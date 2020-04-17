@@ -1,4 +1,5 @@
 #!/bin/sh
+
 # Credit to Zino Holwerda for his invaluable help in creating this script.
 
 # First get a list of all directories containing a pom.xml file.
