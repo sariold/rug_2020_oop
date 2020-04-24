@@ -15,6 +15,12 @@ public class Player {
         this.currentRoom = null;
     }
 
+    public String[] getPossibleMoves(){
+        String[] options = new String[1];
+
+        return options;
+    }
+
     public Room getCurrentRoom() {
         return currentRoom;
     }
