@@ -6,7 +6,11 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
+        Door redDoor = new Door("A mysterious red door.");
+        Door blackDoor = new Door("A black door.");
         Room startingRoom = new Room("A rather dusty room full with computers and two doors.");
+        startingRoom.addDoor(redDoor);
+        startingRoom.addDoor(blackDoor);
         Player player = new Player("P1", startingRoom);
         Scanner scanner = new Scanner(System.in);
         String[] possibleMoves;
