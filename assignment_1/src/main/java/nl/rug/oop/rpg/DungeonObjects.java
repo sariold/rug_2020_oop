@@ -7,6 +7,14 @@ public abstract class DungeonObjects implements Inspectable{
         this.description = description;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     @Override
     public void inspect() {
         System.out.println(description);

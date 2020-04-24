@@ -6,4 +6,6 @@ public class Doors extends DungeonObjects {
         super(description);
     }
 
+
+
 }
