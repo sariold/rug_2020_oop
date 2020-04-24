@@ -1,18 +1,25 @@
 package nl.rug.oop.rpg;
 
-public class Player {
+public class Player implements Attackable{
 
     private String name;
     private Room currentRoom;
+    private int hitPoints;
+    private int attackPoints;
 
-    public Player(String name, Room currentRoom) {
+    public Player(String name, Room currentRoom, int hitPoints, int attackPoints) {
         this.name = name;
         this.currentRoom = currentRoom;
+        this.hitPoints = hitPoints;
+        this.attackPoints = attackPoints;
+    }
+
+    public Player(String name, Room currentRoom) {
+        this(name, currentRoom, 10, 0);
     }
 
     public Player(String name) {
-        this.name = name;
-        this.currentRoom = null;
+        this(name, null,10, 0);
     }
 
     public String[] getPossibleMoves(){
@@ -21,6 +28,10 @@ public class Player {
         options[1] = "Look for a way out";
         options[2] = "Look for company";
         return options;
+    }
+
+    public int getHitPoints() {
+        return hitPoints;
     }
 
     public Room getCurrentRoom() {
@@ -37,5 +48,20 @@ public class Player {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public void attack(Attackable attacked) {
+        attacked.reduceHitPoints(this.attackPoints);
+    }
+
+    @Override
+    public void reduceHitPoints(int value) {
+        this.hitPoints -= value;
+    }
+
+    @Override
+    public boolean isDead() {
+        return this.hitPoints <= 0;
     }
 }
