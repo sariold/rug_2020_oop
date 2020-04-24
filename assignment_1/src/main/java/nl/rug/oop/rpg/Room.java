@@ -16,7 +16,7 @@ public class Room extends DungeonObjects {
     }
 
     public ArrayList<Door> getDoors() {
-        return this.doors;
+        return new ArrayList<Door>(this.doors);
     }
 
 }
