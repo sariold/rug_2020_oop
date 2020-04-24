@@ -12,7 +12,7 @@ public class Room extends DungeonObjects {
     }
 
     public void addDoor(Door door) {
-        doors.add(door);
+        if(door instanceof Door) doors.add(door);
     }
 
     public ArrayList<Door> getDoors() {
