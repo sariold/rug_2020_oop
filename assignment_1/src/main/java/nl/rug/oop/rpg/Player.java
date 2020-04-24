@@ -16,7 +16,9 @@ public class Player {
     }
 
     public String[] getPossibleMoves(){
-        String[] options = new String[1];
+        String[] options = new String[2];
+        options[0] = "Look around";
+        options[1] = "Look for a way out";
 
         return options;
     }

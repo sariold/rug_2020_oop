@@ -1,5 +1,6 @@
 package nl.rug.oop.rpg;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
@@ -20,10 +21,19 @@ public class Main {
             }
             currentMove = scanner.nextInt();
             switch (currentMove) {
-                // Look Around
+                // inspect room
                 case 0:
                     System.out.print("You see: ");
                     player.getCurrentRoom().inspect();
+                    break;
+                // inspect doors
+                case 1:
+                    System.out.print("You see: ");
+                    ArrayList<Door> doors = player.getCurrentRoom().getDoors();
+                    for (int i = 0; i < doors.size(); i++) {
+                        System.out.print("\t(" + i + ") ");
+                        doors.get(i).inspect();
+                    }
                     break;
             }
         }
