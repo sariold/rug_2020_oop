@@ -16,10 +16,10 @@ public class Player {
     }
 
     public String[] getPossibleMoves(){
-        String[] options = new String[2];
+        String[] options = new String[3];
         options[0] = "Look around";
         options[1] = "Look for a way out";
-
+        options[2] = "Look for company";
         return options;
     }
 

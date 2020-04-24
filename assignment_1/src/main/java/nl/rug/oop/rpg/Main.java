@@ -35,16 +35,40 @@ public class Main {
                     break;
                 // inspect doors
                 case 1:
-                    System.out.print("You see: \n");
+                    System.out.println("You look for doors.");
+                    System.out.println("You see:");
                     ArrayList<Door> doors = player.getCurrentRoom().getDoors();
                     for (int i = 0; i < doors.size(); i++) {
                         System.out.print("\t(" + i + ") ");
                         doors.get(i).inspect();
                     }
+                    System.out.println("Which door will you take? (-1 to stay)");
                     currentMove = scanner.nextInt();
-                    if (currentMove < doors.size() && currentMove > -1) {
+                    if (currentMove < doors.size() && currentMove > -2) {
+                        if (currentMove == -1) {
+                            System.out.println("You stayed in the same room.");
+                            break;
+                        }
                         doors.get(currentMove).interact(player);
                         player.getCurrentRoom().inspect();
+                    }
+                    break;
+                case 2:
+                    System.out.println("You look if there's somebody.");
+                    System.out.println("You see:");
+                    ArrayList<DungeonNpc> npcs = player.getCurrentRoom().getNPCs();
+                    for (int i = 0; i < npcs.size(); i++) {
+                        System.out.print("\t(" + i + ") ");
+                        npcs.get(i).inspect();
+                    }
+                    System.out.println("Who will you approach? (-1 to stay by yourself)");
+                    currentMove = scanner.nextInt();
+                    if (currentMove < npcs.size() && currentMove > -2) {
+                        if (currentMove == -1) {
+                            System.out.println("You decided to leave them alone.");
+                            break;
+                        }
+                        npcs.get(currentMove).interact(player);
                     }
                     break;
             }
