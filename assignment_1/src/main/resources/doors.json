@@ -1,0 +1,82 @@
+[
+    {
+        "door": {
+            "name": "d0",
+            "description": "start door",
+            "from": "r0",
+            "to": "r1"
+        }
+    },
+    {
+        "door": {
+            "name": "d1",
+            "description": "first door",
+            "from": "r1",
+            "to": "r2"
+        }
+    },
+    {
+        "door": {
+            "name": "d2",
+            "description": "second door",
+            "from": "r0",
+            "to": "r3"
+        }
+    },
+    {
+        "door": {
+            "name": "d3",
+            "description": "third door",
+            "from": "r1",
+            "to": "r4"
+        }
+    },
+    {
+        "door": {
+            "name": "d4",
+            "description": "fourth door",
+            "from": "r3",
+            "to": "r4"
+        }
+    },
+    {
+        "door": {
+            "name": "d5",
+            "description": "fifth door",
+            "from": "r4",
+            "to": "r5"
+        }
+    },
+    {
+        "door": {
+            "name": "d6",
+            "description": "sixth door",
+            "from": "r5",
+            "to": "r6"
+        }
+    },
+    {
+        "door": {
+            "name": "d7",
+            "description": "seventh door",
+            "from": "r6",
+            "to": "r7"
+        }
+    },
+    {
+        "door": {
+            "name": "d8",
+            "description": "eigth door",
+            "from": "r7",
+            "to": "r8"
+        }
+    },
+    {
+        "door": {
+            "name": "d9",
+            "description": "ninth door",
+            "from": "r8",
+            "to": "r9"
+        }
+    }
+]

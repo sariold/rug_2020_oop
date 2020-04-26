@@ -1,25 +1,42 @@
 package nl.rug.oop.rpg;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
-        Room redDoorRoom = new Room("Red Door Room");
-        Room blackDoorRoom = new Room("Black Door Room");
+        ArrayList<Room> totalRooms = new ArrayList<Room>();
+        ArrayList<Door> totalDoors = new ArrayList<Door>();
+        try {
+            JsonReader.parseRoomJSON(totalRooms);
+            JsonReader.parseDoorJSON(totalRooms, totalDoors);
+            JsonReader.parseConnectionJSON(totalRooms, totalDoors);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
 
-        Knight knight = new Knight("Sir WhoopYourAss");
-        Knight knight1 = new Knight(("Sir Henry III"));
+//        totalRooms.forEach(room -> {
+//            System.out.println(room.getDescription());
+//            room.printDoors();
+//        });
 
-        Door redDoor = new Door("A mysterious red door.", redDoorRoom);
-        Door blackDoor = new Door("A black door.", blackDoorRoom);
-        Room startingRoom = new Room("A rather dusty room full with computers and two doors.");
-        startingRoom.addDoor(redDoor);
-        startingRoom.addDoor(blackDoor);
-        startingRoom.addNPC(knight);
-        startingRoom.addNPC(knight1);
-        Player player = new Player("P1", startingRoom, 10, 2);
+
+//        Room redDoorRoom = new Room("Red Door Room");
+//        Room blackDoorRoom = new Room("Black Door Room");
+//
+//        Knight knight = new Knight("Sir WhoopYourAss");
+//        Knight knight1 = new Knight(("Sir Henry III"));
+//
+//        Door redDoor = new Door("A mysterious red door.", redDoorRoom);
+//        Door blackDoor = new Door("A black door.", blackDoorRoom);
+//        Room startingRoom = new Room("A rather dusty room full with computers and two doors.");
+//        startingRoom.addDoor(redDoor);
+//        startingRoom.addDoor(blackDoor);
+//        startingRoom.addNPC(knight);
+//        startingRoom.addNPC(knight1);
+        Player player = new Player("P1", totalRooms.get(0), 10, 2);
         Scanner scanner = new Scanner(System.in);
         String[] possibleMoves;
         int currentMove;

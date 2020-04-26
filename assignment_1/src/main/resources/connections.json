@@ -1,0 +1,82 @@
+[
+    {
+        "room": {
+            "name": "r0",
+            "doors": [
+                "d0", "d2"
+            ]
+        }
+    },
+    {
+        "room": {
+            "name": "r1",
+            "doors": [
+                "d0", "d1", "d3"
+            ]
+        }
+    },
+    {
+        "room": {
+            "name": "r2",
+            "doors": [
+                "d1"
+            ]
+        }
+    },
+    {
+        "room": {
+            "name": "r3",
+            "doors": [
+                "d2", "d4"
+            ]
+        }
+    },
+    {
+        "room": {
+            "name": "r4",
+            "doors": [
+                "d3", "d4", "d5"
+            ]
+        }
+    },
+    {
+        "room": {
+            "name": "r5",
+            "doors": [
+                "d5", "d6"
+            ]
+        }
+    },
+    {
+        "room": {
+            "name": "r6",
+            "doors": [
+                "d6", "d7"
+            ]
+        }
+    },
+    {
+        "room": {
+            "name": "r7",
+            "doors": [
+                "d7", "d8"
+            ]
+        }
+    },
+    {
+        "room": {
+            "name": "r8",
+            "doors": [
+                "d8", "d9"
+            ]
+        }
+    },
+    {
+        "room": {
+            "name": "r9",
+            "doors": [
+                "d9"
+            ]
+        }
+    }
+]

@@ -21,6 +21,10 @@ public class Room extends DungeonObjects {
         return new ArrayList<Door>(this.doors);
     }
 
+    public void printDoors() {
+        doors.forEach(door -> System.out.println(door.getDescription()));
+    }
+
     public void addNPC(DungeonNpc npc) {
         if(npc != null) NPCs.add(npc);
     }

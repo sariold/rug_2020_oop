@@ -1,0 +1,62 @@
+[
+    {
+        "room": {
+            "name": "r0",
+            "description": "start room"
+        }
+    },
+    {
+        "room": {
+            "name": "r1",
+            "description": "first room"
+        }
+    },
+    {
+        "room": {
+            "name": "r2",
+            "description": "second room"
+        }
+    },
+    {
+        "room": {
+            "name": "r3",
+            "description": "third room"
+        }
+    },
+    {
+        "room": {
+            "name": "r4",
+            "description": "fourth room"
+        }
+    },
+    {
+        "room": {
+            "name": "r5",
+            "description": "fifth room"
+        }
+    },
+    {
+        "room": {
+            "name": "r6",
+            "description": "sixth room"
+        }
+    },
+    {
+        "room": {
+            "name": "r7",
+            "description": "seventh room"
+        }
+    },
+    {
+        "room": {
+            "name": "r8",
+            "description": "eigth room"
+        }
+    },
+    {
+        "room": {
+            "name": "r9",
+            "description": "ninth room"
+        }
+    }
+]
