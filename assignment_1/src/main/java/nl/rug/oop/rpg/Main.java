@@ -9,6 +9,11 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String playerName;
+        System.out.println("Please choose a name for your Hero:");
+        playerName = scanner.nextLine();
+        Game game = new Game(playerName);
 //        ArrayList<Room> totalRooms = new ArrayList<Room>();
 //        ArrayList<Door> totalDoors = new ArrayList<Door>();
 //        try {
@@ -44,80 +49,28 @@ public class Main {
         startingRoom.addNPC(priest);
         startingRoom.addNPC(highPriest);
         Player player = new Player("P1", startingRoom, 10, 2, 10);
-        Scanner scanner = new Scanner(System.in);
-        String[] possibleMoves;
+
         int currentMove;
 
 
         while (true) {
-            System.out.println("What do you want to do?");
-            possibleMoves = player.getPossibleMoves();
-            for (int i = 0; i < possibleMoves.length; i++) {
-                System.out.println("\t(" + i + ") " + possibleMoves[i]);
-            }
+            game.printOptions();
             currentMove = scanner.nextInt();
             switch (currentMove) {
                 // inspect room
                 case 0:
-                    System.out.print("You see: ");
-                    player.getCurrentRoom().inspect();
+                    game.inspectRoom();
                     break;
                 // inspect doors
                 case 1:
-                    System.out.println("You look for doors.");
-                    System.out.println("You see:");
-                    ArrayList<Door> doors = player.getCurrentRoom().getDoors();
-                    for (int i = 0; i < doors.size(); i++) {
-                        System.out.print("\t(" + i + ") ");
-                        doors.get(i).inspect();
-                    }
-                    System.out.println("Which door will you take? (-1 to stay)");
+                    game.inspectDoors();
                     currentMove = scanner.nextInt();
-                    if (currentMove < doors.size() && currentMove > -2) {
-                        if (currentMove == -1) {
-                            System.out.println("You stayed in the same room.");
-                            break;
-                        }
-                        doors.get(currentMove).interact(player);
-                        player.getCurrentRoom().inspect();
-                    }
+                    game.interactDoor(currentMove);
                     break;
                 case 2:
-                    System.out.println("You look if there's somebody.");
-                    System.out.println("You see:");
-                    ArrayList<DungeonNpc> npcs = player.getCurrentRoom().getNPCs();
-                    for (int i = 0; i < npcs.size(); i++) {
-                        System.out.print("\t(" + i + ") " + "[" + npcs.get(i).getType() + "]" + "(" + npcs.get(i).getSpecies() + ")" + npcs.get(i).toString() + ": ");
-                        npcs.get(i).inspect();
-                    }
-                    System.out.println("Who will you approach? (-1 to stay by yourself)");
+                    game.inspectNPCs();
                     currentMove = scanner.nextInt();
-                    if (currentMove < npcs.size() && currentMove > -2) {
-                        if (currentMove == -1) {
-                            System.out.println("You decided to leave them alone.");
-                            break;
-                        }
-                        DungeonNpc currentNPC= npcs.get(currentMove);
-                        if (currentNPC instanceof Enemy) {
-                            System.out.println("You engaged a fight with " + ((Enemy) currentNPC).getName());
-                            while (((Enemy) currentNPC).getHitPoints() > 0 && player.getHitPoints() > 0) {
-                                System.out.println("You attack " + ((Enemy) currentNPC).getName());
-                                player.attack((Enemy)currentNPC);
-                                if (((Enemy) currentNPC).isDead()) {
-                                    System.out.println("You have slain " + ((Enemy) currentNPC).getName() + "!");
-                                    player.getCurrentRoom().removeDeadNPC();
-                                    break;
-                                }
-                                ((Enemy) currentNPC).interact(player);
-                                System.out.println("You are attacked by " + ((Enemy) currentNPC).getName() + " you are at " + player.getHitPoints() + " health!");
-                                if (player.isDead()) {
-                                    System.out.println("You have been slain by " + ((Enemy) currentNPC).getName() + "!");
-                                    return;
-                                }
-                            }
-                        }
-
-                    }
+                    game.interactNPC(currentMove);
                     break;
             }
         }

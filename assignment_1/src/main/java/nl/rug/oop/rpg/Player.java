@@ -25,14 +25,16 @@ public class Player implements Attackable{
 
     public String[] getPossibleMoves(){
         String[] options = new String[3];
-        options[0] = "Look around";
-        options[1] = "Look for a way out";
-        options[2] = "Look for company";
+
         return options;
     }
 
     public int getHitPoints() {
         return hitPoints;
+    }
+
+    public int getAttackPoints() {
+        return this.attackPoints;
     }
 
     public int getMaxHitPoints() {
@@ -55,6 +57,7 @@ public class Player implements Attackable{
         this.name = name;
     }
 
+    @Override
     public void increaseHitPoints(int value) {
         this.hitPoints += value;
         if (this.hitPoints > this.maxHitPoints) this.hitPoints = this.maxHitPoints;

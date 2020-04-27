@@ -43,6 +43,11 @@ public abstract class Enemy extends DungeonNpc implements Attackable {
     }
 
     @Override
+    public void increaseHitPoints(int value) {
+        this.hitPoints += value;
+    }
+
+    @Override
     public boolean isDead() {
         return this.hitPoints <= 0;
     }

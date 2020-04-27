@@ -6,5 +6,7 @@ public interface Attackable {
 
     public void reduceHitPoints(int value);
 
+    public void increaseHitPoints(int value);
+
     public boolean isDead();
 }
