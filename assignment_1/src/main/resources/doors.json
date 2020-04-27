@@ -2,7 +2,7 @@
     {
         "door": {
             "name": "d0",
-            "description": "start door",
+            "description": "A red door",
             "from": "r0",
             "to": "r1"
         }
@@ -10,7 +10,7 @@
     {
         "door": {
             "name": "d1",
-            "description": "first door",
+            "description": "A suspicious looking door",
             "from": "r1",
             "to": "r2"
         }
@@ -18,7 +18,7 @@
     {
         "door": {
             "name": "d2",
-            "description": "second door",
+            "description": "A black door",
             "from": "r0",
             "to": "r3"
         }
@@ -26,7 +26,7 @@
     {
         "door": {
             "name": "d3",
-            "description": "third door",
+            "description": "A mysterious door",
             "from": "r1",
             "to": "r4"
         }
@@ -34,7 +34,7 @@
     {
         "door": {
             "name": "d4",
-            "description": "fourth door",
+            "description": "A very dark door",
             "from": "r3",
             "to": "r4"
         }
@@ -42,7 +42,7 @@
     {
         "door": {
             "name": "d5",
-            "description": "fifth door",
+            "description": "A beautifully decorated door",
             "from": "r4",
             "to": "r5"
         }
@@ -50,7 +50,7 @@
     {
         "door": {
             "name": "d6",
-            "description": "sixth door",
+            "description": "A wooden door that is clearly rotten",
             "from": "r5",
             "to": "r6"
         }
@@ -58,7 +58,7 @@
     {
         "door": {
             "name": "d7",
-            "description": "seventh door",
+            "description": "An old fasioned hand crank door",
             "from": "r6",
             "to": "r7"
         }
@@ -66,7 +66,7 @@
     {
         "door": {
             "name": "d8",
-            "description": "eigth door",
+            "description": "An extremely white and bright door",
             "from": "r7",
             "to": "r8"
         }
@@ -74,7 +74,7 @@
     {
         "door": {
             "name": "d9",
-            "description": "ninth door",
+            "description": "A blood stained door",
             "from": "r8",
             "to": "r9"
         }

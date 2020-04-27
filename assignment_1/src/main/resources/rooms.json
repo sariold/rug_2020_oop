@@ -2,61 +2,61 @@
     {
         "room": {
             "name": "r0",
-            "description": "start room"
+            "description": "A rather dusty room full with computers and two doors."
         }
     },
     {
         "room": {
             "name": "r1",
-            "description": "first room"
+            "description": "A suspicious room with three mysterious doors."
         }
     },
     {
         "room": {
             "name": "r2",
-            "description": "second room"
+            "description": "A strange odor comes from this room."
         }
     },
     {
         "room": {
             "name": "r3",
-            "description": "third room"
+            "description": "A dark room with even darker doors."
         }
     },
     {
         "room": {
             "name": "r4",
-            "description": "fourth room"
+            "description": "An abandoned ballroom."
         }
     },
     {
         "room": {
             "name": "r5",
-            "description": "fifth room"
+            "description": "A long hallway like room with a door at the very end."
         }
     },
     {
         "room": {
             "name": "r6",
-            "description": "sixth room"
+            "description": "A room with no electricity so choose wisely."
         }
     },
     {
         "room": {
             "name": "r7",
-            "description": "seventh room"
+            "description": "A bright room with even brighter doors."
         }
     },
     {
         "room": {
             "name": "r8",
-            "description": "eigth room"
+            "description": "A room full of potential enemies, could this mean you are reaching the end?"
         }
     },
     {
         "room": {
             "name": "r9",
-            "description": "ninth room"
+            "description": "A room that marks the end of this RPG. Congratulations!"
         }
     }
 ]
