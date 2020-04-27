@@ -16,4 +16,10 @@ public class ArmorSmith extends Trader{
     public String getSpecies() {
         return "Armorsmith";
     }
+
+    @Override
+    public String tradeDialog() {
+        String toReturn = "I will increase your maximum health by " + this.getPower() + " for" + this.getPrice() + " gold!";
+        return toReturn;
+    }
 }

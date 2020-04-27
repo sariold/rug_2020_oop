@@ -34,6 +34,7 @@ public class Room extends DungeonObjects {
             DungeonNpc currNPC = this.NPCs.get(i);
             if (currNPC instanceof Enemy && ((Enemy) currNPC).isDead()) this.NPCs.remove(i);
             if (currNPC instanceof Healer && ((Healer) currNPC).getHealStatus()) this.NPCs.remove(i);
+            if (currNPC instanceof Trader && ((Trader) currNPC).getTradeStatus()) this.NPCs.remove(i);
         }
     }
 

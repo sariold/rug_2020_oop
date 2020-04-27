@@ -16,4 +16,10 @@ public class WeaponSmith extends Trader{
     public String getSpecies() {
         return "Weaponsmith";
     }
+
+    @Override
+    public String tradeDialog() {
+        String toReturn = "I will increase your attack power by " + this.getPower() + " for" + this.getPrice() + " gold!";
+        return toReturn;
+    }
 }

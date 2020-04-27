@@ -23,6 +23,10 @@ public abstract class Trader extends DungeonNpc{
         return this.power;
     }
 
+    public int getPrice() {
+        return price;
+    }
+
     public String getName() {
         return this.name;
     }
@@ -34,6 +38,11 @@ public abstract class Trader extends DungeonNpc{
     public void trade(Player player) {
         player.decreaseGold(this.price);
         return;
+    }
+
+    public String tradeDialog() {
+        String toReturn = "I will trade for " + this.price + " Gold.";
+        return toReturn;
     }
 
     @Override

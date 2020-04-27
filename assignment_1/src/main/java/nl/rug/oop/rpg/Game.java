@@ -103,6 +103,8 @@ public class Game {
                 engageFight(player, (Enemy) currentNPC);
             } else if (currentNPC instanceof Healer) {
                 healPlayer(player, (Healer) currentNPC);
+            } else if (currentNPC instanceof Trader) {
+                tradeWith(player, (Trader) currentNPC);
             }
 
         }
@@ -111,6 +113,24 @@ public class Game {
     private void gameOver() {
         System.out.println("GAME OVER!");
         System.exit(0);
+    }
+
+    private void tradeWith(Player player, @NotNull Trader trader) {
+        Scanner scanner = new Scanner(System.in);
+        int move;
+        System.out.println(trader.getName() + ": " + trader.tradeDialog() + "\n Are you interested?");
+        System.out.println("\t(0) I think that is too expensive!\n\t(1) Let's trade!");
+        move = scanner.nextInt();
+        if (move == 0) return;
+        else {
+            if (player.getGold() < trader.getPrice()) {
+                System.out.println("You do not have enough gold!");
+                return;
+            }
+            trader.interact(player);
+            System.out.println("You traded with " + trader.getName() + ". You have " + player.getGold() + " gold.");
+            player.getCurrentRoom().removeDeadNPC();
+        }
     }
 
     private void healPlayer(Player player, @NotNull Healer healer) {
