@@ -19,7 +19,7 @@ public class WeaponSmith extends Trader{
 
     @Override
     public String tradeDialog() {
-        String toReturn = "I will increase your attack power by " + this.getPower() + " for" + this.getPrice() + " gold!";
+        String toReturn = "I will increase your attack power by " + this.getPower() + " for " + this.getPrice() + " gold!";
         return toReturn;
     }
 }

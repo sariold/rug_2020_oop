@@ -1,5 +1,6 @@
 package nl.rug.oop.rpg;
 
+import com.sun.tools.corba.se.idl.constExpr.Or;
 import org.json.simple.parser.ParseException;
 
 import java.io.FileNotFoundException;
@@ -33,6 +34,33 @@ public class Game {
             e.printStackTrace();
         }
         this.player = new Player(name, this.totalRooms.get(0), DefaultStats.PLAYER_HIT_POINTS, DefaultStats.PLAYER_ATTACK_POINTS, DefaultStats.PLAYER_HIT_POINTS);
+
+        Priest priest = new Priest("Priest");
+        HighPriest highPriest = new HighPriest("High");
+        Knight knight1 = new Knight("Knight1");
+        Knight knight2 = new Knight("§§");
+        Knight knight3 = new Knight("RRR");
+        Rat rat = new Rat("Rat");
+        Spider spider = new Spider("spider");
+        Snake snake = new Snake("Snake");
+        Orc orc = new Orc("orc");
+        Dragon dragon = new Dragon("JAJA");
+        WeaponSmith weaponSmith = new WeaponSmith("Weapons");
+        ArmorSmith armorSmith = new ArmorSmith("Armor");
+
+        this.totalRooms.get(0).addNPC(priest);
+        this.totalRooms.get(0).addNPC(highPriest);
+        this.totalRooms.get(0).addNPC(knight1);
+        this.totalRooms.get(0).addNPC(knight2);
+        this.totalRooms.get(0).addNPC(knight3);
+        this.totalRooms.get(0).addNPC(rat);
+        this.totalRooms.get(0).addNPC(spider);
+        this.totalRooms.get(0).addNPC(orc);
+        this.totalRooms.get(0).addNPC(dragon);
+        this.totalRooms.get(0).addNPC(snake);
+        this.totalRooms.get(0).addNPC(weaponSmith);
+        this.totalRooms.get(0).addNPC(armorSmith);
+
         this.possibleMoves.add("Look around");
         this.possibleMoves.add("Look for a way out");
         this.possibleMoves.add("Look for company");
@@ -142,7 +170,7 @@ public class Game {
         Scanner scanner = new Scanner(System.in);
         int move;
         System.out.println(healer.getName() + ":I can only heal you once, and then I will leave!\n Are you sure you want me to heal you?");
-        System.out.println("\t(0) Heal me!\n\t(1) No better do it later!");
+        System.out.println("\t(0) No better do it later!\n\t(1) Heal me!");
         move = scanner.nextInt();
         if (move == 0) return;
         else {
@@ -177,8 +205,9 @@ public class Game {
                     player.increaseHitPoints(enemy.getAttackPoints());
                     return;
                 }
+                System.out.println("You are attacked by " + enemy.getName());
                 enemy.interact(player);
-                System.out.println("You are attacked by " + enemy.getName() + " you are at " + player.getHitPoints() + " health!");
+                System.out.println("You are at " +  player.getHitPoints() + " health!");
                 if (player.isDead()) {
                     System.out.println("You have been slain by " + enemy.getName() + "!");
                     gameOver();

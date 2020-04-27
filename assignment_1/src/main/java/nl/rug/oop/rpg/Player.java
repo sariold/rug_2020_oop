@@ -1,5 +1,7 @@
 package nl.rug.oop.rpg;
 
+import java.util.Random;
+
 public class Player implements Attackable{
 
     private String name;
@@ -13,6 +15,7 @@ public class Player implements Attackable{
         this.name = name;
         this.currentRoom = currentRoom;
         this.hitPoints = hitPoints;
+        this.maxHitPoints = maxHitPoints;
         this.attackPoints = attackPoints;
         this.gold = 0;
     }
@@ -86,7 +89,14 @@ public class Player implements Attackable{
 
     @Override
     public void attack(Attackable attacked) {
-        attacked.reduceHitPoints(this.attackPoints);
+        Random r = new Random();
+        int critical = r.nextInt(101);
+        if (critical < 21) {
+            System.out.println("Critical Hit!");
+            attacked.reduceHitPoints(2 * this.attackPoints);
+        } else {
+            attacked.reduceHitPoints(this.attackPoints);
+        }
     }
 
     @Override

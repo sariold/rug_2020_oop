@@ -19,7 +19,7 @@ public class ArmorSmith extends Trader{
 
     @Override
     public String tradeDialog() {
-        String toReturn = "I will increase your maximum health by " + this.getPower() + " for" + this.getPrice() + " gold!";
+        String toReturn = "I will increase your maximum health by " + this.getPower() + " for " + this.getPrice() + " gold!";
         return toReturn;
     }
 }

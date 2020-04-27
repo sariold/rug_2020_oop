@@ -1,5 +1,7 @@
 package nl.rug.oop.rpg;
 
+import java.util.Random;
+
 public abstract class Enemy extends DungeonNpc implements Attackable {
 
     private String name;
@@ -37,7 +39,14 @@ public abstract class Enemy extends DungeonNpc implements Attackable {
 
     @Override
     public void attack(Attackable attacked) {
-        attacked.reduceHitPoints(this.attackPoints);
+        Random r = new Random();
+        int critical = r.nextInt(101);
+        if (critical < 16) {
+            System.out.println("Critical Hit!");
+            attacked.reduceHitPoints(2 * this.attackPoints);
+        } else {
+            attacked.reduceHitPoints(this.attackPoints);
+        }
     }
 
     @Override
