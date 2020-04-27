@@ -5,6 +5,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -21,7 +22,8 @@ public class JsonReader {
         String filePath = JsonReader.class.getClassLoader().getResource("rooms.json").toString()
                 .replace("file:", "");
         System.out.println(filePath);
-        FileReader roomFile = new FileReader(filePath);
+        File file = new File(filePath);
+        FileReader roomFile = new FileReader(file);
         try {
             Object roomJSON = jsonParser.parse(roomFile);
             JSONArray roomArray = (JSONArray) roomJSON;
