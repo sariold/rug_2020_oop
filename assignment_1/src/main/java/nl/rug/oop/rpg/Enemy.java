@@ -1,6 +1,6 @@
 package nl.rug.oop.rpg;
 
-public abstract class Enemy extends DungeonNpc implements Attackable{
+public abstract class Enemy extends DungeonNpc implements Attackable {
 
     private String name;
     private int hitPoints;

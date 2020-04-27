@@ -20,6 +20,7 @@ public class JsonReader {
         JSONParser jsonParser = new JSONParser();
         String filePath = JsonReader.class.getClassLoader().getResource("rooms.json").toString()
                 .replace("file:", "");
+        System.out.println(filePath);
         FileReader roomFile = new FileReader(filePath);
         try {
             Object roomJSON = jsonParser.parse(roomFile);
