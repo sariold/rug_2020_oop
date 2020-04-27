@@ -7,12 +7,14 @@ public class Player implements Attackable{
     private int maxHitPoints;
     private int hitPoints;
     private int attackPoints;
+    private int gold;
 
     public Player(String name, Room currentRoom, int hitPoints, int attackPoints, int maxHitPoints) {
         this.name = name;
         this.currentRoom = currentRoom;
         this.hitPoints = hitPoints;
         this.attackPoints = attackPoints;
+        this.gold = 0;
     }
 
     public Player(String name, Room currentRoom) {
@@ -27,6 +29,10 @@ public class Player implements Attackable{
         String[] options = new String[3];
 
         return options;
+    }
+
+    public int getGold() {
+        return this.gold;
     }
 
     public int getHitPoints() {
@@ -55,6 +61,14 @@ public class Player implements Attackable{
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void increaseGold(int value) {
+        this.gold += value;
+    }
+
+    public void decreaseGold(int value) {
+        this.gold -= value;
     }
 
     @Override

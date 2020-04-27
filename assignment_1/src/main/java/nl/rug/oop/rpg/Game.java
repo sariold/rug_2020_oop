@@ -1,5 +1,7 @@
 package nl.rug.oop.rpg;
 
+import com.sun.istack.internal.NotNull;
+
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -41,6 +43,13 @@ public class Game {
         for (int i = 0; i < this.possibleMoves.size(); i++) {
             System.out.println("\t(" + i + ") " + this.possibleMoves.get(i));
         }
+    }
+
+    public void displayStats() {
+        System.out.println("Your Character: " + player.getName());
+        System.out.println("\tHealth: "  + player.getHitPoints());
+        System.out.println("\tAttack: " + player.getAttackPoints());
+        System.out.println("\tGold: " + player.getGold());
     }
 
     public void inspectRoom() {
@@ -104,7 +113,7 @@ public class Game {
         System.exit(0);
     }
 
-    private void healPlayer(Player player, Healer healer) {
+    private void healPlayer(Player player, @NotNull Healer healer) {
         Scanner scanner = new Scanner(System.in);
         int move;
         System.out.println(healer.getName() + ":I can only heal you once, and then I will leave!\n Are you sure you want me to heal you?");
@@ -118,7 +127,7 @@ public class Game {
         }
     }
 
-    private void engageFight(Player player, Enemy enemy) {
+    private void engageFight(Player player, @NotNull Enemy enemy) {
         int move;
         int damageToEnemy = 0;
         Scanner scanner = new Scanner(System.in);
