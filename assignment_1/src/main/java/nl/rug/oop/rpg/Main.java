@@ -31,11 +31,13 @@ public class Main {
                     currentMove = scanner.nextInt();
                     game.interactDoor(currentMove);
                     break;
+                // inspect NPCs
                 case 2:
                     game.inspectNPCs();
                     currentMove = scanner.nextInt();
                     game.interactNPC(currentMove);
                     break;
+                // show Stats
                 case 3:
                     game.displayStats();
             }

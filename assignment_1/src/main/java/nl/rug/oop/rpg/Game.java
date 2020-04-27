@@ -47,7 +47,7 @@ public class Game {
 
     public void displayStats() {
         System.out.println("Your Character: " + player.getName());
-        System.out.println("\tHealth: "  + player.getHitPoints());
+        System.out.println("\tHealth: "  + player.getHitPoints() + "/" + player.getMaxHitPoints());
         System.out.println("\tAttack: " + player.getAttackPoints());
         System.out.println("\tGold: " + player.getGold());
     }
