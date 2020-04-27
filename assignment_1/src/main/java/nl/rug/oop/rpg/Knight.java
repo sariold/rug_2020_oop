@@ -11,7 +11,7 @@ public class Knight extends Enemy{
     }
 
     @Override
-    public void interact(Player player) {
-        attack(player);
+    public String getSpecies() {
+        return "Knight";
     }
 }

@@ -15,6 +15,14 @@ public abstract class DungeonNpc implements Inspectable, Interactable {
         this.description = description;
     }
 
+    public String getType(){
+        return "DungeonNpc";
+    }
+
+    public String getSpecies(){
+        return "";
+    }
+
     @Override
     public void inspect() {
         System.out.println(description);

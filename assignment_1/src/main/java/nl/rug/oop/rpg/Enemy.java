@@ -51,4 +51,14 @@ public abstract class Enemy extends DungeonNpc implements Attackable {
     public String toString() {
         return this.getName();
     }
+
+    @Override
+    public void interact(Player player) {
+        attack(player);
+    }
+
+    @Override
+    public String getType() {
+        return "Enemy";
+    }
 }
