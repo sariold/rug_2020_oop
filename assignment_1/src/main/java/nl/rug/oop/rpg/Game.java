@@ -1,8 +1,9 @@
 package nl.rug.oop.rpg;
 
-import com.sun.istack.internal.NotNull;
+import org.json.simple.parser.ParseException;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -25,6 +26,10 @@ public class Game {
             JsonReader.parseDoorJSON(totalRooms, totalDoors);
             JsonReader.parseConnectionJSON(totalRooms, totalDoors);
         } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
             e.printStackTrace();
         }
         this.player = new Player(name, this.totalRooms.get(0), DefaultStats.PLAYER_HIT_POINTS, DefaultStats.PLAYER_ATTACK_POINTS, DefaultStats.PLAYER_HIT_POINTS);
@@ -115,7 +120,7 @@ public class Game {
         System.exit(0);
     }
 
-    private void tradeWith(Player player, @NotNull Trader trader) {
+    private void tradeWith(Player player, Trader trader) {
         Scanner scanner = new Scanner(System.in);
         int move;
         System.out.println(trader.getName() + ": " + trader.tradeDialog() + "\n Are you interested?");
@@ -133,7 +138,7 @@ public class Game {
         }
     }
 
-    private void healPlayer(Player player, @NotNull Healer healer) {
+    private void healPlayer(Player player, Healer healer) {
         Scanner scanner = new Scanner(System.in);
         int move;
         System.out.println(healer.getName() + ":I can only heal you once, and then I will leave!\n Are you sure you want me to heal you?");
@@ -147,7 +152,7 @@ public class Game {
         }
     }
 
-    private void engageFight(Player player, @NotNull Enemy enemy) {
+    private void engageFight(Player player, Enemy enemy) {
         int move;
         int damageToEnemy = 0;
         Scanner scanner = new Scanner(System.in);

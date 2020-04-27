@@ -5,28 +5,28 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 
 public class JsonReader {
 
     public static void main(String[] args) {
-
     }
 
-    public static void parseRoomJSON(ArrayList<Room> rooms) throws FileNotFoundException {
+    public static void parseRoomJSON(ArrayList<Room> rooms) throws IOException, ParseException {
         JSONParser jsonParser = new JSONParser();
-        String filePath = JsonReader.class.getClassLoader().getResource("rooms.json").toString()
-                .replace("file:", "");
-        System.out.println(filePath);
-        FileReader roomFile = new FileReader(filePath);
+        InputStream is = JsonReader.class.getClassLoader().getResourceAsStream("rooms.json");
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(is));
+        String json = "";
+        String temp = "";
+        while((temp = bufferedReader.readLine()) != null) {
+            json = json + temp;
+        }
         try {
-            Object roomJSON = jsonParser.parse(roomFile);
+            Object roomJSON = jsonParser.parse(json);
             JSONArray roomArray = (JSONArray) roomJSON;
             roomArray.forEach(room -> parseRooms((JSONObject) room, rooms));
-        } catch (ParseException | IOException e) {
+        } catch (ParseException e) {
             e.printStackTrace();
         }
     }
@@ -38,16 +38,20 @@ public class JsonReader {
         rooms.add(newRoom);
     }
 
-    public static void parseDoorJSON(ArrayList<Room> rooms, ArrayList<Door> doors) throws FileNotFoundException {
+    public static void parseDoorJSON(ArrayList<Room> rooms, ArrayList<Door> doors) throws IOException {
         JSONParser jsonParser = new JSONParser();
-        String filePath = JsonReader.class.getClassLoader().getResource("doors.json").toString()
-                .replace("file:", "");
-        FileReader doorFile = new FileReader(filePath);
+        InputStream is = JsonReader.class.getClassLoader().getResourceAsStream("doors.json");
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(is));
+        String json = "";
+        String temp = "";
+        while((temp = bufferedReader.readLine()) != null) {
+            json = json + temp;
+        }
         try {
-            Object doorJSON = jsonParser.parse(doorFile);
+            Object doorJSON = jsonParser.parse(json);
             JSONArray doorArray = (JSONArray) doorJSON;
             doorArray.forEach(door -> parseDoors((JSONObject) door, rooms, doors));
-        } catch (ParseException | IOException e) {
+        } catch (ParseException e) {
             e.printStackTrace();
         }
     }
@@ -61,16 +65,20 @@ public class JsonReader {
         doors.add(newDoor);
     }
 
-    public static void parseConnectionJSON(ArrayList<Room> rooms, ArrayList<Door> doors) throws FileNotFoundException {
+    public static void parseConnectionJSON(ArrayList<Room> rooms, ArrayList<Door> doors) throws IOException {
         JSONParser jsonParser = new JSONParser();
-        String filePath = JsonReader.class.getClassLoader().getResource("connections.json").toString()
-                .replace("file:", "");
-        FileReader connectionsFile = new FileReader(filePath);
+        InputStream is = JsonReader.class.getClassLoader().getResourceAsStream("connections.json");
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(is));
+        String json = "";
+        String temp = "";
+        while((temp = bufferedReader.readLine()) != null) {
+            json = json + temp;
+        }
         try {
-            Object connectionJSON = jsonParser.parse(connectionsFile);
+            Object connectionJSON = jsonParser.parse(json);
             JSONArray connectionArray = (JSONArray) connectionJSON;
             connectionArray.forEach(connection -> parseConnections((JSONObject) connection, rooms, doors));
-        } catch (ParseException | IOException e) {
+        } catch (ParseException e) {
             e.printStackTrace();
         }
     }

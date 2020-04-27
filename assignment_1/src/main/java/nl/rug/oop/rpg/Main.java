@@ -1,9 +1,5 @@
 package nl.rug.oop.rpg;
 
-import com.sun.javafx.font.PrismFontFactory;
-
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
