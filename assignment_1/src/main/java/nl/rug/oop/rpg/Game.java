@@ -146,8 +146,10 @@ public class Game {
                 player.attack(enemy);
                 damageToEnemy += this.player.getAttackPoints();
                 if (enemy.isDead()) {
-                    System.out.println("You have slain " + (enemy.getName() + "!"));
+                    System.out.println("You have slain " + enemy.getName() + "!\nYou earned " + enemy.getGoldValue() + " gold.");
                     player.getCurrentRoom().removeDeadNPC();
+                    player.increaseGold(enemy.getGoldValue());
+                    player.increaseHitPoints(enemy.getAttackPoints());
                     return;
                 }
                 enemy.interact(player);

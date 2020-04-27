@@ -5,19 +5,22 @@ public abstract class Enemy extends DungeonNpc implements Attackable {
     private String name;
     private int hitPoints;
     private int attackPoints;
+    private int goldValue;
 
     public Enemy(String description) {
-        super(description);
-        this.name = "an Enemy";
-        this.hitPoints = 1;
-        this.attackPoints = 1;
+        this(description, "an Enemy", 1, 1, 1);
     }
 
-    public Enemy(String description, String name, int hitPoints, int attackPoints) {
+    public Enemy(String description, String name, int hitPoints, int attackPoints, int goldValue) {
         super(description);
         this.name = name;
         this.hitPoints = hitPoints;
         this.attackPoints = attackPoints;
+        this.goldValue = goldValue;
+    }
+
+    public int getGoldValue() {
+        return this.goldValue;
     }
 
     public String getName() {
