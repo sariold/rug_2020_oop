@@ -43,6 +43,13 @@ public class Player implements Attackable{
         return this.attackPoints;
     }
 
+    public void increaseMaxHitPoints(int value) {
+        this.maxHitPoints += value;
+        this.hitPoints += value;
+    }
+
+    public void increaseAttackPoints(int value) { this.attackPoints += value };
+
     public int getMaxHitPoints() {
         return this.maxHitPoints;
     }

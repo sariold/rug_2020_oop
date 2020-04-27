@@ -121,7 +121,7 @@ public class Game {
         move = scanner.nextInt();
         if (move == 0) return;
         else {
-            healer.heal(player);
+            healer.interact(player);
             System.out.println("You have been healed. You are at " + player.getHitPoints() + " health.");
             player.getCurrentRoom().removeDeadNPC();
         }

@@ -12,4 +12,11 @@ public class DefaultStats {
 
     // HEALER
     public static int PRIEST_HEAL_POWER = 4;
+
+    // TRADER
+    public static int WEAPONSMITH_POWER = 1;
+    public static int WEAPONSMITH_PRICE = 3;
+
+    public static int ARMORSMITH_POWER = 1;
+    public static int ARMORSMITH_PRICE = 3;
 }
