@@ -1,5 +1,6 @@
 package nl.rug.oop.rpg;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {

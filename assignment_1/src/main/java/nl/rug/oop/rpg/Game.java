@@ -114,11 +114,15 @@ public class Game {
     }
 
     public void inspectNPCs() {
+        String color = TextColor.ANSI_RESET;
         System.out.println("You look if there's somebody.");
         System.out.println("You see:");
         ArrayList<DungeonNpc> npcs = this.player.getCurrentRoom().getNPCs();
         for (int i = 0; i < npcs.size(); i++) {
-            System.out.print("\t(" + i + ") " + "[" + npcs.get(i).getType() + "]" + "(" + npcs.get(i).getSpecies() + ")" + npcs.get(i).toString() + ": ");
+            if(npcs.get(i) instanceof Enemy) color = TextColor.ANSI_RED;
+            if(npcs.get(i) instanceof Healer) color = TextColor.ANSI_GREEN;
+            if(npcs.get(i) instanceof Trader) color = TextColor.ANSI_BLUE;
+            System.out.print("\t(" + i + ") "+ "[" + color + npcs.get(i).getType() + TextColor.ANSI_RESET + "]" + "(" + npcs.get(i).getSpecies() + ") " + npcs.get(i).toString() + ": ");
             npcs.get(i).inspect();
         }
         System.out.println("Who will you approach? (-1 to stay by yourself)");

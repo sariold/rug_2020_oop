@@ -7,7 +7,7 @@ public class Spider extends Enemy{
     }
 
     public Spider(String name) {
-        this("*loud clicking*!!", name);
+        this("*loud clicking*", name);
     }
 
     @Override
