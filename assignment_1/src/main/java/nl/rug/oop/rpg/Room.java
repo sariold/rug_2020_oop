@@ -23,6 +23,11 @@ public class Room extends DungeonObjects {
         if(collectable != null) items.add(collectable);
     }
 
+    public void removeItem() {
+        for (int i = this.items.size() - 1; i > -1; i--) {
+            if (((Item)this.items.get(i)).getCollected()) this.items.remove(i);
+        }
+    }
 
     public void addDoor(Door door) {
         if(door != null) doors.add(door);

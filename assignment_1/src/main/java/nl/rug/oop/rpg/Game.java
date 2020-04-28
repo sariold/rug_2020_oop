@@ -42,11 +42,15 @@ public class Game {
         this.possibleMoves.add("Look around");
         this.possibleMoves.add("Look for a way out");
         this.possibleMoves.add("Look for company");
+        this.possibleMoves.add("Look for items");
         this.possibleMoves.add("Look at your stats");
         this.possibleMoves.add("Look in your inventory");
 
         this.fightMoves.add("Run");
         this.fightMoves.add("Attack");
+
+//        GoldNugget goldNugget = new GoldNugget();
+//        totalRooms.get(0).addItem(goldNugget);
     }
 
     public boolean notOver() {
@@ -104,6 +108,30 @@ public class Game {
             doors.get(i).inspect();
         }
         System.out.println("Which door will you take? (-1 to stay)");
+    }
+
+    public void inspectItems() {
+        System.out.println("You look for items.");
+        System.out.println("You see:");
+        ArrayList<Collectable> items = this.player.getCurrentRoom().getItems();
+        for (int i = 0; i < items.size(); i++) {
+            System.out.print("\t(" + i + ") ");
+            System.out.println(items.get(i).toString());
+        }
+        System.out.println("Which item will you take? (-1 to not collect any items)");
+    }
+
+    public void interactItem(int currentMove) {
+        ArrayList<Collectable> items = this.player.getCurrentRoom().getItems();
+        if (currentMove < items.size() && currentMove > -2) {
+            if (currentMove == -1) {
+                System.out.println("You did not collect any items.");
+                return;
+            }
+            items.get(currentMove).collect(player);
+            player.getCurrentRoom().removeItem();
+            System.out.println("You collected " + items.get(currentMove).toString());
+        }
     }
 
     public void interactDoor(int currentMove) {
