@@ -178,7 +178,7 @@ public class Game {
         if (move == 0) return;
         else {
             healer.interact(player);
-            System.out.println("You have been healed. You are at " + player.getHitPoints() + " health.");
+            System.out.println("You are at " + player.getHitPoints() + " health.");
             player.getCurrentRoom().removeDeadNPC();
         }
     }
