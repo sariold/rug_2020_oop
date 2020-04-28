@@ -50,7 +50,9 @@ public class Player implements Attackable{
     }
 
     public void removeUsedItem() {
-
+        for (int i = 0; i < this.inventory.size(); i++) {
+            if (((Item)this.inventory.get(i)).getUsed()) this.inventory.remove(i);
+        }
     }
 
     public void increaseAttackPoints(int value) { this.attackPoints += value; };

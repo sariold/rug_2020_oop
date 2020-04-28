@@ -36,6 +36,8 @@ public class Main {
                 // show Stats
                 case 3:
                     game.displayStats();
+                    break;
+                    
             }
         }
     }
