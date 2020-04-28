@@ -13,6 +13,14 @@ public class Door extends DungeonObjects implements Interactable {
 
     @Override
     public void interact(Player player) {
-        player.setCurrentRoom(this.to);
+        if(equals(player.getCurrentRoom(), this.to) == 0) player.setCurrentRoom(this.from);
+        else player.setCurrentRoom(this.to);
+    }
+
+    public int equals(Room r1, Room r2) {
+        int result = 1;
+        if(r1.getDescription().equals(r2.getDescription())) result = 0;
+        System.out.println(result);
+        return result;
     }
 }
