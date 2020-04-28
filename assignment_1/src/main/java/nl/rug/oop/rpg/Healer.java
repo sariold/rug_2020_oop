@@ -28,6 +28,7 @@ public abstract class Healer extends DungeonNpc{
 
     public void heal(Player player) {
         player.increaseHitPoints(this.healPower);
+        this.hasHealed = true;
     }
 
     public int getHealPower() {
@@ -37,7 +38,6 @@ public abstract class Healer extends DungeonNpc{
     @Override
     public void interact(Player player) {
         heal(player);
-        this.hasHealed = true;
     }
 
     @Override

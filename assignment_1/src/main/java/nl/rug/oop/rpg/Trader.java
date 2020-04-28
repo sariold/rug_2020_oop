@@ -37,6 +37,7 @@ public abstract class Trader extends DungeonNpc{
 
     public void trade(Player player) {
         player.decreaseGold(this.price);
+        this.hasTraded = true;
         return;
     }
 
@@ -48,7 +49,6 @@ public abstract class Trader extends DungeonNpc{
     @Override
     public void interact(Player player) {
         trade(player);
-        this.hasTraded = true;
     }
 
     @Override
