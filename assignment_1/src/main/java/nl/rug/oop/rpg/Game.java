@@ -46,7 +46,9 @@ public class Game {
         Dragon dragon = new Dragon("JAJA");
         WeaponSmith weaponSmith = new WeaponSmith("Weapons");
         ArmorSmith armorSmith = new ArmorSmith("Armor");
+        Gambler gambler = new Gambler("gambler");
 
+        this.totalRooms.get(0).addNPC(gambler);
         this.totalRooms.get(0).addNPC(priest);
         this.totalRooms.get(0).addNPC(highPriest);
         this.totalRooms.get(0).addNPC(knight1);
