@@ -1,5 +1,6 @@
 package nl.rug.oop.rpg;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Player implements Attackable{
@@ -10,28 +11,39 @@ public class Player implements Attackable{
     private int hitPoints;
     private int attackPoints;
     private int gold;
+    private ArrayList<Collectable> inventory;
 
-    public Player(String name, Room currentRoom, int hitPoints, int attackPoints, int maxHitPoints) {
+
+    public Player(String name, Room currentRoom, int hitPoints, int attackPoints, int maxHitPoints, ArrayList<Collectable> inventory) {
         this.name = name;
         this.currentRoom = currentRoom;
         this.hitPoints = hitPoints;
         this.maxHitPoints = maxHitPoints;
         this.attackPoints = attackPoints;
         this.gold = 0;
+        this.inventory = new ArrayList<Collectable>();
     }
 
-    public Player(String name, Room currentRoom) {
-        this(name, currentRoom, 10, 0, 10);
-    }
-
-    public Player(String name) {
-        this(name, null,10, 0,10);
-    }
+//    public Player(String name, Room currentRoom) {
+//        this(name, currentRoom, 10, 0, 10, inventory);
+//    }
+//
+//    public Player(String name) {
+//        this(name, null,10, 0,10);
+//    }
 
     public String[] getPossibleMoves(){
         String[] options = new String[3];
 
         return options;
+    }
+
+    public ArrayList<Collectable> getInventory() {
+        return new ArrayList<Collectable>(this.inventory);
+    }
+
+    public void addCollectable(Collectable c) {
+        this.getInventory().add(c);
     }
 
     public int getGold() {
