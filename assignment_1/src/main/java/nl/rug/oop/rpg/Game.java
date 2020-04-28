@@ -5,6 +5,7 @@ import org.json.simple.parser.ParseException;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Game {
@@ -75,6 +76,10 @@ public class Game {
         this.player.addCollectable(new GoldNugget());
     }
 
+    public boolean notOver() {
+        return !player.isDead();
+    }
+
     public void printOptions() {
         System.out.println("What do you want to do?");
         for (int i = 0; i < this.possibleMoves.size(); i++) {
@@ -93,11 +98,16 @@ public class Game {
             System.out.println("\t(" + i + ") " + this.player.getInventory().get(i).toString());
         }
         System.out.println("What item will you use (-1 to not use an item)");
-        move = scanner.nextInt();
+        try {
+            move = scanner.nextInt();
+        } catch (InputMismatchException e) {
+            System.out.println("That is not a valid input!");
+            return;
+        }
         if (move == -1) return;
         if (move < player.getInventory().size() && move > -1) {
             player.getInventory().get(move).use(player);
-        }
+        } else System.out.println("That is not a valid item!");
     }
 
     public void displayStats() {
@@ -184,9 +194,14 @@ public class Game {
         int move;
         System.out.println(trader.getName() + ": " + TextColor.ANSI_PURPLE + trader.tradeDialog() + "\n Are you interested?" + TextColor.ANSI_RESET);
         System.out.println("\t(0) I think that is too expensive!\n\t(1) Let's trade!");
-        move = scanner.nextInt();
+        try {
+            move = scanner.nextInt();
+        } catch (InputMismatchException e) {
+            System.out.println("That is not a valid input!");
+            return;
+        }
         if (move == 0) return;
-        else {
+        else if (move == 1){
             if (player.getGold() < trader.getPrice()) {
                 System.out.println("You do not have enough gold!");
                 return;
@@ -194,7 +209,7 @@ public class Game {
             trader.interact(player);
             System.out.println("You traded with " + trader.getName() + ". You have " + player.getGold() + " gold.");
             player.getCurrentRoom().removeDeadNPC();
-        }
+        } else System.out.println("That is not a valid input!");
     }
 
     private void healPlayer(Player player, Healer healer) {
@@ -202,13 +217,18 @@ public class Game {
         int move;
         System.out.println(healer.getName() + ":" + TextColor.ANSI_PURPLE + "I can only heal you once, and then I will leave!\n Are you sure you want me to heal you?" + TextColor.ANSI_RESET);
         System.out.println("\t(0) No better do it later!\n\t(1) Heal me!");
-        move = scanner.nextInt();
+        try {
+            move = scanner.nextInt();
+        } catch (InputMismatchException e) {
+            System.out.println("That is not a valid input!");
+            return;
+        }
         if (move == 0) return;
-        else {
+        else if (move == 1){
             healer.interact(player);
             System.out.println("You are at " + player.getHitPoints() + " health.");
             player.getCurrentRoom().removeDeadNPC();
-        }
+        } else System.out.println("That is not a valid input!");
     }
 
     private void engageFight(Player player, Enemy enemy) {
@@ -221,12 +241,17 @@ public class Game {
             for(int i = 0; i < this.fightMoves.size(); i++) {
                 System.out.println("\t (" + i + ") " + this.fightMoves.get(i));
             }
-            move = scanner.nextInt();
+            try {
+                move = scanner.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("That is not a valid input!");
+                return;
+            }
             if (move == 0){
                 System.out.println(TextColor.ANSI_YELLOW + "You ran from the fight. " + TextColor.ANSI_RED + enemy.getName() + TextColor.ANSI_YELLOW + " recovered to full health!" + TextColor.ANSI_RESET);
                 enemy.increaseHitPoints(damageToEnemy);
                 return;
-            } else {
+            } else if (move == 1){
                 System.out.println(TextColor.ANSI_YELLOW + "You attack " + enemy.getName() + TextColor.ANSI_RESET);
                 player.attack(enemy);
                 damageToEnemy += this.player.getAttackPoints();
@@ -244,6 +269,8 @@ public class Game {
                     System.out.println(TextColor.ANSI_RED + "You have been slain by " + enemy.getName() + "!" + TextColor.ANSI_RESET);
                     gameOver();
                 }
+            } else {
+                System.out.println("That is not a valid input!");
             }
 
         }

@@ -1,5 +1,6 @@
 package nl.rug.oop.rpg;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
@@ -15,7 +16,13 @@ public class Main {
 
         while (true) {
             game.printOptions();
-            currentMove = scanner.nextInt();
+            try {
+                currentMove = scanner.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("That is not a valid input!");
+                scanner.nextLine();
+                continue;
+            }
             switch (currentMove) {
                 // inspect room
                 case 0:
@@ -24,15 +31,27 @@ public class Main {
                 // inspect doors
                 case 1:
                     game.inspectDoors();
-                    currentMove = scanner.nextInt();
-                    game.interactDoor(currentMove);
-                    break;
+                    try {
+                        currentMove = scanner.nextInt();
+                        game.interactDoor(currentMove);
+                        break;
+                    } catch (InputMismatchException e) {
+                        System.out.println("That is not a valid input!");
+                        scanner.nextLine();
+                        break;
+                    }
                 // inspect NPCs
                 case 2:
                     game.inspectNPCs();
-                    currentMove = scanner.nextInt();
-                    game.interactNPC(currentMove);
-                    break;
+                    try {
+                        currentMove = scanner.nextInt();
+                        game.interactNPC(currentMove);
+                        break;
+                    } catch (InputMismatchException e) {
+                        System.out.println("That is not a valid input!");
+                        scanner.nextLine();
+                        break;
+                    }
                 // show Stats
                 case 3:
                     game.displayStats();
@@ -40,6 +59,7 @@ public class Main {
                 // use the inventory
                 case 4:
                     game.useInventory();
+                    break;
             }
         }
     }
