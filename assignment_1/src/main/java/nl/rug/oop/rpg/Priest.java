@@ -9,6 +9,12 @@ public class Priest extends Healer{
     }
 
     @Override
+    public void heal(Player player) {
+        System.out.println("You have been healed for" + this.getHealPower() + ".");
+        super.heal(player);
+    }
+
+    @Override
     public String getSpecies() {
         return "Priest";
     }

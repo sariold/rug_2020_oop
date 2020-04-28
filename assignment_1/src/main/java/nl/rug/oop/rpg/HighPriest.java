@@ -8,6 +8,7 @@ public class HighPriest extends Healer{
 
     @Override
     public void heal(Player player) {
+        System.out.println("You have been fully healed.");
         player.increaseHitPoints(player.getMaxHitPoints());
     }
 
