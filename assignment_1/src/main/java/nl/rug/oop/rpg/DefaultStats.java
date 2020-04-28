@@ -6,6 +6,8 @@ public class DefaultStats {
 
     public static int GOLD_NUGGET_VALUE = 5;
 
+    public static String MAGIC_ORB_DESCRIPTION = "Teleport to a random room";
+
     // PLAYER
     public static int PLAYER_HIT_POINTS = 10;
     public static int PLAYER_ATTACK_POINTS = 1;

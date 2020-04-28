@@ -6,11 +6,27 @@ public class Room extends DungeonObjects {
 
     private ArrayList<Door> doors;
     private ArrayList<DungeonNpc> NPCs;
+    private ArrayList<Collectable> items;
 
     public Room(String description) {
         super(description);
         this.doors = new ArrayList<Door>();
         this.NPCs = new ArrayList<DungeonNpc>();
+        this.items = new ArrayList<Collectable>();
+    }
+
+    public ArrayList<Collectable> getItems() {
+        return new ArrayList<Collectable>(this.items);
+    }
+
+    public void addItem(Collectable collectable) {
+        if(collectable != null) items.add(collectable);
+    }
+
+    public void removeItem() {
+        for (int i = this.items.size() - 1; i > -1; i--) {
+            if (((Item)this.items.get(i)).getCollected()) this.items.remove(i);
+        }
     }
 
     public void addDoor(Door door) {

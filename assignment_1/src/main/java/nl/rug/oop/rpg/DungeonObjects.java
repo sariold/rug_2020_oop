@@ -1,6 +1,6 @@
 package nl.rug.oop.rpg;
 
-public abstract class DungeonObjects implements Inspectable{
+public abstract class DungeonObjects implements Inspectable {
     private String description;
 
     public DungeonObjects(String description) {

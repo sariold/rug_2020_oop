@@ -34,30 +34,39 @@ public class Main {
                     try {
                         currentMove = scanner.nextInt();
                         game.interactDoor(currentMove);
-                        break;
                     } catch (InputMismatchException e) {
                         System.out.println("That is not a valid input!");
                         scanner.nextLine();
-                        break;
                     }
+                    break;
                 // inspect NPCs
                 case 2:
                     game.inspectNPCs();
                     try {
                         currentMove = scanner.nextInt();
                         game.interactNPC(currentMove);
-                        break;
                     } catch (InputMismatchException e) {
                         System.out.println("That is not a valid input!");
                         scanner.nextLine();
-                        break;
                     }
-                // show Stats
+                    break;
+                // show items in the room
                 case 3:
+                    game.inspectItems();
+                    try {
+                        currentMove = scanner.nextInt();
+                        game.interactItem(currentMove);
+                    } catch (InputMismatchException e) {
+                        System.out.println("That is not a valid input!");
+                        scanner.nextLine();
+                    }
+                    break;
+                // show Stats
+                case 4:
                     game.displayStats();
                     break;
-                // use the inventory
-                case 4:
+                // show iventory
+                case 5:
                     game.useInventory();
                     break;
             }
