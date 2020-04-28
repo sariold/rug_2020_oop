@@ -65,9 +65,6 @@ public class JsonReader {
         if(type.equals("Monster")) {
             MonsterDoor newDoor = new MonsterDoor(description, from, to);
             doors.add(newDoor);
-        } else if(type.equals("Trap")) {
-            TrapDoor newDoor = new TrapDoor(description, from, to, 5);
-            doors.add(newDoor);
         }
         else {
             Door newDoor = new Door(description, from, to);

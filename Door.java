@@ -17,7 +17,7 @@ public class Door extends DungeonObjects implements Interactable {
         else player.setCurrentRoom(this.to);
     }
 
-    public static int equals(Room r1, Room r2) {
+    public int equals(Room r1, Room r2) {
         int result = 1;
         if(r1.getDescription().equals(r2.getDescription())) result = 0;
 //        System.out.println(result);

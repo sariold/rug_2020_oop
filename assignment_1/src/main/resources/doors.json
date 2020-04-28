@@ -2,10 +2,10 @@
     {
         "door": {
             "name": "d0",
-            "type": "Monster",
+            "type": "Trap",
             "description": "A red door",
             "from": "r0",
-            "to": "r1"
+            "to": "r9"
         }
     },
     {

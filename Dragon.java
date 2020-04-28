@@ -1,6 +1,6 @@
 package nl.rug.oop.rpg;
 
-public class Dragon extends Enemy {
+public class Dragon extends Enemy{
 
     public Dragon(String description, String name) {
         super(description, name, DefaultStats.DRAGON_HIT_POINTS , DefaultStats.DRAGON_ATTACK_POINTS, DefaultStats.DRAGON_GOLD_VALUE);
