@@ -169,8 +169,13 @@ public class Game {
         }
     }
 
+    private void winGame() {
+        System.out.println(TextColor.ANSI_BLACK + "Congratulations you have won the game! You are a real dungeon master!" + TextColor.ANSI_RESET);
+        System.exit(0);
+    }
+
     private void gameOver() {
-        System.out.println("GAME OVER!");
+        System.out.println(TextColor.ANSI_BLACK + "GAME OVER!" + TextColor.ANSI_RESET);
         System.exit(0);
     }
 
