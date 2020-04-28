@@ -14,6 +14,11 @@ public abstract class Item extends DungeonObjects implements Collectable{
         player.addCollectable(this);
     }
 
+    @Override
+    public void use(Player player) {
+        player.removeUsedItem();
+    }
+
     public boolean getUsed() {
         return this.used;
     }

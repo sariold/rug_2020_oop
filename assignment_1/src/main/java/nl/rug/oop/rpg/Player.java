@@ -49,6 +49,10 @@ public class Player implements Attackable{
         this.hitPoints += value;
     }
 
+    public void removeUsedItem() {
+
+    }
+
     public void increaseAttackPoints(int value) { this.attackPoints += value; };
 
     public int getMaxHitPoints() {
