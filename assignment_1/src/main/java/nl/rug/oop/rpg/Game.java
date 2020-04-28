@@ -364,6 +364,7 @@ public class Game {
                     fireMagic = fightMoves.size();
                     fightMoves.add("Fire Magic");
                 }
+                if (enemy instanceof Boss) winGame();
                 player.getCurrentRoom().removeDeadNPC();
                 player.increaseGold(enemy.getGoldValue());
                 player.increaseHitPoints(enemy.getAttackPoints());
