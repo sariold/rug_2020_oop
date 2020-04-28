@@ -39,4 +39,7 @@ public class DefaultStats {
 
     public static int ARMORSMITH_POWER = 1;
     public static int ARMORSMITH_PRICE = 3;
+
+    public static int GAMBLER_POWER = 1;
+    public static int GAMBLER_PRICE = 2;
 }

@@ -9,6 +9,7 @@ public class WeaponSmith extends Trader{
     @Override
     public void trade(Player player) {
         player.increaseAttackPoints(this.getPower());
+        System.out.println("Your attack increased by" + this.getPower() + ".");
         super.trade(player);
     }
 
