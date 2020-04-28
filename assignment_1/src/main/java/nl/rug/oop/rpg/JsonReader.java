@@ -199,16 +199,16 @@ public class JsonReader {
         switch(type) {
             case "GoldNugget":
                 GoldNugget goldNugget = new GoldNugget();
-                rooms.get(roomNumber).getItems().add(goldNugget);
+                rooms.get(roomNumber).addItem(goldNugget);
                 break;
             case "HealingPotion":
                 HealingPotion healingPotion = new HealingPotion();
-                rooms.get(roomNumber).getItems().add(healingPotion);
+                rooms.get(roomNumber).addItem(healingPotion);
                 break;
             case "MagicOrb":
-                int endRoomNumber = Integer.parseInt(itemObj.get("room").toString().replace("r", ""));
+                int endRoomNumber = Integer.parseInt(itemObj.get("endRoom").toString().replace("r", ""));
                 MagicOrb magicOrb = new MagicOrb(rooms.get(endRoomNumber));
-                rooms.get(roomNumber).getItems().add(magicOrb);
+                rooms.get(roomNumber).addItem(magicOrb);
                 break;
         }
     }

@@ -13,6 +13,8 @@ public class MagicOrb extends Item {
     public void use(Player player) {
         player.setCurrentRoom(room);
         super.use(player);
+        System.out.println("You have been teleported to a new room!");
+        player.getCurrentRoom().inspect();
     }
 
     @Override
