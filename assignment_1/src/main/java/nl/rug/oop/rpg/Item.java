@@ -1,17 +1,20 @@
 package nl.rug.oop.rpg;
 
-public abstract class Item extends DungeonObjects implements Collectable{
+public abstract class Item extends DungeonObjects implements Collectable {
 
     private boolean used;
+    private boolean collected;
 
     public Item(String description) {
         super(description);
         this.used = false;
+        this.collected = false;
     }
 
     @Override
     public void collect(Player player) {
         player.addCollectable(this);
+        this.collected = true;
     }
 
     @Override
@@ -27,4 +30,13 @@ public abstract class Item extends DungeonObjects implements Collectable{
     public void setUsed(boolean b) {
         this.used = b;
     }
+
+    public boolean getCollected() {
+        return this.collected;
+    }
+
+    public void setCollected(boolean b) {
+        this.collected = b;
+    }
+
 }

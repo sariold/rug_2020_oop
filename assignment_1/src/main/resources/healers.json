@@ -1,0 +1,16 @@
+[
+    {
+        "npc": {
+            "type": "HighPriest",
+            "name": "The Pope",
+            "room": "r0"
+        }
+    },
+    {
+        "npc": {
+            "type": "Priest",
+            "name": "Matthew",
+            "room": "r1"
+        }
+    }
+]
