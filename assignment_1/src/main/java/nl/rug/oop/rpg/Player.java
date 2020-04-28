@@ -98,6 +98,7 @@ public class Player implements Attackable{
     }
 
     public void burn(){
+        System.out.println(TextColor.ANSI_RED + "You have been burned!" + TextColor.ANSI_RESET);
         this.burned = true;
     }
 
@@ -106,6 +107,7 @@ public class Player implements Attackable{
     }
 
     public void freeze() {
+        System.out.println(TextColor.ANSI_RED + "You have been frozen!" + TextColor.ANSI_RESET);
         this.frozen = true;
     }
 

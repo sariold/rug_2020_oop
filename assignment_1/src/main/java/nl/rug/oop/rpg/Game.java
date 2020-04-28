@@ -292,7 +292,7 @@ public class Game {
                 continue;
             }
             if (move == 0){
-                if (enemy instanceof MiniBoss) {
+                if (enemy instanceof MiniBoss || enemy instanceof Boss) {
                     System.out.println("You cannot run from a boss fight!");
                     continue;
                 }
@@ -303,7 +303,7 @@ public class Game {
             if (player.isFrozen()) {
                 chance = r.nextInt(101);
                 if (chance > 60) {
-                    System.out.println(TextColor.ANSI_BLUE + "You are frozen solid." + TextColor.ANSI_RESET);
+                    System.out.println(TextColor.ANSI_RED + "You are frozen solid." + TextColor.ANSI_RESET);
                     enemy.interact(player);
                     if (player.isDead()) {
                         System.out.println(TextColor.ANSI_RED + "You have been slain by " + enemy.getName() + "!" + TextColor.ANSI_RESET);
@@ -318,7 +318,7 @@ public class Game {
             if (player.isBurned()) {
                 chance = r.nextInt(101);
                 if (chance > 55) {
-                    System.out.println(TextColor.ANSI_BLUE + "You are burned and take " + DefaultStats.BURN_DAMAGE  + " damage." +TextColor.ANSI_RESET);
+                    System.out.println(TextColor.ANSI_RED + "You are burned and take " + DefaultStats.BURN_DAMAGE  + " damage." +TextColor.ANSI_RESET);
                     player.reduceHitPoints(DefaultStats.BURN_DAMAGE);
                     if (player.isDead()) {
                         System.out.println(TextColor.ANSI_RED + "You have burned to death!" + TextColor.ANSI_RESET);
@@ -331,23 +331,24 @@ public class Game {
             }
             if (move == 1){
                 System.out.println(TextColor.ANSI_YELLOW + "You attack " + enemy.getName() + TextColor.ANSI_RESET);
+                System.out.println(TextColor.ANSI_YELLOW + enemy.getName() + " takes " + player.getAttackPoints() + " damge!" + TextColor.ANSI_RESET);
                 player.attack(enemy);
                 damageToEnemy += this.player.getAttackPoints();
 
             } else if (move == fireMagic) {
-                System.out.println("You have burned " + enemy.getName() + "!");
+                System.out.println(TextColor.ANSI_YELLOW + "You have burned " + enemy.getName() + "!" + TextColor.ANSI_RESET);
                 enemy.burn();
             } else if (move == iceMagic) {
-                System.out.println("You have frozen " + enemy.getName() + "!");
+                System.out.println(TextColor.ANSI_YELLOW + "You have frozen " + enemy.getName() + "!" + TextColor.ANSI_RESET);
                 enemy.freeze();
             }
             if (enemy.isBurned()) {
                 chance = r.nextInt(101);
                 if (chance > 45) {
-                    System.out.println(TextColor.ANSI_BLUE + enemy.getName() + " is burned and takes " + DefaultStats.BURN_DAMAGE  + " damage." +TextColor.ANSI_RESET);
+                    System.out.println(TextColor.ANSI_YELLOW + enemy.getName() + " is burned and takes " + DefaultStats.BURN_DAMAGE  + " damage." +TextColor.ANSI_RESET);
                     enemy.reduceHitPoints(DefaultStats.BURN_DAMAGE);
                 } else {
-                    System.out.println(TextColor.ANSI_BLUE + enemy.getName() + " does no longer burn!" + TextColor.ANSI_RESET);
+                    System.out.println(TextColor.ANSI_YELLOW + enemy.getName() + " does no longer burn!" + TextColor.ANSI_RESET);
                     enemy.removeBurn();
                 }
             }
