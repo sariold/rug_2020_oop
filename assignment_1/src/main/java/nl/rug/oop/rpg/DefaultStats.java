@@ -1,6 +1,9 @@
 package nl.rug.oop.rpg;
 
 public class DefaultStats {
+    // STATUS
+    public static int BURN_DAMAGE = 1;
+
     // ITEM
     public static int POTION_HEAL_POWER = 4;
 
@@ -30,6 +33,10 @@ public class DefaultStats {
     public static int SNAKE_HIT_POINTS = 3;
     public static int SNAKE_ATTACK_POINTS = 4;
     public static int SNAKE_GOLD_VALUE = 2;
+
+    public static int WIZARD_HIT_POINTS = 15;
+    public static int WIZARD_ATTACK_POINTS = 5;
+    public static int WIZARD_GOLD_VALUE = 5;
 
     public static int DRAGON_HIT_POINTS = 25;
     public static int DRAGON_ATTACK_POINTS = 7;

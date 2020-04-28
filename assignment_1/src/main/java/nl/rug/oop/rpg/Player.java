@@ -11,6 +11,8 @@ public class Player implements Attackable{
     private int hitPoints;
     private int attackPoints;
     private int gold;
+    private boolean frozen;
+    private boolean burned;
     private ArrayList<Collectable> inventory;
 
 
@@ -21,6 +23,8 @@ public class Player implements Attackable{
         this.maxHitPoints = maxHitPoints;
         this.attackPoints = attackPoints;
         this.gold = 0;
+        this.frozen = false;
+        this.burned = false;
         this.inventory = new ArrayList<Collectable>();
     }
 
@@ -83,6 +87,30 @@ public class Player implements Attackable{
 
     public void decreaseGold(int value) {
         this.gold -= value;
+    }
+
+    public boolean isFrozen() {
+        return frozen;
+    }
+
+    public boolean isBurned() {
+        return burned;
+    }
+
+    public void burn(){
+        this.burned = true;
+    }
+
+    public void removeBurn() {
+        this.burned = false;
+    }
+
+    public void freeze() {
+        this.frozen = true;
+    }
+
+    public void removeFreeze() {
+        this.frozen = false;
     }
 
     @Override

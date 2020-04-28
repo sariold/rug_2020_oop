@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Game {
@@ -15,6 +16,8 @@ public class Game {
     private ArrayList<Door> totalDoors;
     private ArrayList<String> possibleMoves;
     private ArrayList<String> fightMoves;
+    private int iceMagic;
+    private int fireMagic;
 
 
     public Game(String name) {
@@ -33,7 +36,7 @@ public class Game {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        this.player = new Player(name, this.totalRooms.get(0), DefaultStats.PLAYER_HIT_POINTS, DefaultStats.PLAYER_ATTACK_POINTS, DefaultStats.PLAYER_HIT_POINTS);
+        this.player = new Player(name, this.totalRooms.get(0), DefaultStats.PLAYER_HIT_POINTS, 30, DefaultStats.PLAYER_HIT_POINTS);
 
         MagicOrb orb = new MagicOrb("Teleport to a random room", totalRooms.get(5));
         Priest priest = new Priest("Priest");
@@ -63,6 +66,8 @@ public class Game {
         this.totalRooms.get(0).addNPC(snake);
         this.totalRooms.get(0).addNPC(weaponSmith);
         this.totalRooms.get(0).addNPC(armorSmith);
+        this.totalRooms.get(0).addNPC(new BlueWizard("Jim"));
+        this.totalRooms.get(0).addNPC(new RedWizard("Jim"));
 
         this.possibleMoves.add("Look around");
         this.possibleMoves.add("Look for a way out");
@@ -72,6 +77,7 @@ public class Game {
 
         this.fightMoves.add("Run");
         this.fightMoves.add("Attack");
+
 
         this.player.addCollectable(new HealingPotion());
         this.player.addCollectable(new GoldNugget());
@@ -233,6 +239,8 @@ public class Game {
     }
 
     private void engageFight(Player player, Enemy enemy) {
+        Random r = new Random();
+        int chance;
         int move;
         int damageToEnemy = 0;
         Scanner scanner = new Scanner(System.in);
@@ -246,32 +254,103 @@ public class Game {
                 move = scanner.nextInt();
             } catch (InputMismatchException e) {
                 System.out.println("That is not a valid input!");
-                return;
+                continue;
+            }
+            if (move > fightMoves.size()) {
+                System.out.println("That is not a valid input!");
+                continue;
             }
             if (move == 0){
+                if (enemy instanceof MiniBoss) {
+                    System.out.println("You cannot run from a boss fight!");
+                    continue;
+                }
                 System.out.println(TextColor.ANSI_YELLOW + "You ran from the fight. " + TextColor.ANSI_RED + enemy.getName() + TextColor.ANSI_YELLOW + " recovered to full health!" + TextColor.ANSI_RESET);
                 enemy.increaseHitPoints(damageToEnemy);
                 return;
-            } else if (move == 1){
+            }
+            if (player.isFrozen()) {
+                chance = r.nextInt(101);
+                if (chance > 60) {
+                    System.out.println(TextColor.ANSI_BLUE + "You are frozen solid." + TextColor.ANSI_RESET);
+                    enemy.interact(player);
+                    if (player.isDead()) {
+                        System.out.println(TextColor.ANSI_RED + "You have been slain by " + enemy.getName() + "!" + TextColor.ANSI_RESET);
+                        gameOver();
+                    }
+                    continue;
+                } else {
+                    System.out.println(TextColor.ANSI_BLUE + "You are no longer frozen!" + TextColor.ANSI_RESET);
+                    player.removeFreeze();
+                }
+            }
+            if (player.isBurned()) {
+                chance = r.nextInt(101);
+                if (chance > 55) {
+                    System.out.println(TextColor.ANSI_BLUE + "You are burned and take " + DefaultStats.BURN_DAMAGE  + " damage." +TextColor.ANSI_RESET);
+                    player.reduceHitPoints(DefaultStats.BURN_DAMAGE);
+                    if (player.isDead()) {
+                        System.out.println(TextColor.ANSI_RED + "You have burned to death!" + TextColor.ANSI_RESET);
+                        gameOver();
+                    }
+                } else {
+                    System.out.println(TextColor.ANSI_BLUE + "You do no longer burn!" + TextColor.ANSI_RESET);
+                    player.removeBurn();
+                }
+            }
+            if (move == 1){
                 System.out.println(TextColor.ANSI_YELLOW + "You attack " + enemy.getName() + TextColor.ANSI_RESET);
                 player.attack(enemy);
                 damageToEnemy += this.player.getAttackPoints();
-                if (enemy.isDead()) {
-                    System.out.println(TextColor.ANSI_YELLOW + "You have slain " + enemy.getName() + "!\nYou earned " + enemy.getGoldValue() + " gold." + TextColor.ANSI_RESET);
-                    player.getCurrentRoom().removeDeadNPC();
-                    player.increaseGold(enemy.getGoldValue());
-                    player.increaseHitPoints(enemy.getAttackPoints());
-                    return;
+
+            } else if (move == fireMagic) {
+                System.out.println("You have burned " + enemy.getName() + "!");
+                enemy.burn();
+            } else if (move == iceMagic) {
+                System.out.println("You have frozen " + enemy.getName() + "!");
+                enemy.freeze();
+            }
+            if (enemy.isBurned()) {
+                chance = r.nextInt(101);
+                if (chance > 45) {
+                    System.out.println(TextColor.ANSI_BLUE + enemy.getName() + " is burned and takes " + DefaultStats.BURN_DAMAGE  + " damage." +TextColor.ANSI_RESET);
+                    enemy.reduceHitPoints(DefaultStats.BURN_DAMAGE);
+                } else {
+                    System.out.println(TextColor.ANSI_BLUE + enemy.getName() + " does no longer burn!" + TextColor.ANSI_RESET);
+                    enemy.removeBurn();
                 }
-                System.out.println(TextColor.ANSI_RED + "You are attacked by " + enemy.getName() + TextColor.ANSI_RESET);
-                enemy.interact(player);
-                System.out.println(TextColor.ANSI_RED + "You are at " +  player.getHitPoints() + " health!" + TextColor.ANSI_RESET);
-                if (player.isDead()) {
-                    System.out.println(TextColor.ANSI_RED + "You have been slain by " + enemy.getName() + "!" + TextColor.ANSI_RESET);
-                    gameOver();
+            }
+            if (enemy.isDead()) {
+                System.out.println(TextColor.ANSI_YELLOW + "You have slain " + enemy.getName() + "!\nYou earned " + enemy.getGoldValue() + " gold." + TextColor.ANSI_RESET);
+                if (enemy instanceof BlueWizard) {
+                    System.out.println(TextColor.ANSI_YELLOW + "You have defeated a blue wizard! You gained ice magic and can now freeze enemies in combat!" + TextColor.ANSI_RESET);
+                    iceMagic = fightMoves.size();
+                    fightMoves.add("Ice Magic");
                 }
-            } else {
-                System.out.println("That is not a valid input!");
+                if (enemy instanceof RedWizard) {
+                    System.out.println(TextColor.ANSI_YELLOW + "You have defeated a red wizard! You gained fire magic and can now burn enemies in combat!" + TextColor.ANSI_RESET);
+                    fireMagic = fightMoves.size();
+                    fightMoves.add("Fire Magic");
+                }
+                player.getCurrentRoom().removeDeadNPC();
+                player.increaseGold(enemy.getGoldValue());
+                player.increaseHitPoints(enemy.getAttackPoints());
+                return;
+            }
+            if (enemy.isFrozen()) {
+                chance = r.nextInt(101);
+                if (chance > 50) {
+                    System.out.println(TextColor.ANSI_BLUE + enemy.getName() + " is frozen solid." + TextColor.ANSI_RESET);
+                    continue;
+                } else {
+                    System.out.println(TextColor.ANSI_BLUE + enemy.getName() + " is no longer frozen!" + TextColor.ANSI_RESET);
+                    enemy.removeFreeze();
+                }
+            }
+            enemy.interact(player);
+            if (player.isDead()) {
+                System.out.println(TextColor.ANSI_RED + "You have been slain by " + enemy.getName() + "!" + TextColor.ANSI_RESET);
+                gameOver();
             }
 
         }

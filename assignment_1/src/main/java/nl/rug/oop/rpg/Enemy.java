@@ -8,6 +8,8 @@ public abstract class Enemy extends DungeonNpc implements Attackable {
     private int hitPoints;
     private int attackPoints;
     private int goldValue;
+    private boolean burned;
+    private boolean frozen;
 
     public Enemy(String description) {
         this(description, "an Enemy", 1, 1, 1);
@@ -19,6 +21,30 @@ public abstract class Enemy extends DungeonNpc implements Attackable {
         this.hitPoints = hitPoints;
         this.attackPoints = attackPoints;
         this.goldValue = goldValue;
+    }
+
+    public boolean isBurned() {
+        return burned;
+    }
+
+    public boolean isFrozen() {
+        return frozen;
+    }
+
+    public void burn(){
+        this.burned = true;
+    }
+
+    public void removeBurn() {
+        this.burned = false;
+    }
+
+    public void freeze() {
+        this.frozen = true;
+    }
+
+    public void removeFreeze() {
+        this.frozen = false;
     }
 
     public int getGoldValue() {
@@ -39,6 +65,7 @@ public abstract class Enemy extends DungeonNpc implements Attackable {
 
     @Override
     public void attack(Attackable attacked) {
+        System.out.println(TextColor.ANSI_RED + "You are attacked by " + this.getName() + TextColor.ANSI_RESET);
         Random r = new Random();
         int critical = r.nextInt(101);
         if (critical < 16) {
@@ -47,6 +74,7 @@ public abstract class Enemy extends DungeonNpc implements Attackable {
         } else {
             attacked.reduceHitPoints(this.attackPoints);
         }
+        System.out.println(TextColor.ANSI_RED + "You are at " +  attacked.getHitPoints() + " health!" + TextColor.ANSI_RESET);
     }
 
     @Override
