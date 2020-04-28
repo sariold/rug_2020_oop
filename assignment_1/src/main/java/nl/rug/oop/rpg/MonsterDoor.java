@@ -9,7 +9,10 @@ public class MonsterDoor extends Door {
     @Override
     public void interact(Player player) {
         if (player.getCurrentRoom().countEnemies(player.getCurrentRoom().getNPCs()) == 0) super.interact(player);
-        else System.out.println("You must slaughter every monster in this room!");
+        else {
+            String color = TextColor.ANSI_RED;
+            System.out.println(color + "You must slaughter every monster in this room!" + TextColor.ANSI_RESET);
+        }
     }
 
 }

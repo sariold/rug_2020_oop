@@ -59,10 +59,17 @@ public class JsonReader {
     public static void parseDoors(JSONObject door, ArrayList<Room> rooms, ArrayList<Door> doors) {
         JSONObject doorObj = (JSONObject) door.get("door");
         String description = doorObj.get("description").toString();
+        String type = doorObj.get("type").toString();
         Room from = rooms.get(Integer.parseInt(doorObj.get("from").toString().replace("r", "")));
         Room to = rooms.get(Integer.parseInt(doorObj.get("to").toString().replace("r", "")));
-        Door newDoor = new Door(description, from, to);
-        doors.add(newDoor);
+        if(type.equals("Monster")) {
+            MonsterDoor newDoor = new MonsterDoor(description, from, to);
+            doors.add(newDoor);
+        }
+        else {
+            Door newDoor = new Door(description, from, to);
+            doors.add(newDoor);
+        }
     }
 
     public static void parseConnectionJSON(ArrayList<Room> rooms, ArrayList<Door> doors) throws IOException {
