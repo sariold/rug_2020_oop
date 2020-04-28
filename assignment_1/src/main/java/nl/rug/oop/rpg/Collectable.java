@@ -4,5 +4,5 @@ public interface Collectable {
 
     public void collect(Player player);
 
-    public void use(Player pLayer);
+    public void use(Player player);
 }

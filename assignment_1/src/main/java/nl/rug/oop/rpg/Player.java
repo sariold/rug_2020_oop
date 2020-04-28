@@ -14,7 +14,7 @@ public class Player implements Attackable{
     private ArrayList<Collectable> inventory;
 
 
-    public Player(String name, Room currentRoom, int hitPoints, int attackPoints, int maxHitPoints, ArrayList<Collectable> inventory) {
+    public Player(String name, Room currentRoom, int hitPoints, int attackPoints, int maxHitPoints) {
         this.name = name;
         this.currentRoom = currentRoom;
         this.hitPoints = hitPoints;
@@ -24,26 +24,12 @@ public class Player implements Attackable{
         this.inventory = new ArrayList<Collectable>();
     }
 
-//    public Player(String name, Room currentRoom) {
-//        this(name, currentRoom, 10, 0, 10, inventory);
-//    }
-//
-//    public Player(String name) {
-//        this(name, null,10, 0,10);
-//    }
-
-    public String[] getPossibleMoves(){
-        String[] options = new String[3];
-
-        return options;
-    }
-
     public ArrayList<Collectable> getInventory() {
         return new ArrayList<Collectable>(this.inventory);
     }
 
     public void addCollectable(Collectable c) {
-        this.getInventory().add(c);
+        this.inventory.add(c);
     }
 
     public int getGold() {
