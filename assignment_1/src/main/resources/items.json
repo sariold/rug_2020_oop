@@ -1,0 +1,21 @@
+[
+    {
+        "item": {
+            "type": "GoldNugget",
+            "room": "r0"
+        }
+    },
+    {
+        "item": {
+            "type": "HealingPotion",
+            "room": "r1"
+        }
+    },
+    {
+        "item": {
+            "type": "MagicOrb",
+            "room": "r0",
+            "endRoom": "r8"
+        }
+    }
+]

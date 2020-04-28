@@ -26,6 +26,10 @@ public class Game {
             JsonReader.parseRoomJSON(totalRooms);
             JsonReader.parseDoorJSON(totalRooms, totalDoors);
             JsonReader.parseConnectionJSON(totalRooms, totalDoors);
+            JsonReader.parseNPCJSON(totalRooms, "enemies.json");
+            JsonReader.parseNPCJSON(totalRooms, "healers.json");
+            JsonReader.parseNPCJSON(totalRooms, "traders.json");
+            JsonReader.parseItemJSON(totalRooms);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (ParseException e) {
@@ -35,34 +39,34 @@ public class Game {
         }
         this.player = new Player(name, this.totalRooms.get(0), DefaultStats.PLAYER_HIT_POINTS, DefaultStats.PLAYER_ATTACK_POINTS, DefaultStats.PLAYER_HIT_POINTS);
 
-        MagicOrb orb = new MagicOrb("Teleport to a random room", totalRooms.get(5));
-        Priest priest = new Priest("Priest");
-        HighPriest highPriest = new HighPriest("High");
-        Knight knight1 = new Knight("Knight1");
-        Knight knight2 = new Knight("§§");
-        Knight knight3 = new Knight("RRR");
-        Rat rat = new Rat("Rat");
-        Spider spider = new Spider("spider");
-        Snake snake = new Snake("Snake");
-        Orc orc = new Orc("orc");
-        Dragon dragon = new Dragon("JAJA");
-        WeaponSmith weaponSmith = new WeaponSmith("Weapons");
-        ArmorSmith armorSmith = new ArmorSmith("Armor");
-        Gambler gambler = new Gambler("gambler");
-
-        this.totalRooms.get(0).addNPC(gambler);
-        this.totalRooms.get(0).addNPC(priest);
-        this.totalRooms.get(0).addNPC(highPriest);
-        this.totalRooms.get(0).addNPC(knight1);
-        this.totalRooms.get(0).addNPC(knight2);
-        this.totalRooms.get(0).addNPC(knight3);
-        this.totalRooms.get(0).addNPC(rat);
-        this.totalRooms.get(0).addNPC(spider);
-        this.totalRooms.get(0).addNPC(orc);
-        this.totalRooms.get(0).addNPC(dragon);
-        this.totalRooms.get(0).addNPC(snake);
-        this.totalRooms.get(0).addNPC(weaponSmith);
-        this.totalRooms.get(0).addNPC(armorSmith);
+        MagicOrb orb = new MagicOrb(totalRooms.get(5));
+//        Priest priest = new Priest("Priest");
+//        HighPriest highPriest = new HighPriest("High");
+//        Knight knight1 = new Knight("Knight1");
+//        Knight knight2 = new Knight("§§");
+//        Knight knight3 = new Knight("RRR");
+//        Rat rat = new Rat("Rat");
+//        Spider spider = new Spider("spider");
+//        Snake snake = new Snake("Snake");
+//        Orc orc = new Orc("orc");
+//        Dragon dragon = new Dragon("JAJA");
+//        WeaponSmith weaponSmith = new WeaponSmith("Weapons");
+//        ArmorSmith armorSmith = new ArmorSmith("Armor");
+//        Gambler gambler = new Gambler("gambler");
+//
+//        this.totalRooms.get(0).addNPC(gambler);
+//        this.totalRooms.get(0).addNPC(priest);
+//        this.totalRooms.get(0).addNPC(highPriest);
+//        this.totalRooms.get(0).addNPC(knight1);
+//        this.totalRooms.get(0).addNPC(knight2);
+//        this.totalRooms.get(0).addNPC(knight3);
+//        this.totalRooms.get(0).addNPC(rat);
+//        this.totalRooms.get(0).addNPC(spider);
+//        this.totalRooms.get(0).addNPC(orc);
+//        this.totalRooms.get(0).addNPC(dragon);
+//        this.totalRooms.get(0).addNPC(snake);
+//        this.totalRooms.get(0).addNPC(weaponSmith);
+//        this.totalRooms.get(0).addNPC(armorSmith);
 
         this.possibleMoves.add("Look around");
         this.possibleMoves.add("Look for a way out");
@@ -73,8 +77,8 @@ public class Game {
         this.fightMoves.add("Run");
         this.fightMoves.add("Attack");
 
-        this.player.addCollectable(new HealingPotion());
-        this.player.addCollectable(new GoldNugget());
+//        this.player.addCollectable(new HealingPotion());
+//        this.player.addCollectable(new GoldNugget());
     }
 
     public boolean notOver() {

@@ -103,5 +103,115 @@ public class JsonReader {
         });
     }
 
+    public static void parseNPCJSON(ArrayList<Room> rooms, String file) throws IOException {
+        JSONParser jsonParser = new JSONParser();
+        InputStream is = JsonReader.class.getClassLoader().getResourceAsStream(file);
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(is));
+        String json = "";
+        String temp = "";
+        while((temp = bufferedReader.readLine()) != null) {
+            json = json + temp;
+        }
+        try {
+            Object npcJSON = jsonParser.parse(json);
+            JSONArray npcArray = (JSONArray) npcJSON;
+            npcArray.forEach(npc -> parseNPCs((JSONObject) npc, rooms));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void parseNPCs(JSONObject npc, ArrayList<Room> rooms) {
+        JSONObject npcObj = (JSONObject) npc.get("npc");
+        String type = npcObj.get("type").toString();
+        String name = npcObj.get("name").toString();
+        int roomNumber = Integer.parseInt(npcObj.get("room").toString().replace("r", ""));
+        switch(type) {
+            case "Dragon":
+                Dragon dragon = new Dragon(name);
+                rooms.get(roomNumber).addNPC(dragon);
+                break;
+            case "Spider":
+                Spider spider = new Spider(name);
+                rooms.get(roomNumber).addNPC(spider);
+                break;
+            case "Snake":
+                Snake snake = new Snake(name);
+                rooms.get(roomNumber).addNPC(snake);
+                break;
+            case "Knight":
+                Knight knight = new Knight(name);
+                rooms.get(roomNumber).addNPC(knight);
+                break;
+            case "Orc":
+                Orc orc = new Orc(name);
+                rooms.get(roomNumber).addNPC(orc);
+                break;
+            case "Rat":
+                Rat rat = new Rat(name);
+                rooms.get(roomNumber).addNPC(rat);
+                break;
+            case "HighPriest":
+                HighPriest highPriest = new HighPriest(name);
+                rooms.get(roomNumber).addNPC(highPriest);
+                break;
+            case "Priest":
+                Priest priest = new Priest(name);
+                rooms.get(roomNumber).addNPC(priest);
+                break;
+            case "Gambler":
+                Gambler gambler = new Gambler(name);
+                rooms.get(roomNumber).addNPC(gambler);
+                break;
+            case "ArmorSmith":
+                ArmorSmith armorSmith = new ArmorSmith(name);
+                rooms.get(roomNumber).addNPC(armorSmith);
+                break;
+            case "WeaponSmith":
+                WeaponSmith weaponSmith = new WeaponSmith(name);
+                rooms.get(roomNumber).addNPC(weaponSmith);
+                break;
+        }
+    }
+
+    public static void parseItemJSON(ArrayList<Room> rooms) throws IOException {
+        JSONParser jsonParser = new JSONParser();
+        InputStream is = JsonReader.class.getClassLoader().getResourceAsStream("items.json");
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(is));
+        String json = "";
+        String temp = "";
+        while((temp = bufferedReader.readLine()) != null) {
+            json = json + temp;
+        }
+        try {
+            Object itemJSON = jsonParser.parse(json);
+            JSONArray itemArray = (JSONArray) itemJSON;
+            itemArray.forEach(item -> parseItems((JSONObject) item, rooms));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void parseItems(JSONObject item, ArrayList<Room> rooms) {
+        JSONObject itemObj = (JSONObject) item.get("item");
+        String type = itemObj.get("type").toString();
+        int roomNumber = Integer.parseInt(itemObj.get("room").toString().replace("r", ""));
+        switch(type) {
+            case "GoldNugget":
+                GoldNugget goldNugget = new GoldNugget();
+                rooms.get(roomNumber).getItems().add(goldNugget);
+                break;
+            case "HealingPotion":
+                HealingPotion healingPotion = new HealingPotion();
+                rooms.get(roomNumber).getItems().add(healingPotion);
+                break;
+            case "MagicOrb":
+                int endRoomNumber = Integer.parseInt(itemObj.get("room").toString().replace("r", ""));
+                MagicOrb magicOrb = new MagicOrb(rooms.get(endRoomNumber));
+                rooms.get(roomNumber).getItems().add(magicOrb);
+                break;
+        }
+    }
+
 }
 

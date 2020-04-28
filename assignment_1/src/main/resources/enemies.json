@@ -1,0 +1,44 @@
+[
+    {
+        "npc": {
+            "type": "Dragon",
+            "name": "Blaze",
+            "room": "r0"
+        }
+    },
+    {
+        "npc": {
+            "type": "Spider",
+            "name": "Daddy Long Legs",
+            "room": "r1"
+        }
+    },
+    {
+        "npc": {
+            "type": "Snake",
+            "name": "Mathias",
+            "room": "r2"
+        }
+    },
+    {
+        "npc": {
+            "type": "Knight",
+            "name": "Headless Horseman",
+            "room": "r3"
+        }
+    },
+    {
+        "npc": {
+            "type": "Orc",
+            "name": "Orky",
+            "room": "r4"
+        }
+    },
+    {
+        "npc": {
+            "type": "Rat",
+            "name": "6ix9ine",
+            "room": "r5"
+        }
+    },
+]

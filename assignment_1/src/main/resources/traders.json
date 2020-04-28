@@ -1,0 +1,23 @@
+[
+    {
+        "npc": {
+            "type": "Gambler",
+            "name": "Walter White",
+            "room": "r0"
+        }
+    },
+    {
+        "npc": {
+            "type": "ArmorSmith",
+            "name": "Flynn",
+            "room": "r1"
+        }
+    },
+    {
+        "npc": {
+            "type": "WeaponSmith",
+            "name": "Zeus",
+            "room": "r2"
+        }
+    }
+]

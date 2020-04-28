@@ -4,8 +4,8 @@ public class MagicOrb extends Item {
 
     private Room room;
 
-    public MagicOrb(String description, Room room) {
-        super(description);
+    public MagicOrb(Room room) {
+        super(DefaultStats.MAGIC_ORB_DESCRIPTION);
         this.room = room;
     }
 
