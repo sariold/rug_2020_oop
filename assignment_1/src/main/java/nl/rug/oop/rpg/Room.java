@@ -42,5 +42,9 @@ public class Room extends DungeonObjects {
         return new ArrayList<DungeonNpc>(this.NPCs);
     }
 
+    public int countEnemies(ArrayList<DungeonNpc> npcs) {
+        int count = (int) npcs.stream().filter(npc -> npc instanceof Enemy).count();
+        return count;
+    }
 
 }
