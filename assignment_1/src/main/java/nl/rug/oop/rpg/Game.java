@@ -35,6 +35,7 @@ public class Game {
         }
         this.player = new Player(name, this.totalRooms.get(0), DefaultStats.PLAYER_HIT_POINTS, DefaultStats.PLAYER_ATTACK_POINTS, DefaultStats.PLAYER_HIT_POINTS);
 
+        MagicOrb orb = new MagicOrb("Teleport to a random room", 5);
         Priest priest = new Priest("Priest");
         HighPriest highPriest = new HighPriest("High");
         Knight knight1 = new Knight("Knight1");

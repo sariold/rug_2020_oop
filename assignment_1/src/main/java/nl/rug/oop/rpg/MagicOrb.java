@@ -2,21 +2,17 @@ package nl.rug.oop.rpg;
 
 public class MagicOrb extends Item {
 
-    private Room to;
+    private Room room;
 
-    public MagicOrb(String description, Room to) {
+    public MagicOrb(String description, Room room) {
         super(description);
-        this.to = to;
+        this.room = room;
     }
 
     @Override
-    public void collect(Player player) {
-
-    }
-
-    @Override
-    public void use(Player pLayer) {
-
+    public void use(Player player) {
+        player.setCurrentRoom(room);
+        super.use(player);
     }
 
     @Override
