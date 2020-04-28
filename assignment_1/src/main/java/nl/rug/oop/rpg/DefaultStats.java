@@ -4,6 +4,8 @@ public class DefaultStats {
     // ITEM
     public static int POTION_HEAL_POWER = 4;
 
+    public static int GOLD_NUGGET_VALUE = 5;
+
     // PLAYER
     public static int PLAYER_HIT_POINTS = 10;
     public static int PLAYER_ATTACK_POINTS = 1;

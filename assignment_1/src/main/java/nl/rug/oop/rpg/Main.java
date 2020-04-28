@@ -37,7 +37,9 @@ public class Main {
                 case 3:
                     game.displayStats();
                     break;
-                    
+                // use the inventory
+                case 4:
+                    game.useInventory();
             }
         }
     }

@@ -18,5 +18,9 @@ public class MagicOrb extends Item {
     public void use(Player pLayer) {
 
     }
-    
+
+    @Override
+    public String toString() {
+        return "Magic Orb";
+    }
 }

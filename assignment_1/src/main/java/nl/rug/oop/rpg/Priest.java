@@ -8,7 +8,7 @@ public class Priest extends Healer{
 
     @Override
     public void heal(Player player) {
-        System.out.println("You have been healed for " + this.getHealPower() + ".");
+        System.out.println(TextColor.ANSI_GREEN + "You have been healed for " + this.getHealPower() + "." + TextColor.ANSI_RESET);
         super.heal(player);
     }
 
