@@ -71,6 +71,7 @@ public class Game {
         this.fightMoves.add("Run");
         this.fightMoves.add("Attack");
 
+        this.player.addCollectable(new HealingPotion());
     }
 
     public void printOptions() {

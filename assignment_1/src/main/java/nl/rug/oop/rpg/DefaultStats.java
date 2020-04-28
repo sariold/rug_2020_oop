@@ -1,6 +1,9 @@
 package nl.rug.oop.rpg;
 
 public class DefaultStats {
+    // ITEM
+    public static int POTION_HEAL_POWER = 4;
+
     // PLAYER
     public static int PLAYER_HIT_POINTS = 10;
     public static int PLAYER_ATTACK_POINTS = 1;
