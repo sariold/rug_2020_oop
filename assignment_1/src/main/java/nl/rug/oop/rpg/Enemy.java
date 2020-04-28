@@ -42,7 +42,7 @@ public abstract class Enemy extends DungeonNpc implements Attackable {
         Random r = new Random();
         int critical = r.nextInt(101);
         if (critical < 16) {
-            System.out.println("Critical Hit!");
+            System.out.println(TextColor.ANSI_RED + "Critical Hit!" + TextColor.ANSI_RESET);
             attacked.reduceHitPoints(2 * this.attackPoints);
         } else {
             attacked.reduceHitPoints(this.attackPoints);

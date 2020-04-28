@@ -14,5 +14,9 @@ public class MagicOrb extends Item {
         player.setCurrentRoom(room);
         super.use(player);
     }
-    
+
+    @Override
+    public String toString() {
+        return "Magic Orb";
+    }
 }

@@ -50,7 +50,7 @@ public class Player implements Attackable{
     }
 
     public void removeUsedItem() {
-        for (int i = 0; i < this.inventory.size(); i++) {
+        for (int i = this.inventory.size() - 1; i > -1; i--) {
             if (((Item)this.inventory.get(i)).getUsed()) this.inventory.remove(i);
         }
     }
@@ -96,7 +96,7 @@ public class Player implements Attackable{
         Random r = new Random();
         int critical = r.nextInt(101);
         if (critical < 21) {
-            System.out.println("Critical Hit!");
+            System.out.println(TextColor.ANSI_YELLOW + "Critical Hit!" + TextColor.ANSI_RESET);
             attacked.reduceHitPoints(2 * this.attackPoints);
         } else {
             attacked.reduceHitPoints(this.attackPoints);

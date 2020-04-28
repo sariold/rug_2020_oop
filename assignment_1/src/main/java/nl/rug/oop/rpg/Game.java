@@ -67,11 +67,13 @@ public class Game {
         this.possibleMoves.add("Look for a way out");
         this.possibleMoves.add("Look for company");
         this.possibleMoves.add("Look at your stats");
+        this.possibleMoves.add("Look in your inventory");
 
         this.fightMoves.add("Run");
         this.fightMoves.add("Attack");
 
         this.player.addCollectable(new HealingPotion());
+        this.player.addCollectable(new GoldNugget());
     }
 
     public void printOptions() {
@@ -81,11 +83,29 @@ public class Game {
         }
     }
 
+    public void useInventory() {
+        Scanner scanner = new Scanner(System.in);
+        int move;
+        if (player.getInventory().size() == 0) {
+            System.out.println("You currently have no items.");
+            return;
+        }
+        for (int i = 0; i < player.getInventory().size(); i++) {
+            System.out.println("\t(" + i + ") " + this.player.getInventory().get(i).toString());
+        }
+        System.out.println("What item will you use (-1 to not use an item)");
+        move = scanner.nextInt();
+        if (move == -1) return;
+        if (move < player.getInventory().size() && move > -1) {
+            player.getInventory().get(move).use(player);
+        }
+    }
+
     public void displayStats() {
         System.out.println("Your Character: " + player.getName());
-        System.out.println("\tHealth: "  + player.getHitPoints() + "/" + player.getMaxHitPoints());
-        System.out.println("\tAttack: " + player.getAttackPoints());
-        System.out.println("\tGold: " + player.getGold());
+        System.out.println(TextColor.ANSI_GREEN + "\tHealth: " + TextColor.ANSI_RESET + player.getHitPoints() + "/" + player.getMaxHitPoints());
+        System.out.println(TextColor.ANSI_RED + "\tAttack: " + TextColor.ANSI_RESET + player.getAttackPoints());
+        System.out.println(TextColor.ANSI_YELLOW + "\tGold: " + TextColor.ANSI_RESET + player.getGold());
     }
 
     public void inspectRoom() {
@@ -150,15 +170,20 @@ public class Game {
         }
     }
 
+    private void winGame() {
+        System.out.println(TextColor.ANSI_BLACK + "Congratulations you have won the game! You are a real dungeon master!" + TextColor.ANSI_RESET);
+        System.exit(0);
+    }
+
     private void gameOver() {
-        System.out.println("GAME OVER!");
+        System.out.println(TextColor.ANSI_BLACK + "GAME OVER!" + TextColor.ANSI_RESET);
         System.exit(0);
     }
 
     private void tradeWith(Player player, Trader trader) {
         Scanner scanner = new Scanner(System.in);
         int move;
-        System.out.println(trader.getName() + ": " + trader.tradeDialog() + "\n Are you interested?");
+        System.out.println(trader.getName() + ": " + TextColor.ANSI_PURPLE + trader.tradeDialog() + "\n Are you interested?" + TextColor.ANSI_RESET);
         System.out.println("\t(0) I think that is too expensive!\n\t(1) Let's trade!");
         move = scanner.nextInt();
         if (move == 0) return;
@@ -176,7 +201,7 @@ public class Game {
     private void healPlayer(Player player, Healer healer) {
         Scanner scanner = new Scanner(System.in);
         int move;
-        System.out.println(healer.getName() + ":I can only heal you once, and then I will leave!\n Are you sure you want me to heal you?");
+        System.out.println(healer.getName() + ":" + TextColor.ANSI_PURPLE + "I can only heal you once, and then I will leave!\n Are you sure you want me to heal you?" + TextColor.ANSI_RESET);
         System.out.println("\t(0) No better do it later!\n\t(1) Heal me!");
         move = scanner.nextInt();
         if (move == 0) return;
@@ -199,24 +224,25 @@ public class Game {
             }
             move = scanner.nextInt();
             if (move == 0){
+                System.out.println(TextColor.ANSI_YELLOW + "You ran from the fight. " + TextColor.ANSI_RED + enemy.getName() + TextColor.ANSI_YELLOW + " recovered to full health!" + TextColor.ANSI_RESET);
                 enemy.increaseHitPoints(damageToEnemy);
                 return;
             } else {
-                System.out.println("You attack " + enemy.getName());
+                System.out.println(TextColor.ANSI_YELLOW + "You attack " + enemy.getName() + TextColor.ANSI_RESET);
                 player.attack(enemy);
                 damageToEnemy += this.player.getAttackPoints();
                 if (enemy.isDead()) {
-                    System.out.println("You have slain " + enemy.getName() + "!\nYou earned " + enemy.getGoldValue() + " gold.");
+                    System.out.println(TextColor.ANSI_YELLOW + "You have slain " + enemy.getName() + "!\nYou earned " + enemy.getGoldValue() + " gold." + TextColor.ANSI_RESET);
                     player.getCurrentRoom().removeDeadNPC();
                     player.increaseGold(enemy.getGoldValue());
                     player.increaseHitPoints(enemy.getAttackPoints());
                     return;
                 }
-                System.out.println("You are attacked by " + enemy.getName());
+                System.out.println(TextColor.ANSI_RED + "You are attacked by " + enemy.getName() + TextColor.ANSI_RESET);
                 enemy.interact(player);
-                System.out.println("You are at " +  player.getHitPoints() + " health!");
+                System.out.println(TextColor.ANSI_RED + "You are at " +  player.getHitPoints() + " health!" + TextColor.ANSI_RESET);
                 if (player.isDead()) {
-                    System.out.println("You have been slain by " + enemy.getName() + "!");
+                    System.out.println(TextColor.ANSI_RED + "You have been slain by " + enemy.getName() + "!" + TextColor.ANSI_RESET);
                     gameOver();
                 }
             }

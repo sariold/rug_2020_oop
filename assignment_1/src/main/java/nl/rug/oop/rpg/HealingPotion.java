@@ -15,4 +15,9 @@ public class HealingPotion extends Item{
         System.out.println(TextColor.ANSI_GREEN + "You have been healed for " + this.healPower + " health." + TextColor.ANSI_RESET);
         super.use(player);
     }
+
+    @Override
+    public String toString() {
+        return "Healing Potion";
+    }
 }

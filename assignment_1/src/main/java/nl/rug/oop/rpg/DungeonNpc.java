@@ -25,6 +25,6 @@ public abstract class DungeonNpc implements Inspectable, Interactable {
 
     @Override
     public void inspect() {
-        System.out.println(description);
+        System.out.println(TextColor.ANSI_PURPLE + description + TextColor.ANSI_RESET);
     }
 }
