@@ -1,5 +1,7 @@
 package nl.rug.oop.rpg;
 
+import nl.rug.oop.rpg.npcs.*;
+import nl.rug.oop.rpg.objects.*;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;

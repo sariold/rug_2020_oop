@@ -1,7 +1,9 @@
 package nl.rug.oop.rpg;
 
+import nl.rug.oop.rpg.interfaces.Collectable;
+import nl.rug.oop.rpg.npcs.*;
+import nl.rug.oop.rpg.objects.*;
 import org.json.simple.parser.ParseException;
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
