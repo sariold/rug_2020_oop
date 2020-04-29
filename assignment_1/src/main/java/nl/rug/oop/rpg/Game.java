@@ -130,8 +130,10 @@ public class Game {
                 System.out.println("You stayed in the same room.");
                 return;
             }
-            doors.get(currentMove).interact(player);
-            player.getCurrentRoom().inspect();
+            if(!(doors.get(currentMove) instanceof FinalBossDoor)) {
+                doors.get(currentMove).interact(player);
+                player.getCurrentRoom().inspect();
+            }
             if(doors.get(currentMove) instanceof MiniBossDoor) {
                 String type = ((MiniBossDoor) doors.get(currentMove)).getWizardColor();
                 if(type == "Blue") {
@@ -139,6 +141,14 @@ public class Game {
                     engageFight(player, (Enemy) player.getCurrentRoom().getNPCs().get(0));
                 } else {
                     player.getCurrentRoom().addNPC(miniBosses.get(1));
+                    engageFight(player, (Enemy) player.getCurrentRoom().getNPCs().get(0));
+                }
+            } else if(doors.get(currentMove) instanceof FinalBossDoor) {
+                if(miniBosses.size() == 0) {
+                    doors.get(currentMove).interact(player);
+                    player.getCurrentRoom().inspect();
+                    Dragon dragon = new Dragon("Draco");
+                    player.getCurrentRoom().addNPC(dragon);
                     engageFight(player, (Enemy) player.getCurrentRoom().getNPCs().get(0));
                 }
             }
