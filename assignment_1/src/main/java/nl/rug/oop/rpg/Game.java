@@ -61,11 +61,6 @@ public class Game {
         this.fightMoves.add("Attack");
     }
 
-    public int countMiniBosses(ArrayList<Door> doors) {
-        int count = (int) doors.stream().filter(door -> door instanceof MiniBossDoor).count();
-        return count;
-    }
-
     public boolean notOver() {
         return !player.isDead();
     }
@@ -135,16 +130,21 @@ public class Game {
                 player.getCurrentRoom().inspect();
             }
             if(doors.get(currentMove) instanceof MiniBossDoor) {
+                if (((MiniBossDoor) doors.get(currentMove)).isDefeated()) return;
                 String type = ((MiniBossDoor) doors.get(currentMove)).getWizardColor();
                 if(type == "Blue") {
+                    miniBosses.get(0).setDoor((MiniBossDoor) doors.get(currentMove));
                     player.getCurrentRoom().addNPC(miniBosses.get(0));
                     engageFight(player, (Enemy) player.getCurrentRoom().getNPCs().get(0));
+                    if(miniBosses.get(0).isDead()) ((MiniBossDoor) doors.get(currentMove)).defeated();
                 } else {
+                    miniBosses.get(1).setDoor((MiniBossDoor) doors.get(currentMove));
                     player.getCurrentRoom().addNPC(miniBosses.get(1));
                     engageFight(player, (Enemy) player.getCurrentRoom().getNPCs().get(0));
+                    if(miniBosses.get(1).isDead()) ((MiniBossDoor) doors.get(currentMove)).defeated();
                 }
             } else if(doors.get(currentMove) instanceof FinalBossDoor) {
-                if(miniBosses.size() == 0) {
+                if(miniBosses.get(0).isDead() && miniBosses.get(1).isDead()) {
                     doors.get(currentMove).interact(player);
                     player.getCurrentRoom().inspect();
                     Dragon dragon = new Dragon("Draco");
@@ -328,7 +328,7 @@ public class Game {
             }
             if (move == 1){
                 System.out.println(TextColor.ANSI_YELLOW + "You attack " + enemy.getName() + TextColor.ANSI_RESET);
-                System.out.println(TextColor.ANSI_YELLOW + enemy.getName() + " takes " + player.getAttackPoints() + " damge!" + TextColor.ANSI_RESET);
+                System.out.println(TextColor.ANSI_YELLOW + enemy.getName() + " takes " + player.getAttackPoints() + " damage!" + TextColor.ANSI_RESET);
                 player.attack(enemy);
                 damageToEnemy += this.player.getAttackPoints();
 
@@ -355,13 +355,11 @@ public class Game {
                     System.out.println(TextColor.ANSI_YELLOW + "You have defeated a blue wizard! You gained ice magic and can now freeze enemies in combat!" + TextColor.ANSI_RESET);
                     iceMagic = fightMoves.size();
                     fightMoves.add("Ice Magic");
-                    miniBosses.remove(0);
                 }
                 if (enemy instanceof RedWizard) {
                     System.out.println(TextColor.ANSI_YELLOW + "You have defeated a red wizard! You gained fire magic and can now burn enemies in combat!" + TextColor.ANSI_RESET);
                     fireMagic = fightMoves.size();
                     fightMoves.add("Fire Magic");
-                    miniBosses.remove(1);
                 }
                 if (enemy instanceof Boss) winGame();
                 player.getCurrentRoom().removeDeadNPC();

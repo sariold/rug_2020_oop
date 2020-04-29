@@ -17,7 +17,56 @@
         "npc": {
             "type": "WeaponSmith",
             "name": "Zeus",
-            "room": "r2"
+            "room": "r3"
+        }
+    },
+    {
+        "npc": {
+            "type": "WeaponSmith",
+            "name": "One Eyed Cyclops",
+            "room": "r5"
+        }
+    },
+    {
+        "npc": {
+            "type": "ArmorSmith",
+            "name": "Artemis",
+            "room": "r5"
+        }
+    },
+    {
+        "npc": {
+            "type": "Gambler",
+            "name": "Felix",
+            "room": "r12"
+        }
+    },
+    {
+        "npc": {
+            "type": "Gambler",
+            "name": "Felix",
+            "room": "r12"
+        }
+    },
+    {
+        "npc": {
+            "type": "ArmorSmith",
+            "name": "Jupiter",
+            "room": "r14"
+        }
+    },
+    {
+        "npc": {
+            "type": "WeaponSmith",
+            "name": "Eros",
+            "room": "r14"
+        }
+    },
+    {
+        "npc": {
+            "type": "Gambler",
+            "name": "Hermes",
+            "room": "r14"
         }
     }
 ]

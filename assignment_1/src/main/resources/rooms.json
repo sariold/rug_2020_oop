@@ -56,7 +56,37 @@
     {
         "room": {
             "name": "r9",
-            "description": "A room that marks the end of this RPG. Congratulations!"
+            "description": "A room where a mighty dragon used to rule from."
+        }
+    },
+    {
+        "room": {
+            "name": "r10",
+            "description": "A room where something does not feel right at all."
+        }
+    },
+    {
+        "room": {
+            "name": "r11",
+            "description": "A room where the cold hearted Blue Wizard lives."
+        }
+    },
+    {
+        "room": {
+            "name": "r12",
+            "description": "A room with only two doors so choose wisely."
+        }
+    },
+    {
+        "room": {
+            "name": "r13",
+            "description": "A room where the mystical Fire Wizard resides!"
+        }
+    },
+    {
+        "room": {
+            "name": "r14",
+            "description": "A room with a possible dead end."
         }
     }
 ]

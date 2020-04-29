@@ -61,15 +61,17 @@ public class JsonReader {
         String description = doorObj.get("description").toString();
         String type = doorObj.get("type").toString();
         Room from = rooms.get(Integer.parseInt(doorObj.get("from").toString().replace("r", "")));
+        if(type.equals("Trap")) {
+            TrapDoor newDoor = new TrapDoor(description, from, 5);
+            doors.add(newDoor);
+            return;
+        }
         Room to = rooms.get(Integer.parseInt(doorObj.get("to").toString().replace("r", "")));
         if(type.equals("Monster")) {
             MonsterDoor newDoor = new MonsterDoor(description, from, to);
             doors.add(newDoor);
-        } else if(type.equals("Trap")) {
-            TrapDoor newDoor = new TrapDoor(description, from, to, 5);
-            doors.add(newDoor);
         } else if(type.equals("MiniBoss")) {
-            MiniBossDoor newDoor = new MiniBossDoor(description, from, to, "Blue");
+            MiniBossDoor newDoor = new MiniBossDoor(description, from, to, "Blue", true);
             doors.add(newDoor);
         } else if(type.equals("FinalBoss")) {
             FinalBossDoor newDoor = new FinalBossDoor(description, from, to);

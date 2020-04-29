@@ -3,11 +3,10 @@ package nl.rug.oop.rpg;
 public class TrapDoor extends Door {
 
     private Room from;
-    private Room to;
     private int attackPoints;
 
-    public TrapDoor(String description, Room from, Room to, int attackPoints) {
-        super(description, from, to);
+    public TrapDoor(String description, Room from, int attackPoints) {
+        super(description, from, null);
         this.attackPoints = attackPoints;
     }
 

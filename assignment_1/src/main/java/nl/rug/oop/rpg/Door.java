@@ -23,4 +23,8 @@ public class Door extends DungeonObjects implements Interactable {
 //        System.out.println(result);
         return result;
     }
+
+    public Room returnTo() {
+        return this.to;
+    }
 }

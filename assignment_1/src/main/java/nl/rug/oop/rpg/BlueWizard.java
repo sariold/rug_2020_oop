@@ -4,12 +4,12 @@ import java.util.Random;
 
 public class BlueWizard extends MiniBoss {
 
-    public BlueWizard(String description, String name) {
-        super(description, name, DefaultStats.WIZARD_HIT_POINTS , DefaultStats.WIZARD_ATTACK_POINTS, DefaultStats.WIZARD_GOLD_VALUE);
+    public BlueWizard(String description, String name, MiniBossDoor door) {
+        super(description, name, DefaultStats.WIZARD_HIT_POINTS , DefaultStats.WIZARD_ATTACK_POINTS, DefaultStats.WIZARD_GOLD_VALUE, door);
     }
 
     public BlueWizard(String name) {
-        this("You will freeze to Death!!", name);
+        this("You will freeze to Death!!", name, null);
     }
 
     @Override
