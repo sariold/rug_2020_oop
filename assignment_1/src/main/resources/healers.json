@@ -10,7 +10,7 @@
         "npc": {
             "type": "Priest",
             "name": "Matthew",
-            "room": "r1"
+            "room": "r2"
         }
     }
 ]

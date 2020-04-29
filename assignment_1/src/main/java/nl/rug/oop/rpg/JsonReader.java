@@ -68,7 +68,10 @@ public class JsonReader {
         } else if(type.equals("Trap")) {
             TrapDoor newDoor = new TrapDoor(description, from, to, 5);
             doors.add(newDoor);
-        }
+        } else if(type.equals("MiniBoss")) {
+            MiniBossDoor newDoor = new MiniBossDoor(description, from, to, "Blue");
+            doors.add(newDoor);
+    }
         else {
             Door newDoor = new Door(description, from, to);
             doors.add(newDoor);

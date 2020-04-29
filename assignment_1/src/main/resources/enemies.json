@@ -10,7 +10,7 @@
         "npc": {
             "type": "Spider",
             "name": "Daddy Long Legs",
-            "room": "r1"
+            "room": "r2"
         }
     },
     {
@@ -24,7 +24,7 @@
         "npc": {
             "type": "Knight",
             "name": "Headless Horseman",
-            "room": "r3"
+            "room": "r4"
         }
     },
     {
@@ -40,5 +40,5 @@
             "name": "6ix9ine",
             "room": "r5"
         }
-    },
+    }
 ]

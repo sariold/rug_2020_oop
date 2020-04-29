@@ -2,7 +2,7 @@ package nl.rug.oop.rpg;
 
 import java.util.Random;
 
-public class RedWizard extends MiniBoss{
+public class RedWizard extends MiniBoss {
 
     public RedWizard(String description, String name) {
         super(description, name, DefaultStats.WIZARD_HIT_POINTS , DefaultStats.WIZARD_ATTACK_POINTS, DefaultStats.WIZARD_GOLD_VALUE);

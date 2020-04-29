@@ -11,7 +11,7 @@
     {
         "door": {
             "name": "d1",
-            "type": "Normal",
+            "type": "MiniBoss",
             "description": "A suspicious looking door",
             "from": "r1",
             "to": "r2"
@@ -20,7 +20,7 @@
     {
         "door": {
             "name": "d2",
-            "type": "Normal",
+            "type": "MiniBoss",
             "description": "A black door",
             "from": "r0",
             "to": "r3"

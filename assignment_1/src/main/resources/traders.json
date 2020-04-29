@@ -10,7 +10,7 @@
         "npc": {
             "type": "ArmorSmith",
             "name": "Flynn",
-            "room": "r1"
+            "room": "r2"
         }
     },
     {

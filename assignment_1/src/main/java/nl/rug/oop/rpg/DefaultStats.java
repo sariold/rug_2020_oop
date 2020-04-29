@@ -56,4 +56,7 @@ public class DefaultStats {
 
     public static int GAMBLER_POWER = 1;
     public static int GAMBLER_PRICE = 2;
+
+    // BOSS
+    public static String MINI_BOSS_DOOR = "If you dare enter this room, you will be forced to defeat a mini boss!";
 }

@@ -16,15 +16,23 @@ public class Game {
     private ArrayList<Door> totalDoors;
     private ArrayList<String> possibleMoves;
     private ArrayList<String> fightMoves;
+    private ArrayList<MiniBoss> miniBosses;
     private int iceMagic;
     private int fireMagic;
-
 
     public Game(String name) {
         this.totalRooms = new ArrayList<Room>();
         this.totalDoors = new ArrayList<Door>();
         this.possibleMoves = new ArrayList<String>();
         this.fightMoves = new ArrayList<String>();
+        this.miniBosses = new ArrayList<MiniBoss>();
+
+        BlueWizard blueWizard = new BlueWizard("Ice Poseidon");
+        miniBosses.add(blueWizard);
+
+        RedWizard redWizard = new RedWizard("Hades");
+        miniBosses.add(redWizard);
+
         try {
             JsonReader.parseRoomJSON(totalRooms);
             JsonReader.parseDoorJSON(totalRooms, totalDoors);
@@ -42,37 +50,6 @@ public class Game {
         }
         this.player = new Player(name, this.totalRooms.get(0), DefaultStats.PLAYER_HIT_POINTS, DefaultStats.PLAYER_ATTACK_POINTS, DefaultStats.PLAYER_HIT_POINTS);
 
-        MagicOrb orb = new MagicOrb( totalRooms.get(5));
-        Priest priest = new Priest("Priest");
-        HighPriest highPriest = new HighPriest("High");
-        Knight knight1 = new Knight("Knight1");
-        Knight knight2 = new Knight("§§");
-        Knight knight3 = new Knight("RRR");
-        Rat rat = new Rat("Rat");
-        Spider spider = new Spider("spider");
-        Snake snake = new Snake("Snake");
-        Orc orc = new Orc("orc");
-        Dragon dragon = new Dragon("JAJA");
-        WeaponSmith weaponSmith = new WeaponSmith("Weapons");
-        ArmorSmith armorSmith = new ArmorSmith("Armor");
-        Gambler gambler = new Gambler("gambler");
-
-        this.totalRooms.get(0).addNPC(gambler);
-        this.totalRooms.get(0).addNPC(priest);
-        this.totalRooms.get(0).addNPC(highPriest);
-        this.totalRooms.get(0).addNPC(knight1);
-        this.totalRooms.get(0).addNPC(knight2);
-        this.totalRooms.get(0).addNPC(knight3);
-        this.totalRooms.get(0).addNPC(rat);
-        this.totalRooms.get(0).addNPC(spider);
-        this.totalRooms.get(0).addNPC(orc);
-        this.totalRooms.get(0).addNPC(dragon);
-        this.totalRooms.get(0).addNPC(snake);
-        this.totalRooms.get(0).addNPC(weaponSmith);
-        this.totalRooms.get(0).addNPC(armorSmith);
-        this.totalRooms.get(0).addNPC(new BlueWizard("Jim"));
-        this.totalRooms.get(0).addNPC(new RedWizard("Jim"));
-
         this.possibleMoves.add("Look around");
         this.possibleMoves.add("Look for a way out");
         this.possibleMoves.add("Look for company");
@@ -82,12 +59,11 @@ public class Game {
 
         this.fightMoves.add("Run");
         this.fightMoves.add("Attack");
+    }
 
-
-        this.player.addCollectable(new HealingPotion());
-        this.player.addCollectable(new GoldNugget());
-//        GoldNugget goldNugget = new GoldNugget();
-//        totalRooms.get(0).addItem(goldNugget);
+    public int countMiniBosses(ArrayList<Door> doors) {
+        int count = (int) doors.stream().filter(door -> door instanceof MiniBossDoor).count();
+        return count;
     }
 
     public boolean notOver() {
@@ -147,6 +123,28 @@ public class Game {
         System.out.println("Which door will you take? (-1 to stay)");
     }
 
+    public void interactDoor(int currentMove) {
+        ArrayList<Door> doors = this.player.getCurrentRoom().getDoors();
+        if (currentMove < doors.size() && currentMove > -2) {
+            if (currentMove == -1) {
+                System.out.println("You stayed in the same room.");
+                return;
+            }
+            doors.get(currentMove).interact(player);
+            player.getCurrentRoom().inspect();
+            if(doors.get(currentMove) instanceof MiniBossDoor) {
+                String type = ((MiniBossDoor) doors.get(currentMove)).getWizardColor();
+                if(type == "Blue") {
+                    player.getCurrentRoom().addNPC(miniBosses.get(0));
+                    engageFight(player, (Enemy) player.getCurrentRoom().getNPCs().get(0));
+                } else {
+                    player.getCurrentRoom().addNPC(miniBosses.get(1));
+                    engageFight(player, (Enemy) player.getCurrentRoom().getNPCs().get(0));
+                }
+            }
+        }
+    }
+
     public void inspectItems() {
         System.out.println("You look for items.");
         System.out.println("You see:");
@@ -168,18 +166,6 @@ public class Game {
             items.get(currentMove).collect(player);
             player.getCurrentRoom().removeItem();
             System.out.println("You collected " + items.get(currentMove).toString());
-        }
-    }
-
-    public void interactDoor(int currentMove) {
-        ArrayList<Door> doors = this.player.getCurrentRoom().getDoors();
-        if (currentMove < doors.size() && currentMove > -2) {
-            if (currentMove == -1) {
-                System.out.println("You stayed in the same room.");
-                return;
-            }
-            doors.get(currentMove).interact(player);
-            player.getCurrentRoom().inspect();
         }
     }
 
@@ -358,11 +344,13 @@ public class Game {
                     System.out.println(TextColor.ANSI_YELLOW + "You have defeated a blue wizard! You gained ice magic and can now freeze enemies in combat!" + TextColor.ANSI_RESET);
                     iceMagic = fightMoves.size();
                     fightMoves.add("Ice Magic");
+                    miniBosses.remove(0);
                 }
                 if (enemy instanceof RedWizard) {
                     System.out.println(TextColor.ANSI_YELLOW + "You have defeated a red wizard! You gained fire magic and can now burn enemies in combat!" + TextColor.ANSI_RESET);
                     fireMagic = fightMoves.size();
                     fightMoves.add("Fire Magic");
+                    miniBosses.remove(1);
                 }
                 if (enemy instanceof Boss) winGame();
                 player.getCurrentRoom().removeDeadNPC();
