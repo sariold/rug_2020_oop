@@ -71,8 +71,10 @@ public class JsonReader {
         } else if(type.equals("MiniBoss")) {
             MiniBossDoor newDoor = new MiniBossDoor(description, from, to, "Blue");
             doors.add(newDoor);
-    }
-        else {
+        } else if(type.equals("FinalBoss")) {
+            FinalBossDoor newDoor = new FinalBossDoor(description, from, to);
+            doors.add(newDoor);
+        } else {
             Door newDoor = new Door(description, from, to);
             doors.add(newDoor);
         }
@@ -130,10 +132,6 @@ public class JsonReader {
         String name = npcObj.get("name").toString();
         int roomNumber = Integer.parseInt(npcObj.get("room").toString().replace("r", ""));
         switch(type) {
-            case "Dragon":
-                Dragon dragon = new Dragon(name);
-                rooms.get(roomNumber).addNPC(dragon);
-                break;
             case "Spider":
                 Spider spider = new Spider(name);
                 rooms.get(roomNumber).addNPC(spider);

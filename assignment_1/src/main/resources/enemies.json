@@ -1,13 +1,6 @@
 [
     {
         "npc": {
-            "type": "Dragon",
-            "name": "Blaze",
-            "room": "r0"
-        }
-    },
-    {
-        "npc": {
             "type": "Spider",
             "name": "Daddy Long Legs",
             "room": "r2"

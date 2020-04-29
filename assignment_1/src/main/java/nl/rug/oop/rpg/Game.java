@@ -151,6 +151,7 @@ public class Game {
                     player.getCurrentRoom().addNPC(dragon);
                     engageFight(player, (Enemy) player.getCurrentRoom().getNPCs().get(0));
                 }
+                doors.get(currentMove).inspect();
             }
         }
     }
