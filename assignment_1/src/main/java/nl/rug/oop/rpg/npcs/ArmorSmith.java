@@ -1,5 +1,8 @@
 package nl.rug.oop.rpg.npcs;
 
+import nl.rug.oop.rpg.DefaultStats;
+import nl.rug.oop.rpg.Player;
+
 public class ArmorSmith extends Trader {
 
     public ArmorSmith(String name) {

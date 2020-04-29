@@ -2,7 +2,10 @@ package nl.rug.oop.rpg;
 
 import nl.rug.oop.rpg.interfaces.Collectable;
 import nl.rug.oop.rpg.npcs.*;
-import nl.rug.oop.rpg.objects.*;
+import nl.rug.oop.rpg.objects.Door;
+import nl.rug.oop.rpg.objects.FinalBossDoor;
+import nl.rug.oop.rpg.objects.MiniBossDoor;
+import nl.rug.oop.rpg.objects.Room;
 import org.json.simple.parser.ParseException;
 import java.io.FileNotFoundException;
 import java.io.IOException;

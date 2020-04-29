@@ -1,6 +1,5 @@
 package nl.rug.oop.rpg;
 
-import nl.rug.oop.rpg.TextColor;
 import nl.rug.oop.rpg.interfaces.Attackable;
 import nl.rug.oop.rpg.interfaces.Collectable;
 import nl.rug.oop.rpg.objects.Item;
