@@ -60,4 +60,7 @@ public class DefaultStats {
     // BOSS
     public static String MINI_BOSS_DOOR = "If you dare enter this room, you will be forced to defeat a mini boss!";
     public static String FINAL_BOSS_DOOR = "You can only enter this room if you have defeated BOTH OF MY SONS!";
+
+    // MONSTER DOOR
+    public static String MONSTER_DOOR_DESCRIPTION = "A monster door";
 }

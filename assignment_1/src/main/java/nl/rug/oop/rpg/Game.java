@@ -33,14 +33,15 @@ public class Game {
         RedWizard redWizard = new RedWizard("Hades");
         miniBosses.add(redWizard);
 
+        JsonReader jsonReader = new JsonReader();
         try {
-            JsonReader.parseRoomJSON(totalRooms);
-            JsonReader.parseDoorJSON(totalRooms, totalDoors);
-            JsonReader.parseConnectionJSON(totalRooms, totalDoors);
-            JsonReader.parseNPCJSON(totalRooms, "enemies.json");
-            JsonReader.parseNPCJSON(totalRooms, "healers.json");
-            JsonReader.parseNPCJSON(totalRooms, "traders.json");
-            JsonReader.parseItemJSON(totalRooms);
+            jsonReader.parseRoomJSON(totalRooms);
+            jsonReader.parseDoorJSON(totalRooms, totalDoors);
+            jsonReader.parseConnectionJSON(totalRooms, totalDoors);
+            jsonReader.parseNPCJSON(totalRooms, "enemies.json");
+            jsonReader.parseNPCJSON(totalRooms, "healers.json");
+            jsonReader.parseNPCJSON(totalRooms, "traders.json");
+            jsonReader.parseItemJSON(totalRooms);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (ParseException e) {
@@ -54,8 +55,8 @@ public class Game {
         this.possibleMoves.add("Look for a way out");
         this.possibleMoves.add("Look for company");
         this.possibleMoves.add("Look for items");
-        this.possibleMoves.add("Look at your stats");
         this.possibleMoves.add("Look in your inventory");
+        this.possibleMoves.add("Look at your stats");
 
         this.fightMoves.add("Run");
         this.fightMoves.add("Attack");
@@ -127,6 +128,10 @@ public class Game {
             }
             if(!(doors.get(currentMove) instanceof FinalBossDoor)) {
                 doors.get(currentMove).interact(player);
+                if (player.isDead()) {
+                    System.out.println(TextColor.ANSI_RED + "You have been slain by the mighty trap door!" + TextColor.ANSI_RESET);
+                    gameOver();
+                }
                 player.getCurrentRoom().inspect();
             }
             if(doors.get(currentMove) instanceof MiniBossDoor) {
@@ -160,11 +165,13 @@ public class Game {
         System.out.println("You look for items.");
         System.out.println("You see:");
         ArrayList<Collectable> items = this.player.getCurrentRoom().getItems();
-        for (int i = 0; i < items.size(); i++) {
-            System.out.print("\t(" + i + ") ");
-            System.out.println(items.get(i).toString());
-        }
-        System.out.println("Which item will you take? (-1 to not collect any items)");
+        if(items.size() > 0) {
+            for (int i = 0; i < items.size(); i++) {
+                System.out.print("\t(" + i + ") ");
+                System.out.println(items.get(i).toString());
+            }
+            System.out.println("Which item will you take? (-1 to not collect any items)");
+        } else System.out.println("Nothing in sight, type (-1 to continue on your journey)");
     }
 
     public void interactItem(int currentMove) {

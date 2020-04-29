@@ -61,13 +61,13 @@ public class Main {
                         scanner.nextLine();
                     }
                     break;
-                // show Stats
+                // show inventory
                 case 4:
-                    game.displayStats();
-                    break;
-                // show iventory
-                case 5:
                     game.useInventory();
+                    break;
+                // show Stats
+                case 5:
+                    game.displayStats();
                     break;
             }
         }

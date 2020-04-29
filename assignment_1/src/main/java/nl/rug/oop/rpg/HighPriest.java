@@ -8,7 +8,7 @@ public class HighPriest extends Healer{
 
     @Override
     public void heal(Player player) {
-        System.out.println(TextColor.ANSI_GREEN + "You have been fully healed." + TextColor.ANSI_RESET);
+//        System.out.println(TextColor.ANSI_GREEN + "You have been fully healed." + TextColor.ANSI_RESET);
         player.increaseHitPoints(player.getMaxHitPoints());
     }
 

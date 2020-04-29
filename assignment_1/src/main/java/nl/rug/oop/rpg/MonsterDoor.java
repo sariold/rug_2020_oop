@@ -3,7 +3,7 @@ package nl.rug.oop.rpg;
 public class MonsterDoor extends Door {
 
     public MonsterDoor(String description, Room from, Room to) {
-        super(description, from, to);
+        super(DefaultStats.MONSTER_DOOR_DESCRIPTION, from, to);
     }
 
     @Override
