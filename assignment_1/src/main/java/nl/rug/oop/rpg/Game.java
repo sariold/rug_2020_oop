@@ -166,17 +166,20 @@ public class Game {
         }
     }
 
-    public void inspectItems() {
+    public boolean inspectItems() {
+        boolean itemExists = false;
         System.out.println("You look for items.");
         System.out.println("You see:");
         ArrayList<Collectable> items = this.player.getCurrentRoom().getItems();
         if(items.size() > 0) {
+            itemExists = true;
             for (int i = 0; i < items.size(); i++) {
                 System.out.print("\t(" + i + ") ");
                 System.out.println(items.get(i).toString());
             }
             System.out.println("Which item will you take? (-1 to not collect any items)");
-        } else System.out.println("Nothing in sight, type (-1 to continue on your journey)");
+        } else System.out.println("Nothing in sight");
+        return itemExists;
     }
 
     public void interactItem(int currentMove) {
@@ -222,7 +225,6 @@ public class Game {
             } else if (currentNPC instanceof Trader) {
                 tradeWith(player, (Trader) currentNPC);
             }
-
         }
     }
 

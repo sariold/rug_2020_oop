@@ -52,13 +52,14 @@ public class Main {
                     break;
                 // show items in the room
                 case 3:
-                    game.inspectItems();
-                    try {
-                        currentMove = scanner.nextInt();
-                        game.interactItem(currentMove);
-                    } catch (InputMismatchException e) {
-                        System.out.println("That is not a valid input!");
-                        scanner.nextLine();
+                    if(game.inspectItems()) {
+                        try {
+                            currentMove = scanner.nextInt();
+                            game.interactItem(currentMove);
+                        } catch (InputMismatchException e) {
+                            System.out.println("That is not a valid input!");
+                            scanner.nextLine();
+                        }
                     }
                     break;
                 // show inventory

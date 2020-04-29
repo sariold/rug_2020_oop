@@ -2,6 +2,12 @@
     {
         "item": {
             "type": "GoldNugget",
+            "room": "r0"
+        }
+    },
+    {
+        "item": {
+            "type": "GoldNugget",
             "room": "r2"
         }
     },
