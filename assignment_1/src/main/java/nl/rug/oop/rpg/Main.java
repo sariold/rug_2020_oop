@@ -41,13 +41,14 @@ public class Main {
                     break;
                 // inspect NPCs
                 case 2:
-                    game.inspectNPCs();
-                    try {
-                        currentMove = scanner.nextInt();
-                        game.interactNPC(currentMove);
-                    } catch (InputMismatchException e) {
-                        System.out.println("That is not a valid input!");
-                        scanner.nextLine();
+                    if(game.inspectNPCs()) {
+                        try {
+                            currentMove = scanner.nextInt();
+                            game.interactNPC(currentMove);
+                        } catch (InputMismatchException e) {
+                            System.out.println("That is not a valid input!");
+                            scanner.nextLine();
+                        }
                     }
                     break;
                 // show items in the room

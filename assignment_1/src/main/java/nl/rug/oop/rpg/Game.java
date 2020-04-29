@@ -2,10 +2,7 @@ package nl.rug.oop.rpg;
 
 import nl.rug.oop.rpg.interfaces.Collectable;
 import nl.rug.oop.rpg.npcs.*;
-import nl.rug.oop.rpg.objects.Door;
-import nl.rug.oop.rpg.objects.FinalBossDoor;
-import nl.rug.oop.rpg.objects.MiniBossDoor;
-import nl.rug.oop.rpg.objects.Room;
+import nl.rug.oop.rpg.objects.*;
 import org.json.simple.parser.ParseException;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -65,6 +62,13 @@ public class Game {
 
         this.fightMoves.add("Run");
         this.fightMoves.add("Attack");
+
+        if(player.getName().equals("John Wick")) {
+            System.out.println(TextColor.ANSI_YELLOW + "Check your stats Mr. Wick." + TextColor.ANSI_RESET);
+            player.increaseGold(100);
+            player.increaseMaxHitPoints(90);
+            player.increaseAttackPoints(99);
+        }
     }
 
     public boolean notOver() {
@@ -85,6 +89,7 @@ public class Game {
             System.out.println("You currently have no items.");
             return;
         }
+        System.out.println("Your inventory contains:");
         for (int i = 0; i < player.getInventory().size(); i++) {
             System.out.println("\t(" + i + ") " + this.player.getInventory().get(i).toString());
         }
@@ -195,19 +200,24 @@ public class Game {
         }
     }
 
-    public void inspectNPCs() {
+    public boolean inspectNPCs() {
+        boolean npcExists = false;
         String color = TextColor.ANSI_RESET;
         System.out.println("You look if there's somebody.");
         System.out.println("You see:");
         ArrayList<DungeonNpc> npcs = this.player.getCurrentRoom().getNPCs();
-        for (int i = 0; i < npcs.size(); i++) {
-            if(npcs.get(i) instanceof Enemy) color = TextColor.ANSI_RED;
-            if(npcs.get(i) instanceof Healer) color = TextColor.ANSI_GREEN;
-            if(npcs.get(i) instanceof Trader) color = TextColor.ANSI_BLUE;
-            System.out.print("\t(" + i + ") "+ "[" + color + npcs.get(i).getType() + TextColor.ANSI_RESET + "]" + "(" + npcs.get(i).getSpecies() + ") " + npcs.get(i).toString() + ": ");
-            npcs.get(i).inspect();
+        if(npcs.size() > 0) {
+            for (int i = 0; i < npcs.size(); i++) {
+                if(npcs.get(i) instanceof Enemy) color = TextColor.ANSI_RED;
+                if(npcs.get(i) instanceof Healer) color = TextColor.ANSI_GREEN;
+                if(npcs.get(i) instanceof Trader) color = TextColor.ANSI_BLUE;
+                System.out.print("\t(" + i + ") "+ "[" + color + npcs.get(i).getType() + TextColor.ANSI_RESET + "]" + "(" + npcs.get(i).getSpecies() + ") " + npcs.get(i).toString() + ": ");
+                npcs.get(i).inspect();
+            }
+            npcExists = true;
+            System.out.println("Who will you approach? (-1 to stay by yourself)");
         }
-        System.out.println("Who will you approach? (-1 to stay by yourself)");
+        return npcExists;
     }
 
     public void interactNPC(int currentMove) {
@@ -345,7 +355,6 @@ public class Game {
                 System.out.println(TextColor.ANSI_YELLOW + enemy.getName() + " takes " + player.getAttackPoints() + " damage!" + TextColor.ANSI_RESET);
                 player.attack(enemy);
                 damageToEnemy += this.player.getAttackPoints();
-
             } else if (move == fireMagic) {
                 System.out.println(TextColor.ANSI_YELLOW + "You have burned " + enemy.getName() + "!" + TextColor.ANSI_RESET);
                 enemy.burn();

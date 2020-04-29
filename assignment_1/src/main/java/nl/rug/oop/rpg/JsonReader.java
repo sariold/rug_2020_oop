@@ -73,7 +73,9 @@ public class JsonReader {
             MonsterDoor newDoor = new MonsterDoor(description, from, to);
             doors.add(newDoor);
         } else if(type.equals("MiniBoss")) {
-            MiniBossDoor newDoor = new MiniBossDoor(description, from, to, "Blue", true);
+            String wizardType = "Red";
+            if(description.equals("Blue")) wizardType = "Blue";
+            MiniBossDoor newDoor = new MiniBossDoor(description, from, to, wizardType, false);
             doors.add(newDoor);
         } else if(type.equals("FinalBoss")) {
             FinalBossDoor newDoor = new FinalBossDoor(description, from, to);

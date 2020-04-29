@@ -122,7 +122,7 @@ public class Player implements Attackable {
 
     @Override
     public void increaseHitPoints(int value) {
-        System.out.println(TextColor.ANSI_GREEN + "You have been healed " + value + "hit points!" + TextColor.ANSI_RESET);
+        System.out.println(TextColor.ANSI_GREEN + "You have been healed " + value + " hit points!" + TextColor.ANSI_RESET);
         this.hitPoints += value;
         if (this.hitPoints > this.maxHitPoints) this.hitPoints = this.maxHitPoints;
     }

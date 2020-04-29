@@ -102,7 +102,7 @@
         "door": {
             "name": "d11",
             "type": "MiniBoss",
-            "description": "",
+            "description": "Blue",
             "from": "r10",
             "to": "r11"
         }
@@ -120,7 +120,7 @@
         "door": {
             "name": "d13",
             "type": "MiniBoss",
-            "description": "",
+            "description": "Red",
             "from": "r12",
             "to": "r13"
         }
