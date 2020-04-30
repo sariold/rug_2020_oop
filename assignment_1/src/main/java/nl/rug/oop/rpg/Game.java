@@ -65,9 +65,9 @@ public class Game {
 
         if(player.getName().equals("John Wick")) {
             System.out.println(TextColor.ANSI_YELLOW + "Check your stats Mr. Wick." + TextColor.ANSI_RESET);
-            player.increaseGold(100);
-            player.increaseMaxHitPoints(90);
-            player.increaseAttackPoints(99);
+            player.increaseGold(100 - player.getGold());
+            player.increaseMaxHitPoints(100 - player.getMaxHitPoints());
+            player.increaseAttackPoints(100 - player.getAttackPoints());
             addIceMagic();
             addFireMagic();
         }
