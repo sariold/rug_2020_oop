@@ -16,10 +16,7 @@ public class Combat {
         Scanner scanner = new Scanner(System.in);
         System.out.println("You engaged a fight with " + enemy.getName());
         while (enemy.getHitPoints() > 0 && player.getHitPoints() > 0) {
-            System.out.println("What will you do?");
-            for(int i = 0; i < game.getFightMoves().size(); i++) {
-                System.out.println("\t (" + i + ") " + game.getFightMoves().get(i));
-            }
+            GUI.displayCombatInterface(player, enemy, game);
             try {
                 move = scanner.nextInt();
             } catch (InputMismatchException e) {

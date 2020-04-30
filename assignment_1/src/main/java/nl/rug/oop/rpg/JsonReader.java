@@ -178,6 +178,14 @@ public class JsonReader {
                 WeaponSmith weaponSmith = new WeaponSmith(name);
                 rooms.get(roomNumber).addNPC(weaponSmith);
                 break;
+            case "StrongArmorSmith":
+                StrongArmorSmith strongArmorSmith = new StrongArmorSmith(name);
+                rooms.get(roomNumber).addNPC(strongArmorSmith);
+                break;
+            case "StrongWeaponSmith":
+                StrongWeaponSmith strongWeaponSmith = new StrongWeaponSmith(name);
+                rooms.get(roomNumber).addNPC(strongWeaponSmith);
+                break;
         }
     }
 

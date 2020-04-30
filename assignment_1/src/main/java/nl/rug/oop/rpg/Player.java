@@ -126,7 +126,7 @@ public class Player implements Attackable {
         int chance;
         if (this.isFrozen()) {
             chance = r.nextInt(101);
-            if (chance < DefaultStats.PLAYER_FREEZE_CHANCE) {
+            if (chance < DefaultStats.FREEZE_CHANCE) {
                 System.out.println(TextColor.ANSI_RED + "You are frozen solid." + TextColor.ANSI_RESET);
             } else {
                 System.out.println(TextColor.ANSI_BLUE + "You are no longer frozen!" + TextColor.ANSI_RESET);
@@ -135,7 +135,7 @@ public class Player implements Attackable {
         }
         if (this.isBurned()) {
             chance = r.nextInt(101);
-            if (chance < DefaultStats.PLAYER_BURN_CHANCE) {
+            if (chance < DefaultStats.BURN_CHANCE) {
                 System.out.println(TextColor.ANSI_RED + "You are burned and take " + DefaultStats.BURN_DAMAGE  + " damage." +TextColor.ANSI_RESET);
             } else {
                 System.out.println(TextColor.ANSI_BLUE + "You do no longer burn!" + TextColor.ANSI_RESET);

@@ -36,6 +36,20 @@
     },
     {
         "npc": {
+            "type": "StrongWeaponSmith",
+            "name": "Alvor",
+            "room": "r7"
+        }
+    },
+    {
+        "npc": {
+            "type": "StrongArmorSmith",
+            "name": "Filnjar",
+            "room": "r10"
+        }
+    },
+    {
+        "npc": {
             "type": "Gambler",
             "name": "Felix",
             "room": "r12"

@@ -11,6 +11,7 @@ public abstract class Enemy extends DungeonNpc implements Attackable {
 
     private String name;
     private int hitPoints;
+    private int maxHitPoints;
     private int attackPoints;
     private int goldValue;
     private boolean burned;
@@ -24,6 +25,7 @@ public abstract class Enemy extends DungeonNpc implements Attackable {
         super(description);
         this.name = name;
         this.hitPoints = hitPoints;
+        this.maxHitPoints = hitPoints;
         this.attackPoints = attackPoints;
         this.goldValue = goldValue;
     }
@@ -64,6 +66,8 @@ public abstract class Enemy extends DungeonNpc implements Attackable {
         return hitPoints;
     }
 
+    public int getMaxHitPoints() { return maxHitPoints; }
+
     public int getAttackPoints() {
         return attackPoints;
     }
@@ -74,7 +78,7 @@ public abstract class Enemy extends DungeonNpc implements Attackable {
         int chance;
         if (this.isFrozen()) {
             chance = r.nextInt(101);
-            if (chance < DefaultStats.ENEMY_FREEZE_CHANCE) {
+            if (chance < DefaultStats.FREEZE_CHANCE) {
                 System.out.println(TextColor.ANSI_BLUE + this.getName() + " is frozen solid." + TextColor.ANSI_RESET);
             } else {
                 System.out.println(TextColor.ANSI_BLUE + this.getName() + " is no longer frozen!" + TextColor.ANSI_RESET);
@@ -83,7 +87,7 @@ public abstract class Enemy extends DungeonNpc implements Attackable {
         }
         if (this.isBurned()) {
             chance = r.nextInt(101);
-            if (chance < DefaultStats.ENEMY_BURN_CHANCE) {
+            if (chance < DefaultStats.BURN_CHANCE) {
                 System.out.println(TextColor.ANSI_YELLOW + this.getName() + " is burned and takes " + DefaultStats.BURN_DAMAGE  + " damage." +TextColor.ANSI_RESET);
                 this.reduceHitPoints(DefaultStats.BURN_DAMAGE);
             } else {
