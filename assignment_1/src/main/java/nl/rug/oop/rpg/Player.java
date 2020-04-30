@@ -54,6 +54,7 @@ public class Player implements Attackable {
     }
 
     public void increaseMaxHitPoints(int value) {
+        System.out.println(TextColor.ANSI_YELLOW + "Your health increased by " + value + "." + TextColor.ANSI_RESET);
         this.maxHitPoints += value;
         this.hitPoints += value;
     }
@@ -64,7 +65,10 @@ public class Player implements Attackable {
         }
     }
 
-    public void increaseAttackPoints(int value) { this.attackPoints += value; };
+    public void increaseAttackPoints(int value) {
+        System.out.println(TextColor.ANSI_YELLOW + "Your attack increased by " + value + "." + TextColor.ANSI_RESET);
+        this.attackPoints += value;
+    }
 
     public int getMaxHitPoints() {
         return this.maxHitPoints;

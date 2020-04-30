@@ -11,8 +11,7 @@ public class StrongWeaponSmith extends Trader{
 
     @Override
     public void trade(Player player) {
-        player.increaseMaxHitPoints(this.getPower());
-        System.out.println("Your health increased by " + this.getPower() + ".");
+        player.increaseAttackPoints(this.getPower());
         super.trade(player);
     }
 

@@ -225,7 +225,7 @@ public class Game {
             }
             npcExists = true;
             System.out.println("Who will you approach? (-1 to stay by yourself)");
-        }
+        } else System.out.println("\tNobody.");
         return npcExists;
     }
 

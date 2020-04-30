@@ -2,7 +2,7 @@ package nl.rug.oop.rpg;
 
 public class DefaultStats {
     // COMBAT
-    public static final int BURN_DAMAGE = 1;
+    public static final int BURN_DAMAGE = 3;
 
     public static final int FREEZE_CHANCE = 60;
     public static final int BURN_CHANCE = 65;
@@ -48,7 +48,7 @@ public class DefaultStats {
     public static final int DRAGON_GOLD_VALUE = 20;
 
     // HEALER
-    public static final int PRIEST_HEAL_POWER = 4;
+    public static final int PRIEST_HEAL_POWER = 7;
 
     // TRADER
     public static final int WEAPONSMITH_POWER = 1;

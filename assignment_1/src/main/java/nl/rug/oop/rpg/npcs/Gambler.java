@@ -18,11 +18,9 @@ public class Gambler extends Trader{
         int chance = r.nextInt(101);
         if (chance < 41) {
             player.increaseMaxHitPoints(this.getPower());
-            System.out.println(TextColor.ANSI_YELLOW + "Your health increased by " + this.getPower() + "." + TextColor.ANSI_RESET);
         }
         else if (chance < 81) {
             player.increaseAttackPoints(this.getPower());
-            System.out.println(TextColor.ANSI_YELLOW + "Your attack increased by " + this.getPower() + "." + TextColor.ANSI_RESET);
         } else {
             System.out.println(TextColor.ANSI_YELLOW + "Nothing happened." + TextColor.ANSI_RESET);
         }
