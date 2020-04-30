@@ -7,9 +7,14 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        String playerName;
+        String playerName = "";
         System.out.println("Please choose a name for your Hero:");
         playerName = scanner.nextLine();
+        while (playerName.length() > 15) {
+            System.out.println("Your name can only have 15 characters.");
+            System.out.println("Please choose a name for your Hero:");
+            playerName = scanner.nextLine();
+        }
         Game game = new Game(playerName);
 
         int currentMove;
