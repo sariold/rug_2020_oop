@@ -160,12 +160,18 @@ public class Game {
                     miniBosses.get(0).setDoor((MiniBossDoor) doors.get(currentMove));
                     player.getCurrentRoom().addNPC(miniBosses.get(0));
                     Combat.engageFight(player, (Enemy) player.getCurrentRoom().getNPCs().get(0), this);
-                    if(miniBosses.get(0).isDead()) ((MiniBossDoor) doors.get(currentMove)).defeated();
+                    if(miniBosses.get(0).isDead()) {
+                        ((MiniBossDoor) doors.get(currentMove)).defeated();
+                        doors.get(currentMove).setDescription("This was once a mini boss door, congrats on surviving the battle");
+                    }
                 } else {
                     miniBosses.get(1).setDoor((MiniBossDoor) doors.get(currentMove));
                     player.getCurrentRoom().addNPC(miniBosses.get(1));
                     Combat.engageFight(player, (Enemy) player.getCurrentRoom().getNPCs().get(0), this);
-                    if(miniBosses.get(1).isDead()) ((MiniBossDoor) doors.get(currentMove)).defeated();
+                    if(miniBosses.get(1).isDead()) {
+                        ((MiniBossDoor) doors.get(currentMove)).defeated();
+                        doors.get(currentMove).setDescription("This was once a mini boss door, congrats on surviving the battle");
+                    }
                 }
             } else if(doors.get(currentMove) instanceof FinalBossDoor) {
                 if(miniBosses.get(0).isDead() && miniBosses.get(1).isDead()) {

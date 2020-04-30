@@ -51,7 +51,7 @@
     {
         "npc": {
             "type": "Gambler",
-            "name": "Felix",
+            "name": "Diego",
             "room": "r12"
         }
     },
