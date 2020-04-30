@@ -2,6 +2,8 @@ package nl.rug.oop.rpg.interfaces;
 
 public interface Attackable {
 
+    public void checkStatusImpairments();
+
     public int getHitPoints();
 
     public void attack(Attackable attacked);

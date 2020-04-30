@@ -121,6 +121,30 @@ public class Player implements Attackable {
     }
 
     @Override
+    public void checkStatusImpairments() {
+        Random r = new Random();
+        int chance;
+        if (this.isFrozen()) {
+            chance = r.nextInt(101);
+            if (chance < DefaultStats.PLAYER_FREEZE_CHANCE) {
+                System.out.println(TextColor.ANSI_RED + "You are frozen solid." + TextColor.ANSI_RESET);
+            } else {
+                System.out.println(TextColor.ANSI_BLUE + "You are no longer frozen!" + TextColor.ANSI_RESET);
+                this.removeFreeze();
+            }
+        }
+        if (this.isBurned()) {
+            chance = r.nextInt(101);
+            if (chance < DefaultStats.PLAYER_BURN_CHANCE) {
+                System.out.println(TextColor.ANSI_RED + "You are burned and take " + DefaultStats.BURN_DAMAGE  + " damage." +TextColor.ANSI_RESET);
+            } else {
+                System.out.println(TextColor.ANSI_BLUE + "You do no longer burn!" + TextColor.ANSI_RESET);
+                this.removeBurn();
+            }
+        }
+    }
+
+    @Override
     public void increaseHitPoints(int value) {
         System.out.println(TextColor.ANSI_GREEN + "You have been healed " + value + " hit points!" + TextColor.ANSI_RESET);
         this.hitPoints += value;

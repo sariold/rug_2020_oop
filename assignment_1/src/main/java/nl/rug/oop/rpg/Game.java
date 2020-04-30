@@ -68,7 +68,17 @@ public class Game {
             player.increaseGold(100);
             player.increaseMaxHitPoints(90);
             player.increaseAttackPoints(99);
+            addIceMagic();
+            addFireMagic();
         }
+    }
+
+    public ArrayList<String> getFightMoves() {
+        return new ArrayList<String>(fightMoves);
+    }
+
+    public Player getPlayer() {
+        return player;
     }
 
     public boolean notOver() {
@@ -150,12 +160,12 @@ public class Game {
                 if(type == "Blue") {
                     miniBosses.get(0).setDoor((MiniBossDoor) doors.get(currentMove));
                     player.getCurrentRoom().addNPC(miniBosses.get(0));
-                    engageFight(player, (Enemy) player.getCurrentRoom().getNPCs().get(0));
+                    Combat.engageFight(player, (Enemy) player.getCurrentRoom().getNPCs().get(0), this);
                     if(miniBosses.get(0).isDead()) ((MiniBossDoor) doors.get(currentMove)).defeated();
                 } else {
                     miniBosses.get(1).setDoor((MiniBossDoor) doors.get(currentMove));
                     player.getCurrentRoom().addNPC(miniBosses.get(1));
-                    engageFight(player, (Enemy) player.getCurrentRoom().getNPCs().get(0));
+                    Combat.engageFight(player, (Enemy) player.getCurrentRoom().getNPCs().get(0), this);
                     if(miniBosses.get(1).isDead()) ((MiniBossDoor) doors.get(currentMove)).defeated();
                 }
             } else if(doors.get(currentMove) instanceof FinalBossDoor) {
@@ -164,7 +174,7 @@ public class Game {
                     player.getCurrentRoom().inspect();
                     Dragon dragon = new Dragon("Draco");
                     player.getCurrentRoom().addNPC(dragon);
-                    engageFight(player, (Enemy) player.getCurrentRoom().getNPCs().get(0));
+                    Combat.engageFight(player, (Enemy) player.getCurrentRoom().getNPCs().get(0), this);
                 }
                 doors.get(currentMove).inspect();
             }
@@ -229,7 +239,7 @@ public class Game {
             }
             DungeonNpc currentNPC= npcs.get(currentMove);
             if (currentNPC instanceof Enemy) {
-                engageFight(player, (Enemy) currentNPC);
+                Combat.engageFight(player, (Enemy) currentNPC, this);
             } else if (currentNPC instanceof Healer) {
                 healPlayer(player, (Healer) currentNPC);
             } else if (currentNPC instanceof Trader) {
@@ -238,12 +248,20 @@ public class Game {
         }
     }
 
-    private void winGame() {
+    public int getFireMagic() {
+        return fireMagic;
+    }
+
+    public int getIceMagic() {
+        return iceMagic;
+    }
+
+    public void winGame() {
         System.out.println(TextColor.ANSI_BLACK + "Congratulations you have won the game! You are a real dungeon master!" + TextColor.ANSI_RESET);
         System.exit(0);
     }
 
-    private void gameOver() {
+    public void gameOver() {
         System.out.println(TextColor.ANSI_BLACK + "GAME OVER!" + TextColor.ANSI_RESET);
         System.exit(0);
     }
@@ -290,122 +308,17 @@ public class Game {
         } else System.out.println("That is not a valid input!");
     }
 
-    private void engageFight(Player player, Enemy enemy) {
-        Random r = new Random();
-        int chance;
-        int move;
-        int damageToEnemy = 0;
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("You engaged a fight with " + enemy.getName());
-        while (enemy.getHitPoints() > 0 && player.getHitPoints() > 0) {
-            System.out.println("What will you do?");
-            for(int i = 0; i < this.fightMoves.size(); i++) {
-                System.out.println("\t (" + i + ") " + this.fightMoves.get(i));
-            }
-            try {
-                move = scanner.nextInt();
-            } catch (InputMismatchException e) {
-                System.out.println("That is not a valid input!");
-                continue;
-            }
-            if (move > fightMoves.size()) {
-                System.out.println("That is not a valid input!");
-                continue;
-            }
-            if (move == 0){
-                if (enemy instanceof MiniBoss || enemy instanceof Boss) {
-                    System.out.println("You cannot run from a boss fight!");
-                    continue;
-                }
-                System.out.println(TextColor.ANSI_YELLOW + "You ran from the fight. " + TextColor.ANSI_RED + enemy.getName() + TextColor.ANSI_YELLOW + " recovered to full health!" + TextColor.ANSI_RESET);
-                enemy.increaseHitPoints(damageToEnemy);
-                return;
-            }
-            if (player.isFrozen()) {
-                chance = r.nextInt(101);
-                if (chance > 60) {
-                    System.out.println(TextColor.ANSI_RED + "You are frozen solid." + TextColor.ANSI_RESET);
-                    enemy.interact(player);
-                    if (player.isDead()) {
-                        System.out.println(TextColor.ANSI_RED + "You have been slain by " + enemy.getName() + "!" + TextColor.ANSI_RESET);
-                        gameOver();
-                    }
-                    continue;
-                } else {
-                    System.out.println(TextColor.ANSI_BLUE + "You are no longer frozen!" + TextColor.ANSI_RESET);
-                    player.removeFreeze();
-                }
-            }
-            if (player.isBurned()) {
-                chance = r.nextInt(101);
-                if (chance > 55) {
-                    System.out.println(TextColor.ANSI_RED + "You are burned and take " + DefaultStats.BURN_DAMAGE  + " damage." +TextColor.ANSI_RESET);
-                    player.reduceHitPoints(DefaultStats.BURN_DAMAGE);
-                    if (player.isDead()) {
-                        System.out.println(TextColor.ANSI_RED + "You have burned to death!" + TextColor.ANSI_RESET);
-                        gameOver();
-                    }
-                } else {
-                    System.out.println(TextColor.ANSI_BLUE + "You do no longer burn!" + TextColor.ANSI_RESET);
-                    player.removeBurn();
-                }
-            }
-            if (move == 1){
-                System.out.println(TextColor.ANSI_YELLOW + "You attack " + enemy.getName() + TextColor.ANSI_RESET);
-                System.out.println(TextColor.ANSI_YELLOW + enemy.getName() + " takes " + player.getAttackPoints() + " damage!" + TextColor.ANSI_RESET);
-                player.attack(enemy);
-                damageToEnemy += this.player.getAttackPoints();
-            } else if (move == fireMagic) {
-                System.out.println(TextColor.ANSI_YELLOW + "You have burned " + enemy.getName() + "!" + TextColor.ANSI_RESET);
-                enemy.burn();
-            } else if (move == iceMagic) {
-                System.out.println(TextColor.ANSI_YELLOW + "You have frozen " + enemy.getName() + "!" + TextColor.ANSI_RESET);
-                enemy.freeze();
-            }
-            if (enemy.isBurned()) {
-                chance = r.nextInt(101);
-                if (chance > 45) {
-                    System.out.println(TextColor.ANSI_YELLOW + enemy.getName() + " is burned and takes " + DefaultStats.BURN_DAMAGE  + " damage." +TextColor.ANSI_RESET);
-                    enemy.reduceHitPoints(DefaultStats.BURN_DAMAGE);
-                } else {
-                    System.out.println(TextColor.ANSI_YELLOW + enemy.getName() + " does no longer burn!" + TextColor.ANSI_RESET);
-                    enemy.removeBurn();
-                }
-            }
-            if (enemy.isDead()) {
-                System.out.println(TextColor.ANSI_YELLOW + "You have slain " + enemy.getName() + "!\nYou earned " + enemy.getGoldValue() + " gold." + TextColor.ANSI_RESET);
-                if (enemy instanceof BlueWizard) {
-                    System.out.println(TextColor.ANSI_YELLOW + "You have defeated a blue wizard! You gained ice magic and can now freeze enemies in combat!" + TextColor.ANSI_RESET);
-                    iceMagic = fightMoves.size();
-                    fightMoves.add("Ice Magic");
-                }
-                if (enemy instanceof RedWizard) {
-                    System.out.println(TextColor.ANSI_YELLOW + "You have defeated a red wizard! You gained fire magic and can now burn enemies in combat!" + TextColor.ANSI_RESET);
-                    fireMagic = fightMoves.size();
-                    fightMoves.add("Fire Magic");
-                }
-                if (enemy instanceof Boss) winGame();
-                player.getCurrentRoom().removeDeadNPC();
-                player.increaseGold(enemy.getGoldValue());
-                player.increaseHitPoints(enemy.getAttackPoints());
-                return;
-            }
-            if (enemy.isFrozen()) {
-                chance = r.nextInt(101);
-                if (chance > 50) {
-                    System.out.println(TextColor.ANSI_BLUE + enemy.getName() + " is frozen solid." + TextColor.ANSI_RESET);
-                    continue;
-                } else {
-                    System.out.println(TextColor.ANSI_BLUE + enemy.getName() + " is no longer frozen!" + TextColor.ANSI_RESET);
-                    enemy.removeFreeze();
-                }
-            }
-            enemy.interact(player);
-            if (player.isDead()) {
-                System.out.println(TextColor.ANSI_RED + "You have been slain by " + enemy.getName() + "!" + TextColor.ANSI_RESET);
-                gameOver();
-            }
+    public void addIceMagic() {
+        for (String move: fightMoves) { if (move.equals("Ice Magic")) return; }
+        System.out.println(TextColor.ANSI_YELLOW + "You have defeated a blue wizard! You gained ice magic and can now freeze enemies in combat!" + TextColor.ANSI_RESET);
+        iceMagic = fightMoves.size();
+        fightMoves.add("Ice Magic");
+    }
 
-        }
+    public void addFireMagic() {
+        for (String move: fightMoves) { if (move.equals("Fire Magic")) return; }
+        System.out.println(TextColor.ANSI_YELLOW + "You have defeated a red wizard! You gained fire magic and can now burn enemies in combat!" + TextColor.ANSI_RESET);
+        fireMagic = fightMoves.size();
+        fightMoves.add("Fire Magic");
     }
 }

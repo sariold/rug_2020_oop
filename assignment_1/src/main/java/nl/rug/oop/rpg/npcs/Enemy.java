@@ -1,5 +1,6 @@
 package nl.rug.oop.rpg.npcs;
 
+import nl.rug.oop.rpg.DefaultStats;
 import nl.rug.oop.rpg.interfaces.Attackable;
 import nl.rug.oop.rpg.Player;
 import nl.rug.oop.rpg.TextColor;
@@ -65,6 +66,31 @@ public abstract class Enemy extends DungeonNpc implements Attackable {
 
     public int getAttackPoints() {
         return attackPoints;
+    }
+
+    @Override
+    public void checkStatusImpairments() {
+        Random r = new Random();
+        int chance;
+        if (this.isFrozen()) {
+            chance = r.nextInt(101);
+            if (chance < DefaultStats.ENEMY_FREEZE_CHANCE) {
+                System.out.println(TextColor.ANSI_BLUE + this.getName() + " is frozen solid." + TextColor.ANSI_RESET);
+            } else {
+                System.out.println(TextColor.ANSI_BLUE + this.getName() + " is no longer frozen!" + TextColor.ANSI_RESET);
+                this.removeFreeze();
+            }
+        }
+        if (this.isBurned()) {
+            chance = r.nextInt(101);
+            if (chance < DefaultStats.ENEMY_BURN_CHANCE) {
+                System.out.println(TextColor.ANSI_YELLOW + this.getName() + " is burned and takes " + DefaultStats.BURN_DAMAGE  + " damage." +TextColor.ANSI_RESET);
+                this.reduceHitPoints(DefaultStats.BURN_DAMAGE);
+            } else {
+                System.out.println(TextColor.ANSI_YELLOW + this.getName() + " does no longer burn!" + TextColor.ANSI_RESET);
+                this.removeBurn();
+            }
+        }
     }
 
     @Override
