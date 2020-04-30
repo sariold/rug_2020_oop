@@ -309,14 +309,14 @@ public class Game {
 
     public void addIceMagic() {
         for (String move: fightMoves) { if (move.equals("Ice Magic")) return; }
-        System.out.println(TextColor.ANSI_YELLOW + "You have defeated a blue wizard! You gained ice magic and can now freeze enemies in combat!" + TextColor.ANSI_RESET);
+        System.out.println(TextColor.ANSI_YELLOW + "You gained ice magic and can now freeze enemies in combat!" + TextColor.ANSI_RESET);
         iceMagic = fightMoves.size();
         fightMoves.add("Ice Magic");
     }
 
     public void addFireMagic() {
         for (String move: fightMoves) { if (move.equals("Fire Magic")) return; }
-        System.out.println(TextColor.ANSI_YELLOW + "You have defeated a red wizard! You gained fire magic and can now burn enemies in combat!" + TextColor.ANSI_RESET);
+        System.out.println(TextColor.ANSI_YELLOW + "You gained fire magic and can now burn enemies in combat!" + TextColor.ANSI_RESET);
         fireMagic = fightMoves.size();
         fightMoves.add("Fire Magic");
     }

@@ -85,9 +85,11 @@ public class Combat {
     private static void winFight(Player player, Enemy enemy, Game game) {
         System.out.println(TextColor.ANSI_YELLOW + "You have slain " + enemy.getName() + "!\nYou earned " + enemy.getGoldValue() + " gold." + TextColor.ANSI_RESET);
         if (enemy instanceof BlueWizard) {
+            System.out.println("Congratulations you have defeated a blue wizard!");
             game.addIceMagic();
         }
         if (enemy instanceof RedWizard) {
+            System.out.println("Congratulations you have defeated a red wizard!");
             game.addFireMagic();
         }
         if (enemy instanceof Boss) game.winGame();
