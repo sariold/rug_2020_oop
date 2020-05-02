@@ -1,12 +1,15 @@
 package nl.rug.oop.rpg.io;
 import nl.rug.oop.rpg.Game;
+import nl.rug.oop.rpg.StartGame;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Serializer {
 
     public static void saveGame(Game game, String fileName) {
-        File saveDirectory = new File("saves");
+        File saveDirectory = new File("assignment_1" + File.separator + "saves");
         saveDirectory.mkdir();
 
         try(FileOutputStream fileOutputStream = new FileOutputStream(saveDirectory + File.separator + fileName + ".ser");
@@ -21,11 +24,9 @@ public class Serializer {
     }
 
     public static Game loadGame(String fileName) throws IOException, ClassNotFoundException {
-        File saveDirectory = new File("saves");
-
-        try(FileInputStream fileInputStream = new FileInputStream(saveDirectory + File.separator + fileName+ ".ser");
-            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream)) {
-
+        File saveDirectory = new File("assignment_1" + File.separator + "saves");
+        try(FileInputStream fileInputStream = new FileInputStream(saveDirectory + File.separator + fileName + ".ser");
+        ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream)) {
             Game game = (Game) objectInputStream.readObject();
             return game;
         }

@@ -61,6 +61,8 @@ public class Game implements Serializable {
         this.possibleMoves.add("Look for items");
         this.possibleMoves.add("Look in your inventory");
         this.possibleMoves.add("Look at your stats");
+        this.possibleMoves.add("QuickSave");
+        this.possibleMoves.add("QuickLoad");
 
         this.fightMoves.add("Run");
         this.fightMoves.add("Attack");
@@ -75,6 +77,10 @@ public class Game implements Serializable {
         }
     }
 
+    public ArrayList<String> getPossibleMoves() {
+        return new ArrayList<String>(possibleMoves);
+    }
+
     public ArrayList<String> getFightMoves() {
         return new ArrayList<String>(fightMoves);
     }
@@ -85,13 +91,6 @@ public class Game implements Serializable {
 
     public boolean notOver() {
         return !player.isDead();
-    }
-
-    public void printOptions() {
-        System.out.println("What do you want to do?");
-        for (int i = 0; i < this.possibleMoves.size(); i++) {
-            System.out.println("\t(" + i + ") " + this.possibleMoves.get(i));
-        }
     }
 
     public void useInventory() {
