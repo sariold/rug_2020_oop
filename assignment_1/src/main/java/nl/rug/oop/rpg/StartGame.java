@@ -25,11 +25,13 @@ public class StartGame {
         ArrayList<String> possibleMoves = new ArrayList<String>();
         possibleMoves.add("New Game");
         possibleMoves.add("Load Game");
-        printOptions(possibleMoves);
+
         Scanner scanner = new Scanner(System.in);
         int currentMove;
         String fileName = "";
         while(true) {
+            System.out.println("What do you want to do?");
+            printOptions(possibleMoves);
             try{
                 currentMove = scanner.nextInt();
             } catch (Exception e) {
@@ -39,20 +41,32 @@ public class StartGame {
             }
             switch (currentMove) {
                 case 0:
-                    System.out.println("What would you like to name this new game file?");
                     fileName = fileNamer();
                     initNewGame(fileName);
                     break;
                 case 1:
-                    System.out.println("Which file would you like to load from?");
-                    fileName = getAllFiles();
-                    initOldGame(fileName);
-                    break;
+                    if(fileLoader()) break;
             }
         }
     }
 
+    public boolean fileLoader() {
+        boolean minusOne = true;
+        System.out.println("Which file would you like to load from? (-1 : none)");
+        String fileName = getAllFiles();
+        if(fileName == "noFilesException") {
+            System.out.println("No save files available!");
+            minusOne = false;
+        }
+        else if(fileName != "-1fileException") {
+            initOldGame(fileName);
+            minusOne = false;
+        }
+        return minusOne;
+    }
+
     public String fileNamer() {
+        System.out.println("What would you like to name this new game file?");
         String fileName = "";
         Scanner scanner = new Scanner(System.in);
         fileName = scanner.nextLine();
@@ -61,13 +75,16 @@ public class StartGame {
 
     public String getAllFiles() {
         Scanner scanner = new Scanner(System.in);
-        File lsFiles = new File("assignment_1" + File.separator + "saves");
+        File lsFiles = new File("savedgames");
+        String[] files = lsFiles.list();
+        if(files == null || files.length == 0) return "noFilesException";
         ArrayList<String> allFiles = new ArrayList<String>(Arrays.asList(lsFiles.list()));
         printOptions(allFiles);
         int currentMove;
         while(true) {
             try{
                 currentMove = scanner.nextInt();
+                if(currentMove == -1) return "-1fileException";
                 return allFiles.get(currentMove).toString().replace(".ser", "");
             } catch (Exception e) {
                 System.out.println("That is not a valid input!");
@@ -172,11 +189,16 @@ public class StartGame {
                     game.displayStats();
                     break;
                 case 6:
-                    Serializer.saveGame(game, fileName);
+                    Serializer.saveGame(game, "quicksave");
                     break;
                 case 7:
-                    initOldGame(fileName);
+                    initOldGame("quicksave");
                     break;
+                case 8:
+                    Serializer.saveGame(game, fileName);
+                    break;
+                case 9:
+                    if(fileLoader()) break;
             }
         }
     }

@@ -63,6 +63,8 @@ public class Game implements Serializable {
         this.possibleMoves.add("Look at your stats");
         this.possibleMoves.add("QuickSave");
         this.possibleMoves.add("QuickLoad");
+        this.possibleMoves.add("Save");
+        this.possibleMoves.add("Load");
 
         this.fightMoves.add("Run");
         this.fightMoves.add("Attack");

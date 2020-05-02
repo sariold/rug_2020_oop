@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class Serializer {
 
     public static void saveGame(Game game, String fileName) {
-        File saveDirectory = new File("assignment_1" + File.separator + "saves");
+        File saveDirectory = new File("savedgames");
         saveDirectory.mkdir();
 
         try(FileOutputStream fileOutputStream = new FileOutputStream(saveDirectory + File.separator + fileName + ".ser");
@@ -24,7 +24,8 @@ public class Serializer {
     }
 
     public static Game loadGame(String fileName) throws IOException, ClassNotFoundException {
-        File saveDirectory = new File("assignment_1" + File.separator + "saves");
+        File saveDirectory = new File("savedgames");
+        saveDirectory.mkdir();
         try(FileInputStream fileInputStream = new FileInputStream(saveDirectory + File.separator + fileName + ".ser");
         ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream)) {
             Game game = (Game) objectInputStream.readObject();
