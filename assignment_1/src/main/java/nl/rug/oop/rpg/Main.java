@@ -15,6 +15,8 @@ public class Main {
             System.out.println("Please choose a name for your Hero:");
             playerName = scanner.nextLine();
         }
+        System.out.println(TextColor.ANSI_BLUE + "Slay both mini bosses and be forced to face the final boss!" +
+                TextColor.ANSI_RESET);
         Game game = new Game(playerName);
 
         int currentMove;

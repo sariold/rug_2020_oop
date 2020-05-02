@@ -262,9 +262,12 @@ public class Game {
     }
 
     public void winGame() {
-        System.out.println(TextColor.ANSI_BLACK + "Congratulations you have won the game! You are a real dungeon master!" + TextColor.ANSI_RESET);
+        System.out.println(TextColor.ANSI_YELLOW + "Congratulations you have won the game! You are a real dungeon master!"
+                + TextColor.ANSI_RESET);
+        System.out.println(TextColor.ANSI_BLUE + "This game has been brought to you by Diego and Felix."
+                + TextColor.ANSI_RESET);
         System.exit(0);
-    }
+    }w
 
     public void gameOver() {
         System.out.println(TextColor.ANSI_BLACK + "GAME OVER!" + TextColor.ANSI_RESET);
