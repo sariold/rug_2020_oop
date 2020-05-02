@@ -126,6 +126,35 @@ public class StartGame {
         gameStart(game, fileName);
     }
 
+    public void gameSave(Game game, String fileName) {
+        ArrayList<String> possibleOptions = new ArrayList<>();
+        possibleOptions.add("Save to current file: " + fileName);
+        possibleOptions.add("Save to a new file");
+        Scanner scanner = new Scanner(System.in);
+        int currentMove;
+        String newFileName = "";
+        while (true) {
+            System.out.println("What do you want to do?");
+            printOptions(possibleOptions);
+            try {
+                currentMove = scanner.nextInt();
+            } catch (Exception e) {
+                System.out.println("That is not a valid input!");
+                scanner.nextLine();
+                continue;
+            }
+            switch (currentMove) {
+                case 0:
+                    Serializer.saveGame(game, fileName);
+                    return;
+                case 1:
+                    newFileName = fileNamer();
+                    Serializer.saveGame(game, newFileName);
+                    return;
+            }
+        }
+    }
+
     public void gameStart(Game game, String fileName) {
         Scanner scanner = new Scanner(System.in);
         int currentMove;
@@ -195,7 +224,7 @@ public class StartGame {
                     initOldGame("quicksave");
                     break;
                 case 8:
-                    Serializer.saveGame(game, fileName);
+                    gameSave(game, fileName);
                     break;
                 case 9:
                     if(fileLoader()) break;
