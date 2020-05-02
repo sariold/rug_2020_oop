@@ -3,7 +3,11 @@ package nl.rug.oop.rpg.npcs;
 import nl.rug.oop.rpg.objects.Door;
 import nl.rug.oop.rpg.objects.MiniBossDoor;
 
-public abstract class MiniBoss extends Enemy {
+import java.io.Serializable;
+
+public abstract class MiniBoss extends Enemy implements Serializable {
+
+    private static final long serialVersionUID = 24L;
 
     private static MiniBossDoor door;
 

@@ -4,7 +4,12 @@ import nl.rug.oop.rpg.interfaces.Inspectable;
 import nl.rug.oop.rpg.interfaces.Interactable;
 import nl.rug.oop.rpg.TextColor;
 
-public abstract class DungeonNpc implements Inspectable, Interactable {
+import java.io.Serializable;
+
+public abstract class DungeonNpc implements Inspectable, Interactable, Serializable {
+
+    private static final long serialVersionUID = 18L;
+
     private String description;
 
     public DungeonNpc(String description) {

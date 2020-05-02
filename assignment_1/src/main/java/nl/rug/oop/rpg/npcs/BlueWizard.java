@@ -5,9 +5,12 @@ import nl.rug.oop.rpg.DefaultStats;
 import nl.rug.oop.rpg.objects.MiniBossDoor;
 import nl.rug.oop.rpg.Player;
 
+import java.io.Serializable;
 import java.util.Random;
 
-public class BlueWizard extends MiniBoss {
+public class BlueWizard extends MiniBoss implements Serializable {
+
+    private static final long serialVersionUID = 15L;
 
     public BlueWizard(String description, String name, MiniBossDoor door) {
         super(description, name, DefaultStats.WIZARD_HIT_POINTS , DefaultStats.WIZARD_ATTACK_POINTS, DefaultStats.WIZARD_GOLD_VALUE, door);

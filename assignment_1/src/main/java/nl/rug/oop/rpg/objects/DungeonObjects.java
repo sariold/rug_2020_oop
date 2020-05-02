@@ -2,7 +2,12 @@ package nl.rug.oop.rpg.objects;
 
 import nl.rug.oop.rpg.interfaces.Inspectable;
 
-public abstract class DungeonObjects implements Inspectable {
+import java.io.Serializable;
+
+public abstract class DungeonObjects implements Inspectable, Serializable {
+
+    private static final long serialVersionUID = 4L;
+
     private String description;
 
     public DungeonObjects(String description) {

@@ -3,7 +3,11 @@ package nl.rug.oop.rpg.objects;
 import nl.rug.oop.rpg.DefaultStats;
 import nl.rug.oop.rpg.Player;
 
-public class HealingPotion extends Item{
+import java.io.Serializable;
+
+public class HealingPotion extends Item implements Serializable {
+
+    private static final long serialVersionUID = 11L;
 
     private int healPower;
 

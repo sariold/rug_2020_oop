@@ -5,9 +5,12 @@ import nl.rug.oop.rpg.interfaces.Attackable;
 import nl.rug.oop.rpg.Player;
 import nl.rug.oop.rpg.TextColor;
 
+import java.io.Serializable;
 import java.util.Random;
 
-public abstract class Enemy extends DungeonNpc implements Attackable {
+public abstract class Enemy extends DungeonNpc implements Attackable, Serializable {
+
+    private static final long serialVersionUID = 19L;
 
     private String name;
     private int hitPoints;

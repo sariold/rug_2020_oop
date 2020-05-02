@@ -2,7 +2,11 @@ package nl.rug.oop.rpg.npcs;
 
 import nl.rug.oop.rpg.DefaultStats;
 
-public class Knight extends Enemy {
+import java.io.Serializable;
+
+public class Knight extends Enemy implements Serializable {
+
+    private static final long serialVersionUID = 23L;
 
     public Knight(String description, String name) {
         super(description, name, DefaultStats.KNIGHT_HIT_POINTS , DefaultStats.KNIGHT_ATTACK_POINTS, DefaultStats.KNIGHT_GOLD_VALUE);

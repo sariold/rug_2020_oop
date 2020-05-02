@@ -4,7 +4,11 @@ import nl.rug.oop.rpg.DefaultStats;
 import nl.rug.oop.rpg.Player;
 import nl.rug.oop.rpg.TextColor;
 
-public class MonsterDoor extends Door {
+import java.io.Serializable;
+
+public class MonsterDoor extends Door implements Serializable {
+
+    private static final long serialVersionUID = 8L;
 
     public MonsterDoor(String description, Room from, Room to) {
         super(DefaultStats.MONSTER_DOOR_DESCRIPTION, from, to);

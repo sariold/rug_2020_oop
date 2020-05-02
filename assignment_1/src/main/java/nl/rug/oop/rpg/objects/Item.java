@@ -3,7 +3,11 @@ package nl.rug.oop.rpg.objects;
 import nl.rug.oop.rpg.Player;
 import nl.rug.oop.rpg.interfaces.Collectable;
 
-public abstract class Item extends DungeonObjects implements Collectable {
+import java.io.Serializable;
+
+public abstract class Item extends DungeonObjects implements Collectable, Serializable {
+
+    private static final long serialVersionUID = 12L;
 
     private boolean used;
     private boolean collected;

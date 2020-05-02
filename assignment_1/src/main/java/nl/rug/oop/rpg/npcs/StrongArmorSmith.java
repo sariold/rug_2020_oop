@@ -3,7 +3,11 @@ package nl.rug.oop.rpg.npcs;
 import nl.rug.oop.rpg.DefaultStats;
 import nl.rug.oop.rpg.Player;
 
-public class StrongArmorSmith extends Trader{
+import java.io.Serializable;
+
+public class StrongArmorSmith extends Trader implements Serializable {
+
+    private static final long serialVersionUID = 31L;
 
     public StrongArmorSmith(String name) {
         super("Armor is not to be joked with!", name, DefaultStats.STRONG_ARMORSMITH_POWER, DefaultStats.STRONG_ARMORSMITH_PRICE);

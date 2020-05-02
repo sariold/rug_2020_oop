@@ -3,7 +3,11 @@ package nl.rug.oop.rpg.npcs;
 import nl.rug.oop.rpg.DefaultStats;
 import nl.rug.oop.rpg.Player;
 
-public class WeaponSmith extends Trader{
+import java.io.Serializable;
+
+public class WeaponSmith extends Trader implements Serializable {
+
+    private static final long serialVersionUID = 34L;
 
     public WeaponSmith(String name) {
         super("Better get them before they get you!", name, DefaultStats.WEAPONSMITH_POWER, DefaultStats.WEAPONSMITH_PRICE);

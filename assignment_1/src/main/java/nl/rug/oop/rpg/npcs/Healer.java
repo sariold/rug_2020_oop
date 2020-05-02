@@ -2,7 +2,11 @@ package nl.rug.oop.rpg.npcs;
 
 import nl.rug.oop.rpg.Player;
 
-public abstract class Healer extends DungeonNpc{
+import java.io.Serializable;
+
+public abstract class Healer extends DungeonNpc implements Serializable {
+
+    private static final long serialVersionUID = 21L;
 
     private String name;
     private int healPower;

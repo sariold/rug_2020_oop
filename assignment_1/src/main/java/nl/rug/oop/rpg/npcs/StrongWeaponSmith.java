@@ -3,7 +3,11 @@ package nl.rug.oop.rpg.npcs;
 import nl.rug.oop.rpg.DefaultStats;
 import nl.rug.oop.rpg.Player;
 
-public class StrongWeaponSmith extends Trader{
+import java.io.Serializable;
+
+public class StrongWeaponSmith extends Trader implements Serializable {
+
+    private static final long serialVersionUID = 32L;
 
     public StrongWeaponSmith(String name) {
         super("Attack is the only defense!", name, DefaultStats.STRONG_WEAPONSMITH_POWER, DefaultStats.STRONG_WEAPONSMITH_PRICE);

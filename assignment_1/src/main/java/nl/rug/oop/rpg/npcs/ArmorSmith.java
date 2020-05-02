@@ -3,7 +3,11 @@ package nl.rug.oop.rpg.npcs;
 import nl.rug.oop.rpg.DefaultStats;
 import nl.rug.oop.rpg.Player;
 
-public class ArmorSmith extends Trader {
+import java.io.Serializable;
+
+public class ArmorSmith extends Trader implements Serializable {
+
+    private static final long serialVersionUID = 14L;
 
     public ArmorSmith(String name) {
         super("Shields and chestplates have saved my life!", name, DefaultStats.ARMORSMITH_POWER, DefaultStats.ARMORSMITH_PRICE);

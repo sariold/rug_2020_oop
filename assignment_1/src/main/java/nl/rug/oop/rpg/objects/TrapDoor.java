@@ -3,7 +3,11 @@ package nl.rug.oop.rpg.objects;
 import nl.rug.oop.rpg.Player;
 import nl.rug.oop.rpg.TextColor;
 
-public class TrapDoor extends Door {
+import java.io.Serializable;
+
+public class TrapDoor extends Door implements Serializable {
+
+    private static final long serialVersionUID = 10L;
 
     private Room from;
     private int attackPoints;

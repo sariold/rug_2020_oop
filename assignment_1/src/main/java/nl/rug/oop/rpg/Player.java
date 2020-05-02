@@ -5,10 +5,13 @@ import nl.rug.oop.rpg.interfaces.Collectable;
 import nl.rug.oop.rpg.objects.Item;
 import nl.rug.oop.rpg.objects.Room;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Player implements Attackable {
+public class Player implements Attackable, Serializable {
+
+    private static final long serialVersionUID = 2L;
 
     private String name;
     private Room currentRoom;

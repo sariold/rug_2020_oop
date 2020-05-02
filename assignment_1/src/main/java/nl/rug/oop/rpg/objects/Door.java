@@ -3,7 +3,11 @@ package nl.rug.oop.rpg.objects;
 import nl.rug.oop.rpg.Player;
 import nl.rug.oop.rpg.interfaces.Interactable;
 
-public class Door extends DungeonObjects implements Interactable {
+import java.io.Serializable;
+
+public class Door extends DungeonObjects implements Interactable, Serializable {
+
+    private static final long serialVersionUID = 3L;
 
     private Room from;
     private Room to;

@@ -3,7 +3,11 @@ package nl.rug.oop.rpg.objects;
 import nl.rug.oop.rpg.DefaultStats;
 import nl.rug.oop.rpg.Player;
 
-public class MagicOrb extends Item {
+import java.io.Serializable;
+
+public class MagicOrb extends Item implements Serializable {
+
+    private static final long serialVersionUID = 13L;
 
     private Room room;
 

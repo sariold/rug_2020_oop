@@ -2,7 +2,11 @@ package nl.rug.oop.rpg.npcs;
 
 import nl.rug.oop.rpg.Player;
 
-public abstract class Trader extends DungeonNpc{
+import java.io.Serializable;
+
+public abstract class Trader extends DungeonNpc implements Serializable {
+
+    private static final long serialVersionUID = 33L;
 
     private String name;
     private int power;

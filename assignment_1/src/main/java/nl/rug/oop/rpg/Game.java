@@ -6,11 +6,14 @@ import nl.rug.oop.rpg.objects.*;
 import org.json.simple.parser.ParseException;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class Game {
+public class Game implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     private Player player;
     private ArrayList<Room> totalRooms;
@@ -267,7 +270,7 @@ public class Game {
         System.out.println(TextColor.ANSI_BLUE + "This game has been brought to you by Diego and Felix."
                 + TextColor.ANSI_RESET);
         System.exit(0);
-    }w
+    }
 
     public void gameOver() {
         System.out.println(TextColor.ANSI_BLACK + "GAME OVER!" + TextColor.ANSI_RESET);

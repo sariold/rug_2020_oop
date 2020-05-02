@@ -3,7 +3,11 @@ package nl.rug.oop.rpg.npcs;
 import nl.rug.oop.rpg.DefaultStats;
 import nl.rug.oop.rpg.Player;
 
-public class HighPriest extends Healer{
+import java.io.Serializable;
+
+public class HighPriest extends Healer implements Serializable {
+
+    private static final long serialVersionUID = 22L;
 
     public HighPriest(String name) {
         super("God Shall bless you!", name, DefaultStats.PRIEST_HEAL_POWER);

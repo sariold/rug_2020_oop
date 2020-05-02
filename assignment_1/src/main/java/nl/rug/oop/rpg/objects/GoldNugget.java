@@ -4,7 +4,11 @@ import nl.rug.oop.rpg.DefaultStats;
 import nl.rug.oop.rpg.Player;
 import nl.rug.oop.rpg.TextColor;
 
-public class GoldNugget extends Item{
+import java.io.Serializable;
+
+public class GoldNugget extends Item implements Serializable {
+
+    private static final long serialVersionUID = 6L;
 
     private int value;
 

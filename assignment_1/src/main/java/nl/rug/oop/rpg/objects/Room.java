@@ -6,9 +6,12 @@ import nl.rug.oop.rpg.npcs.Enemy;
 import nl.rug.oop.rpg.npcs.Healer;
 import nl.rug.oop.rpg.npcs.Trader;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Room extends DungeonObjects {
+public class Room extends DungeonObjects implements Serializable {
+
+    private static final long serialVersionUID = 9L;
 
     private ArrayList<Door> doors;
     private ArrayList<DungeonNpc> NPCs;

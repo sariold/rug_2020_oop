@@ -4,9 +4,12 @@ import nl.rug.oop.rpg.DefaultStats;
 import nl.rug.oop.rpg.Player;
 import nl.rug.oop.rpg.TextColor;
 
+import java.io.Serializable;
 import java.util.Random;
 
-public class Gambler extends Trader{
+public class Gambler extends Trader implements Serializable {
+
+    private static final long serialVersionUID = 20L;
 
     public Gambler(String name) {
         super("Are you feeling lucky?", name, DefaultStats.GAMBLER_POWER, DefaultStats.GAMBLER_PRICE);

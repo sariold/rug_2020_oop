@@ -4,9 +4,12 @@ import nl.rug.oop.rpg.interfaces.Attackable;
 import nl.rug.oop.rpg.DefaultStats;
 import nl.rug.oop.rpg.Player;
 
+import java.io.Serializable;
 import java.util.Random;
 
-public class Dragon extends Boss {
+public class Dragon extends Boss implements Serializable {
+
+    private static final long serialVersionUID = 17L;
 
     public Dragon(String description, String name) {
         super(description, name, DefaultStats.DRAGON_HIT_POINTS , DefaultStats.DRAGON_ATTACK_POINTS, DefaultStats.DRAGON_GOLD_VALUE);

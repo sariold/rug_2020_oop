@@ -2,7 +2,11 @@ package nl.rug.oop.rpg.objects;
 
 import nl.rug.oop.rpg.DefaultStats;
 
-public class MiniBossDoor extends Door {
+import java.io.Serializable;
+
+public class MiniBossDoor extends Door implements Serializable {
+
+    private static final long serialVersionUID = 7L;
 
     private String wizardColor;
     private boolean defeated;
