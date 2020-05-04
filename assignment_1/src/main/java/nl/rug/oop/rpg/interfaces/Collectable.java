@@ -9,4 +9,6 @@ public interface Collectable {
     public void use(Player player);
 
     public boolean hasCombatUse();
+
+    public boolean hasNonCombatUse();
 }

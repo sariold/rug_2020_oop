@@ -35,7 +35,7 @@ public class StartGame {
             try{
                 currentMove = scanner.nextInt();
             } catch (Exception e) {
-                System.out.println("That is not a valid input!");
+                GUI.invalidInputMessage();
                 scanner.nextLine();
                 continue;
             }
@@ -87,7 +87,7 @@ public class StartGame {
                 if(currentMove == -1) return "-1fileException";
                 return allFiles.get(currentMove).toString().replace(".ser", "");
             } catch (Exception e) {
-                System.out.println("That is not a valid input!");
+                GUI.invalidInputMessage();
                 scanner.nextLine();
                 continue;
             }
@@ -139,7 +139,7 @@ public class StartGame {
             try {
                 currentMove = scanner.nextInt();
             } catch (Exception e) {
-                System.out.println("That is not a valid input!");
+                GUI.invalidInputMessage();
                 scanner.nextLine();
                 continue;
             }
@@ -165,46 +165,46 @@ public class StartGame {
             try {
                 currentMove = scanner.nextInt();
             } catch (InputMismatchException e) {
-                System.out.println("That is not a valid input!");
+                GUI.invalidInputMessage();
                 scanner.nextLine();
                 continue;
             }
             switch (currentMove) {
                 // inspect room
                 case 0:
-                    game.inspectRoom();
+                    GUI.inspectRoom(game.getPlayer());
                     break;
                 // inspect doors
                 case 1:
-                    game.inspectDoors();
+                    GUI.inspectDoors(game.getPlayer());
                     try {
                         currentMove = scanner.nextInt();
                         game.interactDoor(currentMove);
                     } catch (InputMismatchException e) {
-                        System.out.println("That is not a valid input!");
+                        GUI.invalidInputMessage();
                         scanner.nextLine();
                     }
                     break;
                 // inspect NPCs
                 case 2:
-                    if(game.inspectNPCs()) {
+                    if(GUI.inspectNPCs(game.getPlayer())) {
                         try {
                             currentMove = scanner.nextInt();
                             game.interactNPC(currentMove);
                         } catch (InputMismatchException e) {
-                            System.out.println("That is not a valid input!");
+                            GUI.invalidInputMessage();
                             scanner.nextLine();
                         }
                     }
                     break;
                 // show items in the room
                 case 3:
-                    if(game.inspectItems()) {
+                    if(GUI.inspectItems(game.getPlayer())) {
                         try {
                             currentMove = scanner.nextInt();
                             game.interactItem(currentMove);
                         } catch (InputMismatchException e) {
-                            System.out.println("That is not a valid input!");
+                            GUI.invalidInputMessage();
                             scanner.nextLine();
                         }
                     }
@@ -215,7 +215,7 @@ public class StartGame {
                     break;
                 // show Stats
                 case 5:
-                    game.displayStats();
+                    GUI.displayStats(game.getPlayer());
                     break;
                 case 6:
                     Serializer.saveGame(game, "quicksave");

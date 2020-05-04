@@ -92,6 +92,14 @@ public class Game implements Serializable {
         return player;
     }
 
+    public int getFireMagic() {
+        return fireMagic;
+    }
+
+    public int getIceMagic() {
+        return iceMagic;
+    }
+
     public boolean notOver() {
         return !player.isDead();
     }
@@ -104,36 +112,17 @@ public class Game implements Serializable {
         try {
             move = scanner.nextInt();
         } catch (InputMismatchException e) {
-            System.out.println("That is not a valid input!");
+            GUI.invalidInputMessage();
             return;
         }
         if (move == -1) return;
         if (move < player.getInventory().size() && move > -1) {
+            if (!player.getInventory().get(move).hasNonCombatUse()) {
+                GUI.onlyCombatItemMessage();
+                return;
+            }
             player.getInventory().get(move).use(player);
-        } else System.out.println("That is not a valid item!");
-    }
-
-    public void displayStats() {
-        System.out.println("Your Character: " + player.getName());
-        System.out.println(TextColor.ANSI_GREEN + "\tHealth: " + TextColor.ANSI_RESET + player.getHitPoints() + "/" + player.getMaxHitPoints());
-        System.out.println(TextColor.ANSI_RED + "\tAttack: " + TextColor.ANSI_RESET + player.getAttackPoints());
-        System.out.println(TextColor.ANSI_YELLOW + "\tGold: " + TextColor.ANSI_RESET + player.getGold());
-    }
-
-    public void inspectRoom() {
-        System.out.print("You see: ");
-        this.player.getCurrentRoom().inspect();
-    }
-
-    public void inspectDoors() {
-        System.out.println("You look for doors.");
-        System.out.println("You see:");
-        ArrayList<Door> doors = this.player.getCurrentRoom().getDoors();
-        for (int i = 0; i < doors.size(); i++) {
-            System.out.print("\t(" + i + ") ");
-            doors.get(i).inspect();
-        }
-        System.out.println("Which door will you take? (-1 to stay)");
+        } else GUI.invalidItemMessage();
     }
 
     public void interactDoor(int currentMove) {
@@ -184,22 +173,6 @@ public class Game implements Serializable {
         }
     }
 
-    public boolean inspectItems() {
-        boolean itemExists = false;
-        System.out.println("You look for items.");
-        System.out.println("You see:");
-        ArrayList<Collectable> items = this.player.getCurrentRoom().getItems();
-        if(items.size() > 0) {
-            itemExists = true;
-            for (int i = 0; i < items.size(); i++) {
-                System.out.print("\t(" + i + ") ");
-                System.out.println(items.get(i).toString());
-            }
-            System.out.println("Which item will you take? (-1 to not collect any items)");
-        } else System.out.println("Nothing in sight");
-        return itemExists;
-    }
-
     public void interactItem(int currentMove) {
         ArrayList<Collectable> items = this.player.getCurrentRoom().getItems();
         if (currentMove < items.size() && currentMove > -2) {
@@ -211,26 +184,6 @@ public class Game implements Serializable {
             player.getCurrentRoom().removeItem();
             System.out.println("You collected " + items.get(currentMove).toString());
         }
-    }
-
-    public boolean inspectNPCs() {
-        boolean npcExists = false;
-        String color = TextColor.ANSI_RESET;
-        System.out.println("You look if there's somebody.");
-        System.out.println("You see:");
-        ArrayList<DungeonNpc> npcs = this.player.getCurrentRoom().getNPCs();
-        if(npcs.size() > 0) {
-            for (int i = 0; i < npcs.size(); i++) {
-                if(npcs.get(i) instanceof Enemy) color = TextColor.ANSI_RED;
-                if(npcs.get(i) instanceof Healer) color = TextColor.ANSI_GREEN;
-                if(npcs.get(i) instanceof Trader) color = TextColor.ANSI_BLUE;
-                System.out.print("\t(" + i + ") "+ "[" + color + npcs.get(i).getType() + TextColor.ANSI_RESET + "]" + "(" + npcs.get(i).getSpecies() + ") " + npcs.get(i).toString() + ": ");
-                npcs.get(i).inspect();
-            }
-            npcExists = true;
-            System.out.println("Who will you approach? (-1 to stay by yourself)");
-        } else System.out.println("\tNobody.");
-        return npcExists;
     }
 
     public void interactNPC(int currentMove) {
@@ -251,36 +204,24 @@ public class Game implements Serializable {
         }
     }
 
-    public int getFireMagic() {
-        return fireMagic;
-    }
-
-    public int getIceMagic() {
-        return iceMagic;
-    }
-
     public void winGame() {
-        System.out.println(TextColor.ANSI_YELLOW + "Congratulations you have won the game! You are a real dungeon master!"
-                + TextColor.ANSI_RESET);
-        System.out.println(TextColor.ANSI_BLUE + "This game has been brought to you by Diego and Felix."
-                + TextColor.ANSI_RESET);
+        GUI.winGameMessage();
         System.exit(0);
     }
 
     public void gameOver() {
-        System.out.println(TextColor.ANSI_BLACK + "GAME OVER!" + TextColor.ANSI_RESET);
+        GUI.gameOverMessage();
         System.exit(0);
     }
 
     private void tradeWith(Player player, Trader trader) {
         Scanner scanner = new Scanner(System.in);
         int move;
-        System.out.println(trader.getName() + ": " + TextColor.ANSI_PURPLE + trader.tradeDialog() + "\n Are you interested?" + TextColor.ANSI_RESET);
-        System.out.println("\t(0) I think that is too expensive!\n\t(1) Let's trade!");
+        GUI.tradeDialog(trader);
         try {
             move = scanner.nextInt();
         } catch (InputMismatchException e) {
-            System.out.println("That is not a valid input!");
+            GUI.invalidInputMessage();
             return;
         }
         if (move == 0) return;
@@ -292,18 +233,17 @@ public class Game implements Serializable {
             trader.interact(player);
             System.out.println("You traded with " + trader.getName() + ". You have " + player.getGold() + " gold.");
             player.getCurrentRoom().removeDeadNPC();
-        } else System.out.println("That is not a valid input!");
+        } else GUI.invalidInputMessage();
     }
 
     private void healPlayer(Player player, Healer healer) {
         Scanner scanner = new Scanner(System.in);
         int move;
-        System.out.println(healer.getName() + ":" + TextColor.ANSI_PURPLE + "I can only heal you once, and then I will leave!\n Are you sure you want me to heal you?" + TextColor.ANSI_RESET);
-        System.out.println("\t(0) No better do it later!\n\t(1) Heal me!");
+        GUI.healDialog(healer);
         try {
             move = scanner.nextInt();
         } catch (InputMismatchException e) {
-            System.out.println("That is not a valid input!");
+            GUI.invalidInputMessage();
             return;
         }
         if (move == 0) return;
@@ -311,7 +251,7 @@ public class Game implements Serializable {
             healer.interact(player);
             System.out.println("You are at " + player.getHitPoints() + " health.");
             player.getCurrentRoom().removeDeadNPC();
-        } else System.out.println("That is not a valid input!");
+        } else GUI.invalidInputMessage();
     }
 
     public void addIceMagic() {

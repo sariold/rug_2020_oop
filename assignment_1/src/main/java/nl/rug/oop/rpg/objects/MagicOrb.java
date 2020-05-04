@@ -30,6 +30,11 @@ public class MagicOrb extends Item implements Serializable {
     }
 
     @Override
+    public boolean hasNonCombatUse() {
+        return true;
+    }
+
+    @Override
     public String toString() {
         return "Magic Orb";
     }
