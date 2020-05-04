@@ -68,6 +68,7 @@ public class Game implements Serializable {
 
         this.fightMoves.add("Run");
         this.fightMoves.add("Attack");
+        this.fightMoves.add("Items");
 
         if(player.getName().equals("John Wick")) {
             System.out.println(TextColor.ANSI_YELLOW + "Check your stats Mr. Wick." + TextColor.ANSI_RESET);
@@ -98,15 +99,8 @@ public class Game implements Serializable {
     public void useInventory() {
         Scanner scanner = new Scanner(System.in);
         int move;
-        if (player.getInventory().size() == 0) {
-            System.out.println("You currently have no items.");
-            return;
-        }
-        System.out.println("Your inventory contains:");
-        for (int i = 0; i < player.getInventory().size(); i++) {
-            System.out.println("\t(" + i + ") " + this.player.getInventory().get(i).toString());
-        }
-        System.out.println("What item will you use (-1 to not use an item)");
+        GUI.displayInventory(player);
+        if (player.getInventory().size() == 0) return;
         try {
             move = scanner.nextInt();
         } catch (InputMismatchException e) {

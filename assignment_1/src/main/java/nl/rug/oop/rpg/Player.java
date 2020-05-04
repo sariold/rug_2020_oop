@@ -6,6 +6,7 @@ import nl.rug.oop.rpg.objects.Item;
 import nl.rug.oop.rpg.objects.Room;
 
 import java.io.Serializable;
+import java.net.CookieHandler;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -38,6 +39,14 @@ public class Player implements Attackable, Serializable {
 
     public ArrayList<Collectable> getInventory() {
         return new ArrayList<Collectable>(this.inventory);
+    }
+
+    public ArrayList<Collectable> getCombatInventory() {
+        ArrayList<Collectable> combatItems = new ArrayList<Collectable>();
+        for (Collectable c: this.getInventory()) {
+            if (c.hasCombatUse()) combatItems.add(c);
+        }
+        return combatItems;
     }
 
     public void addCollectable(Collectable c) {

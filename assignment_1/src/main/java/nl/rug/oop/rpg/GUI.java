@@ -27,4 +27,28 @@ public class GUI {
             System.out.println("\t (" + i + ") " + game.getFightMoves().get(i));
         }
     }
+
+    public static void displayInventory(Player player) {
+        if (player.getInventory().size() == 0) {
+            System.out.println("You currently have no items.");
+            return;
+        }
+        System.out.println("Your inventory contains:");
+        for (int i = 0; i < player.getInventory().size(); i++) {
+            System.out.println("\t(" + i + ") " + player.getInventory().get(i).toString());
+        }
+        System.out.println("What item will you use (-1 to not use an item)");
+    }
+
+    public static void displayCombatInventory(Player player) {
+        if (player.getCombatInventory().size() == 0) {
+            System.out.println("You currently have no items for combat.");
+            return;
+        }
+        System.out.println("Your inventory contains:");
+        for (int i = 0; i < player.getCombatInventory().size(); i++) {
+            System.out.println("\t(" + i + ") " + player.getCombatInventory().get(i).toString());
+        }
+        System.out.println("What item will you use (-1 to not use an item)");
+    }
 }

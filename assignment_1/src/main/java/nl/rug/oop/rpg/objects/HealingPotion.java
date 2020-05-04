@@ -24,6 +24,11 @@ public class HealingPotion extends Item implements Serializable {
     }
 
     @Override
+    public boolean hasCombatUse() {
+        return true;
+    }
+
+    @Override
     public String toString() {
         return "Healing Potion";
     }

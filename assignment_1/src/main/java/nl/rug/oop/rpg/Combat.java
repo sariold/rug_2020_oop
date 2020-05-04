@@ -9,8 +9,6 @@ import java.util.Scanner;
 public class Combat {
 
     public static void engageFight(Player player, Enemy enemy, Game game) {
-        Random r = new Random();
-        int chance;
         int move;
         int damageToEnemy = 0;
         Scanner scanner = new Scanner(System.in);
@@ -35,6 +33,25 @@ public class Combat {
                 System.out.println(TextColor.ANSI_YELLOW + "You ran from the fight. " + TextColor.ANSI_RED + enemy.getName() + TextColor.ANSI_YELLOW + " recovered to full health!" + TextColor.ANSI_RESET);
                 enemy.increaseHitPoints(damageToEnemy);
                 return;
+            }
+            // Combat item use
+            if (move == 2) {
+                // if you use an item in getCOmbatItems it should be uset in the inventory
+                GUI.displayCombatInventory(player);
+                if (player.getCombatInventory().size() == 0) continue;
+                try {
+                    move = scanner.nextInt();
+                } catch (InputMismatchException e) {
+                    System.out.println("That is not a valid input!");
+                    continue;
+                }
+                if (move == -1) return;
+                if (move < player.getCombatInventory().size() && move > -1) {
+                    player.getCombatInventory().get(move).use(player);
+                } else {
+                    System.out.println("That is not a valid item!");
+                    continue;
+                }
             }
             player.checkStatusImpairments();
             if (player.isFrozen()) {

@@ -7,4 +7,6 @@ public interface Collectable {
     public void collect(Player player);
 
     public void use(Player player);
+
+    public boolean hasCombatUse();
 }

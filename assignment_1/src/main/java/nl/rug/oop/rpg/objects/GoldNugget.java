@@ -25,6 +25,11 @@ public class GoldNugget extends Item implements Serializable {
     }
 
     @Override
+    public boolean hasCombatUse() {
+        return false;
+    }
+
+    @Override
     public String toString() {
         return "Gold Nugget";
     }
