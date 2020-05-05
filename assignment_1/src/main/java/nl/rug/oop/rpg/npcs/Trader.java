@@ -1,5 +1,6 @@
 package nl.rug.oop.rpg.npcs;
 
+import nl.rug.oop.rpg.Game;
 import nl.rug.oop.rpg.Player;
 
 import java.io.Serializable;
@@ -56,6 +57,11 @@ public abstract class Trader extends DungeonNpc implements Serializable {
     @Override
     public void interact(Player player) {
         trade(player);
+    }
+
+    @Override
+    public void engage(Player player, Game game) {
+        game.tradeWith(player, this);
     }
 
     @Override

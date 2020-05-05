@@ -1,5 +1,6 @@
 package nl.rug.oop.rpg.npcs;
 
+import nl.rug.oop.rpg.Game;
 import nl.rug.oop.rpg.Player;
 
 import java.io.Serializable;
@@ -39,6 +40,11 @@ public abstract class Healer extends DungeonNpc implements Serializable {
 
     public int getHealPower() {
         return this.healPower;
+    }
+
+    @Override
+    public void engage(Player player, Game game) {
+        game.healPlayer(player, this);
     }
 
     @Override

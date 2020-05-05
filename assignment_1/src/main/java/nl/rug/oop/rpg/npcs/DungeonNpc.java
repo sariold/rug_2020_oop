@@ -1,5 +1,7 @@
 package nl.rug.oop.rpg.npcs;
 
+import nl.rug.oop.rpg.Game;
+import nl.rug.oop.rpg.Player;
 import nl.rug.oop.rpg.interfaces.Inspectable;
 import nl.rug.oop.rpg.interfaces.Interactable;
 import nl.rug.oop.rpg.TextColor;
@@ -31,6 +33,8 @@ public abstract class DungeonNpc implements Inspectable, Interactable, Serializa
     public String getSpecies(){
         return "";
     }
+
+    public void engage(Player player, Game game){}
 
     @Override
     public void inspect() {

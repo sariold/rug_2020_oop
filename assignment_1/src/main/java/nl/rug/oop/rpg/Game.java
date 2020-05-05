@@ -197,13 +197,7 @@ public class Game implements Serializable {
                 return;
             }
             DungeonNpc currentNPC= npcs.get(currentMove);
-            if (currentNPC instanceof Enemy) {
-                Combat.engageFight(player, (Enemy) currentNPC, this);
-            } else if (currentNPC instanceof Healer) {
-                healPlayer(player, (Healer) currentNPC);
-            } else if (currentNPC instanceof Trader) {
-                tradeWith(player, (Trader) currentNPC);
-            }
+            currentNPC.engage(player, this);
         }
     }
 
@@ -217,7 +211,7 @@ public class Game implements Serializable {
         System.exit(0);
     }
 
-    private void tradeWith(Player player, Trader trader) {
+    public void tradeWith(Player player, Trader trader) {
         Scanner scanner = new Scanner(System.in);
         int move;
         GUI.tradeDialog(trader);
@@ -238,7 +232,7 @@ public class Game implements Serializable {
         } else GUI.invalidInputMessage();
     }
 
-    private void healPlayer(Player player, Healer healer) {
+    public void healPlayer(Player player, Healer healer) {
         Scanner scanner = new Scanner(System.in);
         int move;
         GUI.healDialog(healer);

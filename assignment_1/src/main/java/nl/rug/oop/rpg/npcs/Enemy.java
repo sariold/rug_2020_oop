@@ -1,12 +1,11 @@
 package nl.rug.oop.rpg.npcs;
 
-import nl.rug.oop.rpg.DefaultStats;
+import nl.rug.oop.rpg.*;
 import nl.rug.oop.rpg.interfaces.Attackable;
-import nl.rug.oop.rpg.Player;
-import nl.rug.oop.rpg.TextColor;
 
 import java.io.Serializable;
 import java.util.Random;
+import java.util.concurrent.ConcurrentMap;
 
 public abstract class Enemy extends DungeonNpc implements Attackable, Serializable {
 
@@ -137,6 +136,11 @@ public abstract class Enemy extends DungeonNpc implements Attackable, Serializab
     @Override
     public void interact(Player player) {
         attack(player);
+    }
+
+    @Override
+    public void engage(Player player, Game game) {
+        Combat.engageFight(player, this, game);
     }
 
     @Override
