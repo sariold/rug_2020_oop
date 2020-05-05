@@ -5,7 +5,7 @@ import nl.rug.oop.rpg.Player;
 
 import java.io.Serializable;
 
-public class HealingPotion extends Item implements Serializable {
+public class HealingPotion extends EnchantItem implements Serializable {
 
     private static final long serialVersionUID = 11L;
 
@@ -36,5 +36,10 @@ public class HealingPotion extends Item implements Serializable {
     @Override
     public String toString() {
         return "Healing Potion";
+    }
+
+    @Override
+    public void enchant(int value) {
+        this.healPower = this.healPower + value;
     }
 }

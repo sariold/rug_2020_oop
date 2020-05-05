@@ -2,6 +2,7 @@ package nl.rug.oop.rpg;
 
 import nl.rug.oop.rpg.interfaces.Attackable;
 import nl.rug.oop.rpg.interfaces.Collectable;
+import nl.rug.oop.rpg.objects.EnchantItem;
 import nl.rug.oop.rpg.objects.Item;
 import nl.rug.oop.rpg.objects.Room;
 
@@ -63,6 +64,14 @@ public class Player implements Attackable, Serializable {
             if (c.hasCombatUse()) combatItems.add(c);
         }
         return combatItems;
+    }
+
+    public ArrayList<Collectable> getEnchantableInventory() {
+        ArrayList<Collectable> enchantables = new ArrayList<Collectable>();
+        for (Collectable c: this.getInventory()) {
+            if (c instanceof EnchantItem) enchantables.add(c);
+        }
+        return enchantables;
     }
 
     public void addCollectable(Collectable c) {

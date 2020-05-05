@@ -70,6 +70,9 @@ public class Game implements Serializable {
         this.fightMoves.add("Attack");
         this.fightMoves.add("Items");
 
+        this.totalRooms.get(0).addNPC(new Enchanter("Henrietta"));
+        this.totalRooms.get(0).addItem(new HealingPotion());
+
         if(player.getName().equals("John Wick")) {
             System.out.println(TextColor.ANSI_YELLOW + "Check your stats Mr. Wick." + TextColor.ANSI_RESET);
             player.increaseGold(100 - player.getGold());
@@ -231,7 +234,6 @@ public class Game implements Serializable {
                 return;
             }
             trader.interact(player);
-            System.out.println("You traded with " + trader.getName() + ". You have " + player.getGold() + " gold.");
             player.getCurrentRoom().removeDeadNPC();
         } else GUI.invalidInputMessage();
     }

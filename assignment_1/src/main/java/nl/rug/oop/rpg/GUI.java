@@ -75,6 +75,16 @@ public class GUI {
     }
 
     /**
+     * print an ArrayList of Collectables as an option menu
+     * @param arrayList
+     */
+    public static void displayItems(ArrayList<Collectable> arrayList) {
+        for (int i = 0; i < arrayList.size(); i++) {
+            System.out.println("\t(" + i + ") " + arrayList.get(i).toString());
+        }
+    }
+
+    /**
      * prints the players current stats
      * @param player
      */

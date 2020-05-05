@@ -52,19 +52,22 @@ public class DefaultStats {
 
     // TRADER
     public static final int WEAPONSMITH_POWER = 1;
-    public static final int WEAPONSMITH_PRICE = 5;
+    public static final int WEAPONSMITH_PRICE = 10;
 
     public static final int STRONG_WEAPONSMITH_POWER = 2;
-    public static final int STRONG_WEAPONSMITH_PRICE = 10;
+    public static final int STRONG_WEAPONSMITH_PRICE = 20;
 
     public static final int ARMORSMITH_POWER = 1;
-    public static final int ARMORSMITH_PRICE = 5;
+    public static final int ARMORSMITH_PRICE = 10;
 
     public static final int STRONG_ARMORSMITH_POWER = 2;
-    public static final int STRONG_ARMORSMITH_PRICE = 10;
+    public static final int STRONG_ARMORSMITH_PRICE = 20;
 
     public static final int GAMBLER_POWER = 1;
-    public static final int GAMBLER_PRICE = 4;
+    public static final int GAMBLER_PRICE = 8;
+
+    public static final int ENCHANTER_POWER = 3;
+    public static final int ENCHANTER_PRICE = 10;
 
     // BOSS
     public static final String MINI_BOSS_DOOR = "If you dare enter this room, you will be forced to defeat a mini boss!";

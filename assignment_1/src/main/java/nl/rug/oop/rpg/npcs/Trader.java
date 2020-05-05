@@ -44,6 +44,7 @@ public abstract class Trader extends DungeonNpc implements Serializable {
     public void trade(Player player) {
         player.decreaseGold(this.price);
         this.hasTraded = true;
+        System.out.println("You traded with " + this.getName() + ". You have " + player.getGold() + " gold.");
         return;
     }
 
