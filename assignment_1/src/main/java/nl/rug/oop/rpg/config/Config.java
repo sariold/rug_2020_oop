@@ -13,10 +13,17 @@ public class Config {
     public static void setConfig() {
         Properties properties = new Properties();
         Scanner scanner = new Scanner(System.in);
-        String name;
+        String name = "";
         int maxHealth, health, attack, gold;
-        System.out.println("What name should the player have?");
-        name = scanner.nextLine();
+        while (true) {
+            System.out.println("What name should the player have?");
+            name = scanner.nextLine();
+            if (name.length() > 0 && name.length() < 16) {
+                break;
+            }
+            System.out.println("Your name can only have 15 characters.");
+        }
+
         properties.setProperty("playerName", name);
         while (true) {
             System.out.println("How much maximum health should the player have?");
