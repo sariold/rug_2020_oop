@@ -1,5 +1,6 @@
 package nl.rug.oop.rpg;
 
+import nl.rug.oop.rpg.config.Config;
 import nl.rug.oop.rpg.io.Serializer;
 
 import java.io.File;
@@ -23,13 +24,14 @@ public class StartGame {
 
     public void startGameOption() {
         ArrayList<String> possibleMoves = new ArrayList<String>();
-        possibleMoves.add("New Game");
-        possibleMoves.add("Load Game");
 
         Scanner scanner = new Scanner(System.in);
         int currentMove;
         String fileName = "";
         while(true) {
+            possibleMoves.clear();
+            possibleMoves.add("New Game");
+            possibleMoves.add("Load Game");
             System.out.println("What do you want to do?");
             printOptions(possibleMoves);
             try{
@@ -41,8 +43,36 @@ public class StartGame {
             }
             switch (currentMove) {
                 case 0:
-                    fileName = fileNamer();
-                    initNewGame(fileName);
+                    possibleMoves.clear();
+                    possibleMoves.add("Play the game normally");
+                    possibleMoves.add("Initialise from config");
+                    possibleMoves.add("Set default config");
+                    System.out.println("You are about to start a new game, what do you want to do?");
+                    printOptions(possibleMoves);
+                    try{
+                        currentMove = scanner.nextInt();
+                    } catch (Exception e) {
+                        GUI.invalidInputMessage();
+                        scanner.nextLine();
+                        continue;
+                    }
+                    switch (currentMove) {
+                        // normal game
+                        case 0:
+                            fileName = fileNamer();
+                            initNewGame(fileName, false);
+                            break;
+                        // from config
+                        case 1:
+                            fileName = fileNamer();
+                            initNewGame(fileName, true);
+                            break;
+                        // set config
+                        case 2:
+                            Config.setConfig();
+                            break;
+                    }
+
                     break;
                 case 1:
                     if(fileLoader()) break;
@@ -108,20 +138,25 @@ public class StartGame {
         }
     }
 
-    public void initNewGame(String fileName) {
+    public void initNewGame(String fileName, boolean fromConfig) {
         Scanner scanner = new Scanner(System.in);
         String playerName = "";
-        System.out.println("Please choose a name for your Hero:");
-        playerName = scanner.nextLine();
-        while (playerName.length() > 15) {
-            System.out.println("Your name can only have 15 characters.");
+        if (!fromConfig) {
             System.out.println("Please choose a name for your Hero:");
             playerName = scanner.nextLine();
+            while (playerName.length() > 15) {
+                System.out.println("Your name can only have 15 characters.");
+                System.out.println("Please choose a name for your Hero:");
+                playerName = scanner.nextLine();
+            }
         }
         System.out.println(TextColor.ANSI_BLUE + "Slay both mini bosses and be forced to face the final boss!" +
                 TextColor.ANSI_RESET);
 
         Game game = new Game(playerName);
+        if (fromConfig) {
+            Config.loadConfig(game);
+        }
         Serializer.saveGame(game, fileName);
         gameStart(game, fileName);
     }

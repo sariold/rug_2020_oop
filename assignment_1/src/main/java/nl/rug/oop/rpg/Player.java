@@ -37,6 +37,22 @@ public class Player implements Attackable, Serializable {
         this.inventory = new ArrayList<Collectable>();
     }
 
+    public void setMaxHitPoints(int maxHitPoints) {
+        this.maxHitPoints = maxHitPoints;
+    }
+
+    public void setHitPoints(int hitPoints) {
+        this.hitPoints = hitPoints;
+    }
+
+    public void setAttackPoints(int attackPoints) {
+        this.attackPoints = attackPoints;
+    }
+
+    public void setGold(int gold) {
+        this.gold = gold;
+    }
+
     public ArrayList<Collectable> getInventory() {
         return new ArrayList<Collectable>(this.inventory);
     }
