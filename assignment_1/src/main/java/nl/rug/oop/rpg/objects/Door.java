@@ -1,5 +1,6 @@
 package nl.rug.oop.rpg.objects;
 
+import nl.rug.oop.rpg.Game;
 import nl.rug.oop.rpg.Player;
 import nl.rug.oop.rpg.interfaces.Interactable;
 
@@ -17,6 +18,11 @@ public class Door extends DungeonObjects implements Interactable, Serializable {
         this.from = from;
         this.to = to;
     }
+
+    public void engage(Player player, Game game) {
+        this.interact(player);
+        player.getCurrentRoom().inspect();
+    };
 
     @Override
     public void interact(Player player) {

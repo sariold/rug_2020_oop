@@ -7,6 +7,12 @@
     },
     {
         "item": {
+            "type": "HealingPotion",
+            "room": "r0"
+        }
+    },
+    {
+        "item": {
             "type": "GoldNugget",
             "room": "r2"
         }

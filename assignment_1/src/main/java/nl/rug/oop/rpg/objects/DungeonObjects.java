@@ -1,5 +1,7 @@
 package nl.rug.oop.rpg.objects;
 
+import nl.rug.oop.rpg.Game;
+import nl.rug.oop.rpg.Player;
 import nl.rug.oop.rpg.interfaces.Inspectable;
 
 import java.io.Serializable;

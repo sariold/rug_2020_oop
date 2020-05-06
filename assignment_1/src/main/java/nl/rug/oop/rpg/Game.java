@@ -70,9 +70,6 @@ public class Game implements Serializable {
         this.fightMoves.add("Attack");
         this.fightMoves.add("Items");
 
-        this.totalRooms.get(0).addNPC(new Enchanter("Henrietta"));
-        this.totalRooms.get(0).addItem(new HealingPotion());
-
         Cheats.checkCheatCodes(player, this);
     }
 
@@ -98,6 +95,10 @@ public class Game implements Serializable {
 
     public boolean notOver() {
         return !player.isDead();
+    }
+
+    public ArrayList<MiniBoss> getMiniBosses() {
+        return this.miniBosses;
     }
 
     public void useInventory() {
@@ -128,44 +129,8 @@ public class Game implements Serializable {
                 System.out.println("You stayed in the same room.");
                 return;
             }
-            if(!(doors.get(currentMove) instanceof FinalBossDoor)) {
-                doors.get(currentMove).interact(player);
-                if (player.isDead()) {
-                    System.out.println(TextColor.ANSI_RED + "You have been slain by the mighty trap door!" + TextColor.ANSI_RESET);
-                    gameOver();
-                }
-                player.getCurrentRoom().inspect();
-            }
-            if(doors.get(currentMove) instanceof MiniBossDoor) {
-                if (((MiniBossDoor) doors.get(currentMove)).isDefeated()) return;
-                String type = ((MiniBossDoor) doors.get(currentMove)).getWizardColor();
-                if(type == "Blue") {
-                    miniBosses.get(0).setDoor((MiniBossDoor) doors.get(currentMove));
-                    player.getCurrentRoom().addNPC(miniBosses.get(0));
-                    Combat.engageFight(player, (Enemy) player.getCurrentRoom().getNPCs().get(0), this);
-                    if(miniBosses.get(0).isDead()) {
-                        ((MiniBossDoor) doors.get(currentMove)).defeated();
-                        doors.get(currentMove).setDescription("This was once a mini boss door, congrats on surviving the battle");
-                    }
-                } else {
-                    miniBosses.get(1).setDoor((MiniBossDoor) doors.get(currentMove));
-                    player.getCurrentRoom().addNPC(miniBosses.get(1));
-                    Combat.engageFight(player, (Enemy) player.getCurrentRoom().getNPCs().get(0), this);
-                    if(miniBosses.get(1).isDead()) {
-                        ((MiniBossDoor) doors.get(currentMove)).defeated();
-                        doors.get(currentMove).setDescription("This was once a mini boss door, congrats on surviving the battle");
-                    }
-                }
-            } else if(doors.get(currentMove) instanceof FinalBossDoor) {
-                if(miniBosses.get(0).isDead() && miniBosses.get(1).isDead()) {
-                    doors.get(currentMove).interact(player);
-                    player.getCurrentRoom().inspect();
-                    Dragon dragon = new Dragon("Draco");
-                    player.getCurrentRoom().addNPC(dragon);
-                    Combat.engageFight(player, (Enemy) player.getCurrentRoom().getNPCs().get(0), this);
-                }
-                doors.get(currentMove).inspect();
-            }
+            Door currentDoor = doors.get(currentMove);
+            currentDoor.engage(player, this);
         }
     }
 
@@ -189,7 +154,7 @@ public class Game implements Serializable {
                 System.out.println("You decided to leave them alone.");
                 return;
             }
-            DungeonNpc currentNPC= npcs.get(currentMove);
+            DungeonNpc currentNPC = npcs.get(currentMove);
             currentNPC.engage(player, this);
         }
     }

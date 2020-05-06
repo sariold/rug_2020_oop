@@ -82,5 +82,12 @@
             "name": "Hermes",
             "room": "r14"
         }
+    },
+    {
+        "npc": {
+            "type": "Enchanter",
+            "name": "Henrietta",
+            "room": "r0"
+        }
     }
 ]
