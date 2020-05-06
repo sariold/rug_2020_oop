@@ -33,7 +33,7 @@ public class ArmorSmith extends Trader implements Serializable {
 
     /**
      * return the species of this trader
-     * @return "ArmorSmith"
+     * @return "Armorsmith"
      */
     @Override
     public String getSpecies() {

@@ -2,6 +2,7 @@ package nl.rug.oop.rpg.npcs.healer;
 
 import nl.rug.oop.rpg.Game;
 import nl.rug.oop.rpg.Player;
+import nl.rug.oop.rpg.TextColor;
 import nl.rug.oop.rpg.npcs.DungeonNpc;
 
 import java.io.Serializable;
@@ -76,6 +77,6 @@ public abstract class Healer extends DungeonNpc implements Serializable {
      */
     @Override
     public String getType() {
-        return "Healer";
+        return TextColor.ANSI_GREEN +  "Healer" + TextColor.ANSI_RESET;
     }
 }

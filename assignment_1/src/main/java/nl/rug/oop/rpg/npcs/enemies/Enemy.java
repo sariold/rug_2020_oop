@@ -225,6 +225,6 @@ public abstract class Enemy extends DungeonNpc implements Attackable, Serializab
      */
     @Override
     public String getType() {
-        return "Enemy";
+        return TextColor.ANSI_RED + "Enemy" + TextColor.ANSI_RESET;
     }
 }

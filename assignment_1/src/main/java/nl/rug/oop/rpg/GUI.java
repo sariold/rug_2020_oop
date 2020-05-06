@@ -158,10 +158,7 @@ public class GUI {
         ArrayList<DungeonNpc> npcs = player.getCurrentRoom().getNPCs();
         if(npcs.size() > 0) {
             for (int i = 0; i < npcs.size(); i++) {
-                if(npcs.get(i) instanceof Enemy) color = TextColor.ANSI_RED;
-                if(npcs.get(i) instanceof Healer) color = TextColor.ANSI_GREEN;
-                if(npcs.get(i) instanceof Trader) color = TextColor.ANSI_BLUE;
-                System.out.print("\t(" + i + ") "+ "[" + color + npcs.get(i).getType() + TextColor.ANSI_RESET + "]" + "(" + npcs.get(i).getSpecies() + ") " + npcs.get(i).toString() + ": ");
+                System.out.print("\t(" + i + ") "+ "[" + npcs.get(i).getType() + "]" + "(" + npcs.get(i).getSpecies() + ") " + npcs.get(i).getName() + ": ");
                 npcs.get(i).inspect();
             }
             npcExists = true;

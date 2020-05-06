@@ -2,6 +2,7 @@ package nl.rug.oop.rpg.npcs.trader;
 
 import nl.rug.oop.rpg.Game;
 import nl.rug.oop.rpg.Player;
+import nl.rug.oop.rpg.TextColor;
 import nl.rug.oop.rpg.npcs.DungeonNpc;
 
 import java.io.Serializable;
@@ -94,6 +95,6 @@ public abstract class Trader extends DungeonNpc implements Serializable {
      */
     @Override
     public String getType() {
-        return "Trader";
+        return TextColor.ANSI_BLUE +  "Trader" + TextColor.ANSI_RESET;
     }
 }
