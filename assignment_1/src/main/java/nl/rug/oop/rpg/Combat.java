@@ -5,8 +5,17 @@ import nl.rug.oop.rpg.npcs.enemies.*;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+/**
+ * Combat class to allow the player to engage in fights with the npcs
+ */
 public class Combat {
 
+    /**
+     * Forces the player to engage into combat with a specific enemy
+     * @param player
+     * @param enemy
+     * @param game
+     */
     public static void engageFight(Player player, Enemy enemy, Game game) {
         int move;
         int damageToEnemy = 0;
@@ -93,11 +102,23 @@ public class Combat {
         }
     }
 
+    /**
+     * The player loses the fight and the game ends
+     * @param player
+     * @param enemy
+     * @param game
+     */
     private static void loseFight(Player player, Enemy enemy, Game game){
         System.out.println(TextColor.ANSI_RED + "You have been slain by " + enemy.getName() + "!" + TextColor.ANSI_RESET);
         game.gameOver();
     }
 
+    /**
+     * The player has won the fight, the dead npc is removed from the room, the player gets increased gold and health
+     * @param player
+     * @param enemy
+     * @param game
+     */
     private static void winFight(Player player, Enemy enemy, Game game) {
         System.out.println(TextColor.ANSI_YELLOW + "You have slain " + enemy.getName() + "!\nYou earned " + enemy.getGoldValue() + " gold." + TextColor.ANSI_RESET);
         enemy.die(game);

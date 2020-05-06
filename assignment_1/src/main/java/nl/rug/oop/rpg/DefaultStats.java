@@ -1,5 +1,8 @@
 package nl.rug.oop.rpg;
 
+/**
+ * Class file that stores all of the default values of npcs, items, and damage
+ */
 public class DefaultStats {
     // COMBAT
     public static final int BURN_DAMAGE = 3;

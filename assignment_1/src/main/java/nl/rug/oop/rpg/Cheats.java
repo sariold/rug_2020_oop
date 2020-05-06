@@ -1,7 +1,16 @@
 package nl.rug.oop.rpg;
 
+/**
+ * Class to check if the user has inputted a specific name that might be a cheat code
+ */
 public class Cheats {
 
+    /**
+     * Checks if the player name is a specific name which means it might be a cheat code, thus giving the player
+     * increases health or stats or gold
+     * @param player
+     * @param game
+     */
     public static void checkCheatCodes(Player player, Game game) {
         if (player.getName().equals("John Wick")) {
             System.out.println(TextColor.ANSI_YELLOW + "Check your stats Mr. Wick." + TextColor.ANSI_RESET);
