@@ -8,6 +8,9 @@ import nl.rug.oop.rpg.objects.Room;
 
 import java.io.Serializable;
 
+/**
+ * Door class to connect two rooms to each other, allows the player to travel between rooms
+ */
 public class Door extends DungeonObjects implements Interactable, Serializable {
 
     private static final long serialVersionUID = 3L;
@@ -15,12 +18,23 @@ public class Door extends DungeonObjects implements Interactable, Serializable {
     private Room from;
     private Room to;
 
+    /**
+     * Constructor to create a new door object and its connecting rooms
+     * @param description
+     * @param from
+     * @param to
+     */
     public Door(String description, Room from, Room to) {
         super(description);
         this.from = from;
         this.to = to;
     }
 
+    /**
+     * Engage method for a player to interact with a door, the type of door may override the engage method
+     * @param player
+     * @param game
+     */
     public void engage(Player player, Game game) {
         this.interact(player);
         player.getCurrentRoom().inspect();
@@ -32,6 +46,12 @@ public class Door extends DungeonObjects implements Interactable, Serializable {
         else player.setCurrentRoom(this.to);
     }
 
+    /**
+     * Checks if two rooms are equal based off of their room descriptions
+     * @param r1
+     * @param r2
+     * @return
+     */
     public static int equals(Room r1, Room r2) {
         int result = 1;
         if(r1.getDescription().equals(r2.getDescription())) result = 0;
@@ -39,6 +59,10 @@ public class Door extends DungeonObjects implements Interactable, Serializable {
         return result;
     }
 
+    /**
+     * Method to return the room that this door connect TO
+     * @return
+     */
     public Room returnTo() {
         return this.to;
     }

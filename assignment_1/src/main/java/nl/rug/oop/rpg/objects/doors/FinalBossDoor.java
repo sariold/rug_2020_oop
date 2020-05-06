@@ -10,14 +10,29 @@ import nl.rug.oop.rpg.objects.Room;
 
 import java.io.Serializable;
 
+/**
+ * Checks if the player has defeated both minibosses, forces the player to fight a final boss
+ */
 public class FinalBossDoor extends Door implements Serializable {
 
     private static final long serialVersionUID = 5L;
 
+    /**
+     * Creates a finalbossdoor that forces the player to fight a final boss in order to win the game
+     * @param description
+     * @param from
+     * @param to
+     */
     public FinalBossDoor(String description, Room from, Room to) {
         super(DefaultStats.FINAL_BOSS_DOOR, from, to);
     }
 
+    /**
+     * Overrides the Door engage method in order to check if both minibosses have been defeated then forces the player
+     * to fight the final boss
+     * @param player
+     * @param game
+     */
     @Override
     public void engage(Player player, Game game) {
         if(game.getMiniBosses().get(0).isDead() && game.getMiniBosses().get(1).isDead()) {
