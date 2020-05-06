@@ -17,11 +17,20 @@ import org.json.simple.parser.ParseException;
 import java.io.*;
 import java.util.ArrayList;
 
+/**
+ * Creates a json parsing class that allows custom map reading
+ */
 public class JsonReader {
 
     public static void main(String[] args) {
     }
 
+    /**
+     * Parses the rooms.json file and creates the corresponding rooms based off the json file
+     * @param rooms
+     * @throws IOException
+     * @throws ParseException
+     */
     public static void parseRoomJSON(ArrayList<Room> rooms) throws IOException, ParseException {
         JSONParser jsonParser = new JSONParser();
         InputStream is = JsonReader.class.getClassLoader().getResourceAsStream("rooms.json");
@@ -40,6 +49,11 @@ public class JsonReader {
         }
     }
 
+    /**
+     * Creates a json object for each room item in the rooms array and creates custom rooms
+     * @param room
+     * @param rooms
+     */
     public static void parseRooms(JSONObject room, ArrayList<Room> rooms) {
         JSONObject roomObj = (JSONObject) room.get("room");
         String description = roomObj.get("description").toString();
@@ -47,6 +61,12 @@ public class JsonReader {
         rooms.add(newRoom);
     }
 
+    /**
+     * Parses the doors.json file and creates an array of door json objects
+     * @param rooms
+     * @param doors
+     * @throws IOException
+     */
     public static void parseDoorJSON(ArrayList<Room> rooms, ArrayList<Door> doors) throws IOException {
         JSONParser jsonParser = new JSONParser();
         InputStream is = JsonReader.class.getClassLoader().getResourceAsStream("doors.json");
@@ -65,6 +85,12 @@ public class JsonReader {
         }
     }
 
+    /**
+     * Transforms each door json object into a type of door and sets up the connecting rooms
+     * @param door
+     * @param rooms
+     * @param doors
+     */
     public static void parseDoors(JSONObject door, ArrayList<Room> rooms, ArrayList<Door> doors) {
         JSONObject doorObj = (JSONObject) door.get("door");
         String description = doorObj.get("description").toString();
@@ -93,6 +119,12 @@ public class JsonReader {
         }
     }
 
+    /**
+     * Parses the connections.json file and creates connection json objects
+     * @param rooms
+     * @param doors
+     * @throws IOException
+     */
     public static void parseConnectionJSON(ArrayList<Room> rooms, ArrayList<Door> doors) throws IOException {
         JSONParser jsonParser = new JSONParser();
         InputStream is = JsonReader.class.getClassLoader().getResourceAsStream("connections.json");
@@ -111,6 +143,12 @@ public class JsonReader {
         }
     }
 
+    /**
+     * Parses each connection json object and adds the doors to the room arraylist of doors
+     * @param connection
+     * @param rooms
+     * @param doors
+     */
     public static void parseConnections(JSONObject connection, ArrayList<Room> rooms, ArrayList<Door> doors) {
         JSONObject connectionObj = (JSONObject) connection.get("room");
         String roomName = connectionObj.get("name").toString();
@@ -121,6 +159,12 @@ public class JsonReader {
         });
     }
 
+    /**
+     * Parses the npcs.json file and creates an array of npc json objects
+     * @param rooms
+     * @param file
+     * @throws IOException
+     */
     public static void parseNPCJSON(ArrayList<Room> rooms, String file) throws IOException {
         JSONParser jsonParser = new JSONParser();
         InputStream is = JsonReader.class.getClassLoader().getResourceAsStream(file);
@@ -139,6 +183,11 @@ public class JsonReader {
         }
     }
 
+    /**
+     * Parses each npc json object and creates a specific type of npc, either an enemy or a friendly npc
+     * @param npc
+     * @param rooms
+     */
     public static void parseNPCs(JSONObject npc, ArrayList<Room> rooms) {
         JSONObject npcObj = (JSONObject) npc.get("npc");
         String type = npcObj.get("type").toString();
@@ -200,6 +249,11 @@ public class JsonReader {
         }
     }
 
+    /**
+     * Parses the items.json file and creates an arraylist of json item objects
+     * @param rooms
+     * @throws IOException
+     */
     public static void parseItemJSON(ArrayList<Room> rooms) throws IOException {
         JSONParser jsonParser = new JSONParser();
         InputStream is = JsonReader.class.getClassLoader().getResourceAsStream("items.json");
@@ -218,6 +272,11 @@ public class JsonReader {
         }
     }
 
+    /**
+     * Parses the item jsob object and creates a specific type of dungeon object item
+     * @param item
+     * @param rooms
+     */
     public static void parseItems(JSONObject item, ArrayList<Room> rooms) {
         JSONObject itemObj = (JSONObject) item.get("item");
         String type = itemObj.get("type").toString();

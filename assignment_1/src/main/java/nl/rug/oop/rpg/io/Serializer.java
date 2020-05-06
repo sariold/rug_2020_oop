@@ -6,8 +6,16 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Serializer class that allows saving and loading the game object
+ */
 public class Serializer {
 
+    /**
+     * Saves the game to a specific file, given by the user
+     * @param game
+     * @param fileName
+     */
     public static void saveGame(Game game, String fileName) {
         File saveDirectory = new File("savedgames");
         saveDirectory.mkdir();
@@ -23,6 +31,13 @@ public class Serializer {
         }
     }
 
+    /**
+     * Loads the game from a specific file given by the user
+     * @param fileName
+     * @return
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
     public static Game loadGame(String fileName) throws IOException, ClassNotFoundException {
         File saveDirectory = new File("savedgames");
         saveDirectory.mkdir();

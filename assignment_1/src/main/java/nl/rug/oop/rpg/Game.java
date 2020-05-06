@@ -18,6 +18,9 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+/**
+ * Game object which creates the rpg map and all of the npcs and items inside it
+ */
 public class Game implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -31,6 +34,10 @@ public class Game implements Serializable {
     private int iceMagic;
     private int fireMagic;
 
+    /**
+     * Creates a new game and loads in the default map, items, and npcs
+     * @param name
+     */
     public Game(String name) {
         this.totalRooms = new ArrayList<Room>();
         this.totalDoors = new ArrayList<Door>();
@@ -54,10 +61,13 @@ public class Game implements Serializable {
             jsonReader.parseNPCJSON(totalRooms, "traders.json");
             jsonReader.parseItemJSON(totalRooms);
         } catch (FileNotFoundException e) {
+            System.out.println("The default map files could not be found!");
             e.printStackTrace();
         } catch (ParseException e) {
+            System.out.println("The default map files could not be parsed correctly!");
             e.printStackTrace();
         } catch (IOException e) {
+            System.out.println("The default map files are not formatted correctly!");
             e.printStackTrace();
         }
         this.player = new Player(name, this.totalRooms.get(0), DefaultStats.PLAYER_HIT_POINTS, DefaultStats.PLAYER_ATTACK_POINTS, DefaultStats.PLAYER_HIT_POINTS);
@@ -80,34 +90,65 @@ public class Game implements Serializable {
         Cheats.checkCheatCodes(player, this);
     }
 
+    /**
+     * Returns an arraylist of possible moves for the player
+     * @return
+     */
     public ArrayList<String> getPossibleMoves() {
         return new ArrayList<String>(possibleMoves);
     }
 
+    /**
+     * Returns an arraylist of possible fight moves for the player
+     * @return
+     */
     public ArrayList<String> getFightMoves() {
         return new ArrayList<String>(fightMoves);
     }
 
+    /**
+     * Returns the player of this game object
+     * @return
+     */
     public Player getPlayer() {
         return player;
     }
 
+    /**
+     * Returns if the player has fight magic
+     * @return
+     */
     public int getFireMagic() {
         return fireMagic;
     }
 
+    /**
+     * Returns if the player has ice magic
+     * @return
+     */
     public int getIceMagic() {
         return iceMagic;
     }
 
+    /**
+     * Returns the boolean determining if the player is dead or not
+     * @return
+     */
     public boolean notOver() {
         return !player.isDead();
     }
 
+    /**
+     * Returns the minibosses arraylist of the current game
+     * @return
+     */
     public ArrayList<MiniBoss> getMiniBosses() {
         return this.miniBosses;
     }
 
+    /**
+     * Allows the player to use their inventory and the items they have collected, calls helper methods
+     */
     public void useInventory() {
         Scanner scanner = new Scanner(System.in);
         int move;
@@ -129,6 +170,11 @@ public class Game implements Serializable {
         } else GUI.invalidItemMessage();
     }
 
+    /**
+     * Allows the player to interact with a door, depending on the door, this might mean they will engage in combat
+     * or lose damage
+     * @param currentMove
+     */
     public void interactDoor(int currentMove) {
         ArrayList<Door> doors = this.player.getCurrentRoom().getDoors();
         if (currentMove < doors.size() && currentMove > -2) {
@@ -141,6 +187,10 @@ public class Game implements Serializable {
         }
     }
 
+    /**
+     * Allows the player to interact with items and collect them
+     * @param currentMove
+     */
     public void interactItem(int currentMove) {
         ArrayList<Collectable> items = this.player.getCurrentRoom().getItems();
         if (currentMove < items.size() && currentMove > -2) {
@@ -154,6 +204,10 @@ public class Game implements Serializable {
         }
     }
 
+    /**
+     * Allows the player to interact with npcs, might engage them in combat or allow them to trade/get healed
+     * @param currentMove
+     */
     public void interactNPC(int currentMove) {
         ArrayList<DungeonNpc> npcs = this.player.getCurrentRoom().getNPCs();
         if (currentMove < npcs.size() && currentMove > -2) {
@@ -166,16 +220,27 @@ public class Game implements Serializable {
         }
     }
 
+    /**
+     * The player has won the game, the game ends and the player is congratulated
+     */
     public void winGame() {
         GUI.winGameMessage();
         System.exit(0);
     }
 
+    /**
+     * The player has died, the game is over and will be exited
+     */
     public void gameOver() {
         GUI.gameOverMessage();
         System.exit(0);
     }
 
+    /**
+     * Allows the player to trade with an npc if they have enough gold
+     * @param player
+     * @param trader
+     */
     public void tradeWith(Player player, Trader trader) {
         Scanner scanner = new Scanner(System.in);
         int move;
@@ -197,6 +262,11 @@ public class Game implements Serializable {
         } else GUI.invalidInputMessage();
     }
 
+    /**
+     * Allows the player to be healed if they have enough gold
+     * @param player
+     * @param healer
+     */
     public void healPlayer(Player player, Healer healer) {
         Scanner scanner = new Scanner(System.in);
         int move;
@@ -215,6 +285,9 @@ public class Game implements Serializable {
         } else GUI.invalidInputMessage();
     }
 
+    /**
+     * Gives the player ice magic once they have defeated the blue wizard
+     */
     public void addIceMagic() {
         for (String move: fightMoves) { if (move.equals("Ice Magic")) return; }
         System.out.println(TextColor.ANSI_YELLOW + "You gained ice magic and can now freeze enemies in combat!" + TextColor.ANSI_RESET);
@@ -222,6 +295,9 @@ public class Game implements Serializable {
         fightMoves.add("Ice Magic");
     }
 
+    /**
+     * Gives the player fire magic once they have defeated the red wizard
+     */
     public void addFireMagic() {
         for (String move: fightMoves) { if (move.equals("Fire Magic")) return; }
         System.out.println(TextColor.ANSI_YELLOW + "You gained fire magic and can now burn enemies in combat!" + TextColor.ANSI_RESET);

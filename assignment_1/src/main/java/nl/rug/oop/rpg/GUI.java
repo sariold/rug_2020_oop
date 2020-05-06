@@ -9,6 +9,9 @@ import nl.rug.oop.rpg.objects.doors.Door;
 
 import java.util.ArrayList;
 
+/**
+ * Presents the user with a text based user interface
+ */
 public class GUI {
 
     /**

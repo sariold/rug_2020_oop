@@ -8,8 +8,14 @@ import java.util.InputMismatchException;
 import java.util.Properties;
 import java.util.Scanner;
 
+/**
+ * Creates a config class that allows the user to change the java properties of a game
+ */
 public class Config {
 
+    /**
+     * Allows the user to set a custom config for custom java properties
+     */
     public static void setConfig() {
         Properties properties = new Properties();
         Scanner scanner = new Scanner(System.in);
@@ -99,6 +105,10 @@ public class Config {
         }
     }
 
+    /**
+     * Allows the user to load from a custom config file with custom java properties
+     * @param game
+     */
     public static void loadConfig(Game game) {
         File configDirectory = new File("config");
         configDirectory.mkdir();
