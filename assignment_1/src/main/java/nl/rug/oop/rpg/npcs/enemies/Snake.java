@@ -4,6 +4,9 @@ import nl.rug.oop.rpg.DefaultStats;
 
 import java.io.Serializable;
 
+/**
+ * Snake extends abstract class Enemy
+ */
 public class Snake extends Enemy implements Serializable {
 
     private static final long serialVersionUID = 29L;

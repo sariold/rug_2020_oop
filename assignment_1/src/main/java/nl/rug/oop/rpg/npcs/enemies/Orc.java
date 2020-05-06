@@ -4,6 +4,9 @@ import nl.rug.oop.rpg.DefaultStats;
 
 import java.io.Serializable;
 
+/**
+ * Orc extends abstract class Enemy
+ */
 public class Orc extends Enemy implements Serializable {
 
     private static final long serialVersionUID = 25L;

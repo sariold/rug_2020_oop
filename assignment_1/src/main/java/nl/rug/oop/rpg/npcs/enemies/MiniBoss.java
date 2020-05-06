@@ -5,6 +5,9 @@ import nl.rug.oop.rpg.objects.doors.MiniBossDoor;
 
 import java.io.Serializable;
 
+/**
+ * abstract class MiniBoss extends abstract class Enemy must be defeated to fight the boss of the game
+ */
 public abstract class MiniBoss extends Enemy implements Serializable {
 
     private static final long serialVersionUID = 24L;

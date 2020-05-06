@@ -13,14 +13,15 @@ public abstract class DungeonNpc implements Inspectable, Interactable, Serializa
     private static final long serialVersionUID = 18L;
 
     private String description;
-
+    private String name;
     protected boolean engaged;
 
-    public boolean hasBeenEngaged() { return this.engaged; }
-
-    public DungeonNpc(String description) {
+    public DungeonNpc(String description, String name) {
+        this.name = name;
         this.description = description;
     }
+
+    public boolean hasBeenEngaged() { return this.engaged; }
 
     public String getDescription() {
         return description;
@@ -39,6 +40,8 @@ public abstract class DungeonNpc implements Inspectable, Interactable, Serializa
     }
 
     public void engage(Player player, Game game){}
+
+    public String getName() { return this.name;}
 
     @Override
     public void inspect() {

@@ -4,6 +4,9 @@ import nl.rug.oop.rpg.DefaultStats;
 
 import java.io.Serializable;
 
+/**
+ * Knight extends abstract class Enemy
+ */
 public class Knight extends Enemy implements Serializable {
 
     private static final long serialVersionUID = 23L;

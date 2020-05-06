@@ -7,6 +7,9 @@ import nl.rug.oop.rpg.TextColor;
 import java.io.Serializable;
 import java.util.Random;
 
+/**
+ * Gambler extends abstract class Trader increases either health attack or nothing for gold
+ */
 public class Gambler extends Trader implements Serializable {
 
     private static final long serialVersionUID = 20L;

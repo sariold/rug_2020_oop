@@ -6,6 +6,9 @@ import nl.rug.oop.rpg.npcs.DungeonNpc;
 
 import java.io.Serializable;
 
+/**
+ * abstract class Trader extends abstract class DungeonNpc increases stats or item power of a player in exchange for gold
+ */
 public abstract class Trader extends DungeonNpc implements Serializable {
 
     private static final long serialVersionUID = 33L;
@@ -14,34 +17,42 @@ public abstract class Trader extends DungeonNpc implements Serializable {
     private int power;
     private int price;
 
+    /**
+     * Constructor for a trader
+     * @param description
+     * @param name
+     * @param power
+     * @param price
+     */
     public Trader(String description, String name, int power, int price) {
-        super(description);
+        super(description, name);
         this.name = name;
         this.power = power;
         this.price = price;
         this.engaged = false;
     }
 
-    public Trader(String description) {
-        this(description, "a Trader", 1, 1);
-    }
-
+    /**
+     * returns this traders power
+     * @return power
+     */
     public int getPower() {
         return this.power;
     }
 
+    /**
+     * returns this traders price
+     * @return price
+     */
     public int getPrice() {
         return price;
     }
 
-    public String getName() {
-        return this.name;
-    }
-
-    public boolean getTradeStatus() {
-        return this.engaged;
-    }
-
+    /**
+     * remove as much gold from the player as the price of this trader
+     * print that the player has traded with this trader
+     * @param player
+     */
     public void trade(Player player) {
         player.decreaseGold(this.price);
         this.engaged = true;
@@ -49,28 +60,40 @@ public abstract class Trader extends DungeonNpc implements Serializable {
         return;
     }
 
+    /**
+     * return the trade dialog of this trader
+     * @return String
+     */
     public String tradeDialog() {
         String toReturn = "I will trade for " + this.price + " Gold.";
         return toReturn;
     }
 
+    /**
+     * call this traders trade method
+     * @param player
+     */
     @Override
     public void interact(Player player) {
         trade(player);
     }
 
+    /**
+     * calls the tradeWith method from the
+     * @param player
+     * @param game
+     */
     @Override
     public void engage(Player player, Game game) {
         game.tradeWith(player, this);
     }
 
+    /**
+     * returns the type of this trader
+     * @return "Trader"
+     */
     @Override
     public String getType() {
         return "Trader";
-    }
-
-    @Override
-    public String toString() {
-        return this.name;
     }
 }

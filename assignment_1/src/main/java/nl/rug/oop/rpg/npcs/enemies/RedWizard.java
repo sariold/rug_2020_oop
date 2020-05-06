@@ -9,6 +9,9 @@ import nl.rug.oop.rpg.Player;
 import java.io.Serializable;
 import java.util.Random;
 
+/**
+ * RedWizard extends abstract class MiniBoss
+ */
 public class RedWizard extends MiniBoss implements Serializable {
 
     private static final long serialVersionUID = 28L;

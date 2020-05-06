@@ -4,6 +4,9 @@ import nl.rug.oop.rpg.Game;
 
 import java.io.Serializable;
 
+/**
+ * abstract class Boss defeating this enemy wins the game
+ */
 public abstract class Boss extends Enemy implements Serializable {
 
     private static final long serialVersionUID = 16L;

@@ -7,6 +7,9 @@ import nl.rug.oop.rpg.Player;
 import java.io.Serializable;
 import java.util.Random;
 
+/**
+ * Dragon extends abstract class Boss
+ */
 public class Dragon extends Boss implements Serializable {
 
     private static final long serialVersionUID = 17L;

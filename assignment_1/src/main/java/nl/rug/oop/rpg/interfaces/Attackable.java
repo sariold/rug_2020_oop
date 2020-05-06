@@ -1,5 +1,8 @@
 package nl.rug.oop.rpg.interfaces;
 
+/**
+ * Interface to make an object attackable it can enter combat
+ */
 public interface Attackable {
 
     /**

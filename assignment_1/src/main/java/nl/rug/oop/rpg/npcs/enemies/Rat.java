@@ -4,6 +4,9 @@ import nl.rug.oop.rpg.DefaultStats;
 
 import java.io.Serializable;
 
+/**
+ * Rat extends abstract class Enemy
+ */
 public class Rat extends Enemy implements Serializable {
 
     private static final long serialVersionUID = 27L;

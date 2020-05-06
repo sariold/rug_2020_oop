@@ -10,14 +10,27 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+/**
+ * Enchanter extends abstract class Trader increases the power of an enchantable item for gold
+ */
 public class Enchanter extends Trader{
 
     private static final long serialVersionUID = 35L;
 
+    /**
+     * Constructor for an enchanter
+     * power and price are set to default values
+     * @param name
+     */
     public Enchanter(String name) {
         super("I will enchant one of your items for a little price!", name, DefaultStats.ENCHANTER_POWER, DefaultStats.ENCHANTER_PRICE);
     }
 
+    /**
+     * trading with an enchanter lists all enchantable items in the player inventory
+     * the chosen item will increase in power
+     * @param player
+     */
     @Override
     public void trade(Player player) {
         int currentMove;
@@ -48,11 +61,19 @@ public class Enchanter extends Trader{
         super.trade(player);
     }
 
+    /**
+     * returns the species of this trader
+     * @return "Enchanter"
+     */
     @Override
     public String getSpecies() {
         return "Enchanter";
     }
 
+    /**
+     * return the trade dialog for an enchanter
+     * @return String
+     */
     @Override
     public String tradeDialog() {
         String toReturn = "I will increase the power of one of your items by " + this.getPower() + " for " + this.getPrice() + " gold!";

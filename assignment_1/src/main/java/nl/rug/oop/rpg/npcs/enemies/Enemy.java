@@ -8,25 +8,19 @@ import java.io.Serializable;
 import java.util.Random;
 import java.util.concurrent.ConcurrentMap;
 
+/**
+ * abstract class Enemy extends abstract class DungeonNpc implements Attackable and can be fought by a player
+ */
 public abstract class Enemy extends DungeonNpc implements Attackable, Serializable {
 
     private static final long serialVersionUID = 19L;
 
-    private String name;
     private int hitPoints;
     private int maxHitPoints;
     private int attackPoints;
     private int goldValue;
     private boolean burned;
     private boolean frozen;
-
-    /**
-     * Constructor for an enemy with only a description
-     * @param description
-     */
-    public Enemy(String description) {
-        this(description, "an Enemy", 1, 1, 1);
-    }
 
     /**
      * Constructor for an enemy
@@ -37,13 +31,20 @@ public abstract class Enemy extends DungeonNpc implements Attackable, Serializab
      * @param goldValue
      */
     public Enemy(String description, String name, int hitPoints, int attackPoints, int goldValue) {
-        super(description);
-        this.name = name;
+        super(description, name);
         this.hitPoints = hitPoints;
         this.maxHitPoints = hitPoints;
         this.attackPoints = attackPoints;
         this.goldValue = goldValue;
         this.engaged = false;
+    }
+
+    /**
+     * Constructor for an enemy with only a description
+     * @param description
+     */
+    public Enemy(String description) {
+        this(description, "an Enemy", 1, 1, 1);
     }
 
     /**
@@ -96,14 +97,6 @@ public abstract class Enemy extends DungeonNpc implements Attackable, Serializab
      */
     public int getGoldValue() {
         return this.goldValue;
-    }
-
-    /**
-     * returns the name of this enemy
-     * @return name
-     */
-    public String getName() {
-        return this.name;
     }
 
     /**
@@ -205,15 +198,6 @@ public abstract class Enemy extends DungeonNpc implements Attackable, Serializab
     @Override
     public boolean isDead() {
         return this.hitPoints <= 0;
-    }
-
-    /**
-     * returns the name of this enemy
-     * @return name
-     */
-    @Override
-    public String toString() {
-        return this.getName();
     }
 
     /**

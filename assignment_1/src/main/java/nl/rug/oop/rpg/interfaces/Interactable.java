@@ -2,6 +2,9 @@ package nl.rug.oop.rpg.interfaces;
 
 import nl.rug.oop.rpg.Player;
 
+/**
+ * interface to make object interactable
+ */
 public interface Interactable {
 
     /**

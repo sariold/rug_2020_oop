@@ -9,6 +9,9 @@ import nl.rug.oop.rpg.Player;
 import java.io.Serializable;
 import java.util.Random;
 
+/**
+ * BlueWizard extends abstract class MiniBoss
+ */
 public class BlueWizard extends MiniBoss implements Serializable {
 
     private static final long serialVersionUID = 15L;

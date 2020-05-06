@@ -4,6 +4,9 @@ import nl.rug.oop.rpg.DefaultStats;
 
 import java.io.Serializable;
 
+/**
+ * Spider extends abstract class Enemy
+ */
 public class Spider extends Enemy implements Serializable {
 
     private static final long serialVersionUID = 30L;
