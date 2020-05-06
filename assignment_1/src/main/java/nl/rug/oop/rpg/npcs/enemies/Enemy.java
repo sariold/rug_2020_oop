@@ -20,10 +20,22 @@ public abstract class Enemy extends DungeonNpc implements Attackable, Serializab
     private boolean burned;
     private boolean frozen;
 
+    /**
+     * Constructor for an enemy with only a description
+     * @param description
+     */
     public Enemy(String description) {
         this(description, "an Enemy", 1, 1, 1);
     }
 
+    /**
+     * Constructor for an enemy
+     * @param description
+     * @param name
+     * @param hitPoints
+     * @param attackPoints
+     * @param goldValue
+     */
     public Enemy(String description, String name, int hitPoints, int attackPoints, int goldValue) {
         super(description);
         this.name = name;
@@ -34,52 +46,97 @@ public abstract class Enemy extends DungeonNpc implements Attackable, Serializab
         this.engaged = false;
     }
 
+    /**
+     * returns whether the enemy is burned
+     * @return burned
+     */
     public boolean isBurned() {
         return burned;
     }
 
+    /**
+     * returns whether the enemy is frozen
+     * @return frozen
+     */
     public boolean isFrozen() {
         return frozen;
     }
 
+    /**
+     * burns this enemy
+     */
     public void burn(){
         this.burned = true;
     }
 
+    /**
+     * unburns this enemy
+     */
     public void removeBurn() {
         this.burned = false;
     }
 
+    /**
+     * freezes this enemy
+     */
     public void freeze() {
         this.frozen = true;
     }
 
+    /**
+     * unfreezes this enemy
+     */
     public void removeFreeze() {
         this.frozen = false;
     }
 
+    /**
+     * returns the amount of gold gained by defeating this enemy
+     * @return goldValue
+     */
     public int getGoldValue() {
         return this.goldValue;
     }
 
+    /**
+     * returns the name of this enemy
+     * @return name
+     */
     public String getName() {
         return this.name;
     }
 
+    /**
+     * returns the hit points of this enemy
+     * @return hitPoints
+     */
     public int getHitPoints() {
         return hitPoints;
     }
 
+    /**
+     * returns the maximum hit points of this enemy
+     * @return maxHitPoints
+     */
     public int getMaxHitPoints() { return maxHitPoints; }
 
-    public int getAttackPoints() {
-        return attackPoints;
-    }
+    /**
+     * returns the attack points of this enemy
+     * @return attackPoints
+     */
+    public int getAttackPoints() { return attackPoints; }
 
-    public void die(Game game) {
-        this.engaged = true;
-    }
+    /**
+     * sets the engaged value of this enemy to true
+     * @param game
+     */
+    public void die(Game game) { this.engaged = true; }
 
+    /**
+     * checks status impairments of this enemy
+     * if the enemy is frozen it has a chance of being unfrozen otherwise it will skip a turn
+     * if the enemy is burnt it has a chance of being unburnt otherwise it will take damage
+     */
     @Override
     public void checkStatusImpairments() {
         Random r = new Random();
@@ -105,6 +162,10 @@ public abstract class Enemy extends DungeonNpc implements Attackable, Serializab
         }
     }
 
+    /**
+     * deals as much damage to the attacked object as this enemy has attack power
+     * @param attacked
+     */
     @Override
     public void attack(Attackable attacked) {
         System.out.println(TextColor.ANSI_RED + "You are attacked by " + this.getName() + TextColor.ANSI_RESET);
@@ -119,36 +180,65 @@ public abstract class Enemy extends DungeonNpc implements Attackable, Serializab
         System.out.println(TextColor.ANSI_RED + "You are at " +  attacked.getHitPoints() + " health!" + TextColor.ANSI_RESET);
     }
 
+    /**
+     * reduce the hit points of this enemy by the given value
+     * @param value
+     */
     @Override
     public void reduceHitPoints(int value) {
         this.hitPoints -= value;
     }
 
+    /**
+     * increase the hit points of this enemy by the given value
+     * @param value
+     */
     @Override
     public void increaseHitPoints(int value) {
         this.hitPoints += value;
     }
 
+    /**
+     * returns whether the hit points of this enemy are above 0
+     * @return true if hit points are 0 or less
+     */
     @Override
     public boolean isDead() {
         return this.hitPoints <= 0;
     }
 
+    /**
+     * returns the name of this enemy
+     * @return name
+     */
     @Override
     public String toString() {
         return this.getName();
     }
 
+    /**
+     * attacks a player
+     * @param player
+     */
     @Override
     public void interact(Player player) {
         attack(player);
     }
 
+    /**
+     * engages a fight with a player
+     * @param player
+     * @param game
+     */
     @Override
     public void engage(Player player, Game game) {
         Combat.engageFight(player, this, game);
     }
 
+    /**
+     * returns the type of npc this is
+     * @return "Enemy"
+     */
     @Override
     public String getType() {
         return "Enemy";
