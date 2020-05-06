@@ -14,6 +14,10 @@ public abstract class DungeonNpc implements Inspectable, Interactable, Serializa
 
     private String description;
 
+    protected boolean engaged;
+
+    public boolean hasBeenEngaged() { return this.engaged; }
+
     public DungeonNpc(String description) {
         this.description = description;
     }

@@ -1,8 +1,15 @@
 package nl.rug.oop.rpg;
 
 import nl.rug.oop.rpg.interfaces.Collectable;
+import nl.rug.oop.rpg.io.JsonReader;
 import nl.rug.oop.rpg.npcs.*;
+import nl.rug.oop.rpg.npcs.enemies.BlueWizard;
+import nl.rug.oop.rpg.npcs.enemies.MiniBoss;
+import nl.rug.oop.rpg.npcs.enemies.RedWizard;
+import nl.rug.oop.rpg.npcs.healer.Healer;
+import nl.rug.oop.rpg.npcs.trader.Trader;
 import nl.rug.oop.rpg.objects.*;
+import nl.rug.oop.rpg.objects.doors.Door;
 import org.json.simple.parser.ParseException;
 import java.io.FileNotFoundException;
 import java.io.IOException;

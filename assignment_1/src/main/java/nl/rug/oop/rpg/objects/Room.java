@@ -2,9 +2,11 @@ package nl.rug.oop.rpg.objects;
 
 import nl.rug.oop.rpg.interfaces.Collectable;
 import nl.rug.oop.rpg.npcs.DungeonNpc;
-import nl.rug.oop.rpg.npcs.Enemy;
-import nl.rug.oop.rpg.npcs.Healer;
-import nl.rug.oop.rpg.npcs.Trader;
+import nl.rug.oop.rpg.npcs.enemies.Enemy;
+import nl.rug.oop.rpg.npcs.healer.Healer;
+import nl.rug.oop.rpg.npcs.trader.Trader;
+import nl.rug.oop.rpg.objects.doors.Door;
+import nl.rug.oop.rpg.objects.items.Item;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -57,9 +59,7 @@ public class Room extends DungeonObjects implements Serializable {
     public void removeDeadNPC() {
         for (int i = this.NPCs.size() - 1; i >= 0; i--) {
             DungeonNpc currNPC = this.NPCs.get(i);
-            if (currNPC instanceof Enemy && ((Enemy) currNPC).isDead()) this.NPCs.remove(i);
-            if (currNPC instanceof Healer && ((Healer) currNPC).getHealStatus()) this.NPCs.remove(i);
-            if (currNPC instanceof Trader && ((Trader) currNPC).getTradeStatus()) this.NPCs.remove(i);
+            if (currNPC.hasBeenEngaged()) this.NPCs.remove(i);
         }
     }
 

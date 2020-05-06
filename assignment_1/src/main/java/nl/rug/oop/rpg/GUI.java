@@ -2,10 +2,10 @@ package nl.rug.oop.rpg;
 
 import nl.rug.oop.rpg.interfaces.Collectable;
 import nl.rug.oop.rpg.npcs.DungeonNpc;
-import nl.rug.oop.rpg.npcs.Enemy;
-import nl.rug.oop.rpg.npcs.Healer;
-import nl.rug.oop.rpg.npcs.Trader;
-import nl.rug.oop.rpg.objects.Door;
+import nl.rug.oop.rpg.npcs.enemies.Enemy;
+import nl.rug.oop.rpg.npcs.healer.Healer;
+import nl.rug.oop.rpg.npcs.trader.Trader;
+import nl.rug.oop.rpg.objects.doors.Door;
 
 import java.util.ArrayList;
 

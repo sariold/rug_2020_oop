@@ -1,9 +1,8 @@
 package nl.rug.oop.rpg;
 
-import nl.rug.oop.rpg.npcs.*;
+import nl.rug.oop.rpg.npcs.enemies.*;
 
 import java.util.InputMismatchException;
-import java.util.Random;
 import java.util.Scanner;
 
 public class Combat {
@@ -101,15 +100,7 @@ public class Combat {
 
     private static void winFight(Player player, Enemy enemy, Game game) {
         System.out.println(TextColor.ANSI_YELLOW + "You have slain " + enemy.getName() + "!\nYou earned " + enemy.getGoldValue() + " gold." + TextColor.ANSI_RESET);
-        if (enemy instanceof BlueWizard) {
-            System.out.println(TextColor.ANSI_YELLOW + "Congratulations you have defeated a blue wizard!" + TextColor.ANSI_RESET);
-            game.addIceMagic();
-        }
-        if (enemy instanceof RedWizard) {
-            System.out.println(TextColor.ANSI_YELLOW + "Congratulations you have defeated a red wizard!" + TextColor.ANSI_RESET);
-            game.addFireMagic();
-        }
-        if (enemy instanceof Boss) game.winGame();
+        enemy.die(game);
         player.getCurrentRoom().removeDeadNPC();
         player.increaseGold(enemy.getGoldValue());
         player.increaseHitPoints(enemy.getAttackPoints());
