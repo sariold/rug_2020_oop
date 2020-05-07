@@ -30,7 +30,7 @@ public class FileHandler {
             minusOne = false;
         }
         else if(!fileName.equals("-1fileException")) {
-            if(type.equals("saves")) StartGame.initOldGame(fileName, "saves");
+            if(type.equals("saves")) StartGame.initOldGame(fileName, "saves", fileName);
             else StartGame.initNewGame(newFileName, true, fileName);
             minusOne = false;
         }

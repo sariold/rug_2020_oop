@@ -91,12 +91,14 @@ public class StartGame {
     /**
      * Initialize from a saved game file, the game object becomes a loaded game object
      * @param fileName File name
+     * @param type Type
+     * @param oldFileName Old file name
      */
-    public static void initOldGame(String fileName, String type) {
+    public static void initOldGame(String fileName, String type, String oldFileName) {
         Game game;
         try {
             game = Serializer.loadGame(fileName);
-            GameOptions.gameStart(game, fileName);
+            GameOptions.gameStart(game, oldFileName);
         } catch (IOException e) {
             System.out.println("Could not load from the file!");
             if(type.equals("saves")) startGameOption();

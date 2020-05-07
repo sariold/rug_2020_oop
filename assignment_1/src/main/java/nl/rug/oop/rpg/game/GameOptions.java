@@ -94,7 +94,7 @@ public class GameOptions {
                     Serializer.saveGame(game, "quicksave");
                     break;
                 case 7:
-                    StartGame.initOldGame("quicksave", "quickload");
+                    StartGame.initOldGame("quicksave", "quickload", fileName);
                     break;
                 case 8:
                     StartGame.gameSave(game, fileName);
