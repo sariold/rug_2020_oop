@@ -39,6 +39,7 @@ public class MiniBossDoor extends Door implements Serializable {
      */
     @Override
     public void engage(Player player, Game game) {
+            this.interact(player);
             if (this.isDefeated()) return;
             String type = this.getWizardColor();
             if(type == "Blue") {
