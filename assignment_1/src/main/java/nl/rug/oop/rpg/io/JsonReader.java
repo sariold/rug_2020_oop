@@ -45,7 +45,7 @@ public class JsonReader {
             JSONArray roomArray = (JSONArray) roomJSON;
             roomArray.forEach(room -> parseRooms((JSONObject) room, rooms));
         } catch (ParseException e) {
-            e.printStackTrace();
+            System.out.println("Unable to parse json file!");
         }
     }
 
@@ -81,7 +81,7 @@ public class JsonReader {
             JSONArray doorArray = (JSONArray) doorJSON;
             doorArray.forEach(door -> parseDoors((JSONObject) door, rooms, doors));
         } catch (ParseException e) {
-            e.printStackTrace();
+            System.out.println("Unable to parse json file!");
         }
     }
 
@@ -139,7 +139,7 @@ public class JsonReader {
             JSONArray connectionArray = (JSONArray) connectionJSON;
             connectionArray.forEach(connection -> parseConnections((JSONObject) connection, rooms, doors));
         } catch (ParseException e) {
-            e.printStackTrace();
+            System.out.println("Unable to parse json file!");
         }
     }
 
@@ -179,7 +179,7 @@ public class JsonReader {
             JSONArray npcArray = (JSONArray) npcJSON;
             npcArray.forEach(npc -> parseNPCs((JSONObject) npc, rooms));
         } catch (ParseException e) {
-            e.printStackTrace();
+            System.out.println("Unable to parse json file!");
         }
     }
 
@@ -268,7 +268,7 @@ public class JsonReader {
             JSONArray itemArray = (JSONArray) itemJSON;
             itemArray.forEach(item -> parseItems((JSONObject) item, rooms));
         } catch (ParseException e) {
-            e.printStackTrace();
+            System.out.println("Unable to parse json file!");
         }
     }
 

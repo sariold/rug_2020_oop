@@ -64,13 +64,13 @@ public class Game implements Serializable {
             jsonReader.parseItemJSON(totalRooms);
         } catch (FileNotFoundException e) {
             System.out.println("The default map files could not be found!");
-            e.printStackTrace();
+
         } catch (ParseException e) {
             System.out.println("The default map files could not be parsed correctly!");
-            e.printStackTrace();
+
         } catch (IOException e) {
             System.out.println("The default map files are not formatted correctly!");
-            e.printStackTrace();
+
         }
         this.player = new Player(name, this.totalRooms.get(0), DefaultStats.PLAYER_HIT_POINTS,
                 DefaultStats.PLAYER_ATTACK_POINTS, DefaultStats.PLAYER_HIT_POINTS);
