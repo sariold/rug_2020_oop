@@ -27,11 +27,11 @@ public class Combat {
             try {
                 move = scanner.nextInt();
             } catch (InputMismatchException e) {
-                System.out.println("That is not a valid input!");
+                GUI.invalidInputMessage();
                 continue;
             }
             if (move > game.getFightMoves().size()) {
-                System.out.println("That is not a valid input!");
+                GUI.invalidInputMessage();
                 continue;
             }
             if (move == 0){
@@ -186,7 +186,7 @@ public class Combat {
                 move = scanner.nextInt();
                 break;
             } catch (InputMismatchException e) {
-                System.out.println("That is not a valid input!");
+                GUI.invalidInputMessage();
                 continue;
             }
         }
