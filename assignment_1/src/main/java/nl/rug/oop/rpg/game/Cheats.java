@@ -10,8 +10,8 @@ public class Cheats {
     /**
      * Checks if the player name is a specific name which means it might be a cheat code, thus giving the player
      * Increases health or stats or gold
-     * @param player
-     * @param game
+     * @param player Player
+     * @param game Game
      */
     public static void checkCheatCodes(Player player, Game game) {
         if (player.getName().equals("John Wick")) {

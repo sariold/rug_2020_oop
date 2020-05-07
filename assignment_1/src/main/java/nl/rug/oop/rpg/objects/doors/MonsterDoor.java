@@ -16,18 +16,17 @@ public class MonsterDoor extends Door implements Serializable {
 
     /**
      * Creates a monsterdoor that only lets the player enter if they slaughter all enemy npcs in current room
-     * @param description
-     * @param from
-     * @param to
+     * @param from From
+     * @param to To
      */
-    public MonsterDoor(String description, Room from, Room to) {
+    public MonsterDoor(Room from, Room to) {
         super(DefaultStats.MONSTER_DOOR_DESCRIPTION, from, to);
     }
 
     /**
-     * Ovverirdes default interact method because this door has a requirement from the user if
+     * Overrides default interact method because this door has a requirement from the user if
      * they want to pass through
-     * @param player
+     * @param player Player
      */
     @Override
     public void interact(Player player) {

@@ -19,19 +19,18 @@ public class FinalBossDoor extends Door implements Serializable {
 
     /**
      * Creates a finalbossdoor that forces the player to fight a final boss in order to win the game
-     * @param description
-     * @param from
-     * @param to
+     * @param from From
+     * @param to To
      */
-    public FinalBossDoor(String description, Room from, Room to) {
+    public FinalBossDoor(Room from, Room to) {
         super(DefaultStats.FINAL_BOSS_DOOR, from, to);
     }
 
     /**
      * Overrides the Door engage method in order to check if both minibosses have been defeated then forces the player
      * to fight the final boss
-     * @param player
-     * @param game
+     * @param player Player
+     * @param game Game
      */
     @Override
     public void engage(Player player, Game game) {

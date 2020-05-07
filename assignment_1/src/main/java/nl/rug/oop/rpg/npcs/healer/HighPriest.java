@@ -15,7 +15,7 @@ public class HighPriest extends Healer implements Serializable {
     /**
      * Constructor for a HighPriest
      * Heal power is set to a default value
-     * @param name
+     * @param name name
      */
     public HighPriest(String name) {
         super("God Shall bless you!", name, DefaultStats.PRIEST_HEAL_POWER);
@@ -23,7 +23,7 @@ public class HighPriest extends Healer implements Serializable {
 
     /**
      * A high priest heals a player fully
-     * @param player
+     * @param player Player
      */
     @Override
     public void heal(Player player) {

@@ -21,7 +21,7 @@ public class Enchanter extends Trader{
     /**
      * Constructor for an enchanter
      * Power and price are set to default values
-     * @param name
+     * @param name Name
      */
     public Enchanter(String name) {
         super("I will enchant one of your items for a little price!", name, DefaultStats.ENCHANTER_POWER,
@@ -31,7 +31,7 @@ public class Enchanter extends Trader{
     /**
      * Trading with an enchanter lists all enchantable items in the player inventory
      * The chosen item will increase in power
-     * @param player
+     * @param player Player
      */
     @Override
     public void trade(Player player) {
@@ -79,8 +79,7 @@ public class Enchanter extends Trader{
      */
     @Override
     public String tradeDialog() {
-        String toReturn = "I will increase the power of one of your items by " + this.getPower()
+        return "I will increase the power of one of your items by " + this.getPower()
                 + " for " + this.getPrice() + " gold!";
-        return toReturn;
     }
 }

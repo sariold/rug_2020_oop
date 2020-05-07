@@ -16,9 +16,9 @@ public class GUI {
     /**
      * Prints health and healthbar of the player and the current enemy during combat
      * Prints all combat options the player has
-     * @param player
-     * @param enemy
-     * @param game
+     * @param player Player
+     * @param enemy Enemy
+     * @param game Game
      */
     public static void displayCombatInterface(Player player, Enemy enemy, Game game) {
         String playerHealthBar = "";
@@ -50,7 +50,7 @@ public class GUI {
 
     /**
      * Prints all items in the players inventory
-     * @param player
+     * @param player Player
      */
     public static void displayInventory(Player player) {
         if (player.getInventory().size() == 0) {
@@ -66,7 +66,7 @@ public class GUI {
 
     /**
      * Prints all items in the players inventory that can be used in combat
-     * @param player
+     * @param player Player
      */
     public static void displayCombatInventory(Player player) {
         ArrayList<Collectable> combatInventory = InventoryMethods.getCombatInventory(player);
@@ -83,7 +83,7 @@ public class GUI {
 
     /**
      * Print an ArrayList of Collectables as an option menu
-     * @param arrayList
+     * @param arrayList Arraylist
      */
     public static void displayItems(ArrayList<Collectable> arrayList) {
         for (int i = 0; i < arrayList.size(); i++) {
@@ -93,7 +93,7 @@ public class GUI {
 
     /**
      * Prints the players current stats
-     * @param player
+     * @param player Player
      */
     public static void displayStats(Player player) {
         System.out.println("Your Character: " + player.getName());
@@ -106,7 +106,7 @@ public class GUI {
 
     /**
      * Prints the dialog when approaching a trader
-     * @param trader
+     * @param trader Trader
      */
     public static void tradeDialog(Trader trader) {
         System.out.println(trader.getName() + ": " + TextColor.ANSI_PURPLE + trader.tradeDialog()
@@ -116,7 +116,7 @@ public class GUI {
 
     /**
      * Prints the dialog when approaching a healer
-     * @param healer
+     * @param healer Healer
      */
     public static void healDialog(Healer healer) {
         System.out.println(healer.getName() + ":" + TextColor.ANSI_PURPLE + "I can only heal you once, and then "
@@ -125,7 +125,7 @@ public class GUI {
     }
 
     /**
-     * prints a message when using a combat item outside of combat
+     * Prints a message when using a combat item outside of combat
      */
     public static void onlyCombatItemMessage(){ System.out.println(TextColor.ANSI_YELLOW + "This item can only "
             + "be used in combat." + TextColor.ANSI_RESET); }

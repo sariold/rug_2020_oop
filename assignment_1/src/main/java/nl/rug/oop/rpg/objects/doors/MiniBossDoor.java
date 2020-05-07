@@ -14,18 +14,17 @@ public class MiniBossDoor extends Door implements Serializable {
 
     private static final long serialVersionUID = 7L;
 
-    private String wizardColor;
+    private final String wizardColor;
     private boolean defeated;
 
     /**
      * Creates a type of door which forces the player to fight a miniboss if they dare interact with this door
-     * @param description
-     * @param from
-     * @param to
-     * @param wizardColor
-     * @param defeated
+     * @param from From
+     * @param to To
+     * @param wizardColor Wizard color
+     * @param defeated Defeated boolean
      */
-    public MiniBossDoor(String description, Room from, Room to, String wizardColor, boolean defeated) {
+    public MiniBossDoor(Room from, Room to, String wizardColor, boolean defeated) {
         super(DefaultStats.MINI_BOSS_DOOR, from, to);
         this.wizardColor = wizardColor;
         this.defeated = defeated;
@@ -34,8 +33,8 @@ public class MiniBossDoor extends Door implements Serializable {
     /**
      * Overrides the default Door engage method because this door makes you engage in combat with either a red
      * or a blue wizard immediately upon interacting with this door
-     * @param player
-     * @param game
+     * @param player Player
+     * @param game Game
      */
     @Override
     public void engage(Player player, Game game) {
@@ -43,7 +42,6 @@ public class MiniBossDoor extends Door implements Serializable {
             if (this.isDefeated()) return;
             String type = this.getWizardColor();
             if(type.equals("Blue")) {
-                game.getMiniBosses().get(0).setDoor(this);
                 player.getCurrentRoom().addNPC(game.getMiniBosses().get(0));
                 player.getCurrentRoom().getNPCs().get(0).engage(player, game);
                 if(game.getMiniBosses().get(0).isDead()) {
@@ -51,7 +49,6 @@ public class MiniBossDoor extends Door implements Serializable {
                     this.setDescription("This was once a mini boss door, congrats on surviving the battle");
                 }
             } else {
-                game.getMiniBosses().get(1).setDoor(this);
                 player.getCurrentRoom().addNPC(game.getMiniBosses().get(1));
                 player.getCurrentRoom().getNPCs().get(0).engage(player, game);
                 if(game.getMiniBosses().get(1).isDead()) {

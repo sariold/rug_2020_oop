@@ -9,13 +9,13 @@ public interface Collectable {
 
     /**
      * Adds this collectable to the players inventory
-     * @param player
+     * @param player Player
      */
     void collect(Player player);
 
     /**
      * Uses this collectable and removes it from the players inventory
-     * @param player
+     * @param player Player
      */
     void use(Player player);
 

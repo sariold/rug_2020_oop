@@ -15,16 +15,16 @@ public abstract class DungeonNpc implements Inspectable, Interactable, Serializa
 
     private static final long serialVersionUID = 18L;
 
-    private String description;
-    private String name;
+    private final String description;
+    private final String name;
     protected boolean engaged;
     protected int hitPoints;
     protected int attackPoints;
 
     /**
      * Creates a DungeonNPC with a description and a name
-     * @param description
-     * @param name
+     * @param description Description
+     * @param name Name
      */
     public DungeonNpc(String description, String name) {
         this.name = name;
@@ -38,22 +38,6 @@ public abstract class DungeonNpc implements Inspectable, Interactable, Serializa
      * @return Boolean value
      */
     public boolean hasBeenEngaged() { return this.engaged; }
-
-    /**
-     * Get the description of a npc
-     * @return The string description
-     */
-    public String getDescription() {
-        return description;
-    }
-
-    /**
-     * Set the description for a npc
-     * @param description
-     */
-    public void setDescription(String description) {
-        this.description = description;
-    }
 
     /**
      * Return the type of dungeonnpc
@@ -73,8 +57,8 @@ public abstract class DungeonNpc implements Inspectable, Interactable, Serializa
 
     /**
      * Engage method for interacting with npcs
-     * @param player
-     * @param game
+     * @param player Player
+     * @param game Game
      */
     public void engage(Player player, Game game){}
 

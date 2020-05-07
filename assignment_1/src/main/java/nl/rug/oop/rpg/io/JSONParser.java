@@ -14,12 +14,16 @@ import org.json.simple.JSONObject;
 
 import java.util.ArrayList;
 
+/**
+ * Parses JSON objects provided from JSONReader class
+ */
+@SuppressWarnings("unchecked")
 public class JSONParser {
 
     /**
      * Parses the item jsob object and creates a specific type of dungeon object item
-     * @param item
-     * @param rooms
+     * @param item Item
+     * @param rooms Rooms
      */
     public static void parseItems(JSONObject item, ArrayList<Room> rooms) {
         JSONObject itemObj = (JSONObject) item.get("item");
@@ -45,8 +49,8 @@ public class JSONParser {
 
     /**
      * Parses each npc json object and creates a specific type of npc, either an enemy or a friendly npc
-     * @param npc
-     * @param rooms
+     * @param npc Npc
+     * @param rooms Rooms
      */
     public static void parseNPCs(JSONObject npc, ArrayList<Room> rooms) {
         JSONObject npcObj = (JSONObject) npc.get("npc");
@@ -111,24 +115,22 @@ public class JSONParser {
 
     /**
      * Parses each connection json object and adds the doors to the room arraylist of doors
-     * @param connection
-     * @param rooms
-     * @param doors
+     * @param connection Connection
+     * @param rooms Rooms
+     * @param doors Doors
      */
     public static void parseConnections(JSONObject connection, ArrayList<Room> rooms, ArrayList<Door> doors) {
         JSONObject connectionObj = (JSONObject) connection.get("room");
         String roomName = connectionObj.get("name").toString();
         JSONArray doorList = (JSONArray) connectionObj.get("doors");
-        doorList.forEach(door -> {
-            rooms.get(Integer.parseInt(roomName.replace("r", "")))
-                    .addDoor((doors.get(Integer.parseInt(door.toString().replace("d", "")))));
-        });
+        doorList.forEach(door -> rooms.get(Integer.parseInt(roomName.replace("r", "")))
+                .addDoor((doors.get(Integer.parseInt(door.toString().replace("d", ""))))));
     }
 
     /**
      * Creates a json object for each room item in the rooms array and creates custom rooms
-     * @param room
-     * @param rooms
+     * @param room Room
+     * @param rooms Rooms
      */
     public static void parseRooms(JSONObject room, ArrayList<Room> rooms) {
         JSONObject roomObj = (JSONObject) room.get("room");
@@ -139,9 +141,9 @@ public class JSONParser {
 
     /**
      * Transforms each door json object into a type of door and sets up the connecting rooms
-     * @param door
-     * @param rooms
-     * @param doors
+     * @param door Door
+     * @param rooms Rooms
+     * @param doors Doors
      */
     public static void parseDoors(JSONObject door, ArrayList<Room> rooms, ArrayList<Door> doors) {
         JSONObject doorObj = (JSONObject) door.get("door");
@@ -156,19 +158,19 @@ public class JSONParser {
         Room to = rooms.get(Integer.parseInt(doorObj.get("to").toString().replace("r", "")));
         switch (type) {
             case "Monster": {
-                MonsterDoor newDoor = new MonsterDoor(description, from, to);
+                MonsterDoor newDoor = new MonsterDoor(from, to);
                 doors.add(newDoor);
                 break;
             }
             case "MiniBoss": {
                 String wizardType = "Red";
                 if (description.equals("Blue")) wizardType = "Blue";
-                MiniBossDoor newDoor = new MiniBossDoor(description, from, to, wizardType, false);
+                MiniBossDoor newDoor = new MiniBossDoor(from, to, wizardType, false);
                 doors.add(newDoor);
                 break;
             }
             case "FinalBoss": {
-                FinalBossDoor newDoor = new FinalBossDoor(description, from, to);
+                FinalBossDoor newDoor = new FinalBossDoor(from, to);
                 doors.add(newDoor);
                 break;
             }

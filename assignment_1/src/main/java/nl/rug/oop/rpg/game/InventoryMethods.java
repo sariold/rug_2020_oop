@@ -11,8 +11,8 @@ import java.util.ArrayList;
 public class InventoryMethods {
 
     /**
-     * returns the items arrayList of the player that can be used in combat
-     * @param player
+     * Returns the items arrayList of the player that can be used in combat
+     * @param player Player
      * @return The items arrayList of the player that can be used in combat
      */
     public static ArrayList<Collectable> getCombatInventory(Player player) {

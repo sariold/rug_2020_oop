@@ -15,7 +15,7 @@ public class StrongArmorSmith extends Trader implements Serializable {
     /**
      * Constructor for a strong armor smith
      * Power and price are set to default values
-     * @param name
+     * @param name Name
      */
     public StrongArmorSmith(String name) {
         super("Armor is not to be joked with!", name, DefaultStats.STRONG_ARMORSMITH_POWER,
@@ -24,7 +24,7 @@ public class StrongArmorSmith extends Trader implements Serializable {
 
     /**
      * Trading results in increase of health of the player
-     * @param player
+     * @param player Player
      */
     @Override
     public void trade(Player player) {
@@ -47,8 +47,7 @@ public class StrongArmorSmith extends Trader implements Serializable {
      */
     @Override
     public String tradeDialog() {
-        String toReturn = "I will increase your maximum health by " + this.getPower()
+        return "I will increase your maximum health by " + this.getPower()
                 + " for " + this.getPrice() + " gold!";
-        return toReturn;
     }
 }

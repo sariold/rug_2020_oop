@@ -2,7 +2,6 @@ package nl.rug.oop.rpg.npcs.enemies;
 
 import nl.rug.oop.rpg.interfaces.Attackable;
 import nl.rug.oop.rpg.extra.DefaultStats;
-import nl.rug.oop.rpg.game.Player;
 
 import java.io.Serializable;
 import java.util.Random;
@@ -17,8 +16,8 @@ public class Dragon extends Boss implements Serializable {
     /**
      * Constructor for a dragon
      * Attack points, hit points and gold value are all set to default values
-     * @param description
-     * @param name
+     * @param description Description
+     * @param name Name
      */
     public Dragon(String description, String name) {
         super(description, name, DefaultStats.DRAGON_HIT_POINTS , DefaultStats.DRAGON_ATTACK_POINTS,
@@ -28,7 +27,7 @@ public class Dragon extends Boss implements Serializable {
     /**
      * Constructor for a dragon using only a name
      * Sets the description to the standard description
-     * @param name
+     * @param name Name
      */
     public Dragon(String name) {
         this("Do not test me child for I am a mighty Dragon! Engage me and perish in flames!", name);
@@ -37,18 +36,18 @@ public class Dragon extends Boss implements Serializable {
     /**
      * When a dragon attacks there is a chance to burn or freeze the attacked
      * If the attacked does not get burnt or frozen then the dragon deals its attack power as damage
-     * @param attacked
+     * @param attacked Attacked
      */
     @Override
     public void attack(Attackable attacked) {
         Random r = new Random();
         int chance = r.nextInt(101);
         if (chance < 21) {
-            ((Player) attacked).setBurned(true);
+            attacked.setBurned(true);
         } else {
             chance = r.nextInt(101);
             if (chance < 21) {
-                ((Player) attacked).setFrozen(true);
+                attacked.setFrozen(true);
             } else {
                 super.attack(attacked);
             }

@@ -7,7 +7,7 @@ public interface Enchantable {
 
     /**
      * Enchants the enchantable object
-     * @param value
+     * @param value Value
      */
     void enchant(int value);
 

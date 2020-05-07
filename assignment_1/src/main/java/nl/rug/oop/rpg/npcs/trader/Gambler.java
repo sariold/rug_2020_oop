@@ -17,7 +17,7 @@ public class Gambler extends Trader implements Serializable {
     /**
      * Constructor for a gambler
      * Power and price are set to default values
-     * @param name
+     * @param name Name
      */
     public Gambler(String name) {
         super("Are you feeling lucky?", name, DefaultStats.GAMBLER_POWER, DefaultStats.GAMBLER_PRICE);
@@ -26,7 +26,7 @@ public class Gambler extends Trader implements Serializable {
     /**
      * Trading with a gambler has a 40% chance to increase health, 40% chance to increase attack, 20%
      * Chance to not increase stats
-     * @param player
+     * @param player Player
      */
     @Override
     public void trade(Player player) {
@@ -58,8 +58,7 @@ public class Gambler extends Trader implements Serializable {
      */
     @Override
     public String tradeDialog() {
-        String toReturn = "I will increase one of your stats by " + this.getPower() + " for "
+        return "I will increase one of your stats by " + this.getPower() + " for "
                 + this.getPrice() + " gold! However it might not work.";
-        return toReturn;
     }
 }

@@ -14,8 +14,8 @@ public class Rat extends Enemy implements Serializable {
     /**
      * Constructor for a rat
      * Attack points, hit points and gold value are all set to default values
-     * @param description
-     * @param name
+     * @param description Description
+     * @param name Name
      */
     public Rat(String description, String name) {
         super(description, name, DefaultStats.RAT_HIT_POINTS , DefaultStats.RAT_ATTACK_POINTS,
@@ -25,7 +25,7 @@ public class Rat extends Enemy implements Serializable {
     /**
      * Constructor for a rat using only a name
      * Sets the description to the standard description
-     * @param name
+     * @param name Name
      */
     public Rat(String name) {
         this("*angrily* SQUEEK!!", name);

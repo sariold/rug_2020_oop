@@ -14,7 +14,7 @@ public class Priest extends Healer implements Serializable {
     /**
      * Constructor for a Priest
      * Heal power is set to a default value
-     * @param name
+     * @param name Name
      */
     public Priest(String name) {
         super("May the divine spirits look upon your soul!", name, DefaultStats.PRIEST_HEAL_POWER);

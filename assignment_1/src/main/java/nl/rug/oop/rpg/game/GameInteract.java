@@ -10,12 +10,15 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+/**
+ * Class to store Game object interaction methods
+ */
 public class GameInteract {
 
     /**
      * Allows the player to interact with a door, depending on the door, this might mean they will engage in combat
      * or lose damage
-     * @param currentMove
+     * @param currentMove Current move
      */
     public static void interactDoor(int currentMove, Game game) {
         Player player = game.getPlayer();
@@ -32,7 +35,7 @@ public class GameInteract {
 
     /**
      * Allows the player to interact with items and collect them
-     * @param currentMove
+     * @param currentMove Current move
      */
     public static void interactItem(int currentMove, Game game) {
         Player player = game.getPlayer();
@@ -50,7 +53,7 @@ public class GameInteract {
 
     /**
      * Allows the player to interact with npcs, might engage them in combat or allow them to trade/get healed
-     * @param currentMove
+     * @param currentMove Current move
      */
     public static void interactNPC(int currentMove, Game game) {
         Player player = game.getPlayer();
@@ -67,8 +70,8 @@ public class GameInteract {
 
     /**
      * Allows the player to trade with an npc if they have enough gold
-     * @param player
-     * @param trader
+     * @param player Player
+     * @param trader Trader
      */
     public static void tradeWith(Player player, Trader trader) {
         Scanner scanner = new Scanner(System.in);
@@ -80,21 +83,20 @@ public class GameInteract {
             GUI.invalidInputMessage();
             return;
         }
-        if (move == 0) return;
-        else if (move == 1){
+        if (move == 1){
             if (player.getGold() < trader.getPrice()) {
                 System.out.println("You do not have enough gold!");
                 return;
             }
             trader.interact(player);
             player.getCurrentRoom().removeDeadNPC();
-        } else GUI.invalidInputMessage();
+        } else if(move > 1) GUI.invalidInputMessage();
     }
 
     /**
      * Allows the player to be healed if they have enough gold
-     * @param player
-     * @param healer
+     * @param player Player
+     * @param healer Healer
      */
     public static void healPlayer(Player player, Healer healer) {
         Scanner scanner = new Scanner(System.in);
@@ -106,11 +108,10 @@ public class GameInteract {
             GUI.invalidInputMessage();
             return;
         }
-        if (move == 0) return;
-        else if (move == 1){
+        if (move == 1){
             healer.interact(player);
             System.out.println("You are at " + player.getHitPoints() + " health.");
             player.getCurrentRoom().removeDeadNPC();
-        } else GUI.invalidInputMessage();
+        } else if(move > 1) GUI.invalidInputMessage();
     }
 }

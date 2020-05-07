@@ -10,8 +10,8 @@ public class Serializer {
 
     /**
      * Saves the game to a specific file, given by the user
-     * @param game
-     * @param fileName
+     * @param game Game
+     * @param fileName File name
      */
     public static void saveGame(Game game, String fileName) {
         File saveDirectory = new File("savedgames");
@@ -31,10 +31,10 @@ public class Serializer {
 
     /**
      * Loads the game from a specific file given by the user
-     * @param fileName
+     * @param fileName File Name
      * @return A game object
-     * @throws IOException
-     * @throws ClassNotFoundException
+     * @throws IOException Wrong format
+     * @throws ClassNotFoundException Cannot create a game object
      */
     public static Game loadGame(String fileName) throws IOException, ClassNotFoundException {
         File saveDirectory = new File("savedgames");

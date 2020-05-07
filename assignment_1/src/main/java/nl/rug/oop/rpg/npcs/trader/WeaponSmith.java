@@ -15,7 +15,7 @@ public class WeaponSmith extends Trader implements Serializable {
     /**
      * Constructor for a weapon smith
      * Power and price are set to default values
-     * @param name
+     * @param name Name
      */
     public WeaponSmith(String name) {
         super("Better get them before they get you!", name, DefaultStats.WEAPONSMITH_POWER, DefaultStats.WEAPONSMITH_PRICE);
@@ -23,7 +23,7 @@ public class WeaponSmith extends Trader implements Serializable {
 
     /**
      * Trading results in increase of attack of the player
-     * @param player
+     * @param player Player
      */
     @Override
     public void trade(Player player) {
@@ -46,7 +46,6 @@ public class WeaponSmith extends Trader implements Serializable {
      */
     @Override
     public String tradeDialog() {
-        String toReturn = "I will increase your attack power by " + this.getPower() + " for " + this.getPrice() + " gold!";
-        return toReturn;
+        return "I will increase your attack power by " + this.getPower() + " for " + this.getPrice() + " gold!";
     }
 }

@@ -17,26 +17,24 @@ public class Game implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private Player player;
-    private ArrayList<Room> totalRooms;
-    private ArrayList<Door> totalDoors;
-    private ArrayList<String> possibleMoves;
-    private ArrayList<String> fightMoves;
-    private ArrayList<MiniBoss> miniBosses;
+    private final Player player;
+    private final ArrayList<String> possibleMoves;
+    private final ArrayList<String> fightMoves;
+    private final ArrayList<MiniBoss> miniBosses;
     private int iceMagic;
     private int fireMagic;
 
 
     /**
      * Creates a new game and loads in the default map, items, and npcs
-     * @param name
+     * @param name Name
      */
     public Game(String name) {
-        this.totalRooms = new ArrayList<Room>();
-        this.totalDoors = new ArrayList<Door>();
-        this.possibleMoves = new ArrayList<String>();
-        this.fightMoves = new ArrayList<String>();
-        this.miniBosses = new ArrayList<MiniBoss>();
+        ArrayList<Room> totalRooms = new ArrayList<>();
+        ArrayList<Door> totalDoors = new ArrayList<>();
+        this.possibleMoves = new ArrayList<>();
+        this.fightMoves = new ArrayList<>();
+        this.miniBosses = new ArrayList<>();
 
         GameOptions.createGame(totalRooms, totalDoors, possibleMoves, fightMoves, miniBosses);
         player = new Player(name, totalRooms.get(0), DefaultStats.PLAYER_HIT_POINTS,
@@ -50,7 +48,7 @@ public class Game implements Serializable {
      * @return Arraylist of possible moves
      */
     public ArrayList<String> getPossibleMoves() {
-        return new ArrayList<String>(possibleMoves);
+        return new ArrayList<>(possibleMoves);
     }
 
     /**
@@ -58,7 +56,7 @@ public class Game implements Serializable {
      * @return Arraylist of possible fight moves
      */
     public ArrayList<String> getFightMoves() {
-        return new ArrayList<String>(fightMoves);
+        return new ArrayList<>(fightMoves);
     }
 
     /**
@@ -87,7 +85,7 @@ public class Game implements Serializable {
 
     /**
      * Returns the minibosses arraylist of the current game
-     * @return
+     * @return Mini boss array
      */
     public ArrayList<MiniBoss> getMiniBosses() {
         return this.miniBosses;

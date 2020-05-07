@@ -9,7 +9,7 @@ public interface Interactable {
 
     /**
      * Triggers an interaction between the interactable and the player objects
-     * @param player
+     * @param player Player
      */
     void interact(Player player);
 

@@ -13,11 +13,11 @@ public abstract class Boss extends Enemy implements Serializable {
 
     /**
      * Constructor for a boss
-     * @param description
-     * @param name
-     * @param hitPoints
-     * @param attackPoints
-     * @param goldValue
+     * @param description Description
+     * @param name Name
+     * @param hitPoints Hitpoints
+     * @param attackPoints Attackpoints
+     * @param goldValue Goldvalue
      */
     public Boss(String description, String name, int hitPoints, int attackPoints, int goldValue){
         super(description, name, hitPoints, attackPoints, goldValue);
@@ -25,7 +25,7 @@ public abstract class Boss extends Enemy implements Serializable {
 
     /**
      * If a boss dies the game is won
-     * @param game
+     * @param game Game
      */
     @Override
     public void die(Game game) {

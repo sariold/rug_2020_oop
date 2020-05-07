@@ -3,7 +3,6 @@ package nl.rug.oop.rpg.game;
 import nl.rug.oop.rpg.extra.TextColor;
 import nl.rug.oop.rpg.interfaces.Attackable;
 import nl.rug.oop.rpg.interfaces.Collectable;
-import nl.rug.oop.rpg.objects.items.EnchantItem;
 import nl.rug.oop.rpg.objects.items.Item;
 import nl.rug.oop.rpg.objects.Room;
 
@@ -25,16 +24,16 @@ public class Player implements Attackable, Serializable {
     private int gold;
     private boolean frozen;
     private boolean burned;
-    private ArrayList<Collectable> inventory;
+    private final ArrayList<Collectable> inventory;
 
 
     /**
      * Player constructor, custom name and sets their stats depending on the config initialization
-     * @param name
-     * @param currentRoom
-     * @param hitPoints
-     * @param attackPoints
-     * @param maxHitPoints
+     * @param name Name
+     * @param currentRoom Current room
+     * @param hitPoints Hit points
+     * @param attackPoints Attack points
+     * @param maxHitPoints Max hit points
      */
     public Player(String name, Room currentRoom, int hitPoints, int attackPoints, int maxHitPoints) {
         this.name = name;
@@ -45,12 +44,12 @@ public class Player implements Attackable, Serializable {
         this.gold = 0;
         this.frozen = false;
         this.burned = false;
-        this.inventory = new ArrayList<Collectable>();
+        this.inventory = new ArrayList<>();
     }
 
     /**
      * Sets the max health for a player
-     * @param maxHitPoints
+     * @param maxHitPoints Max hit points
      */
     public void setMaxHitPoints(int maxHitPoints) {
         this.maxHitPoints = maxHitPoints;
@@ -58,7 +57,7 @@ public class Player implements Attackable, Serializable {
 
     /**
      * Sets the health for a player
-     * @param hitPoints
+     * @param hitPoints Hit points
      */
     public void setHitPoints(int hitPoints) {
         this.hitPoints = hitPoints;
@@ -66,7 +65,7 @@ public class Player implements Attackable, Serializable {
 
     /**
      * Sets the attack damage a player can give
-     * @param attackPoints
+     * @param attackPoints Attack points
      */
     public void setAttackPoints(int attackPoints) {
         this.attackPoints = attackPoints;
@@ -74,7 +73,7 @@ public class Player implements Attackable, Serializable {
 
     /**
      * Sets the players gold value
-     * @param gold
+     * @param gold Gold
      */
     public void setGold(int gold) {
         this.gold = gold;
@@ -85,12 +84,12 @@ public class Player implements Attackable, Serializable {
      * @return The arraylist inventory
      */
     public ArrayList<Collectable> getInventory() {
-        return new ArrayList<Collectable>(this.inventory);
+        return new ArrayList<>(this.inventory);
     }
 
     /**
      * Adds an item to the players inventory arraylist
-     * @param c
+     * @param c Collectable
      */
     public void addCollectable(Collectable c) {
         this.inventory.add(c);
@@ -98,7 +97,7 @@ public class Player implements Attackable, Serializable {
 
     /**
      * Returns the gold value the player has
-     * @return
+     * @return Gold value
      */
     public int getGold() {
         return this.gold;
@@ -122,7 +121,7 @@ public class Player implements Attackable, Serializable {
 
     /**
      * Setter method to increase the max health points a player has
-     * @param value
+     * @param value Value
      */
     public void increaseMaxHitPoints(int value) {
         System.out.println(TextColor.ANSI_YELLOW + "Your health increased by " + value + "." + TextColor.ANSI_RESET);
@@ -141,7 +140,7 @@ public class Player implements Attackable, Serializable {
 
     /**
      * Increases the attack dmamage of a player
-     * @param value
+     * @param value Value
      */
     public void increaseAttackPoints(int value) {
         System.out.println(TextColor.ANSI_YELLOW + "Your attack increased by " + value + "." + TextColor.ANSI_RESET);
@@ -166,7 +165,7 @@ public class Player implements Attackable, Serializable {
 
     /**
      * Sets the current room for the player
-     * @param currentRoom
+     * @param currentRoom Current room
      */
     public void setCurrentRoom(Room currentRoom) {
         this.currentRoom = currentRoom;
@@ -174,7 +173,7 @@ public class Player implements Attackable, Serializable {
 
     /**
      * Returns the name of the player
-     * @return
+     * @return Name of the player
      */
     public String getName() {
         return name;
@@ -182,7 +181,7 @@ public class Player implements Attackable, Serializable {
 
     /**
      * Sets the name of the player
-     * @param name
+     * @param name Name
      */
     public void setName(String name) {
         this.name = name;
@@ -190,7 +189,7 @@ public class Player implements Attackable, Serializable {
 
     /**
      * Increases the player's gold value
-     * @param value
+     * @param value Value
      */
     public void increaseGold(int value) {
         this.gold += value;
@@ -198,7 +197,7 @@ public class Player implements Attackable, Serializable {
 
     /**
      * Decreases the player's gold value
-     * @param value
+     * @param value Value
      */
     public void decreaseGold(int value) {
         this.gold -= value;
@@ -222,7 +221,7 @@ public class Player implements Attackable, Serializable {
 
     /**
      * sets the frozen value of the player
-     * @param b
+     * @param b Boolean
      */
     public void setFrozen(boolean b) {
         if (b) GUI.frozenMessage();
@@ -231,7 +230,7 @@ public class Player implements Attackable, Serializable {
 
     /**
      * sets the burned value of the player
-     * @param b
+     * @param b Boolean
      */
     public void setBurned(boolean b) {
         if (b) GUI.burnedMessage();
@@ -248,7 +247,7 @@ public class Player implements Attackable, Serializable {
 
     /**
      * Increases the health of a player
-     * @param value
+     * @param value Value
      */
     @Override
     public void increaseHitPoints(int value) {
@@ -259,7 +258,7 @@ public class Player implements Attackable, Serializable {
 
     /**
      * Forces the player to attack an enemy and it might be a critical hit
-     * @param attacked
+     * @param attacked Attacked
      */
     @Override
     public void attack(Attackable attacked) {
@@ -268,7 +267,7 @@ public class Player implements Attackable, Serializable {
 
     /**
      * Reduce the health of a player
-     * @param value
+     * @param value Value
      */
     @Override
     public void reduceHitPoints(int value) {
@@ -277,7 +276,7 @@ public class Player implements Attackable, Serializable {
 
     /**
      * Checks if the player health is 0 or less
-     * @return
+     * @return Boolean if player is dead
      */
     @Override
     public boolean isDead() {

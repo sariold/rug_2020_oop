@@ -14,8 +14,8 @@ public class Spider extends Enemy implements Serializable {
     /**
      * Constructor for a spider
      * Attack points, hit points and gold value are all set to default values
-     * @param description
-     * @param name
+     * @param description Description
+     * @param name Name
      */
     public Spider(String description, String name) {
         super(description, name, DefaultStats.SPIDER_HIT_POINTS , DefaultStats.SPIDER_ATTACK_POINTS,
@@ -25,7 +25,7 @@ public class Spider extends Enemy implements Serializable {
     /**
      * Constructor for a spider using only a name
      * Sets the description to the standard description
-     * @param name
+     * @param name Name
      */
     public Spider(String name) {
         this("*loud clicking*", name);

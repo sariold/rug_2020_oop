@@ -24,7 +24,7 @@ public class HealingPotion extends EnchantItem implements Serializable {
 
     /**
      * Overrides the default user method as this healing potion will give the player a health increase
-     * @param player
+     * @param player Player
      */
     @Override
     public void use(Player player) {
@@ -42,7 +42,7 @@ public class HealingPotion extends EnchantItem implements Serializable {
 
     /**
      * This item can be used outside combat
-     * @return
+     * @return Boolean
      */
     @Override
     public boolean hasNonCombatUse() {
@@ -60,7 +60,7 @@ public class HealingPotion extends EnchantItem implements Serializable {
 
     /**
      * This item can be enchanted to boosts its stats
-     * @param value
+     * @param value Value
      */
     @Override
     public void enchant(int value) {

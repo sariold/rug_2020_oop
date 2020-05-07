@@ -19,7 +19,7 @@ public class StartGame {
 
     /**
      * Print an arraylist as chooseable options
-     * @param arrayList
+     * @param arrayList Arraylist
      */
     public static void printOptions(ArrayList<String> arrayList) {
         for (int i = 0; i < arrayList.size(); i++) {
@@ -30,8 +30,9 @@ public class StartGame {
     /**
      * Present the player with starting game options
      */
+    @SuppressWarnings("InfiniteLoopStatement")
     public static void startGameOption() {
-        ArrayList<String> possibleMoves = new ArrayList<String>();
+        ArrayList<String> possibleMoves = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
         int currentMove;
         String fileName;
@@ -89,7 +90,7 @@ public class StartGame {
 
     /**
      * Initialize from a saved game file, the game object becomes a loaded game object
-     * @param fileName
+     * @param fileName File name
      */
     public static void initOldGame(String fileName, String type) {
         Game game;
@@ -107,9 +108,9 @@ public class StartGame {
 
     /**
      * Creates a new game object and a brand new game, checks if its a config loaded game, and which config file
-     * @param fileName
-     * @param fromConfig
-     * @param configName
+     * @param fileName File name
+     * @param fromConfig Boolean value
+     * @param configName Config name
      */
     public static void initNewGame(String fileName, boolean fromConfig, String configName) {
         Scanner scanner = new Scanner(System.in);
@@ -135,8 +136,8 @@ public class StartGame {
 
     /**
      * Saves the current game to a specific fileName string
-     * @param game
-     * @param fileName
+     * @param game Game
+     * @param fileName File name
      */
     public static void gameSave(Game game, String fileName) {
         ArrayList<String> possibleOptions = new ArrayList<>();

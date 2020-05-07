@@ -13,7 +13,7 @@ public class GoldNugget extends Item implements Serializable {
 
     private static final long serialVersionUID = 6L;
 
-    private int value;
+    private final int value;
 
     /**
      * Creates a gold nugget with a gold value
@@ -25,7 +25,7 @@ public class GoldNugget extends Item implements Serializable {
 
     /**
      * Overrides the default use method as this item gives the player a certain amount of gold
-     * @param player
+     * @param player Player
      */
     @Override
     public void use(Player player) {

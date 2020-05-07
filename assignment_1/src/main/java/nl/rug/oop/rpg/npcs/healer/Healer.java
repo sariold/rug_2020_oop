@@ -15,14 +15,14 @@ public abstract class Healer extends DungeonNpc implements Serializable {
 
     private static final long serialVersionUID = 21L;
 
-    private int healPower;
+    private final int healPower;
 
 
     /**
      * Constructor for a healer
-     * @param description
-     * @param name
-     * @param healPower
+     * @param description Description
+     * @param name Name
+     * @param healPower Heal power
      */
     public Healer(String description, String name, int healPower){
         super(description, name);
@@ -32,13 +32,13 @@ public abstract class Healer extends DungeonNpc implements Serializable {
 
     /**
      * Set engaged to b
-     * @param b
+     * @param b Boolean
      */
     public void setHealStatus(boolean b) { this.engaged = b; }
 
     /**
      * Heal a player for the heal power of this healer
-     * @param player
+     * @param player Player
      */
     public void heal(Player player) {
         player.increaseHitPoints(this.healPower);
@@ -47,8 +47,8 @@ public abstract class Healer extends DungeonNpc implements Serializable {
 
     /**
      * Calls the healPlayer method from the game
-     * @param player
-     * @param game
+     * @param player Player
+     * @param game Game
      */
     @Override
     public void engage(Player player, Game game) {
@@ -57,7 +57,7 @@ public abstract class Healer extends DungeonNpc implements Serializable {
 
     /**
      * Call this healers heal method
-     * @param player
+     * @param player Player
      */
     @Override
     public void interact(Player player) {

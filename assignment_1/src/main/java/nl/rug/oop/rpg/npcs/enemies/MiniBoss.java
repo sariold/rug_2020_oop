@@ -1,8 +1,5 @@
 package nl.rug.oop.rpg.npcs.enemies;
 
-import nl.rug.oop.rpg.objects.doors.Door;
-import nl.rug.oop.rpg.objects.doors.MiniBossDoor;
-
 import java.io.Serializable;
 
 /**
@@ -12,36 +9,15 @@ public abstract class MiniBoss extends Enemy implements Serializable {
 
     private static final long serialVersionUID = 24L;
 
-    private static MiniBossDoor door;
-
     /**
      * Constructor for a mini boss
-     * @param description
-     * @param name
-     * @param hitPoints
-     * @param attackPoints
-     * @param goldValue
-     * @param door
+     * @param description Description
+     * @param name Name
+     * @param hitPoints Hit points
+     * @param attackPoints Attack points
+     * @param goldValue Gold value
      */
-    public MiniBoss(String description, String name, int hitPoints, int attackPoints, int goldValue,
-                    MiniBossDoor door) {
+    public MiniBoss(String description, String name, int hitPoints, int attackPoints, int goldValue) {
         super(description, name, hitPoints, attackPoints, goldValue);
-        this.door = door;
-    }
-
-    /**
-     * Returns the door this mini boss is associated with
-     * @return Door object
-     */
-    public Door getDoor() {
-        return this.door;
-    }
-
-    /**
-     * Sets the door this mini boss is associated with
-     * @param newDoor
-     */
-    public void setDoor(MiniBossDoor newDoor) {
-        this.door = newDoor;
     }
 }

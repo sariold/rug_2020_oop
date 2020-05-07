@@ -16,18 +16,18 @@ public abstract class Enemy extends DungeonNpc implements Attackable, Serializab
 
     private static final long serialVersionUID = 19L;
 
-    private int maxHitPoints;
-    private int goldValue;
+    private final int maxHitPoints;
+    private final int goldValue;
     private boolean burned;
     private boolean frozen;
 
     /**
      * Constructor for an enemy
-     * @param description
-     * @param name
-     * @param hitPoints
-     * @param attackPoints
-     * @param goldValue
+     * @param description Description
+     * @param name Name
+     * @param hitPoints Hit points
+     * @param attackPoints Attack points
+     * @param goldValue Gold value
      */
     public Enemy(String description, String name, int hitPoints, int attackPoints, int goldValue) {
         super(description, name);
@@ -36,14 +36,6 @@ public abstract class Enemy extends DungeonNpc implements Attackable, Serializab
         this.attackPoints = attackPoints;
         this.goldValue = goldValue;
         this.engaged = false;
-    }
-
-    /**
-     * Constructor for an enemy with only a description
-     * @param description
-     */
-    public Enemy(String description) {
-        this(description, "an Enemy", 1, 1, 1);
     }
 
     /**
@@ -63,8 +55,8 @@ public abstract class Enemy extends DungeonNpc implements Attackable, Serializab
     }
 
     /**
-     * sets the frozen value of this enemy
-     * @param b
+     * Sets the frozen value of this enemy
+     * @param b Boolean
      */
     @Override
     public void setFrozen(boolean b) {
@@ -72,8 +64,8 @@ public abstract class Enemy extends DungeonNpc implements Attackable, Serializab
     }
 
     /**
-     * sets the burned value of this enemy
-     * @param b
+     * Sets the burned value of this enemy
+     * @param b Boolean
      */
     @Override
     public void setBurned(boolean b) {
@@ -110,7 +102,7 @@ public abstract class Enemy extends DungeonNpc implements Attackable, Serializab
 
     /**
      * Sets the engaged value of this enemy to true
-     * @param game
+     * @param game Game
      */
     public void die(Game game) { this.engaged = true; }
 
@@ -124,7 +116,7 @@ public abstract class Enemy extends DungeonNpc implements Attackable, Serializab
 
     /**
      * Deals as much damage to the attacked object as this enemy has attack power
-     * @param attacked
+     * @param attacked Attacked
      */
     @Override
     public void attack(Attackable attacked) {
@@ -133,7 +125,7 @@ public abstract class Enemy extends DungeonNpc implements Attackable, Serializab
 
     /**
      * Reduce the hit points of this enemy by the given value
-     * @param value
+     * @param value Value
      */
     @Override
     public void reduceHitPoints(int value) {
@@ -142,7 +134,7 @@ public abstract class Enemy extends DungeonNpc implements Attackable, Serializab
 
     /**
      * Increase the hit points of this enemy by the given value
-     * @param value
+     * @param value Value
      */
     @Override
     public void increaseHitPoints(int value) {
@@ -161,7 +153,7 @@ public abstract class Enemy extends DungeonNpc implements Attackable, Serializab
 
     /**
      * Attacks a player
-     * @param player
+     * @param player Player
      */
     @Override
     public void interact(Player player) {
@@ -170,8 +162,8 @@ public abstract class Enemy extends DungeonNpc implements Attackable, Serializab
 
     /**
      * Engages a fight with a player
-     * @param player
-     * @param game
+     * @param player Player
+     * @param game Game
      */
     @Override
     public void engage(Player player, Game game) {

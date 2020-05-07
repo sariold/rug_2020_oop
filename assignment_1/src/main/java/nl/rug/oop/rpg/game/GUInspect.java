@@ -6,11 +6,14 @@ import nl.rug.oop.rpg.objects.doors.Door;
 
 import java.util.ArrayList;
 
+/**
+ * GUI Class inspection methods
+ */
 public class GUInspect {
 
     /**
      * Prints the description of the current room
-     * @param player
+     * @param player Player
      */
     public static void inspectRoom(Player player) {
         System.out.print("You see: ");
@@ -19,7 +22,7 @@ public class GUInspect {
 
     /**
      * Prints all doors in the current room of the player
-     * @param player
+     * @param player Player
      */
     public static void inspectDoors(Player player) {
         System.out.println("You look for doors.");
@@ -35,7 +38,7 @@ public class GUInspect {
     /**
      * Prints all items in the current room of the player
      * Returns if there are any items in the current room
-     * @param player
+     * @param player Player
      * @return If an item exists
      */
     public static boolean inspectItems(Player player) {
@@ -57,7 +60,7 @@ public class GUInspect {
     /**
      * Prints all npcs in the current room of the player
      * Returns if there are any npcs in the current room
-     * @param player
+     * @param player Player
      * @return If an npc exists
      */
     public static boolean inspectNPCs(Player player) {

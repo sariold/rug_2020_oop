@@ -8,7 +8,6 @@ import nl.rug.oop.rpg.npcs.enemies.MiniBoss;
 import nl.rug.oop.rpg.npcs.enemies.RedWizard;
 import nl.rug.oop.rpg.objects.Room;
 import nl.rug.oop.rpg.objects.doors.Door;
-import org.json.simple.parser.ParseException;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -18,13 +17,17 @@ import java.util.Scanner;
 
 import static nl.rug.oop.rpg.io.JsonReader.*;
 
+/**
+ * Present the user with the possible game options when the game begins
+ */
 public class GameOptions {
 
     /**
      * Starts the game and presents the user with their possible move options to navigate the rpg
-     * @param game
-     * @param fileName
+     * @param game Game
+     * @param fileName Filename
      */
+    @SuppressWarnings("InfiniteLoopStatement")
     public static void gameStart(Game game, String fileName) {
         Scanner scanner = new Scanner(System.in);
         int currentMove;
@@ -102,6 +105,14 @@ public class GameOptions {
         }
     }
 
+    /**
+     * Creates a new game object, initializes the map and npcs and items
+     * @param totalRooms Total rooms
+     * @param totalDoors Total doors
+     * @param possibleMoves Possible moves
+     * @param fightMoves Fight moves
+     * @param miniBosses Mini bosses
+     */
     public static void createGame(ArrayList<Room> totalRooms, ArrayList<Door> totalDoors,
                                   ArrayList<String> possibleMoves, ArrayList<String> fightMoves,
                                   ArrayList<MiniBoss> miniBosses) {
@@ -122,9 +133,6 @@ public class GameOptions {
             parseItemJSON(totalRooms);
         } catch (FileNotFoundException e) {
             System.out.println("The default map files could not be found!");
-        } catch (ParseException e) {
-            System.out.println("The default map files could not be parsed correctly!");
-
         } catch (IOException e) {
             System.out.println("The default map files are not formatted correctly!");
         }

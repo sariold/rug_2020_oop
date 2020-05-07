@@ -16,19 +16,19 @@ public class Room extends DungeonObjects implements Serializable {
 
     private static final long serialVersionUID = 9L;
 
-    private ArrayList<Door> doors;
-    private ArrayList<DungeonNpc> NPCs;
-    private ArrayList<Collectable> items;
+    private final ArrayList<Door> doors;
+    private final ArrayList<DungeonNpc> NPCs;
+    private final ArrayList<Collectable> items;
 
     /**
      * Creats a room and sets the npc, door, and item arraylists
-     * @param description
+     * @param description Description
      */
     public Room(String description) {
         super(description);
-        this.doors = new ArrayList<Door>();
-        this.NPCs = new ArrayList<DungeonNpc>();
-        this.items = new ArrayList<Collectable>();
+        this.doors = new ArrayList<>();
+        this.NPCs = new ArrayList<>();
+        this.items = new ArrayList<>();
     }
 
     /**
@@ -36,12 +36,12 @@ public class Room extends DungeonObjects implements Serializable {
      * @return Arraylist of items in the room
      */
     public ArrayList<Collectable> getItems() {
-        return new ArrayList<Collectable>(this.items);
+        return new ArrayList<>(this.items);
     }
 
     /**
      * Adds an item to the items arraylist of a room
-     * @param collectable
+     * @param collectable Collectable
      */
     public void addItem(Collectable collectable) {
         if(collectable != null) items.add(collectable);
@@ -58,7 +58,7 @@ public class Room extends DungeonObjects implements Serializable {
 
     /**
      * Adds a door to the doors arraylist of a room
-     * @param door
+     * @param door Door
      */
     public void addDoor(Door door) {
         if(door != null) doors.add(door);
@@ -69,12 +69,12 @@ public class Room extends DungeonObjects implements Serializable {
      * @return A door arraylist of a room
      */
     public ArrayList<Door> getDoors() {
-        return new ArrayList<Door>(this.doors);
+        return new ArrayList<>(this.doors);
     }
 
     /**
      * Adds an npc to the npc arraylist of a room
-     * @param npc
+     * @param npc NPC
      */
     public void addNPC(DungeonNpc npc) {
         if(npc != null) NPCs.add(npc);
@@ -95,17 +95,16 @@ public class Room extends DungeonObjects implements Serializable {
      * @return Arraylist of npcs in the room
      */
     public ArrayList<DungeonNpc> getNPCs() {
-        return new ArrayList<DungeonNpc>(this.NPCs);
+        return new ArrayList<>(this.NPCs);
     }
 
     /**
      * Counts how many dead npcs are in a current room
-     * @param npcs
+     * @param npcs NPCS
      * @return How many npcs are dead in a room
      */
     public int countEnemies(ArrayList<DungeonNpc> npcs) {
-        int count = (int) npcs.stream().filter(npc -> npc instanceof Enemy).count();
-        return count;
+        return (int) npcs.stream().filter(npc -> npc instanceof Enemy).count();
     }
 
 }

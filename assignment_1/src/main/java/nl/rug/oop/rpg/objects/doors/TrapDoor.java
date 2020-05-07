@@ -14,14 +14,13 @@ public class TrapDoor extends Door implements Serializable {
 
     private static final long serialVersionUID = 10L;
 
-    private Room from;
-    private int attackPoints;
+    private final int attackPoints;
 
     /**
      * Creates a trap door and deals a certain amount of damage to the player
-     * @param description
-     * @param from
-     * @param attackPoints
+     * @param description Description
+     * @param from From
+     * @param attackPoints Attack points
      */
     public TrapDoor(String description, Room from, int attackPoints) {
         super(description, from, null);
@@ -30,7 +29,7 @@ public class TrapDoor extends Door implements Serializable {
 
     /**
      * Overrides the default door interact method because this door deals damage to the player
-     * @param player
+     * @param player Player
      */
     @Override
     public void interact(Player player) {
@@ -43,8 +42,8 @@ public class TrapDoor extends Door implements Serializable {
     /**
      * Overrides the default Door engage method because this door must check if the player has died as a result of the
      * damage they have taken
-     * @param player
-     * @param game
+     * @param player Player
+     * @param game Game
      */
     @Override
     public void engage(Player player, Game game) {

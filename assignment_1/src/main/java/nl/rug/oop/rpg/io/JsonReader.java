@@ -9,24 +9,25 @@ import org.json.simple.parser.ParseException;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Objects;
 
 import static nl.rug.oop.rpg.io.JSONParser.*;
 
 /**
  * Creates a json parsing class that allows custom map reading
  */
+@SuppressWarnings("unchecked")
 public class JsonReader {
 
     /**
      * Parses the rooms.json file and creates the corresponding rooms based off the json file
-     * @param rooms
-     * @throws IOException
-     * @throws ParseException
+     * @param rooms Rooms
+     * @throws IOException Wrong format
      */
-    public static void parseRoomJSON(ArrayList<Room> rooms) throws IOException, ParseException {
+    public static void parseRoomJSON(ArrayList<Room> rooms) throws IOException {
         JSONParser jsonParser = new JSONParser();
         InputStream is = JsonReader.class.getClassLoader().getResourceAsStream("rooms.json");
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(is));
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(Objects.requireNonNull(is)));
         StringBuilder json = new StringBuilder();
         String temp;
         while((temp = bufferedReader.readLine()) != null) {
@@ -43,14 +44,14 @@ public class JsonReader {
 
     /**
      * Parses the doors.json file and creates an array of door json objects
-     * @param rooms
-     * @param doors
-     * @throws IOException
+     * @param rooms Rooms
+     * @param doors Doors
+     * @throws IOException Wrong format
      */
     public static void parseDoorJSON(ArrayList<Room> rooms, ArrayList<Door> doors) throws IOException {
         JSONParser jsonParser = new JSONParser();
         InputStream is = JsonReader.class.getClassLoader().getResourceAsStream("doors.json");
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(is));
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(Objects.requireNonNull(is)));
         StringBuilder json = new StringBuilder();
         String temp;
         while((temp = bufferedReader.readLine()) != null) {
@@ -67,14 +68,14 @@ public class JsonReader {
 
     /**
      * Parses the connections.json file and creates connection json objects
-     * @param rooms
-     * @param doors
-     * @throws IOException
+     * @param rooms Rooms
+     * @param doors Doors
+     * @throws IOException Wrong format
      */
     public static void parseConnectionJSON(ArrayList<Room> rooms, ArrayList<Door> doors) throws IOException {
         JSONParser jsonParser = new JSONParser();
         InputStream is = JsonReader.class.getClassLoader().getResourceAsStream("connections.json");
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(is));
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(Objects.requireNonNull(is)));
         StringBuilder json = new StringBuilder();
         String temp;
         while((temp = bufferedReader.readLine()) != null) {
@@ -91,14 +92,14 @@ public class JsonReader {
 
     /**
      * Parses the npcs.json file and creates an array of npc json objects
-     * @param rooms
-     * @param file
-     * @throws IOException
+     * @param rooms Rooms
+     * @param file File
+     * @throws IOException Wrong format
      */
     public static void parseNPCJSON(ArrayList<Room> rooms, String file) throws IOException {
         JSONParser jsonParser = new JSONParser();
         InputStream is = JsonReader.class.getClassLoader().getResourceAsStream(file);
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(is));
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(Objects.requireNonNull(is)));
         StringBuilder json = new StringBuilder();
         String temp;
         while((temp = bufferedReader.readLine()) != null) {
@@ -115,13 +116,13 @@ public class JsonReader {
 
     /**
      * Parses the items.json file and creates an arraylist of json item objects
-     * @param rooms
-     * @throws IOException
+     * @param rooms Rooms
+     * @throws IOException Wrong format
      */
     public static void parseItemJSON(ArrayList<Room> rooms) throws IOException {
         JSONParser jsonParser = new JSONParser();
         InputStream is = JsonReader.class.getClassLoader().getResourceAsStream("items.json");
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(is));
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(Objects.requireNonNull(is)));
         StringBuilder json = new StringBuilder();
         String temp;
         while((temp = bufferedReader.readLine()) != null) {

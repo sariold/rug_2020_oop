@@ -1,6 +1,5 @@
 package nl.rug.oop.rpg.game;
 
-import nl.rug.oop.rpg.extra.DefaultStats;
 import nl.rug.oop.rpg.extra.TextColor;
 import nl.rug.oop.rpg.interfaces.Collectable;
 import nl.rug.oop.rpg.npcs.enemies.*;
@@ -16,9 +15,9 @@ public class Combat {
 
     /**
      * Forces the player to engage into combat with a specific enemy
-     * @param player
-     * @param enemy
-     * @param game
+     * @param player Player
+     * @param enemy Enemy
+     * @param game Game
      */
     public static void engageFight(Player player, Enemy enemy, Game game) {
         int move;
@@ -57,10 +56,10 @@ public class Combat {
     }
 
     /**
-     * checks if the enemy has statusimpairments and executes the enemy's attack
-     * @param player
-     * @param enemy
-     * @param game
+     * Checks if the enemy has statusimpairments and executes the enemy's attack
+     * @param player Player
+     * @param enemy Enemy
+     * @param game Game
      */
     private static void enemyMove(Player player, Enemy enemy, Game game) {
         enemy.checkStatusImpairments();
@@ -72,16 +71,16 @@ public class Combat {
             enemy.interact(player);
         }
         if (player.isDead()) {
-            loseFight(player, enemy, game);
+            loseFight(enemy, game);
         }
     }
 
     /**
-     * checks the attack move of the player and executes it
-     * @param move
-     * @param player
-     * @param enemy
-     * @param game
+     * Checks the attack move of the player and executes it
+     * @param move Move
+     * @param player Player
+     * @param enemy Enemy
+     * @param game Game
      */
     private static void playerMove(int move, Player player, Enemy enemy, Game game) {
         if (move == 1){
@@ -98,34 +97,33 @@ public class Combat {
     }
 
     /**
-     * check and remove status impairments of the player
-     * @param player
-     * @param enemy
-     * @param game
-     * @return false if the player is frozen
+     * Check and remove status impairments of the player
+     * @param player Player
+     * @param enemy Enemy
+     * @param game Game
+     * @return False if the player is frozen
      */
     private static boolean playerStatusImpairments(Player player, Enemy enemy, Game game) {
         player.checkStatusImpairments();
         if (player.isFrozen()) {
             enemy.interact(player);
             if (player.isDead()) {
-                loseFight(player, enemy, game);
+                loseFight(enemy, game);
             }
             return false;
         }
         if (player.isDead()) {
-            loseFight(player, enemy, game);
+            loseFight(enemy, game);
         }
         return true;
     }
 
     /**
      * The player loses the fight and the game ends
-     * @param player
-     * @param enemy
-     * @param game
+     * @param enemy Enemy
+     * @param game Game
      */
-    private static void loseFight(Player player, Enemy enemy, Game game){
+    private static void loseFight(Enemy enemy, Game game){
         System.out.println(TextColor.ANSI_RED + "You have been slain by " + enemy.getName() + "!"
                 + TextColor.ANSI_RESET);
         game.gameOver();
@@ -133,9 +131,9 @@ public class Combat {
 
     /**
      * The player has won the fight, the dead npc is removed from the room, the player gets increased gold and health
-     * @param player
-     * @param enemy
-     * @param game
+     * @param player Player
+     * @param enemy Enemy
+     * @param game Game
      */
     private static void winFight(Player player, Enemy enemy, Game game) {
         System.out.println(TextColor.ANSI_YELLOW + "You have slain " + enemy.getName() + "!\nYou earned "
@@ -147,10 +145,10 @@ public class Combat {
     }
 
     /**
-     * run from a fight if it is not a boss fight
-     * restores the enemy to full health
-     * @param enemy
-     * @return true if not boss fight
+     * Run from a fight if it is not a boss fight
+     * Restores the enemy to full health
+     * @param enemy Enemy
+     * @return True if not boss fight
      */
     private static boolean run(Enemy enemy) {
         if (enemy instanceof MiniBoss || enemy instanceof Boss) {
@@ -165,9 +163,9 @@ public class Combat {
     }
 
     /**
-     * allows the player to use an item in combat if there is one in the inventory
-     * @param player
-     * @return true if an item was used
+     * Allows the player to use an item in combat if there is one in the inventory
+     * @param player Player
+     * @return True if an item was used
      */
     private static boolean useCombatItem(Player player) {
         ArrayList<Collectable> combatInventory = InventoryMethods.getCombatInventory(player);

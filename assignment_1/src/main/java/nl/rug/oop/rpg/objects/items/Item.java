@@ -18,7 +18,7 @@ public abstract class Item extends DungeonObjects implements Collectable, Serial
 
     /**
      * Default item constructor which sets description, its collected boolean, and its used boolean
-     * @param description
+     * @param description Description
      */
     public Item(String description) {
         super(description);
@@ -28,7 +28,7 @@ public abstract class Item extends DungeonObjects implements Collectable, Serial
 
     /**
      * Overrides the default collect method because this item can be collected
-     * @param player
+     * @param player Player
      */
     @Override
     public void collect(Player player) {
@@ -38,7 +38,7 @@ public abstract class Item extends DungeonObjects implements Collectable, Serial
 
     /**
      * Allows the player to use the item and then removes it from their inventory
-     * @param player
+     * @param player Player
      */
     @Override
     public void use(Player player) {
@@ -52,14 +52,6 @@ public abstract class Item extends DungeonObjects implements Collectable, Serial
      */
     public boolean getUsed() {
         return this.used;
-    }
-
-    /**
-     * Sets the boolean for the item, determing if it has been used yet
-     * @param b
-     */
-    public void setUsed(boolean b) {
-        this.used = b;
     }
 
     /**

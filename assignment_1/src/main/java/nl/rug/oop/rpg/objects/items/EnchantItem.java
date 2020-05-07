@@ -12,7 +12,7 @@ public abstract class EnchantItem extends Item implements Enchantable {
 
     /**
      * Creates an enchanted item and sets its description
-     * @param description
+     * @param description Description
      */
     public EnchantItem(String description) {
         super(description);

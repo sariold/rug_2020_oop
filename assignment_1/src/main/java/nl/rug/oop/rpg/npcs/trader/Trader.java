@@ -16,20 +16,18 @@ public abstract class Trader extends DungeonNpc implements Serializable {
 
     private static final long serialVersionUID = 33L;
 
-    private String name;
-    private int power;
-    private int price;
+    private final int power;
+    private final int price;
 
     /**
      * Constructor for a trader
-     * @param description
-     * @param name
-     * @param power
-     * @param price
+     * @param description Description
+     * @param name Name
+     * @param power Power
+     * @param price Price
      */
     public Trader(String description, String name, int power, int price) {
         super(description, name);
-        this.name = name;
         this.power = power;
         this.price = price;
         this.engaged = false;
@@ -54,7 +52,7 @@ public abstract class Trader extends DungeonNpc implements Serializable {
     /**
      * Remove as much gold from the player as the price of this trader
      * Print that the player has traded with this trader
-     * @param player
+     * @param player Player
      */
     public void trade(Player player) {
         player.decreaseGold(this.price);
@@ -67,13 +65,12 @@ public abstract class Trader extends DungeonNpc implements Serializable {
      * @return String
      */
     public String tradeDialog() {
-        String toReturn = "I will trade for " + this.price + " Gold.";
-        return toReturn;
+        return "I will trade for " + this.price + " Gold.";
     }
 
     /**
      * Call this traders trade method
-     * @param player
+     * @param player Player
      */
     @Override
     public void interact(Player player) {
@@ -82,8 +79,8 @@ public abstract class Trader extends DungeonNpc implements Serializable {
 
     /**
      * Calls the tradeWith method from the
-     * @param player
-     * @param game
+     * @param player Player
+     * @param game Game
      */
     @Override
     public void engage(Player player, Game game) {

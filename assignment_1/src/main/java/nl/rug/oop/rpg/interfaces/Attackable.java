@@ -18,19 +18,19 @@ public interface Attackable {
 
     /**
      * Attacks an attackable object
-     * @param attacked
+     * @param attacked Attacked
      */
     void attack(Attackable attacked);
 
     /**
      * Reduces the hit points of this object by the given value
-     * @param value
+     * @param value Value
      */
     void reduceHitPoints(int value);
 
     /**
      * Increases the hit points of this object by the given value
-     * @param value
+     * @param value Value
      */
     void increaseHitPoints(int value);
 
@@ -41,32 +41,32 @@ public interface Attackable {
     boolean isDead();
 
     /**
-     * returns if the object is frozen
-     * @return
+     * Returns if the object is frozen
+     * @return If object is frozen
      */
     boolean isFrozen();
 
     /**
-     * sets the frozen value of this object
-     * @param b
+     * Sets the frozen value of this object
+     * @param b Boolean value
      */
     void setFrozen(boolean b);
 
     /**
-     * returns if the object is burned
-     * @return
+     * Returns if the object is burned
+     * @return If object is burned
      */
     boolean isBurned();
 
     /**
-     * sets the burned value of this object
-     * @param b
+     * Sets the burned value of this object
+     * @param b Boolean
      */
     void setBurned(boolean b);
 
     /**
-     * returns the name of this object
-     * @return
+     * Returns the name of this object
+     * @return Name of object
      */
     String getName();
 }

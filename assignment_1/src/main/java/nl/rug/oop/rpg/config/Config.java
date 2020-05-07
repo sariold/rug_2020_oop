@@ -15,7 +15,7 @@ public class Config {
 
     /**
      * Allows the user to set a custom config for custom java properties and save custom config file under custom name
-     * @param configName
+     * @param configName ConfigName
      */
     public static void setConfig(String configName) {
         Properties properties = new Properties();
@@ -106,8 +106,8 @@ public class Config {
 
     /**
      * Allows the user to load from a custom config file with custom java properties
-     * @param game
-     * @param configName
+     * @param game Game
+     * @param configName ConfigName
      */
     public static void loadConfig(Game game, String configName) {
         File configDirectory = new File("config");

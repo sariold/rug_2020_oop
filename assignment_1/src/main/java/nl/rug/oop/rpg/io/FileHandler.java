@@ -6,14 +6,18 @@ import nl.rug.oop.rpg.game.GUI;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Objects;
 import java.util.Scanner;
 
+/**
+ * Class to handle file loading and naming files with custom user input names
+ */
 public class FileHandler {
 
     /**
      * Calls a function to list all of the saved games files that the user can load from depending on string type
-     * @param type
-     * @param newFileName
+     * @param type Type
+     * @param newFileName New file name
      * @return If the file was loaded successfully
      */
     public static boolean fileLoader(String type, String newFileName) {
@@ -35,7 +39,7 @@ public class FileHandler {
 
     /**
      * Asks the user what they would like to save the file as, depending on if its a config or save file
-     * @param type
+     * @param type Type
      * @return A filename string that the user inputted
      */
     public static String fileNamer(String type) {
@@ -49,7 +53,7 @@ public class FileHandler {
 
     /**
      * Lists all of the currently saved game files under the correct file, config or saves
-     * @param type
+     * @param type Type
      * @return The filename chosen by the user from the list
      */
     public static String getAllFiles(String type) {
@@ -59,16 +63,15 @@ public class FileHandler {
         else lsFiles = new File("config");
         String[] files = lsFiles.list();
         if(files == null || files.length == 0) return "noFilesException";
-        ArrayList<String> allFiles = new ArrayList<String>(Arrays.asList(lsFiles.list()));
+        ArrayList<String> allFiles = new ArrayList<>(Arrays.asList(Objects.requireNonNull(lsFiles.list())));
         StartGame.printOptions(allFiles);
         int currentMove;
         while(true) {
             try{
                 currentMove = scanner.nextInt();
                 if(currentMove == -1) return "-1fileException";
-                String fileName = allFiles.get(currentMove).replace(".ser", "")
+                return allFiles.get(currentMove).replace(".ser", "")
                         .replace(".ini", "");
-                return fileName;
             } catch (Exception e) {
                 GUI.invalidInputMessage();
                 scanner.nextLine();

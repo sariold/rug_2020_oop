@@ -13,11 +13,11 @@ public class MagicOrb extends Item implements Serializable {
 
     private static final long serialVersionUID = 13L;
 
-    private Room room;
+    private final Room room;
 
     /**
      * Creates a magic orb and sets the room it will teleport the player too
-     * @param room
+     * @param room Room
      */
     public MagicOrb(Room room) {
         super(DefaultStats.MAGIC_ORB_DESCRIPTION);
@@ -26,7 +26,7 @@ public class MagicOrb extends Item implements Serializable {
 
     /**
      * Overrides the default use method because this item teleports the player to another room
-     * @param player
+     * @param player Player
      */
     @Override
     public void use(Player player) {

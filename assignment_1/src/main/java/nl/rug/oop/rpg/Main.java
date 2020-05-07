@@ -7,10 +7,9 @@ public class Main {
 
     /**
      * Starts the game by calling a startgame method from StartGame class
-     * @param args
+     * @param args Arguments
      */
     public static void main(String[] args) {
-        StartGame startGame = new StartGame();
-        startGame.startGameOption();
+        StartGame.startGameOption();
     }
 }
