@@ -18,9 +18,7 @@ public abstract class Enemy extends DungeonNpc implements Attackable, Serializab
 
     private static final long serialVersionUID = 19L;
 
-    private int hitPoints;
     private int maxHitPoints;
-    private int attackPoints;
     private int goldValue;
     private boolean burned;
     private boolean frozen;

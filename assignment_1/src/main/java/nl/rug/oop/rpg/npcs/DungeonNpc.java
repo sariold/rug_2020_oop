@@ -18,6 +18,8 @@ public abstract class DungeonNpc implements Inspectable, Interactable, Serializa
     private String description;
     private String name;
     protected boolean engaged;
+    protected int hitPoints;
+    protected int attackPoints;
 
     /**
      * Creates a DungeonNPC with a description and a name
@@ -27,6 +29,8 @@ public abstract class DungeonNpc implements Inspectable, Interactable, Serializa
     public DungeonNpc(String description, String name) {
         this.name = name;
         this.description = description;
+        this.hitPoints = 1;
+        this.attackPoints = 1;
     }
 
     /**
