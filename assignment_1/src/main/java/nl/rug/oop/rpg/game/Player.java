@@ -4,6 +4,7 @@ import nl.rug.oop.rpg.extra.DefaultStats;
 import nl.rug.oop.rpg.extra.TextColor;
 import nl.rug.oop.rpg.interfaces.Attackable;
 import nl.rug.oop.rpg.interfaces.Collectable;
+import nl.rug.oop.rpg.npcs.enemies.Enemy;
 import nl.rug.oop.rpg.objects.items.EnchantItem;
 import nl.rug.oop.rpg.objects.items.Item;
 import nl.rug.oop.rpg.objects.Room;
@@ -322,14 +323,17 @@ public class Player implements Attackable, Serializable {
      */
     @Override
     public void attack(Attackable attacked) {
+        int damage = this.getAttackPoints();
+        System.out.println(TextColor.ANSI_YELLOW + "You attack " + ((Enemy)attacked).getName() + TextColor.ANSI_RESET);
         Random r = new Random();
         int critical = r.nextInt(101);
         if (critical < 21) {
             System.out.println(TextColor.ANSI_YELLOW + "Critical Hit!" + TextColor.ANSI_RESET);
-            attacked.reduceHitPoints(2 * this.attackPoints);
-        } else {
-            attacked.reduceHitPoints(this.attackPoints);
+            damage *= 2;
         }
+        System.out.println(TextColor.ANSI_YELLOW + ((Enemy)attacked).getName() + " takes " + damage
+                + " damage!" + TextColor.ANSI_RESET);
+        attacked.reduceHitPoints(damage);
     }
 
     /**

@@ -83,9 +83,6 @@ public class Combat {
      */
     private static void playerMove(int move, Player player, Enemy enemy, Game game) {
         if (move == 1){
-            System.out.println(TextColor.ANSI_YELLOW + "You attack " + enemy.getName() + TextColor.ANSI_RESET);
-            System.out.println(TextColor.ANSI_YELLOW + enemy.getName() + " takes " + player.getAttackPoints()
-                    + " damage!" + TextColor.ANSI_RESET);
             player.attack(enemy);
         } else if (move == game.getFireMagic()) {
             System.out.println(TextColor.ANSI_YELLOW + "You have burned " + enemy.getName() + "!"
