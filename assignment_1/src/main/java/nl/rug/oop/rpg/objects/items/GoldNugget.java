@@ -3,6 +3,7 @@ package nl.rug.oop.rpg.objects.items;
 import nl.rug.oop.rpg.extra.DefaultStats;
 import nl.rug.oop.rpg.game.Player;
 import nl.rug.oop.rpg.extra.TextColor;
+import nl.rug.oop.rpg.game.PlayerStats;
 
 import java.io.Serializable;
 
@@ -29,7 +30,7 @@ public class GoldNugget extends Item implements Serializable {
      */
     @Override
     public void use(Player player) {
-        player.increaseGold(this.value);
+        PlayerStats.increaseGold(this.value, player);
         System.out.println(TextColor.ANSI_YELLOW + "You gained " + this.value + " gold." + TextColor.ANSI_RESET);
         super.use(player);
     }

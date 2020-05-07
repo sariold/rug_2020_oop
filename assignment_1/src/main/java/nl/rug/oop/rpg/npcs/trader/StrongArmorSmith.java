@@ -2,6 +2,7 @@ package nl.rug.oop.rpg.npcs.trader;
 
 import nl.rug.oop.rpg.extra.DefaultStats;
 import nl.rug.oop.rpg.game.Player;
+import nl.rug.oop.rpg.game.PlayerStats;
 
 import java.io.Serializable;
 
@@ -28,7 +29,7 @@ public class StrongArmorSmith extends Trader implements Serializable {
      */
     @Override
     public void trade(Player player) {
-        player.increaseMaxHitPoints(this.getPower());
+        PlayerStats.increaseMaxHitPoints(this.getPower(), player);
         super.trade(player);
     }
 

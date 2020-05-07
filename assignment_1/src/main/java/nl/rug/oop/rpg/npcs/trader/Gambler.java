@@ -3,6 +3,7 @@ package nl.rug.oop.rpg.npcs.trader;
 import nl.rug.oop.rpg.extra.DefaultStats;
 import nl.rug.oop.rpg.game.Player;
 import nl.rug.oop.rpg.extra.TextColor;
+import nl.rug.oop.rpg.game.PlayerStats;
 
 import java.io.Serializable;
 import java.util.Random;
@@ -33,10 +34,10 @@ public class Gambler extends Trader implements Serializable {
         Random r = new Random();
         int chance = r.nextInt(101);
         if (chance < 41) {
-            player.increaseMaxHitPoints(this.getPower());
+            PlayerStats.increaseMaxHitPoints(this.getPower(), player);
         }
         else if (chance < 81) {
-            player.increaseAttackPoints(this.getPower());
+            PlayerStats.increaseAttackPoints(this.getPower(), player);
         } else {
             System.out.println(TextColor.ANSI_YELLOW + "Nothing happened." + TextColor.ANSI_RESET);
         }

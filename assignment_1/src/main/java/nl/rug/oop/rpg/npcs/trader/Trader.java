@@ -4,6 +4,7 @@ import nl.rug.oop.rpg.game.Game;
 import nl.rug.oop.rpg.game.GameInteract;
 import nl.rug.oop.rpg.game.Player;
 import nl.rug.oop.rpg.extra.TextColor;
+import nl.rug.oop.rpg.game.PlayerStats;
 import nl.rug.oop.rpg.npcs.DungeonNpc;
 
 import java.io.Serializable;
@@ -55,7 +56,7 @@ public abstract class Trader extends DungeonNpc implements Serializable {
      * @param player Player
      */
     public void trade(Player player) {
-        player.decreaseGold(this.price);
+        PlayerStats.decreaseGold(this.price, player);
         this.engaged = true;
         System.out.println("You traded with " + this.getName() + ". You have " + player.getGold() + " gold.");
     }

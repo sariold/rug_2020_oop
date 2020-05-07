@@ -140,7 +140,7 @@ public class Combat {
                 + enemy.getGoldValue() + " gold." + TextColor.ANSI_RESET);
         enemy.die(game);
         player.getCurrentRoom().removeDeadNPC();
-        player.increaseGold(enemy.getGoldValue());
+        PlayerStats.increaseGold(enemy.getGoldValue(), player);
         player.increaseHitPoints(enemy.getAttackPoints());
     }
 

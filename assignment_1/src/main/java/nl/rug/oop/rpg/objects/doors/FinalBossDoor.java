@@ -1,5 +1,6 @@
 package nl.rug.oop.rpg.objects.doors;
 
+import nl.rug.oop.rpg.extra.TextColor;
 import nl.rug.oop.rpg.game.Combat;
 import nl.rug.oop.rpg.extra.DefaultStats;
 import nl.rug.oop.rpg.game.Game;
@@ -41,6 +42,8 @@ public class FinalBossDoor extends Door implements Serializable {
             player.getCurrentRoom().addNPC(dragon);
             Combat.engageFight(player, (Enemy) player.getCurrentRoom().getNPCs().get(0), game);
         }
-        this.inspect();
+        System.out.println(TextColor.ANSI_RED + "It seems like someone has some dying to do, I dare you to fight both "
+                + "of my sons." + TextColor.ANSI_RESET);
     }
+
 }

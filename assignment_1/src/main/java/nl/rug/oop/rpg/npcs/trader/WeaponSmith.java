@@ -2,6 +2,7 @@ package nl.rug.oop.rpg.npcs.trader;
 
 import nl.rug.oop.rpg.extra.DefaultStats;
 import nl.rug.oop.rpg.game.Player;
+import nl.rug.oop.rpg.game.PlayerStats;
 
 import java.io.Serializable;
 
@@ -27,7 +28,7 @@ public class WeaponSmith extends Trader implements Serializable {
      */
     @Override
     public void trade(Player player) {
-        player.increaseAttackPoints(this.getPower());
+        PlayerStats.increaseAttackPoints(this.getPower(), player);
         super.trade(player);
     }
 

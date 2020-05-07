@@ -2,6 +2,7 @@ package nl.rug.oop.rpg.game;
 
 import nl.rug.oop.rpg.interfaces.Collectable;
 import nl.rug.oop.rpg.objects.items.EnchantItem;
+import nl.rug.oop.rpg.objects.items.Item;
 
 import java.util.ArrayList;
 
@@ -33,5 +34,15 @@ public class InventoryMethods {
             if (c instanceof EnchantItem) enchantables.add(c);
         }
         return enchantables;
+    }
+
+    /**
+     * Removes used items from a players inventory
+     * @param player Player
+     */
+    public static void removePlayerUsedItem(Player player) {
+        for (int i = player.getInventory().size() - 1; i > -1; i--) {
+            if (((Item) player.getInventory().get(i)).getUsed()) player.getInventory().remove(i);
+        }
     }
 }
