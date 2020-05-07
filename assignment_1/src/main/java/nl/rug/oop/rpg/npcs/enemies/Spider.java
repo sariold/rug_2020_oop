@@ -1,6 +1,6 @@
 package nl.rug.oop.rpg.npcs.enemies;
 
-import nl.rug.oop.rpg.DefaultStats;
+import nl.rug.oop.rpg.extra.DefaultStats;
 
 import java.io.Serializable;
 
@@ -13,17 +13,18 @@ public class Spider extends Enemy implements Serializable {
 
     /**
      * Constructor for a spider
-     * attack points, hit points and gold value are all set to default values
+     * Attack points, hit points and gold value are all set to default values
      * @param description
      * @param name
      */
     public Spider(String description, String name) {
-        super(description, name, DefaultStats.SPIDER_HIT_POINTS , DefaultStats.SPIDER_ATTACK_POINTS, DefaultStats.SPIDER_GOLD_VALUE);
+        super(description, name, DefaultStats.SPIDER_HIT_POINTS , DefaultStats.SPIDER_ATTACK_POINTS,
+                DefaultStats.SPIDER_GOLD_VALUE);
     }
 
     /**
      * Constructor for a spider using only a name
-     * sets the description to the standard description
+     * Sets the description to the standard description
      * @param name
      */
     public Spider(String name) {
@@ -31,7 +32,7 @@ public class Spider extends Enemy implements Serializable {
     }
 
     /**
-     * return the species of this enemy
+     * Return the species of this enemy
      * @return "Spider"
      */
     @Override

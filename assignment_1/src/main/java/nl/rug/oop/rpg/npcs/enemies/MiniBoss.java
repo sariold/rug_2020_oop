@@ -6,7 +6,7 @@ import nl.rug.oop.rpg.objects.doors.MiniBossDoor;
 import java.io.Serializable;
 
 /**
- * abstract class MiniBoss extends abstract class Enemy must be defeated to fight the boss of the game
+ * Abstract class MiniBoss extends abstract class Enemy must be defeated to fight the boss of the game
  */
 public abstract class MiniBoss extends Enemy implements Serializable {
 
@@ -23,21 +23,22 @@ public abstract class MiniBoss extends Enemy implements Serializable {
      * @param goldValue
      * @param door
      */
-    public MiniBoss(String description, String name, int hitPoints, int attackPoints, int goldValue, MiniBossDoor door){
+    public MiniBoss(String description, String name, int hitPoints, int attackPoints, int goldValue,
+                    MiniBossDoor door) {
         super(description, name, hitPoints, attackPoints, goldValue);
         this.door = door;
     }
 
     /**
-     * returns the door this mini boss is associated with
-     * @return door object
+     * Returns the door this mini boss is associated with
+     * @return Door object
      */
     public Door getDoor() {
         return this.door;
     }
 
     /**
-     * sets the door this mini boss is associated with
+     * Sets the door this mini boss is associated with
      * @param newDoor
      */
     public void setDoor(MiniBossDoor newDoor) {

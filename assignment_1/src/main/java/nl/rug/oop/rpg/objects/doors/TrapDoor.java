@@ -1,14 +1,14 @@
 package nl.rug.oop.rpg.objects.doors;
 
-import nl.rug.oop.rpg.Game;
-import nl.rug.oop.rpg.Player;
-import nl.rug.oop.rpg.TextColor;
+import nl.rug.oop.rpg.game.Game;
+import nl.rug.oop.rpg.game.Player;
+import nl.rug.oop.rpg.extra.TextColor;
 import nl.rug.oop.rpg.objects.Room;
 
 import java.io.Serializable;
 
 /**
- * TrapDoor class tricks the user by impersonating a normal door but deals damage instead and leads nowehere
+ * TrapDoor class tricks the user by impersonating a normal door but deals damage instead and leads nowhere
  */
 public class TrapDoor extends Door implements Serializable {
 
@@ -36,7 +36,8 @@ public class TrapDoor extends Door implements Serializable {
     public void interact(Player player) {
         String color = TextColor.ANSI_RED;
         player.reduceHitPoints(this.attackPoints);
-        System.out.println(color + "This is a trap door you fool, you lose " + this.attackPoints + " health!" + TextColor.ANSI_RESET);
+        System.out.println(color + "This is a trap door you fool, you lose " + this.attackPoints + " health!"
+                + TextColor.ANSI_RESET);
     }
 
     /**
@@ -49,7 +50,8 @@ public class TrapDoor extends Door implements Serializable {
     public void engage(Player player, Game game) {
         this.interact(player);
         if (player.isDead()) {
-            System.out.println(TextColor.ANSI_RED + "You have been slain by the mighty trap door!" + TextColor.ANSI_RESET);
+            System.out.println(TextColor.ANSI_RED + "You have been slain by the mighty trap door!"
+                    + TextColor.ANSI_RESET);
             game.gameOver();
         }
         player.getCurrentRoom().inspect();

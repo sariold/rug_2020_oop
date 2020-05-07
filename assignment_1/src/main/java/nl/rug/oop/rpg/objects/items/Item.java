@@ -1,6 +1,6 @@
 package nl.rug.oop.rpg.objects.items;
 
-import nl.rug.oop.rpg.Player;
+import nl.rug.oop.rpg.game.Player;
 import nl.rug.oop.rpg.interfaces.Collectable;
 import nl.rug.oop.rpg.objects.DungeonObjects;
 
@@ -48,7 +48,7 @@ public abstract class Item extends DungeonObjects implements Collectable, Serial
 
     /**
      * Returns if the item has been used yet
-     * @return
+     * @return Boolean value if an item has been used
      */
     public boolean getUsed() {
         return this.used;
@@ -64,7 +64,7 @@ public abstract class Item extends DungeonObjects implements Collectable, Serial
 
     /**
      * Returns if this item has been collected by the player
-     * @return
+     * @return Boolean value if an item has been collected
      */
     public boolean getCollected() {
         return this.collected;

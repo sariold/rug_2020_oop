@@ -1,6 +1,6 @@
 package nl.rug.oop.rpg.npcs.enemies;
 
-import nl.rug.oop.rpg.DefaultStats;
+import nl.rug.oop.rpg.extra.DefaultStats;
 
 import java.io.Serializable;
 
@@ -13,17 +13,18 @@ public class Orc extends Enemy implements Serializable {
 
     /**
      * Constructor for an orc
-     * attack points, hit points and gold value are all set to default values
+     * Attack points, hit points and gold value are all set to default values
      * @param description
      * @param name
      */
     public Orc(String description, String name) {
-        super(description, name, DefaultStats.ORC_HIT_POINTS , DefaultStats.ORC_ATTACK_POINTS, DefaultStats.ORC_GOLD_VALUE);
+        super(description, name, DefaultStats.ORC_HIT_POINTS , DefaultStats.ORC_ATTACK_POINTS,
+                DefaultStats.ORC_GOLD_VALUE);
     }
 
     /**
      * Constructor for an orc using only a name
-     * sets the description to the standard description
+     * Sets the description to the standard description
      * @param name
      */
     public Orc(String name) {
@@ -31,7 +32,7 @@ public class Orc extends Enemy implements Serializable {
     }
 
     /**
-     * return the species of this enemy
+     * Return the species of this enemy
      * @return "Orc"
      */
     @Override

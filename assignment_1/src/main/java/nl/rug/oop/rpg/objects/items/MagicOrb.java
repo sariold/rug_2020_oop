@@ -1,7 +1,7 @@
 package nl.rug.oop.rpg.objects.items;
 
-import nl.rug.oop.rpg.DefaultStats;
-import nl.rug.oop.rpg.Player;
+import nl.rug.oop.rpg.extra.DefaultStats;
+import nl.rug.oop.rpg.game.Player;
 import nl.rug.oop.rpg.objects.Room;
 
 import java.io.Serializable;
@@ -38,7 +38,7 @@ public class MagicOrb extends Item implements Serializable {
 
     /**
      * This item has no combat use
-     * @return
+     * @return Boolean if an item has combat use
      */
     @Override
     public boolean hasCombatUse() {
@@ -47,7 +47,7 @@ public class MagicOrb extends Item implements Serializable {
 
     /**
      * This item has use outside of combat
-     * @return
+     * @return Boolean if an item has non combat use
      */
     @Override
     public boolean hasNonCombatUse() {
@@ -56,7 +56,7 @@ public class MagicOrb extends Item implements Serializable {
 
     /**
      * Returns the type of item
-     * @return
+     * @return The string of an item
      */
     @Override
     public String toString() {

@@ -1,11 +1,11 @@
 package nl.rug.oop.rpg.npcs.enemies;
 
-import nl.rug.oop.rpg.Game;
+import nl.rug.oop.rpg.game.Game;
 
 import java.io.Serializable;
 
 /**
- * abstract class Boss defeating this enemy wins the game
+ * Abstract class Boss defeating this enemy wins the game
  */
 public abstract class Boss extends Enemy implements Serializable {
 
@@ -24,7 +24,7 @@ public abstract class Boss extends Enemy implements Serializable {
     }
 
     /**
-     * if a boss dies the game is won
+     * If a boss dies the game is won
      * @param game
      */
     @Override

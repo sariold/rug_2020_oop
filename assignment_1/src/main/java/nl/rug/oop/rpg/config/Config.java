@@ -1,7 +1,7 @@
 package nl.rug.oop.rpg.config;
 
-import nl.rug.oop.rpg.GUI;
-import nl.rug.oop.rpg.Game;
+import nl.rug.oop.rpg.game.GUI;
+import nl.rug.oop.rpg.game.Game;
 
 import java.io.*;
 import java.util.InputMismatchException;
@@ -14,9 +14,10 @@ import java.util.Scanner;
 public class Config {
 
     /**
-     * Allows the user to set a custom config for custom java properties
+     * Allows the user to set a custom config for custom java properties and save custom config file under custom name
+     * @param configName
      */
-    public static void setConfig() {
+    public static void setConfig(String configName) {
         Properties properties = new Properties();
         Scanner scanner = new Scanner(System.in);
         String name = "";
@@ -95,9 +96,11 @@ public class Config {
         configDirectory.mkdir();
 
         try {
-            FileOutputStream fileOutputStream = new FileOutputStream(configDirectory + File.separator + "playerConfig" + ".ini");
+            FileOutputStream fileOutputStream = new FileOutputStream(configDirectory + File.separator
+                    + configName + ".ini");
             properties.store(fileOutputStream, "Player configuration");
-            System.out.println("Player configuration set to:\nName: " + name + "\nMax Health: " + maxHealth + "\nHealth: " + health + "\nAttack: " + attack + "\nGold: " + gold);
+            System.out.println("Player configuration set to:\nName: " + name + "\nMax Health: " + maxHealth
+                    + "\nHealth: " + health + "\nAttack: " + attack + "\nGold: " + gold);
         } catch (FileNotFoundException e) {
             System.out.println("File could not be found!");
         } catch (IOException e) {
@@ -108,12 +111,14 @@ public class Config {
     /**
      * Allows the user to load from a custom config file with custom java properties
      * @param game
+     * @param configName
      */
-    public static void loadConfig(Game game) {
+    public static void loadConfig(Game game, String configName) {
         File configDirectory = new File("config");
         configDirectory.mkdir();
         try {
-            FileInputStream fileInputStream = new FileInputStream(configDirectory + File.separator + "playerConfig" + ".ini");
+            FileInputStream fileInputStream = new FileInputStream(configDirectory + File.separator + configName
+                    + ".ini");
             Properties properties = new Properties();
             properties.load(fileInputStream);
             game.getPlayer().setName(properties.getProperty("playerName"));
@@ -121,6 +126,7 @@ public class Config {
             game.getPlayer().setHitPoints(Integer.parseInt(properties.getProperty("playerHealth")));
             game.getPlayer().setAttackPoints(Integer.parseInt(properties.getProperty("playerAttack")));
             game.getPlayer().setGold(Integer.parseInt(properties.getProperty("playerGold")));
+            System.out.println("The " + configName + " config was loaded successfully!");
         } catch (FileNotFoundException e) {
             System.out.println("File could not be found!");
         } catch (IOException e) {

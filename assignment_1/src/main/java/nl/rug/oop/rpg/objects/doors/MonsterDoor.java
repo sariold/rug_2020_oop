@@ -1,8 +1,8 @@
 package nl.rug.oop.rpg.objects.doors;
 
-import nl.rug.oop.rpg.DefaultStats;
-import nl.rug.oop.rpg.Player;
-import nl.rug.oop.rpg.TextColor;
+import nl.rug.oop.rpg.extra.DefaultStats;
+import nl.rug.oop.rpg.game.Player;
+import nl.rug.oop.rpg.extra.TextColor;
 import nl.rug.oop.rpg.objects.Room;
 
 import java.io.Serializable;
@@ -25,7 +25,8 @@ public class MonsterDoor extends Door implements Serializable {
     }
 
     /**
-     * Ovverirdes default interact method because this door has a requirement from the user if they want to pass through
+     * Ovverirdes default interact method because this door has a requirement from the user if
+     * they want to pass through
      * @param player
      */
     @Override

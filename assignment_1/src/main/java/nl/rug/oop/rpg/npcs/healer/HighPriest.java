@@ -1,7 +1,7 @@
 package nl.rug.oop.rpg.npcs.healer;
 
-import nl.rug.oop.rpg.DefaultStats;
-import nl.rug.oop.rpg.Player;
+import nl.rug.oop.rpg.extra.DefaultStats;
+import nl.rug.oop.rpg.game.Player;
 
 import java.io.Serializable;
 
@@ -14,7 +14,7 @@ public class HighPriest extends Healer implements Serializable {
 
     /**
      * Constructor for a HighPriest
-     * heal power is set to a default value
+     * Heal power is set to a default value
      * @param name
      */
     public HighPriest(String name) {
@@ -22,7 +22,7 @@ public class HighPriest extends Healer implements Serializable {
     }
 
     /**
-     * a high priest heals a player fully
+     * A high priest heals a player fully
      * @param player
      */
     @Override
@@ -32,7 +32,7 @@ public class HighPriest extends Healer implements Serializable {
     }
 
     /**
-     * return the species of this healer
+     * Return the species of this healer
      * @return "High Priest"
      */
     @Override

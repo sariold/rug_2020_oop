@@ -1,5 +1,7 @@
-package nl.rug.oop.rpg;
+package nl.rug.oop.rpg.game;
 
+import nl.rug.oop.rpg.extra.DefaultStats;
+import nl.rug.oop.rpg.extra.TextColor;
 import nl.rug.oop.rpg.interfaces.Attackable;
 import nl.rug.oop.rpg.interfaces.Collectable;
 import nl.rug.oop.rpg.objects.items.EnchantItem;
@@ -29,7 +31,7 @@ public class Player implements Attackable, Serializable {
 
 
     /**
-     * Player constructor, custom name and sets their stats depending on the config initilization
+     * Player constructor, custom name and sets their stats depending on the config initialization
      * @param name
      * @param currentRoom
      * @param hitPoints
@@ -82,7 +84,7 @@ public class Player implements Attackable, Serializable {
 
     /**
      * Returns the inventory arraylist of a player
-     * @return
+     * @return The arraylist inventory
      */
     public ArrayList<Collectable> getInventory() {
         return new ArrayList<Collectable>(this.inventory);
@@ -90,7 +92,7 @@ public class Player implements Attackable, Serializable {
 
     /**
      * Returns the combat inventory arraylist of a player
-     * @return
+     * @return The combat inventory arraylist
      */
     public ArrayList<Collectable> getCombatInventory() {
         ArrayList<Collectable> combatItems = new ArrayList<Collectable>();
@@ -101,8 +103,8 @@ public class Player implements Attackable, Serializable {
     }
 
     /**
-     * Returns the enchantable friendly arraylist iventory of a player
-     * @return
+     * Returns the enchantable friendly arraylist inventory of a player
+     * @return The enchantable items arraylist of the player
      */
     public ArrayList<Collectable> getEnchantableInventory() {
         ArrayList<Collectable> enchantables = new ArrayList<Collectable>();
@@ -130,7 +132,7 @@ public class Player implements Attackable, Serializable {
 
     /**
      * Returns the health points of a player
-     * @return
+     * @return The health of a player
      */
     public int getHitPoints() {
         return hitPoints;
@@ -138,7 +140,7 @@ public class Player implements Attackable, Serializable {
 
     /**
      * Returns the attack damage of a player
-     * @return
+     * @return The attack damage of aplayer
      */
     public int getAttackPoints() {
         return this.attackPoints;
@@ -174,7 +176,7 @@ public class Player implements Attackable, Serializable {
 
     /**
      * Gets the max health the player can have
-     * @return
+     * @return Max hit points of a player
      */
     public int getMaxHitPoints() {
         return this.maxHitPoints;
@@ -182,7 +184,7 @@ public class Player implements Attackable, Serializable {
 
     /**
      * Gets the current room the player is in
-     * @return
+     * @return Player's current room
      */
     public Room getCurrentRoom() {
         return currentRoom;
@@ -230,7 +232,7 @@ public class Player implements Attackable, Serializable {
 
     /**
      * Checks if the player is frozen
-     * @return
+     * @return If player is frozen
      */
     public boolean isFrozen() {
         return frozen;
@@ -238,7 +240,7 @@ public class Player implements Attackable, Serializable {
 
     /**
      * Checks if the player is burned
-     * @return
+     * @return If player is burned
      */
     public boolean isBurned() {
         return burned;
@@ -293,7 +295,8 @@ public class Player implements Attackable, Serializable {
         if (this.isBurned()) {
             chance = r.nextInt(101);
             if (chance < DefaultStats.BURN_CHANCE) {
-                System.out.println(TextColor.ANSI_RED + "You are burned and take " + DefaultStats.BURN_DAMAGE  + " damage." +TextColor.ANSI_RESET);
+                System.out.println(TextColor.ANSI_RED + "You are burned and take " + DefaultStats.BURN_DAMAGE
+                        + " damage." +TextColor.ANSI_RESET);
             } else {
                 System.out.println(TextColor.ANSI_BLUE + "You do no longer burn!" + TextColor.ANSI_RESET);
                 this.removeBurn();
@@ -307,7 +310,8 @@ public class Player implements Attackable, Serializable {
      */
     @Override
     public void increaseHitPoints(int value) {
-        System.out.println(TextColor.ANSI_GREEN + "You have been healed " + value + " hit points!" + TextColor.ANSI_RESET);
+        System.out.println(TextColor.ANSI_GREEN + "You have been healed " + value + " hit points!"
+                + TextColor.ANSI_RESET);
         this.hitPoints += value;
         if (this.hitPoints > this.maxHitPoints) this.hitPoints = this.maxHitPoints;
     }

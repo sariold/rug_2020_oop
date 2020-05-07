@@ -1,6 +1,9 @@
 package nl.rug.oop.rpg;
 
 import nl.rug.oop.rpg.config.Config;
+import nl.rug.oop.rpg.extra.TextColor;
+import nl.rug.oop.rpg.game.GUI;
+import nl.rug.oop.rpg.game.Game;
 import nl.rug.oop.rpg.io.Serializer;
 
 import java.io.File;
@@ -55,7 +58,7 @@ public class StartGame {
                 case 0:
                     possibleMoves.clear();
                     possibleMoves.add("Play the game normally");
-                    possibleMoves.add("Initialise from config");
+                    possibleMoves.add("Initialize from config");
                     possibleMoves.add("Set default config");
                     System.out.println("You are about to start a new game, what do you want to do?");
                     printOptions(possibleMoves);
@@ -69,52 +72,58 @@ public class StartGame {
                     switch (currentMove) {
                         // normal game
                         case 0:
-                            fileName = fileNamer();
-                            initNewGame(fileName, false);
+                            fileName = fileNamer("saves");
+                            initNewGame(fileName, false, null);
                             break;
                         // from config
                         case 1:
-                            fileName = fileNamer();
-                            initNewGame(fileName, true);
+                            fileName = fileNamer("saves");
+                            if(fileLoader("config", fileName)) break;
                             break;
                         // set config
                         case 2:
-                            Config.setConfig();
+                            fileName = fileNamer("config");
+                            Config.setConfig(fileName);
                             break;
                     }
-
                     break;
                 case 1:
-                    if(fileLoader()) break;
+                    if(fileLoader("saves", null)) break;
             }
         }
     }
 
     /**
-     * Calls a function to list all of the saved games files that the user can load from
-     * @return
+     * Calls a function to list all of the saved games files that the user can load from depending on string type
+     * @param type
+     * @param newFileName
+     * @return If the file was loaded successfully
      */
-    public boolean fileLoader() {
+    public boolean fileLoader(String type, String newFileName) {
         boolean minusOne = true;
-        System.out.println("Which file would you like to load from? (-1 : none)");
-        String fileName = getAllFiles();
+        if(type == "saves") System.out.println("Which save file would you like to load from? (-1 : none)");
+        else System.out.println("Which config file would you like to load from? (-1 : none)");
+        String fileName = getAllFiles(type);
         if(fileName == "noFilesException") {
-            System.out.println("No save files available!");
+            System.out.println("No files available!");
             minusOne = false;
         }
         else if(fileName != "-1fileException") {
-            initOldGame(fileName);
+            if(type == "saves") initOldGame(fileName);
+            else initNewGame(newFileName, true, fileName);
             minusOne = false;
         }
         return minusOne;
     }
 
     /**
-     * Asks the user what they would like to save the file as
-     * @return
+     * Asks the user what they would like to save the file as, depending on if its a config or save file
+     * @param type
+     * @return A filename string that the user inputted
      */
-    public String fileNamer() {
-        System.out.println("What would you like to name this new game file?");
+    public String fileNamer(String type) {
+        if(type == "saves") System.out.println("What would you like to name this new save game file?");
+        else System.out.println("What would you like to name this new config game file?");
         String fileName = "";
         Scanner scanner = new Scanner(System.in);
         fileName = scanner.nextLine();
@@ -122,12 +131,15 @@ public class StartGame {
     }
 
     /**
-     * Lists all of the currently saved game files
-     * @return
+     * Lists all of the currently saved game files under the correct file, config or saves
+     * @param type
+     * @return The filename chosen by the user from the list
      */
-    public String getAllFiles() {
+    public String getAllFiles(String type) {
         Scanner scanner = new Scanner(System.in);
-        File lsFiles = new File("savedgames");
+        File lsFiles = null;
+        if(type == "saves") lsFiles = new File("savedgames");
+        else lsFiles = new File("config");
         String[] files = lsFiles.list();
         if(files == null || files.length == 0) return "noFilesException";
         ArrayList<String> allFiles = new ArrayList<String>(Arrays.asList(lsFiles.list()));
@@ -137,7 +149,8 @@ public class StartGame {
             try{
                 currentMove = scanner.nextInt();
                 if(currentMove == -1) return "-1fileException";
-                return allFiles.get(currentMove).toString().replace(".ser", "");
+                return allFiles.get(currentMove).toString().replace(".ser", "")
+                        .replace(".ini", "");
             } catch (Exception e) {
                 GUI.invalidInputMessage();
                 scanner.nextLine();
@@ -159,17 +172,18 @@ public class StartGame {
             System.out.println("Could not load from the file!");
             startGameOption();
         } catch (ClassNotFoundException e) {
-            System.out.println("The savefile could not be used to load a game!");
+            System.out.println("The save file could not be used to load a game!");
             startGameOption();
         }
     }
 
     /**
-     * Creates a new game object and a brand new game
+     * Creates a new game object and a brand new game, checks if its a config loaded game, and which config file
      * @param fileName
      * @param fromConfig
+     * @param configName
      */
-    public void initNewGame(String fileName, boolean fromConfig) {
+    public void initNewGame(String fileName, boolean fromConfig, String configName) {
         Scanner scanner = new Scanner(System.in);
         String playerName = "";
         if (!fromConfig) {
@@ -181,14 +195,15 @@ public class StartGame {
                 playerName = scanner.nextLine();
             }
         }
-        System.out.println(TextColor.ANSI_BLUE + "Slay both mini bosses and be forced to face the final boss!" +
-                TextColor.ANSI_RESET);
 
         Game game = new Game(playerName);
         if (fromConfig) {
-            Config.loadConfig(game);
+            Config.loadConfig(game, configName);
         }
         Serializer.saveGame(game, fileName);
+        System.out.println(TextColor.ANSI_BLUE + "Slay both mini bosses and be forced to face the final boss!" +
+                TextColor.ANSI_RESET);
+
         gameStart(game, fileName);
     }
 
@@ -219,7 +234,7 @@ public class StartGame {
                     Serializer.saveGame(game, fileName);
                     return;
                 case 1:
-                    newFileName = fileNamer();
+                    newFileName = fileNamer("saves");
                     Serializer.saveGame(game, newFileName);
                     return;
             }
@@ -303,7 +318,7 @@ public class StartGame {
                     gameSave(game, fileName);
                     break;
                 case 9:
-                    if(fileLoader()) break;
+                    if(fileLoader("saves", null)) break;
             }
         }
     }

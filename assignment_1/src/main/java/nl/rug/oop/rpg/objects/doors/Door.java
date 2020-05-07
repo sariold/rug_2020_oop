@@ -1,7 +1,7 @@
 package nl.rug.oop.rpg.objects.doors;
 
-import nl.rug.oop.rpg.Game;
-import nl.rug.oop.rpg.Player;
+import nl.rug.oop.rpg.game.Game;
+import nl.rug.oop.rpg.game.Player;
 import nl.rug.oop.rpg.interfaces.Interactable;
 import nl.rug.oop.rpg.objects.DungeonObjects;
 import nl.rug.oop.rpg.objects.Room;
@@ -50,7 +50,7 @@ public class Door extends DungeonObjects implements Interactable, Serializable {
      * Checks if two rooms are equal based off of their room descriptions
      * @param r1
      * @param r2
-     * @return
+     * @return If two rooms are equal
      */
     public static int equals(Room r1, Room r2) {
         int result = 1;
@@ -61,7 +61,7 @@ public class Door extends DungeonObjects implements Interactable, Serializable {
 
     /**
      * Method to return the room that this door connect TO
-     * @return
+     * @return The To room of a door
      */
     public Room returnTo() {
         return this.to;

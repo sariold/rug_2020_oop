@@ -1,7 +1,7 @@
 package nl.rug.oop.rpg.npcs.trader;
 
-import nl.rug.oop.rpg.DefaultStats;
-import nl.rug.oop.rpg.Player;
+import nl.rug.oop.rpg.extra.DefaultStats;
+import nl.rug.oop.rpg.game.Player;
 
 import java.io.Serializable;
 
@@ -14,7 +14,7 @@ public class WeaponSmith extends Trader implements Serializable {
 
     /**
      * Constructor for a weapon smith
-     * power and price are set to default values
+     * Power and price are set to default values
      * @param name
      */
     public WeaponSmith(String name) {
@@ -22,7 +22,7 @@ public class WeaponSmith extends Trader implements Serializable {
     }
 
     /**
-     * trading results in increase of attack of the player
+     * Trading results in increase of attack of the player
      * @param player
      */
     @Override
@@ -32,7 +32,7 @@ public class WeaponSmith extends Trader implements Serializable {
     }
 
     /**
-     * return the species of this trader
+     * Return the species of this trader
      * @return "Weaponsmith"
      */
     @Override
@@ -41,7 +41,7 @@ public class WeaponSmith extends Trader implements Serializable {
     }
 
     /**
-     * return the trade dialog for this trader
+     * Return the trade dialog for this trader
      * @return String
      */
     @Override

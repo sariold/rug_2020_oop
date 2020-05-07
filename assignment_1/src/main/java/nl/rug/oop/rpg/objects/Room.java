@@ -33,7 +33,7 @@ public class Room extends DungeonObjects implements Serializable {
 
     /**
      * Returns the items arraylist of a room
-     * @return
+     * @return Arraylist of items in the room
      */
     public ArrayList<Collectable> getItems() {
         return new ArrayList<Collectable>(this.items);
@@ -66,7 +66,7 @@ public class Room extends DungeonObjects implements Serializable {
 
     /**
      * Returns the doors arraylist of a room
-     * @return
+     * @return A door arraylist of a room
      */
     public ArrayList<Door> getDoors() {
         return new ArrayList<Door>(this.doors);
@@ -99,7 +99,7 @@ public class Room extends DungeonObjects implements Serializable {
 
     /**
      * Returns an arraylist of npcs from current room
-     * @return
+     * @return Arraylist of npcs in the room
      */
     public ArrayList<DungeonNpc> getNPCs() {
         return new ArrayList<DungeonNpc>(this.NPCs);
@@ -108,7 +108,7 @@ public class Room extends DungeonObjects implements Serializable {
     /**
      * Counts how many dead npcs are in a current room
      * @param npcs
-     * @return
+     * @return How many npcs are dead in a room
      */
     public int countEnemies(ArrayList<DungeonNpc> npcs) {
         int count = (int) npcs.stream().filter(npc -> npc instanceof Enemy).count();

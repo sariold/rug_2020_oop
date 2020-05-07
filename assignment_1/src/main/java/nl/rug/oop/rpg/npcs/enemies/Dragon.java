@@ -1,8 +1,8 @@
 package nl.rug.oop.rpg.npcs.enemies;
 
 import nl.rug.oop.rpg.interfaces.Attackable;
-import nl.rug.oop.rpg.DefaultStats;
-import nl.rug.oop.rpg.Player;
+import nl.rug.oop.rpg.extra.DefaultStats;
+import nl.rug.oop.rpg.game.Player;
 
 import java.io.Serializable;
 import java.util.Random;
@@ -16,17 +16,18 @@ public class Dragon extends Boss implements Serializable {
 
     /**
      * Constructor for a dragon
-     * attack points, hit points and gold value are all set to default values
+     * Attack points, hit points and gold value are all set to default values
      * @param description
      * @param name
      */
     public Dragon(String description, String name) {
-        super(description, name, DefaultStats.DRAGON_HIT_POINTS , DefaultStats.DRAGON_ATTACK_POINTS, DefaultStats.DRAGON_GOLD_VALUE);
+        super(description, name, DefaultStats.DRAGON_HIT_POINTS , DefaultStats.DRAGON_ATTACK_POINTS,
+                DefaultStats.DRAGON_GOLD_VALUE);
     }
 
     /**
      * Constructor for a dragon using only a name
-     * sets the description to the standard description
+     * Sets the description to the standard description
      * @param name
      */
     public Dragon(String name) {
@@ -34,8 +35,8 @@ public class Dragon extends Boss implements Serializable {
     }
 
     /**
-     * when a dragon attacks there is a chance to burn or freeze the attacked
-     * if the attacked does not get burnt or frozen then the dragon deals its attack power as damage
+     * When a dragon attacks there is a chance to burn or freeze the attacked
+     * If the attacked does not get burnt or frozen then the dragon deals its attack power as damage
      * @param attacked
      */
     @Override
@@ -55,7 +56,7 @@ public class Dragon extends Boss implements Serializable {
     }
 
     /**
-     * return the species of this enemy
+     * Return the species of this enemy
      * @return "Dragon"
      */
     @Override

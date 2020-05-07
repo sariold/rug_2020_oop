@@ -1,6 +1,6 @@
 package nl.rug.oop.rpg.npcs.enemies;
 
-import nl.rug.oop.rpg.DefaultStats;
+import nl.rug.oop.rpg.extra.DefaultStats;
 
 import java.io.Serializable;
 
@@ -13,17 +13,18 @@ public class Rat extends Enemy implements Serializable {
 
     /**
      * Constructor for a rat
-     * attack points, hit points and gold value are all set to default values
+     * Attack points, hit points and gold value are all set to default values
      * @param description
      * @param name
      */
     public Rat(String description, String name) {
-        super(description, name, DefaultStats.RAT_HIT_POINTS , DefaultStats.RAT_ATTACK_POINTS, DefaultStats.RAT_GOLD_VALUE);
+        super(description, name, DefaultStats.RAT_HIT_POINTS , DefaultStats.RAT_ATTACK_POINTS,
+                DefaultStats.RAT_GOLD_VALUE);
     }
 
     /**
      * Constructor for a rat using only a name
-     * sets the description to the standard description
+     * Sets the description to the standard description
      * @param name
      */
     public Rat(String name) {
@@ -31,7 +32,7 @@ public class Rat extends Enemy implements Serializable {
     }
 
     /**
-     * return the species of this enemy
+     * Return the species of this enemy
      * @return "Rat"
      */
     @Override

@@ -1,8 +1,8 @@
 package nl.rug.oop.rpg.objects.doors;
 
-import nl.rug.oop.rpg.DefaultStats;
-import nl.rug.oop.rpg.Game;
-import nl.rug.oop.rpg.Player;
+import nl.rug.oop.rpg.extra.DefaultStats;
+import nl.rug.oop.rpg.game.Game;
+import nl.rug.oop.rpg.game.Player;
 import nl.rug.oop.rpg.objects.Room;
 
 import java.io.Serializable;
@@ -32,7 +32,7 @@ public class MiniBossDoor extends Door implements Serializable {
     }
 
     /**
-     * Ovverides the default Door engage method because this door makes you engage in combat with either a red
+     * Overrides the default Door engage method because this door makes you engage in combat with either a red
      * or a blue wizard immediately upon interacting with this door
      * @param player
      * @param game
@@ -65,7 +65,7 @@ public class MiniBossDoor extends Door implements Serializable {
 
     /**
      * Return the color of the miniboss in the room, two types of minibosses, either a blue or a red wizard
-     * @return
+     * @return The type of wizard miniboss
      */
     public String getWizardColor() {
         return this.wizardColor;
@@ -73,14 +73,14 @@ public class MiniBossDoor extends Door implements Serializable {
 
     /**
      * Boolean value that determines if a miniboss has been defeated
-     * @return
+     * @return The boolean value of defeated
      */
     public boolean isDefeated() {
         return defeated;
     }
 
     /**
-     * Sets the boolean value defeated to true if the miniboss has been deafeated
+     * Sets the boolean value defeated to true if the miniboss has been defeated
      */
     public void defeated() {
         this.defeated = true;

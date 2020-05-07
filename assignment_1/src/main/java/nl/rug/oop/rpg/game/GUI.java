@@ -1,5 +1,6 @@
-package nl.rug.oop.rpg;
+package nl.rug.oop.rpg.game;
 
+import nl.rug.oop.rpg.extra.TextColor;
 import nl.rug.oop.rpg.interfaces.Collectable;
 import nl.rug.oop.rpg.npcs.DungeonNpc;
 import nl.rug.oop.rpg.npcs.enemies.Enemy;
@@ -15,8 +16,8 @@ import java.util.ArrayList;
 public class GUI {
 
     /**
-     * prints health and healthbar of the player and the current enemy during combat
-     * prints all combat options the player has
+     * Prints health and healthbar of the player and the current enemy during combat
+     * Prints all combat options the player has
      * @param player
      * @param enemy
      * @param game
@@ -24,16 +25,20 @@ public class GUI {
     public static void displayCombatInterface(Player player, Enemy enemy, Game game) {
         String playerHealthBar = "";
         String enemyHealthBar = "";
-        String indentStringName = player.getName() + ": " + Integer.toString(player.getHitPoints()) + "/" + Integer.toString(player.getMaxHitPoints());
+        String indentStringName = player.getName() + ": " + Integer.toString(player.getHitPoints())
+                + "/" + Integer.toString(player.getMaxHitPoints());
         int indentName = 30 - indentStringName.length();
         int indentBar = 19;
         double playerPercent = (double)player.getHitPoints()/player.getMaxHitPoints();
         double enemyPercent = (double)enemy.getHitPoints()/enemy.getMaxHitPoints();
         for (double i = playerPercent; i > 0; i -= 0.1) {playerHealthBar = playerHealthBar.concat("=");}
         for (double i = enemyPercent; i > 0; i -= 0.1) {enemyHealthBar = enemyHealthBar.concat("=");}
-        String playerColor = playerPercent > 0.64 ? TextColor.ANSI_GREEN : (playerPercent > 0.32 ? TextColor.ANSI_YELLOW : TextColor.ANSI_RED);
-        String enemyColor = enemyPercent > 0.64 ? TextColor.ANSI_GREEN : (enemyPercent > 0.32 ? TextColor.ANSI_YELLOW : TextColor.ANSI_RED);
-        System.out.printf("%s%s: %d/%d %s", TextColor.ANSI_YELLOW, player.getName(), player.getHitPoints(), player.getMaxHitPoints(),TextColor.ANSI_RESET);
+        String playerColor = playerPercent > 0.64 ? TextColor.ANSI_GREEN : (playerPercent > 0.32
+                ? TextColor.ANSI_YELLOW : TextColor.ANSI_RED);
+        String enemyColor = enemyPercent > 0.64 ? TextColor.ANSI_GREEN : (enemyPercent > 0.32
+                ? TextColor.ANSI_YELLOW : TextColor.ANSI_RED);
+        System.out.printf("%s%s: %d/%d %s", TextColor.ANSI_YELLOW, player.getName(), player.getHitPoints(),
+                player.getMaxHitPoints(),TextColor.ANSI_RESET);
         for (int i = 0; i < indentName; i++){ System.out.print(" ");}
         System.out.printf("%s%s%s\n", TextColor.ANSI_RED, enemy.getName(),TextColor.ANSI_RESET);
         System.out.printf("[%s%-10s%s]", playerColor, playerHealthBar, TextColor.ANSI_RESET);
@@ -46,7 +51,7 @@ public class GUI {
     }
 
     /**
-     * prints all items in the players inventory
+     * Prints all items in the players inventory
      * @param player
      */
     public static void displayInventory(Player player) {
@@ -62,7 +67,7 @@ public class GUI {
     }
 
     /**
-     * prints all items in the players inventory that can be used in combat
+     * Prints all items in the players inventory that can be used in combat
      * @param player
      */
     public static void displayCombatInventory(Player player) {
@@ -78,7 +83,7 @@ public class GUI {
     }
 
     /**
-     * print an ArrayList of Collectables as an option menu
+     * Print an ArrayList of Collectables as an option menu
      * @param arrayList
      */
     public static void displayItems(ArrayList<Collectable> arrayList) {
@@ -88,18 +93,19 @@ public class GUI {
     }
 
     /**
-     * prints the players current stats
+     * Prints the players current stats
      * @param player
      */
     public static void displayStats(Player player) {
         System.out.println("Your Character: " + player.getName());
-        System.out.println(TextColor.ANSI_GREEN + "\tHealth: " + TextColor.ANSI_RESET + player.getHitPoints() + "/" + player.getMaxHitPoints());
+        System.out.println(TextColor.ANSI_GREEN + "\tHealth: " + TextColor.ANSI_RESET + player.getHitPoints()
+                + "/" + player.getMaxHitPoints());
         System.out.println(TextColor.ANSI_RED + "\tAttack: " + TextColor.ANSI_RESET + player.getAttackPoints());
         System.out.println(TextColor.ANSI_YELLOW + "\tGold: " + TextColor.ANSI_RESET + player.getGold());
     }
 
     /**
-     * prints the description of the current room
+     * Prints the description of the current room
      * @param player
      */
     public static void inspectRoom(Player player) {
@@ -108,7 +114,7 @@ public class GUI {
     }
 
     /**
-     * prints all doors in the current room of the player
+     * Prints all doors in the current room of the player
      * @param player
      */
     public static void inspectDoors(Player player) {
@@ -123,10 +129,10 @@ public class GUI {
     }
 
     /**
-     * prints all items in the current room of the player
-     * returns if there are any items in the current room
+     * Prints all items in the current room of the player
+     * Returns if there are any items in the current room
      * @param player
-     * @return
+     * @return If an item exists
      */
     public static boolean inspectItems(Player player) {
         boolean itemExists = false;
@@ -145,10 +151,10 @@ public class GUI {
     }
 
     /**
-     * prints all npcs in the current room of the player
-     * returns if there are any npcs in the current room
+     * Prints all npcs in the current room of the player
+     * Returns if there are any npcs in the current room
      * @param player
-     * @return
+     * @return If an npc exists
      */
     public static boolean inspectNPCs(Player player) {
         boolean npcExists = false;
@@ -158,7 +164,8 @@ public class GUI {
         ArrayList<DungeonNpc> npcs = player.getCurrentRoom().getNPCs();
         if(npcs.size() > 0) {
             for (int i = 0; i < npcs.size(); i++) {
-                System.out.print("\t(" + i + ") "+ "[" + npcs.get(i).getType() + "]" + "(" + npcs.get(i).getSpecies() + ") " + npcs.get(i).getName() + ": ");
+                System.out.print("\t(" + i + ") "+ "[" + npcs.get(i).getType() + "]" + "(" + npcs.get(i).getSpecies()
+                        + ") " + npcs.get(i).getName() + ": ");
                 npcs.get(i).inspect();
             }
             npcExists = true;
@@ -168,49 +175,55 @@ public class GUI {
     }
 
     /**
-     * prints the dialog when approaching a trader
+     * Prints the dialog when approaching a trader
      * @param trader
      */
     public static void tradeDialog(Trader trader) {
-        System.out.println(trader.getName() + ": " + TextColor.ANSI_PURPLE + trader.tradeDialog() + "\n Are you interested?" + TextColor.ANSI_RESET);
+        System.out.println(trader.getName() + ": " + TextColor.ANSI_PURPLE + trader.tradeDialog()
+                + "\n Are you interested?" + TextColor.ANSI_RESET);
         System.out.println("\t(0) I think that is too expensive!\n\t(1) Let's trade!");
     }
 
     /**
-     * prints the dialog when approaching a healer
+     * Prints the dialog when approaching a healer
      * @param healer
      */
     public static void healDialog(Healer healer) {
-        System.out.println(healer.getName() + ":" + TextColor.ANSI_PURPLE + "I can only heal you once, and then I will leave!\n Are you sure you want me to heal you?" + TextColor.ANSI_RESET);
+        System.out.println(healer.getName() + ":" + TextColor.ANSI_PURPLE + "I can only heal you once, and then "
+                + "I will leave!\n Are you sure you want me to heal you?" + TextColor.ANSI_RESET);
         System.out.println("\t(0) No better do it later!\n\t(1) Heal me!");
     }
 
     /**
      * prints a message when using a combat item outside of combat
      */
-    public static void onlyCombatItemMessage(){ System.out.println(TextColor.ANSI_YELLOW + "This item can only be used in combat." + TextColor.ANSI_RESET); }
+    public static void onlyCombatItemMessage(){ System.out.println(TextColor.ANSI_YELLOW + "This item can only "
+            + "be used in combat." + TextColor.ANSI_RESET); }
 
     /**
-     * prints a message when invalid input is given
+     * Prints a message when invalid input is given
      */
     public static void invalidInputMessage() { System.out.println("That is not a valid input!"); }
 
     /**
-     * prints a message when invalid item is chosen from the inventory
+     * Prints a message when invalid item is chosen from the inventory
      */
     public static void invalidItemMessage() { System.out.println("That is not a valid item!"); }
 
     /**
-     * prints a message when the game is won
+     * Prints a message when the game is won
      */
     public static void winGameMessage(){
-        System.out.println(TextColor.ANSI_YELLOW + "Congratulations you have won the game! You are a real dungeon master!" + TextColor.ANSI_RESET);
-        System.out.println(TextColor.ANSI_BLUE + "This game has been brought to you by Diego and Felix." + TextColor.ANSI_RESET);
+        System.out.println(TextColor.ANSI_YELLOW + "Congratulations you have won the game! You are a real "
+                + "dungeon master!" + TextColor.ANSI_RESET);
+        System.out.println(TextColor.ANSI_BLUE + "This game has been brought to you by Diego and Felix."
+                + TextColor.ANSI_RESET);
     }
 
     /**
-     * prints a message when the player died
+     * Prints a message when the player died
      */
-    public static void gameOverMessage() { System.out.println(TextColor.ANSI_WHITE + "GAME OVER!" + TextColor.ANSI_RESET); }
+    public static void gameOverMessage() { System.out.println(TextColor.ANSI_WHITE + "GAME OVER!"
+            + TextColor.ANSI_RESET); }
 
 }

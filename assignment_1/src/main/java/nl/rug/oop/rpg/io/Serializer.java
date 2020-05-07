@@ -1,10 +1,7 @@
 package nl.rug.oop.rpg.io;
-import nl.rug.oop.rpg.Game;
-import nl.rug.oop.rpg.StartGame;
+import nl.rug.oop.rpg.game.Game;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * Serializer class that allows saving and loading the game object
@@ -20,7 +17,8 @@ public class Serializer {
         File saveDirectory = new File("savedgames");
         saveDirectory.mkdir();
 
-        try(FileOutputStream fileOutputStream = new FileOutputStream(saveDirectory + File.separator + fileName + ".ser");
+        try(FileOutputStream fileOutputStream = new FileOutputStream(saveDirectory + File.separator
+                + fileName + ".ser");
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream)) {
             objectOutputStream.writeObject(game);
             System.out.println("Save successful!");
@@ -34,14 +32,15 @@ public class Serializer {
     /**
      * Loads the game from a specific file given by the user
      * @param fileName
-     * @return
+     * @return A game object
      * @throws IOException
      * @throws ClassNotFoundException
      */
     public static Game loadGame(String fileName) throws IOException, ClassNotFoundException {
         File saveDirectory = new File("savedgames");
         saveDirectory.mkdir();
-        try(FileInputStream fileInputStream = new FileInputStream(saveDirectory + File.separator + fileName + ".ser");
+        try(FileInputStream fileInputStream = new FileInputStream(saveDirectory + File.separator
+                + fileName + ".ser");
         ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream)) {
             Game game = (Game) objectInputStream.readObject();
             return game;

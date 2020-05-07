@@ -1,8 +1,8 @@
 package nl.rug.oop.rpg.npcs.trader;
 
-import nl.rug.oop.rpg.DefaultStats;
-import nl.rug.oop.rpg.Player;
-import nl.rug.oop.rpg.TextColor;
+import nl.rug.oop.rpg.extra.DefaultStats;
+import nl.rug.oop.rpg.game.Player;
+import nl.rug.oop.rpg.extra.TextColor;
 
 import java.io.Serializable;
 import java.util.Random;
@@ -16,7 +16,7 @@ public class Gambler extends Trader implements Serializable {
 
     /**
      * Constructor for a gambler
-     * power and price are set to default values
+     * Power and price are set to default values
      * @param name
      */
     public Gambler(String name) {
@@ -24,7 +24,8 @@ public class Gambler extends Trader implements Serializable {
     }
 
     /**
-     * trading with a gambler has a 40% chance to increase health, 40% chance to increase attack, 20% chance to not increase stats
+     * Trading with a gambler has a 40% chance to increase health, 40% chance to increase attack, 20%
+     * Chance to not increase stats
      * @param player
      */
     @Override
@@ -43,7 +44,7 @@ public class Gambler extends Trader implements Serializable {
     }
 
     /**
-     * return species of this trader
+     * Return species of this trader
      * @return "Gambler"
      */
     @Override
@@ -52,12 +53,13 @@ public class Gambler extends Trader implements Serializable {
     }
 
     /**
-     * return the trade dialog for a gambler
+     * Return the trade dialog for a gambler
      * @return String
      */
     @Override
     public String tradeDialog() {
-        String toReturn = "I will increase one of your stats by " + this.getPower() + " for " + this.getPrice() + " gold! However it might not work.";
+        String toReturn = "I will increase one of your stats by " + this.getPower() + " for "
+                + this.getPrice() + " gold! However it might not work.";
         return toReturn;
     }
 }

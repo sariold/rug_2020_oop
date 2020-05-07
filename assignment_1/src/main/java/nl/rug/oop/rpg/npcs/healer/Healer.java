@@ -1,14 +1,14 @@
 package nl.rug.oop.rpg.npcs.healer;
 
-import nl.rug.oop.rpg.Game;
-import nl.rug.oop.rpg.Player;
-import nl.rug.oop.rpg.TextColor;
+import nl.rug.oop.rpg.game.Game;
+import nl.rug.oop.rpg.game.Player;
+import nl.rug.oop.rpg.extra.TextColor;
 import nl.rug.oop.rpg.npcs.DungeonNpc;
 
 import java.io.Serializable;
 
 /**
- * abstract class Healer extends abstract class DungeonNpc heals a player
+ * Abstract class Healer extends abstract class DungeonNpc heals a player
  */
 public abstract class Healer extends DungeonNpc implements Serializable {
 
@@ -30,13 +30,13 @@ public abstract class Healer extends DungeonNpc implements Serializable {
     }
 
     /**
-     * set engaged to b
+     * Set engaged to b
      * @param b
      */
     public void setHealStatus(boolean b) { this.engaged = b; }
 
     /**
-     * heal a player for the heal power of this healer
+     * Heal a player for the heal power of this healer
      * @param player
      */
     public void heal(Player player) {
@@ -45,7 +45,7 @@ public abstract class Healer extends DungeonNpc implements Serializable {
     }
 
     /**
-     * returns the heal power of this healer
+     * Returns the heal power of this healer
      * @return healPower
      */
     public int getHealPower() {
@@ -53,7 +53,7 @@ public abstract class Healer extends DungeonNpc implements Serializable {
     }
 
     /**
-     * calls the healPlayer method from the game
+     * Calls the healPlayer method from the game
      * @param player
      * @param game
      */
@@ -63,7 +63,7 @@ public abstract class Healer extends DungeonNpc implements Serializable {
     }
 
     /**
-     * call this healers heal method
+     * Call this healers heal method
      * @param player
      */
     @Override
@@ -72,7 +72,7 @@ public abstract class Healer extends DungeonNpc implements Serializable {
     }
 
     /**
-     * return the type of this healer
+     * Return the type of this healer
      * @return "Healer"
      */
     @Override

@@ -1,8 +1,8 @@
 package nl.rug.oop.rpg.npcs.trader;
 
-import nl.rug.oop.rpg.DefaultStats;
-import nl.rug.oop.rpg.GUI;
-import nl.rug.oop.rpg.Player;
+import nl.rug.oop.rpg.extra.DefaultStats;
+import nl.rug.oop.rpg.game.GUI;
+import nl.rug.oop.rpg.game.Player;
 import nl.rug.oop.rpg.interfaces.Collectable;
 import nl.rug.oop.rpg.objects.items.EnchantItem;
 
@@ -19,16 +19,17 @@ public class Enchanter extends Trader{
 
     /**
      * Constructor for an enchanter
-     * power and price are set to default values
+     * Power and price are set to default values
      * @param name
      */
     public Enchanter(String name) {
-        super("I will enchant one of your items for a little price!", name, DefaultStats.ENCHANTER_POWER, DefaultStats.ENCHANTER_PRICE);
+        super("I will enchant one of your items for a little price!", name, DefaultStats.ENCHANTER_POWER,
+                DefaultStats.ENCHANTER_PRICE);
     }
 
     /**
-     * trading with an enchanter lists all enchantable items in the player inventory
-     * the chosen item will increase in power
+     * Trading with an enchanter lists all enchantable items in the player inventory
+     * The chosen item will increase in power
      * @param player
      */
     @Override
@@ -53,7 +54,8 @@ public class Enchanter extends Trader{
             System.out.println("You did not enchant anything!");
             return;
         }
-        if (currentMove < items.size() && currentMove > -1) ((EnchantItem)items.get(currentMove)).enchant(this.getPower());
+        if (currentMove < items.size() && currentMove > -1) ((EnchantItem)items.get(currentMove))
+                .enchant(this.getPower());
         else {
             GUI.invalidItemMessage();
             return;
@@ -62,7 +64,7 @@ public class Enchanter extends Trader{
     }
 
     /**
-     * returns the species of this trader
+     * Returns the species of this trader
      * @return "Enchanter"
      */
     @Override
@@ -71,12 +73,13 @@ public class Enchanter extends Trader{
     }
 
     /**
-     * return the trade dialog for an enchanter
+     * Return the trade dialog for an enchanter
      * @return String
      */
     @Override
     public String tradeDialog() {
-        String toReturn = "I will increase the power of one of your items by " + this.getPower() + " for " + this.getPrice() + " gold!";
+        String toReturn = "I will increase the power of one of your items by " + this.getPower()
+                + " for " + this.getPrice() + " gold!";
         return toReturn;
     }
 }

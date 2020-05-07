@@ -1,7 +1,7 @@
 package nl.rug.oop.rpg.npcs.trader;
 
-import nl.rug.oop.rpg.DefaultStats;
-import nl.rug.oop.rpg.Player;
+import nl.rug.oop.rpg.extra.DefaultStats;
+import nl.rug.oop.rpg.game.Player;
 
 import java.io.Serializable;
 
@@ -14,15 +14,16 @@ public class StrongArmorSmith extends Trader implements Serializable {
 
     /**
      * Constructor for a strong armor smith
-     * power and price are set to default values
+     * Power and price are set to default values
      * @param name
      */
     public StrongArmorSmith(String name) {
-        super("Armor is not to be joked with!", name, DefaultStats.STRONG_ARMORSMITH_POWER, DefaultStats.STRONG_ARMORSMITH_PRICE);
+        super("Armor is not to be joked with!", name, DefaultStats.STRONG_ARMORSMITH_POWER,
+                DefaultStats.STRONG_ARMORSMITH_PRICE);
     }
 
     /**
-     * trading results in increase of health of the player
+     * Trading results in increase of health of the player
      * @param player
      */
     @Override
@@ -32,7 +33,7 @@ public class StrongArmorSmith extends Trader implements Serializable {
     }
 
     /**
-     * return the species of this trader
+     * Return the species of this trader
      * @return "Excellent Armorsmith"
      */
     @Override
@@ -41,12 +42,13 @@ public class StrongArmorSmith extends Trader implements Serializable {
     }
 
     /**
-     * return the trade dialog for a strong armor smith
+     * Return the trade dialog for a strong armor smith
      * @return String
      */
     @Override
     public String tradeDialog() {
-        String toReturn = "I will increase your maximum health by " + this.getPower() + " for " + this.getPrice() + " gold!";
+        String toReturn = "I will increase your maximum health by " + this.getPower()
+                + " for " + this.getPrice() + " gold!";
         return toReturn;
     }
 }

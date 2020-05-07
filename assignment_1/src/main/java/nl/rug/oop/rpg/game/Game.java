@@ -1,5 +1,7 @@
-package nl.rug.oop.rpg;
+package nl.rug.oop.rpg.game;
 
+import nl.rug.oop.rpg.extra.DefaultStats;
+import nl.rug.oop.rpg.extra.TextColor;
 import nl.rug.oop.rpg.interfaces.Collectable;
 import nl.rug.oop.rpg.io.JsonReader;
 import nl.rug.oop.rpg.npcs.*;
@@ -70,7 +72,8 @@ public class Game implements Serializable {
             System.out.println("The default map files are not formatted correctly!");
             e.printStackTrace();
         }
-        this.player = new Player(name, this.totalRooms.get(0), DefaultStats.PLAYER_HIT_POINTS, DefaultStats.PLAYER_ATTACK_POINTS, DefaultStats.PLAYER_HIT_POINTS);
+        this.player = new Player(name, this.totalRooms.get(0), DefaultStats.PLAYER_HIT_POINTS,
+                DefaultStats.PLAYER_ATTACK_POINTS, DefaultStats.PLAYER_HIT_POINTS);
 
         this.possibleMoves.add("Look around");
         this.possibleMoves.add("Look for a way out");
@@ -92,7 +95,7 @@ public class Game implements Serializable {
 
     /**
      * Returns an arraylist of possible moves for the player
-     * @return
+     * @return Arraylist of possible moves
      */
     public ArrayList<String> getPossibleMoves() {
         return new ArrayList<String>(possibleMoves);
@@ -100,7 +103,7 @@ public class Game implements Serializable {
 
     /**
      * Returns an arraylist of possible fight moves for the player
-     * @return
+     * @return Arraylist of possible fight moves
      */
     public ArrayList<String> getFightMoves() {
         return new ArrayList<String>(fightMoves);
@@ -108,15 +111,15 @@ public class Game implements Serializable {
 
     /**
      * Returns the player of this game object
-     * @return
+     * @return The player object
      */
     public Player getPlayer() {
         return player;
     }
 
     /**
-     * Returns if the player has fight magic
-     * @return
+     * Returns if the player has fire magic
+     * @return If the player has fire magic
      */
     public int getFireMagic() {
         return fireMagic;
@@ -124,7 +127,7 @@ public class Game implements Serializable {
 
     /**
      * Returns if the player has ice magic
-     * @return
+     * @return If the player has ice magic
      */
     public int getIceMagic() {
         return iceMagic;
@@ -132,7 +135,7 @@ public class Game implements Serializable {
 
     /**
      * Returns the boolean determining if the player is dead or not
-     * @return
+     * @return If the player is dead
      */
     public boolean notOver() {
         return !player.isDead();
@@ -290,7 +293,8 @@ public class Game implements Serializable {
      */
     public void addIceMagic() {
         for (String move: fightMoves) { if (move.equals("Ice Magic")) return; }
-        System.out.println(TextColor.ANSI_YELLOW + "You gained ice magic and can now freeze enemies in combat!" + TextColor.ANSI_RESET);
+        System.out.println(TextColor.ANSI_YELLOW + "You gained ice magic and can now freeze enemies in combat!"
+                + TextColor.ANSI_RESET);
         iceMagic = fightMoves.size();
         fightMoves.add("Ice Magic");
     }
@@ -300,7 +304,8 @@ public class Game implements Serializable {
      */
     public void addFireMagic() {
         for (String move: fightMoves) { if (move.equals("Fire Magic")) return; }
-        System.out.println(TextColor.ANSI_YELLOW + "You gained fire magic and can now burn enemies in combat!" + TextColor.ANSI_RESET);
+        System.out.println(TextColor.ANSI_YELLOW + "You gained fire magic and can now burn enemies in combat!"
+                + TextColor.ANSI_RESET);
         fireMagic = fightMoves.size();
         fightMoves.add("Fire Magic");
     }

@@ -1,4 +1,4 @@
-package nl.rug.oop.rpg;
+package nl.rug.oop.rpg.extra;
 
 /**
  * Class file that stores all of the default values of npcs, items, and damage
@@ -73,7 +73,8 @@ public class DefaultStats {
     public static final int ENCHANTER_PRICE = 10;
 
     // BOSS
-    public static final String MINI_BOSS_DOOR = "If you dare enter this room, you will be forced to defeat a mini boss!";
+    public static final String MINI_BOSS_DOOR = "If you dare enter this room, you will be forced to defeat "
+            + "a mini boss!";
     public static final String FINAL_BOSS_DOOR = "You can only enter this room if you have defeated BOTH OF MY SONS!";
 
     // MONSTER DOOR

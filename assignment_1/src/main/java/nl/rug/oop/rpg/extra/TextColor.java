@@ -1,4 +1,4 @@
-package nl.rug.oop.rpg;
+package nl.rug.oop.rpg.extra;
 
 /**
  * Changes the color of system.out.println text

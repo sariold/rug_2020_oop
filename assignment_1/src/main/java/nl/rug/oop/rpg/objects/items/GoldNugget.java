@@ -1,8 +1,8 @@
 package nl.rug.oop.rpg.objects.items;
 
-import nl.rug.oop.rpg.DefaultStats;
-import nl.rug.oop.rpg.Player;
-import nl.rug.oop.rpg.TextColor;
+import nl.rug.oop.rpg.extra.DefaultStats;
+import nl.rug.oop.rpg.game.Player;
+import nl.rug.oop.rpg.extra.TextColor;
 
 import java.io.Serializable;
 
@@ -16,7 +16,7 @@ public class GoldNugget extends Item implements Serializable {
     private int value;
 
     /**
-     * Creats a gold nugget with a gold value
+     * Creates a gold nugget with a gold value
      */
     public GoldNugget() {
         super("This nugget is worth some money.");
@@ -36,7 +36,7 @@ public class GoldNugget extends Item implements Serializable {
 
     /**
      * This item has no use during combat so set to false
-     * @return
+     * @return Boolean value of item's combat use
      */
     @Override
     public boolean hasCombatUse() {
@@ -45,7 +45,7 @@ public class GoldNugget extends Item implements Serializable {
 
     /**
      * This item has no combat use
-     * @return
+     * @return Boolean value if item has non combat use
      */
     @Override
     public boolean hasNonCombatUse() {
@@ -53,8 +53,8 @@ public class GoldNugget extends Item implements Serializable {
     }
 
     /**
-     * Printing the type of item
-     * @return
+     * Returning the type of item
+     * @return The name of an item
      */
     @Override
     public String toString() {

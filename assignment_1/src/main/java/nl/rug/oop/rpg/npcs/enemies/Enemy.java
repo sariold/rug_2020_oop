@@ -1,15 +1,18 @@
 package nl.rug.oop.rpg.npcs.enemies;
 
-import nl.rug.oop.rpg.*;
+import nl.rug.oop.rpg.extra.DefaultStats;
+import nl.rug.oop.rpg.extra.TextColor;
+import nl.rug.oop.rpg.game.Combat;
+import nl.rug.oop.rpg.game.Game;
+import nl.rug.oop.rpg.game.Player;
 import nl.rug.oop.rpg.interfaces.Attackable;
 import nl.rug.oop.rpg.npcs.DungeonNpc;
 
 import java.io.Serializable;
 import java.util.Random;
-import java.util.concurrent.ConcurrentMap;
 
 /**
- * abstract class Enemy extends abstract class DungeonNpc implements Attackable and can be fought by a player
+ * Abstract class Enemy extends abstract class DungeonNpc implements Attackable and can be fought by a player
  */
 public abstract class Enemy extends DungeonNpc implements Attackable, Serializable {
 
@@ -48,51 +51,51 @@ public abstract class Enemy extends DungeonNpc implements Attackable, Serializab
     }
 
     /**
-     * returns whether the enemy is burned
-     * @return burned
+     * Returns whether the enemy is burned
+     * @return Burned
      */
     public boolean isBurned() {
         return burned;
     }
 
     /**
-     * returns whether the enemy is frozen
-     * @return frozen
+     * Returns whether the enemy is frozen
+     * @return Frozen
      */
     public boolean isFrozen() {
         return frozen;
     }
 
     /**
-     * burns this enemy
+     * Burns this enemy
      */
     public void burn(){
         this.burned = true;
     }
 
     /**
-     * unburns this enemy
+     * Unburns this enemy
      */
     public void removeBurn() {
         this.burned = false;
     }
 
     /**
-     * freezes this enemy
+     * Freezes this enemy
      */
     public void freeze() {
         this.frozen = true;
     }
 
     /**
-     * unfreezes this enemy
+     * Unfreezes this enemy
      */
     public void removeFreeze() {
         this.frozen = false;
     }
 
     /**
-     * returns the amount of gold gained by defeating this enemy
+     * Returns the amount of gold gained by defeating this enemy
      * @return goldValue
      */
     public int getGoldValue() {
@@ -100,7 +103,7 @@ public abstract class Enemy extends DungeonNpc implements Attackable, Serializab
     }
 
     /**
-     * returns the hit points of this enemy
+     * Returns the hit points of this enemy
      * @return hitPoints
      */
     public int getHitPoints() {
@@ -108,27 +111,27 @@ public abstract class Enemy extends DungeonNpc implements Attackable, Serializab
     }
 
     /**
-     * returns the maximum hit points of this enemy
+     * Returns the maximum hit points of this enemy
      * @return maxHitPoints
      */
     public int getMaxHitPoints() { return maxHitPoints; }
 
     /**
-     * returns the attack points of this enemy
+     * Returns the attack points of this enemy
      * @return attackPoints
      */
     public int getAttackPoints() { return attackPoints; }
 
     /**
-     * sets the engaged value of this enemy to true
+     * Sets the engaged value of this enemy to true
      * @param game
      */
     public void die(Game game) { this.engaged = true; }
 
     /**
-     * checks status impairments of this enemy
-     * if the enemy is frozen it has a chance of being unfrozen otherwise it will skip a turn
-     * if the enemy is burnt it has a chance of being unburnt otherwise it will take damage
+     * Checks status impairments of this enemy
+     * If the enemy is frozen it has a chance of being unfrozen otherwise it will skip a turn
+     * If the enemy is burnt it has a chance of being unburnt otherwise it will take damage
      */
     @Override
     public void checkStatusImpairments() {
@@ -139,24 +142,27 @@ public abstract class Enemy extends DungeonNpc implements Attackable, Serializab
             if (chance < DefaultStats.FREEZE_CHANCE) {
                 System.out.println(TextColor.ANSI_BLUE + this.getName() + " is frozen solid." + TextColor.ANSI_RESET);
             } else {
-                System.out.println(TextColor.ANSI_BLUE + this.getName() + " is no longer frozen!" + TextColor.ANSI_RESET);
+                System.out.println(TextColor.ANSI_BLUE + this.getName() + " is no longer frozen!"
+                        + TextColor.ANSI_RESET);
                 this.removeFreeze();
             }
         }
         if (this.isBurned()) {
             chance = r.nextInt(101);
             if (chance < DefaultStats.BURN_CHANCE) {
-                System.out.println(TextColor.ANSI_YELLOW + this.getName() + " is burned and takes " + DefaultStats.BURN_DAMAGE  + " damage." +TextColor.ANSI_RESET);
+                System.out.println(TextColor.ANSI_YELLOW + this.getName() + " is burned and takes "
+                        + DefaultStats.BURN_DAMAGE  + " damage." +TextColor.ANSI_RESET);
                 this.reduceHitPoints(DefaultStats.BURN_DAMAGE);
             } else {
-                System.out.println(TextColor.ANSI_YELLOW + this.getName() + " does no longer burn!" + TextColor.ANSI_RESET);
+                System.out.println(TextColor.ANSI_YELLOW + this.getName() + " does no longer burn!"
+                        + TextColor.ANSI_RESET);
                 this.removeBurn();
             }
         }
     }
 
     /**
-     * deals as much damage to the attacked object as this enemy has attack power
+     * Deals as much damage to the attacked object as this enemy has attack power
      * @param attacked
      */
     @Override
@@ -170,11 +176,12 @@ public abstract class Enemy extends DungeonNpc implements Attackable, Serializab
         } else {
             attacked.reduceHitPoints(this.attackPoints);
         }
-        System.out.println(TextColor.ANSI_RED + "You are at " +  attacked.getHitPoints() + " health!" + TextColor.ANSI_RESET);
+        System.out.println(TextColor.ANSI_RED + "You are at " +  attacked.getHitPoints() + " health!"
+                + TextColor.ANSI_RESET);
     }
 
     /**
-     * reduce the hit points of this enemy by the given value
+     * Reduce the hit points of this enemy by the given value
      * @param value
      */
     @Override
@@ -183,7 +190,7 @@ public abstract class Enemy extends DungeonNpc implements Attackable, Serializab
     }
 
     /**
-     * increase the hit points of this enemy by the given value
+     * Increase the hit points of this enemy by the given value
      * @param value
      */
     @Override
@@ -192,8 +199,8 @@ public abstract class Enemy extends DungeonNpc implements Attackable, Serializab
     }
 
     /**
-     * returns whether the hit points of this enemy are above 0
-     * @return true if hit points are 0 or less
+     * Returns whether the hit points of this enemy are above 0
+     * @return True if hit points are 0 or less
      */
     @Override
     public boolean isDead() {
@@ -201,7 +208,7 @@ public abstract class Enemy extends DungeonNpc implements Attackable, Serializab
     }
 
     /**
-     * attacks a player
+     * Attacks a player
      * @param player
      */
     @Override
@@ -210,7 +217,7 @@ public abstract class Enemy extends DungeonNpc implements Attackable, Serializab
     }
 
     /**
-     * engages a fight with a player
+     * Engages a fight with a player
      * @param player
      * @param game
      */
@@ -220,7 +227,7 @@ public abstract class Enemy extends DungeonNpc implements Attackable, Serializab
     }
 
     /**
-     * returns the type of npc this is
+     * Returns the type of npc this is
      * @return "Enemy"
      */
     @Override

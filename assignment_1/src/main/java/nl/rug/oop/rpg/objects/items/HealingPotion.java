@@ -1,7 +1,7 @@
 package nl.rug.oop.rpg.objects.items;
 
-import nl.rug.oop.rpg.DefaultStats;
-import nl.rug.oop.rpg.Player;
+import nl.rug.oop.rpg.extra.DefaultStats;
+import nl.rug.oop.rpg.game.Player;
 
 import java.io.Serializable;
 
@@ -52,7 +52,7 @@ public class HealingPotion extends EnchantItem implements Serializable {
 
     /**
      * Return the type of item this is
-     * @return
+     * @return The type of item
      */
     @Override
     public String toString() {

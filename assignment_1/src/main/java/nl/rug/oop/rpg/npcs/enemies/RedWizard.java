@@ -1,10 +1,10 @@
 package nl.rug.oop.rpg.npcs.enemies;
 
-import nl.rug.oop.rpg.Game;
+import nl.rug.oop.rpg.game.Game;
 import nl.rug.oop.rpg.interfaces.Attackable;
-import nl.rug.oop.rpg.DefaultStats;
+import nl.rug.oop.rpg.extra.DefaultStats;
 import nl.rug.oop.rpg.objects.doors.MiniBossDoor;
-import nl.rug.oop.rpg.Player;
+import nl.rug.oop.rpg.game.Player;
 
 import java.io.Serializable;
 import java.util.Random;
@@ -18,19 +18,20 @@ public class RedWizard extends MiniBoss implements Serializable {
 
     /**
      * Constructor for a red wizard
-     * sets the door associated with this mini boss to door
-     * attack points, hit points and gold value are all set to default values
+     * Sets the door associated with this mini boss to door
+     * Attack points, hit points and gold value are all set to default values
      * @param description
      * @param name
      * @param door
      */
     public RedWizard(String description, String name, MiniBossDoor door) {
-        super(description, name, DefaultStats.WIZARD_HIT_POINTS , DefaultStats.WIZARD_ATTACK_POINTS, DefaultStats.WIZARD_GOLD_VALUE, door);
+        super(description, name, DefaultStats.WIZARD_HIT_POINTS , DefaultStats.WIZARD_ATTACK_POINTS,
+                DefaultStats.WIZARD_GOLD_VALUE, door);
     }
 
     /**
      * Constructor for a red wizard using only a name
-     * sets the door associated with this mini boss to null
+     * Sets the door associated with this mini boss to null
      * @param name
      */
     public RedWizard(String name) {
@@ -38,7 +39,7 @@ public class RedWizard extends MiniBoss implements Serializable {
     }
 
     /**
-     * defeating a red wizard adds fire magic to the combat options of the game
+     * Defeating a red wizard adds fire magic to the combat options of the game
      * @param game
      */
     @Override
@@ -48,8 +49,8 @@ public class RedWizard extends MiniBoss implements Serializable {
     }
 
     /**
-     * when a red wizard attacks there is a chance to burn the attacked
-     * if the attacked does not get burnt then the red wizard deals its attack power as damage
+     * When a red wizard attacks there is a chance to burn the attacked
+     * If the attacked does not get burnt then the red wizard deals its attack power as damage
      * @param attacked
      */
     @Override
@@ -63,7 +64,7 @@ public class RedWizard extends MiniBoss implements Serializable {
     }
 
     /**
-     * returns the species of this enemy
+     * Returns the species of this enemy
      * @return "Red wizard"
      */
     @Override

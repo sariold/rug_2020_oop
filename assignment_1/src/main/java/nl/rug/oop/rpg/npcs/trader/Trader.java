@@ -1,14 +1,15 @@
 package nl.rug.oop.rpg.npcs.trader;
 
-import nl.rug.oop.rpg.Game;
-import nl.rug.oop.rpg.Player;
-import nl.rug.oop.rpg.TextColor;
+import nl.rug.oop.rpg.game.Game;
+import nl.rug.oop.rpg.game.Player;
+import nl.rug.oop.rpg.extra.TextColor;
 import nl.rug.oop.rpg.npcs.DungeonNpc;
 
 import java.io.Serializable;
 
 /**
- * abstract class Trader extends abstract class DungeonNpc increases stats or item power of a player in exchange for gold
+ * Abstract class Trader extends abstract class DungeonNpc increases stats or item power of a player in exchange for
+ * gold
  */
 public abstract class Trader extends DungeonNpc implements Serializable {
 
@@ -34,24 +35,24 @@ public abstract class Trader extends DungeonNpc implements Serializable {
     }
 
     /**
-     * returns this traders power
-     * @return power
+     * Returns this traders power
+     * @return Power
      */
     public int getPower() {
         return this.power;
     }
 
     /**
-     * returns this traders price
-     * @return price
+     * Returns this traders price
+     * @return Price
      */
     public int getPrice() {
         return price;
     }
 
     /**
-     * remove as much gold from the player as the price of this trader
-     * print that the player has traded with this trader
+     * Remove as much gold from the player as the price of this trader
+     * Print that the player has traded with this trader
      * @param player
      */
     public void trade(Player player) {
@@ -62,7 +63,7 @@ public abstract class Trader extends DungeonNpc implements Serializable {
     }
 
     /**
-     * return the trade dialog of this trader
+     * Return the trade dialog of this trader
      * @return String
      */
     public String tradeDialog() {
@@ -71,7 +72,7 @@ public abstract class Trader extends DungeonNpc implements Serializable {
     }
 
     /**
-     * call this traders trade method
+     * Call this traders trade method
      * @param player
      */
     @Override
@@ -80,7 +81,7 @@ public abstract class Trader extends DungeonNpc implements Serializable {
     }
 
     /**
-     * calls the tradeWith method from the
+     * Calls the tradeWith method from the
      * @param player
      * @param game
      */
@@ -90,7 +91,7 @@ public abstract class Trader extends DungeonNpc implements Serializable {
     }
 
     /**
-     * returns the type of this trader
+     * Returns the type of this trader
      * @return "Trader"
      */
     @Override

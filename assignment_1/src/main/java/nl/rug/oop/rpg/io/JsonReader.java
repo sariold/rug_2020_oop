@@ -291,7 +291,8 @@ public class JsonReader {
                 rooms.get(roomNumber).addItem(healingPotion);
                 break;
             case "MagicOrb":
-                int endRoomNumber = Integer.parseInt(itemObj.get("endRoom").toString().replace("r", ""));
+                int endRoomNumber = Integer.parseInt(itemObj.get("endRoom").toString()
+                        .replace("r", ""));
                 MagicOrb magicOrb = new MagicOrb(rooms.get(endRoomNumber));
                 rooms.get(roomNumber).addItem(magicOrb);
                 break;

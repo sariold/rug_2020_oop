@@ -14,7 +14,7 @@ public abstract class DungeonObjects implements Inspectable, Serializable {
     private String description;
 
     /**
-     * Creats a dungeon object and sets the description
+     * Creates a dungeon object and sets the description
      * @param description
      */
     public DungeonObjects(String description) {
@@ -23,7 +23,7 @@ public abstract class DungeonObjects implements Inspectable, Serializable {
 
     /**
      * Returns the description of a dungeon object
-     * @return
+     * @return Description string
      */
     public String getDescription() {
         return description;

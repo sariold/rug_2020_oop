@@ -1,4 +1,6 @@
-package nl.rug.oop.rpg;
+package nl.rug.oop.rpg.game;
+
+import nl.rug.oop.rpg.extra.TextColor;
 
 /**
  * Class to check if the user has inputted a specific name that might be a cheat code
@@ -7,7 +9,7 @@ public class Cheats {
 
     /**
      * Checks if the player name is a specific name which means it might be a cheat code, thus giving the player
-     * increases health or stats or gold
+     * Increases health or stats or gold
      * @param player
      * @param game
      */
