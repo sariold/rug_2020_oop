@@ -73,7 +73,7 @@ public class AttackMethods {
                 System.out.println(TextColor.ANSI_RED + "You are frozen solid." + TextColor.ANSI_RESET);
             } else {
                 System.out.println(TextColor.ANSI_BLUE + "You are no longer frozen!" + TextColor.ANSI_RESET);
-                player.removeFreeze();
+                player.setFrozen(false);
             }
         }
         if (player.isBurned()) {
@@ -83,7 +83,7 @@ public class AttackMethods {
                         + " damage." +TextColor.ANSI_RESET);
             } else {
                 System.out.println(TextColor.ANSI_BLUE + "You do no longer burn!" + TextColor.ANSI_RESET);
-                player.removeBurn();
+                player.setBurned(false);
             }
         }
     }

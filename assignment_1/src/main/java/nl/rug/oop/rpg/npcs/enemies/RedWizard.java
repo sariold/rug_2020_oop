@@ -58,7 +58,7 @@ public class RedWizard extends MiniBoss implements Serializable {
         Random r = new Random();
         int chance = r.nextInt(101);
         if (chance < 21) {
-            ((Player)attacked).burn();
+            ((Player)attacked).setBurned(true);
         }
         super.attack(attacked);
     }

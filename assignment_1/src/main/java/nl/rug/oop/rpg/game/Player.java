@@ -245,33 +245,21 @@ public class Player implements Attackable, Serializable {
     }
 
     /**
-     * Burns the player
+     * sets the frozen value of the player
+     * @param b
      */
-    public void burn(){
-        System.out.println(TextColor.ANSI_RED + "You have been burned!" + TextColor.ANSI_RESET);
-        this.burned = true;
+    public void setFrozen(boolean b) {
+        if (b) GUI.frozenMessage();
+        this.frozen = b;
     }
 
     /**
-     * Unburns the player
+     * sets the burned value of the player
+     * @param b
      */
-    public void removeBurn() {
-        this.burned = false;
-    }
-
-    /**
-     * Freezes the player
-     */
-    public void freeze() {
-        System.out.println(TextColor.ANSI_RED + "You have been frozen!" + TextColor.ANSI_RESET);
-        this.frozen = true;
-    }
-
-    /**
-     * Unfreezes the player
-     */
-    public void removeFreeze() {
-        this.frozen = false;
+    public void setBurned(boolean b) {
+        if (b) GUI.burnedMessage();
+        this.burned = b;
     }
 
     /**
@@ -288,8 +276,7 @@ public class Player implements Attackable, Serializable {
      */
     @Override
     public void increaseHitPoints(int value) {
-        System.out.println(TextColor.ANSI_GREEN + "You have been healed " + value + " hit points!"
-                + TextColor.ANSI_RESET);
+        System.out.println(TextColor.ANSI_GREEN + "You have been healed " + value + " hit points!" + TextColor.ANSI_RESET);
         this.hitPoints += value;
         if (this.hitPoints > this.maxHitPoints) this.hitPoints = this.maxHitPoints;
     }

@@ -153,6 +153,20 @@ public class GUI {
      * Prints a message when the player died
      */
     public static void gameOverMessage() { System.out.println(TextColor.ANSI_WHITE + "GAME OVER!"
-            + TextColor.ANSI_RESET); }
+            + TextColor.ANSI_RESET);
+    }
 
+    /**
+     * Prints a message when the player has been burned
+     */
+    public static void burnedMessage() {
+        System.out.println(TextColor.ANSI_RED + "You have been burned!" + TextColor.ANSI_RESET);
+    }
+
+    /**
+     * prints a message when the player has been frozen
+     */
+    public static void frozenMessage() {
+        System.out.println(TextColor.ANSI_BLUE + "You have been frozen!" + TextColor.ANSI_RESET);
+    }
 }

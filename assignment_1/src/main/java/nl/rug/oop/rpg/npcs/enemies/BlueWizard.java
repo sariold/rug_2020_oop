@@ -58,7 +58,7 @@ public class BlueWizard extends MiniBoss implements Serializable {
         Random r = new Random();
         int chance = r.nextInt(101);
         if (chance < 21) {
-            ((Player)attacked).freeze();
+            ((Player)attacked).setFrozen(true);
         }
         super.attack(attacked);
     }
