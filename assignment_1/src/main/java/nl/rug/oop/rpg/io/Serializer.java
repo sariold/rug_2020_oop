@@ -43,6 +43,7 @@ public class Serializer {
                 + fileName + ".ser");
         ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream)) {
             Game game = (Game) objectInputStream.readObject();
+            System.out.println("Game loaded successfully!");
             return game;
         }
     }

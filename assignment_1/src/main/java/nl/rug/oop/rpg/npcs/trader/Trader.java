@@ -1,6 +1,7 @@
 package nl.rug.oop.rpg.npcs.trader;
 
 import nl.rug.oop.rpg.game.Game;
+import nl.rug.oop.rpg.game.GameInteract;
 import nl.rug.oop.rpg.game.Player;
 import nl.rug.oop.rpg.extra.TextColor;
 import nl.rug.oop.rpg.npcs.DungeonNpc;
@@ -86,7 +87,7 @@ public abstract class Trader extends DungeonNpc implements Serializable {
      */
     @Override
     public void engage(Player player, Game game) {
-        game.tradeWith(player, this);
+        GameInteract.tradeWith(player, this);
     }
 
     /**

@@ -6,7 +6,7 @@ package nl.rug.oop.rpg;
 public class Main {
 
     /**
-     * Starts the game by calling a startgame method
+     * Starts the game by calling a startgame method from StartGame class
      * @param args
      */
     public static void main(String[] args) {

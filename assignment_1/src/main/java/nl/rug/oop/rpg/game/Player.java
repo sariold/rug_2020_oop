@@ -1,17 +1,14 @@
 package nl.rug.oop.rpg.game;
 
-import nl.rug.oop.rpg.extra.DefaultStats;
 import nl.rug.oop.rpg.extra.TextColor;
 import nl.rug.oop.rpg.interfaces.Attackable;
 import nl.rug.oop.rpg.interfaces.Collectable;
-import nl.rug.oop.rpg.npcs.enemies.Enemy;
 import nl.rug.oop.rpg.objects.items.EnchantItem;
 import nl.rug.oop.rpg.objects.items.Item;
 import nl.rug.oop.rpg.objects.Room;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Random;
 
 /**
  * Creates a player which can attack npcs and interact with items/npcs
@@ -282,27 +279,7 @@ public class Player implements Attackable, Serializable {
      */
     @Override
     public void checkStatusImpairments() {
-        Random r = new Random();
-        int chance;
-        if (this.isFrozen()) {
-            chance = r.nextInt(101);
-            if (chance < DefaultStats.FREEZE_CHANCE) {
-                System.out.println(TextColor.ANSI_RED + "You are frozen solid." + TextColor.ANSI_RESET);
-            } else {
-                System.out.println(TextColor.ANSI_BLUE + "You are no longer frozen!" + TextColor.ANSI_RESET);
-                this.removeFreeze();
-            }
-        }
-        if (this.isBurned()) {
-            chance = r.nextInt(101);
-            if (chance < DefaultStats.BURN_CHANCE) {
-                System.out.println(TextColor.ANSI_RED + "You are burned and take " + DefaultStats.BURN_DAMAGE
-                        + " damage." +TextColor.ANSI_RESET);
-            } else {
-                System.out.println(TextColor.ANSI_BLUE + "You do no longer burn!" + TextColor.ANSI_RESET);
-                this.removeBurn();
-            }
-        }
+        AttackMethods.checkPlayerImpairments(this);
     }
 
     /**
@@ -323,17 +300,7 @@ public class Player implements Attackable, Serializable {
      */
     @Override
     public void attack(Attackable attacked) {
-        int damage = this.getAttackPoints();
-        System.out.println(TextColor.ANSI_YELLOW + "You attack " + ((Enemy)attacked).getName() + TextColor.ANSI_RESET);
-        Random r = new Random();
-        int critical = r.nextInt(101);
-        if (critical < 21) {
-            System.out.println(TextColor.ANSI_YELLOW + "Critical Hit!" + TextColor.ANSI_RESET);
-            damage *= 2;
-        }
-        System.out.println(TextColor.ANSI_YELLOW + ((Enemy)attacked).getName() + " takes " + damage
-                + " damage!" + TextColor.ANSI_RESET);
-        attacked.reduceHitPoints(damage);
+       AttackMethods.playerAttacker(attacked, this);
     }
 
     /**

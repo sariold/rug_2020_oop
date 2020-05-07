@@ -29,7 +29,6 @@ public class HealingPotion extends EnchantItem implements Serializable {
     @Override
     public void use(Player player) {
         player.increaseHitPoints(this.healPower);
-//        System.out.println(TextColor.ANSI_GREEN + "You have been healed for " + this.healPower + " health." + TextColor.ANSI_RESET);
         super.use(player);
     }
 
