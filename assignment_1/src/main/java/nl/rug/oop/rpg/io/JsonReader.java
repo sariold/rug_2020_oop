@@ -20,6 +20,7 @@ import java.util.ArrayList;
 /**
  * Creates a json parsing class that allows custom map reading
  */
+@SuppressWarnings("ALL")
 public class JsonReader {
 
     public static void main(String[] args) {
@@ -35,13 +36,13 @@ public class JsonReader {
         JSONParser jsonParser = new JSONParser();
         InputStream is = JsonReader.class.getClassLoader().getResourceAsStream("rooms.json");
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(is));
-        String json = "";
-        String temp = "";
+        StringBuilder json = new StringBuilder();
+        String temp;
         while((temp = bufferedReader.readLine()) != null) {
-            json = json + temp;
+            json.append(temp);
         }
         try {
-            Object roomJSON = jsonParser.parse(json);
+            Object roomJSON = jsonParser.parse(json.toString());
             JSONArray roomArray = (JSONArray) roomJSON;
             roomArray.forEach(room -> parseRooms((JSONObject) room, rooms));
         } catch (ParseException e) {
@@ -71,13 +72,13 @@ public class JsonReader {
         JSONParser jsonParser = new JSONParser();
         InputStream is = JsonReader.class.getClassLoader().getResourceAsStream("doors.json");
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(is));
-        String json = "";
-        String temp = "";
+        StringBuilder json = new StringBuilder();
+        String temp;
         while((temp = bufferedReader.readLine()) != null) {
-            json = json + temp;
+            json.append(temp);
         }
         try {
-            Object doorJSON = jsonParser.parse(json);
+            Object doorJSON = jsonParser.parse(json.toString());
             JSONArray doorArray = (JSONArray) doorJSON;
             doorArray.forEach(door -> parseDoors((JSONObject) door, rooms, doors));
         } catch (ParseException e) {
@@ -102,20 +103,29 @@ public class JsonReader {
             return;
         }
         Room to = rooms.get(Integer.parseInt(doorObj.get("to").toString().replace("r", "")));
-        if(type.equals("Monster")) {
-            MonsterDoor newDoor = new MonsterDoor(description, from, to);
-            doors.add(newDoor);
-        } else if(type.equals("MiniBoss")) {
-            String wizardType = "Red";
-            if(description.equals("Blue")) wizardType = "Blue";
-            MiniBossDoor newDoor = new MiniBossDoor(description, from, to, wizardType, false);
-            doors.add(newDoor);
-        } else if(type.equals("FinalBoss")) {
-            FinalBossDoor newDoor = new FinalBossDoor(description, from, to);
-            doors.add(newDoor);
-        } else {
-            Door newDoor = new Door(description, from, to);
-            doors.add(newDoor);
+        switch (type) {
+            case "Monster": {
+                MonsterDoor newDoor = new MonsterDoor(description, from, to);
+                doors.add(newDoor);
+                break;
+            }
+            case "MiniBoss": {
+                String wizardType = "Red";
+                if (description.equals("Blue")) wizardType = "Blue";
+                MiniBossDoor newDoor = new MiniBossDoor(description, from, to, wizardType, false);
+                doors.add(newDoor);
+                break;
+            }
+            case "FinalBoss": {
+                FinalBossDoor newDoor = new FinalBossDoor(description, from, to);
+                doors.add(newDoor);
+                break;
+            }
+            default: {
+                Door newDoor = new Door(description, from, to);
+                doors.add(newDoor);
+                break;
+            }
         }
     }
 
@@ -129,13 +139,13 @@ public class JsonReader {
         JSONParser jsonParser = new JSONParser();
         InputStream is = JsonReader.class.getClassLoader().getResourceAsStream("connections.json");
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(is));
-        String json = "";
-        String temp = "";
+        StringBuilder json = new StringBuilder();
+        String temp;
         while((temp = bufferedReader.readLine()) != null) {
-            json = json + temp;
+            json.append(temp);
         }
         try {
-            Object connectionJSON = jsonParser.parse(json);
+            Object connectionJSON = jsonParser.parse(json.toString());
             JSONArray connectionArray = (JSONArray) connectionJSON;
             connectionArray.forEach(connection -> parseConnections((JSONObject) connection, rooms, doors));
         } catch (ParseException e) {
@@ -169,13 +179,13 @@ public class JsonReader {
         JSONParser jsonParser = new JSONParser();
         InputStream is = JsonReader.class.getClassLoader().getResourceAsStream(file);
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(is));
-        String json = "";
-        String temp = "";
+        StringBuilder json = new StringBuilder();
+        String temp;
         while((temp = bufferedReader.readLine()) != null) {
-            json = json + temp;
+            json.append(temp);
         }
         try {
-            Object npcJSON = jsonParser.parse(json);
+            Object npcJSON = jsonParser.parse(json.toString());
             JSONArray npcArray = (JSONArray) npcJSON;
             npcArray.forEach(npc -> parseNPCs((JSONObject) npc, rooms));
         } catch (ParseException e) {
@@ -258,13 +268,13 @@ public class JsonReader {
         JSONParser jsonParser = new JSONParser();
         InputStream is = JsonReader.class.getClassLoader().getResourceAsStream("items.json");
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(is));
-        String json = "";
-        String temp = "";
+        StringBuilder json = new StringBuilder();
+        String temp;
         while((temp = bufferedReader.readLine()) != null) {
-            json = json + temp;
+            json.append(temp);
         }
         try {
-            Object itemJSON = jsonParser.parse(json);
+            Object itemJSON = jsonParser.parse(json.toString());
             JSONArray itemArray = (JSONArray) itemJSON;
             itemArray.forEach(item -> parseItems((JSONObject) item, rooms));
         } catch (ParseException e) {

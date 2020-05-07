@@ -9,6 +9,6 @@ public interface Enchantable {
      * Enchants the enchantable object
      * @param value
      */
-    public void enchant(int value);
+    void enchant(int value);
 
 }

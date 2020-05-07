@@ -139,7 +139,7 @@
             "name": "d15",
             "type": "Trap",
             "description": "A door covered with roses",
-            "from": "r2",
+            "from": "r2"
         }
     },
     {
@@ -147,7 +147,7 @@
             "name": "d16",
             "type": "Trap",
             "description": "A door with a bathroom sign",
-            "from": "r10",
+            "from": "r10"
         }
     },
     {
@@ -155,7 +155,7 @@
             "name": "d17",
             "type": "Trap",
             "description": "A glass door",
-            "from": "r5",
+            "from": "r5"
         }
     }
 ]

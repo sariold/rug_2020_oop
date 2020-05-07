@@ -64,13 +64,11 @@ public class Game implements Serializable {
             jsonReader.parseItemJSON(totalRooms);
         } catch (FileNotFoundException e) {
             System.out.println("The default map files could not be found!");
-
         } catch (ParseException e) {
             System.out.println("The default map files could not be parsed correctly!");
 
         } catch (IOException e) {
             System.out.println("The default map files are not formatted correctly!");
-
         }
         this.player = new Player(name, this.totalRooms.get(0), DefaultStats.PLAYER_HIT_POINTS,
                 DefaultStats.PLAYER_ATTACK_POINTS, DefaultStats.PLAYER_HIT_POINTS);
@@ -131,14 +129,6 @@ public class Game implements Serializable {
      */
     public int getIceMagic() {
         return iceMagic;
-    }
-
-    /**
-     * Returns the boolean determining if the player is dead or not
-     * @return If the player is dead
-     */
-    public boolean notOver() {
-        return !player.isDead();
     }
 
     /**

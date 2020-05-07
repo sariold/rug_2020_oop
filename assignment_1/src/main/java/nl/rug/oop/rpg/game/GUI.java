@@ -25,8 +25,8 @@ public class GUI {
     public static void displayCombatInterface(Player player, Enemy enemy, Game game) {
         String playerHealthBar = "";
         String enemyHealthBar = "";
-        String indentStringName = player.getName() + ": " + Integer.toString(player.getHitPoints())
-                + "/" + Integer.toString(player.getMaxHitPoints());
+        String indentStringName = player.getName() + ": " + player.getHitPoints()
+                + "/" + player.getMaxHitPoints();
         int indentName = 30 - indentStringName.length();
         int indentBar = 19;
         double playerPercent = (double)player.getHitPoints()/player.getMaxHitPoints();
@@ -158,7 +158,6 @@ public class GUI {
      */
     public static boolean inspectNPCs(Player player) {
         boolean npcExists = false;
-        String color = TextColor.ANSI_RESET;
         System.out.println("You look if there's somebody.");
         System.out.println("You see:");
         ArrayList<DungeonNpc> npcs = player.getCurrentRoom().getNPCs();

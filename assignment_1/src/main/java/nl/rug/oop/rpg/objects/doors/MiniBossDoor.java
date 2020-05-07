@@ -42,10 +42,9 @@ public class MiniBossDoor extends Door implements Serializable {
             this.interact(player);
             if (this.isDefeated()) return;
             String type = this.getWizardColor();
-            if(type == "Blue") {
+            if(type.equals("Blue")) {
                 game.getMiniBosses().get(0).setDoor(this);
                 player.getCurrentRoom().addNPC(game.getMiniBosses().get(0));
-//                Combat.engageFight(player, (Enemy) player.getCurrentRoom().getNPCs().get(0), game);
                 player.getCurrentRoom().getNPCs().get(0).engage(player, game);
                 if(game.getMiniBosses().get(0).isDead()) {
                     this.defeated();
@@ -54,7 +53,6 @@ public class MiniBossDoor extends Door implements Serializable {
             } else {
                 game.getMiniBosses().get(1).setDoor(this);
                 player.getCurrentRoom().addNPC(game.getMiniBosses().get(1));
-//                Combat.engageFight(player, (Enemy) player.getCurrentRoom().getNPCs().get(0), game);
                 player.getCurrentRoom().getNPCs().get(0).engage(player, game);
                 if(game.getMiniBosses().get(1).isDead()) {
                     this.defeated();

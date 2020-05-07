@@ -70,12 +70,4 @@ public abstract class Item extends DungeonObjects implements Collectable, Serial
         return this.collected;
     }
 
-    /**
-     * Sets the collected boolean value of the item
-     * @param b
-     */
-    public void setCollected(boolean b) {
-        this.collected = b;
-    }
-
 }

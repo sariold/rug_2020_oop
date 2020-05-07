@@ -73,13 +73,6 @@ public class Room extends DungeonObjects implements Serializable {
     }
 
     /**
-     * Prints all of the doors in a room
-     */
-    public void printDoors() {
-        doors.forEach(door -> System.out.println(door.getDescription()));
-    }
-
-    /**
      * Adds an npc to the npc arraylist of a room
      * @param npc
      */

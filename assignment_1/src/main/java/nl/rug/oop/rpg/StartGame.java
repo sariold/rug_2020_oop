@@ -18,9 +18,6 @@ import java.util.Scanner;
  */
 public class StartGame {
 
-    public static void main(String[] args) {
-    }
-
 
     /**
      * Print an arraylist as chooseable options
@@ -40,7 +37,7 @@ public class StartGame {
 
         Scanner scanner = new Scanner(System.in);
         int currentMove;
-        String fileName = "";
+        String fileName;
         while(true) {
             possibleMoves.clear();
             possibleMoves.add("New Game");
@@ -101,15 +98,15 @@ public class StartGame {
      */
     public boolean fileLoader(String type, String newFileName) {
         boolean minusOne = true;
-        if(type == "saves") System.out.println("Which save file would you like to load from? (-1 : none)");
+        if(type.equals("saves")) System.out.println("Which save file would you like to load from? (-1 : none)");
         else System.out.println("Which config file would you like to load from? (-1 : none)");
         String fileName = getAllFiles(type);
-        if(fileName == "noFilesException") {
+        if(fileName.equals("noFilesException")) {
             System.out.println("No files available!");
             minusOne = false;
         }
-        else if(fileName != "-1fileException") {
-            if(type == "saves") initOldGame(fileName);
+        else if(!fileName.equals("-1fileException")) {
+            if(type.equals("saves")) initOldGame(fileName);
             else initNewGame(newFileName, true, fileName);
             minusOne = false;
         }
@@ -122,9 +119,9 @@ public class StartGame {
      * @return A filename string that the user inputted
      */
     public String fileNamer(String type) {
-        if(type == "saves") System.out.println("What would you like to name this new save game file?");
+        if(type.equals("saves")) System.out.println("What would you like to name this new save game file?");
         else System.out.println("What would you like to name this new config game file?");
-        String fileName = "";
+        String fileName;
         Scanner scanner = new Scanner(System.in);
         fileName = scanner.nextLine();
         return fileName;
@@ -137,8 +134,8 @@ public class StartGame {
      */
     public String getAllFiles(String type) {
         Scanner scanner = new Scanner(System.in);
-        File lsFiles = null;
-        if(type == "saves") lsFiles = new File("savedgames");
+        File lsFiles;
+        if(type.equals("saves")) lsFiles = new File("savedgames");
         else lsFiles = new File("config");
         String[] files = lsFiles.list();
         if(files == null || files.length == 0) return "noFilesException";
@@ -149,12 +146,12 @@ public class StartGame {
             try{
                 currentMove = scanner.nextInt();
                 if(currentMove == -1) return "-1fileException";
-                return allFiles.get(currentMove).toString().replace(".ser", "")
+                String fileName = allFiles.get(currentMove).replace(".ser", "")
                         .replace(".ini", "");
+                return fileName;
             } catch (Exception e) {
                 GUI.invalidInputMessage();
                 scanner.nextLine();
-                continue;
             }
         }
     }
@@ -218,7 +215,7 @@ public class StartGame {
         possibleOptions.add("Save to a new file");
         Scanner scanner = new Scanner(System.in);
         int currentMove;
-        String newFileName = "";
+        String newFileName;
         while (true) {
             System.out.println("What do you want to do?");
             printOptions(possibleOptions);

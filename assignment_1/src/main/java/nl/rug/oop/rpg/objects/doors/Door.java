@@ -38,7 +38,7 @@ public class Door extends DungeonObjects implements Interactable, Serializable {
     public void engage(Player player, Game game) {
         this.interact(player);
         player.getCurrentRoom().inspect();
-    };
+    }
 
     @Override
     public void interact(Player player) {
@@ -59,11 +59,4 @@ public class Door extends DungeonObjects implements Interactable, Serializable {
         return result;
     }
 
-    /**
-     * Method to return the room that this door connect TO
-     * @return The To room of a door
-     */
-    public Room returnTo() {
-        return this.to;
-    }
 }

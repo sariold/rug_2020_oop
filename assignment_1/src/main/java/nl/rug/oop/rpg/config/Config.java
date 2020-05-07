@@ -20,7 +20,7 @@ public class Config {
     public static void setConfig(String configName) {
         Properties properties = new Properties();
         Scanner scanner = new Scanner(System.in);
-        String name = "";
+        String name;
         int maxHealth, health, attack, gold;
         while (true) {
             System.out.println("What name should the player have?");
@@ -41,7 +41,6 @@ public class Config {
                 GUI.invalidInputMessage();
                 System.out.println("Let's try again!");
                 scanner.nextLine();
-                continue;
 
             }
         }
@@ -59,7 +58,6 @@ public class Config {
                 GUI.invalidInputMessage();
                 System.out.println("Let's try again!");
                 scanner.nextLine();
-                continue;
 
             }
         }
@@ -73,7 +71,6 @@ public class Config {
                 GUI.invalidInputMessage();
                 System.out.println("Let's try again!");
                 scanner.nextLine();
-                continue;
 
             }
         }
@@ -87,7 +84,6 @@ public class Config {
                 GUI.invalidInputMessage();
                 System.out.println("Let's try again!");
                 scanner.nextLine();
-                continue;
 
             }
         }

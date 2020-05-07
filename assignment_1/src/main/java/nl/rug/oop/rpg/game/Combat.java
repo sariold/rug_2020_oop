@@ -184,7 +184,6 @@ public class Combat {
                 break;
             } catch (InputMismatchException e) {
                 GUI.invalidInputMessage();
-                continue;
             }
         }
         if (move == -1) return false;

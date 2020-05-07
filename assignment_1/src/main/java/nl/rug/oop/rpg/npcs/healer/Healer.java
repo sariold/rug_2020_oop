@@ -45,14 +45,6 @@ public abstract class Healer extends DungeonNpc implements Serializable {
     }
 
     /**
-     * Returns the heal power of this healer
-     * @return healPower
-     */
-    public int getHealPower() {
-        return this.healPower;
-    }
-
-    /**
      * Calls the healPlayer method from the game
      * @param player
      * @param game
