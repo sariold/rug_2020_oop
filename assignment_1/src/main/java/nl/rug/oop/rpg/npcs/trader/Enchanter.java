@@ -2,6 +2,7 @@ package nl.rug.oop.rpg.npcs.trader;
 
 import nl.rug.oop.rpg.extra.DefaultStats;
 import nl.rug.oop.rpg.game.GUI;
+import nl.rug.oop.rpg.game.InventoryMethods;
 import nl.rug.oop.rpg.game.Player;
 import nl.rug.oop.rpg.interfaces.Collectable;
 import nl.rug.oop.rpg.objects.items.EnchantItem;
@@ -36,7 +37,7 @@ public class Enchanter extends Trader{
     public void trade(Player player) {
         int currentMove;
         Scanner scanner = new Scanner(System.in);
-        ArrayList<Collectable> items = player.getEnchantableInventory();
+        ArrayList<Collectable> items = InventoryMethods.getEnchantableInventory(player);
         if (items.size() == 0) {
             System.out.println("You have no enchantable items you fool!");
             return;

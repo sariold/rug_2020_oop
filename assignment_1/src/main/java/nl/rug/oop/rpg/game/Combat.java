@@ -2,8 +2,10 @@ package nl.rug.oop.rpg.game;
 
 import nl.rug.oop.rpg.extra.DefaultStats;
 import nl.rug.oop.rpg.extra.TextColor;
+import nl.rug.oop.rpg.interfaces.Collectable;
 import nl.rug.oop.rpg.npcs.enemies.*;
 
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -171,10 +173,11 @@ public class Combat {
      * @return true if an item was used
      */
     private static boolean useCombatItem(Player player) {
+        ArrayList<Collectable> combatInventory = InventoryMethods.getCombatInventory(player);
         Scanner scanner = new Scanner(System.in);
         int move;
         GUI.displayCombatInventory(player);
-        if (player.getCombatInventory().size() == 0) {
+        if (combatInventory.size() == 0) {
             System.out.println("You have no items that can be used in combat.");
             return false;
         }
@@ -187,13 +190,12 @@ public class Combat {
             }
         }
         if (move == -1) return false;
-        if (move < player.getCombatInventory().size() && move > -1) {
-            player.getCombatInventory().get(move).use(player);
+        if (move < combatInventory.size() && move > -1) {
+            combatInventory.get(move).use(player);
             return true;
         } else {
             GUI.invalidItemMessage();
             return false;
         }
     }
-
 }

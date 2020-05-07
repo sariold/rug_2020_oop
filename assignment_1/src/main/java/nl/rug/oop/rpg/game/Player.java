@@ -89,30 +89,6 @@ public class Player implements Attackable, Serializable {
     }
 
     /**
-     * Returns the combat inventory arraylist of a player
-     * @return The combat inventory arraylist
-     */
-    public ArrayList<Collectable> getCombatInventory() {
-        ArrayList<Collectable> combatItems = new ArrayList<Collectable>();
-        for (Collectable c: this.getInventory()) {
-            if (c.hasCombatUse()) combatItems.add(c);
-        }
-        return combatItems;
-    }
-
-    /**
-     * Returns the enchantable friendly arraylist inventory of a player
-     * @return The enchantable items arraylist of the player
-     */
-    public ArrayList<Collectable> getEnchantableInventory() {
-        ArrayList<Collectable> enchantables = new ArrayList<Collectable>();
-        for (Collectable c: this.getInventory()) {
-            if (c instanceof EnchantItem) enchantables.add(c);
-        }
-        return enchantables;
-    }
-
-    /**
      * Adds an item to the players inventory arraylist
      * @param c
      */

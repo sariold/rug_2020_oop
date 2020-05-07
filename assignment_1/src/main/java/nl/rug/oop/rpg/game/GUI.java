@@ -69,13 +69,14 @@ public class GUI {
      * @param player
      */
     public static void displayCombatInventory(Player player) {
-        if (player.getCombatInventory().size() == 0) {
+        ArrayList<Collectable> combatInventory = InventoryMethods.getCombatInventory(player);
+        if (combatInventory.size() == 0) {
             System.out.println("You currently have no items for combat.");
             return;
         }
         System.out.println("Your inventory contains:");
-        for (int i = 0; i < player.getCombatInventory().size(); i++) {
-            System.out.println("\t(" + i + ") " + player.getCombatInventory().get(i).toString());
+        for (int i = 0; i < combatInventory.size(); i++) {
+            System.out.println("\t(" + i + ") " + combatInventory.get(i).toString());
         }
         System.out.println("What item will you use (-1 to not use an item)");
     }
