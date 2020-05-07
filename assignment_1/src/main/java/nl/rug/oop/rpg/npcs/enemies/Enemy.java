@@ -196,6 +196,7 @@ public abstract class Enemy extends DungeonNpc implements Attackable, Serializab
     @Override
     public void increaseHitPoints(int value) {
         this.hitPoints += value;
+        if (this.hitPoints > this.maxHitPoints) this.hitPoints = this.maxHitPoints;
     }
 
     /**
