@@ -89,11 +89,11 @@ public class Combat {
         } else if (move == game.getFireMagic()) {
             System.out.println(TextColor.ANSI_YELLOW + "You have burned " + enemy.getName() + "!"
                     + TextColor.ANSI_RESET);
-            enemy.burn();
+            enemy.setBurned(true);
         } else if (move == game.getIceMagic()) {
             System.out.println(TextColor.ANSI_YELLOW + "You have frozen " + enemy.getName() + "!"
                     + TextColor.ANSI_RESET);
-            enemy.freeze();
+            enemy.setFrozen(true);
         }
     }
 
@@ -113,11 +113,8 @@ public class Combat {
             }
             return false;
         }
-        if (player.isBurned()) {
-            player.reduceHitPoints(DefaultStats.BURN_DAMAGE);
-            if (player.isDead()) {
-                loseFight(player, enemy, game);
-            }
+        if (player.isDead()) {
+            loseFight(player, enemy, game);
         }
         return true;
     }

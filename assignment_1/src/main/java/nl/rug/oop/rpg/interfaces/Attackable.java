@@ -39,4 +39,34 @@ public interface Attackable {
      * @return True if dead
      */
     boolean isDead();
+
+    /**
+     * returns if the object is frozen
+     * @return
+     */
+    boolean isFrozen();
+
+    /**
+     * sets the frozen value of this object
+     * @param b
+     */
+    void setFrozen(boolean b);
+
+    /**
+     * returns if the object is burned
+     * @return
+     */
+    boolean isBurned();
+
+    /**
+     * sets the burned value of this object
+     * @param b
+     */
+    void setBurned(boolean b);
+
+    /**
+     * returns the name of this object
+     * @return
+     */
+    String getName();
 }

@@ -243,7 +243,7 @@ public class Player implements Attackable, Serializable {
      */
     @Override
     public void checkStatusImpairments() {
-        AttackMethods.checkPlayerImpairments(this);
+        AttackMethods.checkImpairments(this);
     }
 
     /**

@@ -23,29 +23,27 @@ public class AttackMethods {
                 + TextColor.ANSI_RESET);
     }
 
-    public static void checkEnemyImpairments(Enemy enemy) {
+    public static void checkImpairments(Attackable attacked) {
         Random r = new Random();
         int chance;
-        if (enemy.isFrozen()) {
+        if (attacked.isFrozen()) {
             chance = r.nextInt(101);
             if (chance < DefaultStats.FREEZE_CHANCE) {
-                System.out.println(TextColor.ANSI_BLUE + enemy.getName() + " is frozen solid." + TextColor.ANSI_RESET);
+                System.out.println(TextColor.ANSI_RED + attacked.getName() + " is frozen solid." + TextColor.ANSI_RESET);
             } else {
-                System.out.println(TextColor.ANSI_BLUE + enemy.getName() + " is no longer frozen!"
-                        + TextColor.ANSI_RESET);
-                enemy.removeFreeze();
+                System.out.println(TextColor.ANSI_BLUE + attacked.getName() + " is no longer frozen!" + TextColor.ANSI_RESET);
+                attacked.setFrozen(false);
             }
         }
-        if (enemy.isBurned()) {
+        if (attacked.isBurned()) {
             chance = r.nextInt(101);
             if (chance < DefaultStats.BURN_CHANCE) {
-                System.out.println(TextColor.ANSI_YELLOW + enemy.getName() + " is burned and takes "
-                        + DefaultStats.BURN_DAMAGE  + " damage." +TextColor.ANSI_RESET);
-                enemy.reduceHitPoints(DefaultStats.BURN_DAMAGE);
+                System.out.println(TextColor.ANSI_RED + attacked.getName() + " is burned and takes " + DefaultStats.BURN_DAMAGE
+                        + " damage." +TextColor.ANSI_RESET);
+                attacked.reduceHitPoints(DefaultStats.BURN_DAMAGE);
             } else {
-                System.out.println(TextColor.ANSI_YELLOW + enemy.getName() + " does no longer burn!"
-                        + TextColor.ANSI_RESET);
-                enemy.removeBurn();
+                System.out.println(TextColor.ANSI_BLUE + attacked.getName() + " does no longer burn!" + TextColor.ANSI_RESET);
+                attacked.setBurned(false);
             }
         }
     }
@@ -64,27 +62,4 @@ public class AttackMethods {
         attacked.reduceHitPoints(damage);
     }
 
-    public static void checkPlayerImpairments(Player player) {
-        Random r = new Random();
-        int chance;
-        if (player.isFrozen()) {
-            chance = r.nextInt(101);
-            if (chance < DefaultStats.FREEZE_CHANCE) {
-                System.out.println(TextColor.ANSI_RED + "You are frozen solid." + TextColor.ANSI_RESET);
-            } else {
-                System.out.println(TextColor.ANSI_BLUE + "You are no longer frozen!" + TextColor.ANSI_RESET);
-                player.setFrozen(false);
-            }
-        }
-        if (player.isBurned()) {
-            chance = r.nextInt(101);
-            if (chance < DefaultStats.BURN_CHANCE) {
-                System.out.println(TextColor.ANSI_RED + "You are burned and take " + DefaultStats.BURN_DAMAGE
-                        + " damage." +TextColor.ANSI_RESET);
-            } else {
-                System.out.println(TextColor.ANSI_BLUE + "You do no longer burn!" + TextColor.ANSI_RESET);
-                player.setBurned(false);
-            }
-        }
-    }
 }

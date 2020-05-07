@@ -63,31 +63,21 @@ public abstract class Enemy extends DungeonNpc implements Attackable, Serializab
     }
 
     /**
-     * Burns this enemy
+     * sets the frozen value of this enemy
+     * @param b
      */
-    public void burn(){
-        this.burned = true;
+    @Override
+    public void setFrozen(boolean b) {
+        this.frozen = b;
     }
 
     /**
-     * Unburns this enemy
+     * sets the burned value of this enemy
+     * @param b
      */
-    public void removeBurn() {
-        this.burned = false;
-    }
-
-    /**
-     * Freezes this enemy
-     */
-    public void freeze() {
-        this.frozen = true;
-    }
-
-    /**
-     * Unfreezes this enemy
-     */
-    public void removeFreeze() {
-        this.frozen = false;
+    @Override
+    public void setBurned(boolean b) {
+        this.burned = b;
     }
 
     /**
@@ -129,7 +119,7 @@ public abstract class Enemy extends DungeonNpc implements Attackable, Serializab
      */
     @Override
     public void checkStatusImpairments() {
-       AttackMethods.checkEnemyImpairments(this);
+       AttackMethods.checkImpairments(this);
     }
 
     /**

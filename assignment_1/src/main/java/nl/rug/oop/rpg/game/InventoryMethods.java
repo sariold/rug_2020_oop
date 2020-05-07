@@ -5,6 +5,9 @@ import nl.rug.oop.rpg.objects.items.EnchantItem;
 
 import java.util.ArrayList;
 
+/**
+ * Class that returns certain types of inventories of a player
+ */
 public class InventoryMethods {
 
     /**
