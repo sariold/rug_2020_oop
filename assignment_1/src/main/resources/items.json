@@ -13,6 +13,12 @@
     },
     {
         "item": {
+            "type": "AttackPotion",
+            "room": "r0"
+        }
+    },
+    {
+        "item": {
             "type": "GoldNugget",
             "room": "r2"
         }

@@ -43,11 +43,18 @@ public class FileHandler {
      * @return A filename string that the user inputted
      */
     public static String fileNamer(String type) {
-        if(type.equals("saves")) System.out.println("What would you like to name this new save game file?");
-        else System.out.println("What would you like to name this new config game file?");
+        String typePrint;
+        if(type.equals("saves")) typePrint = "What would you like to name this new save game file?";
+        else typePrint = "What would you like to name this new config game file?";
+        System.out.println(typePrint);
         String fileName;
         Scanner scanner = new Scanner(System.in);
-        fileName = scanner.nextLine();
+        while(true) {
+            fileName = scanner.nextLine();
+            if(fileName != null && fileName.matches("^[a-zA-Z0-9]*$") && !fileName.equals("")) break;
+            System.out.println("Only use alphanumeric characters!");
+            System.out.println(typePrint);
+        }
         return fileName;
     }
 

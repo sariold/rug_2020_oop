@@ -6,6 +6,7 @@ import nl.rug.oop.rpg.npcs.healer.Priest;
 import nl.rug.oop.rpg.npcs.trader.*;
 import nl.rug.oop.rpg.objects.Room;
 import nl.rug.oop.rpg.objects.doors.*;
+import nl.rug.oop.rpg.objects.items.AttackPotion;
 import nl.rug.oop.rpg.objects.items.GoldNugget;
 import nl.rug.oop.rpg.objects.items.HealingPotion;
 import nl.rug.oop.rpg.objects.items.MagicOrb;
@@ -43,6 +44,10 @@ public class JSONParser {
                         .replace("r", ""));
                 MagicOrb magicOrb = new MagicOrb(rooms.get(endRoomNumber));
                 rooms.get(roomNumber).addItem(magicOrb);
+                break;
+            case "AttackPotion":
+                AttackPotion attackPotion = new AttackPotion();
+                rooms.get(roomNumber).addItem(attackPotion);
                 break;
         }
     }

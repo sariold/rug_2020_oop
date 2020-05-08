@@ -3,7 +3,6 @@ package nl.rug.oop.rpg.gui;
 import nl.rug.oop.rpg.extra.DefaultStats;
 import nl.rug.oop.rpg.extra.TextColor;
 import nl.rug.oop.rpg.interfaces.Attackable;
-import nl.rug.oop.rpg.player.Player;
 
 import java.util.ArrayList;
 
@@ -138,7 +137,7 @@ public class GUIMessages {
 
     /**
      * prints a message that an attackable object is no longer burned
-     * @param attacked
+     * @param attacked Attacked
      */
     public static void noLongerBurnedMessage(Attackable attacked) { System.out.println(TextColor.ANSI_BLUE + attacked.getName() + " does no longer burn!" + TextColor.ANSI_RESET); }
 

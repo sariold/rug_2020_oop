@@ -10,7 +10,6 @@ import nl.rug.oop.rpg.npcs.enemies.MiniBoss;
 import nl.rug.oop.rpg.npcs.enemies.RedWizard;
 import nl.rug.oop.rpg.objects.Room;
 import nl.rug.oop.rpg.objects.doors.Door;
-import nl.rug.oop.rpg.objects.items.AttackPotion;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -138,7 +137,6 @@ public class GameOptions {
             System.out.println("The default map files are not formatted correctly!");
         }
 
-        totalRooms.get(0).addItem(new AttackPotion());
         initializeOptions(possibleMoves, fightMoves);
     }
 

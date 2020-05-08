@@ -18,7 +18,7 @@ public abstract class Enemy extends DungeonNpc implements Attackable, Serializab
 
     private final int maxHitPoints;
     private final int goldValue;
-    protected int bonusAttackPoints;
+    protected final int bonusAttackPoints;
     private boolean burned;
     private boolean frozen;
 

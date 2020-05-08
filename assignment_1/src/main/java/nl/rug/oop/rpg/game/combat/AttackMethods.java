@@ -4,7 +4,6 @@ import nl.rug.oop.rpg.game.Game;
 import nl.rug.oop.rpg.gui.GUIMessages;
 import nl.rug.oop.rpg.player.Player;
 import nl.rug.oop.rpg.extra.DefaultStats;
-import nl.rug.oop.rpg.extra.TextColor;
 import nl.rug.oop.rpg.interfaces.Attackable;
 import nl.rug.oop.rpg.npcs.enemies.Enemy;
 
@@ -38,10 +37,7 @@ public class AttackMethods {
     private static boolean criticalHit() {
         Random r = new Random();
         int critical = r.nextInt(101);
-        if (critical < DefaultStats.CRITICAL_HIT_CHANCE) {
-            return true;
-        }
-        return false;
+        return critical < DefaultStats.CRITICAL_HIT_CHANCE;
     }
 
     /**
