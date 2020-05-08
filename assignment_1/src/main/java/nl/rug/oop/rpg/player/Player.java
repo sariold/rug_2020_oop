@@ -172,13 +172,6 @@ public class Player implements Attackable, Serializable {
     public void checkStatusImpairments() { AttackMethods.checkImpairments(this); }
 
     /**
-     * Increases the health of a player
-     * @param value Value
-     */
-    @Override
-    public void increaseHitPoints(int value) { PlayerStats.increasePlayerHitPoints(value, this); }
-
-    /**
      * Forces the player to attack an enemy and it might be a critical hit
      * @param attacked Attacked
      */

@@ -1,5 +1,6 @@
 package nl.rug.oop.rpg.game.combat;
 
+import nl.rug.oop.rpg.game.GameInteract;
 import nl.rug.oop.rpg.gui.GUI;
 import nl.rug.oop.rpg.gui.GUIMessages;
 import nl.rug.oop.rpg.game.Game;
@@ -55,49 +56,8 @@ public class Combat {
             if (!playerStatusImpairments(player, enemy, game)) {
                 continue;
             }
-            playerMove(move, player, enemy, game);
-            enemyMove(player, enemy, game);
-        }
-    }
-
-    /**
-     * Checks if the enemy has statusimpairments and executes the enemy's attack
-     * @param player Player
-     * @param enemy Enemy
-     * @param game Game
-     */
-    private static void enemyMove(Player player, Enemy enemy, Game game) {
-        enemy.checkStatusImpairments();
-        if (enemy.isDead()) {
-            winFight(player, enemy, game);
-            return;
-        }
-        if (!enemy.isFrozen()) {
-            enemy.interact(player);
-        }
-        if (player.isDead()) {
-            loseFight(enemy, game);
-        }
-    }
-
-    /**
-     * Checks the attack move of the player and executes it
-     * @param move Move
-     * @param player Player
-     * @param enemy Enemy
-     * @param game Game
-     */
-    private static void playerMove(int move, Player player, Enemy enemy, Game game) {
-        if (move == 1){
-            player.attack(enemy);
-        } else if (move == game.getFireMagic()) {
-            System.out.println(TextColor.ANSI_YELLOW + "You have burned " + enemy.getName() + "!"
-                    + TextColor.ANSI_RESET);
-            enemy.setBurned(true);
-        } else if (move == game.getIceMagic()) {
-            System.out.println(TextColor.ANSI_YELLOW + "You have frozen " + enemy.getName() + "!"
-                    + TextColor.ANSI_RESET);
-            enemy.setFrozen(true);
+            AttackMethods.playerAttack(move, player, enemy, game);
+            AttackMethods.enemyAttack(player, enemy, game);
         }
     }
 
@@ -128,7 +88,7 @@ public class Combat {
      * @param enemy Enemy
      * @param game Game
      */
-    private static void loseFight(Enemy enemy, Game game){
+    public static void loseFight(Enemy enemy, Game game){
         System.out.println(TextColor.ANSI_RED + "You have been slain by " + enemy.getName() + "!"
                 + TextColor.ANSI_RESET);
         game.gameOver();
@@ -140,13 +100,15 @@ public class Combat {
      * @param enemy Enemy
      * @param game Game
      */
-    private static void winFight(Player player, Enemy enemy, Game game) {
+    public static void winFight(Player player, Enemy enemy, Game game) {
         System.out.println(TextColor.ANSI_YELLOW + "You have slain " + enemy.getName() + "!\nYou earned "
                 + enemy.getGoldValue() + " gold." + TextColor.ANSI_RESET);
         enemy.die(game);
         player.getCurrentRoom().removeDeadNPC();
         PlayerStats.increaseGold(enemy.getGoldValue(), player);
-        player.increaseHitPoints(enemy.getAttackPoints());
+        int healValue = GameInteract.getHealValue(player.getHitPoints(), player.getMaxHitPoints(), enemy.getAttackPoints());
+        player.setHitPoints(player.getHitPoints() + healValue);
+        GUIMessages.playerHealedMessage(healValue);
     }
 
     /**
@@ -161,7 +123,7 @@ public class Combat {
             return false;
         }
         GUIMessages.runFromFightMessage(enemy.getName());
-        enemy.increaseHitPoints(enemy.getMaxHitPoints());
+        enemy.setHitPoints(enemy.getMaxHitPoints());
         return true;
     }
 

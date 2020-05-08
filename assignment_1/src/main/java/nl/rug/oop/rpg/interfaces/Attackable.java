@@ -29,12 +29,6 @@ public interface Attackable {
     void reduceHitPoints(int value);
 
     /**
-     * Increases the hit points of this object by the given value
-     * @param value Value
-     */
-    void increaseHitPoints(int value);
-
-    /**
      * Checks whether the object has more than 0 hit points
      * @return True if dead
      */

@@ -38,6 +38,7 @@ public abstract class Enemy extends DungeonNpc implements Attackable, Serializab
         this.engaged = false;
     }
 
+
     /**
      * Returns whether the enemy is burned
      * @return Burned
@@ -130,16 +131,6 @@ public abstract class Enemy extends DungeonNpc implements Attackable, Serializab
     @Override
     public void reduceHitPoints(int value) {
         this.hitPoints -= value;
-    }
-
-    /**
-     * Increase the hit points of this enemy by the given value
-     * @param value Value
-     */
-    @Override
-    public void increaseHitPoints(int value) {
-        this.hitPoints += value;
-        if (this.hitPoints > this.maxHitPoints) this.hitPoints = this.maxHitPoints;
     }
 
     /**

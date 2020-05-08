@@ -34,6 +34,14 @@ public abstract class DungeonNpc implements Inspectable, Interactable, Serializa
     }
 
     /**
+     * sets the hit points of this npc
+     * @param hitPoints Hit points
+     */
+    public void setHitPoints(int hitPoints) {
+        this.hitPoints = hitPoints;
+    }
+
+    /**
      * Boolean function to determine if a npc has been engaged
      * @return Boolean value
      */

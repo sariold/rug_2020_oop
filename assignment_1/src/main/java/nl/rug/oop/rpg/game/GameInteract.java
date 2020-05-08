@@ -117,4 +117,15 @@ public class GameInteract {
             player.getCurrentRoom().removeDeadNPC();
         } else if(move > 1) GUIMessages.invalidInputMessage();
     }
+
+    /**
+     * Returns the value to heal given a maximum health
+     * @param currHealth Current Health
+     * @param maxHealth Maximum Health
+     * @param heal Maximum Heal
+     * @return Value to heal
+     */
+    public static int getHealValue(int currHealth, int maxHealth, int heal) {
+        return currHealth + heal > maxHealth ? maxHealth - currHealth : heal;
+    }
 }

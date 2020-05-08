@@ -1,6 +1,7 @@
 package nl.rug.oop.rpg.npcs.healer;
 
 import nl.rug.oop.rpg.extra.DefaultStats;
+import nl.rug.oop.rpg.gui.GUIMessages;
 import nl.rug.oop.rpg.player.Player;
 
 import java.io.Serializable;
@@ -27,8 +28,9 @@ public class HighPriest extends Healer implements Serializable {
      */
     @Override
     public void heal(Player player) {
-        player.increaseHitPoints(player.getMaxHitPoints());
-        this.setHealStatus(true);
+        GUIMessages.playerHealedMessage(player.getMaxHitPoints() - player.getHitPoints());
+        player.setHitPoints(player.getMaxHitPoints());
+        this.engaged = true;
     }
 
     /**

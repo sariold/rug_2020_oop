@@ -108,4 +108,9 @@ public class GUIMessages {
         possibleOptions.add("Save to a new file");
         printOptions(possibleOptions);
     }
+
+    public static void playerHealedMessage(int healValue) {
+        System.out.println(TextColor.ANSI_GREEN + "You have been healed " + healValue + " hit points!"
+                + TextColor.ANSI_RESET);
+    }
 }
