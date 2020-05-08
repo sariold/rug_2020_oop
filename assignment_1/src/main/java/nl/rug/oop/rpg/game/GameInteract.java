@@ -2,7 +2,7 @@ package nl.rug.oop.rpg.game;
 
 import nl.rug.oop.rpg.GUI.GUI;
 import nl.rug.oop.rpg.GUI.GUIMessages;
-import nl.rug.oop.rpg.Player.Player;
+import nl.rug.oop.rpg.player.Player;
 import nl.rug.oop.rpg.interfaces.Collectable;
 import nl.rug.oop.rpg.npcs.DungeonNpc;
 import nl.rug.oop.rpg.npcs.healer.Healer;

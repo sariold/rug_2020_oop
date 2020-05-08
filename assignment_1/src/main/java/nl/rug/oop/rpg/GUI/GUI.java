@@ -3,7 +3,7 @@ package nl.rug.oop.rpg.GUI;
 import nl.rug.oop.rpg.extra.TextColor;
 import nl.rug.oop.rpg.game.Game;
 import nl.rug.oop.rpg.game.InventoryMethods;
-import nl.rug.oop.rpg.Player.Player;
+import nl.rug.oop.rpg.player.Player;
 import nl.rug.oop.rpg.interfaces.Collectable;
 import nl.rug.oop.rpg.npcs.enemies.Enemy;
 import nl.rug.oop.rpg.npcs.healer.Healer;

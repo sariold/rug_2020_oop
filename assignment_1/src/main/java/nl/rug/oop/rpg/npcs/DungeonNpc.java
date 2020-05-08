@@ -1,7 +1,7 @@
 package nl.rug.oop.rpg.npcs;
 
 import nl.rug.oop.rpg.game.Game;
-import nl.rug.oop.rpg.Player.Player;
+import nl.rug.oop.rpg.player.Player;
 import nl.rug.oop.rpg.interfaces.Inspectable;
 import nl.rug.oop.rpg.interfaces.Interactable;
 import nl.rug.oop.rpg.extra.TextColor;

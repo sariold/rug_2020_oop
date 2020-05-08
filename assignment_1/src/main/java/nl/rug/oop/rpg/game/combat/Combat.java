@@ -1,9 +1,11 @@
-package nl.rug.oop.rpg.game;
+package nl.rug.oop.rpg.game.combat;
 
 import nl.rug.oop.rpg.GUI.GUI;
 import nl.rug.oop.rpg.GUI.GUIMessages;
-import nl.rug.oop.rpg.Player.Player;
-import nl.rug.oop.rpg.Player.PlayerStats;
+import nl.rug.oop.rpg.game.Game;
+import nl.rug.oop.rpg.game.InventoryMethods;
+import nl.rug.oop.rpg.player.Player;
+import nl.rug.oop.rpg.player.PlayerStats;
 import nl.rug.oop.rpg.extra.TextColor;
 import nl.rug.oop.rpg.interfaces.Collectable;
 import nl.rug.oop.rpg.npcs.enemies.*;

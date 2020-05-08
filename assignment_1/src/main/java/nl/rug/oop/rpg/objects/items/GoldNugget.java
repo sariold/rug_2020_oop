@@ -1,9 +1,9 @@
 package nl.rug.oop.rpg.objects.items;
 
 import nl.rug.oop.rpg.extra.DefaultStats;
-import nl.rug.oop.rpg.Player.Player;
+import nl.rug.oop.rpg.player.Player;
 import nl.rug.oop.rpg.extra.TextColor;
-import nl.rug.oop.rpg.Player.PlayerStats;
+import nl.rug.oop.rpg.player.PlayerStats;
 
 import java.io.Serializable;
 

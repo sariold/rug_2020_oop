@@ -1,6 +1,6 @@
 package nl.rug.oop.rpg.interfaces;
 
-import nl.rug.oop.rpg.Player.Player;
+import nl.rug.oop.rpg.player.Player;
 
 /**
  * Interface to make an object collectable by the player

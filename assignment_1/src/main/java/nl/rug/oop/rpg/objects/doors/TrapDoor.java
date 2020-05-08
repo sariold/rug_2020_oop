@@ -1,7 +1,7 @@
 package nl.rug.oop.rpg.objects.doors;
 
 import nl.rug.oop.rpg.game.Game;
-import nl.rug.oop.rpg.Player.Player;
+import nl.rug.oop.rpg.player.Player;
 import nl.rug.oop.rpg.extra.TextColor;
 import nl.rug.oop.rpg.objects.Room;
 

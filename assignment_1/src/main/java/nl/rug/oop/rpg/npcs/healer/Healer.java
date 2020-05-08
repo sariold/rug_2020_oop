@@ -2,7 +2,7 @@ package nl.rug.oop.rpg.npcs.healer;
 
 import nl.rug.oop.rpg.game.Game;
 import nl.rug.oop.rpg.game.GameInteract;
-import nl.rug.oop.rpg.Player.Player;
+import nl.rug.oop.rpg.player.Player;
 import nl.rug.oop.rpg.extra.TextColor;
 import nl.rug.oop.rpg.npcs.DungeonNpc;
 

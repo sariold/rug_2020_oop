@@ -1,6 +1,6 @@
-package nl.rug.oop.rpg.Player;
+package nl.rug.oop.rpg.player;
 import nl.rug.oop.rpg.GUI.GUIMessages;
-import nl.rug.oop.rpg.game.AttackMethods;
+import nl.rug.oop.rpg.game.combat.AttackMethods;
 import nl.rug.oop.rpg.game.InventoryMethods;
 import nl.rug.oop.rpg.interfaces.Attackable;
 import nl.rug.oop.rpg.interfaces.Collectable;
