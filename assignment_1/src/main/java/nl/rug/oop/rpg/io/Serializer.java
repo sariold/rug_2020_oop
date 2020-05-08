@@ -6,6 +6,7 @@ import java.io.*;
 /**
  * Serializer class that allows saving and loading the game object
  */
+@SuppressWarnings("ResultOfMethodCallIgnored")
 public class Serializer {
 
     /**

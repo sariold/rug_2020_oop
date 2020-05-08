@@ -11,6 +11,7 @@ import java.util.Scanner;
 /**
  * Creates a config class that allows the user to change the java properties of a game
  */
+@SuppressWarnings("ResultOfMethodCallIgnored")
 public class Config {
 
     /**
