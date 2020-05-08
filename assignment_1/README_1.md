@@ -1,301 +1,342 @@
-# RPG + IO
+# Text-based RPG
 
-In this assignment, you will be extending the RPG assignment with extra functionality. Before you start, make sure that you have finished all the requirements for RPG so far.
-If your program already does everything it needs to do, try to improve the quality of the design and code as much as possible. It will be far easier to build upon a program with good design and well written code, than realising later on that you need to rewrite a large chunk of it.
+In this assignment, you'll make your own text-based RPG. For the people who don't know what a text-based RPG is; it is an RPG that is played by interacting with a virtual world through text (`System.in` and `System.out`). This assignment will help you get familiar with inheritance and polymorphism. 
 
-We created a new `__assignment1_1` branch which you can merge into `development`. The only file that we added here is the new README for RPG+IO.
+In this RPG you'll be acting as the player. The game will be a sort of dungeon crawler where you make your way through all kinds of rooms, and you'll run into some of the most fantastic creatures (un)known to mankind. If you manage to reach the final room, you win eternal fame and glory (if you know how to program that).
 
-## 0 About Saving
+Note that we will not explain everything in as much detail as the first assignment. You will have to decide most of the implementation details for yourself.  Quite some things that you need for this assignment are explained in the reader, so please read through the entire chapter `OOP Concepts` before you start this assignment. It will make it significantly easier to understand and make. 
 
-In many programs we can save data. The program does this by writing certain information to a file. Abstractly speaking, it is converting program data into a structured form, so that it can be converted back into the program data later.
-This conversion of program data to structured data (saving) is referred to as serialization. The reverse process (loading) is called de-serialization. There are some formats available that store information in an organized manner such as YAML, JSON or XML. However, many programming languages also support the saving or loading of data natively, among those is Java.
+This is probably one of your first projects using OOP, so don't be afraid to ask help from your TA! We are there to help :)
 
-In this lab, we will make use of this native support for serialization to make save files. This way we can have (quick)saving and (quick)loading in our game (which is kinda awesome right?)!
+## 0. Before we begin
 
-## 1 Serialization in Java
+### Setting up
+Just as the previous assignment, you will find the necessary files in the newly created `__assignment1` branch. Make sure that you successfully merge the `__assignment1` branch into `development`. For instructions on how to do this, see the reader and/or the previous assignment.
 
-Before we get started with saving, think about which class(es) you need to save in order to properly save the user's progress. 
-In order to save our classes, we will need to use the `Serializable` interface. Later on, this allows us to convert Java objects into a stream of bytes that can be saved in a file. This stream of bytes can then be reconstructed to Java objects later on.
-More specifically, we are saving the state of our objects, since this is all we are interested in.
+### Incremental Maintenance
+This assignment has been divided into multiple section so that we can focus on a small subproblem at the time. This way it is easier to manage the changes. The programs we will be writing in this course will be a lot larger than the programs written so far in, for example, Imperative Programming. Therefore it is important to maintain a pleasant working environment. We can do this by doing the following after each step:
 
-Any class that we want to save should implement this `Serializable` interface. If these classes already implement an interface, do not worry, since Java supports having multiple interfaces (unlike multiple inheritance).
-The nice thing about the `Serializable` interface is that we do not have to implement any methods of this interface. It acts as a "marker" or "flag" for our classes that indicates to the JVM that this class can be serialized.
+- Adding comments(mainly Javadoc) to the code;
+- Integrating the changes into the main program so they are visible and usable;
+- Verifying that the code still compiles;
+- Refactoring the code (remove duplicate code, ensure proper variable names etc.);
+- Committing the changes;
+- Pushing the commit to the `development` branch.
+- Giving yourself a pat on the back to stay motivated.
 
-When our class implements `Serializable` we can eventually use the `ObjectOutputStream` class to write the data of our object.
-However, before we can do this, each class that implements `Serializable` should have a `serialVersionUID` field:
+## 1. Rooms
+
+Let's start with creating the most important part of our RPG: the player. We can do this by creating a class `Player`. Since we want our `Player` to have a magnificent name, the `Player` should have a field `name`.
+
+Before we can start playing, we need something to walk around in. As mentioned before, our RPG world consists of rooms, so let's implement this by creating a class `Room`. A `Room` should have a field `description` which will be used to `inspect` a `Room`. Whenever a `Room` is inspected, it should print this descriptive piece of text to `System.out` using the `System.out.println` method.
+
+Note that the point of having classes is (among others) reusability. Therefore, don't hardcode the room descriptions in `Room`, since this does not allow us to easily create rooms with different descriptions.
+Instead, have the description string as a parameter in the constructor of `Room`. This means that wherever you initialise the `Room`, you can specify a description. This holds for almost all the classes we will be creating. In general it is good practice to hardcode as little as possible, so try to conform to that. 
+
+Now that we have rooms and a player, we can connect the two. Since we play from the perspective of a `Player`, we do not let a `Room` keep track of the `Player`, but rather we let the `Player` keep track of the `Room` they are in.
+
+**Requirements:**
+
+- Create a `Player` class with a `name`.
+- Create a `Room` class with a `description`.
+- You should be able to `inspect` a `Room`. Doing so will print its description.
+- The `Player` should keep track of what `Room` they are in.
+
+## 1.1 A Simple Interaction Menu
+
+We now have all the ingredients to create a basic program. Let's use the two classes mentioned above to create a simple program that can do some basic interaction. For now you are allowed to do this in the `Main` class, but keep in mind that the `Main` class should ideally only be used for initalising. Later on, you will have to change this.
+
+The program should print a simple options menu. The user can then enter a number that matches one of the options. Just as in assignment 0, we can read the input from the user with `Scanner`. More specifically, we want to read an integer from the input line, so once we have created a `Scanner` object, we can call the `nextInt()` method.
+
+For now, let's add an option to "look around". Whenever the player looks around, the `Room` the `Player` is in should be inspected. This will look something like this:
+
+```
+What do you want to do?
+  (0) Look around
+0
+You see: A rather dusty room full with computers and two doors.
+What do you want to do?
+ (0) Look around
+```
+
+As you can see, this interaction menu should keep repeating itself. For now you can use an infinite while loop for this. Later on, we can add conditions so that the loop stops if the `Player` wins (or dies).
+
+**Requirements:**
+
+- A simple interaction menu with the option to look around
+- When the the option "look around" is chosen, the `Room` the `Player` is in should be inspected.
+
+## 2. Doors
+Are you able to look around in the `Room`? Well done! So far, so good. It's starting to get boring in this particular `Room` after a while though, so we decide we want to escape it and go to another `Room`. This means we will need to have doors, so let's create a class for this.
+
+**Requirements:**
+
+- Create a `Door` class that is very similar to a `Room`: it has a description, and you should be able to `inspect` it.
+
+### 2.1 Inspectable
+
+By now, both classes probably have a field `private String description` and a method `inspect()`.
+At this point there might be a small voice in the back of your head that says: "_Psst, I smell duplicate code_ (◕ᴥ◕)". If this is the case, contact a doctor as soon as possible.
+Nevertheless, the `behaviour` of the `Door` and `Room` classes is indeed very similar. They both share one property: they are inspectable. Let's generalise that property!
+
+The OOP-way to indicate that a class has certain `behaviour` is via an interface. Interfaces are used to describe that a class **must** have a few methods, which can then be used by the outside world. The implementation of those methods, however, is not provided in the interface. 
+This means that the method(s) that are described in the interface can potentially not do what you expect them to do. Therefore be very concise with how you name your interface and the methods in your interface. 
+
+The way that you specify these methods in interfaces is extremely similar to the way that you write forward declarations for functions in C header files. In short, a basic interface is simply a list of unimplemented methods. In this case, there is only method in there: `inspect()`. This means that our interface will look something like this:
 
 ```java
-/* 42L is just an example, this ID should be different for each class! */
-private static final long serialVersionUID = 42L;
+/**
+ * An interface that classes can implement so that they can be inspected
+ */
+interface Inspectable {
+
+    void inspect();
+
+}
 ```
 
-This field is stored together with the other data of our object whenever we save. It is then used during loading to verify the class we try to load is indeed the same class as the one we saved. Therefore, this ID **must be unique**. 
+Our newly created interface `Inspectable` is now ready to be used! The way that we apply interfaces to classes is by using the `implements` keyword. Using our new interface in `Room` would be as easy as changing
 
-If we make a class implement `Serializable`, all of its fields should be `Serializable`. If we would try to serialize a class with fields that cannot be serialized (for example `Scanner`), it will throw a `NotSerializableException`:
-
-```
-java.io.NotSerializableException: java.util.Scanner
+```java
+public class Room { 
 ```
 
-How can we prevent this error? Whenever there is a field that we do not want or need to serialize, we can define this field as `transient`:
+to 
 
-```Java
-/* This field will not be serialized */
-private transient Scanner scanner;
+```java
+public class Room implements Inspectable {
 ```
 
-Fields that refer to local resources such as IO streams and `Scanner` are not serialized, because the serialized objects can also be used for network communication. If we then de-serialize these IO related fields, they would not be valid on a different machine.
-
-The serialization process is fully recursive. This means that if the class you want to save contains a (non-transient) field that references another class, you need to ensure this class implements `Serializable` as well!
+Let's apply the same changes to `Door`. These changes enforce the programmer to give `Door` and `Room` an `inspect()` method. Note that since we don't have those methods yet at this point, you will not be able to compile your program anymore. We will fix this in the next section.
 
 **Requirements:**
 
-- Make every class you want to save implement `Serializable`.
-- Give every class that implements `Serializable` a unique `serialVersionUID`.
+- Create an interface `Inspectable` with an `inspect()` method.
+- `Room` should implement `Inspectable`.
+- `Door` should implement `Inspectable`.
 
-### 1.1 New interact options
+### 2.2 Adding Doors
 
-Before we start with the actual saving and loading, we are first going to add two options to the interaction menu: `QuickSave` and `QuickLoad`.
-This will look something like this:
+It is obviously nothing short of amazing that we have added a `Door` class, but we are not doing anything with it now. That is a bit sad, so let's fix that.
+
+A `Room` can have multiple doors. A first intuition might be to add an array of `Door`s to `Room`. However, arrays are really annoying to use in this case, since we need a length, keep track of indices and all that stuff.
+Instead, we are going to use a List. Lists are very nice, because they allow us to add and remove items very easily. In Java, we use a special type of list: `ArrayList` (There are other List types, but `ArrayList` is almost always a good choice). 
+
+We can add a list of `Door`s as follows: `private ArrayList<Door> doors`. The part between the angle brackets indicates what items should be in our `ArrayList`. In this case, we want a list containing `Door`s, so we added `Door`. 
+
+However, just as any other object, we first need to initialise our list before we can use it. We can do this by adding the following to our constructor:
+
+```java
+doors = new ArrayList<>();
+```
+
+Let's also create a method `addDoor(Door door)` so that we can add doors to this list. Adding an item to an `ArrayList` can be done by calling `add(...)` on the our List. This will add the door provided in the arguments to the end of the List.
+
+**Requirements:**
+
+- Add a field `doors` to `Room`. The field should be an `ArrayList`.
+- Initialise the List of doors in the constructor of `Room`.
+- Add a method `addDoor(Door door)` to `Room` that adds a `Door` to the list of doors.
+
+### 2.3 More Gameplay Options
+
+We are also going to add another gameplay option that allows us to see all the doors in a room. The option will be "look for a way out" and, if selected, shows all the doors in the room. The user can then select a door to interact with.
+
+Suppose that we are in a room that has two doors, this would look something like this:
 
 ```
 What do you want to do? 
   (0) Look around 
   (1) Look for a way out 
-  (2) Look for company 
-  (3) QuickSave 
-  (4) QuickLoad 
+1 
+You look around for doors. You see: 
+  (0) A mysterious red door 
+  (1) A black door 
+What do you want to do? 
+  (0) Look around 
+  (1) Look for a way out
 ```
 
-For now these actions do not need to do anything, but we are going to use them in a bit.
+As you can see, the interaction is now two levels deep. Whenever the user selects "look for a way out", it will show some new interactive possibilities. We will be adding more to this interaction menu, so be sure to use separate methods to handle all these different possibilities. This will make it a lot easier to read and (potentially) debug your code.
+
+If you have done the main game loop in `Main` so far, now would be a good time to move this to a more dedicated class. You could, for example, create a class `Game` that executes the main game loop. Remember: `Main` should only be used for initialising.
+
+An important thing to pay attention to is that calling `inspect()` on `null` will cause a `NullPointerException`. This is rather undesirable, so add a check to the `addDoor()` function that prevents us from adding `null` to the list of doors.
 
 **Requirements:**
 
-- Add an option `QuickSave` to the interaction menu.
-- Add an option `QuickLoad` to the interaction menu.
+- Add an option to the interaction menu that allows the `Player` to "look for a way out".
+- When the option to "look for a way out" is selected, all the `Door`s of the room should be inspected.
+- Add a `null` check in the `addDoor()` method that prevents us from adding `null` to the list of doors.
 
-### 1.1 Quicksaving and Quickloading
+### 2.4 Entering Doors
 
-Now that we have set up our classes to be saved, it is time to move on to the actual saving part. You will have to decide for yourself where to put the code for this. Here you should keep in mind that your classes should not be responsible for too many things at once.
+Obviously we want to do more than just inspecting doors. So now we are going to add something that allows the `Player` to go through a `Door`. Whenever a `Player` `interacts` with a `Door` they should go through it. This means that the `Door` will need a method `interact()`.
 
-The very first thing that we have to do is set up a directory in which we will place our files. However, we do not want to do this manually, but rather let our program take care of this. That way, our program does not break if the user removes this directory. 
-We want to store our saves in a folder called `savedgames` and this folder should be located in the root of this assignment folder.
-For this we can use Java's `File` class. This class is an abstract representation of file and directory pathnames, so we can use this as a representation for both files and directories.
-We can create such an object using the following:
+This means that we first need to connect a `Door` to another `Room`. We can do this by adding a field to the `Door` for the `Room` behind it. In this case, our doors are one-way. So once we go through it, we cannot go back (you are free to change this later on). 
 
-```Java
-/* will create a File object that refers to the location "savedgames" in the root of your project folder */
-File saveDirectory = new File("savedgames");
-```
+In the `interact()` method of `Door`, we need to somehow tell our `Player` to change rooms. However, this is a bit difficult, since the `interact()` method belongs to `Door` and not to `Player`. Therefore, you should add a parameter `Player` to the `interact()` method, so that we can tell the player to switch rooms. There is no need to make the `Player` a field everywhere or to make it a global variable, which would be even worse. 
 
-Now we need to ensure that this directory is created if it does not exist yet. We can use the following for this:
-
-```Java
-saveDirectory.mkdir();
-```
-
-This will create the directory if it does not exist and do nothing if it already exists. This method returns a boolean value that indicates whether the creation of the directory was successful. If the directory already exists, it will return false. Since we do not really care about this, we can ignore this value for now.
-
-Whenever the user chooses the option `QuickSave`, the program should save the state of the game in a file called `quicksave.ser` inside of this `savedgames` directory. 
-For this you will need the classes [`FileOutputStream`](https://docs.oracle.com/javase/8/docs/api/java/io/FileOutputStream.html) and [`ObjectOutputStream`](https://docs.oracle.com/javase/8/docs/api/java/io/ObjectOutputStream.html).
-
-Whenever the user chooses the option `QuickLoad`, the program should load the state of the game as it was saved in the file `quicksave.ser`.
-For this you will need the classes [`FileInputStream`](https://docs.oracle.com/javase/8/docs/api/java/io/FileInputStream.html) and [`ObjectInputStream`](https://docs.oracle.com/javase/8/docs/api/java/io/ObjectInputStream.html).
-
-The result of this serialization process is a stream of bytes (VERY DIFFICULT TO READ FOR US HUMANS [-c°▥°]-c). Therefore we cannot easily verify whether saving was successful, so we will have to implement both saving and loading before we can verify that it works.
-
-We need to make sure that we give appropriate feedback to the user if something went wrong (for example if the file does not exist). For this a simple print statement should be enough. While printing the stack trace might be very useful for debugging, we do not want this in our final program, since we do not want our users to see this. Always give proper feedback to the user if something goes wrong.
-
-The details about how to save and load Objects are explained in the lecture about serialization.
-
-**Requirements:**
-
-- Save games should be stored in a directory called `savedgames` at the root of the assignment directory.
-- The `savedgames` directory should be created if it does not exist yet.
-- Choosing `QuickSave` should save the game in a file called `quicksave.ser`.
-- Choosing `QuickLoad` should load the game as it was saved in the file `quicksave.ser`
-- If something goes wrong during saving or loading, the program should print an informative message to the user.
-
-## 1.2 Functionality Warning
-
-It could very well be that something broke because of the saving and loading process. Therefore, be sure to verify that all your program features still work after loading a game.
-
-## 2 Named save and load files
-
-Obviously we also want to give have the option to give our savegames custom names. Similarly, we also want to load these files.
-So let's add two more options to our interaction menu: `Save` and `Load` (an example of the extended user interface can be found below).
-
-Choosing the option `Save` should ask the user for a name for their new savegame. Note that the `.ser` extension should not be included in this filename. 
-Since the user can enter basically anything, we need to ensure that the provided filename satisfies some constraints (think of some yourself, just make sure the filename itself cannot produce an error). If there is an error, we need to give the user appropriate feedback about the file name (e.g. does the filename already exist? is it too long? forbidden characters?). 
-If there is no error with the filename, the program should save the game into the savefile with the name the user provided.
-
-Choosing the option `Load` should display a list of savefiles in the `savedgames` directory. The user can then pick one of these options and the program should load that savefile. 
-It should only list the files with the `.ser` extension. The `quicksave.ser` file should also be included in this list.
-
-When implementing these two options, try to prevent code duplication with quicksave and quickload.
-
-The interaction menu now could look something like this:
+Once you added the ability for a `Player` to go through a `Door` the interaction menu should look something like this:
 
 ```
 What do you want to do? 
-  (0) Look around 
-  (1) Look for a way out 
-  (2) Look for company 
-  (3) QuickSave 
-  (4) QuickLoad 
-  (5) Save 
-  (6) Load 
-5 
-Filename? 
-room1 
-Save successful
-What do you want to do?
-  (0) Look around 
-  (1) Look for a way out 
-  (2) Look for company 
-  (3) QuickSave 
-  (4) QuickLoad 
-  (5) Save 
-  (6) Load 
-3 
-Quicksave successful
-What do you want to do? 
-  (-1) Give up 
-  (0) Look around 
-  (1) Look for a way out 
-  (2) Look for company 
-  (3) QuickSave 
-  (4) QuickLoad 
-  (5) Save 
-  (6) Load 
-6 
-Which file? (-1 : none) 
-  (0) room1.ser 
-  (1) quickSave.ser
+  (0) Look around
+  (1) Look for a way out
 0
-Load successful
+You see: A rather dusty room full with computers and two doors.
+What do you want to do? 
+  (0) Look around 
+  (1) Look for a way out 
+1 
+You look around for doors. 
+You see: 
+  (0) A mysterious red door 
+  (1) A black door 
+Which door do you take? (-1 : stay here) 
+1 
+You go through the door 
+What do you want to do? 
+  (0) Look around 
+  (1) Look for a way out 
+0 
+You see: A dark room with dark doors
 ```
 
 **Requirements:**
 
-- Add an option `Save`.
-- Add an option `Load`.
-- Choosing `Save` should save the game in a file whose name is provided by the user.
-- Choosing `Load` should display a list of savefiles to the user. It should then load the file selected by the user.
+- A `Door` should be connected to a `Room` behind it.
+- Add an `interact()` method to `Door`. When this method is called, the player should move to the `Room` behind that `Door`.
+- The `Player` should be an argument of the `interact()` method.
+- The interaction menu should be augmented with an option to select a `Door` to go through after looking around.
 
-## 3 Input Configuration
+### 2.5 Interactable
 
-A lot of games use initialisation files to initialise the games in a particular way. We are going to do something similar, although a bit simpler.
-There are all kinds of file types that we could use for this such as YAML, JSON or XML. However, for this assignment we will be using Java Properties, since we do not need any (external)libraries for it.
-The downside to using Java Properties is that it does not allow us to customise everything, since it does not natively support nested values (you could emulate this by adding prefixes to the key names). However, for the purpose of the assignment, we will not need that.
+We have now made a `Door` interactable. However, we will also be adding more things that we can interact with(one of them being NPCs). If we wanted to expand on this program even more, we could also have chests or items to interact with. In other words, a lot of these classes would share `behaviour`. And just as before, whenever we see a lot of these (unrelated) classes sharing `behaviour`, we use an interface. 
+So let's move this method into a new interface `Interactable`.
 
-## 3.1 More Interact Options
-
-Before we get started, we are going to add a small separate menu that should be shown to the user when they start the game.
-This menu should consist of three options: `Play normally`, `Initialise from config`, `Set default config`. This will look something like this:
-
-```
-You are about to start the game, what do you want to do?
-  (0) Play Normally
-  (1) Initialise from config
-  (2) Set default config
-```
-
-Choosing option 0 should initialise the game as before
-Choosing option 1 should initialise the game using the properties in the config file
-Choosing option 2 should set the properties in the config file.
+Now `Door` can implement this interface. The nice thing is, as mentioned before, that we can also use this for NPCs.
 
 **Requirements:**
 
-- Add an interaction menu that is shown to the user before starting a game.
-- This menu should contain three options: `Play normally`, `Initialise from config`, `Set default config`.
+- Create an interface `Interactable` that contains the method `void interact(Player player)`.
+- `Door` should implement this `Interactable` interface.
 
-## 3.2 Java Properties
+Before we continue, let's make sure that everything works so far. Test your program to to see if there are any bugs in there. As you know, if you have a lot of bugs, they will start to affect each other and everything will be one big mess. So take it slow and you'll have an easier time.
 
-Java Properties are configuration values in the form of key-value pairs. In each pair, both the key and the value are String values. We can use a key to retrieve the corresponding value. Java Properties can be nicely saved to a stream, which in turn allows us to save them to a file.
 
-We are going to create a file in which we can store some properties of the `Player` class. By now, your `Player` class should have at least the fields `name`, `health` and `damage`. We are going to initialise these fields using our configuration file. Note that this is simply an example. You can choose any class (or multiple classes) for which you want to initialise properties, as long as at least 5 properties can be initialised from this configuration file.
+## 3 NPCs
 
-Similar to the savefiles, we want to store our configuration files in a separate directory. This directory should be called `config` and should also be stored in the root of this assignment directory.
+Now it is finally time to add some more exciting interactions to our game!
+
+We are going to add some NPCs. To do this, we create an `NPC` class. For now, the `NPC` should only have a field `String description`. The `Player` should be able to `inspect` and `interact` with an `NPC`, so make sure `NPC` implements both `Inspectable` and `Interactable`. 
+
+An `NPC` belongs to a `Room`, so let's also create a field to keep track of all the `NPC`s in a `Room`. Note that there can be multiple `NPC`s in a room, so we can use an `ArrayList` for this again.
+
+We will later add more specific NPCs, but for now let's use an example implementation with a simple print statement in the `interact()` method to verify that `NPC` is working. The interaction menu should be augmented with an option "look for company" which should list all the `NPC`s. This should look something like this:
+
+```
+What do you want to do? 
+  (0) Look around 
+  (1) Look for a way out 
+  (2) Look for company
+2 
+You look if there’s someone here. 
+You see: 
+  (0) A suspiciously happy looking orc  
+  (2) The kerstman
+  (3) A dancing strawberry
+Interact ? (-1 : do nothing) 
+1 
+The creature is asleep so you can’t interact with it. 
+What do you want to do? 
+  (0) Look around 
+  (1) Look for a way out 
+  (2) Look for company
+```
+If this works, awesome! We can now start to implement some more interesting `NPC`s.
 
 **Requirements:**
 
-- Config files be stored in a directory called `config` at the root of the assignment directory.
-- The `config` directory should be created if it does not exist yet.
+- Create an `NPC` class with a field `description`.
+- An `NPC` should be `Inspectable`.
+- An `NPC` should be `Interactable`.
+- A `Room` should have contain a number of `NPC`s.
+- Create a new option in the interaction menu: "Look for company".
+- When the option "look for company" is chosen, it should inspect all the NPCs in the room.
 
-## 3.3 Setting Properties
+## 4 A Simple Combat System
 
-We do not want to create this config file manually, so we are going to write a method that can do this for us.
+What fun is an RPG without a little combat? So let's add this!
+In order to have combat, we first need something to fight. So let's create an `Enemy` class. Since `Enemy` is an `NPC`, it should extend from `NPC`.
 
-The first thing we need to do when creating this config file is create a `Properties` object:
+From now on, you will have to make the design decisions yourself. We will only give some requirements that your program should have and you are free to decide how to implement this. Try to make use of inheritance, abstract classes and interfaces to create a proper design here!
 
-```Java
-Properties rpgProperties = new Properties();
-```
-
-We will use this object to store our key-value pairs.
-
-Next we can set a property, such as the name of a player, using:
-
-```Java
-rpgProperties.setProperty("playerName", "Howard the Duck")
-```
-
-Since Java Properties only uses Strings, we can add integers by simply doing it in String notation (e.g. "2").
-
-Once we are done with setting all our properties, we can store it to a file (for example `rpgConfig.properties`). 
-For this, we will have to initialise a `FileOutputStream` (similar to saving). We can then save the properties to this stream using the `store()` method of the `Properties` class. This method takes as its first argument a `FileOutputStream` and as a second argument a `String`. This `String` will be a comment that appears at the top of the config file:
-
-```Java
-rpgProperties.store(fileOutputStream, "These are the properties of a player in the RPG game");
-```
-
-Now we are done with saving our properties! When the user selects option 2 from the start menu, it should save these properties. When this method runs, it should create a `config` directory(if it does not exist yet) and add a file called `rpgConfig.properties` in it. You can open this file and see if everything was stored correctly.
+Don't forget that you can add methods to `Player` which can be called by, for example, the `NPC`'s `interact()` method. This allows you to add a lot more besides the combat system. Think about things such as a money system or status effect. However, make sure that you have enough time to finish the other parts of this assignment. If you finished all that, you can go ham!
 
 **Requirements:**
 
-- Create a method that stores properties that can be used to initialise a class.
-- At least 5 different properties should be stored in the properties file.
+- `Player` should have damage and health.
+- All `NPC`s should have damage and health.
+- Only `Player` and `Enemy` should be attackable.
+- The `Player` should be able to attack an `Enemy` and by doing this deal damage to that `Enemy`.
+- An `Enemy` should be able to attack the `Player` and by doing this deal damage to the `Player`.
+- The `Player` or an `NPC` should die when its health drops to or below 0.
+- The game stops when the `Player` dies. When the game stops, it should print something along the lines of "Game Over!".
+- A simple interaction menu for the combat. For example, when the `Player` interacts with an `Enemy` it should give the option to attack that enemy. The `Enemy` then attacks back etc.
 
-## 3.4 Loading Properties
+## 5 Multiple NPCs 
 
-Now that we have saved the properties, we can move on to loading them ٩(◕‿◕｡)۶.
+Since we want our game to be a bit more interesting, we do not want boring generic NPCs in there. Therefore, make the class `NPC` abstract. 
+Now you can get as creative as you want!
+Try to come up with another class that extends from `NPC`. Make sure it does something interesting! Some ideas could be:
 
-Since we first need to read from the config file, we are going to need a `FileInputStream` (similar to loading).
-Once we have this, we can load the contents from this file into our `Properties` object using the `load()` method:
+- A healer that heals the `Player`
+- A trader that gives the `Player` an item (in exchange for money?)
+- A wizard that buffs the `Player` and permanently increases their damage
 
-```Java
-rpgProperties.load(fileInputStream);
-```
-
-Now all the properties should be in our `rpgProperties` object. We can retrieve these properties using:
-
-```Java
-String playerName = rpgProperties.getProperty("playerName");
-```
-
-Here the argument of `getProperty()` is the key of the key-value pair.
-If you stored any integers, these will also be retrieved as strings, so they will have to be converted to integers manually. This can be done using:
-
-```
-int n = Integer.parseInt(numberString);
-```
-
-Now we have all our fancy properties and we can use these to initialise a `Player` object!
-When the user selects option 1 from the start menu, it should run this method.
-As always, ensure proper error handling.
+Note that, since `NPC` is now abstract, we no longer have to give specific implementation of `interact()` and `inspect()` in `NPC`. The details of these methods are specific to the classes that extend from `NPC` and should therefore rather be implemented in those specific subclasses.
 
 **Requirements:**
 
-- Create a method that loads properties from a config file.
-- The properties should in the config file should be used to initialise a class (or multiple classes).
+- Make `NPC` an abstract class.
+- Create at least 1 other class (besides `Enemy`) that extends from `NPC`.
+- The class(es) should have distinct behaviour (different descriptions do not count; be creative!).
 
-## 3.5 Extra
+## 6 Multiple Doors
 
-You can obviously go completely ham with this and create a way bigger configuration file. You could also create multiple config files so that different types of games can be played. Feel free to play around with this!
+Just as with NPCs, we also want to make the doors a bit more interesting. So create at least two classes that extend from `Door` and make sure that they do something interesting! Some examples could be:
+- An AttackDoor that the `Player` has to defeat before entering.
+- A MonsterDoor that requires all enemies to be dead before entering.
+- A TrapDoor that damages the player when going through.
 
-## 4 Handing in
+**Requirements:**
 
-Before you hand in, remember that you should not have empty try/catch statements! An empty try/catch is extremely bad practice, because you are hiding the fact that an error occurred and continuing execution as normal. It is basically equivalent to putting a piece of tape on an engine warning light. If something goes wrong, you have no idea where it went wrong and why, so you are strongly recommended to inform the user if something goes wrong. In the case that an exception does not represent a bug, you should likely not be using a try/catch for it. 
+- Create at least 2 classes that extend from `Door`.
+- The class(es) should have distinct behaviour (different descriptions do not count; be creative!).
 
-When you are finished, create a pull request from the development branch into the master branch and confirm that your program passes CircleCI.
+
+## 7 Final Requirements
+
+As you might have noticed, we have not implemented anything that allows us to win the game. Therefore, now might be a good time to do this. We leave it up to you how to implement this. The idea is that the `Player` wins when he reaches a certain "winning" room. However, if you have another good idea, you are free to do something else!
+
+On top of all the previous requirements, we only have a few more requirements.
+
+**Requirements:**
+
+- You should have at least 2 different abstract super classes.
+- You should have at least 2 different interfaces (besides `Inspectable` and `Interactable`).
+- Allow the `Player` to win the game.
+
+## 8 Be Creative!
+
+You are encouraged to add your own twist to the RPG! Create a real story or make the experience more enjoyable in whatever way you wish. Once you get the hang of it, it will be a lot of fun to think of new things and functionalities to add! 
+Think of fairies, trolls, weird items, characters from Lord of the Rings - the more interesting the story and the game, the more chance you have at getting bonus points! Just make sure that your program can at least do what is specified in the requirements. Also be sure to keep paying attention to the design of your program. While a very nice game is obviously amazing, we will be mainly looking at your code/design. 
+
+## 9 Free Tip
+
+We obviously want you to get the highest grade possible, so here is a free tip to **bump up your grade**: go through the section `Common Mistakes` in the reader. You can increase the quality of your code **a lot** by going through this list and checking your program for every single one of these mistakes. It really can make quite the difference!
+
+## 10 Handing in
+
+When you are finished, create a pull request from the `development` branch into the `master` branch and confirm that your program passes CircleCI.

@@ -31,6 +31,12 @@
     },
     {
         "item": {
+            "type": "MonsterKey",
+            "room": "r2"
+        }
+    },
+    {
+        "item": {
             "type": "MagicOrb",
             "room": "r5",
             "endRoom": "r3"

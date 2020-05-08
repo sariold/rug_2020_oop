@@ -6,10 +6,7 @@ import nl.rug.oop.rpg.npcs.healer.Priest;
 import nl.rug.oop.rpg.npcs.trader.*;
 import nl.rug.oop.rpg.objects.Room;
 import nl.rug.oop.rpg.objects.doors.*;
-import nl.rug.oop.rpg.objects.items.AttackPotion;
-import nl.rug.oop.rpg.objects.items.GoldNugget;
-import nl.rug.oop.rpg.objects.items.HealingPotion;
-import nl.rug.oop.rpg.objects.items.MagicOrb;
+import nl.rug.oop.rpg.objects.items.*;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -48,6 +45,10 @@ public class JSONParser {
             case "AttackPotion":
                 AttackPotion attackPotion = new AttackPotion();
                 rooms.get(roomNumber).addItem(attackPotion);
+                break;
+            case "MonsterKey":
+                MonsterKey monsterKey = new MonsterKey();
+                rooms.get(roomNumber).addItem(monsterKey);
                 break;
         }
     }
@@ -163,7 +164,7 @@ public class JSONParser {
         Room to = rooms.get(Integer.parseInt(doorObj.get("to").toString().replace("r", "")));
         switch (type) {
             case "Monster": {
-                MonsterDoor newDoor = new MonsterDoor(from, to);
+                MonsterDoor newDoor = new MonsterDoor(from, to, false);
                 doors.add(newDoor);
                 break;
             }
