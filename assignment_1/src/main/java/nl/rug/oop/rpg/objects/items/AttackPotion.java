@@ -6,6 +6,10 @@ import nl.rug.oop.rpg.gui.GUIMessages;
 import nl.rug.oop.rpg.interfaces.Enchantable;
 import nl.rug.oop.rpg.player.Player;
 
+/**
+ * Attack poition extends abstract class Item increases attack value for a player until after the next fight
+ * can be used in an outside of combat and is enchatable
+ */
 public class AttackPotion extends Item implements Enchantable {
 
     private static final long serialVersionUID = 37L;
