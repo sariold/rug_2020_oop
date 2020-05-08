@@ -1,7 +1,7 @@
 package nl.rug.oop.rpg.io;
 
 import nl.rug.oop.rpg.gui.GUIMessages;
-import nl.rug.oop.rpg.StartGame;
+import nl.rug.oop.rpg.game.StartGame;
 
 import java.io.File;
 import java.util.ArrayList;

@@ -21,7 +21,7 @@ public class AttackMethods {
      * @param attacked Attacked
      */
     public static void attackMove(Attackable attacker, Attackable attacked) {
-        int damage = attacker.getAttackPoints();
+        int damage = attacker.getAttackPoints() + attacker.getBonusAttackPoints();
         GUIMessages.attackedMessage(attacker, attacked);
         if (criticalHit()) {
             GUIMessages.criticalHitMessage();

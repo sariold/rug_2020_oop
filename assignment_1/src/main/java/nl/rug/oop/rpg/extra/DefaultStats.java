@@ -14,6 +14,7 @@ public class DefaultStats {
 
     // ITEM
     public static final int POTION_HEAL_POWER = 4;
+    public static final int POTION_ATTACK_POWER = 2;
 
     public static final int GOLD_NUGGET_VALUE = 5;
 

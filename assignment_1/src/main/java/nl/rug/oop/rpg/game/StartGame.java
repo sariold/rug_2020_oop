@@ -1,4 +1,4 @@
-package nl.rug.oop.rpg;
+package nl.rug.oop.rpg.game;
 
 import nl.rug.oop.rpg.gui.GUIMessages;
 import nl.rug.oop.rpg.config.Config;

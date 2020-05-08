@@ -1,5 +1,7 @@
 package nl.rug.oop.rpg;
 
+import nl.rug.oop.rpg.game.StartGame;
+
 /**
  * Main method which calls the startGame class to start the game
  */

@@ -23,6 +23,12 @@ public interface Attackable {
     int getAttackPoints();
 
     /**
+     * Returns the bonus attack points
+     * @return Bonus Attack Points
+     */
+    int getBonusAttackPoints();
+
+    /**
      * Sets the hit points to the given value
      * @param value Value
      */

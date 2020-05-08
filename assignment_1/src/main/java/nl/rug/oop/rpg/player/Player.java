@@ -19,6 +19,7 @@ public class Player implements Attackable, Serializable {
     private int maxHitPoints;
     private int hitPoints;
     private int attackPoints;
+    private int bonusAttackPoints;
     private int gold;
     private boolean frozen;
     private boolean burned;
@@ -38,6 +39,7 @@ public class Player implements Attackable, Serializable {
         this.hitPoints = hitPoints;
         this.maxHitPoints = maxHitPoints;
         this.attackPoints = attackPoints;
+        this.bonusAttackPoints = 0;
         this.gold = 0;
         this.frozen = false;
         this.burned = false;
@@ -49,6 +51,18 @@ public class Player implements Attackable, Serializable {
      * @param maxHitPoints Max hit points
      */
     public void setMaxHitPoints(int maxHitPoints) { this.maxHitPoints = maxHitPoints; }
+
+    /**
+     * Returns the bonus attack points attained by items
+     * @return Bonus attack points
+     */
+    public int getBonusAttackPoints() { return bonusAttackPoints; }
+
+    /**
+     * sets the bonus attack points attained by items
+     * @param bonusAttackPoints Bonus Attack Points
+     */
+    public void setBonusAttackPoints(int bonusAttackPoints) { this.bonusAttackPoints = bonusAttackPoints; }
 
     /**
      * Sets the health for a player

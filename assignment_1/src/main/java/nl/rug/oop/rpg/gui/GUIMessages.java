@@ -153,4 +153,10 @@ public class GUIMessages {
      * @param attackable Attackable that was frozen
      */
     public static void hasBeenFrozenMessage(Attackable attackable) { System.out.println(TextColor.ANSI_BLUE + attackable.getName() + " has been frozen!" + TextColor.ANSI_RESET); }
+
+    /**
+     * prints a message when an attack potion is used
+     * @param attackPower Bonus attack given
+     */
+    public static void attackPotionMessage(int attackPower) { System.out.println(TextColor.ANSI_YELLOW + "You consumed an attack potion. Your attack has increased by " + attackPower + " until after the next fight." + TextColor.ANSI_RESET); }
 }

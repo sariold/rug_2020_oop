@@ -18,6 +18,7 @@ public abstract class Enemy extends DungeonNpc implements Attackable, Serializab
 
     private final int maxHitPoints;
     private final int goldValue;
+    protected int bonusAttackPoints;
     private boolean burned;
     private boolean frozen;
 
@@ -34,6 +35,7 @@ public abstract class Enemy extends DungeonNpc implements Attackable, Serializab
         this.hitPoints = hitPoints;
         this.maxHitPoints = hitPoints;
         this.attackPoints = attackPoints;
+        this.bonusAttackPoints = 0;
         this.goldValue = goldValue;
         this.engaged = false;
     }
@@ -102,6 +104,12 @@ public abstract class Enemy extends DungeonNpc implements Attackable, Serializab
     public int getAttackPoints() { return attackPoints; }
 
     /**
+     * Returns bonus attack points
+     * @return Bonus Attack Points
+     */
+    public int getBonusAttackPoints() { return bonusAttackPoints; }
+
+    /**
      * Sets the engaged value of this enemy to true
      * @param game Game
      */
@@ -120,9 +128,7 @@ public abstract class Enemy extends DungeonNpc implements Attackable, Serializab
      * @param attacked Attacked
      */
     @Override
-    public void attack(Attackable attacked) {
-        AttackMethods.attackMove(this, attacked);
-    }
+    public void attack(Attackable attacked) { AttackMethods.attackMove(this, attacked); }
 
     /**
      * Returns whether the hit points of this enemy are above 0

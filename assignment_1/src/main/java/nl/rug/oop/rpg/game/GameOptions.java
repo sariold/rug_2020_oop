@@ -3,7 +3,6 @@ package nl.rug.oop.rpg.game;
 import nl.rug.oop.rpg.gui.GUI;
 import nl.rug.oop.rpg.gui.GUIMessages;
 import nl.rug.oop.rpg.gui.GUInspect;
-import nl.rug.oop.rpg.StartGame;
 import nl.rug.oop.rpg.io.FileHandler;
 import nl.rug.oop.rpg.io.Serializer;
 import nl.rug.oop.rpg.npcs.enemies.BlueWizard;
@@ -11,6 +10,7 @@ import nl.rug.oop.rpg.npcs.enemies.MiniBoss;
 import nl.rug.oop.rpg.npcs.enemies.RedWizard;
 import nl.rug.oop.rpg.objects.Room;
 import nl.rug.oop.rpg.objects.doors.Door;
+import nl.rug.oop.rpg.objects.items.AttackPotion;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -138,6 +138,7 @@ public class GameOptions {
             System.out.println("The default map files are not formatted correctly!");
         }
 
+        totalRooms.get(0).addItem(new AttackPotion());
         initializeOptions(possibleMoves, fightMoves);
     }
 

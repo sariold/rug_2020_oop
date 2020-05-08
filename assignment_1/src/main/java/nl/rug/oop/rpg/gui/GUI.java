@@ -102,7 +102,7 @@ public class GUI {
         System.out.println("Your Character: " + player.getName());
         System.out.println(TextColor.ANSI_GREEN + "\tHealth: " + TextColor.ANSI_RESET + player.getHitPoints()
                 + "/" + player.getMaxHitPoints());
-        System.out.println(TextColor.ANSI_RED + "\tAttack: " + TextColor.ANSI_RESET + player.getAttackPoints());
+        System.out.println(TextColor.ANSI_RED + "\tAttack: " + TextColor.ANSI_RESET + (player.getAttackPoints()+player.getBonusAttackPoints()));
         System.out.println(TextColor.ANSI_YELLOW + "\tGold: " + TextColor.ANSI_RESET + player.getGold());
     }
 

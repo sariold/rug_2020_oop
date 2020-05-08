@@ -43,7 +43,7 @@ public class Combat {
                 continue;
             }
             if (move == 0){
-                if (run(enemy)) {
+                if (run(player, enemy)) {
                     return;
                 }
                 continue;
@@ -79,6 +79,7 @@ public class Combat {
         System.out.println(TextColor.ANSI_YELLOW + "You have slain " + enemy.getName() + "!\nYou earned "
                 + enemy.getGoldValue() + " gold." + TextColor.ANSI_RESET);
         enemy.die(game);
+        player.setBonusAttackPoints(0);
         player.getCurrentRoom().removeDeadNPC();
         PlayerStats.increaseGold(enemy.getGoldValue(), player);
         int healValue = GameInteract.getHealValue(player.getHitPoints(), player.getMaxHitPoints(), enemy.getAttackPoints());
@@ -92,12 +93,13 @@ public class Combat {
      * @param enemy Enemy
      * @return True if not boss fight
      */
-    private static boolean run(Enemy enemy) {
+    private static boolean run(Player player, Enemy enemy) {
         if (enemy instanceof MiniBoss || enemy instanceof Boss) {
             System.out.println("You cannot run from a boss fight!");
             return false;
         }
         GUIMessages.runFromFightMessage(enemy.getName());
+        player.setBonusAttackPoints(0);
         enemy.setHitPoints(enemy.getMaxHitPoints());
         return true;
     }
