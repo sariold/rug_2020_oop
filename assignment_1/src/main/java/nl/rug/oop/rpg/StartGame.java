@@ -19,12 +19,10 @@ public class StartGame {
     /**
      * Present the player with starting game options
      */
-    @SuppressWarnings("InfiniteLoopStatement")
     public static void startGameOption() {
         boolean start = true;
         Scanner scanner = new Scanner(System.in);
         int currentMove;
-        String fileName;
         while(start) {
             GUIMessages.startGameMessage();
             try{

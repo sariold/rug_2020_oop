@@ -32,12 +32,6 @@ public abstract class Healer extends DungeonNpc implements Serializable {
     }
 
     /**
-     * Set engaged to b
-     * @param b Boolean
-     */
-    public void setHealStatus(boolean b) { this.engaged = b; }
-
-    /**
      * Heal a player for the heal power of this healer
      * @param player Player
      */
