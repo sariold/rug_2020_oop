@@ -125,15 +125,6 @@ public abstract class Enemy extends DungeonNpc implements Attackable, Serializab
     }
 
     /**
-     * Reduce the hit points of this enemy by the given value
-     * @param value Value
-     */
-    @Override
-    public void reduceHitPoints(int value) {
-        this.hitPoints -= value;
-    }
-
-    /**
      * Returns whether the hit points of this enemy are above 0
      * @return True if hit points are 0 or less
      */

@@ -179,13 +179,6 @@ public class Player implements Attackable, Serializable {
     public void attack(Attackable attacked) { AttackMethods.attackMove(this, attacked); }
 
     /**
-     * Reduce the health of a player
-     * @param value Value
-     */
-    @Override
-    public void reduceHitPoints(int value) { this.hitPoints -= value; }
-
-    /**
      * Checks if the player health is 0 or less
      * @return Boolean if player is dead
      */
