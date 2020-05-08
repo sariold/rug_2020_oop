@@ -19,7 +19,8 @@ public class WeaponSmith extends Trader implements Serializable {
      * @param name Name
      */
     public WeaponSmith(String name) {
-        super("Better get them before they get you!", name, DefaultStats.WEAPONSMITH_POWER, DefaultStats.WEAPONSMITH_PRICE);
+        super("Better get them before they get you!", name, DefaultStats.WEAPONSMITH_POWER,
+                DefaultStats.WEAPONSMITH_PRICE);
     }
 
     /**

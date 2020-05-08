@@ -12,7 +12,7 @@ public class PlayerStats {
     public static void increaseMaxHitPoints(int value, Player player) {
         System.out.println(TextColor.ANSI_YELLOW + "Your health increased by " + value + "." + TextColor.ANSI_RESET);
         player.setMaxHitPoints(player.getMaxHitPoints() + value);
-        player.setAttackPoints(player.getHitPoints() + value);
+        player.setHitPoints(player.getHitPoints() + value);
     }
 
     /**
