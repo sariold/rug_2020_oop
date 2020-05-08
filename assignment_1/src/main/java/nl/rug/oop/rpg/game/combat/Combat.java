@@ -53,34 +53,9 @@ public class Combat {
                     continue;
                 }
             }
-            if (!playerStatusImpairments(player, enemy, game)) {
-                continue;
-            }
             AttackMethods.playerAttack(move, player, enemy, game);
             AttackMethods.enemyAttack(player, enemy, game);
         }
-    }
-
-    /**
-     * Check and remove status impairments of the player
-     * @param player Player
-     * @param enemy Enemy
-     * @param game Game
-     * @return False if the player is frozen
-     */
-    private static boolean playerStatusImpairments(Player player, Enemy enemy, Game game) {
-        player.checkStatusImpairments();
-        if (player.isFrozen()) {
-            enemy.interact(player);
-            if (player.isDead()) {
-                loseFight(enemy, game);
-            }
-            return false;
-        }
-        if (player.isDead()) {
-            loseFight(enemy, game);
-        }
-        return true;
     }
 
     /**

@@ -121,7 +121,7 @@ public abstract class Enemy extends DungeonNpc implements Attackable, Serializab
      */
     @Override
     public void attack(Attackable attacked) {
-        AttackMethods.enemyAttacker(this, attacked);
+        AttackMethods.attackMove(this, attacked);
     }
 
     /**

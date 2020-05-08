@@ -7,6 +7,8 @@ public class DefaultStats {
     // COMBAT
     public static final int BURN_DAMAGE = 3;
 
+    public static final int CRITICAL_HIT_CHANCE = 21;
+
     public static final int FREEZE_CHANCE = 60;
     public static final int BURN_CHANCE = 65;
 
@@ -73,8 +75,7 @@ public class DefaultStats {
     public static final int ENCHANTER_PRICE = 10;
 
     // BOSS
-    public static final String MINI_BOSS_DOOR = "If you dare enter this room, you will be forced to defeat "
-            + "a mini boss!";
+    public static final String MINI_BOSS_DOOR = "If you dare enter this room, you will be forced to defeat " + "a mini boss!";
     public static final String FINAL_BOSS_DOOR = "You can only enter this room if you have defeated BOTH OF MY SONS!";
 
     // MONSTER DOOR

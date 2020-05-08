@@ -152,7 +152,7 @@ public class Player implements Attackable, Serializable {
      * @param b Boolean
      */
     public void setFrozen(boolean b) {
-        if (b) GUIMessages.frozenMessage();
+        if (b) GUIMessages.hasBeenFrozenMessage(this);
         this.frozen = b;
     }
 
@@ -161,7 +161,7 @@ public class Player implements Attackable, Serializable {
      * @param b Boolean
      */
     public void setBurned(boolean b) {
-        if (b) GUIMessages.burnedMessage();
+        if (b) GUIMessages.hasBeenBurnedMessage(this);
         this.burned = b;
     }
 
@@ -176,7 +176,7 @@ public class Player implements Attackable, Serializable {
      * @param attacked Attacked
      */
     @Override
-    public void attack(Attackable attacked) { AttackMethods.playerAttacker(attacked, this); }
+    public void attack(Attackable attacked) { AttackMethods.attackMove(this, attacked); }
 
     /**
      * Reduce the health of a player

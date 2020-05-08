@@ -1,6 +1,9 @@
 package nl.rug.oop.rpg.gui;
 
+import nl.rug.oop.rpg.extra.DefaultStats;
 import nl.rug.oop.rpg.extra.TextColor;
+import nl.rug.oop.rpg.interfaces.Attackable;
+import nl.rug.oop.rpg.player.Player;
 
 import java.util.ArrayList;
 
@@ -11,8 +14,7 @@ public class GUIMessages {
     /**
      * Prints a message when using a combat item outside of combat
      */
-    public static void onlyCombatItemMessage(){ System.out.println(TextColor.ANSI_YELLOW + "This item can only "
-            + "be used in combat." + TextColor.ANSI_RESET); }
+    public static void onlyCombatItemMessage(){ System.out.println(TextColor.ANSI_YELLOW + "This item can only " + "be used in combat." + TextColor.ANSI_RESET); }
 
     /**
      * Prints a message when invalid input is given
@@ -28,32 +30,14 @@ public class GUIMessages {
      * Prints a message when the game is won
      */
     public static void winGameMessage(){
-        System.out.println(TextColor.ANSI_YELLOW + "Congratulations you have won the game! You are a real "
-                + "dungeon master!" + TextColor.ANSI_RESET);
-        System.out.println(TextColor.ANSI_BLUE + "This game has been brought to you by Diego and Felix."
-                + TextColor.ANSI_RESET);
+        System.out.println(TextColor.ANSI_YELLOW + "Congratulations you have won the game! You are a real " + "dungeon master!" + TextColor.ANSI_RESET);
+        System.out.println(TextColor.ANSI_BLUE + "This game has been brought to you by Diego and Felix." + TextColor.ANSI_RESET);
     }
 
     /**
      * Prints a message when the player died
      */
-    public static void gameOverMessage() { System.out.println(TextColor.ANSI_WHITE + "GAME OVER!"
-            + TextColor.ANSI_RESET);
-    }
-
-    /**
-     * Prints a message when the player has been burned
-     */
-    public static void burnedMessage() {
-        System.out.println(TextColor.ANSI_RED + "You have been burned!" + TextColor.ANSI_RESET);
-    }
-
-    /**
-     * prints a message when the player has been frozen
-     */
-    public static void frozenMessage() {
-        System.out.println(TextColor.ANSI_BLUE + "You have been frozen!" + TextColor.ANSI_RESET);
-    }
+    public static void gameOverMessage() { System.out.println(TextColor.ANSI_WHITE + "GAME OVER!" + TextColor.ANSI_RESET); }
 
     /**
      * prints a message when running from a fight
@@ -109,8 +93,64 @@ public class GUIMessages {
         printOptions(possibleOptions);
     }
 
-    public static void playerHealedMessage(int healValue) {
-        System.out.println(TextColor.ANSI_GREEN + "You have been healed " + healValue + " hit points!"
-                + TextColor.ANSI_RESET);
-    }
+    /**
+     * prints a message that the player has been healed for a given amount
+     * @param healValue Heal Value
+     */
+    public static void playerHealedMessage(int healValue) { System.out.println(TextColor.ANSI_GREEN + "You have been healed " + healValue + " hit points!" + TextColor.ANSI_RESET); }
+
+    /**
+     * prints a message that the attacked is attacked by the attacker
+     * @param attacker Attacker
+     * @param attacked Attacked
+     */
+    public static void attackedMessage(Attackable attacker, Attackable attacked) { System.out.println(TextColor.ANSI_RED + attacked.getName() + " is attacked by " + attacker.getName() + TextColor.ANSI_RESET); }
+
+    /**
+     * prints a message when a critical hit has been landed
+     */
+    public static void criticalHitMessage() { System.out.println(TextColor.ANSI_RED + "Critical Hit!" + TextColor.ANSI_RESET); }
+
+    /**
+     * prints how much damage an attacked has taken
+     * @param attacked Attacked
+     * @param damage Damage taken
+     */
+    public static void takesDamageMessage(Attackable attacked, int damage) { System.out.println(TextColor.ANSI_YELLOW + attacked.getName() + " takes " + damage + " damage!" + TextColor.ANSI_RESET); }
+
+    /**
+     * prints a message that an attackable object is frozen
+     * @param attacked Frozen attackable
+     */
+    public static void isFrozenMessage(Attackable attacked) { System.out.println(TextColor.ANSI_RED + attacked.getName() + " is frozen solid." + TextColor.ANSI_RESET); }
+
+    /**
+     * prints a message that an attackable object is no longer frozen
+     * @param attacked No longer frozen attackable
+     */
+    public static void noLongerFrozenMessage(Attackable attacked) { System.out.println(TextColor.ANSI_BLUE + attacked.getName() + " is no longer frozen!" + TextColor.ANSI_RESET); }
+
+    /**
+     * prints a message that an attackable object took burn damage
+     * @param attacked Attacked that takes burn damage
+     */
+    public static void burnDamageMessage(Attackable attacked) { System.out.println(TextColor.ANSI_RED + attacked.getName() + " is burned and takes " + DefaultStats.BURN_DAMAGE + " damage." +TextColor.ANSI_RESET); }
+
+    /**
+     * prints a message that an attackable object is no longer burned
+     * @param attacked
+     */
+    public static void noLongerBurnedMessage(Attackable attacked) { System.out.println(TextColor.ANSI_BLUE + attacked.getName() + " does no longer burn!" + TextColor.ANSI_RESET); }
+
+    /**
+     * prints a message that an attackable object has been burned
+     * @param attackable Attackable that was burned
+     */
+    public static void hasBeenBurnedMessage(Attackable attackable) { System.out.println(TextColor.ANSI_YELLOW + attackable.getName() + " has been burned!" + TextColor.ANSI_RESET); }
+
+    /**
+     * prints a message that an attackable object has been frozen
+     * @param attackable Attackable that was frozen
+     */
+    public static void hasBeenFrozenMessage(Attackable attackable) { System.out.println(TextColor.ANSI_BLUE + attackable.getName() + " has been frozen!" + TextColor.ANSI_RESET); }
 }

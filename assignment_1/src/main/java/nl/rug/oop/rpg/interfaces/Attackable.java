@@ -17,6 +17,18 @@ public interface Attackable {
     int getHitPoints();
 
     /**
+     * Returns the attack points
+     * @return Attack points
+     */
+    int getAttackPoints();
+
+    /**
+     * Sets the hit points to the given value
+     * @param value Value
+     */
+    void setHitPoints(int value);
+
+    /**
      * Attacks an attackable object
      * @param attacked Attacked
      */
