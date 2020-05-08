@@ -4,6 +4,9 @@ import nl.rug.oop.rpg.extra.TextColor;
 
 import java.util.ArrayList;
 
+/**
+ * Class that prints messages in the game
+ */
 public class GUIMessages {
     /**
      * Prints a message when using a combat item outside of combat
@@ -52,12 +55,19 @@ public class GUIMessages {
         System.out.println(TextColor.ANSI_BLUE + "You have been frozen!" + TextColor.ANSI_RESET);
     }
 
+    /**
+     * prints a message when running from a fight
+     * @param name Name of enemy
+     */
     public static void runFromFightMessage(String name) {
         System.out.println(TextColor.ANSI_YELLOW + "You ran from the fight. " + TextColor.ANSI_RED
                 + name + TextColor.ANSI_YELLOW + " recovered to full health!"
                 + TextColor.ANSI_RESET);
     }
 
+    /**
+     * prints a message when starting a new game
+     */
     public static void newGameMessage() {
         ArrayList<String> possibleMoves = new ArrayList<>();
         possibleMoves.add("Play the game normally");
@@ -78,6 +88,9 @@ public class GUIMessages {
         }
     }
 
+    /**
+     * prints a message when starting the game
+     */
     public static void startGameMessage() {
         ArrayList<String> possibleMoves = new ArrayList<>();
         possibleMoves.add("New Game");
@@ -85,6 +98,10 @@ public class GUIMessages {
         printOptions(possibleMoves);
     }
 
+    /**
+     * prints a message when saving the game
+     * @param fileName Current save file
+     */
     public static void saveGameMessage(String fileName) {
         ArrayList<String> possibleOptions = new ArrayList<>();
         possibleOptions.add("Save to current file: " + fileName);

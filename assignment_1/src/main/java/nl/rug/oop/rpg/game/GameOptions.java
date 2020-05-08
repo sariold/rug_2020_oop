@@ -138,6 +138,15 @@ public class GameOptions {
             System.out.println("The default map files are not formatted correctly!");
         }
 
+        initializeOptions(possibleMoves, fightMoves);
+    }
+
+    /**
+     * initializes all standard options the player has while playing the game
+     * @param possibleMoves Possible moves
+     * @param fightMoves Fight moves
+     */
+    private static void initializeOptions(ArrayList<String> possibleMoves, ArrayList<String> fightMoves) {
         possibleMoves.add("Look around");
         possibleMoves.add("Look for a way out");
         possibleMoves.add("Look for company");
