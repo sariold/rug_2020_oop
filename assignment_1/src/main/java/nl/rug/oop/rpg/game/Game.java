@@ -112,6 +112,10 @@ public class Game implements Serializable {
         if (move == -1) return;
         if (move < player.getInventory().size() && move > -1) {
             if (!player.getInventory().get(move).hasNonCombatUse()) {
+                if(player.getInventory().get(move).toString().equals("Monster Key")) {
+                    GUIMessages.onlyMonsterDoorUsage();
+                    return;
+                }
                 GUIMessages.onlyCombatItemMessage();
                 return;
             }

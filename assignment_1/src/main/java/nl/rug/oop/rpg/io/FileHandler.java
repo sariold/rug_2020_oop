@@ -22,8 +22,8 @@ public class FileHandler {
      */
     public static boolean fileLoader(String type, String newFileName) {
         boolean minusOne = true;
-        if(type.equals("saves")) System.out.println("Which save file would you like to load from? (-1 : none)");
-        else System.out.println("Which config file would you like to load from? (-1 : none)");
+        if(type.equals("saves")) System.out.println("Which save file would you like to load from?");
+        else System.out.println("Which config file would you like to load from?");
         String fileName = getAllFiles(type);
         if(fileName.equals("noFilesException")) {
             System.out.println("No files available!");
@@ -52,7 +52,7 @@ public class FileHandler {
         while(true) {
             fileName = scanner.nextLine();
             if(fileName != null && fileName.matches("^[a-zA-Z0-9]*$") && !fileName.equals("")) break;
-            System.out.println("Only use alphanumeric characters!");
+            System.out.println("Only use alphabetic characters and numbers!");
             System.out.println(typePrint);
         }
         return fileName;

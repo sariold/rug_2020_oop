@@ -47,7 +47,7 @@ public class MonsterKey extends Item implements Serializable {
      */
     @Override
     public boolean hasNonCombatUse() {
-        return true;
+        return false;
     }
 
     /**
@@ -58,4 +58,6 @@ public class MonsterKey extends Item implements Serializable {
     public String toString() {
         return "Monster Key";
     }
+
+
 }

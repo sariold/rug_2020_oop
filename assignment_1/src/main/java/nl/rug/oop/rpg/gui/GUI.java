@@ -3,6 +3,7 @@ package nl.rug.oop.rpg.gui;
 import nl.rug.oop.rpg.extra.TextColor;
 import nl.rug.oop.rpg.game.Game;
 import nl.rug.oop.rpg.game.InventoryMethods;
+import nl.rug.oop.rpg.objects.items.Item;
 import nl.rug.oop.rpg.player.Player;
 import nl.rug.oop.rpg.interfaces.Collectable;
 import nl.rug.oop.rpg.npcs.enemies.Enemy;
@@ -62,7 +63,8 @@ public class GUI {
         }
         System.out.println("Your inventory contains:");
         for (int i = 0; i < player.getInventory().size(); i++) {
-            System.out.println("\t(" + i + ") " + player.getInventory().get(i).toString());
+            System.out.println("\t(" + i + ") " + player.getInventory().get(i).toString()
+            + " : " + ((Item) player.getInventory().get(i)).getDescription());
         }
         System.out.println("What item will you use (-1 to not use an item)");
     }

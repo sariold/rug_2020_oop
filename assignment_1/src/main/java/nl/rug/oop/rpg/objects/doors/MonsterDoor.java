@@ -8,6 +8,7 @@ import nl.rug.oop.rpg.extra.TextColor;
 import nl.rug.oop.rpg.objects.Room;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  * Creates a type of door that only lets the player enter if they have defeated all enemy npcs in the current room
@@ -35,8 +36,8 @@ public class MonsterDoor extends Door implements Serializable {
      */
     @Override
     public void interact(Player player) {
-        if (player.getCurrentRoom().countEnemies(player.getCurrentRoom().getNPCs()) == 0 || checkKey(player)
-            || getDefeated()) {
+        if (getDefeated() || player.getCurrentRoom().countEnemies(player.getCurrentRoom().getNPCs()) == 0 ||
+                checkKey(player)) {
             super.interact(player);
             this.defeated = true;
             this.setDescription("A broken monster door");
@@ -60,14 +61,16 @@ public class MonsterDoor extends Door implements Serializable {
      * @return Boolean if they have a key
      */
     public boolean checkKey(Player player) {
-        boolean hasKey = false;
-        for (Collectable c: player.getInventory()) {
-            if (c instanceof MonsterKey) {
-                hasKey = true;
-                c.use(player);
+        ArrayList<Collectable> newInventory = player.getInventory();
+        if(player.getInventory().size() > 0) {
+            for (Collectable c : newInventory) {
+                if (c instanceof MonsterKey) {
+                    c.use(player);
+                    return true;
+                }
             }
         }
-        return hasKey;
+        return false;
     }
 
 

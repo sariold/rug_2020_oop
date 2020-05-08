@@ -30,4 +30,5 @@ public interface Collectable {
      * @return True if it has non combat use
      */
     boolean hasNonCombatUse();
+
 }
