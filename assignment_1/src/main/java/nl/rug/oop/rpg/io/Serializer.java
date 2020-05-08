@@ -22,6 +22,7 @@ public class Serializer {
                 + fileName + ".ser");
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream)) {
             objectOutputStream.writeObject(game);
+            objectOutputStream.close();
             System.out.println("Save successful!");
         } catch (FileNotFoundException e) {
             System.out.println("File could not be found!");
@@ -44,6 +45,7 @@ public class Serializer {
                 + fileName + ".ser");
         ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream)) {
             Game game = (Game) objectInputStream.readObject();
+            objectInputStream.close();
             System.out.println("Game loaded successfully!");
             return game;
         }

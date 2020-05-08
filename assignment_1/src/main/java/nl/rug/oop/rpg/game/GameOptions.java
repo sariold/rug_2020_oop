@@ -1,8 +1,8 @@
 package nl.rug.oop.rpg.game;
 
-import nl.rug.oop.rpg.GUI.GUI;
-import nl.rug.oop.rpg.GUI.GUIMessages;
-import nl.rug.oop.rpg.GUI.GUInspect;
+import nl.rug.oop.rpg.gui.GUI;
+import nl.rug.oop.rpg.gui.GUIMessages;
+import nl.rug.oop.rpg.gui.GUInspect;
 import nl.rug.oop.rpg.StartGame;
 import nl.rug.oop.rpg.io.FileHandler;
 import nl.rug.oop.rpg.io.Serializer;

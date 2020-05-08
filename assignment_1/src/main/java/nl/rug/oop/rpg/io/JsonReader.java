@@ -33,6 +33,7 @@ public class JsonReader {
         while((temp = bufferedReader.readLine()) != null) {
             json.append(temp);
         }
+        bufferedReader.close();
         try {
             Object roomJSON = jsonParser.parse(json.toString());
             JSONArray roomArray = (JSONArray) roomJSON;
@@ -57,6 +58,7 @@ public class JsonReader {
         while((temp = bufferedReader.readLine()) != null) {
             json.append(temp);
         }
+        bufferedReader.close();
         try {
             Object doorJSON = jsonParser.parse(json.toString());
             JSONArray doorArray = (JSONArray) doorJSON;
@@ -81,6 +83,7 @@ public class JsonReader {
         while((temp = bufferedReader.readLine()) != null) {
             json.append(temp);
         }
+        bufferedReader.close();
         try {
             Object connectionJSON = jsonParser.parse(json.toString());
             JSONArray connectionArray = (JSONArray) connectionJSON;
@@ -105,6 +108,7 @@ public class JsonReader {
         while((temp = bufferedReader.readLine()) != null) {
             json.append(temp);
         }
+        bufferedReader.close();
         try {
             Object npcJSON = jsonParser.parse(json.toString());
             JSONArray npcArray = (JSONArray) npcJSON;
@@ -128,6 +132,7 @@ public class JsonReader {
         while((temp = bufferedReader.readLine()) != null) {
             json.append(temp);
         }
+        bufferedReader.close();
         try {
             Object itemJSON = jsonParser.parse(json.toString());
             JSONArray itemArray = (JSONArray) itemJSON;

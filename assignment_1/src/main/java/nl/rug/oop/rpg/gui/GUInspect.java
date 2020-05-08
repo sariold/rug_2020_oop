@@ -1,4 +1,4 @@
-package nl.rug.oop.rpg.GUI;
+package nl.rug.oop.rpg.gui;
 
 import nl.rug.oop.rpg.player.Player;
 import nl.rug.oop.rpg.interfaces.Collectable;

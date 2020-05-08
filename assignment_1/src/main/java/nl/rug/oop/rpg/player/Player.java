@@ -1,5 +1,5 @@
 package nl.rug.oop.rpg.player;
-import nl.rug.oop.rpg.GUI.GUIMessages;
+import nl.rug.oop.rpg.gui.GUIMessages;
 import nl.rug.oop.rpg.game.combat.AttackMethods;
 import nl.rug.oop.rpg.game.InventoryMethods;
 import nl.rug.oop.rpg.interfaces.Attackable;

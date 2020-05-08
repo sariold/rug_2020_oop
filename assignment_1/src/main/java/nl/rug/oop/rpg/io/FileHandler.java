@@ -1,6 +1,6 @@
 package nl.rug.oop.rpg.io;
 
-import nl.rug.oop.rpg.GUI.GUIMessages;
+import nl.rug.oop.rpg.gui.GUIMessages;
 import nl.rug.oop.rpg.StartGame;
 
 import java.io.File;

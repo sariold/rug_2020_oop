@@ -1,6 +1,6 @@
 package nl.rug.oop.rpg;
 
-import nl.rug.oop.rpg.GUI.GUIMessages;
+import nl.rug.oop.rpg.gui.GUIMessages;
 import nl.rug.oop.rpg.config.Config;
 import nl.rug.oop.rpg.extra.TextColor;
 import nl.rug.oop.rpg.game.Game;
@@ -9,7 +9,6 @@ import nl.rug.oop.rpg.io.FileHandler;
 import nl.rug.oop.rpg.io.Serializer;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 /**

@@ -1,6 +1,6 @@
 package nl.rug.oop.rpg.config;
 
-import nl.rug.oop.rpg.GUI.GUIMessages;
+import nl.rug.oop.rpg.gui.GUIMessages;
 import nl.rug.oop.rpg.game.Game;
 
 import java.io.*;
@@ -94,6 +94,7 @@ public class Config {
             properties.store(fileOutputStream, "Player configuration");
             System.out.println("Player configuration set to:\nName: " + name + "\nMax Health: " + maxHealth
                     + "\nHealth: " + health + "\nAttack: " + attack + "\nGold: " + gold);
+            fileOutputStream.close();
         } catch (FileNotFoundException e) {
             System.out.println("File could not be found!");
         } catch (IOException e) {
@@ -120,6 +121,7 @@ public class Config {
             game.getPlayer().setAttackPoints(Integer.parseInt(properties.getProperty("playerAttack")));
             game.getPlayer().setGold(Integer.parseInt(properties.getProperty("playerGold")));
             System.out.println("The " + configName + " config was loaded successfully!");
+            fileInputStream.close();
         } catch (FileNotFoundException e) {
             System.out.println("File could not be found!");
         } catch (IOException e) {
