@@ -64,7 +64,7 @@ public class FileHandler {
         String[] files = lsFiles.list();
         if(files == null || files.length == 0) return "noFilesException";
         ArrayList<String> allFiles = new ArrayList<>(Arrays.asList(Objects.requireNonNull(lsFiles.list())));
-        StartGame.printOptions(allFiles);
+        GUIMessages.printOptions(allFiles);
         int currentMove;
         while(true) {
             try{
