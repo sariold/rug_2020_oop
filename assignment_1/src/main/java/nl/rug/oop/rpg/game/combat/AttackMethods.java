@@ -1,5 +1,6 @@
 package nl.rug.oop.rpg.game.combat;
 
+import nl.rug.oop.rpg.game.Game;
 import nl.rug.oop.rpg.player.Player;
 import nl.rug.oop.rpg.extra.DefaultStats;
 import nl.rug.oop.rpg.extra.TextColor;
@@ -85,4 +86,44 @@ public class AttackMethods {
         attacked.reduceHitPoints(damage);
     }
 
+    /**
+     * Checks if the enemy has statusimpairments and executes the enemy's attack
+     * @param player Player
+     * @param enemy Enemy
+     * @param game Game
+     */
+    static void enemyAttack(Player player, Enemy enemy, Game game) {
+        enemy.checkStatusImpairments();
+        if (enemy.isDead()) {
+            Combat.winFight(player, enemy, game);
+            return;
+        }
+        if (!enemy.isFrozen()) {
+            enemy.interact(player);
+        }
+        if (player.isDead()) {
+            Combat.loseFight(enemy, game);
+        }
+    }
+
+    /**
+     * Checks the attack move of the player and executes it
+     * @param move Move
+     * @param player Player
+     * @param enemy Enemy
+     * @param game Game
+     */
+    static void playerAttack(int move, Player player, Enemy enemy, Game game) {
+        if (move == 1){
+            player.attack(enemy);
+        } else if (move == game.getFireMagic()) {
+            System.out.println(TextColor.ANSI_YELLOW + "You have burned " + enemy.getName() + "!"
+                    + TextColor.ANSI_RESET);
+            enemy.setBurned(true);
+        } else if (move == game.getIceMagic()) {
+            System.out.println(TextColor.ANSI_YELLOW + "You have frozen " + enemy.getName() + "!"
+                    + TextColor.ANSI_RESET);
+            enemy.setFrozen(true);
+        }
+    }
 }

@@ -1,6 +1,8 @@
 package nl.rug.oop.rpg.objects.items;
 
 import nl.rug.oop.rpg.extra.DefaultStats;
+import nl.rug.oop.rpg.game.GameInteract;
+import nl.rug.oop.rpg.gui.GUIMessages;
 import nl.rug.oop.rpg.player.Player;
 
 import java.io.Serializable;
@@ -28,7 +30,9 @@ public class HealingPotion extends EnchantItem implements Serializable {
      */
     @Override
     public void use(Player player) {
-        player.increaseHitPoints(this.healPower);
+        int healValue = GameInteract.getHealValue(player.getHitPoints(), player.getMaxHitPoints(), this.healPower);
+        GUIMessages.playerHealedMessage(healValue);
+        player.setHitPoints(player.getHitPoints() + healValue);
         super.use(player);
     }
 

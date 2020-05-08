@@ -2,6 +2,7 @@ package nl.rug.oop.rpg.npcs.healer;
 
 import nl.rug.oop.rpg.game.Game;
 import nl.rug.oop.rpg.game.GameInteract;
+import nl.rug.oop.rpg.gui.GUIMessages;
 import nl.rug.oop.rpg.player.Player;
 import nl.rug.oop.rpg.extra.TextColor;
 import nl.rug.oop.rpg.npcs.DungeonNpc;
@@ -41,7 +42,9 @@ public abstract class Healer extends DungeonNpc implements Serializable {
      * @param player Player
      */
     public void heal(Player player) {
-        player.increaseHitPoints(this.healPower);
+        int healValue = GameInteract.getHealValue(player.getHitPoints(), player.getMaxHitPoints(), this.healPower);
+        player.setHitPoints(player.getHitPoints() + healValue);
+        GUIMessages.playerHealedMessage(healValue);
         this.engaged = true;
     }
 

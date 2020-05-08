@@ -16,7 +16,7 @@ public class PlayerStats {
     }
 
     /**
-     * Increases the attack dmamage of a player
+     * Increases the attack damage of a player
      * @param value Value
      * @param player Player
      */
@@ -39,15 +39,4 @@ public class PlayerStats {
      */
     public static void decreaseGold(int value, Player player) { player.setGold(player.getGold() - value); }
 
-    /**
-     * Increases the health of a player
-     * @param value Value
-     * @param player Player
-     * */
-    public static void increasePlayerHitPoints(int value, Player player) {
-        System.out.println(TextColor.ANSI_GREEN + "You have been healed " + value + " hit points!"
-                + TextColor.ANSI_RESET);
-        player.setHitPoints(player.getHitPoints() + value);
-        if (player.getHitPoints() > player.getMaxHitPoints()) player.setHitPoints(player.getMaxHitPoints());
-    }
 }
