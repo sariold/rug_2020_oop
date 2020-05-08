@@ -21,13 +21,15 @@ public class StartGame {
      */
     @SuppressWarnings("InfiniteLoopStatement")
     public static void startGameOption() {
+        boolean start = true;
         Scanner scanner = new Scanner(System.in);
         int currentMove;
         String fileName;
-        while(true) {
+        while(start) {
             GUIMessages.startGameMessage();
             try{
                 currentMove = scanner.nextInt();
+                if(currentMove == -1) start = false;
             } catch (Exception e) {
                 GUIMessages.invalidInputMessage();
                 scanner.nextLine();
@@ -36,30 +38,7 @@ public class StartGame {
             switch (currentMove) {
                 case 0:
                     GUIMessages.newGameMessage();
-                    try{
-                        currentMove = scanner.nextInt();
-                    } catch (Exception e) {
-                        GUIMessages.invalidInputMessage();
-                        scanner.nextLine();
-                        continue;
-                    }
-                    switch (currentMove) {
-                        // normal game
-                        case 0:
-                            fileName = FileHandler.fileNamer("saves");
-                            initNewGame(fileName, false, null);
-                            break;
-                        // from config
-                        case 1:
-                            fileName = FileHandler.fileNamer("saves");
-                            if(FileHandler.fileLoader("config", fileName)) break;
-                            break;
-                        // set config
-                        case 2:
-                            fileName = FileHandler.fileNamer("config");
-                            Config.setConfig(fileName);
-                            break;
-                    }
+                    configOptions();
                     break;
                 case 1:
                     if(FileHandler.fileLoader("saves", null)) break;
@@ -142,6 +121,35 @@ public class StartGame {
                     Serializer.saveGame(game, newFileName);
                     return;
             }
+        }
+    }
+
+    public static void configOptions() {
+        Scanner scanner = new Scanner(System.in);
+        int currentMove = 0;
+        String fileName;
+        try{
+            currentMove = scanner.nextInt();
+        } catch (Exception e) {
+            GUIMessages.invalidInputMessage();
+            scanner.nextLine();
+        }
+        switch (currentMove) {
+            // normal game
+            case 0:
+                fileName = FileHandler.fileNamer("saves");
+                initNewGame(fileName, false, null);
+                break;
+            // from config
+            case 1:
+                fileName = FileHandler.fileNamer("saves");
+                if(FileHandler.fileLoader("config", fileName)) break;
+                break;
+            // set config
+            case 2:
+                fileName = FileHandler.fileNamer("config");
+                Config.setConfig(fileName);
+                break;
         }
     }
 

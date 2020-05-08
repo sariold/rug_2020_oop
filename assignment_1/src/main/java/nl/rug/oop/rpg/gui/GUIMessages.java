@@ -73,7 +73,7 @@ public class GUIMessages {
         possibleMoves.add("Play the game normally");
         possibleMoves.add("Initialize from config");
         possibleMoves.add("Set default config");
-        System.out.println("You are about to start a new game, what do you want to do?");
+        System.out.println("You are about to start a new game, what do you want to do? (-1 : exit)");
         printOptions(possibleMoves);
     }
 
@@ -82,7 +82,7 @@ public class GUIMessages {
      * @param arrayList Arraylist
      */
     public static void printOptions(ArrayList<String> arrayList) {
-        System.out.println("What do you want to do?");
+        System.out.println("What do you want to do? (-1 : exit)");
         for (int i = 0; i < arrayList.size(); i++) {
             System.out.println("\t(" + i + ") " + arrayList.get(i));
         }
