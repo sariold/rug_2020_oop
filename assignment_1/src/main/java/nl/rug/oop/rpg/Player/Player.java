@@ -1,4 +1,7 @@
-package nl.rug.oop.rpg.game;
+package nl.rug.oop.rpg.Player;
+import nl.rug.oop.rpg.GUI.GUIMessages;
+import nl.rug.oop.rpg.game.AttackMethods;
+import nl.rug.oop.rpg.game.InventoryMethods;
 import nl.rug.oop.rpg.interfaces.Attackable;
 import nl.rug.oop.rpg.interfaces.Collectable;
 import nl.rug.oop.rpg.objects.Room;
@@ -149,7 +152,7 @@ public class Player implements Attackable, Serializable {
      * @param b Boolean
      */
     public void setFrozen(boolean b) {
-        if (b) GUI.frozenMessage();
+        if (b) GUIMessages.frozenMessage();
         this.frozen = b;
     }
 
@@ -158,7 +161,7 @@ public class Player implements Attackable, Serializable {
      * @param b Boolean
      */
     public void setBurned(boolean b) {
-        if (b) GUI.burnedMessage();
+        if (b) GUIMessages.burnedMessage();
         this.burned = b;
     }
 

@@ -1,4 +1,4 @@
-package nl.rug.oop.rpg.game;
+package nl.rug.oop.rpg.Player;
 
 import nl.rug.oop.rpg.extra.TextColor;
 

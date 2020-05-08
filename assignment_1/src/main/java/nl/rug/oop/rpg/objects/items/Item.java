@@ -1,6 +1,6 @@
 package nl.rug.oop.rpg.objects.items;
 
-import nl.rug.oop.rpg.game.Player;
+import nl.rug.oop.rpg.Player.Player;
 import nl.rug.oop.rpg.interfaces.Collectable;
 import nl.rug.oop.rpg.objects.DungeonObjects;
 

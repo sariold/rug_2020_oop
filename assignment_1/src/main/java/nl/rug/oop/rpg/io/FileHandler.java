@@ -1,7 +1,7 @@
 package nl.rug.oop.rpg.io;
 
+import nl.rug.oop.rpg.GUI.GUIMessages;
 import nl.rug.oop.rpg.StartGame;
-import nl.rug.oop.rpg.game.GUI;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -73,7 +73,7 @@ public class FileHandler {
                 return allFiles.get(currentMove).replace(".ser", "")
                         .replace(".ini", "");
             } catch (Exception e) {
-                GUI.invalidInputMessage();
+                GUIMessages.invalidInputMessage();
                 scanner.nextLine();
             }
         }

@@ -1,7 +1,7 @@
 package nl.rug.oop.rpg.npcs.healer;
 
 import nl.rug.oop.rpg.extra.DefaultStats;
-import nl.rug.oop.rpg.game.Player;
+import nl.rug.oop.rpg.Player.Player;
 
 import java.io.Serializable;
 

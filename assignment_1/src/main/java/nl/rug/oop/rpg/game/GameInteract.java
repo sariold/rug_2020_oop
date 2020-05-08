@@ -1,5 +1,8 @@
 package nl.rug.oop.rpg.game;
 
+import nl.rug.oop.rpg.GUI.GUI;
+import nl.rug.oop.rpg.GUI.GUIMessages;
+import nl.rug.oop.rpg.Player.Player;
 import nl.rug.oop.rpg.interfaces.Collectable;
 import nl.rug.oop.rpg.npcs.DungeonNpc;
 import nl.rug.oop.rpg.npcs.healer.Healer;
@@ -80,7 +83,7 @@ public class GameInteract {
         try {
             move = scanner.nextInt();
         } catch (InputMismatchException e) {
-            GUI.invalidInputMessage();
+            GUIMessages.invalidInputMessage();
             return;
         }
         if (move == 1){
@@ -90,7 +93,7 @@ public class GameInteract {
             }
             trader.interact(player);
             player.getCurrentRoom().removeDeadNPC();
-        } else if(move > 1) GUI.invalidInputMessage();
+        } else if(move > 1) GUIMessages.invalidInputMessage();
     }
 
     /**
@@ -105,13 +108,13 @@ public class GameInteract {
         try {
             move = scanner.nextInt();
         } catch (InputMismatchException e) {
-            GUI.invalidInputMessage();
+            GUIMessages.invalidInputMessage();
             return;
         }
         if (move == 1){
             healer.interact(player);
             System.out.println("You are at " + player.getHitPoints() + " health.");
             player.getCurrentRoom().removeDeadNPC();
-        } else if(move > 1) GUI.invalidInputMessage();
+        } else if(move > 1) GUIMessages.invalidInputMessage();
     }
 }

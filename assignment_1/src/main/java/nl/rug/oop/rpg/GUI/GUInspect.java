@@ -1,5 +1,6 @@
-package nl.rug.oop.rpg.game;
+package nl.rug.oop.rpg.GUI;
 
+import nl.rug.oop.rpg.Player.Player;
 import nl.rug.oop.rpg.interfaces.Collectable;
 import nl.rug.oop.rpg.npcs.DungeonNpc;
 import nl.rug.oop.rpg.objects.doors.Door;

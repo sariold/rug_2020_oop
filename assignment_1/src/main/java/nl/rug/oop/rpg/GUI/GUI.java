@@ -1,6 +1,9 @@
-package nl.rug.oop.rpg.game;
+package nl.rug.oop.rpg.GUI;
 
 import nl.rug.oop.rpg.extra.TextColor;
+import nl.rug.oop.rpg.game.Game;
+import nl.rug.oop.rpg.game.InventoryMethods;
+import nl.rug.oop.rpg.Player.Player;
 import nl.rug.oop.rpg.interfaces.Collectable;
 import nl.rug.oop.rpg.npcs.enemies.Enemy;
 import nl.rug.oop.rpg.npcs.healer.Healer;
@@ -124,50 +127,4 @@ public class GUI {
         System.out.println("\t(0) No better do it later!\n\t(1) Heal me!");
     }
 
-    /**
-     * Prints a message when using a combat item outside of combat
-     */
-    public static void onlyCombatItemMessage(){ System.out.println(TextColor.ANSI_YELLOW + "This item can only "
-            + "be used in combat." + TextColor.ANSI_RESET); }
-
-    /**
-     * Prints a message when invalid input is given
-     */
-    public static void invalidInputMessage() { System.out.println("That is not a valid input!"); }
-
-    /**
-     * Prints a message when invalid item is chosen from the inventory
-     */
-    public static void invalidItemMessage() { System.out.println("That is not a valid item!"); }
-
-    /**
-     * Prints a message when the game is won
-     */
-    public static void winGameMessage(){
-        System.out.println(TextColor.ANSI_YELLOW + "Congratulations you have won the game! You are a real "
-                + "dungeon master!" + TextColor.ANSI_RESET);
-        System.out.println(TextColor.ANSI_BLUE + "This game has been brought to you by Diego and Felix."
-                + TextColor.ANSI_RESET);
-    }
-
-    /**
-     * Prints a message when the player died
-     */
-    public static void gameOverMessage() { System.out.println(TextColor.ANSI_WHITE + "GAME OVER!"
-            + TextColor.ANSI_RESET);
-    }
-
-    /**
-     * Prints a message when the player has been burned
-     */
-    public static void burnedMessage() {
-        System.out.println(TextColor.ANSI_RED + "You have been burned!" + TextColor.ANSI_RESET);
-    }
-
-    /**
-     * prints a message when the player has been frozen
-     */
-    public static void frozenMessage() {
-        System.out.println(TextColor.ANSI_BLUE + "You have been frozen!" + TextColor.ANSI_RESET);
-    }
 }

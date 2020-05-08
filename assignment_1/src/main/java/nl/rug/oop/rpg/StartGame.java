@@ -1,8 +1,8 @@
 package nl.rug.oop.rpg;
 
+import nl.rug.oop.rpg.GUI.GUIMessages;
 import nl.rug.oop.rpg.config.Config;
 import nl.rug.oop.rpg.extra.TextColor;
-import nl.rug.oop.rpg.game.GUI;
 import nl.rug.oop.rpg.game.Game;
 import nl.rug.oop.rpg.game.GameOptions;
 import nl.rug.oop.rpg.io.FileHandler;
@@ -18,49 +18,29 @@ import java.util.Scanner;
 public class StartGame {
 
     /**
-     * Print an arraylist as chooseable options
-     * @param arrayList Arraylist
-     */
-    public static void printOptions(ArrayList<String> arrayList) {
-        for (int i = 0; i < arrayList.size(); i++) {
-            System.out.println("\t(" + i + ") " + arrayList.get(i));
-        }
-    }
-
-    /**
      * Present the player with starting game options
      */
     @SuppressWarnings("InfiniteLoopStatement")
     public static void startGameOption() {
-        ArrayList<String> possibleMoves = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
         int currentMove;
         String fileName;
         while(true) {
-            possibleMoves.clear();
-            possibleMoves.add("New Game");
-            possibleMoves.add("Load Game");
-            System.out.println("What do you want to do?");
-            printOptions(possibleMoves);
+            GUIMessages.startGameMessage();
             try{
                 currentMove = scanner.nextInt();
             } catch (Exception e) {
-                GUI.invalidInputMessage();
+                GUIMessages.invalidInputMessage();
                 scanner.nextLine();
                 continue;
             }
             switch (currentMove) {
                 case 0:
-                    possibleMoves.clear();
-                    possibleMoves.add("Play the game normally");
-                    possibleMoves.add("Initialize from config");
-                    possibleMoves.add("Set default config");
-                    System.out.println("You are about to start a new game, what do you want to do?");
-                    printOptions(possibleMoves);
+                    GUIMessages.newGameMessage();
                     try{
                         currentMove = scanner.nextInt();
                     } catch (Exception e) {
-                        GUI.invalidInputMessage();
+                        GUIMessages.invalidInputMessage();
                         scanner.nextLine();
                         continue;
                     }
@@ -142,19 +122,15 @@ public class StartGame {
      * @param fileName File name
      */
     public static void gameSave(Game game, String fileName) {
-        ArrayList<String> possibleOptions = new ArrayList<>();
-        possibleOptions.add("Save to current file: " + fileName);
-        possibleOptions.add("Save to a new file");
         Scanner scanner = new Scanner(System.in);
         int currentMove;
         String newFileName;
         while (true) {
-            System.out.println("What do you want to do?");
-            printOptions(possibleOptions);
+            GUIMessages.saveGameMessage(fileName);
             try {
                 currentMove = scanner.nextInt();
             } catch (Exception e) {
-                GUI.invalidInputMessage();
+                GUIMessages.invalidInputMessage();
                 scanner.nextLine();
                 continue;
             }

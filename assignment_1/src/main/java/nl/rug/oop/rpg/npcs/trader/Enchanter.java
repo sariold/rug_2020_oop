@@ -1,9 +1,10 @@
 package nl.rug.oop.rpg.npcs.trader;
 
+import nl.rug.oop.rpg.GUI.GUIMessages;
 import nl.rug.oop.rpg.extra.DefaultStats;
-import nl.rug.oop.rpg.game.GUI;
+import nl.rug.oop.rpg.GUI.GUI;
 import nl.rug.oop.rpg.game.InventoryMethods;
-import nl.rug.oop.rpg.game.Player;
+import nl.rug.oop.rpg.Player.Player;
 import nl.rug.oop.rpg.interfaces.Collectable;
 import nl.rug.oop.rpg.objects.items.EnchantItem;
 
@@ -47,7 +48,7 @@ public class Enchanter extends Trader{
         try{
             currentMove = scanner.nextInt();
         } catch (InputMismatchException e) {
-            GUI.invalidInputMessage();
+            GUIMessages.invalidInputMessage();
             scanner.nextLine();
             return;
         }
@@ -58,7 +59,7 @@ public class Enchanter extends Trader{
         if (currentMove < items.size() && currentMove > -1) ((EnchantItem)items.get(currentMove))
                 .enchant(this.getPower());
         else {
-            GUI.invalidItemMessage();
+            GUIMessages.invalidItemMessage();
             return;
         }
         super.trade(player);

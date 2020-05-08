@@ -1,9 +1,9 @@
 package nl.rug.oop.rpg.npcs.trader;
 
 import nl.rug.oop.rpg.extra.DefaultStats;
-import nl.rug.oop.rpg.game.Player;
+import nl.rug.oop.rpg.Player.Player;
 import nl.rug.oop.rpg.extra.TextColor;
-import nl.rug.oop.rpg.game.PlayerStats;
+import nl.rug.oop.rpg.Player.PlayerStats;
 
 import java.io.Serializable;
 import java.util.Random;

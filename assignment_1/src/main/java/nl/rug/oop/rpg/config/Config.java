@@ -1,6 +1,6 @@
 package nl.rug.oop.rpg.config;
 
-import nl.rug.oop.rpg.game.GUI;
+import nl.rug.oop.rpg.GUI.GUIMessages;
 import nl.rug.oop.rpg.game.Game;
 
 import java.io.*;
@@ -39,10 +39,9 @@ public class Config {
                 maxHealth = scanner.nextInt();
                 break;
             } catch (InputMismatchException e) {
-                GUI.invalidInputMessage();
+                GUIMessages.invalidInputMessage();
                 System.out.println("Let's try again!");
                 scanner.nextLine();
-
             }
         }
         properties.setProperty("playerMaxHealth", Integer.toString(maxHealth));
@@ -56,10 +55,9 @@ public class Config {
                 }
                 break;
             } catch (InputMismatchException e) {
-                GUI.invalidInputMessage();
+                GUIMessages.invalidInputMessage();
                 System.out.println("Let's try again!");
                 scanner.nextLine();
-
             }
         }
         properties.setProperty("playerHealth", Integer.toString(health));
@@ -69,10 +67,9 @@ public class Config {
                 attack = scanner.nextInt();
                 break;
             } catch (InputMismatchException e) {
-                GUI.invalidInputMessage();
+                GUIMessages.invalidInputMessage();
                 System.out.println("Let's try again!");
                 scanner.nextLine();
-
             }
         }
         properties.setProperty("playerAttack", Integer.toString(attack));
@@ -82,10 +79,9 @@ public class Config {
                 gold = scanner.nextInt();
                 break;
             } catch (InputMismatchException e) {
-                GUI.invalidInputMessage();
+                GUIMessages.invalidInputMessage();
                 System.out.println("Let's try again!");
                 scanner.nextLine();
-
             }
         }
         properties.setProperty("playerGold", Integer.toString(gold));

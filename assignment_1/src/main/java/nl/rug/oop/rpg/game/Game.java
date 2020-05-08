@@ -1,5 +1,8 @@
 package nl.rug.oop.rpg.game;
 
+import nl.rug.oop.rpg.GUI.GUI;
+import nl.rug.oop.rpg.GUI.GUIMessages;
+import nl.rug.oop.rpg.Player.Player;
 import nl.rug.oop.rpg.extra.DefaultStats;
 import nl.rug.oop.rpg.extra.TextColor;
 import nl.rug.oop.rpg.npcs.enemies.MiniBoss;
@@ -102,24 +105,24 @@ public class Game implements Serializable {
         try {
             move = scanner.nextInt();
         } catch (InputMismatchException e) {
-            GUI.invalidInputMessage();
+            GUIMessages.invalidInputMessage();
             return;
         }
         if (move == -1) return;
         if (move < player.getInventory().size() && move > -1) {
             if (!player.getInventory().get(move).hasNonCombatUse()) {
-                GUI.onlyCombatItemMessage();
+                GUIMessages.onlyCombatItemMessage();
                 return;
             }
             player.getInventory().get(move).use(player);
-        } else GUI.invalidItemMessage();
+        } else GUIMessages.invalidItemMessage();
     }
 
     /**
      * The player has won the game, the game ends and the player is congratulated
      */
     public void winGame() {
-        GUI.winGameMessage();
+        GUIMessages.winGameMessage();
         System.exit(0);
     }
 
@@ -127,7 +130,7 @@ public class Game implements Serializable {
      * The player has died, the game is over and will be exited
      */
     public void gameOver() {
-        GUI.gameOverMessage();
+        GUIMessages.gameOverMessage();
         System.exit(0);
     }
 

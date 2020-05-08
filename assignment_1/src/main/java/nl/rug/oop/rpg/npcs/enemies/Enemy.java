@@ -4,7 +4,7 @@ import nl.rug.oop.rpg.extra.TextColor;
 import nl.rug.oop.rpg.game.AttackMethods;
 import nl.rug.oop.rpg.game.Combat;
 import nl.rug.oop.rpg.game.Game;
-import nl.rug.oop.rpg.game.Player;
+import nl.rug.oop.rpg.Player.Player;
 import nl.rug.oop.rpg.interfaces.Attackable;
 import nl.rug.oop.rpg.npcs.DungeonNpc;
 import java.io.Serializable;

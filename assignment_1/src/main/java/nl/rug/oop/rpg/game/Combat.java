@@ -1,5 +1,9 @@
 package nl.rug.oop.rpg.game;
 
+import nl.rug.oop.rpg.GUI.GUI;
+import nl.rug.oop.rpg.GUI.GUIMessages;
+import nl.rug.oop.rpg.Player.Player;
+import nl.rug.oop.rpg.Player.PlayerStats;
 import nl.rug.oop.rpg.extra.TextColor;
 import nl.rug.oop.rpg.interfaces.Collectable;
 import nl.rug.oop.rpg.npcs.enemies.*;
@@ -28,11 +32,11 @@ public class Combat {
             try {
                 move = scanner.nextInt();
             } catch (InputMismatchException e) {
-                GUI.invalidInputMessage();
+                GUIMessages.invalidInputMessage();
                 continue;
             }
             if (move > game.getFightMoves().size()) {
-                GUI.invalidInputMessage();
+                GUIMessages.invalidInputMessage();
                 continue;
             }
             if (move == 0){
@@ -41,7 +45,6 @@ public class Combat {
                 }
                 continue;
             }
-            // Combat item use
             if (move == 2) {
                 if (!useCombatItem(player)) {
                     continue;
@@ -155,9 +158,7 @@ public class Combat {
             System.out.println("You cannot run from a boss fight!");
             return false;
         }
-        System.out.println(TextColor.ANSI_YELLOW + "You ran from the fight. " + TextColor.ANSI_RED
-                + enemy.getName() + TextColor.ANSI_YELLOW + " recovered to full health!"
-                + TextColor.ANSI_RESET);
+        GUIMessages.runFromFightMessage(enemy.getName());
         enemy.increaseHitPoints(enemy.getMaxHitPoints());
         return true;
     }
@@ -181,7 +182,7 @@ public class Combat {
                 move = scanner.nextInt();
                 break;
             } catch (InputMismatchException e) {
-                GUI.invalidInputMessage();
+                GUIMessages.invalidInputMessage();
             }
         }
         if (move == -1) return false;
@@ -189,7 +190,7 @@ public class Combat {
             combatInventory.get(move).use(player);
             return true;
         } else {
-            GUI.invalidItemMessage();
+            GUIMessages.invalidItemMessage();
             return false;
         }
     }

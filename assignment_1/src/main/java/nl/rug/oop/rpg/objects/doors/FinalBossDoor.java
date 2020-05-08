@@ -4,7 +4,7 @@ import nl.rug.oop.rpg.extra.TextColor;
 import nl.rug.oop.rpg.game.Combat;
 import nl.rug.oop.rpg.extra.DefaultStats;
 import nl.rug.oop.rpg.game.Game;
-import nl.rug.oop.rpg.game.Player;
+import nl.rug.oop.rpg.Player.Player;
 import nl.rug.oop.rpg.npcs.enemies.Dragon;
 import nl.rug.oop.rpg.npcs.enemies.Enemy;
 import nl.rug.oop.rpg.objects.Room;

@@ -1,5 +1,6 @@
 package nl.rug.oop.rpg.game;
 
+import nl.rug.oop.rpg.Player.Player;
 import nl.rug.oop.rpg.extra.DefaultStats;
 import nl.rug.oop.rpg.extra.TextColor;
 import nl.rug.oop.rpg.interfaces.Attackable;
@@ -71,7 +72,7 @@ public class AttackMethods {
      */
     public static void playerAttacker(Attackable attacked, Player player) {
         int damage = player.getAttackPoints();
-        System.out.println(TextColor.ANSI_YELLOW + "You attack " + ((Enemy) attacked).getName()
+        System.out.println(TextColor.ANSI_YELLOW + "You attack " + attacked.getName()
                 + TextColor.ANSI_RESET);
         Random r = new Random();
         int critical = r.nextInt(101);
@@ -79,7 +80,7 @@ public class AttackMethods {
             System.out.println(TextColor.ANSI_YELLOW + "Critical Hit!" + TextColor.ANSI_RESET);
             damage *= 2;
         }
-        System.out.println(TextColor.ANSI_YELLOW + ((Enemy)attacked).getName() + " takes " + damage
+        System.out.println(TextColor.ANSI_YELLOW + attacked.getName() + " takes " + damage
                 + " damage!" + TextColor.ANSI_RESET);
         attacked.reduceHitPoints(damage);
     }

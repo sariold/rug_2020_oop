@@ -1,5 +1,8 @@
 package nl.rug.oop.rpg.game;
 
+import nl.rug.oop.rpg.GUI.GUI;
+import nl.rug.oop.rpg.GUI.GUIMessages;
+import nl.rug.oop.rpg.GUI.GUInspect;
 import nl.rug.oop.rpg.StartGame;
 import nl.rug.oop.rpg.io.FileHandler;
 import nl.rug.oop.rpg.io.Serializer;
@@ -31,14 +34,12 @@ public class GameOptions {
     public static void gameStart(Game game, String fileName) {
         Scanner scanner = new Scanner(System.in);
         int currentMove;
-
         while (true) {
-            System.out.println("What do you want to do?");
-            StartGame.printOptions(game.getPossibleMoves());
+            GUIMessages.printOptions(game.getPossibleMoves());
             try {
                 currentMove = scanner.nextInt();
             } catch (InputMismatchException e) {
-                GUI.invalidInputMessage();
+                GUIMessages.invalidInputMessage();
                 scanner.nextLine();
                 continue;
             }
@@ -54,7 +55,7 @@ public class GameOptions {
                         currentMove = scanner.nextInt();
                         GameInteract.interactDoor(currentMove, game);
                     } catch (InputMismatchException e) {
-                        GUI.invalidInputMessage();
+                        GUIMessages.invalidInputMessage();
                         scanner.nextLine();
                     }
                     break;
@@ -65,7 +66,7 @@ public class GameOptions {
                             currentMove = scanner.nextInt();
                             GameInteract.interactNPC(currentMove, game);
                         } catch (InputMismatchException e) {
-                            GUI.invalidInputMessage();
+                            GUIMessages.invalidInputMessage();
                             scanner.nextLine();
                         }
                     }
@@ -77,7 +78,7 @@ public class GameOptions {
                             currentMove = scanner.nextInt();
                             GameInteract.interactItem(currentMove, game);
                         } catch (InputMismatchException e) {
-                            GUI.invalidInputMessage();
+                            GUIMessages.invalidInputMessage();
                             scanner.nextLine();
                         }
                     }
