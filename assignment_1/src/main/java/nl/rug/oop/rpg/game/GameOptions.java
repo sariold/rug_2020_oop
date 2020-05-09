@@ -31,9 +31,10 @@ public class GameOptions {
      */
     @SuppressWarnings("InfiniteLoopStatement")
     public static void gameStart(Game game, String fileName) {
+        boolean start = true;
         Scanner scanner = new Scanner(System.in);
         int currentMove;
-        while (true) {
+        while (start) {
             GUIMessages.printOptions(game.getPossibleMoves());
             try {
                 currentMove = scanner.nextInt();
@@ -43,6 +44,9 @@ public class GameOptions {
                 continue;
             }
             switch (currentMove) {
+                case -1:
+                    start = false;
+                    break;
                 // inspect room
                 case 0:
                     GUInspect.inspectRoom(game.getPlayer());
