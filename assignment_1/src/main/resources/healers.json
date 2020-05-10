@@ -1,0 +1,30 @@
+[
+    {
+        "npc": {
+            "type": "Priest",
+            "name": "Matthew",
+            "room": "r0"
+        }
+    },
+    {
+        "npc": {
+            "type": "HighPriest",
+            "name": "The Pope",
+            "room": "r5"
+        }
+    },
+    {
+        "npc": {
+            "type": "Priest",
+            "name": "John",
+            "room": "r8"
+        }
+    },
+    {
+        "npc": {
+            "type": "Priest",
+            "name": "Mary",
+            "room": "r10"
+        }
+    }
+]

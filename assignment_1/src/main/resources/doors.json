@@ -1,0 +1,161 @@
+[
+    {
+        "door": {
+            "name": "d0",
+            "type": "Normal",
+            "description": "A red door",
+            "from": "r0",
+            "to": "r1"
+        }
+    },
+    {
+        "door": {
+            "name": "d1",
+            "type": "Monster",
+            "description": "",
+            "from": "r1",
+            "to": "r2"
+        }
+    },
+    {
+        "door": {
+            "name": "d2",
+            "type": "Normal",
+            "description": "A black door",
+            "from": "r0",
+            "to": "r3"
+        }
+    },
+    {
+        "door": {
+            "name": "d3",
+            "type": "Normal",
+            "description": "A very dark door",
+            "from": "r1",
+            "to": "r4"
+        }
+    },
+    {
+        "door": {
+            "name": "d4",
+            "type": "Normal",
+            "description": "A wooden door that is clearly rotten",
+            "from": "r3",
+            "to": "r4"
+        }
+    },
+    {
+        "door": {
+            "name": "d5",
+            "type": "Monster",
+            "description": "",
+            "from": "r4",
+            "to": "r5"
+        }
+    },
+    {
+        "door": {
+            "name": "d6",
+            "type": "Normal",
+            "description": "A door that could lead you to danger",
+            "from": "r5",
+            "to": "r6"
+        }
+    },
+    {
+        "door": {
+            "name": "d7",
+            "type": "Normal",
+            "description": "A normal looking door, or so it seems",
+            "from": "r6",
+            "to": "r7"
+        }
+    },
+    {
+        "door": {
+            "name": "d8",
+            "type": "Normal",
+            "description": "A reinforced steel door",
+            "from": "r7",
+            "to": "r8"
+        }
+    },
+    {
+        "door": {
+            "name": "d9",
+            "type": "FinalBoss",
+            "description": "",
+            "from": "r8",
+            "to": "r9"
+        }
+    },
+    {
+        "door": {
+            "name": "d10",
+            "type": "Normal",
+            "description": "A door with a warning",
+            "from": "r6",
+            "to": "r10"
+        }
+    },
+    {
+        "door": {
+            "name": "d11",
+            "type": "MiniBoss",
+            "description": "Blue",
+            "from": "r10",
+            "to": "r11"
+        }
+    },
+    {
+        "door": {
+            "name": "d12",
+            "type": "Normal",
+            "description": "A door you may have seen before",
+            "from": "r5",
+            "to": "r12"
+        }
+    },
+    {
+        "door": {
+            "name": "d13",
+            "type": "MiniBoss",
+            "description": "Red",
+            "from": "r12",
+            "to": "r13"
+        }
+    },
+    {
+        "door": {
+            "name": "d14",
+            "type": "Monster",
+            "description": "",
+            "from": "r6",
+            "to": "r14"
+        }
+    },
+    {
+        "door": {
+            "name": "d15",
+            "type": "Trap",
+            "description": "A door covered with roses",
+            "from": "r2"
+        }
+    },
+    {
+        "door": {
+            "name": "d16",
+            "type": "Trap",
+            "description": "A door with a bathroom sign",
+            "from": "r10"
+        }
+    },
+    {
+        "door": {
+            "name": "d17",
+            "type": "Trap",
+            "description": "A glass door",
+            "from": "r5"
+        }
+    }
+]

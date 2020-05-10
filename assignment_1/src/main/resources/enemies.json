@@ -1,0 +1,149 @@
+[
+    {
+        "npc": {
+            "type": "Rat",
+            "name": "6ix9ine",
+            "room": "r0"
+        }
+    },
+    {
+        "npc": {
+            "type": "Rat",
+            "name": "Stuart Little",
+            "room": "r1"
+        }
+    },
+    {
+        "npc": {
+            "type": "Spider",
+            "name": "Daddy Long Legs",
+            "room": "r1"
+        }
+    },
+    {
+        "npc": {
+            "type": "Knight",
+            "name": "Headless Horseman",
+            "room": "r1"
+        }
+    },
+    {
+        "npc": {
+            "type": "Orc",
+            "name": "Orky",
+            "room": "r3"
+        }
+    },
+    {
+        "npc": {
+            "type": "Snake",
+            "name": "Mathiaas",
+            "room": "r4"
+        }
+    },
+    {
+        "npc": {
+            "type": "Rat",
+            "name": "Gregory",
+            "room": "r4"
+        }
+    },
+    {
+        "npc": {
+            "type": "Knight",
+            "name": "Sir sire",
+            "room": "r4"
+        }
+    },
+    {
+        "npc": {
+            "type": "Orc",
+            "name": "Orky Jr.",
+            "room": "r6"
+        }
+    },
+    {
+        "npc": {
+            "type": "Snake",
+            "name": "Adam",
+            "room": "r6"
+        }
+    },
+    {
+        "npc": {
+            "type": "Knight",
+            "name": "Sir Nobleson",
+            "room": "r6"
+        }
+    },
+    {
+        "npc": {
+            "type": "Snake",
+            "name": "Serpiente",
+            "room": "r7"
+        }
+    },
+    {
+        "npc": {
+            "type": "Snake",
+            "name": "Spaghetti Noodle",
+            "room": "r7"
+        }
+    },
+    {
+        "npc": {
+            "type": "Spider",
+            "name": "Arach Nid",
+            "room": "r7"
+        }
+    },
+    {
+        "npc": {
+            "type": "Rat",
+            "name": "Ratito",
+            "room": "r8"
+        }
+    },
+    {
+        "npc": {
+            "type": "Rat",
+            "name": "Rata",
+            "room": "r8"
+        }
+    },
+    {
+        "npc": {
+            "type": "Rat",
+            "name": "Stu",
+            "room": "r8"
+        }
+    },
+    {
+        "npc": {
+            "type": "Rat",
+            "name": "Ratito Jr.",
+            "room": "r8"
+        }
+    },
+    {
+        "npc": {
+            "type": "Rat",
+            "name": "Greg",
+            "room": "r8"
+        }
+    },
+    {
+        "npc": {
+            "type": "Spider",
+            "name": "Tuco",
+            "room": "r10"
+        }
+    },
+    {
+        "npc": {
+            "type": "Knight",
+            "name": "Sir Gustavo",
+            "room": "r10"
+        }
+    }
+]

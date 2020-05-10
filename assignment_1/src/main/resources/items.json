@@ -1,0 +1,100 @@
+[
+    {
+        "item": {
+            "type": "GoldNugget",
+            "room": "r0"
+        }
+    },
+    {
+        "item": {
+            "type": "HealingPotion",
+            "room": "r0"
+        }
+    },
+    {
+        "item": {
+            "type": "AttackPotion",
+            "room": "r0"
+        }
+    },
+    {
+        "item": {
+            "type": "GoldNugget",
+            "room": "r2"
+        }
+    },
+    {
+        "item": {
+            "type": "HealingPotion",
+            "room": "r2"
+        }
+    },
+    {
+        "item": {
+            "type": "MonsterKey",
+            "room": "r2"
+        }
+    },
+    {
+        "item": {
+            "type": "MagicOrb",
+            "room": "r5",
+            "endRoom": "r3"
+        }
+    },
+    {
+        "item": {
+            "type": "HealingPotion",
+            "room": "r6"
+        }
+    },
+    {
+        "item": {
+            "type": "HealingPotion",
+            "room": "r10"
+        }
+    },
+    {
+        "item": {
+            "type": "HealingPotion",
+            "room": "r10"
+        }
+    },
+    {
+        "item": {
+            "type": "GoldNugget",
+            "room": "r10"
+        }
+    },
+    {
+        "item": {
+            "type": "MagicOrb",
+            "room": "r12",
+            "endRoom": "r0"
+        }
+    },
+    {
+        "item": {
+            "type": "HealingPotion",
+            "room": "r13"
+        }
+    },
+    {
+        "item": {
+            "type": "HealingPotion",
+            "room": "r13"
+        }
+    },
+    {
+        "item": {
+            "type": "GoldNugget",
+            "room": "r13"
+        }
+    },
+    {
+        "item": {
+            "type": "GoldNugget",
+            "room": "r14"
+        }
+    }
+]

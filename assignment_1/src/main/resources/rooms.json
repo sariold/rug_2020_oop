@@ -1,0 +1,92 @@
+[
+    {
+        "room": {
+            "name": "r0",
+            "description": "A rather dusty room full with computers and two doors."
+        }
+    },
+    {
+        "room": {
+            "name": "r1",
+            "description": "A suspicious room with three mysterious doors."
+        }
+    },
+    {
+        "room": {
+            "name": "r2",
+            "description": "A strange odor comes from this room."
+        }
+    },
+    {
+        "room": {
+            "name": "r3",
+            "description": "A dark room with even darker doors."
+        }
+    },
+    {
+        "room": {
+            "name": "r4",
+            "description": "An abandoned ballroom."
+        }
+    },
+    {
+        "room": {
+            "name": "r5",
+            "description": "A long hallway like room with a door at the very end."
+        }
+    },
+    {
+        "room": {
+            "name": "r6",
+            "description": "A room with no electricity so choose wisely."
+        }
+    },
+    {
+        "room": {
+            "name": "r7",
+            "description": "A bright room with even brighter doors."
+        }
+    },
+    {
+        "room": {
+            "name": "r8",
+            "description": "A room full of potential enemies, could this mean you are reaching the end?"
+        }
+    },
+    {
+        "room": {
+            "name": "r9",
+            "description": "A room where a mighty dragon used to rule from."
+        }
+    },
+    {
+        "room": {
+            "name": "r10",
+            "description": "A room where something does not feel right at all."
+        }
+    },
+    {
+        "room": {
+            "name": "r11",
+            "description": "A room where the cold hearted Blue Wizard lives."
+        }
+    },
+    {
+        "room": {
+            "name": "r12",
+            "description": "A room with only two doors so choose wisely."
+        }
+    },
+    {
+        "room": {
+            "name": "r13",
+            "description": "A room where the mystical Fire Wizard resides!"
+        }
+    },
+    {
+        "room": {
+            "name": "r14",
+            "description": "A room with a possible dead end."
+        }
+    }
+]

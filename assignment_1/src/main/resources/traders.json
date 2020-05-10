@@ -1,0 +1,93 @@
+[
+    {
+        "npc": {
+            "type": "Gambler",
+            "name": "Walter White",
+            "room": "r0"
+        }
+    },
+    {
+        "npc": {
+            "type": "ArmorSmith",
+            "name": "Flynn",
+            "room": "r2"
+        }
+    },
+    {
+        "npc": {
+            "type": "WeaponSmith",
+            "name": "Zeus",
+            "room": "r3"
+        }
+    },
+    {
+        "npc": {
+            "type": "WeaponSmith",
+            "name": "One Eyed Cyclops",
+            "room": "r5"
+        }
+    },
+    {
+        "npc": {
+            "type": "ArmorSmith",
+            "name": "Artemis",
+            "room": "r5"
+        }
+    },
+    {
+        "npc": {
+            "type": "StrongWeaponSmith",
+            "name": "Alvor",
+            "room": "r7"
+        }
+    },
+    {
+        "npc": {
+            "type": "StrongArmorSmith",
+            "name": "Filnjar",
+            "room": "r10"
+        }
+    },
+    {
+        "npc": {
+            "type": "Gambler",
+            "name": "Diego",
+            "room": "r12"
+        }
+    },
+    {
+        "npc": {
+            "type": "Gambler",
+            "name": "Felix",
+            "room": "r12"
+        }
+    },
+    {
+        "npc": {
+            "type": "ArmorSmith",
+            "name": "Jupiter",
+            "room": "r14"
+        }
+    },
+    {
+        "npc": {
+            "type": "WeaponSmith",
+            "name": "Eros",
+            "room": "r14"
+        }
+    },
+    {
+        "npc": {
+            "type": "Gambler",
+            "name": "Hermes",
+            "room": "r14"
+        }
+    },
+    {
+        "npc": {
+            "type": "Enchanter",
+            "name": "Henrietta",
+            "room": "r0"
+        }
+    }
+]
