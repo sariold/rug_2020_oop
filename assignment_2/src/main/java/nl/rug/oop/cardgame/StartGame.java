@@ -1,9 +1,5 @@
 package nl.rug.oop.cardgame;
 
-import nl.rug.oop.cardgame.card.Card;
-
-import java.util.Scanner;
-
 /**
  * Start Game
  */

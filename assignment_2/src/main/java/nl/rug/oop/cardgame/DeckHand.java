@@ -37,11 +37,10 @@ public class DeckHand {
     public void viewHand() {
         System.out.println("Your hand contains:");
         if(this.deckHand.size() > 0) {
-            AtomicInteger i = new AtomicInteger();
-            this.deckHand.forEach(card -> {
-                System.out.println(i + ") " + card.getName() + ": Mana Cost -> " + card.getCost());
-                i.getAndIncrement();
-            });
+            for(int i = 0; i < this.getDeckHand().size(); i++) {
+                System.out.println(i + ") " + this.getDeckHand().get(i).getName() + ": Mana Cost -> "
+                        + this.getDeckHand().get(i).getCost());
+            }
             System.out.println("");
         } else System.out.println("Nothing!");
     }

@@ -86,7 +86,8 @@ public class Hero implements Attackable {
             System.out.println("0) Check Hand");
             System.out.println("1) Play a Card");
             System.out.println("2) Discard a Card");
-            System.out.println("3) End turn");
+            System.out.println("3) Attack Enemy Hero");
+            System.out.println("4) End turn");
             try {
                 currentMove = scanner.nextInt();
             } catch (Exception e) {
@@ -105,10 +106,41 @@ public class Hero implements Attackable {
                     this.getDeckHand().discardCard();
                     break;
                 case 3:
+                    attackHero(battlefield);
+                    start = true;
+                    break;
+                case 4:
                     battlefield.setPlayerTurn(false);
                     start = false;
                     break;
             }
+        }
+    }
+
+    public void attackHero(Battlefield battlefield) {
+        if(this.getPlayedCreatures().size() > 0) {
+            Scanner scanner = new Scanner(System.in);
+            showPlayedCreatures();
+            System.out.println("Which creature would you like to attack with?");
+            boolean start = true;
+            int currentMove = 0;
+            while (start) {
+                try {
+                    currentMove = scanner.nextInt();
+                    this.getPlayedCreatures().get(currentMove).attack(battlefield.getAi());
+                    start = false;
+                } catch (Exception e) {
+                    System.out.println("NOT VALID INPUT!");
+                }
+            }
+        } else System.out.println("Empty field!");
+    }
+
+    public void showPlayedCreatures() {
+        for(int i = 0; i < this.getPlayedCreatures().size(); i++) {
+            System.out.println(i + ") " + this.getPlayedCreatures().get(i).getName() + ": Health = " +
+                    this.getPlayedCreatures().get(i).getHealth() + ": Attack = " +
+                    this.getPlayedCreatures().get(i).getAttack());
         }
     }
 

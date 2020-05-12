@@ -16,8 +16,8 @@ public class Battlefield {
      * Create a new battlefield
      */
     public Battlefield() {
-        this.player = new Hero("Diego", 10, 0, 0);
-        this.ai = new Hero("Felix", 10, 0, 0);
+        this.player = new Hero("Diego", 10, 0, 0, 1);
+        this.ai = new Hero("Felix", 10, 0, 0, 1);
     }
 
     /**
@@ -32,11 +32,15 @@ public class Battlefield {
      * Show the creatures on the battlefield for AI and Player
      */
     public void showBattlefield() {
+        System.out.println();
+        System.out.println("ENEMY FIELD:");
         for(int i = 0; i < ai.getPlayedCreatures().size(); i++) {
             System.out.println(i + ") " + ai.getPlayedCreatures().get(i).getName() + ": Health = " +
                     ai.getPlayedCreatures().get(i).getHealth() + ": Attack = " +
                     ai.getPlayedCreatures().get(i).getAttack());
         }
+        System.out.println();
+        System.out.println("YOUR FIELD:");
         for(int i = 0; i < player.getPlayedCreatures().size(); i++) {
             System.out.println(i + ") " + player.getPlayedCreatures().get(i).getName() + ": Health = " +
                     player.getPlayedCreatures().get(i).getHealth() + ": Attack = " +
