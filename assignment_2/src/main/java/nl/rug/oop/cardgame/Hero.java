@@ -100,14 +100,13 @@ public class Hero implements Attackable {
                     break;
                 case 1:
                     this.playCard(battlefield);
-                    battlefield.setPlayerTurn(false);
-                    start = false;
                     break;
                 case 2:
                     this.getDeckHand().discardCard();
                     break;
                 case 3:
                     attackHero(battlefield);
+                    battlefield.setPlayerTurn(false);
                     start = false;
                     break;
                 case 4:
