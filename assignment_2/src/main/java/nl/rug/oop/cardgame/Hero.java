@@ -58,8 +58,8 @@ public class Hero implements Attackable {
                     currentMove = scanner.nextInt();
                     if(this.deckHand.getDeckHand().get(currentMove).getCost() <= this.mana) {
                         Card played =  this.deckHand.getDeckHand().get(currentMove);
-                        played.play(battlefield, 0);
                         this.deckHand.getDeckHand().remove(currentMove);
+                        played.play(battlefield, 0);
                         this.setMana(this.getMana()-played.getCost());
                     } else System.out.println("You cease to have enough mana!");
                     start = false;

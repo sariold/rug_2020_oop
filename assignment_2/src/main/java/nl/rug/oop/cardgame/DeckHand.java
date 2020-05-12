@@ -27,7 +27,8 @@ public class DeckHand {
      * @param card Takes a card
      */
     public void addCard(Card card) {
-        if(this.deckHand.size() > 3) System.out.println("Please discard a card before drawing!");
+        if(this.deckHand.size() > DefaultStats.MAX_HAND_CARDS) System.out.println("You have too many cards in hand the " +
+                "drawn card is dicarded!");
         else this.deckHand.add(card);
     }
 

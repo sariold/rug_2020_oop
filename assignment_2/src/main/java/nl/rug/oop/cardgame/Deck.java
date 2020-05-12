@@ -58,6 +58,10 @@ public class Deck {
      */
     public Card drawCard() {
         Card card;
+        if (this.deckList.size() == 0) {
+            System.out.println("Deck empty!");
+            return null;
+        }
         card = this.deckList.get(0);
         this.deckList.remove(0);
         return card;

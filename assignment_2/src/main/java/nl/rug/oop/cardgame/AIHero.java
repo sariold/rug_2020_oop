@@ -37,8 +37,8 @@ public class AIHero extends Hero{
             int currentMove = r.nextInt(playableCards.size());
             Card played = this.deckHand.getDeckHand().get(currentMove);
             System.out.println("AI plays " + played.getName());
-            played.play(battlefield, 1);
             this.deckHand.getDeckHand().remove(currentMove);
+            played.play(battlefield, 1);
             this.setMana(this.getMana() - played.getCost());
         } else System.out.println("AI has no cards in hand");
         attackHero(battlefield);

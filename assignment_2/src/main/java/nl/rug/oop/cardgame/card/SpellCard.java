@@ -26,6 +26,19 @@ public class SpellCard extends Card{
      */
     @Override
     public void play(Battlefield battlefield, int hero) {
-        super.play(battlefield, hero);
+        System.out.println("Played a spell you draw 2 cards");
+        if (hero == 0) {
+            for (int i = 0; i < 2; i++) {
+                Card card = battlefield.getPlayer().getDeck().drawCard();
+                System.out.println("Drawing card: " + card.getName() + " : Mana Cost -> " + card.getCost());
+                battlefield.getPlayer().getDeckHand().addCard(card);
+            }
+            return;
+        }
+        for (int i = 0; i < 2; i++) {
+            Card card = battlefield.getAi().getDeck().drawCard();
+            System.out.println("Drawing card: " + card.getName() + " : Mana Cost -> " + card.getCost());
+            battlefield.getAi().getDeckHand().addCard(card);
+        }
     }
 }
