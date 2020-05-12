@@ -33,10 +33,10 @@ public class StartGame {
         Hero player = battlefield.getPlayer();
         Hero ai = battlefield.getAi();
         boolean start = true;
-        for(int i = 0; start; i++) {
-            System.out.println("It's turn number " + (i -(i*(i%2))));
+        for(int i = 1; start; i++) {
+            System.out.println("It's turn number " + ((i+(i%2))/2));
             battlefield.showBattlefield();
-            if(i % 2 == 0)  {
+            if(i % 2 == 1)  {
                 battlefield.incMana(player);
                 player.setMana(player.getMaxMana());
                 player.takeTurn(battlefield);
