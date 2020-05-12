@@ -29,5 +29,6 @@ public class MagicStoneFrame extends JFrame {
         setLocationRelativeTo(null);
         /* Make sure we can actually see the frame */
         setVisible(true);
+        setResizable(false);
     }
 }
