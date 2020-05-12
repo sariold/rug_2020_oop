@@ -16,8 +16,8 @@ public class Battlefield {
      * Create a new battlefield
      */
     public Battlefield() {
-        this.player = new Hero("Diego", 10, 0, 10);
-        this.ai = new Hero("Felix", 10, 0, 10);
+        this.player = new Hero("Diego", 10, 0, 0);
+        this.ai = new Hero("Felix", 10, 0, 0);
     }
 
     /**
@@ -25,7 +25,7 @@ public class Battlefield {
      * @param hero Hero
      */
     public void incMana(Hero hero) {
-        if(hero.getMana() < hero.getMaxMana()) hero.setMana(hero.getMana() + 1);
+        if(hero.getMana() < DefaultStats.MAX_MANA) hero.setMaxMana(hero.getMaxMana() + 1);
     }
 
 

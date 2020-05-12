@@ -26,53 +26,6 @@ public class StartGame {
     }
 
     /**
-     * Present the player with game options
-     * @param battlefield Playing board
-     * @param player Hero player
-     */
-    public void gameOptions(Battlefield battlefield, Hero player) {
-        Scanner scanner = new Scanner(System.in);
-        boolean start = true;
-        int currentMove = 0;
-        System.out.println("YOUR TURN!");
-        while (start) {
-            System.out.println("Current Mana: " + player.getMana());
-            System.out.println("0) Draw a Card");
-            System.out.println("1) Check Hand");
-            System.out.println("2) Play a Card");
-            System.out.println("3) Discard a Card");
-            System.out.println("4) End turn");
-            try {
-                currentMove = scanner.nextInt();
-            } catch (Exception e) {
-                System.out.println("NOT VALID INPUT!");
-            }
-            switch (currentMove) {
-                case 0:
-                    Card card = player.getDeck().drawCard();
-                    System.out.println("Drawing card: " + card.getName());
-                    player.getDeckHand().addCard(card);
-                    break;
-                case 1:
-                    player.getDeckHand().viewHand();
-                    break;
-                case 2:
-                    player.playCard();
-                    battlefield.setPlayerTurn(false);
-                    start = false;
-                    break;
-                case 3:
-                    player.getDeckHand().discardCard();
-                    break;
-                case 4:
-                    battlefield.setPlayerTurn(false);
-                    start = false;
-                    break;
-            }
-        }
-    }
-
-    /**
      * Rotates the turns
      * @param battlefield Playing board
      */
@@ -83,10 +36,13 @@ public class StartGame {
         while(start) {
             if(battlefield.isPlayerTurn())  {
                 battlefield.incMana(player);
-                gameOptions(battlefield, player);
+                player.setMana(player.getMaxMana());
+                player.takeTurn(battlefield);
             }
             else {
                 battlefield.incMana(ai);
+                ai.setMana(ai.getMaxMana());
+                ai.takeTurn(battlefield);
                 System.out.println("AI PLAYS ITS TURN!");
                 battlefield.setPlayerTurn(true);
             }
