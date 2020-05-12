@@ -47,7 +47,7 @@ public class CreatureCard extends Card implements Attackable, Attacking {
     }
 
     /**
-     * Play method
+     * Add this creature to the battlefield
      */
     @Override
     public void play(Battlefield battlefield, int hero) {

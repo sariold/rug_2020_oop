@@ -53,8 +53,10 @@ public class Hero {
                 try {
                     currentMove = scanner.nextInt();
                     if(this.deckHand.getDeckHand().get(currentMove).getCost() <= this.mana) {
-                        this.deckHand.getDeckHand().get(currentMove).play(battlefield, 0);
+                        Card played =  this.deckHand.getDeckHand().get(currentMove);
+                        played.play(battlefield, 0);
                         this.deckHand.getDeckHand().remove(currentMove);
+                        this.setMana(this.getMana()-played.getCost());
                     } else System.out.println("You cease to have enough mana!");
                     start = false;
                 } catch (Exception e) {
@@ -74,7 +76,7 @@ public class Hero {
         int currentMove = 0;
         System.out.println(this.name + "'s TURN!");
         while (start) {
-            System.out.println("Current Mana: " + this.getMana());
+            System.out.println("Current Mana: " + this.getMana() + "/" + this.getMaxMana());
             System.out.println("0) Draw a Card");
             System.out.println("1) Check Hand");
             System.out.println("2) Play a Card");
