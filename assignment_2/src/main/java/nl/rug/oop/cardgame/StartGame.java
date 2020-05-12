@@ -31,18 +31,31 @@ public class StartGame {
         boolean start = true;
         for(int i = 1; start; i++) {
             System.out.println("It's turn number " + ((i+(i%2))/2));
-            battlefield.showBattlefield();
             if(i % 2 == 1)  {
+                resetUsedCreatures(player);
+                battlefield.showBattlefield();
                 battlefield.incMana(player);
                 player.setMana(player.getMaxMana());
                 player.takeTurn(battlefield);
             }
             else {
+                resetUsedCreatures(ai);
+                battlefield.showBattlefield();
                 battlefield.incMana(ai);
                 ai.setMana(ai.getMaxMana());
                 ai.takeTurn(battlefield);
                 battlefield.setPlayerTurn(true);
             }
+        }
+    }
+
+    /**
+     * Resets the param used for each played creature
+     * @param hero Hero
+     */
+    public void resetUsedCreatures(Hero hero) {
+        for(int i = hero.getPlayedCreatures().size() - 1; i >= 0; i--) {
+            hero.getPlayedCreatures().get(i).setUsed(false);
         }
     }
 }

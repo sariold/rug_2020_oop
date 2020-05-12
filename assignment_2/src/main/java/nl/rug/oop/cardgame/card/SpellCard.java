@@ -30,15 +30,19 @@ public class SpellCard extends Card{
         if (hero == 0) {
             for (int i = 0; i < 2; i++) {
                 Card card = battlefield.getPlayer().getDeck().drawCard();
-                System.out.println("Drawing card: " + card.getName() + " : Mana Cost -> " + card.getCost());
-                battlefield.getPlayer().getDeckHand().addCard(card);
+                if(card != null) {
+                    System.out.println("Drawing card: " + card.getName() + " : Mana Cost -> " + card.getCost());
+                    battlefield.getPlayer().getDeckHand().addCard(card);
+                }
             }
             return;
         }
         for (int i = 0; i < 2; i++) {
             Card card = battlefield.getAi().getDeck().drawCard();
-            System.out.println("Drawing card: " + card.getName() + " : Mana Cost -> " + card.getCost());
-            battlefield.getAi().getDeckHand().addCard(card);
+            if(card != null) {
+                System.out.println("Drawing card: " + card.getName() + " : Mana Cost -> " + card.getCost());
+                battlefield.getAi().getDeckHand().addCard(card);
+            }
         }
     }
 }

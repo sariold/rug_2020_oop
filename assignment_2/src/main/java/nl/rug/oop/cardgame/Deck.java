@@ -41,12 +41,12 @@ public class Deck {
             ex.printStackTrace();
         }
         this.deckList = new ArrayList<Card>();
-        deckList.add(new CreatureCard("Creature", 3, creature, 2, 2));
-        deckList.add(new CreatureCard("Creature", 3, creature, 2, 2));
+        deckList.add(new CreatureCard("Creature", 3, creature, 2, 2, false));
+        deckList.add(new CreatureCard("Creature", 3, creature, 2, 2, false));
         deckList.add(new SpellCard("Spell", 4, spell));
         deckList.add(new SpellCard("Spell", 4, spell));
-        deckList.add(new CreatureCard("Creature", 3, creature, 2, 2));
-        deckList.add(new CreatureCard("Creature", 3, creature, 2, 2));
+        deckList.add(new CreatureCard("Creature", 3, creature, 2, 2, false));
+        deckList.add(new CreatureCard("Creature", 3, creature, 2, 2, false));
         deckList.add(new SpellCard("Spell", 4, spell));
         deckList.add(new SpellCard("Spell", 4, spell));
         Collections.shuffle(deckList);

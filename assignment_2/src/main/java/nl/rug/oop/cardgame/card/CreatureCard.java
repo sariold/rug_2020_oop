@@ -1,6 +1,7 @@
 package nl.rug.oop.cardgame.card;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import nl.rug.oop.cardgame.Battlefield;
 import nl.rug.oop.cardgame.interfaces.Attackable;
 
@@ -9,11 +10,13 @@ import java.awt.*;
 /**
  * A type of card that summons a creature when played
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
 public class CreatureCard extends Card implements Attackable {
 
     private int creatureAttack;
     private int creatureHealth;
+    private boolean used;
 
     /**
      * Create a creature card
@@ -22,16 +25,19 @@ public class CreatureCard extends Card implements Attackable {
      * @param image Image
      * @param creatureAttack Attack
      * @param creatureHealth Health
+     * @param used Has the card been used or just played?
      */
-    public CreatureCard(String name, int cost, Image image, int creatureAttack, int creatureHealth) {
+    public CreatureCard(String name, int cost, Image image, int creatureAttack, int creatureHealth, boolean used) {
         super(name, cost, image);
         this.creatureAttack = creatureAttack;
         this.creatureHealth = creatureHealth;
+        this.used = used;
     }
 
     /**
      * Set health
      * @param health Health
+     *
      */
     @Override
     public void setHealth(int health) {
@@ -80,6 +86,7 @@ public class CreatureCard extends Card implements Attackable {
      */
     @Override
     public void play(Battlefield battlefield, int hero) {
+        this.setUsed(true);
         if (hero == 0) {
             battlefield.getPlayer().getPlayedCreatures().add(this);
             return;

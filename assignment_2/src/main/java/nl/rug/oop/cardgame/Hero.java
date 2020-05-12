@@ -80,8 +80,10 @@ public class Hero implements Attackable {
         int currentMove = 0;
         System.out.println(this.name + "'s TURN!");
         Card card = this.getDeck().drawCard();
-        System.out.println("Drawing card: " + card.getName() + " : Mana Cost -> " + card.getCost());
-        this.getDeckHand().addCard(card);
+        if(card != null) {
+            System.out.println("Drawing card: " + card.getName() + " : Mana Cost -> " + card.getCost());
+            this.getDeckHand().addCard(card);
+        }
         while (start) {
             System.out.println("Current Mana: " + this.getMana() + "/" + this.getMaxMana());
             System.out.println("0) Check Hand");
@@ -117,31 +119,52 @@ public class Hero implements Attackable {
         }
     }
 
+    /**
+     *
+     * @param battlefield
+     */
     public void attackHero(Battlefield battlefield) {
-        if(this.getPlayedCreatures().size() > 0) {
+        if(this.playableCreatures()) {
             Scanner scanner = new Scanner(System.in);
-            showPlayedCreatures();
-            System.out.println("Which creature would you like to attack with?");
             boolean start = true;
             int currentMove = 0;
-            while (start) {
+            while (start && this.playableCreatures()) {
+                System.out.println("Which creature would you like to attack with? (-1 : End Turn)");
+                showPlayedCreatures();
                 try {
                     currentMove = scanner.nextInt();
+                    if(currentMove == -1) break;
                     this.getPlayedCreatures().get(currentMove).attack(battlefield.getAi());
-                    start = false;
+                    this.getPlayedCreatures().get(currentMove).setUsed(true);
                 } catch (Exception e) {
                     System.out.println("NOT VALID INPUT!");
                 }
             }
-        } else System.out.println("Empty field!");
+        } else System.out.println("Either you have no creatures or you just placed them down!");
     }
 
+    /**
+     *
+     */
     public void showPlayedCreatures() {
         for(int i = 0; i < this.getPlayedCreatures().size(); i++) {
-            System.out.println(i + ") " + this.getPlayedCreatures().get(i).getName() + ": Health = " +
-                    this.getPlayedCreatures().get(i).getHealth() + ": Attack = " +
-                    this.getPlayedCreatures().get(i).getAttack());
+            if(this.getPlayedCreatures().get(i).isUsed() == false) {
+                System.out.println(i + ") " + this.getPlayedCreatures().get(i).getName() + ": Health = " +
+                        this.getPlayedCreatures().get(i).getHealth() + ": Attack = " +
+                        this.getPlayedCreatures().get(i).getAttack());
+            }
         }
+    }
+
+    /**
+     *
+     * @return
+     */
+    public boolean playableCreatures() {
+        for(int i = this.getPlayedCreatures().size() - 1; i >= 0; i--) {
+            if(this.getPlayedCreatures().get(i).isUsed() == false) return true;
+        }
+        return false;
     }
 
     /**

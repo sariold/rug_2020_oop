@@ -24,8 +24,10 @@ public class AIHero extends Hero{
     public void takeTurn(Battlefield battlefield) {
         System.out.println(this.name + "'s TURN!");
         Card card = this.getDeck().drawCard();
-        System.out.println("Drawing card: " + card.getName() + " : Mana Cost -> " + card.getCost());
-        this.getDeckHand().addCard(card);
+        if(card != null) {
+            System.out.println("Drawing card: " + card.getName() + " : Mana Cost -> " + card.getCost());
+            this.getDeckHand().addCard(card);
+        }
         if(this.deckHand.getDeckHand().size() > 0) {
             System.out.println("AI has cards in hand");
             ArrayList<Card> playableCards = getPlayableCards();
