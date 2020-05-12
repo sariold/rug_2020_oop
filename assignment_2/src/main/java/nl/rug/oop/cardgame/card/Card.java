@@ -1,6 +1,7 @@
 package nl.rug.oop.cardgame.card;
 
 import lombok.Data;
+import nl.rug.oop.cardgame.Battlefield;
 import nl.rug.oop.cardgame.interfaces.Playable;
 
 import java.awt.*;
@@ -31,7 +32,7 @@ public abstract class Card implements Playable {
      * Play method
      */
     @Override
-    public void play() {
+    public void play(Battlefield battlefield, int hero) {
         System.out.println("You played " + this.name);
     }
 

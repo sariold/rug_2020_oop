@@ -41,7 +41,7 @@ public class Hero {
     /**
      * Play a card
      */
-    public void playCard() {
+    public void playCard(Battlefield battlefield) {
         if(this.deckHand.getDeckHand().size() > 0) {
 
             Scanner scanner = new Scanner(System.in);
@@ -53,7 +53,7 @@ public class Hero {
                 try {
                     currentMove = scanner.nextInt();
                     if(this.deckHand.getDeckHand().get(currentMove).getCost() <= this.mana) {
-                        this.deckHand.getDeckHand().get(currentMove).play();
+                        this.deckHand.getDeckHand().get(currentMove).play(battlefield, 0);
                         this.deckHand.getDeckHand().remove(currentMove);
                     } else System.out.println("You cease to have enough mana!");
                     start = false;
@@ -95,7 +95,7 @@ public class Hero {
                     this.getDeckHand().viewHand();
                     break;
                 case 2:
-                    this.playCard();
+                    this.playCard(battlefield);
                     battlefield.setPlayerTurn(false);
                     start = false;
                     break;

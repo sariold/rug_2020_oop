@@ -1,6 +1,7 @@
 package nl.rug.oop.cardgame.card;
 
 import lombok.Data;
+import nl.rug.oop.cardgame.Battlefield;
 
 import java.awt.*;
 
@@ -24,7 +25,7 @@ public class SpellCard extends Card{
      * Play method
      */
     @Override
-    public void play() {
-        super.play();
+    public void play(Battlefield battlefield, int hero) {
+        super.play(battlefield, hero);
     }
 }
