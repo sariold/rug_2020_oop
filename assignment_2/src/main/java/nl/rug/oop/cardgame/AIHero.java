@@ -1,6 +1,7 @@
 package nl.rug.oop.cardgame;
 
 import nl.rug.oop.cardgame.card.Card;
+import nl.rug.oop.cardgame.card.CreatureCard;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -40,6 +41,17 @@ public class AIHero extends Hero{
             this.deckHand.getDeckHand().remove(currentMove);
             this.setMana(this.getMana() - played.getCost());
         } else System.out.println("AI has no cards in hand");
+        attackHero(battlefield);
+    }
+
+    @Override
+    public void attackHero(Battlefield battlefield) {
+        ArrayList<CreatureCard> creatures = getPlayedCreatures();
+        if (creatures.size() == 0) System.out.println("AI has no creatures to attack with");
+        for (CreatureCard c: creatures) {
+            System.out.println("AI attack you with " + c.getName());
+            c.attack(battlefield.getPlayer());
+        }
     }
 
     private ArrayList<Card> getPlayableCards() {
