@@ -9,7 +9,7 @@ public class MagicStoneFrame extends JFrame {
 
     public MagicStoneFrame(MagicStoneGame magicStoneGame) {
         /* Create a frame for the GUI */
-        super("Card Game");
+        super("Magic Stone Game");
         /* Make sure our program exits when we close the frame */
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         /* Add a menu to the frame */
