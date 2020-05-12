@@ -28,6 +28,9 @@ public class Battlefield {
         if(hero.getMana() < DefaultStats.MAX_MANA) hero.setMaxMana(hero.getMaxMana() + 1);
     }
 
+    /**
+     * Show the creatures on the battlefield for AI and Player
+     */
     public void showBattlefield() {
         for(int i = 0; i < ai.getPlayedCreatures().size(); i++) {
             System.out.println(i + ") " + ai.getPlayedCreatures().get(i).getName() + ": Health = " +

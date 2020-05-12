@@ -3,6 +3,7 @@ package nl.rug.oop.cardgame;
 import lombok.Data;
 import nl.rug.oop.cardgame.card.Card;
 import nl.rug.oop.cardgame.card.CreatureCard;
+import nl.rug.oop.cardgame.interfaces.Attackable;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -11,12 +12,13 @@ import java.util.Scanner;
  * Hero class to store health, mana, deck, and deck hand
  */
 @Data
-public class Hero {
+public class Hero implements Attackable {
 
     protected String name;
-    protected int health;
+    protected int heroHealth;
     protected int mana;
     protected int maxMana;
+    protected int heroAttack;
     protected Deck deck;
     protected DeckHand deckHand;
     protected ArrayList<CreatureCard> playedCreatures;
@@ -24,17 +26,18 @@ public class Hero {
     /**
      * Creates a new Hero
      * @param playerName Player name
-     * @param health Player health
+     * @param heroHealth Player health
      * @param mana Player mana
      * @param maxMana Player max mana
      */
-    public Hero(String playerName, int health, int mana, int maxMana) {
+    public Hero(String playerName, int heroHealth, int mana, int maxMana, int heroAttack) {
         this.name = playerName;
         this.deck = new Deck();
         this.deckHand = new DeckHand();
         this.mana = mana;
         this.maxMana = maxMana;
-        this.health = health;
+        this.heroHealth = heroHealth;
+        this.heroAttack = heroAttack;
         this.playedCreatures = new ArrayList<CreatureCard>();
     }
 
@@ -75,13 +78,15 @@ public class Hero {
         boolean start = true;
         int currentMove = 0;
         System.out.println(this.name + "'s TURN!");
+        Card card = this.getDeck().drawCard();
+        System.out.println("Drawing card: " + card.getName() + " : Mana Cost -> " + card.getCost());
+        this.getDeckHand().addCard(card);
         while (start) {
             System.out.println("Current Mana: " + this.getMana() + "/" + this.getMaxMana());
-            System.out.println("0) Draw a Card");
-            System.out.println("1) Check Hand");
-            System.out.println("2) Play a Card");
-            System.out.println("3) Discard a Card");
-            System.out.println("4) End turn");
+            System.out.println("0) Check Hand");
+            System.out.println("1) Play a Card");
+            System.out.println("2) Discard a Card");
+            System.out.println("3) End turn");
             try {
                 currentMove = scanner.nextInt();
             } catch (Exception e) {
@@ -89,22 +94,17 @@ public class Hero {
             }
             switch (currentMove) {
                 case 0:
-                    Card card = this.getDeck().drawCard();
-                    System.out.println("Drawing card: " + card.getName());
-                    this.getDeckHand().addCard(card);
-                    break;
-                case 1:
                     this.getDeckHand().viewHand();
                     break;
-                case 2:
+                case 1:
                     this.playCard(battlefield);
                     battlefield.setPlayerTurn(false);
                     start = false;
                     break;
-                case 3:
+                case 2:
                     this.getDeckHand().discardCard();
                     break;
-                case 4:
+                case 3:
                     battlefield.setPlayerTurn(false);
                     start = false;
                     break;
@@ -112,5 +112,48 @@ public class Hero {
         }
     }
 
+    /**
+     * Set health
+     * @param health Health
+     */
+    @Override
+    public void setHealth(int health) {
+        this.setHeroHealth(health);
+    }
 
+    /**
+     * Return health
+     * @return Health
+     */
+    @Override
+    public int getHealth() {
+        return this.getHeroHealth();
+    }
+
+    /**
+     * Attack a hero or creature
+     * @param attackable Attackable
+     */
+    @Override
+    public void attack(Attackable attackable) {
+
+    }
+
+    /**
+     * Return attack
+     * @return Attack
+     */
+    @Override
+    public int getAttack() {
+        return this.getHeroAttack();
+    }
+
+    /**
+     * Set attack
+     * @param attack Attack
+     */
+    @Override
+    public void setAttack(int attack) {
+        this.setHeroAttack(attack);
+    }
 }
