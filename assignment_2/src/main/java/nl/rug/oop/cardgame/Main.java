@@ -1,5 +1,6 @@
 package nl.rug.oop.cardgame;
 
+import nl.rug.oop.cardgame.card.Card;
 import nl.rug.oop.cardgame.model.MagicStoneGame;
 import nl.rug.oop.cardgame.view.MagicStoneFrame;
 
@@ -18,8 +19,9 @@ public class Main {
         while(start) {
             System.out.println("0) Draw a Card");
             System.out.println("1) Check Hand");
-            System.out.println("2) Discard a Card");
-            System.out.println("3) Exit");
+            System.out.println("2) Play a Card");
+            System.out.println("3) Discard a Card");
+            System.out.println("4) Exit");
 
             try {
                 currentMove = scanner.nextInt();
@@ -28,17 +30,20 @@ public class Main {
             }
             switch(currentMove) {
                 case 0:
-                    String card = player.getDeck().drawCard();
-                    System.out.println("Drawing card: " + card);
+                    Card card = player.getDeck().drawCard();
+                    System.out.println("Drawing card: " + card.getName());
                     player.getDeckHand().addCard(card);
                     break;
                 case 1:
                     player.getDeckHand().viewHand();
                     break;
                 case 2:
-                    player.getDeckHand().discardCard();
+                    player.getDeckHand().playCard();
                     break;
                 case 3:
+                    player.getDeckHand().discardCard();
+                    break;
+                case 4:
                     start = false;
                     break;
             }
