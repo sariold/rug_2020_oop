@@ -34,6 +34,7 @@ public class StartGame {
         Hero ai = battlefield.getAi();
         boolean start = true;
         while(start) {
+            battlefield.showBattlefield();
             if(battlefield.isPlayerTurn())  {
                 battlefield.incMana(player);
                 player.setMana(player.getMaxMana());
@@ -43,7 +44,6 @@ public class StartGame {
                 battlefield.incMana(ai);
                 ai.setMana(ai.getMaxMana());
                 ai.takeTurn(battlefield);
-                System.out.println("AI PLAYS ITS TURN!");
                 battlefield.setPlayerTurn(true);
             }
         }

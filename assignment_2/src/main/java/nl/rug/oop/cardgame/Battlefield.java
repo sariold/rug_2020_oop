@@ -28,5 +28,17 @@ public class Battlefield {
         if(hero.getMana() < DefaultStats.MAX_MANA) hero.setMaxMana(hero.getMaxMana() + 1);
     }
 
+    public void showBattlefield() {
+        for(int i = 0; i < ai.getPlayedCreatures().size(); i++) {
+            System.out.println(i + ") " + ai.getPlayedCreatures().get(i).getName() + ": Health = " +
+                    ai.getPlayedCreatures().get(i).getHealth() + ": Attack = " +
+                    ai.getPlayedCreatures().get(i).getAttack());
+        }
+        for(int i = 0; i < player.getPlayedCreatures().size(); i++) {
+            System.out.println(i + ") " + player.getPlayedCreatures().get(i).getName() + ": Health = " +
+                    player.getPlayedCreatures().get(i).getHealth() + ": Attack = " +
+                    player.getPlayedCreatures().get(i).getAttack());
+        }
+    }
 
 }

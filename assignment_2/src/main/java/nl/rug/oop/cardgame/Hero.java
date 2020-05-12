@@ -2,7 +2,9 @@ package nl.rug.oop.cardgame;
 
 import lombok.Data;
 import nl.rug.oop.cardgame.card.Card;
+import nl.rug.oop.cardgame.card.CreatureCard;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -17,6 +19,7 @@ public class Hero {
     protected int maxMana;
     protected Deck deck;
     protected DeckHand deckHand;
+    protected ArrayList<CreatureCard> playedCreatures;
 
     /**
      * Creates a new Hero
@@ -32,6 +35,7 @@ public class Hero {
         this.mana = mana;
         this.maxMana = maxMana;
         this.health = health;
+        this.playedCreatures = new ArrayList<CreatureCard>();
     }
 
     /**
