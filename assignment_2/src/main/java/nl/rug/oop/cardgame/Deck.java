@@ -27,13 +27,15 @@ public class Deck {
         Image creature = null;
         Image spell = null;
         try {
-            File pathToFile = new File("resources/Creature_blank.jpg");
+            File pathToFile = new File("target" + File.separator + "classes" + File.separator + "textures"
+                    + File.separator + "Creature_blank.jpg");
             creature = ImageIO.read(pathToFile);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
         try {
-            File pathToFile = new File("resources/Spell_blank.jpg");
+            File pathToFile = new File("target" + File.separator + "classes" + File.separator + "textures"
+                    + File.separator + "Spell_blank.jpg");
             spell = ImageIO.read(pathToFile);
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -52,7 +54,7 @@ public class Deck {
 
     /**
      * Removes a card from the top of the deck and returns it
-     * @return
+     * @return Card drawn
      */
     public Card drawCard() {
         Card card;

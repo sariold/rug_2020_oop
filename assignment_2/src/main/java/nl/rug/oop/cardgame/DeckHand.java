@@ -39,7 +39,7 @@ public class DeckHand {
         if(this.deckHand.size() > 0) {
             AtomicInteger i = new AtomicInteger();
             this.deckHand.forEach(card -> {
-                System.out.println(i + ") " + card.getName());
+                System.out.println(i + ") " + card.getName() + ": Mana Cost -> " + card.getCost());
                 i.getAndIncrement();
             });
             System.out.println("");
@@ -68,23 +68,5 @@ public class DeckHand {
         } else System.out.println("Empty Hand!");
     }
 
-    public void playCard() {
-        if(this.deckHand.size() > 0) {
-            Scanner scanner = new Scanner(System.in);
-            viewHand();
-            System.out.println("Which card would you like to play?");
-            boolean start = true;
-            int currentMove = 0;
-            while (start) {
-                try {
-                    currentMove = scanner.nextInt();
-                    this.deckHand.get(currentMove).play();
-                    this.deckHand.remove(currentMove);
-                    start = false;
-                } catch (Exception e) {
-                    System.out.println("NOT VALID INPUT!");
-                }
-            }
-        } else System.out.println("Empty Hand!");
-    }
+
 }

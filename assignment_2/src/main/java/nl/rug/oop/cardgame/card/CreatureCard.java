@@ -1,5 +1,6 @@
 package nl.rug.oop.cardgame.card;
 
+import lombok.Data;
 import nl.rug.oop.cardgame.interfaces.Attackable;
 import nl.rug.oop.cardgame.interfaces.Attacking;
 
@@ -8,6 +9,7 @@ import java.awt.*;
 /**
  * A type of card that summons a creature when played
  */
+@Data
 public class CreatureCard extends Card implements Attackable, Attacking {
 
     private int attack;
@@ -15,11 +17,11 @@ public class CreatureCard extends Card implements Attackable, Attacking {
 
     /**
      * Create a creature card
-     * @param name
-     * @param cost
-     * @param image
-     * @param attack
-     * @param health
+     * @param name Name
+     * @param cost Cost
+     * @param image Image
+     * @param attack Attack
+     * @param health Health
      */
     public CreatureCard(String name, int cost, Image image, int attack, int health) {
         super(name, cost, image);
@@ -27,16 +29,25 @@ public class CreatureCard extends Card implements Attackable, Attacking {
         this.health = health;
     }
 
+    /**
+     * Method when this creature is attacked
+     */
     @Override
     public void getAttacked() {
 
     }
 
+    /**
+     * Attack method
+     */
     @Override
     public void attack() {
 
     }
 
+    /**
+     * Play method
+     */
     @Override
     public void play() {
         super.play();
