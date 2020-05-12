@@ -29,6 +29,7 @@ public class Hero implements Attackable {
      * @param heroHealth Player health
      * @param mana Player mana
      * @param maxMana Player max mana
+     * @param heroAttack Player attack
      */
     public Hero(String playerName, int heroHealth, int mana, int maxMana, int heroAttack) {
         this.name = playerName;
@@ -107,7 +108,7 @@ public class Hero implements Attackable {
                     break;
                 case 3:
                     attackHero(battlefield);
-                    start = true;
+                    start = false;
                     break;
                 case 4:
                     battlefield.setPlayerTurn(false);
