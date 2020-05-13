@@ -2,13 +2,9 @@ package nl.rug.oop.cardgame.model.card;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-<<<<<<< HEAD:assignment_2/src/main/java/nl/rug/oop/cardgame/model/card/CreatureCard.java
 import nl.rug.oop.cardgame.model.Battlefield;
-=======
-import nl.rug.oop.cardgame.battlefield.Battlefield;
-import nl.rug.oop.cardgame.hero.Hero;
->>>>>>> c530b26370df613ec733227bc978eb220c1d20cb:assignment_2/src/main/java/nl/rug/oop/cardgame/card/CreatureCard.java
 import nl.rug.oop.cardgame.interfaces.Attackable;
+import nl.rug.oop.cardgame.model.hero.Hero;
 
 import java.awt.*;
 
@@ -64,6 +60,7 @@ public class CreatureCard extends Card implements Attackable {
     @Override
     public void attack(Attackable attackable) {
         attackable.setHealth(attackable.getHealth() - this.getAttack());
+        this.setUsed(true);
     }
 
     /**
@@ -91,9 +88,10 @@ public class CreatureCard extends Card implements Attackable {
     @Override
     public void play(Battlefield battlefield, int hero) {
         this.setUsed(true);
-        Hero playing = (hero == 0 ? battlefield.getPlayer():battlefield.getAi());
-        if (battlefield.getPlayer().getPlayedCreatures().size() < 6) {
-            battlefield.placeCreature(this, playing);
+        if (hero == 0) {
+            battlefield.getPlayer().getPlayedCreatures().add(this);
+            return;
         }
+        battlefield.getAi().getPlayedCreatures().add(this);
     }
 }

@@ -1,16 +1,9 @@
-<<<<<<< HEAD:assignment_2/src/main/java/nl/rug/oop/cardgame/model/deck/DeckHand.java
 package nl.rug.oop.cardgame.model.deck;
 
 import lombok.Data;
-import nl.rug.oop.cardgame.DefaultStats;
 import nl.rug.oop.cardgame.model.card.Card;
-=======
-package nl.rug.oop.cardgame.deck;
 
-import lombok.Data;
-import nl.rug.oop.cardgame.defaultstats.DefaultStats;
-import nl.rug.oop.cardgame.card.Card;
->>>>>>> c530b26370df613ec733227bc978eb220c1d20cb:assignment_2/src/main/java/nl/rug/oop/cardgame/deck/DeckHand.java
+import nl.rug.oop.cardgame.DefaultStats;
 
 import java.util.HashMap;
 import java.util.Scanner;

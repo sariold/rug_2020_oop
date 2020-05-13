@@ -1,20 +1,9 @@
-<<<<<<< HEAD:assignment_2/src/main/java/nl/rug/oop/cardgame/model/hero/Hero.java
 package nl.rug.oop.cardgame.model.hero;
 
 import lombok.Data;
 import nl.rug.oop.cardgame.model.Battlefield;
 import nl.rug.oop.cardgame.model.card.Card;
 import nl.rug.oop.cardgame.model.card.CreatureCard;
-=======
-package nl.rug.oop.cardgame.hero;
-
-import lombok.Data;
-import nl.rug.oop.cardgame.battlefield.Battlefield;
-import nl.rug.oop.cardgame.deck.Deck;
-import nl.rug.oop.cardgame.deck.DeckHand;
-import nl.rug.oop.cardgame.card.Card;
-import nl.rug.oop.cardgame.card.CreatureCard;
->>>>>>> c530b26370df613ec733227bc978eb220c1d20cb:assignment_2/src/main/java/nl/rug/oop/cardgame/hero/Hero.java
 import nl.rug.oop.cardgame.interfaces.Attackable;
 import nl.rug.oop.cardgame.model.deck.Deck;
 import nl.rug.oop.cardgame.model.deck.DeckHand;
@@ -53,14 +42,7 @@ public class Hero implements Attackable {
         this.maxMana = maxMana;
         this.heroHealth = heroHealth;
         this.heroAttack = heroAttack;
-<<<<<<< HEAD:assignment_2/src/main/java/nl/rug/oop/cardgame/model/hero/Hero.java
         this.playedCreatures = new ArrayList<>();
-=======
-        this.playedCreatures = new ArrayList<CreatureCard>();
-        for (int i = 0; i < 5; i++) {
-            playedCreatures.add(null);
-        }
->>>>>>> c530b26370df613ec733227bc978eb220c1d20cb:assignment_2/src/main/java/nl/rug/oop/cardgame/hero/Hero.java
     }
 
     /**
@@ -69,7 +51,6 @@ public class Hero implements Attackable {
      */
     public void playCard(Battlefield battlefield) {
         if(this.deckHand.getDeckHand().size() > 0) {
-
             Scanner scanner = new Scanner(System.in);
             this.deckHand.viewHand();
             System.out.println("Which card would you like to play?");
@@ -82,7 +63,7 @@ public class Hero implements Attackable {
                         Card played =  this.deckHand.getDeckHand().get(currentMove);
                         this.deckHand.getDeckHand().remove(currentMove);
                         played.play(battlefield, 0);
-                        this.setMana(this.getMana()-played.getCost());
+                        this.setMana(this.getMana() - played.getCost());
                     } else System.out.println("You cease to have enough mana!");
                     start = false;
                 } catch (Exception e) {
@@ -173,12 +154,8 @@ public class Hero implements Attackable {
      * Print out all creatures are not tapped
      */
     public void showPlayedCreatures() {
-        for(int i = 0; i < this.getPlayedCreatures().size(); i++) {
-<<<<<<< HEAD:assignment_2/src/main/java/nl/rug/oop/cardgame/model/hero/Hero.java
-            if(!this.getPlayedCreatures().get(i).isUsed()) {
-=======
-            if(this.getPlayedCreatures().get(i) != null && this.getPlayedCreatures().get(i).isUsed() == false) {
->>>>>>> c530b26370df613ec733227bc978eb220c1d20cb:assignment_2/src/main/java/nl/rug/oop/cardgame/hero/Hero.java
+        for (int i = 0; i < this.getPlayedCreatures().size(); i++) {
+            if (!this.getPlayedCreatures().get(i).isUsed()) {
                 System.out.println(i + ") " + this.getPlayedCreatures().get(i).getName() + ": Health = " +
                         this.getPlayedCreatures().get(i).getHealth() + ": Attack = " +
                         this.getPlayedCreatures().get(i).getAttack());
@@ -192,11 +169,8 @@ public class Hero implements Attackable {
      */
     public boolean untappedCreatures() {
         for(int i = this.getPlayedCreatures().size() - 1; i >= 0; i--) {
-<<<<<<< HEAD:assignment_2/src/main/java/nl/rug/oop/cardgame/model/hero/Hero.java
             if(!this.getPlayedCreatures().get(i).isUsed()) return true;
-=======
             if(this.getPlayedCreatures().get(i) != null && this.getPlayedCreatures().get(i).isUsed() == false) return true;
->>>>>>> c530b26370df613ec733227bc978eb220c1d20cb:assignment_2/src/main/java/nl/rug/oop/cardgame/hero/Hero.java
         }
         return false;
     }

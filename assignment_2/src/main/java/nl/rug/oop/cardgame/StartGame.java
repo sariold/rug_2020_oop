@@ -1,12 +1,7 @@
 package nl.rug.oop.cardgame;
 
-<<<<<<< HEAD
 import nl.rug.oop.cardgame.model.Battlefield;
 import nl.rug.oop.cardgame.model.hero.Hero;
-=======
-import nl.rug.oop.cardgame.battlefield.Battlefield;
-import nl.rug.oop.cardgame.hero.Hero;
->>>>>>> c530b26370df613ec733227bc978eb220c1d20cb
 
 /**
  * Start Game
@@ -38,10 +33,6 @@ public class StartGame {
         Hero ai = battlefield.getAi();
         boolean start = true;
         for(int i = 1; start; i++) {
-            if(battlefield.isPlayerDead(player)) {
-                System.out.println("GAME OVER!");
-                start = false;
-            }
             System.out.println();
             System.out.println("It's turn number " + ((i+(i%2))/2));
             if(i % 2 == 1)  {
@@ -83,7 +74,7 @@ public class StartGame {
      * Ends the game player has lost
      */
     private void loseGame() {
-        System.out.println("Lost against a lousy machine you noob!");
+        System.out.println("Lost against a lousy machine you N00B!");
         System.exit(0);
     }
 
@@ -92,10 +83,9 @@ public class StartGame {
      * @param hero Hero
      */
     public void resetUsedCreatures(Hero hero) {
+        if(hero.getPlayedCreatures().size() == 0) return;
         for(int i = hero.getPlayedCreatures().size() - 1; i >= 0; i--) {
-            if (hero.getPlayedCreatures().get(i) != null) {
                 hero.getPlayedCreatures().get(i).setUsed(false);
-            }
         }
     }
 }

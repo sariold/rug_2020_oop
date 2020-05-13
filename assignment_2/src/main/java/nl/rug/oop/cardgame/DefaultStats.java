@@ -1,4 +1,4 @@
-package nl.rug.oop.cardgame.defaultstats;
+package nl.rug.oop.cardgame;
 
 /**
  * Default Stats

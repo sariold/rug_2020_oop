@@ -7,6 +7,9 @@ import nl.rug.oop.cardgame.model.card.CreatureCard;
 import java.util.ArrayList;
 import java.util.Collections;
 
+/**
+ * AI Hero
+ */
 public class AIHero extends Hero {
 
     /**

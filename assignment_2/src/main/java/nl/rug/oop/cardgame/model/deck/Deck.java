@@ -1,8 +1,4 @@
-<<<<<<< HEAD:assignment_2/src/main/java/nl/rug/oop/cardgame/model/deck/Deck.java
 package nl.rug.oop.cardgame.model.deck;
-=======
-package nl.rug.oop.cardgame.deck;
->>>>>>> c530b26370df613ec733227bc978eb220c1d20cb:assignment_2/src/main/java/nl/rug/oop/cardgame/deck/Deck.java
 
 import lombok.Data;
 import nl.rug.oop.cardgame.model.card.Card;
@@ -30,20 +26,20 @@ public class Deck {
     public Deck() {
         Image creature = null;
         Image spell = null;
-        try {
-            File pathToFile = new File("target" + File.separator + "classes" + File.separator + "textures"
-                    + File.separator + "Creature_blank.jpg");
-            creature = ImageIO.read(pathToFile);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-        try {
-            File pathToFile = new File("target" + File.separator + "classes" + File.separator + "textures"
-                    + File.separator + "Spell_blank.jpg");
-            spell = ImageIO.read(pathToFile);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
+//        try {
+//            File pathToFile = new File("target" + File.separator + "classes" + File.separator + "textures"
+//                    + File.separator + "Creature_blank.jpg");
+//            creature = ImageIO.read(pathToFile);
+//        } catch (IOException ex) {
+//            ex.printStackTrace();
+//        }
+//        try {
+//            File pathToFile = new File("target" + File.separator + "classes" + File.separator + "textures"
+//                    + File.separator + "Spell_blank.jpg");
+//            spell = ImageIO.read(pathToFile);
+//        } catch (IOException ex) {
+//            ex.printStackTrace();
+//        }
         this.deckList = new ArrayList<>();
         deckList.add(new CreatureCard("Creature", 3, creature, 2, 2, false));
         deckList.add(new CreatureCard("Creature", 3, creature, 2, 2, false));
