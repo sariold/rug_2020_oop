@@ -1,8 +1,8 @@
-package nl.rug.oop.cardgame.card;
+package nl.rug.oop.cardgame.model.card;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import nl.rug.oop.cardgame.Battlefield;
+import nl.rug.oop.cardgame.model.Battlefield;
 import nl.rug.oop.cardgame.interfaces.Attackable;
 
 import java.awt.*;
@@ -37,7 +37,6 @@ public class CreatureCard extends Card implements Attackable {
     /**
      * Set health
      * @param health Health
-     *
      */
     @Override
     public void setHealth(int health) {

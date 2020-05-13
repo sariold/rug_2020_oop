@@ -1,9 +1,12 @@
-package nl.rug.oop.cardgame;
+package nl.rug.oop.cardgame.model.hero;
 
 import lombok.Data;
-import nl.rug.oop.cardgame.card.Card;
-import nl.rug.oop.cardgame.card.CreatureCard;
+import nl.rug.oop.cardgame.model.Battlefield;
+import nl.rug.oop.cardgame.model.card.Card;
+import nl.rug.oop.cardgame.model.card.CreatureCard;
 import nl.rug.oop.cardgame.interfaces.Attackable;
+import nl.rug.oop.cardgame.model.deck.Deck;
+import nl.rug.oop.cardgame.model.deck.DeckHand;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -39,11 +42,12 @@ public class Hero implements Attackable {
         this.maxMana = maxMana;
         this.heroHealth = heroHealth;
         this.heroAttack = heroAttack;
-        this.playedCreatures = new ArrayList<CreatureCard>();
+        this.playedCreatures = new ArrayList<>();
     }
 
     /**
      * Play a card
+     * @param battlefield Battlefield
      */
     public void playCard(Battlefield battlefield) {
         if(this.deckHand.getDeckHand().size() > 0) {
@@ -52,7 +56,7 @@ public class Hero implements Attackable {
             this.deckHand.viewHand();
             System.out.println("Which card would you like to play?");
             boolean start = true;
-            int currentMove = 0;
+            int currentMove;
             while (start) {
                 try {
                     currentMove = scanner.nextInt();
@@ -90,7 +94,8 @@ public class Hero implements Attackable {
             System.out.println("1) Play a Card");
             System.out.println("2) Discard a Card");
             System.out.println("3) Attack Enemy Hero");
-            System.out.println("4) End turn");
+            System.out.println("4) Show Battlefield");
+            System.out.println("5) End turn");
             try {
                 currentMove = scanner.nextInt();
             } catch (Exception e) {
@@ -112,6 +117,9 @@ public class Hero implements Attackable {
                     start = false;
                     break;
                 case 4:
+                    battlefield.showBattlefield();
+                    break;
+                case 5:
                     battlefield.setPlayerTurn(false);
                     start = false;
                     break;
@@ -120,20 +128,20 @@ public class Hero implements Attackable {
     }
 
     /**
-     *
-     * @param battlefield
+     * Attack enemy Hero
+     * @param battlefield Battlefield
      */
     public void attackHero(Battlefield battlefield) {
-        if(this.playableCreatures()) {
+        if(this.untappedCreatures()) {
             Scanner scanner = new Scanner(System.in);
             boolean start = true;
-            int currentMove = 0;
-            while (start && this.playableCreatures()) {
+            int currentMove;
+            while (start && this.untappedCreatures()) {
                 System.out.println("Which creature would you like to attack with? (-1 : End Turn)");
                 showPlayedCreatures();
                 try {
                     currentMove = scanner.nextInt();
-                    if(currentMove == -1) break;
+                    if(currentMove == -1) start = false;
                     this.getPlayedCreatures().get(currentMove).attack(battlefield.getAi());
                     this.getPlayedCreatures().get(currentMove).setUsed(true);
                 } catch (Exception e) {
@@ -144,11 +152,11 @@ public class Hero implements Attackable {
     }
 
     /**
-     *
+     * Print out all creatures are not tapped
      */
     public void showPlayedCreatures() {
         for(int i = 0; i < this.getPlayedCreatures().size(); i++) {
-            if(this.getPlayedCreatures().get(i).isUsed() == false) {
+            if(!this.getPlayedCreatures().get(i).isUsed()) {
                 System.out.println(i + ") " + this.getPlayedCreatures().get(i).getName() + ": Health = " +
                         this.getPlayedCreatures().get(i).getHealth() + ": Attack = " +
                         this.getPlayedCreatures().get(i).getAttack());
@@ -157,12 +165,12 @@ public class Hero implements Attackable {
     }
 
     /**
-     *
-     * @return
+     * Return a boolean if your battlefield has untapped creatures
+     * @return Boolean if a creature can be used for combat
      */
-    public boolean playableCreatures() {
+    public boolean untappedCreatures() {
         for(int i = this.getPlayedCreatures().size() - 1; i >= 0; i--) {
-            if(this.getPlayedCreatures().get(i).isUsed() == false) return true;
+            if(!this.getPlayedCreatures().get(i).isUsed()) return true;
         }
         return false;
     }

@@ -1,15 +1,17 @@
-package nl.rug.oop.cardgame.card;
+package nl.rug.oop.cardgame.model.card;
 
 import lombok.Data;
-import nl.rug.oop.cardgame.Battlefield;
+import lombok.EqualsAndHashCode;
+import nl.rug.oop.cardgame.model.Battlefield;
 
 import java.awt.*;
 
 /**
  * Spell card
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
-public class SpellCard extends Card{
+public class SpellCard extends Card {
 
     /**
      * Creates a new spell card

@@ -1,6 +1,9 @@
-package nl.rug.oop.cardgame;
+package nl.rug.oop.cardgame.model;
 
 import lombok.Data;
+import nl.rug.oop.cardgame.DefaultStats;
+import nl.rug.oop.cardgame.model.hero.AIHero;
+import nl.rug.oop.cardgame.model.hero.Hero;
 
 /**
  * Battlefield Game board
@@ -51,5 +54,16 @@ public class Battlefield {
         }
         System.out.println();
     }
+
+    /**
+     * Check if player heatlh is < 1
+     * @param hero Hero
+     * @return Boolean
+     */
+    public boolean isPlayerDead(Hero hero) {
+        return hero.getHeroHealth() < 1;
+    }
+
+
 
 }

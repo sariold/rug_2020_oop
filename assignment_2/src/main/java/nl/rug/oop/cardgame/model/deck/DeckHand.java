@@ -1,11 +1,11 @@
-package nl.rug.oop.cardgame;
+package nl.rug.oop.cardgame.model.deck;
 
 import lombok.Data;
-import nl.rug.oop.cardgame.card.Card;
+import nl.rug.oop.cardgame.DefaultStats;
+import nl.rug.oop.cardgame.model.card.Card;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
-import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Player's deck hand
@@ -13,13 +13,13 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Data
 public class DeckHand {
 
-    private ArrayList<Card> deckHand;
+    private HashMap<Integer, Card> deckHand;
 
     /**
      * Generates a player's deck hand
      */
     public DeckHand() {
-        this.deckHand = new ArrayList<Card>();
+        this.deckHand = new HashMap<>();
     }
 
     /**
@@ -27,9 +27,9 @@ public class DeckHand {
      * @param card Takes a card
      */
     public void addCard(Card card) {
-        if(this.deckHand.size() > DefaultStats.MAX_HAND_CARDS) System.out.println("You have too many cards in hand the " +
-                "drawn card is dicarded!");
-        else this.deckHand.add(card);
+        if(this.deckHand.size() > DefaultStats.MAX_HAND_CARDS) System.out.println("You have too many cards in " +
+                "hand the drawn card is discarded!");
+        else this.deckHand.put(card.getCardNumber(), card);
     }
 
     /**
@@ -38,11 +38,13 @@ public class DeckHand {
     public void viewHand() {
         System.out.println("Your hand contains:");
         if(this.deckHand.size() > 0) {
-            for(int i = 0; i < this.getDeckHand().size(); i++) {
-                System.out.println(i + ") " + this.getDeckHand().get(i).getName() + ": Mana Cost -> "
-                        + this.getDeckHand().get(i).getCost());
+            int i = 0;
+            for(Card card : this.getDeckHand().values()) {
+                System.out.println(i + ") " + card.getName() + ": Mana Cost -> "
+                        + card.getCost());
+                i++;
             }
-            System.out.println("");
+            System.out.println();
         } else System.out.println("Nothing!");
     }
 
@@ -55,7 +57,7 @@ public class DeckHand {
             viewHand();
             System.out.println("Which card would you like to discard?");
             boolean start = true;
-            int currentMove = 0;
+            int currentMove;
             while (start) {
                 try {
                     currentMove = scanner.nextInt();

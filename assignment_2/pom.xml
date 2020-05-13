@@ -48,7 +48,7 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>nl.rug.oop.rpg.Main</mainClass>
+                            <mainClass>nl.rug.oop.cardgame.Main</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

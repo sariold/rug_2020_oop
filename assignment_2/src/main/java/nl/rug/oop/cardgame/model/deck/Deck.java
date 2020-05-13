@@ -1,9 +1,9 @@
-package nl.rug.oop.cardgame;
+package nl.rug.oop.cardgame.model.deck;
 
 import lombok.Data;
-import nl.rug.oop.cardgame.card.Card;
-import nl.rug.oop.cardgame.card.CreatureCard;
-import nl.rug.oop.cardgame.card.SpellCard;
+import nl.rug.oop.cardgame.model.card.Card;
+import nl.rug.oop.cardgame.model.card.CreatureCard;
+import nl.rug.oop.cardgame.model.card.SpellCard;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -40,13 +40,13 @@ public class Deck {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-        this.deckList = new ArrayList<Card>();
+        this.deckList = new ArrayList<>();
         deckList.add(new CreatureCard("Creature", 3, creature, 2, 2, false));
         deckList.add(new CreatureCard("Creature", 3, creature, 2, 2, false));
         deckList.add(new SpellCard("Spell", 4, spell));
         deckList.add(new SpellCard("Spell", 4, spell));
-        deckList.add(new CreatureCard("Creature", 3, creature, 2, 2, false));
-        deckList.add(new CreatureCard("Creature", 3, creature, 2, 2, false));
+        deckList.add(new CreatureCard("Creature", 2, creature, 2, 2, false));
+        deckList.add(new CreatureCard("Creature", 2, creature, 2, 2, false));
         deckList.add(new SpellCard("Spell", 4, spell));
         deckList.add(new SpellCard("Spell", 4, spell));
         Collections.shuffle(deckList);

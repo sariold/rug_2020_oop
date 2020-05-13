@@ -1,5 +1,8 @@
 package nl.rug.oop.cardgame;
 
+import nl.rug.oop.cardgame.model.Battlefield;
+import nl.rug.oop.cardgame.model.hero.Hero;
+
 /**
  * Start Game
  */
@@ -30,6 +33,11 @@ public class StartGame {
         Hero ai = battlefield.getAi();
         boolean start = true;
         for(int i = 1; start; i++) {
+            if(battlefield.isPlayerDead(player)) {
+                System.out.println("GAME OVER!");
+                start = false;
+            }
+            System.out.println();
             System.out.println("It's turn number " + ((i+(i%2))/2));
             if(i % 2 == 1)  {
                 resetUsedCreatures(player);
@@ -40,7 +48,6 @@ public class StartGame {
             }
             else {
                 resetUsedCreatures(ai);
-                battlefield.showBattlefield();
                 battlefield.incMana(ai);
                 ai.setMana(ai.getMaxMana());
                 ai.takeTurn(battlefield);

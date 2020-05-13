@@ -1,6 +1,6 @@
 package nl.rug.oop.cardgame.interfaces;
 
-import nl.rug.oop.cardgame.Battlefield;
+import nl.rug.oop.cardgame.model.Battlefield;
 
 /**
  * Objects that can be played
