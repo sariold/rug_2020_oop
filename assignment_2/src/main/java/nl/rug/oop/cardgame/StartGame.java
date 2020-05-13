@@ -46,7 +46,33 @@ public class StartGame {
                 ai.takeTurn(battlefield);
                 battlefield.setPlayerTurn(true);
             }
+            endGameCheck(battlefield);
         }
+    }
+
+    /**
+     * Checks whether either hero has died if so ends the game
+     * @param battlefield Battlefield
+     */
+    private void endGameCheck(Battlefield battlefield) {
+        if (battlefield.getPlayer().getHealth() <= 0) loseGame();
+        else if (battlefield.getAi().getHealth() <= 0) winGame();
+    }
+
+    /**
+     * Ends the game player has won
+     */
+    private void winGame() {
+        System.out.println("You have won against the perfection of artificial intelligence");
+        System.exit(0);
+    }
+
+    /**
+     * Ends the game player has lost
+     */
+    private void loseGame() {
+        System.out.println("Lost against a lousy machine you noob!");
+        System.exit(0);
     }
 
     /**
