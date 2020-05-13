@@ -1,11 +1,11 @@
-package nl.rug.oop.cardgame;
+package nl.rug.oop.cardgame.deck;
 
 import lombok.Data;
+import nl.rug.oop.cardgame.defaultstats.DefaultStats;
 import nl.rug.oop.cardgame.card.Card;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Player's deck hand

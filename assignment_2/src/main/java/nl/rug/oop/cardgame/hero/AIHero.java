@@ -1,5 +1,6 @@
-package nl.rug.oop.cardgame;
+package nl.rug.oop.cardgame.hero;
 
+import nl.rug.oop.cardgame.battlefield.Battlefield;
 import nl.rug.oop.cardgame.card.Card;
 import nl.rug.oop.cardgame.card.CreatureCard;
 

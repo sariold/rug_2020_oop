@@ -1,5 +1,8 @@
 package nl.rug.oop.cardgame;
 
+import nl.rug.oop.cardgame.battlefield.Battlefield;
+import nl.rug.oop.cardgame.hero.Hero;
+
 /**
  * Start Game
  */

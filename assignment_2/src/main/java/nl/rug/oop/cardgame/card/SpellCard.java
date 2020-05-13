@@ -1,7 +1,7 @@
 package nl.rug.oop.cardgame.card;
 
 import lombok.Data;
-import nl.rug.oop.cardgame.Battlefield;
+import nl.rug.oop.cardgame.battlefield.Battlefield;
 
 import java.awt.*;
 

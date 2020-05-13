@@ -1,6 +1,9 @@
-package nl.rug.oop.cardgame;
+package nl.rug.oop.cardgame.battlefield;
 
 import lombok.Data;
+import nl.rug.oop.cardgame.defaultstats.DefaultStats;
+import nl.rug.oop.cardgame.hero.AIHero;
+import nl.rug.oop.cardgame.hero.Hero;
 
 /**
  * Battlefield Game board

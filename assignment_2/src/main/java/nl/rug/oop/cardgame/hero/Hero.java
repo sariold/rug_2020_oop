@@ -1,6 +1,9 @@
-package nl.rug.oop.cardgame;
+package nl.rug.oop.cardgame.hero;
 
 import lombok.Data;
+import nl.rug.oop.cardgame.battlefield.Battlefield;
+import nl.rug.oop.cardgame.deck.Deck;
+import nl.rug.oop.cardgame.deck.DeckHand;
 import nl.rug.oop.cardgame.card.Card;
 import nl.rug.oop.cardgame.card.CreatureCard;
 import nl.rug.oop.cardgame.interfaces.Attackable;

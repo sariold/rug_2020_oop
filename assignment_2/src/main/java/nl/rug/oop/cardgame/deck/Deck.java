@@ -1,4 +1,4 @@
-package nl.rug.oop.cardgame;
+package nl.rug.oop.cardgame.deck;
 
 import lombok.Data;
 import nl.rug.oop.cardgame.card.Card;
