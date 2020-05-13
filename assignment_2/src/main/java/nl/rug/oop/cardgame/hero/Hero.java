@@ -43,6 +43,9 @@ public class Hero implements Attackable {
         this.heroHealth = heroHealth;
         this.heroAttack = heroAttack;
         this.playedCreatures = new ArrayList<CreatureCard>();
+        for (int i = 0; i < 5; i++) {
+            playedCreatures.add(null);
+        }
     }
 
     /**
@@ -151,7 +154,7 @@ public class Hero implements Attackable {
      */
     public void showPlayedCreatures() {
         for(int i = 0; i < this.getPlayedCreatures().size(); i++) {
-            if(this.getPlayedCreatures().get(i).isUsed() == false) {
+            if(this.getPlayedCreatures().get(i) != null && this.getPlayedCreatures().get(i).isUsed() == false) {
                 System.out.println(i + ") " + this.getPlayedCreatures().get(i).getName() + ": Health = " +
                         this.getPlayedCreatures().get(i).getHealth() + ": Attack = " +
                         this.getPlayedCreatures().get(i).getAttack());
@@ -165,7 +168,7 @@ public class Hero implements Attackable {
      */
     public boolean playableCreatures() {
         for(int i = this.getPlayedCreatures().size() - 1; i >= 0; i--) {
-            if(this.getPlayedCreatures().get(i).isUsed() == false) return true;
+            if(this.getPlayedCreatures().get(i) != null && this.getPlayedCreatures().get(i).isUsed() == false) return true;
         }
         return false;
     }

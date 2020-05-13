@@ -84,7 +84,9 @@ public class StartGame {
      */
     public void resetUsedCreatures(Hero hero) {
         for(int i = hero.getPlayedCreatures().size() - 1; i >= 0; i--) {
-            hero.getPlayedCreatures().get(i).setUsed(false);
+            if (hero.getPlayedCreatures().get(i) != null) {
+                hero.getPlayedCreatures().get(i).setUsed(false);
+            }
         }
     }
 }

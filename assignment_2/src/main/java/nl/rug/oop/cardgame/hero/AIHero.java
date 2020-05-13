@@ -52,8 +52,11 @@ public class AIHero extends Hero{
         ArrayList<CreatureCard> creatures = getPlayedCreatures();
         if (creatures.size() == 0) System.out.println("AI has no creatures to attack with");
         for (CreatureCard c: creatures) {
-            System.out.println("AI attack you with " + c.getName());
-            c.attack(battlefield.getPlayer());
+            if (c != null) {
+                System.out.println("AI attack you with " + c.getName());
+                c.attack(battlefield.getPlayer());
+            }
+
         }
     }
 
