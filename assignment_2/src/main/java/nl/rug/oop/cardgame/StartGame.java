@@ -1,7 +1,12 @@
 package nl.rug.oop.cardgame;
 
+<<<<<<< HEAD
 import nl.rug.oop.cardgame.model.Battlefield;
 import nl.rug.oop.cardgame.model.hero.Hero;
+=======
+import nl.rug.oop.cardgame.battlefield.Battlefield;
+import nl.rug.oop.cardgame.hero.Hero;
+>>>>>>> c530b26370df613ec733227bc978eb220c1d20cb
 
 /**
  * Start Game
@@ -53,7 +58,33 @@ public class StartGame {
                 ai.takeTurn(battlefield);
                 battlefield.setPlayerTurn(true);
             }
+            endGameCheck(battlefield);
         }
+    }
+
+    /**
+     * Checks whether either hero has died if so ends the game
+     * @param battlefield Battlefield
+     */
+    private void endGameCheck(Battlefield battlefield) {
+        if (battlefield.getPlayer().getHealth() <= 0) loseGame();
+        else if (battlefield.getAi().getHealth() <= 0) winGame();
+    }
+
+    /**
+     * Ends the game player has won
+     */
+    private void winGame() {
+        System.out.println("You have won against the perfection of artificial intelligence");
+        System.exit(0);
+    }
+
+    /**
+     * Ends the game player has lost
+     */
+    private void loseGame() {
+        System.out.println("Lost against a lousy machine you noob!");
+        System.exit(0);
     }
 
     /**
@@ -62,7 +93,9 @@ public class StartGame {
      */
     public void resetUsedCreatures(Hero hero) {
         for(int i = hero.getPlayedCreatures().size() - 1; i >= 0; i--) {
-            hero.getPlayedCreatures().get(i).setUsed(false);
+            if (hero.getPlayedCreatures().get(i) != null) {
+                hero.getPlayedCreatures().get(i).setUsed(false);
+            }
         }
     }
 }

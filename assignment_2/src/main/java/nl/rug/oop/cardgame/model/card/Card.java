@@ -1,7 +1,11 @@
 package nl.rug.oop.cardgame.model.card;
 
 import lombok.Data;
+<<<<<<< HEAD:assignment_2/src/main/java/nl/rug/oop/cardgame/model/card/Card.java
 import nl.rug.oop.cardgame.model.Battlefield;
+=======
+import nl.rug.oop.cardgame.battlefield.Battlefield;
+>>>>>>> c530b26370df613ec733227bc978eb220c1d20cb:assignment_2/src/main/java/nl/rug/oop/cardgame/card/Card.java
 import nl.rug.oop.cardgame.interfaces.Playable;
 
 import java.awt.*;
