@@ -34,9 +34,11 @@ public abstract class Card implements Playable {
 
     /**
      * Play method
+     * @return
      */
     @Override
-    public void play(Battlefield battlefield, int hero) {
+    public boolean play(Battlefield battlefield, int hero) {
         System.out.println("You played " + this.name);
+        return true;
     }
 }

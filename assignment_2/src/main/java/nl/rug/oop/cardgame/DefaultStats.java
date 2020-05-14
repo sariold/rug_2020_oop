@@ -8,4 +8,5 @@ public class DefaultStats {
     public static final int MAX_MANA = 10;
 
     public static final int MAX_HAND_CARDS = 4;
+    public static final int MAX_CREATURES_ON_BATTLEFIELD = 5;
 }

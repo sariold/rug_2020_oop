@@ -9,6 +9,7 @@ import nl.rug.oop.cardgame.model.deck.Deck;
 import nl.rug.oop.cardgame.model.deck.DeckHand;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -43,6 +44,9 @@ public class Hero implements Attackable {
         this.heroHealth = heroHealth;
         this.heroAttack = heroAttack;
         this.playedCreatures = new ArrayList<>();
+        for (int i = 0; i < 5; i++) {
+            playedCreatures.add(null);
+        }
     }
 
     /**
@@ -59,14 +63,18 @@ public class Hero implements Attackable {
             while (start) {
                 try {
                     currentMove = scanner.nextInt();
-                    if(this.deckHand.getDeckHand().get(currentMove).getCost() <= this.mana) {
-                        Card played =  this.deckHand.getDeckHand().get(currentMove);
+                    Card played =  this.deckHand.getDeckHand().get(currentMove);
+                    if(played != null && played.getCost() <= this.mana) {
                         this.deckHand.getDeckHand().remove(currentMove);
-                        played.play(battlefield, 0);
-                        this.setMana(this.getMana() - played.getCost());
+                        if(played.play(battlefield, 0)) {
+                            this.setMana(this.getMana() - played.getCost());
+                        }
+                        else {
+                            this.deckHand.getDeckHand().put(currentMove, played);
+                        }
                     } else System.out.println("You cease to have enough mana!");
                     start = false;
-                } catch (Exception e) {
+                } catch (InputMismatchException e) {
                     System.out.println("NOT VALID INPUT!");
                 }
             }
@@ -97,7 +105,7 @@ public class Hero implements Attackable {
             System.out.println("5) End turn");
             try {
                 currentMove = scanner.nextInt();
-            } catch (Exception e) {
+            } catch (InputMismatchException e) {
                 System.out.println("NOT VALID INPUT!");
             }
             switch (currentMove) {
@@ -141,8 +149,10 @@ public class Hero implements Attackable {
                 try {
                     currentMove = scanner.nextInt();
                     if(currentMove == -1) start = false;
-                    this.getPlayedCreatures().get(currentMove).attack(battlefield.getAi());
-                    this.getPlayedCreatures().get(currentMove).setUsed(true);
+                    CreatureCard attackingCreature = this.getPlayedCreatures().get(currentMove);
+                    if (attackingCreature == null) continue;
+                    attackingCreature.attack(battlefield.getAi());
+                    attackingCreature.setUsed(true);
                 } catch (Exception e) {
                     System.out.println("NOT VALID INPUT!");
                 }
@@ -155,10 +165,11 @@ public class Hero implements Attackable {
      */
     public void showPlayedCreatures() {
         for (int i = 0; i < this.getPlayedCreatures().size(); i++) {
-            if (!this.getPlayedCreatures().get(i).isUsed()) {
+            if (this.playedCreatures.get(i) != null && !this.getPlayedCreatures().get(i).isUsed()) {
                 System.out.println(i + ") " + this.getPlayedCreatures().get(i).getName() + ": Health = " +
                         this.getPlayedCreatures().get(i).getHealth() + ": Attack = " +
                         this.getPlayedCreatures().get(i).getAttack());
+
             }
         }
     }
@@ -169,8 +180,7 @@ public class Hero implements Attackable {
      */
     public boolean untappedCreatures() {
         for(int i = this.getPlayedCreatures().size() - 1; i >= 0; i--) {
-            if(!this.getPlayedCreatures().get(i).isUsed()) return true;
-            if(this.getPlayedCreatures().get(i) != null && this.getPlayedCreatures().get(i).isUsed() == false) return true;
+            if(this.getPlayedCreatures().get(i) != null && !this.getPlayedCreatures().get(i).isUsed()) return true;
         }
         return false;
     }

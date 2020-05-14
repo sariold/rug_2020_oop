@@ -39,11 +39,9 @@ public class DeckHand {
     public void viewHand() {
         System.out.println("Your hand contains:");
         if(this.deckHand.size() > 0) {
-            int i = 0;
             for(Card card : this.getDeckHand().values()) {
-                System.out.println(i + ") " + card.getName() + ": Mana Cost -> "
+                System.out.println(card.getCardNumber() + ") " + card.getName() + ": Mana Cost -> "
                         + card.getCost());
-                i++;
             }
             System.out.println();
         } else System.out.println("Nothing!");

@@ -83,15 +83,13 @@ public class CreatureCard extends Card implements Attackable {
 
     /** Play a card
      * @param battlefield Battlefield
-     * @param hero Hero
+     * @param heroIndex Hero that played the card 0 for player, 1 for AI
+     * @return
      */
     @Override
-    public void play(Battlefield battlefield, int hero) {
+    public boolean play(Battlefield battlefield, int heroIndex) {
         this.setUsed(true);
-        if (hero == 0) {
-            battlefield.getPlayer().getPlayedCreatures().add(this);
-            return;
-        }
-        battlefield.getAi().getPlayedCreatures().add(this);
+        Hero hero = (heroIndex == 0 ? battlefield.getPlayer() : battlefield.getAi());
+        return battlefield.placeCreature(this, hero);
     }
 }

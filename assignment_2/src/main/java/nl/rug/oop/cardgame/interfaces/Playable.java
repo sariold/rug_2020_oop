@@ -9,6 +9,7 @@ public interface Playable {
 
     /**
      * Play the object
+     * @return
      */
-    void play(Battlefield battlefield, int hero);
+    boolean play(Battlefield battlefield, int hero);
 }

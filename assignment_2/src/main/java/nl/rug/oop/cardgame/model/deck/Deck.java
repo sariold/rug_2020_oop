@@ -47,6 +47,11 @@ public class Deck {
         deckList.add(new SpellCard("Spell", 4, spell));
         deckList.add(new CreatureCard("Creature", 2, creature, 2, 2, false));
         deckList.add(new CreatureCard("Creature", 2, creature, 2, 2, false));
+        deckList.add(new CreatureCard("Creature", 2, creature, 2, 2, false));
+        deckList.add(new CreatureCard("Creature", 2, creature, 2, 2, false));
+        deckList.add(new CreatureCard("Creature", 2, creature, 2, 2, false));
+        deckList.add(new CreatureCard("Creature", 2, creature, 2, 2, false));
+        deckList.add(new CreatureCard("Creature", 2, creature, 2, 2, false));
         deckList.add(new SpellCard("Spell", 4, spell));
         deckList.add(new SpellCard("Spell", 4, spell));
         Collections.shuffle(deckList);

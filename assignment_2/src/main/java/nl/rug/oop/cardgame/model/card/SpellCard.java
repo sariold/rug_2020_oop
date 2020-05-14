@@ -25,9 +25,10 @@ public class SpellCard extends Card {
 
     /**
      * Play method
+     * @return
      */
     @Override
-    public void play(Battlefield battlefield, int hero) {
+    public boolean play(Battlefield battlefield, int hero) {
         System.out.println("Played a spell you draw 2 cards");
         if (hero == 0) {
             for (int i = 0; i < 2; i++) {
@@ -37,7 +38,7 @@ public class SpellCard extends Card {
                     battlefield.getPlayer().getDeckHand().addCard(card);
                 }
             }
-            return;
+            return false;
         }
         for (int i = 0; i < 2; i++) {
             Card card = battlefield.getAi().getDeck().drawCard();
@@ -46,5 +47,6 @@ public class SpellCard extends Card {
                 battlefield.getAi().getDeckHand().addCard(card);
             }
         }
+        return false;
     }
 }
