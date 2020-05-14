@@ -100,9 +100,10 @@ public class Hero implements Attackable {
             System.out.println("0) Check Hand");
             System.out.println("1) Play a Card");
             System.out.println("2) Discard a Card");
-            System.out.println("3) Attack Enemy Hero");
-            System.out.println("4) Show Battlefield");
-            System.out.println("5) End turn");
+            System.out.println("3) Attack with creature");
+            System.out.println("4) Swap a creatures position");
+            System.out.println("5) Show Battlefield");
+            System.out.println("6) End turn");
             try {
                 currentMove = scanner.nextInt();
             } catch (InputMismatchException e) {
@@ -124,14 +125,40 @@ public class Hero implements Attackable {
                     start = false;
                     break;
                 case 4:
-                    battlefield.showBattlefield();
+                    swapCreaturePositions(battlefield);
                     break;
                 case 5:
+                    battlefield.showBattlefield();
+                    break;
+                case 6:
                     battlefield.setPlayerTurn(false);
                     start = false;
                     break;
             }
         }
+    }
+
+    private void swapCreaturePositions(Battlefield battlefield) {
+        if (this.untappedCreatures()) {
+            Scanner scanner = new Scanner(System.in);
+            boolean start = true;
+            int currentMove;
+            while (start && this.untappedCreatures()) {
+                System.out.println("Which creature would oyu like to swap to another position? (-1 : none)");
+                showPlayedCreatures();
+                try {
+                    currentMove = scanner.nextInt();
+                    if(currentMove == -1) return;
+                    CreatureCard movingCreature = this.getPlayedCreatures().get(currentMove);
+                    if (battlefield.moveCreature(this, movingCreature)) {
+                        movingCreature.setUsed(true);
+                        this.getPlayedCreatures().set(currentMove, null);
+                    }
+                } catch (Exception e) {
+                    System.out.println("NOT VALID INPUT!");
+                }
+            }
+        } else System.out.println("Either you have no creatures or you just placed them down!");
     }
 
     /**

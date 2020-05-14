@@ -109,4 +109,39 @@ public class Battlefield {
         }
         return freePositions;
     }
+
+    /**
+     * Moves a creature to another spot on the battlefield
+     *
+     * @param hero
+     * @param movingCreature Creature
+     * @return If the creature has been moved
+     */
+    public boolean moveCreature(Hero hero, CreatureCard movingCreature) {
+        Scanner scanner = new Scanner(System.in);
+        ArrayList<Integer> freePositions = getFreePositions(hero);
+        if (freePositions.size() == 0) {
+            System.out.println("No space to move a creature!");
+            return false;
+        }
+        int position = 0;
+        System.out.println("Where will you move the creature to? (-1 : nowhere)");
+        for (int i = 0; i < freePositions.size(); i++) {
+            System.out.println(freePositions.get(i) + ")");
+        }
+        while (true) {
+            try {
+                position = scanner.nextInt();
+                if (position == -1) return false;
+                if (freePositions.contains(position)) break;
+                System.out.println("Invalid input. Where to move?");
+                continue;
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input. Where to move?");
+                continue;
+            }
+        }
+        hero.getPlayedCreatures().set(position, movingCreature);
+        return true;
+    }
 }
