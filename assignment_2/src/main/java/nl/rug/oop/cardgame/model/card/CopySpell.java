@@ -28,30 +28,40 @@ public class CopySpell extends SpellCard implements Targetting {
         Scanner scanner = new Scanner(System.in);
         int currentMove;
         boolean start = true;
-        if (!(hero instanceof AIHero)) {
-            while (start) {
-                try {
-                    showBattlefield(hero);
-                    currentMove = scanner.nextInt();
-                    if (hero.getPlayedCreatures().get(currentMove) != null && hero.getPlayedCreatures().size() < 5) {
-                        CreatureCard creatureCard = new CreatureCard(hero.getPlayedCreatures().get(currentMove).getEnumCard());
+        if(notEmptyBattlefield(hero)) {
+            if (!(hero instanceof AIHero)) {
+                while (start) {
+                    try {
+                        showBattlefield(hero);
+                        currentMove = scanner.nextInt();
+                        if (hero.getPlayedCreatures().get(currentMove) != null && hero.getPlayedCreatures().size() < 5) {
+                            CreatureCard creatureCard = new CreatureCard(hero.getPlayedCreatures().get(currentMove).getEnumCard());
+                            battlefield.placeCreature(creatureCard, hero);
+                        }
+                        start = false;
+                    } catch (Exception e) {
+                        System.out.println("INVALID INPUT");
+                    }
+                }
+            } else {
+                if(freePositions.size() > 0) {
+                    ArrayList<CreatureCard> creatures = hero.getPlayedCreatures();
+                    Collections.shuffle(creatures);
+                    if(creatures.get(0) != null) {
+                        CreatureCard creatureCard = new CreatureCard(creatures.get(0).getEnumCard());
                         battlefield.placeCreature(creatureCard, hero);
                     }
-                    start = false;
-                } catch (Exception e) {
-                    System.out.println("INVALID INPUT");
-                }
-            }
-        } else {
-            if(freePositions.size() > 0) {
-                ArrayList<CreatureCard> creatures = hero.getPlayedCreatures();
-                Collections.shuffle(creatures);
-                if(creatures.get(0) != null) {
-                    CreatureCard creatureCard = new CreatureCard(creatures.get(0).getEnumCard());
-                    battlefield.placeCreature(creatureCard, hero);
                 }
             }
         }
+    }
+
+    public boolean notEmptyBattlefield(Hero hero) {
+        ArrayList<CreatureCard> creatures = hero.getPlayedCreatures();
+        for(CreatureCard c : creatures) {
+            if(c != null) return true;
+        }
+        return false;
     }
 
     public void showBattlefield(Hero hero) {
