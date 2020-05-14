@@ -2,6 +2,7 @@ package nl.rug.oop.cardgame.model;
 
 import lombok.Data;
 import nl.rug.oop.cardgame.model.hero.Hero;
+import nl.rug.oop.cardgame.view.MagicStoneFrame;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -20,19 +21,20 @@ public class MagicStoneGame extends Observable implements Observer {
      * Starts the actual turn based game
      * @param battlefield Playing board
      */
-    public void startGame(Battlefield battlefield) {
-        turnRotation(battlefield);
+    public void startGame(Battlefield battlefield, MagicStoneFrame frame) {
+        turnRotation(battlefield, frame);
     }
 
     /**
      * Rotates the turns
      * @param battlefield Playing board
      */
-    public void turnRotation(Battlefield battlefield) {
+    public void turnRotation(Battlefield battlefield, MagicStoneFrame frame) {
         Hero player = battlefield.getPlayer();
         Hero ai = battlefield.getAi();
         boolean start = true;
         for(int i = 1; start; i++) {
+            frame.update(frame.getGraphics());
             System.out.println();
             System.out.println("It's turn number " + ((i+(i%2))/2));
             if(i % 2 == 1)  {
