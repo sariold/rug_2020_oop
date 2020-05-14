@@ -119,7 +119,7 @@ public class Hero implements Attackable {
                     this.getDeckHand().discardCard();
                     break;
                 case 3:
-                    attackHero(battlefield);
+                    attackPhase(battlefield);
                     battlefield.setPlayerTurn(false);
                     start = false;
                     break;
@@ -138,7 +138,7 @@ public class Hero implements Attackable {
      * Attack enemy Hero
      * @param battlefield Battlefield
      */
-    public void attackHero(Battlefield battlefield) {
+    public void attackPhase(Battlefield battlefield) {
         if(this.untappedCreatures()) {
             Scanner scanner = new Scanner(System.in);
             boolean start = true;
@@ -150,8 +150,12 @@ public class Hero implements Attackable {
                     currentMove = scanner.nextInt();
                     if(currentMove == -1) start = false;
                     CreatureCard attackingCreature = this.getPlayedCreatures().get(currentMove);
+                    CreatureCard attackedCreature = battlefield.getAi().getPlayedCreatures().get(currentMove);
                     if (attackingCreature == null) continue;
-                    attackingCreature.attack(battlefield.getAi());
+                    if (attackedCreature == null) attackingCreature.attack(battlefield.getAi());
+                    else attackingCreature.attack(attackedCreature);
+                    attackingCreature.checkDeath(this, currentMove);
+                    attackedCreature.checkDeath(battlefield.getAi(), currentMove);
                     attackingCreature.setUsed(true);
                 } catch (Exception e) {
                     System.out.println("NOT VALID INPUT!");

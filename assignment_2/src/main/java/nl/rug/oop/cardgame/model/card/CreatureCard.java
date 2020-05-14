@@ -60,6 +60,7 @@ public class CreatureCard extends Card implements Attackable {
     @Override
     public void attack(Attackable attackable) {
         attackable.setHealth(attackable.getHealth() - this.getAttack());
+        this.setHealth(this.getHealth() - attackable.getAttack());
         this.setUsed(true);
     }
 
@@ -91,5 +92,17 @@ public class CreatureCard extends Card implements Attackable {
         this.setUsed(true);
         Hero hero = (heroIndex == 0 ? battlefield.getPlayer() : battlefield.getAi());
         return battlefield.placeCreature(this, hero);
+    }
+
+    /**
+     * Checks if a creature has died if so removes it from the battlefield
+     * @param hero Hero
+     * @param index Index in played creatures array list
+     */
+    public void checkDeath(Hero hero, int index) {
+        if (this.getHealth() <= 0) {
+            System.out.println(this.getName() + " has died in combat");
+            hero.getPlayedCreatures().set(index, null);
+        }
     }
 }

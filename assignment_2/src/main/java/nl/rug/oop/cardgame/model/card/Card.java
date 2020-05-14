@@ -3,6 +3,7 @@ package nl.rug.oop.cardgame.model.card;
 import lombok.Data;
 import nl.rug.oop.cardgame.model.Battlefield;
 import nl.rug.oop.cardgame.interfaces.Playable;
+import nl.rug.oop.cardgame.model.hero.Hero;
 
 import java.awt.*;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -41,4 +42,5 @@ public abstract class Card implements Playable {
         System.out.println("You played " + this.name);
         return true;
     }
+
 }

@@ -56,7 +56,7 @@ public class AIHero extends Hero {
                 }
             }
         } else System.out.println("AI has no cards in hand");
-        attackHero(battlefield);
+        attackPhase(battlefield);
     }
 
     /**
@@ -64,7 +64,7 @@ public class AIHero extends Hero {
      * @param battlefield Battlefield
      */
     @Override
-    public void attackHero(Battlefield battlefield) {
+    public void attackPhase(Battlefield battlefield) {
         ArrayList<CreatureCard> creatures = getPlayedCreatures();
         if (creatures.size() == 0) System.out.println("AI has no creatures to attack with");
         for (CreatureCard c: creatures) {
