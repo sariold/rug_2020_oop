@@ -1,5 +1,7 @@
 package nl.rug.oop.cardgame.view.textures;
 
+import lombok.Data;
+
 import java.util.EnumMap;
 
 import java.io.File;
@@ -9,6 +11,7 @@ import java.awt.image.BufferedImage;
 
 import javax.imageio.ImageIO;
 
+@Data
 public class CardBackTextures {
 
     private static EnumMap<CardBack, BufferedImage> textures;
