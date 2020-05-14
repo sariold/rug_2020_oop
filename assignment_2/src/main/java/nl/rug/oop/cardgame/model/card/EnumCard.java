@@ -8,8 +8,8 @@ public enum EnumCard {
     CREATURE_DRAGON     (Type.CREATURE, Face.DRAGON, 4, 4, 4),
 
     SPELL_INSTANTDRAW   (Type.SPELL, Face.INSTANTDRAW, 4),
-    SPELL_INSTANTHEALTH (Type.SPELL, Face.INSTANTHEALTH, 3),
-    SPELL_INSTANTDAMAGE (Type.SPELL, Face.INSTANTDAMAGE, 5),
+    SPELL_INSTANTHEALTH (Type.SPELL, Face.INSTANTHEALTH, 3, 3),
+    SPELL_INSTANTDAMAGE (Type.SPELL, Face.INSTANTDAMAGE, 5, 3),
     SPELL_COPYPASTE     (Type.SPELL, Face.COPYPASTE, 4);
 
     private final Type type;
@@ -17,6 +17,7 @@ public enum EnumCard {
     private int health;
     private int attack;
     private final int cost;
+    private int value;
 
     EnumCard(Type type, Face face, int health, int attack, int cost) {
         this.type = type;
@@ -32,6 +33,13 @@ public enum EnumCard {
         this.cost = cost;
     }
 
+    EnumCard(Type type, Face face, int cost, int value) {
+        this.type = type;
+        this.face = face;
+        this.cost = cost;
+        this.value = value;
+    }
+
     public int getHealth() {
         return this.health;
     }
@@ -43,6 +51,8 @@ public enum EnumCard {
     public int getCost() {
         return this.cost;
     }
+
+    public int getValue() {return this.value; }
 
     public enum Type {
         CREATURE,

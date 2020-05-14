@@ -67,6 +67,7 @@ public class Hero implements Attackable {
                     if(played != null && played.getCost() <= this.mana) {
                         this.deckHand.getDeckHand().remove(currentMove);
                         if(played.play(battlefield, 0)) {
+                            if()
                             this.setMana(this.getMana() - played.getCost());
                         }
                         else {

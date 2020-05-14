@@ -1,10 +1,7 @@
 package nl.rug.oop.cardgame.model.deck;
 
 import lombok.Data;
-import nl.rug.oop.cardgame.model.card.Card;
-import nl.rug.oop.cardgame.model.card.CreatureCard;
-import nl.rug.oop.cardgame.model.card.EnumCard;
-import nl.rug.oop.cardgame.model.card.SpellCard;
+import nl.rug.oop.cardgame.model.card.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -39,17 +36,17 @@ public class Deck {
         deckList.add(new CreatureCard(EnumCard.CREATURE_DRAGON));
         deckList.add(new CreatureCard(EnumCard.CREATURE_DRAGON));
 
-        deckList.add(new SpellCard(EnumCard.SPELL_COPYPASTE));
-        deckList.add(new SpellCard(EnumCard.SPELL_COPYPASTE));
+        deckList.add(new CopySpell(EnumCard.SPELL_COPYPASTE));
+        deckList.add(new CopySpell(EnumCard.SPELL_COPYPASTE));
 
-        deckList.add(new SpellCard(EnumCard.SPELL_INSTANTDAMAGE));
-        deckList.add(new SpellCard(EnumCard.SPELL_INSTANTDAMAGE));
+        deckList.add(new HealthSpell(EnumCard.SPELL_INSTANTDAMAGE));
+        deckList.add(new HealthSpell(EnumCard.SPELL_INSTANTDAMAGE));
 
-        deckList.add(new SpellCard(EnumCard.SPELL_INSTANTDRAW));
-        deckList.add(new SpellCard(EnumCard.SPELL_INSTANTDRAW));
+        deckList.add(new DrawSpell(EnumCard.SPELL_INSTANTDRAW));
+        deckList.add(new DrawSpell(EnumCard.SPELL_INSTANTDRAW));
 
-        deckList.add(new SpellCard(EnumCard.SPELL_COPYPASTE));
-        deckList.add(new SpellCard(EnumCard.SPELL_COPYPASTE));
+        deckList.add(new HealthSpell(EnumCard.SPELL_INSTANTHEALTH));
+        deckList.add(new HealthSpell(EnumCard.SPELL_INSTANTHEALTH));
 
         Collections.shuffle(deckList);
     }

@@ -102,6 +102,7 @@ public class Battlefield {
             }
         }
         hero.getPlayedCreatures().set(position, creatureCard);
+        creatureCard.setBattlePosition(position);
         return true;
     }
 
@@ -110,7 +111,7 @@ public class Battlefield {
      * @param hero Hero
      * @return Free Positions
      */
-    private ArrayList<Integer> getFreePositions(Hero hero) {
+    public ArrayList<Integer> getFreePositions(Hero hero) {
         ArrayList<Integer> freePositions = new ArrayList<Integer>();
         for (int i = 0; i < DefaultStats.MAX_CREATURES_ON_BATTLEFIELD; i++) {
             if (hero.getPlayedCreatures().get(i) == null) freePositions.add(i);

@@ -100,7 +100,6 @@ public class MagicStonePanel extends JPanel implements Observer {
         g.drawRect(1058, 380, 75, 112); // Played Card 5
     }
 
-
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
