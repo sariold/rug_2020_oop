@@ -3,9 +3,6 @@ package nl.rug.oop.cardgame.model.card;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import nl.rug.oop.cardgame.model.Battlefield;
-import nl.rug.oop.cardgame.model.hero.Hero;
-
-import java.awt.*;
 
 /**
  * Spell card
@@ -16,12 +13,10 @@ public class SpellCard extends Card {
 
     /**
      * Creates a new spell card
-     * @param name Name
-     * @param cost Cost
-     * @param image Image
+     * @param enumCard Enum Card
      */
-    public SpellCard(String name, int cost, Image image) {
-        super(name, cost, image);
+    public SpellCard(EnumCard enumCard) {
+        super(enumCard);
     }
 
     /**

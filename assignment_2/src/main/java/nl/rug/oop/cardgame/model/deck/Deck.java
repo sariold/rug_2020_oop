@@ -3,6 +3,7 @@ package nl.rug.oop.cardgame.model.deck;
 import lombok.Data;
 import nl.rug.oop.cardgame.model.card.Card;
 import nl.rug.oop.cardgame.model.card.CreatureCard;
+import nl.rug.oop.cardgame.model.card.EnumCard;
 import nl.rug.oop.cardgame.model.card.SpellCard;
 
 import javax.imageio.ImageIO;
@@ -24,36 +25,35 @@ public class Deck {
      * Creates a new Deck and fills it with cards and shuffles it
      */
     public Deck() {
-        Image creature = null;
-        Image spell = null;
-//        try {
-//            File pathToFile = new File("target" + File.separator + "classes" + File.separator + "textures"
-//                    + File.separator + "Creature_blank.jpg");
-//            creature = ImageIO.read(pathToFile);
-//        } catch (IOException ex) {
-//            ex.printStackTrace();
-//        }
-//        try {
-//            File pathToFile = new File("target" + File.separator + "classes" + File.separator + "textures"
-//                    + File.separator + "Spell_blank.jpg");
-//            spell = ImageIO.read(pathToFile);
-//        } catch (IOException ex) {
-//            ex.printStackTrace();
-//        }
         this.deckList = new ArrayList<>();
-        deckList.add(new CreatureCard("Creature", 3, creature, 2, 2, false));
-        deckList.add(new CreatureCard("Creature", 3, creature, 2, 2, false));
-        deckList.add(new SpellCard("Spell", 4, spell));
-        deckList.add(new SpellCard("Spell", 4, spell));
-        deckList.add(new CreatureCard("Creature", 2, creature, 2, 2, false));
-        deckList.add(new CreatureCard("Creature", 2, creature, 2, 2, false));
-        deckList.add(new CreatureCard("Creature", 2, creature, 2, 2, false));
-        deckList.add(new CreatureCard("Creature", 2, creature, 2, 2, false));
-        deckList.add(new CreatureCard("Creature", 2, creature, 2, 2, false));
-        deckList.add(new CreatureCard("Creature", 2, creature, 2, 2, false));
-        deckList.add(new CreatureCard("Creature", 2, creature, 2, 2, false));
-        deckList.add(new SpellCard("Spell", 4, spell));
-        deckList.add(new SpellCard("Spell", 4, spell));
+        deckList.add(new CreatureCard(EnumCard.CREATURE_ZOMBIE));
+        deckList.add(new CreatureCard(EnumCard.CREATURE_ZOMBIE));
+        deckList.add(new CreatureCard(EnumCard.CREATURE_ZOMBIE));
+
+        deckList.add(new CreatureCard(EnumCard.CREATURE_WEREWOLF));
+        deckList.add(new CreatureCard(EnumCard.CREATURE_WEREWOLF));
+        deckList.add(new CreatureCard(EnumCard.CREATURE_WEREWOLF));
+
+        deckList.add(new CreatureCard(EnumCard.CREATURE_WOLF));
+        deckList.add(new CreatureCard(EnumCard.CREATURE_WOLF));
+        deckList.add(new CreatureCard(EnumCard.CREATURE_WOLF));
+
+        deckList.add(new CreatureCard(EnumCard.CREATURE_DRAGON));
+        deckList.add(new CreatureCard(EnumCard.CREATURE_DRAGON));
+        deckList.add(new CreatureCard(EnumCard.CREATURE_DRAGON));
+
+        deckList.add(new CreatureCard(EnumCard.SPELL_COPYPASTE));
+        deckList.add(new CreatureCard(EnumCard.SPELL_COPYPASTE));
+
+        deckList.add(new CreatureCard(EnumCard.SPELL_INSTANTDAMAGE));
+        deckList.add(new CreatureCard(EnumCard.SPELL_INSTANTDAMAGE));
+
+        deckList.add(new CreatureCard(EnumCard.SPELL_INSTANTDRAW));
+        deckList.add(new CreatureCard(EnumCard.SPELL_INSTANTDRAW));
+
+        deckList.add(new CreatureCard(EnumCard.SPELL_COPYPASTE));
+        deckList.add(new CreatureCard(EnumCard.SPELL_COPYPASTE));
+
         Collections.shuffle(deckList);
     }
 

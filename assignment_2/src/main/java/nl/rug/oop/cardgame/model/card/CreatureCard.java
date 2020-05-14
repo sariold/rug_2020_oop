@@ -6,8 +6,6 @@ import nl.rug.oop.cardgame.model.Battlefield;
 import nl.rug.oop.cardgame.interfaces.Attackable;
 import nl.rug.oop.cardgame.model.hero.Hero;
 
-import java.awt.*;
-
 /**
  * A type of card that summons a creature when played
  */
@@ -21,18 +19,13 @@ public class CreatureCard extends Card implements Attackable {
 
     /**
      * Create a creature card
-     * @param name Name
-     * @param cost Cost
-     * @param image Image
-     * @param creatureAttack Attack
-     * @param creatureHealth Health
-     * @param used Has the card been used or just played?
+     * @param enumCard Enum Card
      */
-    public CreatureCard(String name, int cost, Image image, int creatureAttack, int creatureHealth, boolean used) {
-        super(name, cost, image);
-        this.creatureAttack = creatureAttack;
-        this.creatureHealth = creatureHealth;
-        this.used = used;
+    public CreatureCard(EnumCard enumCard) {
+        super(enumCard);
+        this.creatureAttack = enumCard.getAttack();
+        this.creatureHealth = enumCard.getHealth();
+        this.used = false;
     }
 
     /**
@@ -92,6 +85,11 @@ public class CreatureCard extends Card implements Attackable {
         this.setUsed(true);
         Hero hero = (heroIndex == 0 ? battlefield.getPlayer() : battlefield.getAi());
         return battlefield.placeCreature(this, hero);
+    }
+
+    @Override
+    public String getType() {
+        return this.name;
     }
 
     /**
