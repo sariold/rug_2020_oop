@@ -131,7 +131,7 @@ public class MagicStonePanel extends JPanel implements Observer {
             g.setFont(new Font("TimesRoman", Font.BOLD, 8));
             g.setColor(Color.BLACK);
             g.drawString(attackAndHealth, 140+i*xOffset+81-g.getFontMetrics().stringWidth(attackAndHealth),
-                    508);
+                    507);
             i++;
         }
         i = 0;
@@ -146,7 +146,7 @@ public class MagicStonePanel extends JPanel implements Observer {
             g.setFont(new Font("TimesRoman", Font.BOLD, 8));
             g.setColor(Color.BLACK);
             g.drawString(attackAndHealth, 140+i*xOffset+81-g.getFontMetrics().stringWidth(attackAndHealth),
-                    328);
+                    327);
             i++;
         }
     }
@@ -161,13 +161,23 @@ public class MagicStonePanel extends JPanel implements Observer {
         CardBack redBack = CardBack.RED_BACK;
         int xOffset = 150;
         int i = 0;
+        int x = 0;
         for (Card c: playerHand.getDeckHand().values()) {
             if (i == 6) break;
             EnumCard card = c.getEnumCard();
             if (i < 3) {
-                g.drawImage(CardTextures.getTexture(card), 100+i*xOffset, 530, 100, 150, this);
+                x = 100+i*xOffset;
+                g.drawImage(CardTextures.getTexture(card), x, 530, 100, 150, this);
             } else {
-                g.drawImage(CardTextures.getTexture(card), 780+(i-3)*xOffset, 530, 100, 150, this);
+                x = 780+(i-3)*xOffset;
+                g.drawImage(CardTextures.getTexture(card), x, 530, 100, 150, this);
+            }
+            if (c instanceof CreatureCard) {
+                String attackAndHealth = ((CreatureCard)c).getAttack() + "/" + ((CreatureCard)c).getHealth();
+                g.setFont(new Font("TimesRoman", Font.BOLD, 8));
+                g.setColor(Color.BLACK);
+                g.drawString(attackAndHealth, x+90-g.getFontMetrics().stringWidth(attackAndHealth),
+                        670);
             }
             i++;
         }
