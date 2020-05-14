@@ -60,11 +60,11 @@ public class MagicStonePanel extends JPanel implements Observer {
         g.drawRect(780, 10, 100, 150); // Card 4
         g.drawRect(930, 10, 100, 150); // Card 5
         g.drawRect(1080, 10, 100, 150); // Card 6
-        g.drawRect(140, 200, 90, 135); // Played Card 1
-        g.drawRect(370, 200, 90, 135); // Played Card 2
-        g.drawRect(600, 200, 90, 135); // Played Card 3
-        g.drawRect(830, 200, 90, 135); // Played Card 4
-        g.drawRect(1060, 200, 90, 135); // Played Card 5
+        g.drawRect(140, 194, 90, 135); // Played Card 1
+        g.drawRect(370, 194, 90, 135); // Played Card 2
+        g.drawRect(600, 194, 90, 135); // Played Card 3
+        g.drawRect(830, 194, 90, 135); // Played Card 4
+        g.drawRect(1060, 194, 90, 135); // Played Card 5
 
         g.setColor(Color.BLUE);
         g.drawRect(0, getHeight() / 2, getWidth() - 1, getHeight() / 2); // Blue Half
@@ -74,7 +74,7 @@ public class MagicStonePanel extends JPanel implements Observer {
         g.drawString("Discard", 23, 445);
         g.drawString("Deck", 1183, 445);
         g.drawString("Mana " + battlefield.getPlayer().getMana() + "/" + battlefield.getPlayer().getMaxMana(),
-                (getWidth() / 2) - 40, 555);
+                (getWidth() / 2) - 40, 565);
         g.setColor(Color.WHITE);
         g.drawString("Card 1", 117, 615);
         g.drawString("Card 2", 267, 615);
@@ -94,11 +94,11 @@ public class MagicStonePanel extends JPanel implements Observer {
         g.drawRect(780, 530, 100, 150); // Card 4
         g.drawRect(930, 530, 100, 150); // Card 5
         g.drawRect(1080, 530, 100, 150); // Card 6
-        g.drawRect(140, 380, 90, 135); // Played Card 1
-        g.drawRect(370, 380, 90, 135); // Played Card 2
-        g.drawRect(600, 380, 90, 135); // Played Card 3
-        g.drawRect(830, 380, 90, 135); // Played Card 4
-        g.drawRect(1060, 380, 90, 135); // Played Card 5
+        g.drawRect(140, 360, 90, 135); // Played Card 1
+        g.drawRect(370, 360, 90, 135); // Played Card 2
+        g.drawRect(600, 360, 90, 135); // Played Card 3
+        g.drawRect(830, 360, 90, 135); // Played Card 4
+        g.drawRect(1060, 360, 90, 135); // Played Card 5
     }
 
     @Override
@@ -126,7 +126,7 @@ public class MagicStonePanel extends JPanel implements Observer {
                 continue;
             }
             EnumCard card = c.getEnumCard();
-            g.drawImage(CardTextures.getTexture(card), 140+i*xOffset, 380, 90, 135, this);
+            g.drawImage(CardTextures.getTexture(card), 140+i*xOffset, 360, 90, 135, this);
             String attackAndHealth = c.getAttack() + "/" + c.getHealth();
             g.setFont(new Font("TimesRoman", Font.BOLD, 8));
             g.setColor(Color.BLACK);
@@ -141,7 +141,7 @@ public class MagicStonePanel extends JPanel implements Observer {
                 continue;
             }
             EnumCard card = c.getEnumCard();
-            g.drawImage(CardTextures.getTexture(card), 140+i*xOffset, 200, 90, 135, this);
+            g.drawImage(CardTextures.getTexture(card), 140+i*xOffset, 194, 90, 135, this);
             String attackAndHealth = c.getAttack() + "/" + c.getHealth();
             g.setFont(new Font("TimesRoman", Font.BOLD, 8));
             g.setColor(Color.BLACK);
@@ -207,11 +207,11 @@ public class MagicStonePanel extends JPanel implements Observer {
         }
         g.setFont(new Font("TimesRoman", Font.PLAIN, 30));
         g.setColor(Color.BLACK);
-        g.drawString(Integer.toString(playerCards), 1195, 435);
+        g.drawString(Integer.toString(playerCards), 1190, 440);
         for (int i = 0; i < aiCards; i++) {
             g.drawImage(CardBackTextures.getTexture(redBack), 1159, 180, 100 ,150, this);
         }
-        g.drawString(Integer.toString(aiCards), 1195, 255);
+        g.drawString(Integer.toString(aiCards), 1190, 260);
     }
 
     @Override

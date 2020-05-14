@@ -7,6 +7,7 @@ import nl.rug.oop.cardgame.model.hero.Hero;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class CopySpell extends SpellCard implements Targetting {
@@ -32,15 +33,19 @@ public class CopySpell extends SpellCard implements Targetting {
             if (!(hero instanceof AIHero)) {
                 while (start) {
                     try {
+                        System.out.println("Which creature do you want to copy paste?");
                         showBattlefield(hero);
+                        System.out.println();
                         currentMove = scanner.nextInt();
-                        if (hero.getPlayedCreatures().get(currentMove) != null && hero.getPlayedCreatures().size() < 5) {
+                        if (hero.getPlayedCreatures().get(currentMove) != null) {
                             CreatureCard creatureCard = new CreatureCard(hero.getPlayedCreatures().get(currentMove).getEnumCard());
                             battlefield.placeCreature(creatureCard, hero);
                         }
                         start = false;
-                    } catch (Exception e) {
+                    } catch (InputMismatchException e) {
+                        e.printStackTrace();
                         System.out.println("INVALID INPUT");
+                        scanner.nextLine();
                     }
                 }
             } else {
@@ -68,8 +73,10 @@ public class CopySpell extends SpellCard implements Targetting {
         ArrayList<CreatureCard> creatures = hero.getPlayedCreatures();
         int i = 0;
         for(CreatureCard c: creatures) {
-            System.out.print(i + ") " + c.getName() + " : Health = " + c.getCreatureHealth() + " : Attack = " +
-                    c.getCreatureAttack());
+            if(c != null) {
+                System.out.print(i + ") " + c.getName() + " : Health = " + c.getCreatureHealth() + " : Attack = " +
+                        c.getCreatureAttack());
+            }
             i++;
         }
     }

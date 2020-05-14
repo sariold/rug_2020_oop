@@ -48,7 +48,7 @@ public class Battlefield {
             if (creature == null) System.out.println(i + ") null");
             else {
                 System.out.println(i + ") " + creature.getName() + ": Health = " + creature.getHealth() + ": Attack = " +
-                        creature.getAttack() + " : Tapped = " + creature.isUsed());
+                        creature.getAttack() + " : Tapped = " + creature.isUsed() + " : Pos = " + creature.getBattlePosition());
             }
         }
         System.out.println();
@@ -59,7 +59,7 @@ public class Battlefield {
             if (creature == null) System.out.println(i + ") null");
             else {
                 System.out.println(i + ") " + creature.getName() + ": Health = " + creature.getHealth() + ": Attack = " +
-                        creature.getAttack() + " : Tapped = " + creature.isUsed());
+                        creature.getAttack() + " : Tapped = " + creature.isUsed()  + " : Pos = " + creature.getBattlePosition());
             }
         }
         System.out.println();

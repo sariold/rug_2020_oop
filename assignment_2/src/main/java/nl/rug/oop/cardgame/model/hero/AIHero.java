@@ -73,7 +73,7 @@ public class AIHero extends Hero {
                 CreatureCard attackedCreature = battlefield.getPlayer().getPlayedCreatures().get(c.getBattlePosition());
                 if (attackedCreature == null) c.attack(battlefield.getPlayer());
                 else c.attack(attackedCreature);
-                if(attackedCreature != null) attackedCreature.checkDeath(battlefield.getAi(),
+                if(attackedCreature != null) attackedCreature.checkDeath(battlefield.getPlayer(),
                         attackedCreature.getBattlePosition());
                 c.checkDeath(battlefield.getAi(), c.getBattlePosition());
             }

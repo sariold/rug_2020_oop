@@ -181,8 +181,8 @@ public class Hero implements Attackable {
                     if (attackingCreature == null) continue;
                     if (attackedCreature == null) attackingCreature.attack(battlefield.getAi());
                     else attackingCreature.attack(attackedCreature);
-                    attackingCreature.checkDeath(this, currentMove);
-                    attackedCreature.checkDeath(battlefield.getAi(), currentMove);
+                    attackingCreature.checkDeath(this, attackingCreature.getBattlePosition());
+                    attackedCreature.checkDeath(battlefield.getAi(), attackedCreature.getBattlePosition());
                     attackingCreature.setUsed(true);
                 } catch (Exception e) {
                     System.out.println("NOT VALID INPUT!");
