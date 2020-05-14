@@ -6,12 +6,9 @@ import nl.rug.oop.cardgame.model.card.CreatureCard;
 import nl.rug.oop.cardgame.model.card.EnumCard;
 import nl.rug.oop.cardgame.model.card.SpellCard;
 
-import javax.imageio.ImageIO;
-import java.awt.*;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Observable;
 
 /**
  * Deck class to store cards
@@ -71,6 +68,5 @@ public class Deck {
         this.deckList.remove(0);
         return card;
     }
-
 
 }
