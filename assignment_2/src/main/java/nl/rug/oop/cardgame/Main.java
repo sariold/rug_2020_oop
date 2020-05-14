@@ -15,7 +15,7 @@ public class Main {
     public static void main(String[] args) {
         MagicStoneGame magicStoneGame = new MagicStoneGame();
         MagicStoneFrame frame = new MagicStoneFrame(magicStoneGame);
-        magicStoneGame.startGame(magicStoneGame.getBattlefield());
+        magicStoneGame.startGame(magicStoneGame.getBattlefield(), frame);
 //        StartGame startGame = new StartGame();
 
     }

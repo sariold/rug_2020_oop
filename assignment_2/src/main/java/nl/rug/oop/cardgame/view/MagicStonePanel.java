@@ -1,13 +1,18 @@
 package nl.rug.oop.cardgame.view;
 
+import nl.rug.oop.cardgame.model.Battlefield;
 import nl.rug.oop.cardgame.model.MagicStoneGame;
 import nl.rug.oop.cardgame.model.card.Card;
+import nl.rug.oop.cardgame.model.card.EnumCard;
 import nl.rug.oop.cardgame.model.deck.Deck;
+import nl.rug.oop.cardgame.model.deck.DeckHand;
 import nl.rug.oop.cardgame.view.textures.CardBack;
 import nl.rug.oop.cardgame.view.textures.CardBackTextures;
+import nl.rug.oop.cardgame.view.textures.CardTextures;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -25,6 +30,7 @@ public class MagicStonePanel extends JPanel implements Observer {
     }
 
     private void paintAreas(Graphics g) {
+        Battlefield battlefield = magicStoneGame.getBattlefield();
         g.setColor(Color.RED);
         g.drawRect(0, 0, getWidth() - 1, getHeight() / 2); // Red Half
         g.fillArc(540, -100, 200, 200, 180, 180); // AI Arc
@@ -32,7 +38,8 @@ public class MagicStonePanel extends JPanel implements Observer {
         g.setColor(Color.BLACK);
         g.drawString("Discard", 23, 263);
         g.drawString("Deck", 1183, 263);
-        g.drawString("Mana 1/3", (getWidth() / 2) - 40, 158);
+        g.drawString("Mana " + battlefield.getAi().getMana() + "/" + battlefield.getAi().getMaxMana(),
+                (getWidth() / 2) - 40, 158);
         g.setColor(Color.WHITE);
         g.drawString("Card 1", 117, 90);
         g.drawString("Card 2", 267, 90);
@@ -41,7 +48,8 @@ public class MagicStonePanel extends JPanel implements Observer {
         g.drawString("Card 5", 945, 90);
         g.drawString("Card 6", 1097, 90);
         g.setFont(new Font("TimesRoman", Font.PLAIN, 30));
-        g.drawString("5", (getWidth() / 2) - 5, 50);
+        g.drawString(Integer.toString(battlefield.getAi().getHealth()),
+                640 - (g.getFontMetrics().stringWidth(Integer.toString(battlefield.getAi().getHealth()))/2), 50);
         g.setColor(Color.RED);
         g.drawRect(10, 180, 100, 150); // Discard
         g.drawRect(1159, 180, 100, 150); // Deck
@@ -64,7 +72,8 @@ public class MagicStonePanel extends JPanel implements Observer {
         g.setColor(Color.BLACK);
         g.drawString("Discard", 23, 445);
         g.drawString("Deck", 1183, 445);
-        g.drawString("Mana 3/3", (getWidth() / 2) - 40, 555);
+        g.drawString("Mana " + battlefield.getPlayer().getMana() + "/" + battlefield.getPlayer().getMaxMana(),
+                (getWidth() / 2) - 40, 555);
         g.setColor(Color.WHITE);
         g.drawString("Card 1", 117, 615);
         g.drawString("Card 2", 267, 615);
@@ -73,7 +82,8 @@ public class MagicStonePanel extends JPanel implements Observer {
         g.drawString("Card 5", 945, 615);
         g.drawString("Card 6", 1097, 615);
         g.setFont(new Font("TimesRoman", Font.PLAIN, 30));
-        g.drawString("10", (getWidth() / 2) - 17, 670);
+        g.drawString(Integer.toString(battlefield.getPlayer().getHealth()),
+                640 - (g.getFontMetrics().stringWidth(Integer.toString(battlefield.getPlayer().getHealth()))/2), 670);
         g.setColor(Color.BLUE);
         g.drawRect(10, 360, 100, 150); // Discard
         g.drawRect(1159, 360, 100, 150); // Deck
@@ -97,11 +107,44 @@ public class MagicStonePanel extends JPanel implements Observer {
         paintAreas(g);
 //        paintDiscardPile(g);
         paintDeck(g);
+        paintHand(g);
+    }
+
+    /**
+     * paint both players hands
+     * @param g Graphics
+     */
+    private void paintHand(Graphics g) {
+        DeckHand playerHand = magicStoneGame.getBattlefield().getPlayer().getDeckHand();
+        DeckHand aiHand = magicStoneGame.getBattlefield().getAi().getDeckHand();
+        int playerHandSize = playerHand.getDeckHand().size();
+        int aiHandSize = aiHand.getDeckHand().size();
+        CardBack redBack = CardBack.RED_BACK;
+        int xOffset = 150;
+        int i = 0;
+        for (Card c: playerHand.getDeckHand().values()) {
+            EnumCard card = c.getEnumCard();
+            if (i < 3) {
+                g.drawImage(CardTextures.getTexture(card), 100+i*xOffset, 530, 100, 150, this);
+            } else {
+                g.drawImage(CardTextures.getTexture(card), 780+(i-3)*xOffset, 530, 100, 150, this);
+            }
+            i++;
+        }
+        i = 0;
+        for (Card c: aiHand.getDeckHand().values()) {
+            if (i < 3) {
+                g.drawImage(CardBackTextures.getTexture(redBack), 100+i*xOffset, 10, 100, 150, this);
+            } else {
+                g.drawImage(CardBackTextures.getTexture(redBack), 780+(i-3)*xOffset, 10, 100, 150, this);
+            }
+            i++;
+        }
     }
 
     /**
      * paints the deck for both players
-     * @param g
+     * @param g Graphics
      */
     private void paintDeck(Graphics g) {
         int playerCards = magicStoneGame.getBattlefield().getPlayer().getDeck().getDeckList().size();
