@@ -1,6 +1,10 @@
 package nl.rug.oop.cardgame.view;
 
 import nl.rug.oop.cardgame.model.MagicStoneGame;
+import nl.rug.oop.cardgame.model.card.Card;
+import nl.rug.oop.cardgame.model.deck.Deck;
+import nl.rug.oop.cardgame.view.textures.CardBack;
+import nl.rug.oop.cardgame.view.textures.CardBackTextures;
 
 import javax.swing.*;
 import java.awt.*;
@@ -92,7 +96,28 @@ public class MagicStonePanel extends JPanel implements Observer {
         super.paintComponent(g);
         paintAreas(g);
 //        paintDiscardPile(g);
-//        paintDeck(g);
+        paintDeck(g);
+    }
+
+    /**
+     * paints the deck for both players
+     * @param g
+     */
+    private void paintDeck(Graphics g) {
+        int playerCards = magicStoneGame.getBattlefield().getPlayer().getDeck().getDeckList().size();
+        int aiCards = magicStoneGame.getBattlefield().getAi().getDeck().getDeckList().size();
+        CardBack redBack = CardBack.RED_BACK;
+        CardBack blueBack = CardBack.BLUE_BACK;
+        for (int i = 0; i < playerCards; i++) {
+            g.drawImage(CardBackTextures.getTexture(blueBack), 1159, 360, 100 ,150, this);
+        }
+        g.setFont(new Font("TimesRoman", Font.PLAIN, 30));
+        g.setColor(Color.BLACK);
+        g.drawString(Integer.toString(playerCards), 1195, 435);
+        for (int i = 0; i < aiCards; i++) {
+            g.drawImage(CardBackTextures.getTexture(redBack), 1159, 180, 100 ,150, this);
+        }
+        g.drawString(Integer.toString(aiCards), 1195, 255);
     }
 
     @Override

@@ -2,11 +2,13 @@ package nl.rug.oop.cardgame;
 
 import nl.rug.oop.cardgame.model.Battlefield;
 import nl.rug.oop.cardgame.model.hero.Hero;
+import nl.rug.oop.cardgame.view.MagicStoneFrame;
 
 /**
  * Start Game
  */
 public class StartGame {
+
 
     /**
      * Creates a new Battlefield and starts the game
