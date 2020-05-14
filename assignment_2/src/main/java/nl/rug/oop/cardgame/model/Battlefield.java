@@ -7,6 +7,7 @@ import nl.rug.oop.cardgame.model.hero.AIHero;
 import nl.rug.oop.cardgame.model.hero.Hero;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -25,7 +26,7 @@ public class Battlefield {
      */
     public Battlefield() {
         this.player = new Hero("Diego", 100, 0, 0, 1);
-        this.ai = new AIHero("Felix", 10, 0, 0, 1);
+        this.ai = new AIHero("AI", 10, 0, 0, 1);
     }
 
     /**
@@ -82,6 +83,13 @@ public class Battlefield {
         for (int i = 0; i < freePositions.size(); i++) {
             System.out.println(freePositions.get(i) + ")");
         }
+        if(hero instanceof AIHero) {
+            Collections.shuffle(freePositions);
+            hero.getPlayedCreatures().set(freePositions.get(0), creatureCard);
+            hero.getPlayedCreatures().get(freePositions.get(0)).setBattlePosition(freePositions.get(0));
+            System.out.println(freePositions.get(0));
+            return true;
+        }
         while (true) {
             try {
                 position = scanner.nextInt();
@@ -98,7 +106,7 @@ public class Battlefield {
     }
 
     /**
-     * Returns an arra list of free positions on the battlefield for the hero
+     * Returns an array list of free positions on the battlefield for the hero
      * @param hero Hero
      * @return Free Positions
      */
@@ -142,6 +150,7 @@ public class Battlefield {
             }
         }
         hero.getPlayedCreatures().set(position, movingCreature);
+        movingCreature.setBattlePosition(position);
         return true;
     }
 }

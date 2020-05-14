@@ -42,17 +42,17 @@ public class Deck {
         deckList.add(new CreatureCard(EnumCard.CREATURE_DRAGON));
         deckList.add(new CreatureCard(EnumCard.CREATURE_DRAGON));
 
-        deckList.add(new CreatureCard(EnumCard.SPELL_COPYPASTE));
-        deckList.add(new CreatureCard(EnumCard.SPELL_COPYPASTE));
+        deckList.add(new SpellCard(EnumCard.SPELL_COPYPASTE));
+        deckList.add(new SpellCard(EnumCard.SPELL_COPYPASTE));
 
-        deckList.add(new CreatureCard(EnumCard.SPELL_INSTANTDAMAGE));
-        deckList.add(new CreatureCard(EnumCard.SPELL_INSTANTDAMAGE));
+        deckList.add(new SpellCard(EnumCard.SPELL_INSTANTDAMAGE));
+        deckList.add(new SpellCard(EnumCard.SPELL_INSTANTDAMAGE));
 
-        deckList.add(new CreatureCard(EnumCard.SPELL_INSTANTDRAW));
-        deckList.add(new CreatureCard(EnumCard.SPELL_INSTANTDRAW));
+        deckList.add(new SpellCard(EnumCard.SPELL_INSTANTDRAW));
+        deckList.add(new SpellCard(EnumCard.SPELL_INSTANTDRAW));
 
-        deckList.add(new CreatureCard(EnumCard.SPELL_COPYPASTE));
-        deckList.add(new CreatureCard(EnumCard.SPELL_COPYPASTE));
+        deckList.add(new SpellCard(EnumCard.SPELL_COPYPASTE));
+        deckList.add(new SpellCard(EnumCard.SPELL_COPYPASTE));
 
         Collections.shuffle(deckList);
     }

@@ -16,6 +16,7 @@ public class CreatureCard extends Card implements Attackable {
     private int creatureAttack;
     private int creatureHealth;
     private boolean used;
+    private int battlePosition = -1;
 
     /**
      * Create a creature card
@@ -100,7 +101,9 @@ public class CreatureCard extends Card implements Attackable {
     public void checkDeath(Hero hero, int index) {
         if (this.getHealth() <= 0) {
             System.out.println(this.getName() + " has died in combat");
+            System.out.println(index);
             hero.getPlayedCreatures().set(index, null);
+            this.setBattlePosition(-1);
         }
     }
 }

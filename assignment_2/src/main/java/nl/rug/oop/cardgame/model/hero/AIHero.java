@@ -67,17 +67,16 @@ public class AIHero extends Hero {
     public void attackPhase(Battlefield battlefield) {
         ArrayList<CreatureCard> creatures = getPlayedCreatures();
         if (creatures.size() == 0) System.out.println("AI has no creatures to attack with");
-        int i = 0;
         for (CreatureCard c: creatures) {
-            if(c != null && !c.isUsed()) {
+            if(c != null && !c.isUsed() && c.getBattlePosition() != -1) {
                 System.out.println("AI attack you with " + c.getName());
-                CreatureCard attackedCreature = battlefield.getPlayer().getPlayedCreatures().get(i);
+                CreatureCard attackedCreature = battlefield.getPlayer().getPlayedCreatures().get(c.getBattlePosition());
                 if (attackedCreature == null) c.attack(battlefield.getPlayer());
                 else c.attack(attackedCreature);
-                attackedCreature.checkDeath(battlefield.getPlayer(), i);
-                c.checkDeath(this, i);
+                if(attackedCreature != null) attackedCreature.checkDeath(battlefield.getAi(),
+                        attackedCreature.getBattlePosition());
+                c.checkDeath(battlefield.getAi(), c.getBattlePosition());
             }
-            i++;
         }
     }
 
