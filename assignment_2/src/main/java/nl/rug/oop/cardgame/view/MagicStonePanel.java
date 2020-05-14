@@ -128,6 +128,11 @@ public class MagicStonePanel extends JPanel implements Observer {
             }
             EnumCard card = c.getEnumCard();
             g.drawImage(CardTextures.getTexture(card), 140+i*xOffset, 380, 90, 135, this);
+            String attackAndHealth = c.getAttack() + "/" + c.getHealth();
+            g.setFont(new Font("TimesRoman", Font.BOLD, 8));
+            g.setColor(Color.BLACK);
+            g.drawString(attackAndHealth, 140+i*xOffset+81-g.getFontMetrics().stringWidth(attackAndHealth),
+                    508);
             i++;
         }
         i = 0;
@@ -138,6 +143,11 @@ public class MagicStonePanel extends JPanel implements Observer {
             }
             EnumCard card = c.getEnumCard();
             g.drawImage(CardTextures.getTexture(card), 140+i*xOffset, 200, 90, 135, this);
+            String attackAndHealth = c.getAttack() + "/" + c.getHealth();
+            g.setFont(new Font("TimesRoman", Font.BOLD, 8));
+            g.setColor(Color.BLACK);
+            g.drawString(attackAndHealth, 140+i*xOffset+81-g.getFontMetrics().stringWidth(attackAndHealth),
+                    328);
             i++;
         }
     }
