@@ -26,26 +26,31 @@ public class MagicStonePanel extends JPanel implements Observer {
         g.fillArc(540, -100, 200, 200, 180, 180); // AI Arc
         g.setFont(new Font("TimesRoman", Font.PLAIN, 20));
         g.setColor(Color.BLACK);
-        g.drawString("Discard", 23, 90);
-        g.drawString("Deck", 1183, 90);
+        g.drawString("Discard", 23, 263);
+        g.drawString("Deck", 1183, 263);
+        g.drawString("Mana 1/3", (getWidth() / 2) - 40, 158);
         g.setColor(Color.WHITE);
-        g.drawString("Card 1", 267, 90);
-        g.drawString("Card 2", 417, 90);
-        g.drawString("Card 3", 795, 90);
-        g.drawString("Card 4", 945, 90);
+        g.drawString("Card 1", 117, 90);
+        g.drawString("Card 2", 267, 90);
+        g.drawString("Card 3", 417, 90);
+        g.drawString("Card 4", 795, 90);
+        g.drawString("Card 5", 945, 90);
+        g.drawString("Card 6", 1097, 90);
         g.setFont(new Font("TimesRoman", Font.PLAIN, 30));
         g.drawString("5", (getWidth() / 2) - 5, 50);
         g.setColor(Color.RED);
-        g.drawRect(10, 10, 100, 150); // Discard
-        g.drawRect(1159, 10, 100, 150); // Deck
-        g.drawRect(250, 10, 100, 150); // Card 1
-        g.drawRect(400, 10, 100, 150); // Card 2
-        g.drawRect(780, 10, 100, 150); // Card 3
-        g.drawRect(930, 10, 100, 150); // Card 4
+        g.drawRect(10, 180, 100, 150); // Discard
+        g.drawRect(1159, 180, 100, 150); // Deck
+        g.drawRect(100, 10, 100, 150); // Card 1
+        g.drawRect(250, 10, 100, 150); // Card 2
+        g.drawRect(400, 10, 100, 150); // Card 3
+        g.drawRect(780, 10, 100, 150); // Card 4
+        g.drawRect(930, 10, 100, 150); // Card 5
+        g.drawRect(1080, 10, 100, 150); // Card 6
         g.drawRect(140, 200, 75, 112); // Played Card 1
-        g.drawRect(337, 200, 75, 112); // Played Card 2
+        g.drawRect(370, 200, 75, 112); // Played Card 2
         g.drawRect(605, 200, 75, 112); // Played Card 3
-        g.drawRect(870, 200, 75, 112); // Played Card 4
+        g.drawRect(830, 200, 75, 112); // Played Card 4
         g.drawRect(1058, 200, 75, 112); // Played Card 5
 
         g.setColor(Color.BLUE);
@@ -53,26 +58,31 @@ public class MagicStonePanel extends JPanel implements Observer {
         g.fillArc(540, 590, 200, 200, 0, 180); // Player Arc
         g.setFont(new Font("TimesRoman", Font.PLAIN, 20));
         g.setColor(Color.BLACK);
-        g.drawString("Discard", 23, 615);
-        g.drawString("Deck", 1183, 615);
+        g.drawString("Discard", 23, 445);
+        g.drawString("Deck", 1183, 445);
+        g.drawString("Mana 3/3", (getWidth() / 2) - 40, 555);
         g.setColor(Color.WHITE);
-        g.drawString("Card 1", 267, 615);
-        g.drawString("Card 2", 417, 615);
-        g.drawString("Card 3", 795, 615);
-        g.drawString("Card 4", 945, 615);
+        g.drawString("Card 1", 117, 615);
+        g.drawString("Card 2", 267, 615);
+        g.drawString("Card 3", 417, 615);
+        g.drawString("Card 4", 795, 615);
+        g.drawString("Card 5", 945, 615);
+        g.drawString("Card 6", 1097, 615);
         g.setFont(new Font("TimesRoman", Font.PLAIN, 30));
         g.drawString("10", (getWidth() / 2) - 17, 670);
-        g.setColor(Color.RED);
-        g.drawRect(10, 530, 100, 150); // Discard
-        g.drawRect(1159, 530, 100, 150); // Deck
-        g.drawRect(250, 530, 100, 150); // Card 1
-        g.drawRect(400, 530, 100, 150); // Card 2
-        g.drawRect(780, 530, 100, 150); // Card 3
-        g.drawRect(930, 530, 100, 150); // Card 4
+        g.setColor(Color.BLUE);
+        g.drawRect(10, 360, 100, 150); // Discard
+        g.drawRect(1159, 360, 100, 150); // Deck
+        g.drawRect(100, 530, 100, 150); // Card 1
+        g.drawRect(250, 530, 100, 150); // Card 2
+        g.drawRect(400, 530, 100, 150); // Card 3
+        g.drawRect(780, 530, 100, 150); // Card 4
+        g.drawRect(930, 530, 100, 150); // Card 5
+        g.drawRect(1080, 530, 100, 150); // Card 6
         g.drawRect(140, 380, 75, 112); // Played Card 1
-        g.drawRect(337, 380, 75, 112); // Played Card 2
+        g.drawRect(370, 380, 75, 112); // Played Card 2
         g.drawRect(605, 380, 75, 112); // Played Card 3
-        g.drawRect(870, 380, 75, 112); // Played Card 4
+        g.drawRect(830, 380, 75, 112); // Played Card 4
         g.drawRect(1058, 380, 75, 112); // Played Card 5
     }
 

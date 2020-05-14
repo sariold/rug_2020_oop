@@ -13,10 +13,10 @@ public class Main {
      * @param args Args
      */
     public static void main(String[] args) {
-//        MagicStoneGame magicStoneGame = new MagicStoneGame();
-//        new MagicStoneFrame(magicStoneGame);
+        MagicStoneGame magicStoneGame = new MagicStoneGame();
+        new MagicStoneFrame(magicStoneGame);
 
-        StartGame startGame = new StartGame();
+//        StartGame startGame = new StartGame();
 
     }
 }
