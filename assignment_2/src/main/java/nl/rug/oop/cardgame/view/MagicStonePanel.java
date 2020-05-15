@@ -27,24 +27,6 @@ public class MagicStonePanel extends JPanel implements Observer {
         setOpaque(true);
     }
 
-    private int movableX;
-    private int movableY;
-
-    /**
-     * Get the number of pixels in X this card has been moved
-     */
-    public int getMovableX() {
-        return movableX;
-    }
-
-    /**
-     * Get the number of pixels in Y this card has been moved
-     */
-    public int getMovableY() {
-        return movableY;
-    }
-
-
     private void paintAreas(Graphics g) {
         g.setFont(new Font("TimesRoman", Font.PLAIN, 20));
         g.setColor(Color.WHITE);
