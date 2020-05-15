@@ -247,13 +247,13 @@ public class MagicStonePanel extends JPanel implements Observer {
         int aiCards = magicStoneGame.getBattlefield().getAi().getDeck().getDeckList().size();
         CardBack redBack = CardBack.RED_BACK;
         CardBack blueBack = CardBack.BLUE_BACK;
-        for (int i = 0; i < playerCards; i++) {
+        if (playerCards > 0) {
             g.drawImage(CardBackTextures.getTexture(blueBack), 1159, 360, 100 ,150, this);
         }
         g.setFont(new Font("TimesRoman", Font.PLAIN, 30));
         g.setColor(Color.BLACK);
         g.drawString(Integer.toString(playerCards), 1190, 440);
-        for (int i = 0; i < aiCards; i++) {
+        if (aiCards > 0) {
             g.drawImage(CardBackTextures.getTexture(redBack), 1159, 180, 100 ,150, this);
         }
         g.drawString(Integer.toString(aiCards), 1190, 260);
