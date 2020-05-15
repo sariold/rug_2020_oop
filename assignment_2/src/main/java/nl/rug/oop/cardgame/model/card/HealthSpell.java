@@ -1,16 +1,16 @@
 package nl.rug.oop.cardgame.model.card;
 
+import lombok.Data;
 import nl.rug.oop.cardgame.model.Battlefield;
 import nl.rug.oop.cardgame.model.hero.Hero;
 
+@Data
 public class HealthSpell extends SpellCard {
 
-    private final int value;
     private final String type;
 
     public HealthSpell(EnumCard enumCard) {
         super(enumCard);
-        this.value = enumCard.getValue();
         this.type = enumCard.getFace().toString();
     }
 
@@ -20,7 +20,7 @@ public class HealthSpell extends SpellCard {
         Hero ai = battlefield.getAi();
         Hero target;
         boolean heal = this.type.equals("INSTANTHEALTH");
-        int dealValue = this.value;
+        int dealValue = this.getEnumCard().getValue();
         if(!heal) dealValue *= -1;
         if(hero == 0) {
             if(heal) target = player;

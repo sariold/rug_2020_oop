@@ -7,10 +7,10 @@ public enum EnumCard {
     CREATURE_WEREWOLF   (Type.CREATURE, Face.WEREWOLF, 3, 3, 3),
     CREATURE_DRAGON     (Type.CREATURE, Face.DRAGON, 4, 4, 4),
 
-    SPELL_INSTANTDRAW   (Type.SPELL, Face.INSTANTDRAW, 4),
+    SPELL_INSTANTDRAW   (Type.SPELL, Face.INSTANTDRAW, 4, 2),
     SPELL_INSTANTHEALTH (Type.SPELL, Face.INSTANTHEALTH, 3, 3),
     SPELL_INSTANTDAMAGE (Type.SPELL, Face.INSTANTDAMAGE, 5, 3),
-    SPELL_COPYPASTE     (Type.SPELL, Face.COPYPASTE, 4);
+    SPELL_COPYPASTE     (Type.SPELL, Face.COPYPASTE, 4, 1);
 
     private final Type type;
     private final Face face;
@@ -24,12 +24,6 @@ public enum EnumCard {
         this.face = face;
         this.health = health;
         this.attack = attack;
-        this.cost = cost;
-    }
-
-    EnumCard(Type type, Face face, int cost) {
-        this.type = type;
-        this.face = face;
         this.cost = cost;
     }
 

@@ -1,7 +1,9 @@
 package nl.rug.oop.cardgame.model.card;
 
+import lombok.Data;
 import nl.rug.oop.cardgame.model.Battlefield;
 
+@Data
 public class DrawSpell extends SpellCard {
 
     public DrawSpell(EnumCard enumCard) {

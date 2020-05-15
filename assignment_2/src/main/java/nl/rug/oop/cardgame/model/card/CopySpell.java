@@ -1,5 +1,6 @@
 package nl.rug.oop.cardgame.model.card;
 
+import lombok.Data;
 import nl.rug.oop.cardgame.interfaces.Targetting;
 import nl.rug.oop.cardgame.model.Battlefield;
 import nl.rug.oop.cardgame.model.hero.AIHero;
@@ -10,6 +11,7 @@ import java.util.Collections;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+@Data
 public class CopySpell extends SpellCard implements Targetting {
 
     public CopySpell(EnumCard enumCard) {

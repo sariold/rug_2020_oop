@@ -2,6 +2,7 @@ package nl.rug.oop.cardgame.view.textures;
 
 import nl.rug.oop.cardgame.model.card.EnumCard;
 
+import java.awt.*;
 import java.util.EnumMap;
 
 import java.io.File;
@@ -10,6 +11,7 @@ import java.io.IOException;
 import java.awt.image.BufferedImage;
 
 import javax.imageio.ImageIO;
+import javax.swing.*;
 
 /**
  * For each card in a 54 card deck, this class loads a texture. It does so

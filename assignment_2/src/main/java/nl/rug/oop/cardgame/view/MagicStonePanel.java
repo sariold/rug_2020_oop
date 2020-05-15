@@ -5,6 +5,7 @@ import nl.rug.oop.cardgame.model.MagicStoneGame;
 import nl.rug.oop.cardgame.model.card.Card;
 import nl.rug.oop.cardgame.model.card.CreatureCard;
 import nl.rug.oop.cardgame.model.card.EnumCard;
+import nl.rug.oop.cardgame.model.card.SpellCard;
 import nl.rug.oop.cardgame.model.deck.Deck;
 import nl.rug.oop.cardgame.model.deck.DeckHand;
 import nl.rug.oop.cardgame.view.textures.CardBack;
@@ -128,10 +129,10 @@ public class MagicStonePanel extends JPanel implements Observer {
             EnumCard card = c.getEnumCard();
             g.drawImage(CardTextures.getTexture(card), 140+i*xOffset, 360, 90, 135, this);
             String attackAndHealth = c.getAttack() + "/" + c.getHealth();
-            g.setFont(new Font("TimesRoman", Font.BOLD, 8));
+            g.setFont(new Font("TimesRoman", Font.BOLD, 15));
             g.setColor(Color.BLACK);
             g.drawString(attackAndHealth, 140+i*xOffset+81-g.getFontMetrics().stringWidth(attackAndHealth),
-                    507);
+                    512);
             i++;
         }
         i = 0;
@@ -143,16 +144,16 @@ public class MagicStonePanel extends JPanel implements Observer {
             EnumCard card = c.getEnumCard();
             g.drawImage(CardTextures.getTexture(card), 140+i*xOffset, 194, 90, 135, this);
             String attackAndHealth = c.getAttack() + "/" + c.getHealth();
-            g.setFont(new Font("TimesRoman", Font.BOLD, 8));
+            g.setFont(new Font("TimesRoman", Font.BOLD, 15));
             g.setColor(Color.BLACK);
             g.drawString(attackAndHealth, 140+i*xOffset+81-g.getFontMetrics().stringWidth(attackAndHealth),
-                    327);
+                    190);
             i++;
         }
     }
 
     /**
-     * paint both players hands
+     * Ppaint both players hands
      * @param g Graphics
      */
     private void paintHand(Graphics g) {
@@ -174,9 +175,13 @@ public class MagicStonePanel extends JPanel implements Observer {
             }
             if (c instanceof CreatureCard) {
                 String attackAndHealth = ((CreatureCard)c).getAttack() + "/" + ((CreatureCard)c).getHealth();
-                g.setFont(new Font("TimesRoman", Font.BOLD, 8));
+                g.setFont(new Font("TimesRoman", Font.BOLD, 15));
                 g.setColor(Color.BLACK);
-                g.drawString(attackAndHealth, x+90-g.getFontMetrics().stringWidth(attackAndHealth),
+                g.drawString(attackAndHealth, x+130-g.getFontMetrics().stringWidth(attackAndHealth),
+                        670);
+            } else {
+                String value = String.valueOf(((SpellCard) c ).getEnumCard().getValue());
+                g.drawString(value, x+130-g.getFontMetrics().stringWidth(value),
                         670);
             }
             i++;
