@@ -196,6 +196,7 @@ public class Hero implements Attackable {
                 } catch (Exception e) {
                     System.out.println("NOT VALID INPUT!");
                 }
+                battlefield.removeDead(this);
                 frame.update(frame.getGraphics());
             }
         } else System.out.println("Either you have no creatures or you just placed them down!");

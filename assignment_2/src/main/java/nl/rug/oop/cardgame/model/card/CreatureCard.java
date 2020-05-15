@@ -53,9 +53,11 @@ public class CreatureCard extends Card implements Attackable {
      */
     @Override
     public void attack(Attackable attackable) {
-        attackable.setHealth(attackable.getHealth() - this.getAttack());
-        this.setHealth(this.getHealth() - attackable.getAttack());
-        this.setUsed(true);
+        if(!this.isUsed()) {
+            attackable.setHealth(attackable.getHealth() - this.getAttack());
+            this.setHealth(this.getHealth() - attackable.getAttack());
+            this.setUsed(true);
+        }
     }
 
     /**
@@ -99,7 +101,7 @@ public class CreatureCard extends Card implements Attackable {
      * @param index Index in played creatures array list
      */
     public void checkDeath(Hero hero, int index) {
-        if (this.getHealth() <= 0) {
+        if (this.getCreatureHealth() <= 0) {
             System.out.println(this.getName() + " has died in combat");
             System.out.println(index);
             hero.getPlayedCreatures().set(index, null);
