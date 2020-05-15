@@ -21,7 +21,7 @@ public class DrawSpell extends SpellCard {
                     battlefield.getPlayer().getDeckHand().addCard(card);
                 }
             }
-            return true;
+            return super.play(battlefield, hero);
         }
         for (int i = 0; i < 2; i++) {
             Card card = battlefield.getAi().getDeck().drawCard();
@@ -30,7 +30,7 @@ public class DrawSpell extends SpellCard {
                 battlefield.getAi().getDeckHand().addCard(card);
             }
         }
-        return true;
+        return super.play(battlefield, hero);
     }
 
 

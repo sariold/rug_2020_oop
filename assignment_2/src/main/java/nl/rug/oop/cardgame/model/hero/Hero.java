@@ -5,8 +5,10 @@ import nl.rug.oop.cardgame.model.Battlefield;
 import nl.rug.oop.cardgame.model.card.Card;
 import nl.rug.oop.cardgame.model.card.CreatureCard;
 import nl.rug.oop.cardgame.interfaces.Attackable;
+import nl.rug.oop.cardgame.model.card.SpellCard;
 import nl.rug.oop.cardgame.model.deck.Deck;
 import nl.rug.oop.cardgame.model.deck.DeckHand;
+import nl.rug.oop.cardgame.model.deck.DiscardDeck;
 import nl.rug.oop.cardgame.view.MagicStoneFrame;
 
 import java.util.ArrayList;
@@ -26,6 +28,7 @@ public class Hero implements Attackable {
     protected int heroAttack;
     protected Deck deck;
     protected DeckHand deckHand;
+    protected DiscardDeck discardDeck;
     protected ArrayList<CreatureCard> playedCreatures;
 
     /**
@@ -40,6 +43,7 @@ public class Hero implements Attackable {
         this.name = playerName;
         this.deck = new Deck();
         this.deckHand = new DeckHand();
+        this.discardDeck = new DiscardDeck();
         this.mana = mana;
         this.maxMana = maxMana;
         this.heroHealth = heroHealth;
@@ -120,7 +124,7 @@ public class Hero implements Attackable {
                     this.playCard(battlefield, frame);
                     break;
                 case 2:
-                    this.getDeckHand().discardCard();
+                    this.getDeckHand().discardCard(this.getDiscardDeck());
                     frame.update(frame.getGraphics());
                     break;
                 case 3:

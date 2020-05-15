@@ -22,7 +22,7 @@ public class CopySpell extends SpellCard implements Targetting {
     public boolean play(Battlefield battlefield, int hero) {
         Hero targetHero = (hero == 0 ? battlefield.getPlayer() : battlefield.getAi());
         target(battlefield, targetHero);
-        return true;
+        return super.play(battlefield, hero);
     }
 
     @Override

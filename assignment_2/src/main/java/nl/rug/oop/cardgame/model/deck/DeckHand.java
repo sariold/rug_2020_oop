@@ -49,8 +49,9 @@ public class DeckHand {
 
     /**
      * Removes a card from player's deck hand
+     * @param discardDeck
      */
-    public void discardCard() {
+    public void discardCard(DiscardDeck discardDeck) {
         if(this.deckHand.size() > 0) {
             Scanner scanner = new Scanner(System.in);
             viewHand();
@@ -60,7 +61,9 @@ public class DeckHand {
             while (start) {
                 try {
                     currentMove = scanner.nextInt();
+                    Card discarded = this.deckHand.get(currentMove);
                     this.deckHand.remove(currentMove);
+                    discardDeck.discard(discarded);
                     start = false;
                 } catch (Exception e) {
                     System.out.println("NOT VALID INPUT!");

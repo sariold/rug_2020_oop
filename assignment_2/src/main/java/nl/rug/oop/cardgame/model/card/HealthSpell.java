@@ -31,7 +31,7 @@ public class HealthSpell extends SpellCard {
             else target = player;
         }
         target.setHeroHealth(target.getHealth() + dealValue);
-        return true;
+        return super.play(battlefield, hero);
     }
 
 

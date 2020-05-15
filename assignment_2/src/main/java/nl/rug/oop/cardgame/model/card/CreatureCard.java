@@ -104,6 +104,7 @@ public class CreatureCard extends Card implements Attackable {
             System.out.println(index);
             hero.getPlayedCreatures().set(index, null);
             this.setBattlePosition(-1);
+            hero.getDiscardDeck().discard(this);
         }
     }
 }

@@ -2,6 +2,8 @@ package nl.rug.oop.cardgame.model.card;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import nl.rug.oop.cardgame.model.Battlefield;
+import nl.rug.oop.cardgame.model.hero.Hero;
 
 /**
  * Spell card
@@ -18,4 +20,10 @@ public abstract class SpellCard extends Card {
         super(enumCard);
     }
 
+    @Override
+    public boolean play(Battlefield battlefield, int heroIndex) {
+        Hero hero = (heroIndex == 0? battlefield.getPlayer() : battlefield.getAi());
+        hero.getDiscardDeck().discard(this);
+        return true;
+    }
 }
