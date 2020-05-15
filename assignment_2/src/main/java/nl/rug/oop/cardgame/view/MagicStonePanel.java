@@ -9,6 +9,8 @@ import nl.rug.oop.cardgame.model.card.SpellCard;
 import nl.rug.oop.cardgame.model.deck.Deck;
 import nl.rug.oop.cardgame.model.deck.DeckHand;
 import nl.rug.oop.cardgame.model.deck.DiscardDeck;
+import nl.rug.oop.cardgame.model.hero.AIHero;
+import nl.rug.oop.cardgame.model.hero.Hero;
 import nl.rug.oop.cardgame.view.textures.*;
 
 import javax.swing.*;
@@ -17,6 +19,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.concurrent.TimeUnit;
 
 public class MagicStonePanel extends JPanel implements Observer {
 
@@ -61,7 +64,6 @@ public class MagicStonePanel extends JPanel implements Observer {
         g.drawString("Card 4", 795, 615);
         g.drawString("Card 5", 945, 615);
         g.drawString("Card 6", 1097, 615);
-
         g.drawRect(10, 360, 100, 150); // Discard
         g.drawRect(1159, 360, 100, 150); // Deck
         g.drawRect(100, 530, 100, 150); // Card 1
@@ -86,6 +88,25 @@ public class MagicStonePanel extends JPanel implements Observer {
         paintDeck(g);
         paintHand(g);
         paintBattlefield(g);
+    }
+
+    public void animateAttack(Graphics g, int attackIndex, Hero hero) {
+
+        if (hero instanceof AIHero) {
+            g.drawImage(CombatTextures.getTexture(CombatEnum.REVERSE_SWORD), 140+attackIndex*200, 194, 90, 135, this);
+            try {
+                TimeUnit.MILLISECONDS.sleep(800);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        } else {
+            g.drawImage(CombatTextures.getTexture(CombatEnum.SWORD), 140+attackIndex*200, 360, 90, 135, this);
+            try {
+                TimeUnit.MILLISECONDS.sleep(800);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     /**
@@ -216,7 +237,7 @@ public class MagicStonePanel extends JPanel implements Observer {
             }
             g.setColor(Color.GREEN);
             if (c.getCost() <= manaPlayer) g.drawRect(x,530, 100, 150);
-            g.setColor(Color.WHITE);
+            g.setColor(Color.BLACK);
             if (c instanceof CreatureCard) {
                 String attackAndHealth = ((CreatureCard)c).getAttack() + "/" + ((CreatureCard)c).getHealth();
                 g.setColor(Color.BLACK);

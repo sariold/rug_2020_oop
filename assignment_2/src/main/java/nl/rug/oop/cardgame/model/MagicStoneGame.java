@@ -3,6 +3,7 @@ package nl.rug.oop.cardgame.model;
 import lombok.Data;
 import nl.rug.oop.cardgame.model.hero.Hero;
 import nl.rug.oop.cardgame.view.MagicStoneFrame;
+import nl.rug.oop.cardgame.view.MagicStonePanel;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -21,15 +22,15 @@ public class MagicStoneGame extends Observable implements Observer {
      * Starts the actual turn based game
      * @param battlefield Playing board
      */
-    public void startGame(Battlefield battlefield, MagicStoneFrame frame) {
-        turnRotation(battlefield, frame);
+    public void startGame(Battlefield battlefield, MagicStoneFrame frame, MagicStonePanel panel) {
+        turnRotation(battlefield, frame, panel);
     }
 
     /**
      * Rotates the turns
      * @param battlefield Playing board
      */
-    public void turnRotation(Battlefield battlefield, MagicStoneFrame frame) {
+    public void turnRotation(Battlefield battlefield, MagicStoneFrame frame, MagicStonePanel panel) {
         Hero player = battlefield.getPlayer();
         Hero ai = battlefield.getAi();
         boolean start = true;
@@ -44,14 +45,14 @@ public class MagicStoneGame extends Observable implements Observer {
                 battlefield.incMana(player);
                 player.setMana(player.getMaxMana());
                 frame.update(frame.getGraphics());
-                player.takeTurn(battlefield, frame);
+                player.takeTurn(battlefield, frame, panel);
                 frame.update(frame.getGraphics());
             }
             else {
                 resetUsedCreatures(ai);
                 battlefield.incMana(ai);
                 ai.setMana(ai.getMaxMana());
-                ai.takeTurn(battlefield, frame);
+                ai.takeTurn(battlefield, frame, panel);
                 battlefield.setPlayerTurn(true);
             }
             endGameCheck(battlefield);

@@ -10,6 +10,7 @@ import nl.rug.oop.cardgame.model.deck.Deck;
 import nl.rug.oop.cardgame.model.deck.DeckHand;
 import nl.rug.oop.cardgame.model.deck.DiscardDeck;
 import nl.rug.oop.cardgame.view.MagicStoneFrame;
+import nl.rug.oop.cardgame.view.MagicStonePanel;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
@@ -91,7 +92,7 @@ public class Hero implements Attackable {
      * Present the player with game options
      * @param battlefield Playing board
      */
-    public void takeTurn(Battlefield battlefield, MagicStoneFrame frame) {
+    public void takeTurn(Battlefield battlefield, MagicStoneFrame frame, MagicStonePanel panel) {
         Scanner scanner = new Scanner(System.in);
         boolean start = true;
         int currentMove = 0;
@@ -128,7 +129,7 @@ public class Hero implements Attackable {
                     frame.update(frame.getGraphics());
                     break;
                 case 3:
-                    attackPhase(battlefield, frame);
+                    attackPhase(battlefield, frame, panel);
                     battlefield.setPlayerTurn(false);
                     start = false;
                     break;
@@ -174,7 +175,7 @@ public class Hero implements Attackable {
      * Attack enemy Hero
      * @param battlefield Battlefield
      */
-    public void attackPhase(Battlefield battlefield, MagicStoneFrame frame) {
+    public void attackPhase(Battlefield battlefield, MagicStoneFrame frame, MagicStonePanel panel) {
         if(this.untappedCreatures()) {
             Scanner scanner = new Scanner(System.in);
             boolean start = true;
@@ -190,6 +191,7 @@ public class Hero implements Attackable {
                     if (attackingCreature == null) continue;
                     if (attackedCreature == null) attackingCreature.attack(battlefield.getAi());
                     else attackingCreature.attack(attackedCreature);
+                    panel.animateAttack(frame.getGraphics(), currentMove, this);
                     attackingCreature.checkDeath(this, attackingCreature.getBattlePosition());
                     attackedCreature.checkDeath(battlefield.getAi(), attackedCreature.getBattlePosition());
                     attackingCreature.setUsed(true);

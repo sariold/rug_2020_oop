@@ -4,6 +4,7 @@ import nl.rug.oop.cardgame.model.Battlefield;
 import nl.rug.oop.cardgame.model.card.Card;
 import nl.rug.oop.cardgame.model.card.CreatureCard;
 import nl.rug.oop.cardgame.view.MagicStoneFrame;
+import nl.rug.oop.cardgame.view.MagicStonePanel;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -30,7 +31,7 @@ public class AIHero extends Hero {
      * @param battlefield Playing board
      */
     @Override
-    public void takeTurn(Battlefield battlefield, MagicStoneFrame frame) {
+    public void takeTurn(Battlefield battlefield, MagicStoneFrame frame, MagicStonePanel panel) {
         System.out.println(this.name + "'s TURN!");
         Card card = this.getDeck().drawCard();
         if(card != null) {
@@ -59,7 +60,7 @@ public class AIHero extends Hero {
                 }
             }
         } else System.out.println("AI has no cards in hand");
-        attackPhase(battlefield, frame);
+        attackPhase(battlefield, frame, panel);
     }
 
     /**
@@ -67,7 +68,7 @@ public class AIHero extends Hero {
      * @param battlefield Battlefield
      */
     @Override
-    public void attackPhase(Battlefield battlefield, MagicStoneFrame frame) {
+    public void attackPhase(Battlefield battlefield, MagicStoneFrame frame, MagicStonePanel panel) {
         ArrayList<CreatureCard> creatures = getPlayedCreatures();
         if (creatures.size() == 0) System.out.println("AI has no creatures to attack with");
         for (CreatureCard c: creatures) {
@@ -78,6 +79,7 @@ public class AIHero extends Hero {
                 else c.attack(attackedCreature);
                 if(attackedCreature != null) attackedCreature.checkDeath(battlefield.getPlayer(),
                         attackedCreature.getBattlePosition());
+                panel.animateAttack(frame.getGraphics(), c.getBattlePosition(), this);
                 c.checkDeath(battlefield.getAi(), c.getBattlePosition());
                 battlefield.removeDead(this);
                 frame.update(frame.getGraphics());
