@@ -79,6 +79,7 @@ public class AIHero extends Hero {
                 if(attackedCreature != null) attackedCreature.checkDeath(battlefield.getPlayer(),
                         attackedCreature.getBattlePosition());
                 c.checkDeath(battlefield.getAi(), c.getBattlePosition());
+                battlefield.removeDead(this);
                 frame.update(frame.getGraphics());
             }
         }

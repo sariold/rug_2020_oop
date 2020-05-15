@@ -154,4 +154,15 @@ public class Battlefield {
         movingCreature.setBattlePosition(position);
         return true;
     }
+
+    public void removeDead(Hero hero) {
+        for(int i = 0; i < hero.getPlayedCreatures().size(); i++) {
+            if(hero.getPlayedCreatures().get(i) != null) {
+                if(hero.getPlayedCreatures().get(i).getCreatureHealth() < 1) {
+                    hero.getPlayedCreatures().get(i).setBattlePosition(-1);
+                    hero.getPlayedCreatures().set(i, null);
+                }
+            }
+        }
+    }
 }
