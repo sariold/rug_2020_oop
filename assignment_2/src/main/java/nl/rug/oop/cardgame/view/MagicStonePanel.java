@@ -8,6 +8,7 @@ import nl.rug.oop.cardgame.model.card.EnumCard;
 import nl.rug.oop.cardgame.model.card.SpellCard;
 import nl.rug.oop.cardgame.model.deck.Deck;
 import nl.rug.oop.cardgame.model.deck.DeckHand;
+import nl.rug.oop.cardgame.model.deck.DiscardDeck;
 import nl.rug.oop.cardgame.view.textures.*;
 
 import javax.swing.*;
@@ -81,10 +82,27 @@ public class MagicStonePanel extends JPanel implements Observer {
         super.paintComponent(g);
         paintAreas(g);
         paintHeros(g);
-//        paintDiscardPile(g);
+        paintDiscardPile(g);
         paintDeck(g);
         paintHand(g);
         paintBattlefield(g);
+    }
+
+    /**
+     * Paint the discard piles
+     * @param g Graphics
+     */
+    private void paintDiscardPile(Graphics g) {
+        ArrayList<Card> playerDiscardPile = magicStoneGame.getBattlefield().getPlayer().getDiscardDeck().getDicardPile();
+        ArrayList<Card> aiDiscardPile = magicStoneGame.getBattlefield().getAi().getDiscardDeck().getDicardPile();
+        if (playerDiscardPile.size() > 0) {
+            g.drawImage(CardTextures.getTexture(playerDiscardPile.get(playerDiscardPile.size()-1).getEnumCard()),
+                    10,360, 100, 150, this);
+        }
+        if (aiDiscardPile.size() > 0) {
+            g.drawImage(CardTextures.getTexture(aiDiscardPile.get(aiDiscardPile.size()-1).getEnumCard()),
+                    10,180, 100, 150, this);
+        }
     }
 
     /**
