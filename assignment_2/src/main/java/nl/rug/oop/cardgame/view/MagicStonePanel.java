@@ -5,22 +5,18 @@ import nl.rug.oop.cardgame.model.MagicStoneGame;
 import nl.rug.oop.cardgame.model.card.Card;
 import nl.rug.oop.cardgame.model.card.CreatureCard;
 import nl.rug.oop.cardgame.model.card.EnumCard;
-import nl.rug.oop.cardgame.model.card.SpellCard;
-import nl.rug.oop.cardgame.model.deck.Deck;
 import nl.rug.oop.cardgame.model.deck.DeckHand;
-import nl.rug.oop.cardgame.model.deck.DiscardDeck;
 import nl.rug.oop.cardgame.view.textures.*;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
 public class MagicStonePanel extends JPanel implements Observer {
 
-    private MagicStoneGame magicStoneGame;
+    private final MagicStoneGame magicStoneGame;
     private static final Color BACKGROUND_COLOR = new Color(0xa3, 0xa3, 0xa3);
 
     public MagicStonePanel(MagicStoneGame magicStoneGame) {
@@ -30,6 +26,24 @@ public class MagicStonePanel extends JPanel implements Observer {
         setVisible(true);
         setOpaque(true);
     }
+
+    private int movableX;
+    private int movableY;
+
+    /**
+     * Get the number of pixels in X this card has been moved
+     */
+    public int getMovableX() {
+        return movableX;
+    }
+
+    /**
+     * Get the number of pixels in Y this card has been moved
+     */
+    public int getMovableY() {
+        return movableY;
+    }
+
 
     private void paintAreas(Graphics g) {
         g.setFont(new Font("TimesRoman", Font.PLAIN, 20));
@@ -90,23 +104,25 @@ public class MagicStonePanel extends JPanel implements Observer {
 
     /**
      * Paint the discard piles
+     *
      * @param g Graphics
      */
     private void paintDiscardPile(Graphics g) {
         ArrayList<Card> playerDiscardPile = magicStoneGame.getBattlefield().getPlayer().getDiscardDeck().getDicardPile();
         ArrayList<Card> aiDiscardPile = magicStoneGame.getBattlefield().getAi().getDiscardDeck().getDicardPile();
         if (playerDiscardPile.size() > 0) {
-            g.drawImage(CardTextures.getTexture(playerDiscardPile.get(playerDiscardPile.size()-1).getEnumCard()),
-                    10,360, 100, 150, this);
+            g.drawImage(CardTextures.getTexture(playerDiscardPile.get(playerDiscardPile.size() - 1).getEnumCard()),
+                    10, 360, 100, 150, this);
         }
         if (aiDiscardPile.size() > 0) {
-            g.drawImage(CardTextures.getTexture(aiDiscardPile.get(aiDiscardPile.size()-1).getEnumCard()),
-                    10,180, 100, 150, this);
+            g.drawImage(CardTextures.getTexture(aiDiscardPile.get(aiDiscardPile.size() - 1).getEnumCard()),
+                    10, 180, 100, 150, this);
         }
     }
 
     /**
      * Paints both heros on the battlefield
+     *
      * @param g Grpahics
      */
     private void paintHeros(Graphics g) {
@@ -124,10 +140,10 @@ public class MagicStonePanel extends JPanel implements Observer {
         g.setFont(new Font("TimesRoman", Font.PLAIN, 20));
         g.drawImage(StatTextures.getTexture(StatEnum.HEART_BLUE), 570, 17, 55, 55, this);
         g.drawString(Integer.toString(battlefield.getAi().getHealth()),
-                600-g.getFontMetrics().stringWidth(Integer.toString(battlefield.getAi().getHealth()))/2, 48);
+                600 - g.getFontMetrics().stringWidth(Integer.toString(battlefield.getAi().getHealth())) / 2, 48);
         g.drawImage(StatTextures.getTexture(StatEnum.ATTACK_BLUE), 655, 5, 60, 67, this);
         g.drawString(Integer.toString(battlefield.getAi().getAttack()),
-                685-g.getFontMetrics().stringWidth(Integer.toString(battlefield.getAi().getAttack()))/2, 50);
+                685 - g.getFontMetrics().stringWidth(Integer.toString(battlefield.getAi().getAttack())) / 2, 50);
 
         g.setColor(Color.BLUE);
         g.drawRect(0, getHeight() / 2, getWidth() - 1, getHeight() / 2); // Blue Half
@@ -142,14 +158,15 @@ public class MagicStonePanel extends JPanel implements Observer {
         g.setFont(new Font("TimesRoman", Font.PLAIN, 20));
         g.drawImage(StatTextures.getTexture(StatEnum.HEART), 570, 630, 55, 55, this);
         g.drawString(Integer.toString(battlefield.getPlayer().getHealth()),
-                600-g.getFontMetrics().stringWidth(Integer.toString(battlefield.getPlayer().getHealth()))/2, 665);
+                600 - g.getFontMetrics().stringWidth(Integer.toString(battlefield.getPlayer().getHealth())) / 2, 665);
         g.drawImage(StatTextures.getTexture(StatEnum.ATTACK), 655, 625, 60, 67, this);
         g.drawString(Integer.toString(battlefield.getPlayer().getAttack()),
-                685-g.getFontMetrics().stringWidth(Integer.toString(battlefield.getPlayer().getAttack()))/2, 669);
+                685 - g.getFontMetrics().stringWidth(Integer.toString(battlefield.getPlayer().getAttack())) / 2, 669);
     }
 
     /**
      * paint both players battlefields
+     *
      * @param g Grpahics
      */
     private void paintBattlefield(Graphics g) {
@@ -164,36 +181,37 @@ public class MagicStonePanel extends JPanel implements Observer {
                 continue;
             }
             EnumCard card = c.getEnumCard();
-            g.drawImage(CardTextures.getTexture(card), 140+i*xOffset, 360, 90, 135, this);
+            g.drawImage(CardTextures.getTexture(card), 140 + i * xOffset, 360, 90, 135, this);
             g.setFont(new Font("TimesRoman", Font.PLAIN, 20));
-            g.drawImage(StatTextures.getTexture(StatEnum.ATTACK), 160+i*xOffset+83, 370, 50, 65, this);
-            g.drawString(Integer.toString(c.getAttack()), 160+i*xOffset+100, 415);
-            g.drawImage(StatTextures.getTexture(StatEnum.HEART), 167+i*xOffset+77, 450, 45, 45, this);
-            g.drawString(Integer.toString(c.getHealth()), 162+i*xOffset+100, 475);
+            g.drawImage(StatTextures.getTexture(StatEnum.ATTACK), 160 + i * xOffset + 83, 370, 50, 65, this);
+            g.drawString(Integer.toString(c.getAttack()), 160 + i * xOffset + 100, 415);
+            g.drawImage(StatTextures.getTexture(StatEnum.HEART), 167 + i * xOffset + 77, 450, 45, 45, this);
+            g.drawString(Integer.toString(c.getHealth()), 162 + i * xOffset + 100, 475);
             i++;
         }
         i = 0;
         for (CreatureCard c : aiCreatures) {
-            if (c == null)  {
+            if (c == null) {
                 i++;
                 continue;
             }
             EnumCard card = c.getEnumCard();
-            g.drawImage(CardTextures.getTexture(card), 140+i*xOffset, 194, 90, 135, this);
+            g.drawImage(CardTextures.getTexture(card), 140 + i * xOffset, 194, 90, 135, this);
 //            String attackAndHealth = c.getAttack() + "/" + c.getHealth();
             g.setFont(new Font("TimesRoman", Font.PLAIN, 20));
 //            g.drawString(attackAndHealth, 140+i*xOffset+81-g.getFontMetrics().stringWidth(attackAndHealth),
 //                    190);
-            g.drawImage(StatTextures.getTexture(StatEnum.ATTACK_BLUE), 160+i*xOffset+83, 200, 50, 65, this);
-            g.drawString(Integer.toString(c.getAttack()), 160+i*xOffset+100, 245);
-            g.drawImage(StatTextures.getTexture(StatEnum.HEART_BLUE), 167+i*xOffset+77, 280, 45, 45, this);
-            g.drawString(Integer.toString(c.getHealth()), 162+i*xOffset+100, 305);
+            g.drawImage(StatTextures.getTexture(StatEnum.ATTACK_BLUE), 160 + i * xOffset + 83, 200, 50, 65, this);
+            g.drawString(Integer.toString(c.getAttack()), 160 + i * xOffset + 100, 245);
+            g.drawImage(StatTextures.getTexture(StatEnum.HEART_BLUE), 167 + i * xOffset + 77, 280, 45, 45, this);
+            g.drawString(Integer.toString(c.getHealth()), 162 + i * xOffset + 100, 305);
             i++;
         }
     }
 
     /**
      * Ppaint both players hands
+     *
      * @param g Graphics
      */
     private void paintHand(Graphics g) {
@@ -204,35 +222,35 @@ public class MagicStonePanel extends JPanel implements Observer {
         int xOffset = 150;
         int i = 0;
         int x = 0;
-        for (Card c: playerHand.getDeckHand().values()) {
+        for (Card c : playerHand.getDeckHand().values()) {
             if (i == 6) break;
             EnumCard card = c.getEnumCard();
             if (i < 3) {
-                x = 100+i*xOffset;
+                x = 100 + i * xOffset;
                 g.drawImage(CardTextures.getTexture(card), x, 530, 100, 150, this);
             } else {
-                x = 780+(i-3)*xOffset;
+                x = 780 + (i - 3) * xOffset;
                 g.drawImage(CardTextures.getTexture(card), x, 530, 100, 150, this);
             }
             if (c instanceof CreatureCard) {
-                String attackAndHealth = ((CreatureCard)c).getAttack() + "/" + ((CreatureCard)c).getHealth();
+                String attackAndHealth = ((CreatureCard) c).getAttack() + "/" + ((CreatureCard) c).getHealth();
                 g.setColor(Color.BLACK);
-                g.drawString(attackAndHealth, x+130-g.getFontMetrics().stringWidth(attackAndHealth),
+                g.drawString(attackAndHealth, x + 130 - g.getFontMetrics().stringWidth(attackAndHealth),
                         670);
             } else {
-                String value = String.valueOf(((SpellCard) c ).getEnumCard().getValue());
-                g.drawString(value, x+130-g.getFontMetrics().stringWidth(value),
+                String value = String.valueOf(c.getEnumCard().getValue());
+                g.drawString(value, x + 130 - g.getFontMetrics().stringWidth(value),
                         670);
             }
             i++;
         }
         i = 0;
-        for (Card c: aiHand.getDeckHand().values()) {
+        for (Card c : aiHand.getDeckHand().values()) {
             if (i == 6) break;
             if (i < 3) {
-                g.drawImage(CardBackTextures.getTexture(redBack), 100+i*xOffset, 10, 100, 150, this);
+                g.drawImage(CardBackTextures.getTexture(redBack), 100 + i * xOffset, 10, 100, 150, this);
             } else {
-                g.drawImage(CardBackTextures.getTexture(redBack), 780+(i-3)*xOffset, 10, 100, 150, this);
+                g.drawImage(CardBackTextures.getTexture(redBack), 780 + (i - 3) * xOffset, 10, 100, 150, this);
             }
             i++;
         }
@@ -240,6 +258,7 @@ public class MagicStonePanel extends JPanel implements Observer {
 
     /**
      * paints the deck for both players
+     *
      * @param g Graphics
      */
     private void paintDeck(Graphics g) {
@@ -248,13 +267,13 @@ public class MagicStonePanel extends JPanel implements Observer {
         CardBack redBack = CardBack.RED_BACK;
         CardBack blueBack = CardBack.BLUE_BACK;
         if (playerCards > 0) {
-            g.drawImage(CardBackTextures.getTexture(blueBack), 1159, 360, 100 ,150, this);
+            g.drawImage(CardBackTextures.getTexture(blueBack), 1159, 360, 100, 150, this);
         }
         g.setFont(new Font("TimesRoman", Font.PLAIN, 30));
         g.setColor(Color.BLACK);
         g.drawString(Integer.toString(playerCards), 1190, 440);
         if (aiCards > 0) {
-            g.drawImage(CardBackTextures.getTexture(redBack), 1159, 180, 100 ,150, this);
+            g.drawImage(CardBackTextures.getTexture(redBack), 1159, 180, 100, 150, this);
         }
         g.drawString(Integer.toString(aiCards), 1190, 260);
     }

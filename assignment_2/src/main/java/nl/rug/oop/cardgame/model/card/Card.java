@@ -1,8 +1,8 @@
 package nl.rug.oop.cardgame.model.card;
 
 import lombok.Data;
-import nl.rug.oop.cardgame.model.Battlefield;
 import nl.rug.oop.cardgame.interfaces.Playable;
+import nl.rug.oop.cardgame.model.Battlefield;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -12,15 +12,16 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Data
 public abstract class Card implements Playable {
 
-        protected String type;
-        protected String name;
-        protected int cost;
-        protected int cardNumber;
-        protected static final AtomicInteger atomicInteger = new AtomicInteger(0);
-        EnumCard enumCard;
+    protected String type;
+    protected String name;
+    protected int cost;
+    protected int cardNumber;
+    protected static final AtomicInteger atomicInteger = new AtomicInteger(0);
+    EnumCard enumCard;
 
     /**
      * Creates a new Card
+     *
      * @param enumCard EnumCard
      */
     public Card(EnumCard enumCard) {
@@ -33,6 +34,7 @@ public abstract class Card implements Playable {
 
     /**
      * Play method
+     *
      * @return
      */
     @Override

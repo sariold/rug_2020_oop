@@ -14,6 +14,7 @@ public abstract class SpellCard extends Card {
 
     /**
      * Creates a new spell card
+     *
      * @param enumCard Enum Card
      */
     public SpellCard(EnumCard enumCard) {
@@ -22,7 +23,7 @@ public abstract class SpellCard extends Card {
 
     @Override
     public boolean play(Battlefield battlefield, int heroIndex) {
-        Hero hero = (heroIndex == 0? battlefield.getPlayer() : battlefield.getAi());
+        Hero hero = (heroIndex == 0 ? battlefield.getPlayer() : battlefield.getAi());
         hero.getDiscardDeck().discard(this);
         return true;
     }

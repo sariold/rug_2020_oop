@@ -2,15 +2,15 @@ package nl.rug.oop.cardgame.model.card;
 
 public enum EnumCard {
 
-    CREATURE_ZOMBIE     (Type.CREATURE, Face.ZOMBIE, 1, 1, 1),
-    CREATURE_WOLF       (Type.CREATURE, Face.WOLF, 2, 2, 2),
-    CREATURE_WEREWOLF   (Type.CREATURE, Face.WEREWOLF, 3, 3, 3),
-    CREATURE_DRAGON     (Type.CREATURE, Face.DRAGON, 4, 4, 4),
+    CREATURE_ZOMBIE(Type.CREATURE, Face.ZOMBIE, 1, 1, 1),
+    CREATURE_WOLF(Type.CREATURE, Face.WOLF, 2, 2, 2),
+    CREATURE_WEREWOLF(Type.CREATURE, Face.WEREWOLF, 3, 3, 3),
+    CREATURE_DRAGON(Type.CREATURE, Face.DRAGON, 4, 4, 4),
 
-    SPELL_INSTANTDRAW   (Type.SPELL, Face.INSTANTDRAW, 4, 2),
-    SPELL_INSTANTHEALTH (Type.SPELL, Face.INSTANTHEALTH, 3, 3),
-    SPELL_INSTANTDAMAGE (Type.SPELL, Face.INSTANTDAMAGE, 5, 3),
-    SPELL_COPYPASTE     (Type.SPELL, Face.COPYPASTE, 4, 1);
+    SPELL_INSTANTDRAW(Type.SPELL, Face.INSTANTDRAW, 4, 2),
+    SPELL_INSTANTHEALTH(Type.SPELL, Face.INSTANTHEALTH, 3, 3),
+    SPELL_INSTANTDAMAGE(Type.SPELL, Face.INSTANTDAMAGE, 5, 3),
+    SPELL_COPYPASTE(Type.SPELL, Face.COPYPASTE, 4, 1);
 
     private final Type type;
     private final Face face;
@@ -46,7 +46,9 @@ public enum EnumCard {
         return this.cost;
     }
 
-    public int getValue() {return this.value; }
+    public int getValue() {
+        return this.value;
+    }
 
     public enum Type {
         CREATURE,

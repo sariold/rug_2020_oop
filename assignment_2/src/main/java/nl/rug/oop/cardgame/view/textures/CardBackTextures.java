@@ -2,14 +2,11 @@ package nl.rug.oop.cardgame.view.textures;
 
 import lombok.Data;
 
-import java.util.EnumMap;
-
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-
-import java.awt.image.BufferedImage;
-
-import javax.imageio.ImageIO;
+import java.util.EnumMap;
 
 @Data
 public class CardBackTextures {
@@ -39,6 +36,7 @@ public class CardBackTextures {
 
     /**
      * Find a texture for a card back.
+     *
      * @param back The cart in question.
      */
     public static BufferedImage getTexture(CardBack back) {
