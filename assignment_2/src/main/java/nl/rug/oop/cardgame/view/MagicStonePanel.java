@@ -31,6 +31,7 @@ public class MagicStonePanel extends JPanel implements Observer {
     }
 
     private void paintAreas(Graphics g) {
+        g.setFont(new Font("TimesRoman", Font.PLAIN, 20));
         g.setColor(Color.WHITE);
         g.drawString("Card 1", 117, 90);
         g.drawString("Card 2", 267, 90);
@@ -96,18 +97,18 @@ public class MagicStonePanel extends JPanel implements Observer {
         g.drawRect(0, 0, getWidth() - 1, getHeight() / 2); // Red Half
         g.fillArc(540, -100, 200, 200, 180, 180); // AI Arc
         g.setFont(new Font("TimesRoman", Font.PLAIN, 20));
-        g.setColor(Color.WHITE);
+        g.setColor(Color.BLACK);
         g.drawString("Discard", 23, 263);
         g.drawString("Deck", 1183, 263);
         g.drawString("Mana " + battlefield.getAi().getMana() + "/" + battlefield.getAi().getMaxMana(),
                 (getWidth() / 2) - 40, 158);
-        g.setFont(new Font("TimesRoman", Font.PLAIN, 30));
-        g.drawImage(StatTextures.getTexture(StatEnum.BLOOD_DROP), 550, 0, 80, 88, this);
+        g.setFont(new Font("TimesRoman", Font.PLAIN, 20));
+        g.drawImage(StatTextures.getTexture(StatEnum.HEART_BLUE), 570, 17, 55, 55, this);
         g.drawString(Integer.toString(battlefield.getAi().getHealth()),
-                590-g.getFontMetrics().stringWidth(Integer.toString(battlefield.getAi().getHealth()))/2, 48);
-        g.drawImage(rotate(StatTextures.getTexture(StatEnum.SWORD), 315), 690, -18, 55, 110, this);
+                600-g.getFontMetrics().stringWidth(Integer.toString(battlefield.getAi().getHealth()))/2, 48);
+        g.drawImage(StatTextures.getTexture(StatEnum.ATTACK_BLUE), 655, 5, 60, 67, this);
         g.drawString(Integer.toString(battlefield.getAi().getAttack()),
-                710-g.getFontMetrics().stringWidth(Integer.toString(battlefield.getAi().getAttack()))/2, 48);
+                685-g.getFontMetrics().stringWidth(Integer.toString(battlefield.getAi().getAttack()))/2, 50);
 
         g.setColor(Color.BLUE);
         g.drawRect(0, getHeight() / 2, getWidth() - 1, getHeight() / 2); // Blue Half
@@ -118,13 +119,13 @@ public class MagicStonePanel extends JPanel implements Observer {
         g.drawString("Deck", 1183, 445);
         g.drawString("Mana " + battlefield.getPlayer().getMana() + "/" + battlefield.getPlayer().getMaxMana(),
                 (getWidth() / 2) - 40, 565);
-        g.setFont(new Font("TimesRoman", Font.BOLD, 30));
-        g.drawImage(StatTextures.getTexture(StatEnum.BLOOD_DROP), 555, 620, 80, 88, this);
+        g.setFont(new Font("TimesRoman", Font.BOLD, 20));
+        g.drawImage(StatTextures.getTexture(StatEnum.HEART), 570, 630, 55, 55, this);
         g.drawString(Integer.toString(battlefield.getPlayer().getHealth()),
-                590-g.getFontMetrics().stringWidth(Integer.toString(battlefield.getPlayer().getHealth()))/2, 675);
-        g.drawImage(StatTextures.getTexture(StatEnum.ATTACK), 680, 620, 60, 67, this);
+                600-g.getFontMetrics().stringWidth(Integer.toString(battlefield.getPlayer().getHealth()))/2, 665);
+        g.drawImage(StatTextures.getTexture(StatEnum.ATTACK), 655, 625, 60, 67, this);
         g.drawString(Integer.toString(battlefield.getPlayer().getAttack()),
-                710-g.getFontMetrics().stringWidth(Integer.toString(battlefield.getPlayer().getAttack()))/2, 675);
+                685-g.getFontMetrics().stringWidth(Integer.toString(battlefield.getPlayer().getAttack()))/2, 669);
     }
 
     /**

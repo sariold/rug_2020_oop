@@ -25,7 +25,7 @@ public class Battlefield {
      * Create a new battlefield
      */
     public Battlefield() {
-        this.player = new Hero("Diego", 100, 0, 0, 1);
+        this.player = new Hero("Diego", 10, 0, 0, 1);
         this.ai = new AIHero("AI", 10, 0, 0, 1);
     }
 
