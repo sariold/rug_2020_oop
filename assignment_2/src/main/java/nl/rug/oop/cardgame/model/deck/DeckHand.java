@@ -27,9 +27,12 @@ public class DeckHand {
      * Adds a card to player's deck hand
      * @param card Takes a card
      */
-    public void addCard(Card card) {
-        if(this.deckHand.size() == DefaultStats.MAX_HAND_CARDS) System.out.println("You have too many cards in " +
-                "hand the drawn card is discarded!");
+    public void addCard(Card card, DiscardDeck discardDeck) {
+        if(this.deckHand.size() == DefaultStats.MAX_HAND_CARDS){
+            System.out.println("You have too many cards in " +
+                    "hand the drawn card is discarded!");
+            discardDeck.discard(card);
+        }
         else this.deckHand.put(card.getCardNumber(), card);
     }
 

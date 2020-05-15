@@ -99,7 +99,7 @@ public class Hero implements Attackable {
         Card card = this.getDeck().drawCard();
         if(card != null) {
             System.out.println("Drawing card: " + card.getName() + " : Mana Cost -> " + card.getCost());
-            this.getDeckHand().addCard(card);
+            this.getDeckHand().addCard(card, this.discardDeck);
         }
         frame.update(frame.getGraphics());
         while (start) {

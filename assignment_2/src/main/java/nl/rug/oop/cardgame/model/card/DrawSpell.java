@@ -18,7 +18,7 @@ public class DrawSpell extends SpellCard {
                 Card card = battlefield.getPlayer().getDeck().drawCard();
                 if(card != null) {
                     System.out.println("Drawing card: " + card.getName() + " : Mana Cost -> " + card.getCost());
-                    battlefield.getPlayer().getDeckHand().addCard(card);
+                    battlefield.getPlayer().getDeckHand().addCard(card, battlefield.getPlayer().getDiscardDeck());
                 }
             }
             return super.play(battlefield, hero);
@@ -27,7 +27,7 @@ public class DrawSpell extends SpellCard {
             Card card = battlefield.getAi().getDeck().drawCard();
             if(card != null) {
                 System.out.println("Drawing card: " + card.getName() + " : Mana Cost -> " + card.getCost());
-                battlefield.getAi().getDeckHand().addCard(card);
+                battlefield.getAi().getDeckHand().addCard(card, battlefield.getAi().getDiscardDeck());
             }
         }
         return super.play(battlefield, hero);
