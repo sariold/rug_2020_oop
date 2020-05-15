@@ -1,7 +1,6 @@
 package nl.rug.oop.cardgame.model;
 
 import lombok.Data;
-import nl.rug.oop.cardgame.model.card.MoveableCard;
 import nl.rug.oop.cardgame.model.deck.DiscardDeck;
 import nl.rug.oop.cardgame.model.hero.Hero;
 import nl.rug.oop.cardgame.view.MagicStoneFrame;
@@ -13,8 +12,6 @@ import java.util.Observer;
 public class MagicStoneGame extends Observable implements Observer {
 
     Battlefield battlefield;
-    private MoveableCard movable;
-    private DiscardDeck discardPile;
 
     public MagicStoneGame() {
         this.battlefield = new Battlefield();
@@ -106,62 +103,5 @@ public class MagicStoneGame extends Observable implements Observer {
         setChanged();
         notifyObservers();
     }
-
-//    /**
-//     * Creates a movable card and adds an Observer to it
-//     */
-//    private void createMovableCard() {
-//        if (movable != null) {
-//            movable.deleteObserver(this);
-//            movable = null;
-//        }
-//        if (!deck.isEmpty()) {
-//            movable = new MovableCard(deck.draw());
-//            movable.addObserver(this);
-//        }
-//    }
-
-//    /**
-//     * Create a new Draw with all 54 different cards in the deck once
-//     */
-//    public DrawGame() {
-//        deck = makeDeck();
-//        discardPile = new DiscardPile();
-//        createMovableCard();
-//    }
-//
-//    /**
-//     * Getter for deck so it may be looked at without being changed
-//     */
-//    public AbstractDeck getDeck() {
-//        return deck;
-//    }
-
-    /**
-     * Observe the state of the discard pile without allowing other classes
-     * access
-     */
-    public DiscardDeck getDiscardPile() {
-        return discardPile;
-    }
-
-    /**
-     * Look at which card is movable
-     */
-    public MoveableCard getMovableCard() {
-        return movable;
-    }
-
-    /**
-     * Draw a card and put it on the discard pile
-     */
-//    public void move() {
-//        if (movable != null) {
-//            discardPile.discard(movable.getCard());
-//        }
-//        createMoveableCard();
-//        setChanged();
-//        notifyObservers();
-//    }
 
 }
