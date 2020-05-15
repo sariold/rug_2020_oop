@@ -15,22 +15,22 @@ public class StartGame {
      */
     public StartGame() {
         Battlefield battlefield = new Battlefield();
-        startGame(battlefield);
+//        startGame(battlefield, frame);
     }
 
     /**
      * Starts the actual turn based game
      * @param battlefield Playing board
      */
-    public void startGame(Battlefield battlefield) {
-       turnRotation(battlefield);
+    public void startGame(Battlefield battlefield, MagicStoneFrame frame) {
+       turnRotation(battlefield, frame);
     }
 
     /**
      * Rotates the turns
      * @param battlefield Playing board
      */
-    public void turnRotation(Battlefield battlefield) {
+    public void turnRotation(Battlefield battlefield, MagicStoneFrame frame) {
         Hero player = battlefield.getPlayer();
         Hero ai = battlefield.getAi();
         boolean start = true;
@@ -42,13 +42,13 @@ public class StartGame {
                 battlefield.showBattlefield();
                 battlefield.incMana(player);
                 player.setMana(player.getMaxMana());
-                player.takeTurn(battlefield);
+                player.takeTurn(battlefield, frame);
             }
             else {
                 resetUsedCreatures(ai);
                 battlefield.incMana(ai);
                 ai.setMana(ai.getMaxMana());
-                ai.takeTurn(battlefield);
+                ai.takeTurn(battlefield, frame);
                 battlefield.setPlayerTurn(true);
             }
             endGameCheck(battlefield);

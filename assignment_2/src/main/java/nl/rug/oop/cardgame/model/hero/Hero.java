@@ -7,6 +7,7 @@ import nl.rug.oop.cardgame.model.card.CreatureCard;
 import nl.rug.oop.cardgame.interfaces.Attackable;
 import nl.rug.oop.cardgame.model.deck.Deck;
 import nl.rug.oop.cardgame.model.deck.DeckHand;
+import nl.rug.oop.cardgame.view.MagicStoneFrame;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
@@ -53,7 +54,7 @@ public class Hero implements Attackable {
      * Play a card
      * @param battlefield Battlefield
      */
-    public void playCard(Battlefield battlefield) {
+    public void playCard(Battlefield battlefield, MagicStoneFrame frame) {
         if(this.deckHand.getDeckHand().size() > 0) {
             Scanner scanner = new Scanner(System.in);
             this.deckHand.viewHand();
@@ -78,6 +79,7 @@ public class Hero implements Attackable {
                     System.out.println("NOT VALID INPUT!");
                 }
             }
+            frame.update(frame.getGraphics());
         } else System.out.println("Empty Hand!");
     }
 
@@ -85,7 +87,7 @@ public class Hero implements Attackable {
      * Present the player with game options
      * @param battlefield Playing board
      */
-    public void takeTurn(Battlefield battlefield) {
+    public void takeTurn(Battlefield battlefield, MagicStoneFrame frame) {
         Scanner scanner = new Scanner(System.in);
         boolean start = true;
         int currentMove = 0;
@@ -95,6 +97,7 @@ public class Hero implements Attackable {
             System.out.println("Drawing card: " + card.getName() + " : Mana Cost -> " + card.getCost());
             this.getDeckHand().addCard(card);
         }
+        frame.update(frame.getGraphics());
         while (start) {
             System.out.println("Current Mana: " + this.getMana() + "/" + this.getMaxMana());
             System.out.println("0) Check Hand");
@@ -114,18 +117,19 @@ public class Hero implements Attackable {
                     this.getDeckHand().viewHand();
                     break;
                 case 1:
-                    this.playCard(battlefield);
+                    this.playCard(battlefield, frame);
                     break;
                 case 2:
                     this.getDeckHand().discardCard();
+                    frame.update(frame.getGraphics());
                     break;
                 case 3:
-                    attackPhase(battlefield);
+                    attackPhase(battlefield, frame);
                     battlefield.setPlayerTurn(false);
                     start = false;
                     break;
                 case 4:
-                    swapCreaturePositions(battlefield);
+                    swapCreaturePositions(battlefield, frame);
                     break;
                 case 5:
                     battlefield.showBattlefield();
@@ -138,7 +142,7 @@ public class Hero implements Attackable {
         }
     }
 
-    private void swapCreaturePositions(Battlefield battlefield) {
+    private void swapCreaturePositions(Battlefield battlefield, MagicStoneFrame frame) {
         if (this.untappedCreatures()) {
             Scanner scanner = new Scanner(System.in);
             boolean start = true;
@@ -154,6 +158,7 @@ public class Hero implements Attackable {
                         movingCreature.setUsed(true);
                         this.getPlayedCreatures().set(currentMove, null);
                     }
+                    frame.update(frame.getGraphics());
                 } catch (Exception e) {
                     System.out.println("NOT VALID INPUT!");
                 }
@@ -165,7 +170,7 @@ public class Hero implements Attackable {
      * Attack enemy Hero
      * @param battlefield Battlefield
      */
-    public void attackPhase(Battlefield battlefield) {
+    public void attackPhase(Battlefield battlefield, MagicStoneFrame frame) {
         if(this.untappedCreatures()) {
             Scanner scanner = new Scanner(System.in);
             boolean start = true;
@@ -187,6 +192,7 @@ public class Hero implements Attackable {
                 } catch (Exception e) {
                     System.out.println("NOT VALID INPUT!");
                 }
+                frame.update(frame.getGraphics());
             }
         } else System.out.println("Either you have no creatures or you just placed them down!");
     }

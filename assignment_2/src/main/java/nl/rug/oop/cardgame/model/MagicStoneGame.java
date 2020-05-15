@@ -39,16 +39,19 @@ public class MagicStoneGame extends Observable implements Observer {
             System.out.println("It's turn number " + ((i+(i%2))/2));
             if(i % 2 == 1)  {
                 resetUsedCreatures(player);
+                frame.update(frame.getGraphics());
                 battlefield.showBattlefield();
                 battlefield.incMana(player);
                 player.setMana(player.getMaxMana());
-                player.takeTurn(battlefield);
+                frame.update(frame.getGraphics());
+                player.takeTurn(battlefield, frame);
+                frame.update(frame.getGraphics());
             }
             else {
                 resetUsedCreatures(ai);
                 battlefield.incMana(ai);
                 ai.setMana(ai.getMaxMana());
-                ai.takeTurn(battlefield);
+                ai.takeTurn(battlefield, frame);
                 battlefield.setPlayerTurn(true);
             }
             endGameCheck(battlefield);

@@ -3,6 +3,7 @@ package nl.rug.oop.cardgame.model.hero;
 import nl.rug.oop.cardgame.model.Battlefield;
 import nl.rug.oop.cardgame.model.card.Card;
 import nl.rug.oop.cardgame.model.card.CreatureCard;
+import nl.rug.oop.cardgame.view.MagicStoneFrame;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -29,13 +30,14 @@ public class AIHero extends Hero {
      * @param battlefield Playing board
      */
     @Override
-    public void takeTurn(Battlefield battlefield) {
+    public void takeTurn(Battlefield battlefield, MagicStoneFrame frame) {
         System.out.println(this.name + "'s TURN!");
         Card card = this.getDeck().drawCard();
         if(card != null) {
             System.out.println("Drawing card: " + card.getName() + " : Mana Cost -> " + card.getCost());
             this.getDeckHand().addCard(card);
         }
+        frame.update(frame.getGraphics());
         if(this.deckHand.getDeckHand().size() > 0) {
             System.out.println("AI has cards in hand");
             ArrayList<Card> playableCards;
@@ -53,10 +55,11 @@ public class AIHero extends Hero {
                     played.play(battlefield, 1);
                     this.setMana(this.getMana() - played.getCost());
                     System.out.println("Current Mana: " + this.getMana() + "/" + this.getMaxMana());
+                    frame.update(frame.getGraphics());
                 }
             }
         } else System.out.println("AI has no cards in hand");
-        attackPhase(battlefield);
+        attackPhase(battlefield, frame);
     }
 
     /**
@@ -64,7 +67,7 @@ public class AIHero extends Hero {
      * @param battlefield Battlefield
      */
     @Override
-    public void attackPhase(Battlefield battlefield) {
+    public void attackPhase(Battlefield battlefield, MagicStoneFrame frame) {
         ArrayList<CreatureCard> creatures = getPlayedCreatures();
         if (creatures.size() == 0) System.out.println("AI has no creatures to attack with");
         for (CreatureCard c: creatures) {
@@ -76,6 +79,7 @@ public class AIHero extends Hero {
                 if(attackedCreature != null) attackedCreature.checkDeath(battlefield.getPlayer(),
                         attackedCreature.getBattlePosition());
                 c.checkDeath(battlefield.getAi(), c.getBattlePosition());
+                frame.update(frame.getGraphics());
             }
         }
     }

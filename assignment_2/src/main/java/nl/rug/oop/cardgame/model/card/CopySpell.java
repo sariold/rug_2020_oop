@@ -41,6 +41,7 @@ public class CopySpell extends SpellCard implements Targetting {
                         currentMove = scanner.nextInt();
                         if (hero.getPlayedCreatures().get(currentMove) != null) {
                             CreatureCard creatureCard = new CreatureCard(hero.getPlayedCreatures().get(currentMove).getEnumCard());
+                            creatureCard.setUsed(true);
                             battlefield.placeCreature(creatureCard, hero);
                         }
                         start = false;
@@ -56,6 +57,7 @@ public class CopySpell extends SpellCard implements Targetting {
                     Collections.shuffle(creatures);
                     if(creatures.get(0) != null) {
                         CreatureCard creatureCard = new CreatureCard(creatures.get(0).getEnumCard());
+                        creatureCard.setUsed(true);
                         battlefield.placeCreature(creatureCard, hero);
                     }
                 }
