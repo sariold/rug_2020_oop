@@ -31,7 +31,7 @@ public class CopySpell extends SpellCard implements Targetting {
         Scanner scanner = new Scanner(System.in);
         int currentMove;
         boolean start = true;
-        if(notEmptyBattlefield(hero)) {
+        if (notEmptyBattlefield(hero)) {
             if (!(hero instanceof AIHero)) {
                 while (start) {
                     try {
@@ -52,10 +52,10 @@ public class CopySpell extends SpellCard implements Targetting {
                     }
                 }
             } else {
-                if(freePositions.size() > 0) {
+                if (freePositions.size() > 0) {
                     ArrayList<CreatureCard> creatures = hero.getPlayedCreatures();
                     Collections.shuffle(creatures);
-                    if(creatures.get(0) != null) {
+                    if (creatures.get(0) != null) {
                         CreatureCard creatureCard = new CreatureCard(creatures.get(0).getEnumCard());
                         creatureCard.setUsed(true);
                         battlefield.placeCreature(creatureCard, hero);
@@ -67,8 +67,8 @@ public class CopySpell extends SpellCard implements Targetting {
 
     public boolean notEmptyBattlefield(Hero hero) {
         ArrayList<CreatureCard> creatures = hero.getPlayedCreatures();
-        for(CreatureCard c : creatures) {
-            if(c != null) return true;
+        for (CreatureCard c : creatures) {
+            if (c != null) return true;
         }
         return false;
     }
@@ -76,8 +76,8 @@ public class CopySpell extends SpellCard implements Targetting {
     public void showBattlefield(Hero hero) {
         ArrayList<CreatureCard> creatures = hero.getPlayedCreatures();
         int i = 0;
-        for(CreatureCard c: creatures) {
-            if(c != null) {
+        for (CreatureCard c : creatures) {
+            if (c != null) {
                 System.out.print(i + ") " + c.getName() + " : Health = " + c.getCreatureHealth() + " : Attack = " +
                         c.getCreatureAttack());
             }

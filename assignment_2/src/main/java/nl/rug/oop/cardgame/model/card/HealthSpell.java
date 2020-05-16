@@ -21,13 +21,12 @@ public class HealthSpell extends SpellCard {
         Hero target;
         boolean heal = this.type.equals("INSTANTHEALTH");
         int dealValue = this.getEnumCard().getValue();
-        if(!heal) dealValue *= -1;
-        if(hero == 0) {
-            if(heal) target = player;
+        if (!heal) dealValue *= -1;
+        if (hero == 0) {
+            if (heal) target = player;
             else target = ai;
-        }
-        else {
-            if(heal) target = ai;
+        } else {
+            if (heal) target = ai;
             else target = player;
         }
         target.setHeroHealth(target.getHealth() + dealValue);

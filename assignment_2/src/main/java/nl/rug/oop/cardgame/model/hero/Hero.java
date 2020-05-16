@@ -2,11 +2,10 @@ package nl.rug.oop.cardgame.model.hero;
 
 import lombok.Data;
 import nl.rug.oop.cardgame.DefaultCoordinates;
+import nl.rug.oop.cardgame.interfaces.Attackable;
 import nl.rug.oop.cardgame.model.Battlefield;
 import nl.rug.oop.cardgame.model.card.Card;
 import nl.rug.oop.cardgame.model.card.CreatureCard;
-import nl.rug.oop.cardgame.interfaces.Attackable;
-import nl.rug.oop.cardgame.model.card.SpellCard;
 import nl.rug.oop.cardgame.model.deck.Deck;
 import nl.rug.oop.cardgame.model.deck.DeckHand;
 import nl.rug.oop.cardgame.model.deck.DiscardDeck;
@@ -34,10 +33,11 @@ public class Hero implements Attackable {
 
     /**
      * Creates a new Hero
+     *
      * @param playerName Player name
      * @param heroHealth Player health
-     * @param mana Player mana
-     * @param maxMana Player max mana
+     * @param mana       Player mana
+     * @param maxMana    Player max mana
      * @param heroAttack Player attack
      */
     public Hero(String playerName, int heroHealth, int mana, int maxMana, int heroAttack) {
@@ -57,10 +57,11 @@ public class Hero implements Attackable {
 
     /**
      * Play a card
+     *
      * @param battlefield Battlefield
      */
     public void playCard(Battlefield battlefield, MagicStoneFrame frame) {
-        if(this.deckHand.getDeckHand().size() > 0) {
+        if (this.deckHand.getDeckHand().size() > 0) {
             Scanner scanner = new Scanner(System.in);
             this.deckHand.viewHand();
             System.out.println("Which card would you like to play?");
@@ -69,13 +70,12 @@ public class Hero implements Attackable {
             while (start) {
                 try {
                     currentMove = scanner.nextInt();
-                    Card played =  this.deckHand.getDeckHand().get(currentMove);
-                    if(played != null && played.getCost() <= this.mana) {
+                    Card played = this.deckHand.getDeckHand().get(currentMove);
+                    if (played != null && played.getCost() <= this.mana) {
                         this.deckHand.getDeckHand().remove(currentMove);
-                        if(played.play(battlefield, 0)) {
+                        if (played.play(battlefield, 0)) {
                             this.setMana(this.getMana() - played.getCost());
-                        }
-                        else {
+                        } else {
                             this.deckHand.getDeckHand().put(currentMove, played);
                         }
                     } else System.out.println("You cease to have enough mana!");
@@ -90,6 +90,7 @@ public class Hero implements Attackable {
 
     /**
      * Present the player with game options
+     *
      * @param battlefield Playing board
      */
     public void takeTurn(Battlefield battlefield, MagicStoneFrame frame) {
@@ -98,7 +99,7 @@ public class Hero implements Attackable {
         int currentMove = 0;
         System.out.println(this.name + "'s TURN!");
         Card card = this.getDeck().drawCard();
-        if(card != null) {
+        if (card != null) {
             System.out.println("Drawing card: " + card.getName() + " : Mana Cost -> " + card.getCost());
             int freeHandPosition = this.getDeckHand().getNextFreePosition();
             card.getCardImage().setCoordinates(DefaultCoordinates.PLAYER_HAND[freeHandPosition]);
@@ -162,7 +163,7 @@ public class Hero implements Attackable {
                 showPlayedCreatures();
                 try {
                     currentMove = scanner.nextInt();
-                    if(currentMove == -1) return;
+                    if (currentMove == -1) return;
                     CreatureCard movingCreature = this.getPlayedCreatures().get(currentMove);
                     if (battlefield.moveCreature(this, movingCreature)) {
                         movingCreature.setUsed(true);
@@ -178,10 +179,11 @@ public class Hero implements Attackable {
 
     /**
      * Attack enemy Hero
+     *
      * @param battlefield Battlefield
      */
     public void attackPhase(Battlefield battlefield, MagicStoneFrame frame) {
-        if(this.untappedCreatures()) {
+        if (this.untappedCreatures()) {
             Scanner scanner = new Scanner(System.in);
             boolean start = true;
             int currentMove;
@@ -190,7 +192,7 @@ public class Hero implements Attackable {
                 showPlayedCreatures();
                 try {
                     currentMove = scanner.nextInt();
-                    if(currentMove == -1) start = false;
+                    if (currentMove == -1) start = false;
                     CreatureCard attackingCreature = this.getPlayedCreatures().get(currentMove);
                     CreatureCard attackedCreature = battlefield.getAi().getPlayedCreatures().get(currentMove);
                     if (attackingCreature == null) continue;
@@ -202,6 +204,7 @@ public class Hero implements Attackable {
                 } catch (Exception e) {
                     System.out.println("NOT VALID INPUT!");
                 }
+                battlefield.removeDead(this);
                 frame.update(frame.getGraphics());
             }
         } else System.out.println("Either you have no creatures or you just placed them down!");
@@ -223,17 +226,19 @@ public class Hero implements Attackable {
 
     /**
      * Return a boolean if your battlefield has untapped creatures
+     *
      * @return Boolean if a creature can be used for combat
      */
     public boolean untappedCreatures() {
-        for(int i = this.getPlayedCreatures().size() - 1; i >= 0; i--) {
-            if(this.getPlayedCreatures().get(i) != null && !this.getPlayedCreatures().get(i).isUsed()) return true;
+        for (int i = this.getPlayedCreatures().size() - 1; i >= 0; i--) {
+            if (this.getPlayedCreatures().get(i) != null && !this.getPlayedCreatures().get(i).isUsed()) return true;
         }
         return false;
     }
 
     /**
      * Set health
+     *
      * @param health Health
      */
     @Override
@@ -243,6 +248,7 @@ public class Hero implements Attackable {
 
     /**
      * Return health
+     *
      * @return Health
      */
     @Override
@@ -252,6 +258,7 @@ public class Hero implements Attackable {
 
     /**
      * Attack a hero or creature
+     *
      * @param attackable Attackable
      */
     @Override
@@ -261,6 +268,7 @@ public class Hero implements Attackable {
 
     /**
      * Return attack
+     *
      * @return Attack
      */
     @Override
@@ -270,6 +278,7 @@ public class Hero implements Attackable {
 
     /**
      * Set attack
+     *
      * @param attack Attack
      */
     @Override

@@ -1,14 +1,15 @@
 package nl.rug.oop.cardgame.model.card;
 
 import lombok.Data;
-import nl.rug.oop.cardgame.model.Battlefield;
 import nl.rug.oop.cardgame.interfaces.Playable;
 import nl.rug.oop.cardgame.util.Displayable;
 import nl.rug.oop.cardgame.view.CardImage;
 import nl.rug.oop.cardgame.view.MagicStonePanel;
 import nl.rug.oop.cardgame.view.textures.CardTextures;
+import nl.rug.oop.cardgame.model.Battlefield;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -23,10 +24,11 @@ public abstract class Card implements Playable, Displayable {
         protected int cardNumber;
         protected static final AtomicInteger atomicInteger = new AtomicInteger(0);
         protected CardImage cardImage;
-        EnumCard enumCard;
+        protected EnumCard enumCard;
 
     /**
      * Creates a new Card
+     *
      * @param enumCard EnumCard
      */
     public Card(EnumCard enumCard) {
@@ -35,11 +37,12 @@ public abstract class Card implements Playable, Displayable {
         this.cost = enumCard.getCost();
         this.cardNumber = atomicInteger.incrementAndGet();
         this.enumCard = enumCard;
-        this.cardImage = new CardImage(CardTextures.getTexture(this.enumCard), null);
+        this.cardImage = new CardImage( CardTextures.getTexture(this.enumCard), null);
     }
 
     /**
      * Play method
+     *
      * @return
      */
     @Override

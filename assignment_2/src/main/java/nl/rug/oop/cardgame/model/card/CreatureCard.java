@@ -2,8 +2,8 @@ package nl.rug.oop.cardgame.model.card;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import nl.rug.oop.cardgame.model.Battlefield;
 import nl.rug.oop.cardgame.interfaces.Attackable;
+import nl.rug.oop.cardgame.model.Battlefield;
 import nl.rug.oop.cardgame.model.hero.Hero;
 
 /**
@@ -20,6 +20,7 @@ public class CreatureCard extends Card implements Attackable {
 
     /**
      * Create a creature card
+     *
      * @param enumCard Enum Card
      */
     public CreatureCard(EnumCard enumCard) {
@@ -31,6 +32,7 @@ public class CreatureCard extends Card implements Attackable {
 
     /**
      * Set health
+     *
      * @param health Health
      */
     @Override
@@ -40,6 +42,7 @@ public class CreatureCard extends Card implements Attackable {
 
     /**
      * Get health
+     *
      * @return Health
      */
     @Override
@@ -49,17 +52,21 @@ public class CreatureCard extends Card implements Attackable {
 
     /**
      * Attack method
+     *
      * @param attackable Pass in creature or hero
      */
     @Override
     public void attack(Attackable attackable) {
-        attackable.setHealth(attackable.getHealth() - this.getAttack());
-        this.setHealth(this.getHealth() - attackable.getAttack());
-        this.setUsed(true);
+        if (!this.isUsed()) {
+            attackable.setHealth(attackable.getHealth() - this.getAttack());
+            this.setHealth(this.getHealth() - attackable.getAttack());
+            this.setUsed(true);
+        }
     }
 
     /**
      * Return attack
+     *
      * @return Attack
      */
     @Override
@@ -69,6 +76,7 @@ public class CreatureCard extends Card implements Attackable {
 
     /**
      * Sets attack
+     *
      * @param attack Attack
      */
     @Override
@@ -76,9 +84,11 @@ public class CreatureCard extends Card implements Attackable {
         this.setCreatureAttack(attack);
     }
 
-    /** Play a card
+    /**
+     * Play a card
+     *
      * @param battlefield Battlefield
-     * @param heroIndex Hero that played the card 0 for player, 1 for AI
+     * @param heroIndex   Hero that played the card 0 for player, 1 for AI
      * @return
      */
     @Override
@@ -95,11 +105,12 @@ public class CreatureCard extends Card implements Attackable {
 
     /**
      * Checks if a creature has died if so removes it from the battlefield
-     * @param hero Hero
+     *
+     * @param hero  Hero
      * @param index Index in played creatures array list
      */
     public void checkDeath(Hero hero, int index) {
-        if (this.getHealth() <= 0) {
+        if (this.getCreatureHealth() <= 0) {
             System.out.println(this.getName() + " has died in combat");
             System.out.println(index);
             hero.getPlayedCreatures().set(index, null);

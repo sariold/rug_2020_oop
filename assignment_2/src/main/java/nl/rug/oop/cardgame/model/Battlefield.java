@@ -25,16 +25,17 @@ public class Battlefield {
      * Create a new battlefield
      */
     public Battlefield() {
-        this.player = new Hero("Diego", 100, 0, 0, 1);
+        this.player = new Hero("Diego", 10, 0, 0, 1);
         this.ai = new AIHero("AI", 10, 0, 0, 1);
     }
 
     /**
      * Increase mana each turn
+     *
      * @param hero Hero
      */
     public void incMana(Hero hero) {
-        if(hero.getMana() < DefaultStats.MAX_MANA) hero.setMaxMana(hero.getMaxMana() + 1);
+        if (hero.getMana() < DefaultStats.MAX_MANA) hero.setMaxMana(hero.getMaxMana() + 1);
     }
 
     /**
@@ -43,7 +44,7 @@ public class Battlefield {
     public void showBattlefield() {
         System.out.println("ENEMY HEALTH: " + this.getAi().getHeroHealth());
         System.out.println("ENEMY FIELD:");
-        for(int i = 0; i < ai.getPlayedCreatures().size(); i++) {
+        for (int i = 0; i < ai.getPlayedCreatures().size(); i++) {
             CreatureCard creature = ai.getPlayedCreatures().get(i);
             if (creature == null) System.out.println(i + ") null");
             else {
@@ -54,12 +55,12 @@ public class Battlefield {
         System.out.println();
         System.out.println("YOUR HEALTH: " + this.getPlayer().getHeroHealth());
         System.out.println("YOUR FIELD:");
-        for(int i = 0; i < player.getPlayedCreatures().size(); i++) {
+        for (int i = 0; i < player.getPlayedCreatures().size(); i++) {
             CreatureCard creature = player.getPlayedCreatures().get(i);
             if (creature == null) System.out.println(i + ") null");
             else {
                 System.out.println(i + ") " + creature.getName() + ": Health = " + creature.getHealth() + ": Attack = " +
-                        creature.getAttack() + " : Tapped = " + creature.isUsed()  + " : Pos = " + creature.getBattlePosition());
+                        creature.getAttack() + " : Tapped = " + creature.isUsed() + " : Pos = " + creature.getBattlePosition());
             }
         }
         System.out.println();
@@ -67,8 +68,9 @@ public class Battlefield {
 
     /**
      * places a creature on a free spot on the battlefield
+     *
      * @param creatureCard Creature
-     * @param hero Hero who played the creature
+     * @param hero         Hero who played the creature
      * @return
      */
     public boolean placeCreature(CreatureCard creatureCard, Hero hero) {
@@ -83,7 +85,7 @@ public class Battlefield {
         for (int i = 0; i < freePositions.size(); i++) {
             System.out.println(freePositions.get(i) + ")");
         }
-        if(hero instanceof AIHero) {
+        if (hero instanceof AIHero) {
             Collections.shuffle(freePositions);
             hero.getPlayedCreatures().set(freePositions.get(0), creatureCard);
             hero.getPlayedCreatures().get(freePositions.get(0)).setBattlePosition(freePositions.get(0));
@@ -108,6 +110,7 @@ public class Battlefield {
 
     /**
      * Returns an array list of free positions on the battlefield for the hero
+     *
      * @param hero Hero
      * @return Free Positions
      */
@@ -153,5 +156,16 @@ public class Battlefield {
         hero.getPlayedCreatures().set(position, movingCreature);
         movingCreature.setBattlePosition(position);
         return true;
+    }
+
+    public void removeDead(Hero hero) {
+        for (int i = 0; i < hero.getPlayedCreatures().size(); i++) {
+            if (hero.getPlayedCreatures().get(i) != null) {
+                if (hero.getPlayedCreatures().get(i).getCreatureHealth() < 1) {
+                    hero.getPlayedCreatures().get(i).setBattlePosition(-1);
+                    hero.getPlayedCreatures().set(i, null);
+                }
+            }
+        }
     }
 }
