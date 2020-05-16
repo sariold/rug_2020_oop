@@ -1,8 +1,8 @@
 package nl.rug.oop.cardgame.view.textures;
 
 public enum StatEnum {
-    BLOOD_DROP,
-    SHIELD,
+    HEART,
+    HEART_BLUE,
     ATTACK,
-    SWORD
+    ATTACK_BLUE,
 }

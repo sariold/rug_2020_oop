@@ -5,9 +5,9 @@ package nl.rug.oop.cardgame.util;
  */
 public interface Sized {
 
-        /**
-         * The number of items in this sized
-         */
-        int size();
+    /**
+     * The number of items in this sized
+     */
+    int size();
 
 }

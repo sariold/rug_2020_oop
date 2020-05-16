@@ -5,7 +5,6 @@ import nl.rug.oop.cardgame.model.card.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Observable;
 
 /**
  * Deck class to store cards
@@ -53,6 +52,7 @@ public class Deck {
 
     /**
      * Removes a card from the top of the deck and returns it
+     *
      * @return Card drawn
      */
     public Card drawCard() {

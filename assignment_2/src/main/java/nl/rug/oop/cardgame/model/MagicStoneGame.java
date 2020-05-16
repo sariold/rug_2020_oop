@@ -1,6 +1,7 @@
 package nl.rug.oop.cardgame.model;
 
 import lombok.Data;
+import nl.rug.oop.cardgame.model.deck.DiscardDeck;
 import nl.rug.oop.cardgame.model.hero.Hero;
 import nl.rug.oop.cardgame.view.MagicStoneFrame;
 
@@ -19,6 +20,7 @@ public class MagicStoneGame extends Observable implements Observer {
 
     /**
      * Starts the actual turn based game
+     *
      * @param battlefield Playing board
      */
     public void startGame(Battlefield battlefield, MagicStoneFrame frame) {
@@ -27,17 +29,18 @@ public class MagicStoneGame extends Observable implements Observer {
 
     /**
      * Rotates the turns
+     *
      * @param battlefield Playing board
      */
     public void turnRotation(Battlefield battlefield, MagicStoneFrame frame) {
         Hero player = battlefield.getPlayer();
         Hero ai = battlefield.getAi();
         boolean start = true;
-        for(int i = 1; start; i++) {
+        for (int i = 1; start; i++) {
             frame.update(frame.getGraphics());
             System.out.println();
-            System.out.println("It's turn number " + ((i+(i%2))/2));
-            if(i % 2 == 1)  {
+            System.out.println("It's turn number " + ((i + (i % 2)) / 2));
+            if (i % 2 == 1) {
                 resetUsedCreatures(player);
                 frame.update(frame.getGraphics());
                 battlefield.showBattlefield();
@@ -46,8 +49,7 @@ public class MagicStoneGame extends Observable implements Observer {
                 frame.update(frame.getGraphics());
                 player.takeTurn(battlefield, frame);
                 frame.update(frame.getGraphics());
-            }
-            else {
+            } else {
                 resetUsedCreatures(ai);
                 battlefield.incMana(ai);
                 ai.setMana(ai.getMaxMana());
@@ -60,6 +62,7 @@ public class MagicStoneGame extends Observable implements Observer {
 
     /**
      * Checks whether either hero has died if so ends the game
+     *
      * @param battlefield Battlefield
      */
     private void endGameCheck(Battlefield battlefield) {
@@ -85,11 +88,12 @@ public class MagicStoneGame extends Observable implements Observer {
 
     /**
      * Resets the param used for each played creature
+     *
      * @param hero Hero
      */
     public void resetUsedCreatures(Hero hero) {
-        if(hero.getPlayedCreatures().size() == 0) return;
-        for(int i = hero.getPlayedCreatures().size() - 1; i >= 0; i--) {
+        if (hero.getPlayedCreatures().size() == 0) return;
+        for (int i = hero.getPlayedCreatures().size() - 1; i >= 0; i--) {
             if (hero.getPlayedCreatures().get(i) != null) hero.getPlayedCreatures().get(i).setUsed(false);
         }
     }
@@ -99,4 +103,5 @@ public class MagicStoneGame extends Observable implements Observer {
         setChanged();
         notifyObservers();
     }
+
 }

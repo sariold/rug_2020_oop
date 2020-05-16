@@ -36,6 +36,7 @@ public class StatTextures {
 
     /**
      * Find a texture for a stat.
+     *
      * @param stat The stat in question.
      */
     public static BufferedImage getTexture(StatEnum stat) {

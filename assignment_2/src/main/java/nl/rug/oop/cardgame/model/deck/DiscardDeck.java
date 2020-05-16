@@ -19,6 +19,7 @@ public class DiscardDeck {
 
     /**
      * puts a card onto the discard pile
+     *
      * @param card Card
      */
     public void discard(Card card) {
