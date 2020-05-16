@@ -1,6 +1,7 @@
 package nl.rug.oop.cardgame.model.hero;
 
 import lombok.Data;
+import nl.rug.oop.cardgame.DefaultCoordinates;
 import nl.rug.oop.cardgame.model.Battlefield;
 import nl.rug.oop.cardgame.model.card.Card;
 import nl.rug.oop.cardgame.model.card.CreatureCard;
@@ -99,7 +100,12 @@ public class Hero implements Attackable {
         Card card = this.getDeck().drawCard();
         if(card != null) {
             System.out.println("Drawing card: " + card.getName() + " : Mana Cost -> " + card.getCost());
+            int freeHandPosition = this.getDeckHand().getNextFreePosition();
+            card.getCardImage().setCoordinates(DefaultCoordinates.PLAYER_HAND[freeHandPosition]);
             this.getDeckHand().addCard(card);
+        } else {
+            card.getCardImage().setCoordinates(DefaultCoordinates.PLAYER_DISCARD_PILE);
+            this.getDiscardDeck().discard(card);
         }
         frame.update(frame.getGraphics());
         while (start) {

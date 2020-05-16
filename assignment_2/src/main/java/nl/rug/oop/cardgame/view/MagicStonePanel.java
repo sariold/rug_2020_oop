@@ -184,15 +184,7 @@ public class MagicStonePanel extends JPanel implements Observer {
         int i = 0;
         int x = 0;
         for (Card c: playerHand.getDeckHand().values()) {
-            if (i == 6) break;
-            EnumCard card = c.getEnumCard();
-            if (i < 3) {
-                x = 100+i*xOffset;
-                g.drawImage(CardTextures.getTexture(card), x, 530, 100, 150, this);
-            } else {
-                x = 780+(i-3)*xOffset;
-                g.drawImage(CardTextures.getTexture(card), x, 530, 100, 150, this);
-            }
+            c.display(g, this);
             if (c instanceof CreatureCard) {
                 String attackAndHealth = ((CreatureCard)c).getAttack() + "/" + ((CreatureCard)c).getHealth();
                 g.setFont(new Font("TimesRoman", Font.BOLD, 15));
