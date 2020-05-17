@@ -238,24 +238,9 @@ public class MagicStonePanel extends JPanel implements Observer {
         int xOffset = 150;
         int i = 0;
         int x = 0;
-        for (Card c : playerHand.getDeckHand().values()) {
-            if (i == 6) break;
-            EnumCard card = c.getEnumCard();
-            if(c.getCost() <= magicStoneGame.getBattlefield().getPlayer().getMana()) {
-                g.setColor(Color.GREEN);
-            } else g.setColor(Color.RED);
-            playerHand.getDeckHand().get(c.getCardNumber()).setHandPos(i);
-            if (i < 3) {
-                x = 100 + i * xOffset;
-                g.drawImage(CardTextures.getTexture(card), x, 530, 100, 150, this);
-                g.drawRect(x, 530, 100, 150);
-            } else {
-                x = 780 + (i - 3) * xOffset;
-                g.drawImage(CardTextures.getTexture(card), x, 530, 100, 150, this);
-                g.drawRect(x, 530, 100, 150);
-            }
-//            System.out.println(c.getName() + " : " + c.getHandPos());
-            g.setColor(Color.BLACK);
+
+        for (Card c: playerHand.getDeckHand().values()) {
+            c.display(g, this);
             if (c instanceof CreatureCard) {
                 String attackAndHealth = ((CreatureCard) c).getAttack() + "/" + ((CreatureCard) c).getHealth();
                 g.drawString(attackAndHealth, x + 130 - g.getFontMetrics().stringWidth(attackAndHealth),

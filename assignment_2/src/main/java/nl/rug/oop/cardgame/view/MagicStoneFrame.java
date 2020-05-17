@@ -18,15 +18,19 @@ public class MagicStoneFrame extends JFrame {
     private MagicStonePanel panel;
     private CardClicker clicker;
     private JLabel gifLabel;
+    private MagicStoneGame magicStoneGame;
 
 
     public MagicStoneFrame(MagicStoneGame magicStoneGame, EndTurnButton endTurnButton) {
         super("Magic Stone");
+        this.magicStoneGame = magicStoneGame;
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         panel = new MagicStonePanel(magicStoneGame);
         panel.setLayout(null);
         endTurnButton.setBounds(590, 510, 100, 30);
         panel.add(endTurnButton);
+//        setJMenuBar(new ButtonBar(magicStoneGame));
+//        new CardDragger(magicStoneGame, panel);
         add(panel);
         clicker = new CardClicker(magicStoneGame, panel, this);
         System.out.println(this);

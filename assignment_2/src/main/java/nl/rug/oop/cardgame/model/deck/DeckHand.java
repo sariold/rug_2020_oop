@@ -22,6 +22,16 @@ public class DeckHand {
     }
 
     /**
+     * returns the next free postion in the players hand
+     * @return Free Position
+     */
+    public int getNextFreePosition() {
+        int freePosition = 0;
+        for (Card card: this.getDeckHand().values()) freePosition++;
+        return freePosition;
+    }
+
+    /**
      * Adds a card to player's deck hand
      *
      * @param card Takes a card

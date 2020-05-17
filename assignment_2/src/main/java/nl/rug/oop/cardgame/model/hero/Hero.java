@@ -4,6 +4,7 @@ import lombok.Data;
 import nl.rug.oop.cardgame.controller.button.AttackPhaseButton;
 import nl.rug.oop.cardgame.controller.button.EndTurnButton;
 import nl.rug.oop.cardgame.util.Attackable;
+import nl.rug.oop.cardgame.DefaultCoordinates;
 import nl.rug.oop.cardgame.model.Battlefield;
 import nl.rug.oop.cardgame.model.MagicStoneGame;
 import nl.rug.oop.cardgame.model.card.Card;
@@ -113,7 +114,13 @@ public class Hero implements Attackable {
         AttackPhaseButton attackPhaseButton = new AttackPhaseButton(game, frame, panel, frame.getClicker());
         Card card = this.getDeck().drawCard();
         if (card != null) {
+            System.out.println("Drawing card: " + card.getName() + " : Mana Cost -> " + card.getCost());
+            int freeHandPosition = this.getDeckHand().getNextFreePosition();
+            card.getCardImage().setCoordinates(DefaultCoordinates.PLAYER_HAND[freeHandPosition]);
             this.getDeckHand().addCard(card);
+        } else {
+            card.getCardImage().setCoordinates(DefaultCoordinates.PLAYER_DISCARD_PILE);
+            this.getDiscardDeck().discard(card);
         }
         if(this.untappedCreatures()) {
             attackPhaseButton.setBounds(590, 108, 100, 30);
