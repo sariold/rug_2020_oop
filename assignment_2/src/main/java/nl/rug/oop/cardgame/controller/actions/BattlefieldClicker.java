@@ -25,11 +25,11 @@ public class BattlefieldClicker extends MouseInputAdapter {
     private boolean attackPhase;
 
     public BattlefieldClicker(MagicStoneGame magicStoneGame, MagicStonePanel magicStonePanel, Card card,
-                              MagicStoneFrame frame, boolean attackPhase) {
+                              MagicStoneFrame magicStoneFrame, boolean attackPhase) {
         this.magicStoneGame = magicStoneGame;
         this.magicStonePanel = magicStonePanel;
         this.card = card;
-        this.frame = frame;
+        this.frame = magicStoneFrame;
         magicStonePanel.addMouseListener(this);
         this.freePos = magicStoneGame.getBattlefield().getFreePositions(magicStoneGame.getBattlefield().getPlayer());
         this.attackPhase = attackPhase;

@@ -26,7 +26,8 @@ public class MagicStoneGame extends Observable implements Observer {
      * @param battlefield Playing board
      */
     public void startGame(Battlefield battlefield, MagicStoneFrame frame, EndTurnButton endTurnButton) {
-        turnRotation(battlefield, frame, endTurnButton);
+        this.frame = frame;
+        turnRotation(battlefield, endTurnButton);
     }
 
     /**
@@ -34,12 +35,11 @@ public class MagicStoneGame extends Observable implements Observer {
      *
      * @param battlefield Playing board
      */
-    public void turnRotation(Battlefield battlefield, MagicStoneFrame frame, EndTurnButton endTurnButton) {
+    public void turnRotation(Battlefield battlefield, EndTurnButton endTurnButton) {
         Hero player = battlefield.getPlayer();
         Hero ai = battlefield.getAi();
         boolean start = true;
         for (int i = 1; start; i++) {
-            frame.update(frame.getGraphics());
             System.out.println();
             System.out.println("It's turn number " + ((i + (i % 2)) / 2));
             if (i % 2 == 1) {
@@ -52,10 +52,13 @@ public class MagicStoneGame extends Observable implements Observer {
                 frame.update(frame.getGraphics());
             } else {
                 resetUsedCreatures(ai);
+                frame.update(frame.getGraphics());
                 battlefield.incMana(ai);
                 ai.setMana(ai.getMaxMana());
+                frame.update(frame.getGraphics());
                 ai.takeTurn(battlefield, frame, frame.getPanel(), this, endTurnButton);
                 battlefield.setPlayerTurn(true);
+                frame.update(frame.getGraphics());
             }
             endGameCheck(battlefield);
         }

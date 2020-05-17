@@ -77,25 +77,38 @@ public class Battlefield {
      */
     public boolean placeCreature(CreatureCard creatureCard, Hero hero, int pos) {
         ArrayList<Integer> freePositions = getFreePositions(hero);
-        int placePos;
-        if (hero instanceof AIHero) {
-            ArrayList<Integer> enemySpots = playerHasBattlefieldCreature(this.getPlayer());
-            if(enemySpots.size() > 0) {
-                Collections.shuffle(enemySpots);
-                placePos = enemySpots.get(0);
-            }
-            else {
-                Collections.shuffle(freePositions);
-                placePos = freePositions.get(0);
-            }
-            hero.getPlayedCreatures().set(placePos, creatureCard);
-            hero.getPlayedCreatures().get(placePos).setBattlePosition(placePos);
+        int placePos = -1;
+        if(freePositions.size() > 0) {
+            if (hero instanceof AIHero) {
+                ArrayList<Integer> enemySpots = playerHasBattlefieldCreature(this.getPlayer());
+                if (enemySpots.size() > 0) {
+//                    Collections.shuffle(enemySpots);
+//                    placePos = enemySpots.get(0);
+                    placePos = enemySpotIHaveEmpty(freePositions, enemySpots);
+                }
+                if(placePos == -1){
+                    Collections.shuffle(freePositions);
+                    placePos = freePositions.get(0);
+                }
+                hero.getPlayedCreatures().set(placePos, creatureCard);
+                hero.getPlayedCreatures().get(placePos).setBattlePosition(placePos);
 //            System.out.println(freePositions.get(0));
+                return true;
+            }
+            hero.getPlayedCreatures().set(pos, creatureCard);
+            creatureCard.setBattlePosition(pos);
             return true;
         }
-        hero.getPlayedCreatures().set(pos, creatureCard);
-        creatureCard.setBattlePosition(pos);
-        return true;
+        return false;
+    }
+
+    private int enemySpotIHaveEmpty(ArrayList<Integer> mySpots, ArrayList<Integer> enemySpots) {
+        for(int i = 0; i < mySpots.size(); i++) {
+            for(int j = 0; j < enemySpots.size(); j++) {
+                if(mySpots.get(i) == enemySpots.get(j)) return mySpots.get(i);
+            }
+        }
+        return -1;
     }
 
     private ArrayList playerHasBattlefieldCreature(Hero hero) {

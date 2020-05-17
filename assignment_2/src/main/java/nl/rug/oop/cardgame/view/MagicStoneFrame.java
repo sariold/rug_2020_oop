@@ -29,6 +29,7 @@ public class MagicStoneFrame extends JFrame {
         panel.add(endTurnButton);
         add(panel);
         clicker = new CardClicker(magicStoneGame, panel, this);
+        System.out.println(this);
         setPreferredSize(new Dimension(1280, 720));
         gifLabel = new JLabel();
         pack();
@@ -38,11 +39,14 @@ public class MagicStoneFrame extends JFrame {
     }
 
     public void playGif(String gifName) {
+        System.out.println(this);
         Icon gif = new ImageIcon(this.getClass().getResource(File.separator + "textures"
                 + File.separator + gifName + ".gif"));
         gifLabel.setIcon(gif);
         gifLabel.setBounds(500, 100, 339, 399);
         panel.add(gifLabel);
+//        this.add(gifLabel);
+//        this.add(panel);
         pack();
         try {
             TimeUnit.SECONDS.sleep(2);

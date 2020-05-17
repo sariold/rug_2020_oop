@@ -18,7 +18,7 @@ public class Main {
         MagicStoneGame magicStoneGame = new MagicStoneGame();
         EndTurnButton endTurnButton = new EndTurnButton(magicStoneGame);
         MagicStoneFrame frame = new MagicStoneFrame(magicStoneGame, endTurnButton);
-        magicStoneGame.setFrame(frame);
+//        magicStoneGame.setFrame(frame);
         magicStoneGame.startGame(magicStoneGame.getBattlefield(), frame, endTurnButton);
     }
 }
