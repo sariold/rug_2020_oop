@@ -6,6 +6,7 @@ import nl.rug.oop.cardgame.DefaultStats;
 import nl.rug.oop.cardgame.controller.button.AttackPhaseButton;
 import nl.rug.oop.cardgame.controller.button.EndTurnButton;
 import nl.rug.oop.cardgame.util.Attackable;
+import nl.rug.oop.cardgame.DefaultCoordinates;
 import nl.rug.oop.cardgame.model.Battlefield;
 import nl.rug.oop.cardgame.model.MagicStoneGame;
 import nl.rug.oop.cardgame.model.card.Card;

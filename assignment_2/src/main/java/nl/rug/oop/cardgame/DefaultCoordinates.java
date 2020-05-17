@@ -24,5 +24,4 @@ public class DefaultCoordinates {
 
     public static final int[] AI_DISCARD_PILE = {10, 180, 100, 150};
 
-
 }

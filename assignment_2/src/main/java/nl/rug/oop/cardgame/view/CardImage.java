@@ -13,5 +13,6 @@ public class CardImage {
     public CardImage(Image image) {
         this.image = image;
         this.coordinates = new int[]{0,0,0,0};
+
     }
 }
