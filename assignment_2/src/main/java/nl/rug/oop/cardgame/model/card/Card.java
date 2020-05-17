@@ -1,8 +1,9 @@
 package nl.rug.oop.cardgame.model.card;
 
 import lombok.Data;
-import nl.rug.oop.cardgame.interfaces.Playable;
+import nl.rug.oop.cardgame.util.Playable;
 import nl.rug.oop.cardgame.model.Battlefield;
+import nl.rug.oop.cardgame.view.MagicStoneFrame;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -17,7 +18,8 @@ public abstract class Card implements Playable {
     protected int cost;
     protected int cardNumber;
     protected static final AtomicInteger atomicInteger = new AtomicInteger(0);
-    EnumCard enumCard;
+    private EnumCard enumCard;
+    private int handPos;
 
     /**
      * Creates a new Card
@@ -30,6 +32,7 @@ public abstract class Card implements Playable {
         this.cost = enumCard.getCost();
         this.cardNumber = atomicInteger.incrementAndGet();
         this.enumCard = enumCard;
+        this.enumCard.setCardNumber(cardNumber);
     }
 
     /**
@@ -38,7 +41,7 @@ public abstract class Card implements Playable {
      * @return
      */
     @Override
-    public boolean play(Battlefield battlefield, int hero) {
+    public boolean play(Battlefield battlefield, int hero, int pos, MagicStoneFrame frame) {
         System.out.println("You played " + this.name);
         return true;
     }

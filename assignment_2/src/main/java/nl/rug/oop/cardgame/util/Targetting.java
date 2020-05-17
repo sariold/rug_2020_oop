@@ -1,4 +1,4 @@
-package nl.rug.oop.cardgame.interfaces;
+package nl.rug.oop.cardgame.util;
 
 import nl.rug.oop.cardgame.model.Battlefield;
 import nl.rug.oop.cardgame.model.hero.Hero;

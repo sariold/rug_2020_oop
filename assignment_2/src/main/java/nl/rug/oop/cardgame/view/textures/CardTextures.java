@@ -27,16 +27,14 @@ public class CardTextures {
         textures = new EnumMap<>(EnumCard.class);
         for (EnumCard card : EnumCard.values()) {
             Image texture = null;
-            String fileName = "target" + File.separator + "classes" + File.separator + "textures" + File.separator
-                    + card + ".png";
             try {
-                File imgFile = new File(fileName);
-                Image loaded = ImageIO.read(imgFile);
+                Image loaded = ImageIO.read(CardTextures.class.getResource(File.separator + "textures" + File.separator
+                    + card + ".png"));
                 Image renderedImage = loaded.getScaledInstance(100, 150, Image.SCALE_SMOOTH);
                 texture = renderedImage;
                 textures.put(card, texture);
             } catch (IOException ioe) {
-                System.err.println("Could not load " + fileName);
+                System.err.println("Could not load!");
             }
         }
     }

@@ -1,18 +1,25 @@
 package nl.rug.oop.cardgame.model.hero;
 
 import lombok.Data;
-import nl.rug.oop.cardgame.interfaces.Attackable;
+import nl.rug.oop.cardgame.controller.button.AttackPhaseButton;
+import nl.rug.oop.cardgame.controller.button.EndTurnButton;
+import nl.rug.oop.cardgame.util.Attackable;
 import nl.rug.oop.cardgame.model.Battlefield;
+import nl.rug.oop.cardgame.model.MagicStoneGame;
 import nl.rug.oop.cardgame.model.card.Card;
 import nl.rug.oop.cardgame.model.card.CreatureCard;
 import nl.rug.oop.cardgame.model.deck.Deck;
 import nl.rug.oop.cardgame.model.deck.DeckHand;
 import nl.rug.oop.cardgame.model.deck.DiscardDeck;
 import nl.rug.oop.cardgame.view.MagicStoneFrame;
+import nl.rug.oop.cardgame.view.MagicStonePanel;
 
+import javax.swing.*;
+import java.io.File;
+import java.sql.Time;
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Hero class to store health, mana, deck, and deck hand
@@ -59,30 +66,39 @@ public class Hero implements Attackable {
      *
      * @param battlefield Battlefield
      */
-    public void playCard(Battlefield battlefield, MagicStoneFrame frame) {
+    public void playCard(Battlefield battlefield, MagicStoneFrame frame, int pos, Card card) {
         if (this.deckHand.getDeckHand().size() > 0) {
             Scanner scanner = new Scanner(System.in);
             this.deckHand.viewHand();
             System.out.println("Which card would you like to play?");
             boolean start = true;
             int currentMove;
-            while (start) {
-                try {
-                    currentMove = scanner.nextInt();
-                    Card played = this.deckHand.getDeckHand().get(currentMove);
-                    if (played != null && played.getCost() <= this.mana) {
-                        this.deckHand.getDeckHand().remove(currentMove);
-                        if (played.play(battlefield, 0)) {
-                            this.setMana(this.getMana() - played.getCost());
-                        } else {
-                            this.deckHand.getDeckHand().put(currentMove, played);
-                        }
-                    } else System.out.println("You cease to have enough mana!");
-                    start = false;
-                } catch (InputMismatchException e) {
-                    System.out.println("NOT VALID INPUT!");
+            Card played = this.deckHand.getDeckHand().get(card.getCardNumber());
+            if (played != null && played.getCost() <= this.mana) {
+                this.deckHand.getDeckHand().remove(card.getCardNumber());
+                if (played.play(battlefield, 0, pos, frame)) {
+                    this.setMana(this.getMana() - played.getCost());
+                } else {
+                    this.deckHand.getDeckHand().put(card.getCardNumber(), played);
                 }
-            }
+            } else System.out.println("You cease to have enough mana!");
+//            while (start) {
+//                try {
+//                    currentMove = scanner.nextInt();
+//                    Card played = this.deckHand.getDeckHand().get(currentMove);
+//                    if (played != null && played.getCost() <= this.mana) {
+//                        this.deckHand.getDeckHand().remove(currentMove);
+//                        if (played.play(battlefield, 0, pos)) {
+//                            this.setMana(this.getMana() - played.getCost());
+//                        } else {
+//                            this.deckHand.getDeckHand().put(currentMove, played);
+//                        }
+//                    } else System.out.println("You cease to have enough mana!");
+//                    start = false;
+//                } catch (InputMismatchException e) {
+//                    System.out.println("NOT VALID INPUT!");
+//                }
+//            }
             frame.update(frame.getGraphics());
         } else System.out.println("Empty Hand!");
     }
@@ -92,59 +108,32 @@ public class Hero implements Attackable {
      *
      * @param battlefield Playing board
      */
-    public void takeTurn(Battlefield battlefield, MagicStoneFrame frame) {
-        Scanner scanner = new Scanner(System.in);
-        boolean start = true;
-        int currentMove = 0;
-        System.out.println(this.name + "'s TURN!");
+    public void takeTurn(Battlefield battlefield, MagicStoneFrame frame, MagicStonePanel panel, MagicStoneGame game,
+    EndTurnButton endTurnButton) {
+        AttackPhaseButton attackPhaseButton = new AttackPhaseButton(game, frame, panel, frame.getClicker());
         Card card = this.getDeck().drawCard();
         if (card != null) {
-            System.out.println("Drawing card: " + card.getName() + " : Mana Cost -> " + card.getCost());
             this.getDeckHand().addCard(card);
         }
+        if(this.untappedCreatures()) {
+            attackPhaseButton.setBounds(590, 108, 100, 30);
+            panel.add(endTurnButton);
+            panel.add(attackPhaseButton);
+        }
         frame.update(frame.getGraphics());
-        while (start) {
-            System.out.println("Current Mana: " + this.getMana() + "/" + this.getMaxMana());
-            System.out.println("0) Check Hand");
-            System.out.println("1) Play a Card");
-            System.out.println("2) Discard a Card");
-            System.out.println("3) Attack with creature");
-            System.out.println("4) Swap a creatures position");
-            System.out.println("5) Show Battlefield");
-            System.out.println("6) End turn");
+        while(battlefield.isPlayerTurn()) {
             try {
-                currentMove = scanner.nextInt();
-            } catch (InputMismatchException e) {
-                System.out.println("NOT VALID INPUT!");
-            }
-            switch (currentMove) {
-                case 0:
-                    this.getDeckHand().viewHand();
-                    break;
-                case 1:
-                    this.playCard(battlefield, frame);
-                    break;
-                case 2:
-                    this.getDeckHand().discardCard(this.getDiscardDeck());
-                    frame.update(frame.getGraphics());
-                    break;
-                case 3:
-                    attackPhase(battlefield, frame);
-                    battlefield.setPlayerTurn(false);
-                    start = false;
-                    break;
-                case 4:
-                    swapCreaturePositions(battlefield, frame);
-                    break;
-                case 5:
-                    battlefield.showBattlefield();
-                    break;
-                case 6:
-                    battlefield.setPlayerTurn(false);
-                    start = false;
-                    break;
+                TimeUnit.SECONDS.sleep(1);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
         }
+        panel.remove(attackPhaseButton);
+//        battlefield.setPlayerTurn(false);
+        return;
+//                case 4:
+//                    swapCreaturePositions(battlefield, frame);
+//                    break;
     }
 
     private void swapCreaturePositions(Battlefield battlefield, MagicStoneFrame frame) {
@@ -173,35 +162,20 @@ public class Hero implements Attackable {
 
     /**
      * Attack enemy Hero
-     *
      * @param battlefield Battlefield
      */
-    public void attackPhase(Battlefield battlefield, MagicStoneFrame frame) {
-        if (this.untappedCreatures()) {
-            Scanner scanner = new Scanner(System.in);
-            boolean start = true;
-            int currentMove;
-            while (start && this.untappedCreatures()) {
-                System.out.println("Which creature would you like to attack with? (-1 : End Turn)");
-                showPlayedCreatures();
-                try {
-                    currentMove = scanner.nextInt();
-                    if (currentMove == -1) start = false;
-                    CreatureCard attackingCreature = this.getPlayedCreatures().get(currentMove);
-                    CreatureCard attackedCreature = battlefield.getAi().getPlayedCreatures().get(currentMove);
-                    if (attackingCreature == null) continue;
-                    if (attackedCreature == null) attackingCreature.attack(battlefield.getAi());
-                    else attackingCreature.attack(attackedCreature);
-                    attackingCreature.checkDeath(this, attackingCreature.getBattlePosition());
-                    attackedCreature.checkDeath(battlefield.getAi(), attackedCreature.getBattlePosition());
-                    attackingCreature.setUsed(true);
-                } catch (Exception e) {
-                    System.out.println("NOT VALID INPUT!");
-                }
-                battlefield.removeDead(this);
-                frame.update(frame.getGraphics());
-            }
-        } else System.out.println("Either you have no creatures or you just placed them down!");
+    public void attackPhase(Battlefield battlefield, MagicStoneFrame frame, int pos, MagicStoneGame game, MagicStonePanel panel) {
+        CreatureCard attackingCreature = this.getPlayedCreatures().get(pos);
+        CreatureCard attackedCreature = battlefield.getAi().getPlayedCreatures().get(pos);
+//        frame.playGif("SWORD");
+        if (attackedCreature == null) attackingCreature.attack(battlefield.getAi());
+        else attackingCreature.attack(attackedCreature);
+        attackingCreature.checkDeath(this, attackingCreature.getBattlePosition());
+        if(attackedCreature != null) attackedCreature.checkDeath(battlefield.getAi(), attackedCreature.getBattlePosition());
+        attackingCreature.setUsed(true);
+        battlefield.removeDead(this);
+        game.endGameCheck(battlefield);
+        frame.update(frame.getGraphics());
     }
 
     /**
@@ -220,7 +194,6 @@ public class Hero implements Attackable {
 
     /**
      * Return a boolean if your battlefield has untapped creatures
-     *
      * @return Boolean if a creature can be used for combat
      */
     public boolean untappedCreatures() {
@@ -232,7 +205,6 @@ public class Hero implements Attackable {
 
     /**
      * Set health
-     *
      * @param health Health
      */
     @Override
@@ -242,7 +214,6 @@ public class Hero implements Attackable {
 
     /**
      * Return health
-     *
      * @return Health
      */
     @Override
@@ -252,7 +223,6 @@ public class Hero implements Attackable {
 
     /**
      * Attack a hero or creature
-     *
      * @param attackable Attackable
      */
     @Override
@@ -262,7 +232,6 @@ public class Hero implements Attackable {
 
     /**
      * Return attack
-     *
      * @return Attack
      */
     @Override
@@ -272,11 +241,11 @@ public class Hero implements Attackable {
 
     /**
      * Set attack
-     *
      * @param attack Attack
      */
     @Override
     public void setAttack(int attack) {
         this.setHeroAttack(attack);
     }
+
 }

@@ -1,16 +1,19 @@
 package nl.rug.oop.cardgame.model.card;
 
 import lombok.Data;
-import nl.rug.oop.cardgame.interfaces.Targetting;
+import lombok.EqualsAndHashCode;
+import nl.rug.oop.cardgame.util.Targetting;
 import nl.rug.oop.cardgame.model.Battlefield;
 import nl.rug.oop.cardgame.model.hero.AIHero;
 import nl.rug.oop.cardgame.model.hero.Hero;
+import nl.rug.oop.cardgame.view.MagicStoneFrame;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 public class CopySpell extends SpellCard implements Targetting {
 
@@ -19,10 +22,10 @@ public class CopySpell extends SpellCard implements Targetting {
     }
 
     @Override
-    public boolean play(Battlefield battlefield, int hero) {
+    public boolean play(Battlefield battlefield, int hero, int pos, MagicStoneFrame frame) {
         Hero targetHero = (hero == 0 ? battlefield.getPlayer() : battlefield.getAi());
         target(battlefield, targetHero);
-        return super.play(battlefield, hero);
+        return super.play(battlefield, hero, pos, frame);
     }
 
     @Override
@@ -42,7 +45,7 @@ public class CopySpell extends SpellCard implements Targetting {
                         if (hero.getPlayedCreatures().get(currentMove) != null) {
                             CreatureCard creatureCard = new CreatureCard(hero.getPlayedCreatures().get(currentMove).getEnumCard());
                             creatureCard.setUsed(true);
-                            battlefield.placeCreature(creatureCard, hero);
+//                            battlefield.placeCreature(creatureCard, hero);
                         }
                         start = false;
                     } catch (InputMismatchException e) {
@@ -58,7 +61,7 @@ public class CopySpell extends SpellCard implements Targetting {
                     if (creatures.get(0) != null) {
                         CreatureCard creatureCard = new CreatureCard(creatures.get(0).getEnumCard());
                         creatureCard.setUsed(true);
-                        battlefield.placeCreature(creatureCard, hero);
+//                        battlefield.placeCreature(creatureCard, hero);
                     }
                 }
             }

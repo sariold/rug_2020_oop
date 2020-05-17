@@ -1,4 +1,4 @@
-package nl.rug.oop.cardgame.interfaces;
+package nl.rug.oop.cardgame.util;
 
 /**
  * Objects that can be attacked

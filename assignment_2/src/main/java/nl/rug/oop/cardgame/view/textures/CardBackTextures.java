@@ -3,6 +3,7 @@ package nl.rug.oop.cardgame.view.textures;
 import lombok.Data;
 
 import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -11,7 +12,7 @@ import java.util.EnumMap;
 @Data
 public class CardBackTextures {
 
-    private static EnumMap<CardBack, BufferedImage> textures;
+    private static EnumMap<CardBack, Image> textures;
 
 
     /**
@@ -22,13 +23,14 @@ public class CardBackTextures {
     static {
         textures = new EnumMap<>(CardBack.class);
         for (CardBack back : CardBack.values()) {
-            BufferedImage texture = null;
-            String fileName = "target/classes/textures/" + back + ".png";
+            Image texture = null;
             try {
-                File imgFile = new File(fileName);
-                texture = ImageIO.read(imgFile);
+                Image loaded = ImageIO.read(CardTextures.class.getResource(File.separator + "textures" + File.separator
+                        + back + ".png"));
+                Image renderedImage = loaded.getScaledInstance(100, 150, Image.SCALE_SMOOTH);
+                texture = renderedImage;
             } catch (IOException ioe) {
-                System.err.println("Could not load " + fileName);
+                System.err.println("Could not load!");
             }
             textures.put(back, texture);
         }
@@ -39,7 +41,7 @@ public class CardBackTextures {
      *
      * @param back The cart in question.
      */
-    public static BufferedImage getTexture(CardBack back) {
+    public static Image getTexture(CardBack back) {
         return textures.get(back);
     }
 

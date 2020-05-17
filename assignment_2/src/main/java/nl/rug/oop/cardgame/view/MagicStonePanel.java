@@ -6,6 +6,7 @@ import nl.rug.oop.cardgame.model.card.Card;
 import nl.rug.oop.cardgame.model.card.CreatureCard;
 import nl.rug.oop.cardgame.model.card.EnumCard;
 import nl.rug.oop.cardgame.model.deck.DeckHand;
+import nl.rug.oop.cardgame.model.hero.Hero;
 import nl.rug.oop.cardgame.view.textures.*;
 
 import javax.swing.*;
@@ -25,6 +26,7 @@ public class MagicStonePanel extends JPanel implements Observer {
         setBackground(BACKGROUND_COLOR);
         setVisible(true);
         setOpaque(true);
+        this.setLayout(null);
     }
 
     private void paintAreas(Graphics g) {
@@ -179,10 +181,7 @@ public class MagicStonePanel extends JPanel implements Observer {
             }
             EnumCard card = c.getEnumCard();
             g.drawImage(CardTextures.getTexture(card), 140 + i * xOffset, 194, 90, 135, this);
-//            String attackAndHealth = c.getAttack() + "/" + c.getHealth();
             g.setFont(new Font("TimesRoman", Font.PLAIN, 20));
-//            g.drawString(attackAndHealth, 140+i*xOffset+81-g.getFontMetrics().stringWidth(attackAndHealth),
-//                    190);
             g.drawImage(StatTextures.getTexture(StatEnum.ATTACK_BLUE), 160 + i * xOffset + 83, 200, 50, 65, this);
             g.drawString(Integer.toString(c.getAttack()), 160 + i * xOffset + 100, 245);
             g.drawImage(StatTextures.getTexture(StatEnum.HEART_BLUE), 167 + i * xOffset + 77, 280, 45, 45, this);
@@ -191,13 +190,48 @@ public class MagicStonePanel extends JPanel implements Observer {
         }
     }
 
+    public void paintPositions(Graphics g, Color color, boolean attack) {
+        Hero player = magicStoneGame.getBattlefield().getPlayer();
+        g.setColor(color);
+        int xOffset = 200;
+        for(int i = 0; i < 5; i++) {
+            if(!attack) {
+                if(player.getPlayedCreatures().get(i) == null) g.drawRect(140 + i * xOffset, 396, 90, 135);
+            } else {
+                if (player.getPlayedCreatures().get(i) != null) {
+                    if(!player.getPlayedCreatures().get(i).isUsed()) {
+                        System.out.println(player.getPlayedCreatures().get(i).toString());
+                        g.drawRect(140 + i * xOffset, 396, 90, 135);
+                    }
+                }
+            }
+        }
+    }
+
+    public void paintSelected(Graphics g, int i, Color color) {
+        int xOffset = 150;
+        int x = 0;
+        g.setColor(color);
+            if (i < 3) {
+                x = 100 + i * xOffset;
+                g.drawRect(x, 530, 100, 150);
+            } else if (i < 6){
+                x = 780 + (i - 3) * xOffset;
+                g.drawRect(x, 530, 100, 150);
+            } else {
+                g.drawRect(10, 360, 100, 150); // Discard
+            }
+            g.setColor(Color.BLACK);
+            i++;
+    }
+
     /**
      * Ppaint both players hands
      *
      * @param g Graphics
      */
     private void paintHand(Graphics g) {
-        g.setFont(new Font("TimesRoman", Font.PLAIN, 15));
+        g.setFont(new Font("TimesRoman", Font.BOLD, 15));
         DeckHand playerHand = magicStoneGame.getBattlefield().getPlayer().getDeckHand();
         DeckHand aiHand = magicStoneGame.getBattlefield().getAi().getDeckHand();
         CardBack redBack = CardBack.RED_BACK;
@@ -207,16 +241,23 @@ public class MagicStonePanel extends JPanel implements Observer {
         for (Card c : playerHand.getDeckHand().values()) {
             if (i == 6) break;
             EnumCard card = c.getEnumCard();
+            if(c.getCost() <= magicStoneGame.getBattlefield().getPlayer().getMana()) {
+                g.setColor(Color.GREEN);
+            } else g.setColor(Color.RED);
+            playerHand.getDeckHand().get(c.getCardNumber()).setHandPos(i);
             if (i < 3) {
                 x = 100 + i * xOffset;
                 g.drawImage(CardTextures.getTexture(card), x, 530, 100, 150, this);
+                g.drawRect(x, 530, 100, 150);
             } else {
                 x = 780 + (i - 3) * xOffset;
                 g.drawImage(CardTextures.getTexture(card), x, 530, 100, 150, this);
+                g.drawRect(x, 530, 100, 150);
             }
+//            System.out.println(c.getName() + " : " + c.getHandPos());
+            g.setColor(Color.BLACK);
             if (c instanceof CreatureCard) {
                 String attackAndHealth = ((CreatureCard) c).getAttack() + "/" + ((CreatureCard) c).getHealth();
-                g.setColor(Color.BLACK);
                 g.drawString(attackAndHealth, x + 130 - g.getFontMetrics().stringWidth(attackAndHealth),
                         670);
             } else {

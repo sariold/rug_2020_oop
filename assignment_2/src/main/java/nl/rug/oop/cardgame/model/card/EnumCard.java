@@ -18,6 +18,8 @@ public enum EnumCard {
     private int attack;
     private final int cost;
     private int value;
+    private int cardNumber;
+
 
     EnumCard(Type type, Face face, int health, int attack, int cost) {
         this.type = type;
@@ -25,6 +27,7 @@ public enum EnumCard {
         this.health = health;
         this.attack = attack;
         this.cost = cost;
+        this.cardNumber = -1;
     }
 
     EnumCard(Type type, Face face, int cost, int value) {
@@ -32,7 +35,12 @@ public enum EnumCard {
         this.face = face;
         this.cost = cost;
         this.value = value;
+        this.cardNumber = -1;
     }
+
+    public int getCardNumber() { return this.cardNumber; }
+
+    public void setCardNumber(int num) { this.cardNumber = num; }
 
     public int getHealth() {
         return this.health;

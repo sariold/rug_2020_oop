@@ -2,9 +2,10 @@ package nl.rug.oop.cardgame.model.card;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import nl.rug.oop.cardgame.interfaces.Attackable;
+import nl.rug.oop.cardgame.util.Attackable;
 import nl.rug.oop.cardgame.model.Battlefield;
 import nl.rug.oop.cardgame.model.hero.Hero;
+import nl.rug.oop.cardgame.view.MagicStoneFrame;
 
 /**
  * A type of card that summons a creature when played
@@ -32,7 +33,6 @@ public class CreatureCard extends Card implements Attackable {
 
     /**
      * Set health
-     *
      * @param health Health
      */
     @Override
@@ -42,7 +42,6 @@ public class CreatureCard extends Card implements Attackable {
 
     /**
      * Get health
-     *
      * @return Health
      */
     @Override
@@ -52,7 +51,6 @@ public class CreatureCard extends Card implements Attackable {
 
     /**
      * Attack method
-     *
      * @param attackable Pass in creature or hero
      */
     @Override
@@ -66,7 +64,6 @@ public class CreatureCard extends Card implements Attackable {
 
     /**
      * Return attack
-     *
      * @return Attack
      */
     @Override
@@ -76,7 +73,6 @@ public class CreatureCard extends Card implements Attackable {
 
     /**
      * Sets attack
-     *
      * @param attack Attack
      */
     @Override
@@ -86,16 +82,15 @@ public class CreatureCard extends Card implements Attackable {
 
     /**
      * Play a card
-     *
      * @param battlefield Battlefield
      * @param heroIndex   Hero that played the card 0 for player, 1 for AI
      * @return
      */
     @Override
-    public boolean play(Battlefield battlefield, int heroIndex) {
+    public boolean play(Battlefield battlefield, int heroIndex, int pos, MagicStoneFrame frame) {
         this.setUsed(true);
         Hero hero = (heroIndex == 0 ? battlefield.getPlayer() : battlefield.getAi());
-        return battlefield.placeCreature(this, hero);
+        return battlefield.placeCreature(this, hero, pos);
     }
 
     @Override

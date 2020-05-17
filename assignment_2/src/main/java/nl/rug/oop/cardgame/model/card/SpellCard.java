@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import nl.rug.oop.cardgame.model.Battlefield;
 import nl.rug.oop.cardgame.model.hero.Hero;
+import nl.rug.oop.cardgame.view.MagicStoneFrame;
 
 /**
  * Spell card
@@ -22,9 +23,10 @@ public abstract class SpellCard extends Card {
     }
 
     @Override
-    public boolean play(Battlefield battlefield, int heroIndex) {
+    public boolean play(Battlefield battlefield, int heroIndex, int pos, MagicStoneFrame frame) {
         Hero hero = (heroIndex == 0 ? battlefield.getPlayer() : battlefield.getAi());
         hero.getDiscardDeck().discard(this);
         return true;
     }
+
 }

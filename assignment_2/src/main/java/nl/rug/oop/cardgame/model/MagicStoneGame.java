@@ -1,21 +1,23 @@
 package nl.rug.oop.cardgame.model;
 
 import lombok.Data;
-import nl.rug.oop.cardgame.model.deck.DiscardDeck;
+import lombok.EqualsAndHashCode;
+import nl.rug.oop.cardgame.controller.button.EndTurnButton;
 import nl.rug.oop.cardgame.model.hero.Hero;
 import nl.rug.oop.cardgame.view.MagicStoneFrame;
 
 import java.util.Observable;
 import java.util.Observer;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 public class MagicStoneGame extends Observable implements Observer {
 
-    Battlefield battlefield;
+    private Battlefield battlefield;
+    private MagicStoneFrame frame;
 
     public MagicStoneGame() {
         this.battlefield = new Battlefield();
-//        startGame(this.battlefield);
     }
 
     /**
@@ -23,8 +25,8 @@ public class MagicStoneGame extends Observable implements Observer {
      *
      * @param battlefield Playing board
      */
-    public void startGame(Battlefield battlefield, MagicStoneFrame frame) {
-        turnRotation(battlefield, frame);
+    public void startGame(Battlefield battlefield, MagicStoneFrame frame, EndTurnButton endTurnButton) {
+        turnRotation(battlefield, frame, endTurnButton);
     }
 
     /**
@@ -32,7 +34,7 @@ public class MagicStoneGame extends Observable implements Observer {
      *
      * @param battlefield Playing board
      */
-    public void turnRotation(Battlefield battlefield, MagicStoneFrame frame) {
+    public void turnRotation(Battlefield battlefield, MagicStoneFrame frame, EndTurnButton endTurnButton) {
         Hero player = battlefield.getPlayer();
         Hero ai = battlefield.getAi();
         boolean start = true;
@@ -43,47 +45,32 @@ public class MagicStoneGame extends Observable implements Observer {
             if (i % 2 == 1) {
                 resetUsedCreatures(player);
                 frame.update(frame.getGraphics());
-                battlefield.showBattlefield();
                 battlefield.incMana(player);
                 player.setMana(player.getMaxMana());
                 frame.update(frame.getGraphics());
-                player.takeTurn(battlefield, frame);
+                player.takeTurn(battlefield, frame, frame.getPanel(), this, endTurnButton);
                 frame.update(frame.getGraphics());
             } else {
                 resetUsedCreatures(ai);
                 battlefield.incMana(ai);
                 ai.setMana(ai.getMaxMana());
-                ai.takeTurn(battlefield, frame);
+                ai.takeTurn(battlefield, frame, frame.getPanel(), this, endTurnButton);
                 battlefield.setPlayerTurn(true);
             }
             endGameCheck(battlefield);
         }
     }
 
+    public void endPlayerTurn() {
+       this.battlefield.setPlayerTurn(false);
+    }
+
     /**
      * Checks whether either hero has died if so ends the game
-     *
-     * @param battlefield Battlefield
      */
-    private void endGameCheck(Battlefield battlefield) {
-        if (battlefield.getPlayer().getHealth() <= 0) loseGame();
-        else if (battlefield.getAi().getHealth() <= 0) winGame();
-    }
-
-    /**
-     * Ends the game player has won
-     */
-    private void winGame() {
-        System.out.println("You have won against the perfection of artificial intelligence");
-        System.exit(0);
-    }
-
-    /**
-     * Ends the game player has lost
-     */
-    private void loseGame() {
-        System.out.println("Lost against a lousy machine you N00B!");
-        System.exit(0);
+    public void endGameCheck(Battlefield battlefield) {
+        if (battlefield.getPlayer().getHealth() <= 0) frame.gameOver(false);
+        else if (battlefield.getAi().getHealth() <= 0) frame.gameOver(true);
     }
 
     /**

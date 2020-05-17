@@ -5,7 +5,6 @@ import nl.rug.oop.cardgame.DefaultStats;
 import nl.rug.oop.cardgame.model.card.Card;
 
 import java.util.HashMap;
-import java.util.Scanner;
 
 /**
  * Player's deck hand
@@ -31,6 +30,7 @@ public class DeckHand {
         if (this.deckHand.size() == DefaultStats.MAX_HAND_CARDS) System.out.println("You have too many cards in " +
                 "hand the drawn card is discarded!");
         else this.deckHand.put(card.getCardNumber(), card);
+        System.out.println(card.getCardNumber());
     }
 
     /**
@@ -52,24 +52,12 @@ public class DeckHand {
      *
      * @param discardDeck
      */
-    public void discardCard(DiscardDeck discardDeck) {
+    public void discardCard(DiscardDeck discardDeck, int key) {
         if (this.deckHand.size() > 0) {
-            Scanner scanner = new Scanner(System.in);
-            viewHand();
-            System.out.println("Which card would you like to discard?");
-            boolean start = true;
-            int currentMove;
-            while (start) {
-                try {
-                    currentMove = scanner.nextInt();
-                    Card discarded = this.deckHand.get(currentMove);
-                    this.deckHand.remove(currentMove);
-                    discardDeck.discard(discarded);
-                    start = false;
-                } catch (Exception e) {
-                    System.out.println("NOT VALID INPUT!");
-                }
-            }
+                Card discarded = this.deckHand.get(key);
+                discarded.setHandPos(-1);
+                this.deckHand.remove(key);
+                discardDeck.discard(discarded);
         } else System.out.println("Empty Hand!");
     }
 
