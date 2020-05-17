@@ -44,7 +44,7 @@ public class AIHero extends Hero {
         Card card = this.getDeck().drawCard();
         if (card != null) {
             System.out.println("Drawing card: " + card.getName() + " : Mana Cost -> " + card.getCost());
-            this.getDeckHand().addCard(card);
+            this.getDeckHand().addCard(card, this);
         }
         frame.update(frame.getGraphics());
         if (this.deckHand.getDeckHand().size() > 0) {

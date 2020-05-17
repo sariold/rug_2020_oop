@@ -5,6 +5,9 @@ import lombok.EqualsAndHashCode;
 import nl.rug.oop.cardgame.model.Battlefield;
 import nl.rug.oop.cardgame.model.hero.Hero;
 import nl.rug.oop.cardgame.view.MagicStoneFrame;
+import nl.rug.oop.cardgame.view.MagicStonePanel;
+
+import java.awt.*;
 
 /**
  * Spell card
@@ -29,4 +32,12 @@ public abstract class SpellCard extends Card {
         return true;
     }
 
+    @Override
+    public void display(Graphics g, MagicStonePanel panel) {
+        super.display(g, panel);
+        g.setColor(Color.BLACK);
+        String value = String.valueOf(this.getEnumCard().getValue());
+        g.drawString(value, this.cardImage.getCoordinates()[0] + 130 - g.getFontMetrics().stringWidth(value),
+                670);
+    }
 }

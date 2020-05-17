@@ -1,6 +1,8 @@
 package nl.rug.oop.cardgame.model.hero;
 
 import lombok.Data;
+import nl.rug.oop.cardgame.DefaultCoordinates;
+import nl.rug.oop.cardgame.DefaultStats;
 import nl.rug.oop.cardgame.controller.button.AttackPhaseButton;
 import nl.rug.oop.cardgame.controller.button.EndTurnButton;
 import nl.rug.oop.cardgame.util.Attackable;
@@ -113,7 +115,7 @@ public class Hero implements Attackable {
         AttackPhaseButton attackPhaseButton = new AttackPhaseButton(game, frame, panel, frame.getClicker());
         Card card = this.getDeck().drawCard();
         if (card != null) {
-            this.getDeckHand().addCard(card);
+            this.getDeckHand().addCard(card, this);
         }
         if(this.untappedCreatures()) {
             attackPhaseButton.setBounds(590, 108, 100, 30);

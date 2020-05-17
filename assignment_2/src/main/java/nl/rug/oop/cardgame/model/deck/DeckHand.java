@@ -3,6 +3,7 @@ package nl.rug.oop.cardgame.model.deck;
 import lombok.Data;
 import nl.rug.oop.cardgame.DefaultStats;
 import nl.rug.oop.cardgame.model.card.Card;
+import nl.rug.oop.cardgame.model.hero.Hero;
 
 import java.util.HashMap;
 
@@ -26,9 +27,12 @@ public class DeckHand {
      *
      * @param card Takes a card
      */
-    public void addCard(Card card) {
-        if (this.deckHand.size() == DefaultStats.MAX_HAND_CARDS) System.out.println("You have too many cards in " +
-                "hand the drawn card is discarded!");
+    public void addCard(Card card, Hero hero) {
+        if (this.deckHand.size() == DefaultStats.MAX_HAND_CARDS){
+            System.out.println("You have too many cards in " +
+                    "hand the drawn card is discarded!");
+            hero.getDiscardDeck().discard(card);
+        }
         else this.deckHand.put(card.getCardNumber(), card);
         System.out.println(card.getCardNumber());
     }
@@ -59,6 +63,16 @@ public class DeckHand {
                 this.deckHand.remove(key);
                 discardDeck.discard(discarded);
         } else System.out.println("Empty Hand!");
+    }
+
+    /**
+     * Returns the next free position in the hand
+     * @return Free Position
+     */
+    public int freePostion() {
+        int i;
+        for (i = 0; i < this.getDeckHand().values().size(); i++) { }
+        return i;
     }
 
 

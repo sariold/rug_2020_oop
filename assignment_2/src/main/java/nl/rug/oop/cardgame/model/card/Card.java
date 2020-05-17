@@ -3,8 +3,12 @@ package nl.rug.oop.cardgame.model.card;
 import lombok.Data;
 import nl.rug.oop.cardgame.util.Playable;
 import nl.rug.oop.cardgame.model.Battlefield;
+import nl.rug.oop.cardgame.view.CardImage;
 import nl.rug.oop.cardgame.view.MagicStoneFrame;
+import nl.rug.oop.cardgame.view.MagicStonePanel;
+import nl.rug.oop.cardgame.view.textures.CardTextures;
 
+import java.awt.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -19,6 +23,7 @@ public abstract class Card implements Playable {
     protected int cardNumber;
     protected static final AtomicInteger atomicInteger = new AtomicInteger(0);
     private EnumCard enumCard;
+    protected CardImage cardImage;
     private int handPos;
 
     /**
@@ -33,6 +38,7 @@ public abstract class Card implements Playable {
         this.cardNumber = atomicInteger.incrementAndGet();
         this.enumCard = enumCard;
         this.enumCard.setCardNumber(cardNumber);
+        this.cardImage = new CardImage(CardTextures.getTexture(this.enumCard));
     }
 
     /**
@@ -44,6 +50,11 @@ public abstract class Card implements Playable {
     public boolean play(Battlefield battlefield, int hero, int pos, MagicStoneFrame frame) {
         System.out.println("You played " + this.name);
         return true;
+    }
+
+    public void display(Graphics g, MagicStonePanel panel){
+        int[] coords = this.cardImage.getCoordinates();
+        g.drawImage(this.cardImage.getImage(), coords[0],coords[1],coords[2],coords[3], panel);
     }
 
 }

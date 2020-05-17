@@ -6,6 +6,11 @@ import nl.rug.oop.cardgame.util.Attackable;
 import nl.rug.oop.cardgame.model.Battlefield;
 import nl.rug.oop.cardgame.model.hero.Hero;
 import nl.rug.oop.cardgame.view.MagicStoneFrame;
+import nl.rug.oop.cardgame.view.MagicStonePanel;
+import nl.rug.oop.cardgame.view.textures.StatEnum;
+import nl.rug.oop.cardgame.view.textures.StatTextures;
+
+import java.awt.*;
 
 /**
  * A type of card that summons a creature when played
@@ -112,5 +117,25 @@ public class CreatureCard extends Card implements Attackable {
             this.setBattlePosition(-1);
             hero.getDiscardDeck().discard(this);
         }
+    }
+
+    @Override
+    public void display(Graphics g, MagicStonePanel panel) {
+        super.display(g, panel);
+        int[] coords = this.cardImage.getCoordinates();
+        if (this.battlePosition == -1) {
+            g.setColor(Color.BLACK);
+            String attackAndHealth = (this.getAttack() + "/" + (this.getHealth()));
+            g.drawString(attackAndHealth, coords[0] + 130 -
+                    g.getFontMetrics().stringWidth(attackAndHealth), 670);
+        } else {
+            g.setColor(Color.WHITE);
+            g.setFont(new Font("TimesRoman", Font.PLAIN, 20));
+            g.drawImage(StatTextures.getTexture(StatEnum.ATTACK), coords[0] + 103, coords[1] + 10, 50, 65, panel);
+            g.drawString(Integer.toString(this.getAttack()), coords[0] + 120, coords[1] + 55);
+            g.drawImage(StatTextures.getTexture(StatEnum.HEART), coords[0] + 104, coords[1] + 90, 45, 45, panel);
+            g.drawString(Integer.toString(this.getHealth()), coords[0] + 122, coords[1] + 115);
+        }
+
     }
 }

@@ -3,6 +3,7 @@ package nl.rug.oop.cardgame.model.card;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import nl.rug.oop.cardgame.model.Battlefield;
+import nl.rug.oop.cardgame.model.hero.Hero;
 import nl.rug.oop.cardgame.view.MagicStoneFrame;
 
 @EqualsAndHashCode(callSuper = true)
@@ -14,26 +15,17 @@ public class DrawSpell extends SpellCard {
     }
 
     @Override
-    public boolean play(Battlefield battlefield, int hero, int pos, MagicStoneFrame frame) {
+    public boolean play(Battlefield battlefield, int heroIndex, int pos, MagicStoneFrame frame) {
         System.out.println("Played a spell you draw 2 cards");
-        if (hero == 0) {
-            for (int i = 0; i < 2; i++) {
-                Card card = battlefield.getPlayer().getDeck().drawCard();
-                if (card != null) {
-                    System.out.println("Drawing card: " + card.getName() + " : Mana Cost -> " + card.getCost());
-                    battlefield.getPlayer().getDeckHand().addCard(card);
-                }
-            }
-            return super.play(battlefield, hero, pos, frame);
-        }
+        Hero hero = (heroIndex == 0? battlefield.getPlayer(): battlefield.getAi());
         for (int i = 0; i < 2; i++) {
-            Card card = battlefield.getAi().getDeck().drawCard();
+            Card card = hero.getDeck().drawCard();
             if (card != null) {
                 System.out.println("Drawing card: " + card.getName() + " : Mana Cost -> " + card.getCost());
-                battlefield.getAi().getDeckHand().addCard(card);
+                hero.getDeckHand().addCard(card, hero);
             }
         }
-        return super.play(battlefield, hero, pos, frame);
+        return super.play(battlefield, heroIndex, pos, frame);
     }
 
 
