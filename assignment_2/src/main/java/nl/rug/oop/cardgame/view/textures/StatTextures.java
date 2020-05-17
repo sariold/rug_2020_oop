@@ -3,6 +3,7 @@ package nl.rug.oop.cardgame.view.textures;
 import lombok.Data;
 
 import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -11,7 +12,7 @@ import java.util.EnumMap;
 @Data
 public class StatTextures {
 
-    private static EnumMap<StatEnum, BufferedImage> textures;
+    private static EnumMap<StatEnum, Image> textures;
 
 
     /**
@@ -22,13 +23,14 @@ public class StatTextures {
     static {
         textures = new EnumMap<>(StatEnum.class);
         for (StatEnum stat : StatEnum.values()) {
-            BufferedImage texture = null;
-            String fileName = "target/classes/textures/" + stat + ".png";
+            Image texture = null;
             try {
-                File imgFile = new File(fileName);
-                texture = ImageIO.read(imgFile);
+                Image loaded = ImageIO.read(CardTextures.class.getResource(File.separator + "textures" + File.separator
+                        + stat + ".png"));
+                Image renderedImage = loaded.getScaledInstance(100, 150, Image.SCALE_SMOOTH);
+                texture = renderedImage;
             } catch (IOException ioe) {
-                System.err.println("Could not load " + fileName);
+                System.err.println("Could not load!");
             }
             textures.put(stat, texture);
         }
@@ -39,7 +41,7 @@ public class StatTextures {
      *
      * @param stat The stat in question.
      */
-    public static BufferedImage getTexture(StatEnum stat) {
+    public static Image getTexture(StatEnum stat) {
         return textures.get(stat);
     }
 

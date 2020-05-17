@@ -1,8 +1,11 @@
 package nl.rug.oop.cardgame.model.card;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import nl.rug.oop.cardgame.model.Battlefield;
+import nl.rug.oop.cardgame.view.MagicStoneFrame;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 public class DrawSpell extends SpellCard {
 
@@ -11,7 +14,7 @@ public class DrawSpell extends SpellCard {
     }
 
     @Override
-    public boolean play(Battlefield battlefield, int hero) {
+    public boolean play(Battlefield battlefield, int hero, int pos, MagicStoneFrame frame) {
         System.out.println("Played a spell you draw 2 cards");
         if (hero == 0) {
             for (int i = 0; i < 2; i++) {
@@ -21,7 +24,7 @@ public class DrawSpell extends SpellCard {
                     battlefield.getPlayer().getDeckHand().addCard(card);
                 }
             }
-            return super.play(battlefield, hero);
+            return super.play(battlefield, hero, pos, frame);
         }
         for (int i = 0; i < 2; i++) {
             Card card = battlefield.getAi().getDeck().drawCard();
@@ -30,7 +33,7 @@ public class DrawSpell extends SpellCard {
                 battlefield.getAi().getDeckHand().addCard(card);
             }
         }
-        return super.play(battlefield, hero);
+        return super.play(battlefield, hero, pos, frame);
     }
 
 

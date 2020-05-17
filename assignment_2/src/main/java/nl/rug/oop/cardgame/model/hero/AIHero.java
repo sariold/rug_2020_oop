@@ -1,12 +1,18 @@
 package nl.rug.oop.cardgame.model.hero;
 
+import nl.rug.oop.cardgame.controller.button.EndTurnButton;
 import nl.rug.oop.cardgame.model.Battlefield;
+import nl.rug.oop.cardgame.model.MagicStoneGame;
 import nl.rug.oop.cardgame.model.card.Card;
 import nl.rug.oop.cardgame.model.card.CreatureCard;
 import nl.rug.oop.cardgame.view.MagicStoneFrame;
+import nl.rug.oop.cardgame.view.MagicStonePanel;
 
+import javax.swing.*;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.concurrent.TimeUnit;
 
 /**
  * AI Hero
@@ -32,7 +38,8 @@ public class AIHero extends Hero {
      * @param battlefield Playing board
      */
     @Override
-    public void takeTurn(Battlefield battlefield, MagicStoneFrame frame) {
+    public void takeTurn(Battlefield battlefield, MagicStoneFrame frame, MagicStonePanel panel, MagicStoneGame game,
+                         EndTurnButton endTurnButton) {
         System.out.println(this.name + "'s TURN!");
         Card card = this.getDeck().drawCard();
         if (card != null) {
@@ -54,14 +61,15 @@ public class AIHero extends Hero {
                 if (played.getCost() <= this.getMana()) {
                     System.out.println("AI plays " + played.getName() + " for " + played.getCost() + " mana");
                     this.deckHand.getDeckHand().remove(played.getCardNumber());
-                    played.play(battlefield, 1);
+                    played.play(battlefield, 1, -1, frame);
                     this.setMana(this.getMana() - played.getCost());
                     System.out.println("Current Mana: " + this.getMana() + "/" + this.getMaxMana());
                     frame.update(frame.getGraphics());
                 }
             }
         } else System.out.println("AI has no cards in hand");
-        attackPhase(battlefield, frame);
+        attackPhase(battlefield, frame, -1, game, panel);
+        battlefield.setPlayerTurn(true);
     }
 
     /**
@@ -70,19 +78,21 @@ public class AIHero extends Hero {
      * @param battlefield Battlefield
      */
     @Override
-    public void attackPhase(Battlefield battlefield, MagicStoneFrame frame) {
+    public void attackPhase(Battlefield battlefield, MagicStoneFrame frame, int pos, MagicStoneGame game, MagicStonePanel panel) {
         ArrayList<CreatureCard> creatures = getPlayedCreatures();
         if (creatures.size() == 0) System.out.println("AI has no creatures to attack with");
         for (CreatureCard c : creatures) {
             if (c != null && !c.isUsed() && c.getBattlePosition() != -1) {
+                frame.playGif("SWORD");
                 System.out.println("AI attack you with " + c.getName());
                 CreatureCard attackedCreature = battlefield.getPlayer().getPlayedCreatures().get(c.getBattlePosition());
                 if (attackedCreature == null) c.attack(battlefield.getPlayer());
                 else c.attack(attackedCreature);
                 if (attackedCreature != null) attackedCreature.checkDeath(battlefield.getPlayer(),
-                        attackedCreature.getBattlePosition());
+                attackedCreature.getBattlePosition());
                 c.checkDeath(battlefield.getAi(), c.getBattlePosition());
                 battlefield.removeDead(this);
+                game.endGameCheck(battlefield);
                 frame.update(frame.getGraphics());
             }
         }

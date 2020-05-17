@@ -7,6 +7,7 @@ import nl.rug.oop.cardgame.view.CardImage;
 import nl.rug.oop.cardgame.view.MagicStonePanel;
 import nl.rug.oop.cardgame.view.textures.CardTextures;
 import nl.rug.oop.cardgame.model.Battlefield;
+import nl.rug.oop.cardgame.view.MagicStoneFrame;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -25,6 +26,7 @@ public abstract class Card implements Playable, Displayable {
         protected static final AtomicInteger atomicInteger = new AtomicInteger(0);
         protected CardImage cardImage;
         protected EnumCard enumCard;
+        private int handPos;
 
     /**
      * Creates a new Card
@@ -37,6 +39,7 @@ public abstract class Card implements Playable, Displayable {
         this.cost = enumCard.getCost();
         this.cardNumber = atomicInteger.incrementAndGet();
         this.enumCard = enumCard;
+        this.enumCard.setCardNumber(cardNumber);
         this.cardImage = new CardImage( CardTextures.getTexture(this.enumCard), null);
     }
 
@@ -46,7 +49,7 @@ public abstract class Card implements Playable, Displayable {
      * @return
      */
     @Override
-    public boolean play(Battlefield battlefield, int hero) {
+    public boolean play(Battlefield battlefield, int hero, int pos, MagicStoneFrame frame) {
         System.out.println("You played " + this.name);
         return true;
     }
