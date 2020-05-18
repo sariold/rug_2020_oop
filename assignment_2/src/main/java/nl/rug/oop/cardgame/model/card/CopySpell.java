@@ -10,12 +10,12 @@ import nl.rug.oop.cardgame.view.MagicStoneFrame;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.InputMismatchException;
-import java.util.Scanner;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class CopySpell extends SpellCard implements Targetting {
+
+    private int pos;
 
     public CopySpell(EnumCard enumCard) {
         super(enumCard);
@@ -23,6 +23,7 @@ public class CopySpell extends SpellCard implements Targetting {
 
     @Override
     public boolean play(Battlefield battlefield, int hero, int pos, MagicStoneFrame frame) {
+        this.pos = pos;
         Hero targetHero = (hero == 0 ? battlefield.getPlayer() : battlefield.getAi());
         boolean played = target(battlefield, targetHero);
         if(played) return super.play(battlefield, hero, pos, frame);
@@ -32,29 +33,29 @@ public class CopySpell extends SpellCard implements Targetting {
     @Override
     public boolean target(Battlefield battlefield, Hero hero) {
         ArrayList<Integer> freePositions = battlefield.getFreePositions(hero);
-        Scanner scanner = new Scanner(System.in);
-        int currentMove;
-        boolean start = true;
         if (notEmptyBattlefield(hero)) {
             if (!(hero instanceof AIHero)) {
-                while (start) {
-                    try {
-                        System.out.println("Which creature do you want to copy paste?");
-                        showBattlefield(hero);
-                        System.out.println();
-                        currentMove = scanner.nextInt();
-                        if (hero.getPlayedCreatures().get(currentMove) != null) {
-                            CreatureCard creatureCard = new CreatureCard(hero.getPlayedCreatures().get(currentMove).getEnumCard());
-                            creatureCard.setUsed(true);
-//                            battlefield.placeCreature(creatureCard, hero);
-                        }
-                        start = false;
-                    } catch (InputMismatchException e) {
-                        e.printStackTrace();
-                        System.out.println("INVALID INPUT");
-                        scanner.nextLine();
-                    }
-                }
+                CreatureCard creatureCard = new CreatureCard(hero.getPlayedCreatures().get(pos).getEnumCard());
+                creatureCard.setUsed(true);
+                battlefield.placeCreature(creatureCard, hero, freePositions.get(0));
+//                while (start) {
+//                    try {
+//                        System.out.println("Which creature do you want to copy paste?");
+//                        showBattlefield(hero);
+//                        System.out.println();
+//                        currentMove = scanner.nextInt();
+//                        if (hero.getPlayedCreatures().get(currentMove) != null) {
+//                            CreatureCard creatureCard = new CreatureCard(hero.getPlayedCreatures().get(currentMove).getEnumCard());
+//                            creatureCard.setUsed(true);
+////                            battlefield.placeCreature(creatureCard, hero);
+//                        }
+//                        start = false;
+//                    } catch (InputMismatchException e) {
+//                        e.printStackTrace();
+//                        System.out.println("INVALID INPUT");
+//                        scanner.nextLine();
+//                    }
+//                }
             } else {
                 if (freePositions.size() > 0) {
                     ArrayList<CreatureCard> creatures = hero.getPlayedCreatures();

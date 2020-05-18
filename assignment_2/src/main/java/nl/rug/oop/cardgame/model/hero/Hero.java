@@ -68,11 +68,8 @@ public class Hero implements Attackable {
      */
     public void playCard(Battlefield battlefield, MagicStoneFrame frame, int pos, Card card) {
         if (this.deckHand.getDeckHand().size() > 0) {
-            Scanner scanner = new Scanner(System.in);
             this.deckHand.viewHand();
             System.out.println("Which card would you like to play?");
-            boolean start = true;
-            int currentMove;
             Card played = this.deckHand.getDeckHand().get(card.getCardNumber());
             if (played != null && played.getCost() <= this.mana) {
                 this.deckHand.getDeckHand().remove(card.getCardNumber());

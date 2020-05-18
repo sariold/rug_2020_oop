@@ -55,7 +55,7 @@ public class BattlefieldClicker extends MouseInputAdapter {
     @Override
     public void mouseClicked(MouseEvent event) {
         x = event.getX();
-        y= event.getY();
+        y = event.getY();
         if(!attackPhase) {
             switch (card.getEnumCard()) {
                 case SPELL_INSTANTDRAW:
@@ -66,27 +66,33 @@ public class BattlefieldClicker extends MouseInputAdapter {
                     if (x >= 540 && x <= 740 && y >= 0 && y <= 200) playSpell();
                     break;
                 case SPELL_COPYPASTE:
-//                    if(card.getEnumCard().getCost() <= magicStoneGame.getBattlefield().getPlayer().getMana() && freePos.size() > 0) {
-//                        new CopyClicker(magicStoneGame, magicStonePanel, card, frame);
-//                    }
+                    if(card.getEnumCard().getCost() <= magicStoneGame.getBattlefield().getPlayer().getMana() && freePos.size() > 0
+                    && magicStoneGame.getBattlefield().playerHasBattlefieldCreature(magicStoneGame.getBattlefield().getPlayer()).size() > 0) {
+                        new CopyClicker(magicStoneGame, magicStonePanel, card, frame);
+                    }
                     break;
                 default:
-                    if (x >= 140 && x <= 230 && y >= 360 && y <= 495) placeCreature(0);
-                    else if (x >= 340 && x <= 430 && y >= 360 && y <= 495) placeCreature(1);
-                    else if (x >= 540 && x <= 630 && y >= 360 && y <= 495) placeCreature(2);
-                    else if (x >= 740 && x <= 830 && y >= 360 && y <= 495) placeCreature(3);
-                    else if (x >= 940 && x <= 1030 && y >= 360 && y <= 495) placeCreature(4);
+                    attackOrPlace(false);
                     break;
             }
         } else {
-                if (x >= 140 && x <= 230 && y >= 360 && y <= 495) attack(0);
-                else if (x >= 340 && x <= 430 && y >= 360 && y <= 495) attack(1);
-                else if (x >= 540 && x <= 630 && y >= 360 && y <= 495) attack(2);
-                else if (x >= 740 && x <= 830 && y >= 360 && y <= 495) attack(3);
-                else if (x >= 940 && x <= 1030 && y >= 360 && y <= 495) attack(4);
+                attackOrPlace(true);
         }
         if(!attackPhase) ((Component) event.getSource()).removeMouseListener(this);
         if(attackPhase) magicStonePanel.paintPositions(frame.getGraphics(), Color.RED, true);
+    }
+
+    private void attackOrPlace(boolean attack) {
+        int pos = -1;
+        if (x >= 140 && x <= 230 && y >= 360 && y <= 495) pos = 0;
+        else if (x >= 340 && x <= 430 && y >= 360 && y <= 495) pos = 1;
+        else if (x >= 540 && x <= 630 && y >= 360 && y <= 495) pos = 2;
+        else if (x >= 740 && x <= 830 && y >= 360 && y <= 495) pos = 3;
+        else if (x >= 940 && x <= 1030 && y >= 360 && y <= 495) pos = 4;
+        if(pos != -1) {
+            if(attack) attack(pos);
+            else placeCreature(pos);
+        }
     }
 
     private void attack(int pos) {

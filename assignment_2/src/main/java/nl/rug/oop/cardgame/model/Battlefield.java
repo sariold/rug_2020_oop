@@ -116,7 +116,7 @@ public class Battlefield {
         return -1;
     }
 
-    private ArrayList playerHasBattlefieldCreature(Hero hero) {
+    public ArrayList playerHasBattlefieldCreature(Hero hero) {
         ArrayList<Integer> battleSpots = new ArrayList<>();
         ArrayList<CreatureCard> playerCreatures = hero.getPlayedCreatures();
         for(CreatureCard c: playerCreatures) {
