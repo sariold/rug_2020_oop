@@ -66,6 +66,9 @@ public class BattlefieldClicker extends MouseInputAdapter {
                     if (x >= 540 && x <= 740 && y >= 0 && y <= 200) playSpell();
                     break;
                 case SPELL_COPYPASTE:
+//                    if(card.getEnumCard().getCost() <= magicStoneGame.getBattlefield().getPlayer().getMana() && freePos.size() > 0) {
+//                        new CopyClicker(magicStoneGame, magicStonePanel, card, frame);
+//                    }
                     break;
                 default:
                     if (x >= 140 && x <= 230 && y >= 360 && y <= 495) placeCreature(0);

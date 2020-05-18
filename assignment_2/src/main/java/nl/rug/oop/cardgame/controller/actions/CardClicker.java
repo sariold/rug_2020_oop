@@ -16,7 +16,7 @@ public class CardClicker extends MouseInputAdapter {
     private MagicStoneGame magicStoneGame;
     private MagicStonePanel magicStonePanel;
     private MagicStoneFrame magicStoneFrame;
-    Card card = null;
+    private Card card = null;
 
     private boolean selected;
     private int x;

@@ -24,12 +24,13 @@ public class CopySpell extends SpellCard implements Targetting {
     @Override
     public boolean play(Battlefield battlefield, int hero, int pos, MagicStoneFrame frame) {
         Hero targetHero = (hero == 0 ? battlefield.getPlayer() : battlefield.getAi());
-        target(battlefield, targetHero);
-        return super.play(battlefield, hero, pos, frame);
+        boolean played = target(battlefield, targetHero);
+        if(played) return super.play(battlefield, hero, pos, frame);
+        return false;
     }
 
     @Override
-    public void target(Battlefield battlefield, Hero hero) {
+    public boolean target(Battlefield battlefield, Hero hero) {
         ArrayList<Integer> freePositions = battlefield.getFreePositions(hero);
         Scanner scanner = new Scanner(System.in);
         int currentMove;
@@ -62,10 +63,13 @@ public class CopySpell extends SpellCard implements Targetting {
                         CreatureCard creatureCard = new CreatureCard(creatures.get(0).getEnumCard());
                         creatureCard.setUsed(true);
                         battlefield.placeCreature(creatureCard, hero, freePositions.get(0));
+                        System.out.println("AI COPIES " + creatureCard.getName() + " AI PLACES IN " + freePositions.get(0));
                     }
                 }
             }
+            return true;
         }
+        return false;
     }
 
     public boolean notEmptyBattlefield(Hero hero) {

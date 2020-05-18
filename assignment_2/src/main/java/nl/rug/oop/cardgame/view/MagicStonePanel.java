@@ -233,6 +233,7 @@ public class MagicStonePanel extends JPanel implements Observer {
             Color color = (c.getCost() <= magicStoneGame.getBattlefield().getPlayer().getMana()?Color.GREEN:Color.RED);
             playerHand.getDeckHand().get(c.getCardNumber()).setHandPos(i);
             c.display(g, this);
+            if(magicStoneGame.getBattlefield().isAttackPhase()) color = Color.WHITE;
             g.setColor(color);
             g.drawRect(c.getCardImage().getCoordinates()[0], c.getCardImage().getCoordinates()[1],
                     c.getCardImage().getCoordinates()[2], c.getCardImage().getCoordinates()[3]);

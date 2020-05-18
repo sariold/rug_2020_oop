@@ -5,6 +5,6 @@ import nl.rug.oop.cardgame.model.hero.Hero;
 
 public interface Targetting {
 
-    void target(Battlefield battlefield, Hero hero);
+    boolean target(Battlefield battlefield, Hero hero);
 
 }

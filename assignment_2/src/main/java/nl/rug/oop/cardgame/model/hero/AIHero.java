@@ -44,7 +44,7 @@ public class AIHero extends Hero {
         Card card = this.getDeck().drawCard();
         if (card != null) {
             System.out.println("Drawing card: " + card.getName() + " : Mana Cost -> " + card.getCost());
-            this.getDeckHand().addCard(card);
+            this.getDeckHand().addCard(this.getDiscardDeck(), card);
         }
         frame.update(frame.getGraphics());
         if (this.deckHand.getDeckHand().size() > 0) {
@@ -59,11 +59,13 @@ public class AIHero extends Hero {
                 Collections.shuffle(playableCards);
                 Card played = playableCards.get(0);
                 if (played.getCost() <= this.getMana()) {
-                    System.out.println("AI plays " + played.getName() + " for " + played.getCost() + " mana");
-                    this.deckHand.getDeckHand().remove(played.getCardNumber());
-                    played.play(battlefield, 1, -1, frame);
-                    this.setMana(this.getMana() - played.getCost());
-                    System.out.println("Current Mana: " + this.getMana() + "/" + this.getMaxMana());
+                    boolean playedSuccessfully = played.play(battlefield, 1, -1, frame);
+                    if(playedSuccessfully) {
+                        System.out.println("AI plays " + played.getName() + " for " + played.getCost() + " mana");
+                        this.deckHand.getDeckHand().remove(played.getCardNumber());
+                        this.setMana(this.getMana() - played.getCost());
+                        System.out.println("Current Mana: " + this.getMana() + "/" + this.getMaxMana());
+                    }
                     frame.update(frame.getGraphics());
                 }
             }
