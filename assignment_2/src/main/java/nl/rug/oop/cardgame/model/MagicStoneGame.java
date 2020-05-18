@@ -9,7 +9,7 @@ import nl.rug.oop.cardgame.view.MagicStoneFrame;
 import java.util.Observable;
 import java.util.Observer;
 
-@EqualsAndHashCode(callSuper = true)
+//@EqualsAndHashCode(callSuper = true)
 @Data
 public class MagicStoneGame extends Observable implements Observer {
 
