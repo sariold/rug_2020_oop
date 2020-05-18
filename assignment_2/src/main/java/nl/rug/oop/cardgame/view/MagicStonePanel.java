@@ -230,7 +230,7 @@ public class MagicStonePanel extends JPanel implements Observer {
      *
      * @param g Graphics
      */
-    private void paintHand(Graphics g) {
+    public void paintHand(Graphics g) {
         g.setFont(new Font("TimesRoman", Font.BOLD, 15));
         DeckHand playerHand = magicStoneGame.getBattlefield().getPlayer().getDeckHand();
         DeckHand aiHand = magicStoneGame.getBattlefield().getAi().getDeckHand();
@@ -241,9 +241,12 @@ public class MagicStonePanel extends JPanel implements Observer {
         for (Card c : playerHand.getDeckHand().values()) {
             if (i == 6) break;
             EnumCard card = c.getEnumCard();
-            if(c.getCost() <= magicStoneGame.getBattlefield().getPlayer().getMana()) {
-                g.setColor(Color.GREEN);
-            } else g.setColor(Color.RED);
+            g.setColor(Color.WHITE);
+            if(!magicStoneGame.getBattlefield().isAttackPhase()) {
+                if (c.getCost() <= magicStoneGame.getBattlefield().getPlayer().getMana()) {
+                    g.setColor(Color.GREEN);
+                } else g.setColor(Color.RED);
+            }
             playerHand.getDeckHand().get(c.getCardNumber()).setHandPos(i);
             if (i < 3) {
                 x = 100 + i * xOffset;
