@@ -83,7 +83,7 @@ public class AIHero extends Hero {
         if (creatures.size() == 0) System.out.println("AI has no creatures to attack with");
         for (CreatureCard c : creatures) {
             if (c != null && !c.isUsed() && c.getBattlePosition() != -1) {
-                frame.playGif("SWORD");
+                frame.playGif("SWORD", c.getCardImage().getCoordinates());
                 System.out.println("AI attack you with " + c.getName());
                 CreatureCard attackedCreature = battlefield.getPlayer().getPlayedCreatures().get(c.getBattlePosition());
                 if (attackedCreature == null) c.attack(battlefield.getPlayer());

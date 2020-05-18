@@ -167,7 +167,7 @@ public class Hero implements Attackable {
     public void attackPhase(Battlefield battlefield, MagicStoneFrame frame, int pos, MagicStoneGame game, MagicStonePanel panel) {
         CreatureCard attackingCreature = this.getPlayedCreatures().get(pos);
         CreatureCard attackedCreature = battlefield.getAi().getPlayedCreatures().get(pos);
-//        frame.playGif("SWORD");
+        frame.playGif("SWORD", attackingCreature.getCardImage().getCoordinates());
         if (attackedCreature == null) attackingCreature.attack(battlefield.getAi());
         else attackingCreature.attack(attackedCreature);
         attackingCreature.checkDeath(this, attackingCreature.getBattlePosition());

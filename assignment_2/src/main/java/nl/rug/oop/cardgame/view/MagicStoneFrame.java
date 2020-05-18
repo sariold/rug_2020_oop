@@ -37,11 +37,12 @@ public class MagicStoneFrame extends JFrame {
         setResizable(false);
     }
 
-    public void playGif(String gifName) {
-        Icon gif = new ImageIcon(this.getClass().getResource(File.separator + "textures"
+    public void playGif(String gifName, int[] coords) {
+        ImageIcon gif = new ImageIcon(this.getClass().getResource(File.separator + "textures"
                 + File.separator + gifName + ".gif"));
+        gif.setImage(gif.getImage().getScaledInstance(coords[2],coords[2], Image.SCALE_DEFAULT));
         gifLabel.setIcon(gif);
-        gifLabel.setBounds(500, 100, 339, 399);
+        gifLabel.setBounds(coords[0], coords[1], coords[2], coords[2]);
         panel.add(gifLabel);
         pack();
         try {
