@@ -222,7 +222,7 @@ public class MagicStonePanel extends JPanel implements Observer {
      *
      * @param g Graphics
      */
-    private void paintHand(Graphics g) {
+    public void paintHand(Graphics g) {
         g.setFont(new Font("TimesRoman", Font.BOLD, 15));
         DeckHand playerHand = magicStoneGame.getBattlefield().getPlayer().getDeckHand();
         DeckHand aiHand = magicStoneGame.getBattlefield().getAi().getDeckHand();
