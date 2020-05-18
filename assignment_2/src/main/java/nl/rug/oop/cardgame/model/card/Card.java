@@ -1,6 +1,7 @@
 package nl.rug.oop.cardgame.model.card;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import nl.rug.oop.cardgame.util.Playable;
 import nl.rug.oop.cardgame.model.Battlefield;
 import nl.rug.oop.cardgame.view.CardImage;
