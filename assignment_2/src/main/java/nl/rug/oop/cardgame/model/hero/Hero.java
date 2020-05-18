@@ -174,6 +174,7 @@ public class Hero implements Attackable {
         if(attackedCreature != null) attackedCreature.checkDeath(battlefield.getAi(), attackedCreature.getBattlePosition());
         attackingCreature.setUsed(true);
         battlefield.removeDead(this);
+        battlefield.removeDead(battlefield.getAi());
         game.endGameCheck(battlefield);
         frame.update(frame.getGraphics());
     }

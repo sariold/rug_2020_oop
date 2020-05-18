@@ -50,6 +50,7 @@ public class MagicStoneFrame extends JFrame {
             e.printStackTrace();
         }
         gifLabel.setIcon(null);
+        return;
     }
 
     public void gameOver(boolean win) {

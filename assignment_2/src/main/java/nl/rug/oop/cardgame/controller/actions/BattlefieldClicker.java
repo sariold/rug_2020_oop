@@ -76,13 +76,14 @@ public class BattlefieldClicker extends MouseInputAdapter {
                     break;
             }
         } else {
-            if (x >= 140 && x <= 230 && y >= 360 && y <= 495) attack(0);
-            else if (x >= 340 && x <= 430 && y >= 360 && y <= 495) attack(1);
-            else if (x >= 540 && x <= 630 && y >= 360 && y <= 495) attack(2);
-            else if (x >= 740 && x <= 830 && y >= 360 && y <= 495) attack(3);
-            else if (x >= 940 && x <= 1030 && y >= 360 && y <= 495) attack(4);
+                if (x >= 140 && x <= 230 && y >= 360 && y <= 495) attack(0);
+                else if (x >= 340 && x <= 430 && y >= 360 && y <= 495) attack(1);
+                else if (x >= 540 && x <= 630 && y >= 360 && y <= 495) attack(2);
+                else if (x >= 740 && x <= 830 && y >= 360 && y <= 495) attack(3);
+                else if (x >= 940 && x <= 1030 && y >= 360 && y <= 495) attack(4);
         }
-        ((Component) event.getSource()).removeMouseListener(this);
+        if(!attackPhase) ((Component) event.getSource()).removeMouseListener(this);
+        if(attackPhase) magicStonePanel.paintPositions(frame.getGraphics(), Color.RED, true);
     }
 
     private void attack(int pos) {
@@ -91,7 +92,10 @@ public class BattlefieldClicker extends MouseInputAdapter {
         if(card != null) {
             if (!card.isUsed()) player.attackPhase(magicStoneGame.getBattlefield(), frame, pos, magicStoneGame, magicStonePanel);
         }
-        if(!player.untappedCreatures()) magicStoneGame.getBattlefield().setPlayerTurn(false);
+        if(!player.untappedCreatures()) {
+            magicStoneGame.getBattlefield().setAttackPhase(false);
+            magicStoneGame.getBattlefield().setPlayerTurn(false);
+        }
     }
 
     private CreatureCard getCard(MagicStoneGame magicStoneGame, int pos) {
