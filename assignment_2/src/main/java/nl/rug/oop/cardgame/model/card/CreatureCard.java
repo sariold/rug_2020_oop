@@ -5,12 +5,7 @@ import lombok.EqualsAndHashCode;
 import nl.rug.oop.cardgame.util.Attackable;
 import nl.rug.oop.cardgame.model.Battlefield;
 import nl.rug.oop.cardgame.model.hero.Hero;
-import nl.rug.oop.cardgame.view.MagicStoneFrame;
-import nl.rug.oop.cardgame.view.MagicStonePanel;
-import nl.rug.oop.cardgame.view.textures.StatEnum;
-import nl.rug.oop.cardgame.view.textures.StatTextures;
-
-import java.awt.*;
+import nl.rug.oop.cardgame.view.frame.MagicStoneFrame;
 
 /**
  * A type of card that summons a creature when played

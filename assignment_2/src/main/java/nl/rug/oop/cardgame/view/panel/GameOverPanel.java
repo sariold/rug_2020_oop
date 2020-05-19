@@ -1,4 +1,4 @@
-package nl.rug.oop.cardgame.view;
+package nl.rug.oop.cardgame.view.panel;
 
 import javax.swing.*;
 import java.awt.*;

@@ -1,4 +1,4 @@
-package nl.rug.oop.cardgame.view;
+package nl.rug.oop.cardgame.view.frame;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -6,7 +6,8 @@ import nl.rug.oop.cardgame.controller.actions.CardClicker;
 import nl.rug.oop.cardgame.controller.button.AttackPhaseButton;
 import nl.rug.oop.cardgame.controller.button.EndTurnButton;
 import nl.rug.oop.cardgame.model.MagicStoneGame;
-import nl.rug.oop.cardgame.model.card.Card;
+import nl.rug.oop.cardgame.view.panel.GameOverPanel;
+import nl.rug.oop.cardgame.view.panel.MagicStonePanel;
 
 import javax.swing.*;
 import java.awt.*;

@@ -1,18 +1,14 @@
 package nl.rug.oop.cardgame.model.hero;
 
-import nl.rug.oop.cardgame.controller.button.EndTurnButton;
 import nl.rug.oop.cardgame.model.Battlefield;
 import nl.rug.oop.cardgame.model.MagicStoneGame;
 import nl.rug.oop.cardgame.model.card.Card;
 import nl.rug.oop.cardgame.model.card.CreatureCard;
-import nl.rug.oop.cardgame.view.MagicStoneFrame;
-import nl.rug.oop.cardgame.view.MagicStonePanel;
+import nl.rug.oop.cardgame.view.frame.MagicStoneFrame;
+import nl.rug.oop.cardgame.view.panel.MagicStonePanel;
 
-import javax.swing.*;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.concurrent.TimeUnit;
 
 /**
  * AI Hero

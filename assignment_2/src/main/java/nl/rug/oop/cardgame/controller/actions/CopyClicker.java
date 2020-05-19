@@ -2,10 +2,8 @@ package nl.rug.oop.cardgame.controller.actions;
 
 import nl.rug.oop.cardgame.model.MagicStoneGame;
 import nl.rug.oop.cardgame.model.card.Card;
-import nl.rug.oop.cardgame.model.card.CreatureCard;
-import nl.rug.oop.cardgame.model.hero.Hero;
-import nl.rug.oop.cardgame.view.MagicStoneFrame;
-import nl.rug.oop.cardgame.view.MagicStonePanel;
+import nl.rug.oop.cardgame.view.frame.MagicStoneFrame;
+import nl.rug.oop.cardgame.view.panel.MagicStonePanel;
 
 import javax.swing.event.MouseInputAdapter;
 import java.awt.*;

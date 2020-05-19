@@ -1,6 +1,6 @@
-package nl.rug.oop.cardgame.view;
+package nl.rug.oop.cardgame.view.panel;
 
-import nl.rug.oop.cardgame.DefaultCoordinates;
+import nl.rug.oop.cardgame.util.DefaultCoordinates;
 import nl.rug.oop.cardgame.model.Battlefield;
 import nl.rug.oop.cardgame.model.MagicStoneGame;
 import nl.rug.oop.cardgame.model.card.Card;

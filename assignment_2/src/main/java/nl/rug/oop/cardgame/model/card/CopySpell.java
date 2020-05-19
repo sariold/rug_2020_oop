@@ -6,7 +6,7 @@ import nl.rug.oop.cardgame.util.Targetting;
 import nl.rug.oop.cardgame.model.Battlefield;
 import nl.rug.oop.cardgame.model.hero.AIHero;
 import nl.rug.oop.cardgame.model.hero.Hero;
-import nl.rug.oop.cardgame.view.MagicStoneFrame;
+import nl.rug.oop.cardgame.view.frame.MagicStoneFrame;
 
 import java.util.ArrayList;
 import java.util.Collections;

@@ -1,7 +1,7 @@
 package nl.rug.oop.cardgame.model;
 
 import lombok.Data;
-import nl.rug.oop.cardgame.DefaultStats;
+import nl.rug.oop.cardgame.util.DefaultStats;
 import nl.rug.oop.cardgame.model.card.Card;
 import nl.rug.oop.cardgame.model.card.CreatureCard;
 import nl.rug.oop.cardgame.model.hero.AIHero;

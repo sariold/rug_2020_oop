@@ -4,11 +4,9 @@ import lombok.Data;
 import nl.rug.oop.cardgame.CardImage;
 import nl.rug.oop.cardgame.util.Playable;
 import nl.rug.oop.cardgame.model.Battlefield;
-import nl.rug.oop.cardgame.view.MagicStoneFrame;
-import nl.rug.oop.cardgame.view.MagicStonePanel;
+import nl.rug.oop.cardgame.view.frame.MagicStoneFrame;
 import nl.rug.oop.cardgame.view.textures.CardTextures;
 
-import java.awt.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**

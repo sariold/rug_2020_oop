@@ -3,8 +3,8 @@ package nl.rug.oop.cardgame.controller.button;
 import nl.rug.oop.cardgame.controller.actions.AttackPhaseAction;
 import nl.rug.oop.cardgame.controller.actions.CardClicker;
 import nl.rug.oop.cardgame.model.MagicStoneGame;
-import nl.rug.oop.cardgame.view.MagicStoneFrame;
-import nl.rug.oop.cardgame.view.MagicStonePanel;
+import nl.rug.oop.cardgame.view.frame.MagicStoneFrame;
+import nl.rug.oop.cardgame.view.panel.MagicStonePanel;
 
 import javax.swing.*;
 import java.awt.event.KeyEvent;

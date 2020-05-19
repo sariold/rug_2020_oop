@@ -1,11 +1,10 @@
 package nl.rug.oop.cardgame.controller.actions;
 
 import nl.rug.oop.cardgame.model.MagicStoneGame;
-import nl.rug.oop.cardgame.view.MagicStoneFrame;
-import nl.rug.oop.cardgame.view.MagicStonePanel;
+import nl.rug.oop.cardgame.view.frame.MagicStoneFrame;
+import nl.rug.oop.cardgame.view.panel.MagicStonePanel;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 
 public class AttackPhaseAction extends AbstractAction {

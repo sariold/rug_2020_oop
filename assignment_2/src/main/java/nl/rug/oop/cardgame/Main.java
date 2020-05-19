@@ -1,8 +1,7 @@
 package nl.rug.oop.cardgame;
 
-import nl.rug.oop.cardgame.controller.button.EndTurnButton;
 import nl.rug.oop.cardgame.model.MagicStoneGame;
-import nl.rug.oop.cardgame.view.MagicStoneFrame;
+import nl.rug.oop.cardgame.view.frame.MagicStoneFrame;
 
 /**
  * Main class to call start game

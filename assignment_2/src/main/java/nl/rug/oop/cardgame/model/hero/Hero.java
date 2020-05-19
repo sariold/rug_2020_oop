@@ -1,8 +1,6 @@
 package nl.rug.oop.cardgame.model.hero;
 
 import lombok.Data;
-import nl.rug.oop.cardgame.controller.button.AttackPhaseButton;
-import nl.rug.oop.cardgame.controller.button.EndTurnButton;
 import nl.rug.oop.cardgame.util.Attackable;
 import nl.rug.oop.cardgame.model.Battlefield;
 import nl.rug.oop.cardgame.model.MagicStoneGame;
@@ -11,12 +9,9 @@ import nl.rug.oop.cardgame.model.card.CreatureCard;
 import nl.rug.oop.cardgame.model.deck.Deck;
 import nl.rug.oop.cardgame.model.deck.DeckHand;
 import nl.rug.oop.cardgame.model.deck.DiscardDeck;
-import nl.rug.oop.cardgame.view.MagicStoneFrame;
-import nl.rug.oop.cardgame.view.MagicStonePanel;
+import nl.rug.oop.cardgame.view.frame.MagicStoneFrame;
+import nl.rug.oop.cardgame.view.panel.MagicStonePanel;
 
-import javax.swing.*;
-import java.io.File;
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Scanner;

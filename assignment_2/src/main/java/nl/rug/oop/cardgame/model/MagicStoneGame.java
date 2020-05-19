@@ -2,9 +2,8 @@ package nl.rug.oop.cardgame.model;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import nl.rug.oop.cardgame.controller.button.EndTurnButton;
 import nl.rug.oop.cardgame.model.hero.Hero;
-import nl.rug.oop.cardgame.view.MagicStoneFrame;
+import nl.rug.oop.cardgame.view.frame.MagicStoneFrame;
 
 import java.util.Observable;
 

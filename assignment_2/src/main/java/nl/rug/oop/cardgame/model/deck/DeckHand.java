@@ -1,7 +1,7 @@
 package nl.rug.oop.cardgame.model.deck;
 
 import lombok.Data;
-import nl.rug.oop.cardgame.DefaultStats;
+import nl.rug.oop.cardgame.util.DefaultStats;
 import nl.rug.oop.cardgame.model.card.Card;
 
 import java.util.HashMap;
