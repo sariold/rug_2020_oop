@@ -108,16 +108,16 @@ public class Hero extends Observable implements Attackable {
      * @param battlefield Playing board
      */
     public void takeTurn(Battlefield battlefield, MagicStoneFrame frame, MagicStonePanel panel, MagicStoneGame game) {
-        AttackPhaseButton attackPhaseButton = new AttackPhaseButton(game, frame, panel, frame.getClicker());
+//        AttackPhaseButton attackPhaseButton = new AttackPhaseButton(game, frame, panel, frame.getClicker());
         Card card = this.getDeck().drawCard();
         if (card != null) {
             this.getDeckHand().addCard(this.getDiscardDeck(), card);
         }
-        if(this.untappedCreatures()) {
-            attackPhaseButton.setBounds(590, 108, 100, 30);
-//            panel.add(endTurnButton);
-            panel.add(attackPhaseButton);
-        }
+//        if(this.untappedCreatures()) {
+//            attackPhaseButton.setBounds(590, 108, 100, 30);
+////            panel.add(endTurnButton);
+//            panel.add(attackPhaseButton);
+//        }
         notifyUpdate();
 //        frame.update(frame.getGraphics());
         while(battlefield.isPlayerTurn()) {

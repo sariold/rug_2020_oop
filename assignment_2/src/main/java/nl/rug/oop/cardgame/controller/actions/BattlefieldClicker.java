@@ -54,6 +54,10 @@ public class BattlefieldClicker extends MouseInputAdapter {
 
     @Override
     public void mouseClicked(MouseEvent event) {
+        if(!magicStoneGame.getBattlefield().isPlayerTurn()) {
+            ((Component) event.getSource()).removeMouseListener(this);
+            return;
+        }
         x = event.getX();
         y = event.getY();
         if(!attackPhase) {
@@ -79,7 +83,7 @@ public class BattlefieldClicker extends MouseInputAdapter {
                 attackOrPlace(true);
         }
         if(!attackPhase) ((Component) event.getSource()).removeMouseListener(this);
-        if(attackPhase) magicStoneGame.getBattlefield().setAttackPhase(true);
+//        if(attackPhase) magicStoneGame.getBattlefield().setAttackPhase(true);
     }
 
     private void attackOrPlace(boolean attack) {
