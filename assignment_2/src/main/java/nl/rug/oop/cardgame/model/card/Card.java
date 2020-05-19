@@ -53,9 +53,4 @@ public abstract class Card implements Playable {
         return true;
     }
 
-    public void display(Graphics g, MagicStonePanel panel){
-        int[] coords = this.cardImage.getCoordinates();
-        g.drawImage(this.cardImage.getImage(), coords[0],coords[1],coords[2],coords[3], panel);
-    }
-
 }

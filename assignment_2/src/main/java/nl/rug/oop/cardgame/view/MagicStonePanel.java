@@ -6,6 +6,7 @@ import nl.rug.oop.cardgame.model.MagicStoneGame;
 import nl.rug.oop.cardgame.model.card.Card;
 import nl.rug.oop.cardgame.model.card.CreatureCard;
 import nl.rug.oop.cardgame.model.card.EnumCard;
+import nl.rug.oop.cardgame.model.card.SpellCard;
 import nl.rug.oop.cardgame.model.deck.DeckHand;
 import nl.rug.oop.cardgame.model.hero.Hero;
 import nl.rug.oop.cardgame.view.textures.*;
@@ -105,12 +106,12 @@ public class MagicStonePanel extends JPanel implements Observer {
         if (playerDiscardPile.size() > 0) {
             card = playerDiscardPile.get(playerDiscardPile.size()-1);
             card.getCardImage().setCoordinates(DefaultCoordinates.PLAYER_DISCARD_PILE);
-            card.display(g, this);
+            renderCard(card, g);
         }
         if (aiDiscardPile.size() > 0) {
             card = aiDiscardPile.get(aiDiscardPile.size()-1);
             card.getCardImage().setCoordinates(DefaultCoordinates.AI_DISCARD_PILE);
-            card.display(g, this);
+            renderCard(card, g);
         }
     }
 
@@ -173,7 +174,7 @@ public class MagicStonePanel extends JPanel implements Observer {
                 continue;
             }
             c.getCardImage().setCoordinates(DefaultCoordinates.PLAYER_BATTLEFIELD[i]);
-            c.display(g, this);
+            renderCard(c, g);
             i++;
         }
         i = 0;
@@ -183,7 +184,7 @@ public class MagicStonePanel extends JPanel implements Observer {
                 continue;
             }
             c.getCardImage().setCoordinates(DefaultCoordinates.AI_BATTLEFIELD[i]);
-            c.display(g, this);
+            renderCard(c, g);
             i++;
         }
     }
@@ -236,7 +237,7 @@ public class MagicStonePanel extends JPanel implements Observer {
             c.getCardImage().setCoordinates(DefaultCoordinates.PLAYER_HAND[i]);
             Color color = (c.getCost() <= magicStoneGame.getBattlefield().getPlayer().getMana()?Color.GREEN:Color.RED);
             playerHand.getDeckHand().get(c.getCardNumber()).setHandPos(i);
-            c.display(g, this);
+            renderCard(c, g);
             if(magicStoneGame.getBattlefield().isAttackPhase()) color = Color.WHITE;
             g.setColor(color);
             g.drawRect(c.getCardImage().getCoordinates()[0], c.getCardImage().getCoordinates()[1],
@@ -278,6 +279,34 @@ public class MagicStonePanel extends JPanel implements Observer {
     @Override
     public void update(Observable observed, Object message) {
         repaint();
+    }
+
+    private void renderCard(Card c, Graphics g) {
+        int[] coords = c.getCardImage().getCoordinates();
+        g.drawImage(c.getCardImage().getImage(), coords[0],coords[1],coords[2],coords[3], this);
+        if (c.isDiscarded()) return;
+        if (c.getEnumCard().getType() == EnumCard.Type.CREATURE) {
+            CreatureCard creature = (CreatureCard)c;
+            if (creature.getBattlePosition() == -1) {
+                g.setColor(Color.BLACK);
+                String attackAndHealth = (creature.getAttack() + "/" + (creature.getHealth()));
+                g.drawString(attackAndHealth, coords[0] + 130 -
+                        g.getFontMetrics().stringWidth(attackAndHealth), 670);
+            } else if (creature.getBattlePosition() > -1){
+                g.setColor(Color.WHITE);
+                g.setFont(new Font("TimesRoman", Font.PLAIN, 20));
+                g.drawImage(StatTextures.getTexture(StatEnum.ATTACK), coords[0] + 103, coords[1] + 10, 50, 65, this);
+                g.drawString(Integer.toString(creature.getAttack()), coords[0] + 120, coords[1] + 55);
+                g.drawImage(StatTextures.getTexture(StatEnum.HEART), coords[0] + 104, coords[1] + 90, 45, 45, this);
+                g.drawString(Integer.toString(creature.getHealth()), coords[0] + 122, coords[1] + 115);
+            }
+        } else {
+            SpellCard spell = (SpellCard)c;
+            g.setColor(Color.BLACK);
+            String value = String.valueOf(spell.getEnumCard().getValue());
+            g.drawString(value, spell.getCardImage().getCoordinates()[0] + 130 - g.getFontMetrics().stringWidth(value),
+                    670);
+        }
     }
 
 }

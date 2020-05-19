@@ -32,14 +32,4 @@ public abstract class SpellCard extends Card {
         return true;
     }
 
-    @Override
-    public void display(Graphics g, MagicStonePanel panel) {
-        super.display(g, panel);
-        if(isDiscarded()) return;
-        g.setColor(Color.BLACK);
-        String value = String.valueOf(this.getEnumCard().getValue());
-        g.drawString(value, this.cardImage.getCoordinates()[0] + 130 - g.getFontMetrics().stringWidth(value),
-                670);
-    }
-
 }

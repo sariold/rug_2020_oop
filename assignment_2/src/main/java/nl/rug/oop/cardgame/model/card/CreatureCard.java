@@ -118,25 +118,5 @@ public class CreatureCard extends Card implements Attackable {
             hero.getDiscardDeck().discard(this);
         }
     }
-
-    @Override
-    public void display(Graphics g, MagicStonePanel panel) {
-        super.display(g, panel);
-        if(isDiscarded()) return;
-        int[] coords = this.cardImage.getCoordinates();
-        if (this.battlePosition == -1) {
-            g.setColor(Color.BLACK);
-            String attackAndHealth = (this.getAttack() + "/" + (this.getHealth()));
-            g.drawString(attackAndHealth, coords[0] + 130 -
-                    g.getFontMetrics().stringWidth(attackAndHealth), 670);
-        } else if (this.battlePosition > -1){
-            g.setColor(Color.WHITE);
-            g.setFont(new Font("TimesRoman", Font.PLAIN, 20));
-            g.drawImage(StatTextures.getTexture(StatEnum.ATTACK), coords[0] + 103, coords[1] + 10, 50, 65, panel);
-            g.drawString(Integer.toString(this.getAttack()), coords[0] + 120, coords[1] + 55);
-            g.drawImage(StatTextures.getTexture(StatEnum.HEART), coords[0] + 104, coords[1] + 90, 45, 45, panel);
-            g.drawString(Integer.toString(this.getHealth()), coords[0] + 122, coords[1] + 115);
-        }
-
-    }
+    
 }
