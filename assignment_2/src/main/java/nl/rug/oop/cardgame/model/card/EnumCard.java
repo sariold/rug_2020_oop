@@ -6,7 +6,7 @@ public enum EnumCard {
     CREATURE_WOLF(Type.CREATURE, Face.WOLF, 2, 2, 2),
     CREATURE_WEREWOLF(Type.CREATURE, Face.WEREWOLF, 3, 3, 3),
     CREATURE_DRAGON(Type.CREATURE, Face.DRAGON, 4, 4, 4),
-    CREATURE_DEVIL(Type.CREATURE, Face.DEVIL, 5, 5, 5),
+    CREATURE_DEMON(Type.CREATURE, Face.DEMON, 5, 5, 5),
     CREATURE_GUARD(Type.CREATURE, Face.GUARD, 4, 2, 3),
     CREATURE_ARCHER(Type.CREATURE, Face.ARCHER, 1, 3, 2),
     CREATURE_GARGOYLE(Type.CREATURE, Face.GARGOYLE, 3, 1, 2),
@@ -15,7 +15,9 @@ public enum EnumCard {
     SPELL_INSTANTDRAW(Type.SPELL, Face.INSTANTDRAW, 4, 2),
     SPELL_INSTANTHEALTH(Type.SPELL, Face.INSTANTHEALTH, 3, 3),
     SPELL_INSTANTDAMAGE(Type.SPELL, Face.INSTANTDAMAGE, 5, 3),
-    SPELL_COPYPASTE(Type.SPELL, Face.COPYPASTE, 4, 1);
+    SPELL_COPYPASTE(Type.SPELL, Face.COPYPASTE, 4, 1),
+    SPELL_HELLFIRE(Type.SPELL, Face.HELLFIRE, 4, 2),
+    SPELL_DAMAGEBUFF(Type.SPELL, Face.DAMAGEBUFF, 3, 2);
 
     private final Type type;
     private final Face face;
@@ -73,7 +75,7 @@ public enum EnumCard {
         WEREWOLF,
         ZOMBIE,
         DRAGON,
-        DEVIL,
+        DEMON,
         GUARD,
         ARCHER,
         GARGOYLE,
@@ -81,7 +83,9 @@ public enum EnumCard {
         INSTANTDRAW,
         INSTANTHEALTH,
         INSTANTDAMAGE,
-        COPYPASTE
+        COPYPASTE,
+        HELLFIRE,
+        DAMAGEBUFF
     }
 
     public Type getType() {

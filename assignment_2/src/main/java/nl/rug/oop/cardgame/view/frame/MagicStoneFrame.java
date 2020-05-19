@@ -8,10 +8,13 @@ import nl.rug.oop.cardgame.controller.button.EndTurnButton;
 import nl.rug.oop.cardgame.model.MagicStoneGame;
 import nl.rug.oop.cardgame.view.panel.GameOverPanel;
 import nl.rug.oop.cardgame.view.panel.MagicStonePanel;
+import nl.rug.oop.cardgame.view.textures.CardTextures;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 @EqualsAndHashCode(callSuper = true)
@@ -21,10 +24,17 @@ public class MagicStoneFrame extends JFrame {
     private MagicStonePanel panel;
     private CardClicker clicker;
     private JLabel gifLabel;
-
+    private Image loadedLogo;
 
     public MagicStoneFrame(MagicStoneGame magicStoneGame) {
         super("Magic Stone");
+        try {
+            this.loadedLogo = ImageIO.read(CardTextures.class.getResource(File.separator + "textures"
+                    + File.separator + "MAGICSTONE_LOGO.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        this.setIconImage(loadedLogo);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         panel = new MagicStonePanel(magicStoneGame);
         panel.setLayout(null);

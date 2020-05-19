@@ -55,13 +55,13 @@ public class CopySpell extends SpellCard implements Targetting {
         return false;
     }
 
-    public boolean notEmptyBattlefield(Hero hero) {
-        ArrayList<CreatureCard> creatures = hero.getPlayedCreatures();
-        for (CreatureCard c : creatures) {
-            if (c != null) return true;
-        }
-        return false;
-    }
+//    public boolean notEmptyBattlefield(Hero hero) {
+//        ArrayList<CreatureCard> creatures = hero.getPlayedCreatures();
+//        for (CreatureCard c : creatures) {
+//            if (c != null) return true;
+//        }
+//        return false;
+//    }
 
     public void showBattlefield(Hero hero) {
         ArrayList<CreatureCard> creatures = hero.getPlayedCreatures();

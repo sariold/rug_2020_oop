@@ -4,6 +4,7 @@ import nl.rug.oop.cardgame.model.Battlefield;
 import nl.rug.oop.cardgame.model.MagicStoneGame;
 import nl.rug.oop.cardgame.model.card.Card;
 import nl.rug.oop.cardgame.model.card.CreatureCard;
+import nl.rug.oop.cardgame.model.card.EnumCard;
 import nl.rug.oop.cardgame.view.frame.MagicStoneFrame;
 import nl.rug.oop.cardgame.view.panel.MagicStonePanel;
 
@@ -46,7 +47,7 @@ public class AIHero extends Hero {
             System.out.println("AI has cards in hand");
             ArrayList<Card> playableCards;
             while (this.getMana() > 0) {
-                playableCards = getPlayableCards();
+                playableCards = getPlayableCards(battlefield);
                 if (playableCards.size() == 0) {
                     System.out.println("AI does not have enough mana to play a card");
                     break;
@@ -80,7 +81,6 @@ public class AIHero extends Hero {
         if (creatures.size() == 0) System.out.println("AI has no creatures to attack with");
         for (CreatureCard c : creatures) {
             if (c != null && !c.isUsed() && c.getBattlePosition() != -1) {
-//                frame.playGif("SWORD", c.getCardImage().getCoordinates());
                 System.out.println("AI attack you with " + c.getName());
                 CreatureCard attackedCreature = battlefield.getPlayer().getPlayedCreatures().get(c.getBattlePosition());
                 if (attackedCreature == null) c.attack(battlefield.getPlayer());
@@ -92,7 +92,6 @@ public class AIHero extends Hero {
                 battlefield.removeDead(battlefield.getPlayer());
                 game.endGameCheck(battlefield);
                 notifyUpdate();
-//                frame.update(frame.getGraphics());
             }
         }
     }
@@ -102,11 +101,19 @@ public class AIHero extends Hero {
      *
      * @return An arraylist of playable cards
      */
-    private ArrayList<Card> getPlayableCards() {
+    private ArrayList<Card> getPlayableCards(Battlefield battlefield) {
+        boolean addable;
         ArrayList<Card> playable = new ArrayList<>();
         for (Card c : this.deckHand.getDeckHand().values()) {
             if (c.getCost() <= this.getMana()) {
-                playable.add(c);
+                addable = true;
+                if(c.getEnumCard().getFace() == EnumCard.Face.COPYPASTE ) {
+                    if(battlefield.playerHasBattlefieldCreature(battlefield.getAi()).size() == 0) addable = false;
+                }
+                if(c.getEnumCard().getFace() == EnumCard.Face.HELLFIRE ) {
+                    if(battlefield.playerHasBattlefieldCreature(battlefield.getPlayer()).size() == 0) addable = false;
+                }
+                if(addable) playable.add(c);
             }
         }
         return playable;

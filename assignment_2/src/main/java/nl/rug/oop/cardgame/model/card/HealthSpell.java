@@ -10,11 +10,8 @@ import nl.rug.oop.cardgame.view.frame.MagicStoneFrame;
 @Data
 public class HealthSpell extends SpellCard {
 
-    private final String type;
-
     public HealthSpell(EnumCard enumCard) {
         super(enumCard);
-        this.type = enumCard.getFace().toString();
     }
 
     @Override
@@ -35,6 +32,5 @@ public class HealthSpell extends SpellCard {
         target.setHeroHealth(target.getHealth() + dealValue);
         return super.play(battlefield, hero, pos, frame);
     }
-
 
 }

@@ -6,6 +6,8 @@ import nl.rug.oop.cardgame.model.Battlefield;
 import nl.rug.oop.cardgame.model.hero.Hero;
 import nl.rug.oop.cardgame.view.frame.MagicStoneFrame;
 
+import java.util.ArrayList;
+
 /**
  * Spell card
  */
@@ -27,6 +29,14 @@ public abstract class SpellCard extends Card {
         Hero hero = (heroIndex == 0 ? battlefield.getPlayer() : battlefield.getAi());
         hero.getDiscardDeck().discard(this);
         return true;
+    }
+
+    public boolean notEmptyBattlefield(Hero hero) {
+        ArrayList<CreatureCard> creatures = hero.getPlayedCreatures();
+        for (CreatureCard c : creatures) {
+            if (c != null) return true;
+        }
+        return false;
     }
 
 }

@@ -41,6 +41,7 @@ public class MagicStoneGame extends Observable {
             System.out.println();
             System.out.println("It's turn number " + ((i + (i % 2)) / 2));
             if (i % 2 == 1) {
+                battlefield.setDamageBuff(player, false, 0);
                 resetUsedCreatures(player);
                 notifyUpdate();
                 battlefield.incMana(player);
@@ -49,6 +50,7 @@ public class MagicStoneGame extends Observable {
                 player.takeTurn(battlefield, frame, frame.getPanel(), this);
                 notifyUpdate();
             } else {
+                battlefield.setDamageBuff(ai, false, 0);
                 resetUsedCreatures(ai);
                 battlefield.incMana(ai);
                 ai.setMana(ai.getMaxMana());

@@ -21,6 +21,7 @@ public class Battlefield extends Observable {
     private boolean attackPhase;
     private boolean playPhase;
     private Card selectedCard;
+    private boolean hellFire;
 
     /**
      * Create a new battlefield
@@ -32,11 +33,29 @@ public class Battlefield extends Observable {
         this.playPhase = true;
     }
 
+    public void notifyUpdate() {
+        setChanged();
+        notifyObservers();
+    }
+
+    public void setDamageBuff(Hero hero, boolean damageBuff, int value) {
+        if(damageBuff) {
+            hero.setHeroAttack(hero.getHeroAttack() + value);
+        } else hero.setHeroAttack(DefaultStats.DEFAULT_ATTACK);
+        notifyUpdate();
+    }
+
+    public void setHellFire(boolean hellFire, Hero hero) {
+        this.hellFire = hellFire;
+        removeDead(hero);
+        notifyUpdate();
+        this.hellFire = false;
+    }
+
     public void setAttackPhase(boolean attackPhase) {
         this.attackPhase = attackPhase;
         this.playPhase = false;
-        setChanged();
-        notifyObservers();
+        notifyUpdate();
     }
 
     public void setPlayerTurn(boolean playerTurn) {
@@ -48,14 +67,12 @@ public class Battlefield extends Observable {
         this.playPhase = playPhase;
         this.playerTurn = playPhase;
         this.attackPhase = false;
-        setChanged();
-        notifyObservers();
+        notifyUpdate();
     }
 
     public void setSelectedCard(Card selected) {
         this.selectedCard = selected;
-        setChanged();
-        notifyObservers();
+        notifyUpdate();
     }
 
     /**

@@ -60,10 +60,12 @@ public class BattlefieldClicker extends MouseInputAdapter {
         y = event.getY();
         if(!attackPhase) {
             switch (card.getEnumCard()) {
+                case SPELL_DAMAGEBUFF:
                 case SPELL_INSTANTDRAW:
                 case SPELL_INSTANTHEALTH:
                     if (x >= 540 && x <= 740 && y >= 590 && y <= 790) playSpell();
                     break;
+                case SPELL_HELLFIRE:
                 case SPELL_INSTANTDAMAGE:
                     if (x >= 540 && x <= 740 && y >= 0 && y <= 200) playSpell();
                     break;
