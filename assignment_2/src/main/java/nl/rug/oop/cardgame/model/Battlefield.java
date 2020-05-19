@@ -28,6 +28,8 @@ public class Battlefield extends Observable {
     public Battlefield() {
         this.player = new Hero("Diego", 100, 0, 0, 1);
         this.ai = new AIHero("AI", 10, 0, 0, 1);
+//        this.attackPhase = false;
+//        this.playPhase = true;
     }
 
     public void setAttackPhase(boolean attackPhase) {

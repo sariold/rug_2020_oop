@@ -61,7 +61,7 @@ public class CardClicker extends MouseInputAdapter {
             if (pos != -1) {
                 System.out.println("pos:" + pos);
 //                magicStonePanel.paintSelected(magicStonePanel.getGraphics(), pos, Color.BLUE);
-                magicStoneGame.getBattlefield().setSelectedCard(magicStoneGame.getBattlefield().getSelectedCard());
+                magicStoneGame.getBattlefield().setSelectedCard(getCard(magicStoneGame, pos));
                 System.out.println("Card number " + card.getCardNumber());
                 new DiscardClicker(magicStoneGame, magicStonePanel, card.getCardNumber(), magicStoneFrame);
                 if (card.getCost() <= magicStoneGame.getBattlefield().getPlayer().getMana()) {

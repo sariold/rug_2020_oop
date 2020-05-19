@@ -86,7 +86,7 @@ public class MagicStonePanel extends JPanel implements Observer {
         paintDeck(g);
         paintHand(g);
         paintBattlefield(g);
-        if(magicStoneGame.getBattlefield().isPlayerTurn()) {
+        if(magicStoneGame.getBattlefield().isPlayerTurn() && magicStoneGame.getBattlefield().getSelectedCard() != null) {
             paintPositions(g);
         }
         paintSelected(g);
