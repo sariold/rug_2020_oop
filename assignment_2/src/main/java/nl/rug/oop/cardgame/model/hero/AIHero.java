@@ -38,8 +38,7 @@ public class AIHero extends Hero {
      * @param battlefield Playing board
      */
     @Override
-    public void takeTurn(Battlefield battlefield, MagicStoneFrame frame, MagicStonePanel panel, MagicStoneGame game,
-                         EndTurnButton endTurnButton) {
+    public void takeTurn(Battlefield battlefield, MagicStoneFrame frame, MagicStonePanel panel, MagicStoneGame game) {
         System.out.println(this.name + "'s TURN!");
         Card card = this.getDeck().drawCard();
         if (card != null) {

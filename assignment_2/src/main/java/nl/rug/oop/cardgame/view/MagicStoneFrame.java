@@ -20,11 +20,12 @@ public class MagicStoneFrame extends JFrame {
     private JLabel gifLabel;
 
 
-    public MagicStoneFrame(MagicStoneGame magicStoneGame, EndTurnButton endTurnButton) {
+    public MagicStoneFrame(MagicStoneGame magicStoneGame) {
         super("Magic Stone");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         panel = new MagicStonePanel(magicStoneGame);
         panel.setLayout(null);
+        EndTurnButton endTurnButton = new EndTurnButton(magicStoneGame);
         endTurnButton.setBounds(590, 510, 100, 30);
         panel.add(endTurnButton);
         add(panel);

@@ -7,11 +7,10 @@ import nl.rug.oop.cardgame.model.hero.Hero;
 import nl.rug.oop.cardgame.view.MagicStoneFrame;
 
 import java.util.Observable;
-import java.util.Observer;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class MagicStoneGame extends Observable implements Observer {
+public class MagicStoneGame extends Observable {
 
     private Battlefield battlefield;
     private MagicStoneFrame frame;
@@ -25,8 +24,8 @@ public class MagicStoneGame extends Observable implements Observer {
      *
      * @param battlefield Playing board
      */
-    public void startGame(Battlefield battlefield, MagicStoneFrame frame, EndTurnButton endTurnButton) {
-        turnRotation(battlefield, frame, endTurnButton);
+    public void startGame(Battlefield battlefield, MagicStoneFrame frame) {
+        turnRotation(battlefield, frame);
     }
 
     /**
@@ -34,7 +33,7 @@ public class MagicStoneGame extends Observable implements Observer {
      *
      * @param battlefield Playing board
      */
-    public void turnRotation(Battlefield battlefield, MagicStoneFrame frame, EndTurnButton endTurnButton) {
+    public void turnRotation(Battlefield battlefield, MagicStoneFrame frame) {
         Hero player = battlefield.getPlayer();
         Hero ai = battlefield.getAi();
         boolean start = true;
@@ -48,13 +47,13 @@ public class MagicStoneGame extends Observable implements Observer {
                 battlefield.incMana(player);
                 player.setMana(player.getMaxMana());
                 frame.update(frame.getGraphics());
-                player.takeTurn(battlefield, frame, frame.getPanel(), this, endTurnButton);
+                player.takeTurn(battlefield, frame, frame.getPanel(), this);
                 frame.update(frame.getGraphics());
             } else {
                 resetUsedCreatures(ai);
                 battlefield.incMana(ai);
                 ai.setMana(ai.getMaxMana());
-                ai.takeTurn(battlefield, frame, frame.getPanel(), this, endTurnButton);
+                ai.takeTurn(battlefield, frame, frame.getPanel(), this);
                 battlefield.setPlayerTurn(true);
             }
             endGameCheck(battlefield);
@@ -83,12 +82,6 @@ public class MagicStoneGame extends Observable implements Observer {
         for (int i = hero.getPlayedCreatures().size() - 1; i >= 0; i--) {
             if (hero.getPlayedCreatures().get(i) != null) hero.getPlayedCreatures().get(i).setUsed(false);
         }
-    }
-
-    @Override
-    public void update(Observable observable, Object message) {
-        setChanged();
-        notifyObservers();
     }
 
 }
