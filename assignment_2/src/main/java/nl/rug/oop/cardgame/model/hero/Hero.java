@@ -174,6 +174,7 @@ public class Hero extends Observable implements Attackable {
     @Override
     public void setHealth(int health) {
         this.setHeroHealth(health);
+        notifyUpdate();
     }
 
     /**
