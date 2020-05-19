@@ -25,6 +25,7 @@ public abstract class Card implements Playable {
     private EnumCard enumCard;
     protected CardImage cardImage;
     private int handPos;
+    private boolean discarded;
 
     /**
      * Creates a new Card

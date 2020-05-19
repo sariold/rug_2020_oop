@@ -33,10 +33,11 @@ public class DiscardClicker extends MouseInputAdapter {
         x = event.getX();
         y= event.getY();
         if(x >= 10 && x <= 110 && y >= 360 && y <= 510) {
+//            magicStoneGame.getBattlefield().setSelectedCard();
 //            magicStonePanel.paintSelected(magicStonePanel.getGraphics(), 6, Color.RED);
             Hero player = magicStoneGame.getBattlefield().getPlayer();
             player.getDeckHand().discardCard(player.getDiscardDeck(), key);
-            frame.update(frame.getGraphics());
+//            frame.update(frame.getGraphics());
         }
         ((Component) event.getSource()).removeMouseListener(this);
     }

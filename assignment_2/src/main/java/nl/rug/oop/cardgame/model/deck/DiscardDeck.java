@@ -23,6 +23,7 @@ public class DiscardDeck {
      * @param card Card
      */
     public void discard(Card card) {
+        card.setDiscarded(true);
         this.dicardPile.add(card);
     }
 }

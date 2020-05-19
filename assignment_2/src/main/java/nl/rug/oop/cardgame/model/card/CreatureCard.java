@@ -122,6 +122,7 @@ public class CreatureCard extends Card implements Attackable {
     @Override
     public void display(Graphics g, MagicStonePanel panel) {
         super.display(g, panel);
+        if(isDiscarded()) return;
         int[] coords = this.cardImage.getCoordinates();
         if (this.battlePosition == -1) {
             g.setColor(Color.BLACK);

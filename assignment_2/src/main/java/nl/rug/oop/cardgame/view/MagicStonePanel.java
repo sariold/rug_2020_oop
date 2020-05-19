@@ -86,7 +86,8 @@ public class MagicStonePanel extends JPanel implements Observer {
         paintDeck(g);
         paintHand(g);
         paintBattlefield(g);
-        if(magicStoneGame.getBattlefield().isPlayerTurn() && magicStoneGame.getBattlefield().getSelectedCard() != null) {
+        if(magicStoneGame.getBattlefield().isPlayerTurn() && magicStoneGame.getBattlefield().getSelectedCard() != null
+        && magicStoneGame.getBattlefield().getSelectedCard() instanceof CreatureCard) {
             paintPositions(g);
         }
         paintSelected(g);
@@ -213,6 +214,9 @@ public class MagicStonePanel extends JPanel implements Observer {
         if (c != null) {
             int[] coords = c.getCardImage().getCoordinates();
             g.setColor(Color.BLUE);
+            g.drawRect(coords[0], coords[1], coords[2], coords[3]);
+            coords = DefaultCoordinates.PLAYER_DISCARD_PILE;
+            g.setColor(Color.RED);
             g.drawRect(coords[0], coords[1], coords[2], coords[3]);
         }
     }
