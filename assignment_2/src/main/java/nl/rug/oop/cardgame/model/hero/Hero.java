@@ -127,7 +127,7 @@ public class Hero extends Observable implements Attackable {
                 e.printStackTrace();
             }
         }
-        panel.remove(attackPhaseButton);
+//        panel.remove(attackPhaseButton);
 //        battlefield.setPlayerTurn(false);
         return;
 //                case 4:

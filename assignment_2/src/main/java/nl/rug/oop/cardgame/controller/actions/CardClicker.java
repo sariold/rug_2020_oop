@@ -69,6 +69,7 @@ public class CardClicker extends MouseInputAdapter {
                 }
                 card = null;
             }
+//            magicStoneGame.getBattlefield().setSelectedCard(null);
         }
     }
 

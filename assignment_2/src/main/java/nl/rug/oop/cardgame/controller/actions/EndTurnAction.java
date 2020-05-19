@@ -17,6 +17,7 @@ public class EndTurnAction extends AbstractAction {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        System.out.println("END TURN");
         magicStoneGame.endPlayerTurn();
     }
 

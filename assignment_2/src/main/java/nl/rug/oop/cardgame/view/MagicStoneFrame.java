@@ -3,8 +3,10 @@ package nl.rug.oop.cardgame.view;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import nl.rug.oop.cardgame.controller.actions.CardClicker;
+import nl.rug.oop.cardgame.controller.button.AttackPhaseButton;
 import nl.rug.oop.cardgame.controller.button.EndTurnButton;
 import nl.rug.oop.cardgame.model.MagicStoneGame;
+import nl.rug.oop.cardgame.model.card.Card;
 
 import javax.swing.*;
 import java.awt.*;
@@ -30,6 +32,9 @@ public class MagicStoneFrame extends JFrame {
         panel.add(endTurnButton);
         add(panel);
         clicker = new CardClicker(magicStoneGame, panel, this);
+        AttackPhaseButton attackPhaseButton = new AttackPhaseButton(magicStoneGame, this, panel, clicker);
+        attackPhaseButton.setBounds(590, 108, 100, 30);
+        panel.add(attackPhaseButton);
         setPreferredSize(new Dimension(1280, 720));
         gifLabel = new JLabel();
         pack();

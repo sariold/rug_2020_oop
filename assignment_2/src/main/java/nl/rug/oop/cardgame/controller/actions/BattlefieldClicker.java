@@ -90,8 +90,10 @@ public class BattlefieldClicker extends MouseInputAdapter {
         else if (x >= 740 && x <= 830 && y >= 360 && y <= 495) pos = 3;
         else if (x >= 940 && x <= 1030 && y >= 360 && y <= 495) pos = 4;
         if(pos != -1) {
+//            magicStoneGame.getBattlefield().setSelectedCard(getCard(magicStoneGame, pos));
             if(attack) attack(pos);
             else placeCreature(pos);
+//            magicStoneGame.getBattlefield().setSelectedCard(null);
         }
     }
 

@@ -28,8 +28,8 @@ public class Battlefield extends Observable {
     public Battlefield() {
         this.player = new Hero("Diego", 100, 0, 0, 1);
         this.ai = new AIHero("AI", 10, 0, 0, 1);
-//        this.attackPhase = false;
-//        this.playPhase = true;
+        this.attackPhase = false;
+        this.playPhase = true;
     }
 
     public void setAttackPhase(boolean attackPhase) {
@@ -39,8 +39,14 @@ public class Battlefield extends Observable {
         notifyObservers();
     }
 
+    public void setPlayerTurn(boolean playerTurn) {
+        if(playerTurn) setPlayPhase(true);
+        else setPlayPhase(false);
+    }
+
     public void setPlayPhase(boolean playPhase) {
         this.playPhase = playPhase;
+        this.playerTurn = playPhase;
         this.attackPhase = false;
         setChanged();
         notifyObservers();
@@ -51,8 +57,6 @@ public class Battlefield extends Observable {
         setChanged();
         notifyObservers();
     }
-
-
 
     /**
      * Increase mana each turn
