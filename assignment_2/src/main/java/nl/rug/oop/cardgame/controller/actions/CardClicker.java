@@ -60,7 +60,6 @@ public class CardClicker extends MouseInputAdapter {
             if (card != null) pos = card.getHandPos();
             if (pos != -1) {
                 System.out.println("pos:" + pos);
-//                magicStonePanel.paintSelected(magicStonePanel.getGraphics(), pos, Color.BLUE);
                 magicStoneGame.getBattlefield().setSelectedCard(getCard(magicStoneGame, pos));
                 System.out.println("Card number " + card.getCardNumber());
                 new DiscardClicker(magicStoneGame, magicStonePanel, card.getCardNumber(), magicStoneFrame);
@@ -69,7 +68,6 @@ public class CardClicker extends MouseInputAdapter {
                 }
                 card = null;
             }
-//            magicStoneGame.getBattlefield().setSelectedCard(null);
         }
     }
 

@@ -38,24 +38,6 @@ public class CopySpell extends SpellCard implements Targetting {
                 CreatureCard creatureCard = new CreatureCard(hero.getPlayedCreatures().get(pos).getEnumCard());
                 creatureCard.setUsed(true);
                 battlefield.placeCreature(creatureCard, hero, freePositions.get(0));
-//                while (start) {
-//                    try {
-//                        System.out.println("Which creature do you want to copy paste?");
-//                        showBattlefield(hero);
-//                        System.out.println();
-//                        currentMove = scanner.nextInt();
-//                        if (hero.getPlayedCreatures().get(currentMove) != null) {
-//                            CreatureCard creatureCard = new CreatureCard(hero.getPlayedCreatures().get(currentMove).getEnumCard());
-//                            creatureCard.setUsed(true);
-////                            battlefield.placeCreature(creatureCard, hero);
-//                        }
-//                        start = false;
-//                    } catch (InputMismatchException e) {
-//                        e.printStackTrace();
-//                        System.out.println("INVALID INPUT");
-//                        scanner.nextLine();
-//                    }
-//                }
             } else {
                 if (freePositions.size() > 0) {
                     ArrayList<CreatureCard> creatures = hero.getPlayedCreatures();

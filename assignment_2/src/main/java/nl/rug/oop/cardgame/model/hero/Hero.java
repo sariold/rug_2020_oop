@@ -80,25 +80,7 @@ public class Hero extends Observable implements Attackable {
                     this.deckHand.getDeckHand().put(card.getCardNumber(), played);
                 }
             } else System.out.println("You cease to have enough mana!");
-//            while (start) {
-//                try {
-//                    currentMove = scanner.nextInt();
-//                    Card played = this.deckHand.getDeckHand().get(currentMove);
-//                    if (played != null && played.getCost() <= this.mana) {
-//                        this.deckHand.getDeckHand().remove(currentMove);
-//                        if (played.play(battlefield, 0, pos)) {
-//                            this.setMana(this.getMana() - played.getCost());
-//                        } else {
-//                            this.deckHand.getDeckHand().put(currentMove, played);
-//                        }
-//                    } else System.out.println("You cease to have enough mana!");
-//                    start = false;
-//                } catch (InputMismatchException e) {
-//                    System.out.println("NOT VALID INPUT!");
-//                }
-//            }
             notifyUpdate();
-//            frame.update(frame.getGraphics());
         } else System.out.println("Empty Hand!");
     }
 
@@ -108,18 +90,11 @@ public class Hero extends Observable implements Attackable {
      * @param battlefield Playing board
      */
     public void takeTurn(Battlefield battlefield, MagicStoneFrame frame, MagicStonePanel panel, MagicStoneGame game) {
-//        AttackPhaseButton attackPhaseButton = new AttackPhaseButton(game, frame, panel, frame.getClicker());
         Card card = this.getDeck().drawCard();
         if (card != null) {
             this.getDeckHand().addCard(this.getDiscardDeck(), card);
         }
-//        if(this.untappedCreatures()) {
-//            attackPhaseButton.setBounds(590, 108, 100, 30);
-////            panel.add(endTurnButton);
-//            panel.add(attackPhaseButton);
-//        }
         notifyUpdate();
-//        frame.update(frame.getGraphics());
         while(battlefield.isPlayerTurn()) {
             try {
                 TimeUnit.SECONDS.sleep(1);
@@ -127,12 +102,7 @@ public class Hero extends Observable implements Attackable {
                 e.printStackTrace();
             }
         }
-//        panel.remove(attackPhaseButton);
-//        battlefield.setPlayerTurn(false);
         return;
-//                case 4:
-//                    swapCreaturePositions(battlefield, frame);
-//                    break;
     }
 
     private void swapCreaturePositions(Battlefield battlefield, MagicStoneFrame frame) {
@@ -152,7 +122,6 @@ public class Hero extends Observable implements Attackable {
                         this.getPlayedCreatures().set(currentMove, null);
                     }
                     notifyUpdate();
-//                    frame.update(frame.getGraphics());
                 } catch (Exception e) {
                     System.out.println("NOT VALID INPUT!");
                 }
@@ -167,7 +136,6 @@ public class Hero extends Observable implements Attackable {
     public void attackPhase(Battlefield battlefield, MagicStoneFrame frame, int pos, MagicStoneGame game, MagicStonePanel panel) {
         CreatureCard attackingCreature = this.getPlayedCreatures().get(pos);
         CreatureCard attackedCreature = battlefield.getAi().getPlayedCreatures().get(pos);
-//        frame.playGif("SWORD", attackingCreature.getCardImage().getCoordinates());
         if (attackedCreature == null) attackingCreature.attack(battlefield.getAi());
         else attackingCreature.attack(attackedCreature);
         attackingCreature.checkDeath(this, attackingCreature.getBattlePosition());
@@ -177,7 +145,6 @@ public class Hero extends Observable implements Attackable {
         battlefield.removeDead(battlefield.getAi());
         game.endGameCheck(battlefield);
         notifyUpdate();
-//        frame.update(frame.getGraphics());
     }
 
     /**

@@ -46,7 +46,6 @@ public class AIHero extends Hero {
             this.getDeckHand().addCard(this.getDiscardDeck(), card);
         }
         notifyUpdate();
-//        frame.update(frame.getGraphics());
         if (this.deckHand.getDeckHand().size() > 0) {
             System.out.println("AI has cards in hand");
             ArrayList<Card> playableCards;
@@ -67,7 +66,6 @@ public class AIHero extends Hero {
                         System.out.println("Current Mana: " + this.getMana() + "/" + this.getMaxMana());
                     }
                     notifyUpdate();
-//                    frame.update(frame.getGraphics());
                 }
             }
         } else System.out.println("AI has no cards in hand");

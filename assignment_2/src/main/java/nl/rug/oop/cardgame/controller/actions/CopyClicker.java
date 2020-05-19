@@ -31,8 +31,6 @@ public class CopyClicker extends MouseInputAdapter {
         this.frame = frame;
         magicStonePanel.addMouseListener(this);
         this.freePos = magicStoneGame.getBattlefield().getFreePositions(magicStoneGame.getBattlefield().getPlayer());
-//        if(card instanceof CreatureCard && !attackPhase) magicStonePanel.paintPositions(frame.getGraphics(), Color.GREEN, false);
-//        else if(attackPhase) magicStonePanel.paintPositions(frame.getGraphics(), Color.RED, true);
     }
 
     @Override
@@ -46,7 +44,6 @@ public class CopyClicker extends MouseInputAdapter {
         else if (x >= 740 && x <= 830 && y >= 360 && y <= 495) pos = 3;
         else if (x >= 940 && x <= 1030 && y >= 360 && y <= 495) pos = 4;
         if(pos != -1) {
-//            CreatureCard copy = magicStoneGame.getBattlefield().getPlayer().getPlayedCreatures().get(pos);
             magicStoneGame.getBattlefield().getPlayer().playCard(magicStoneGame.getBattlefield(), frame, pos, card);
         }
         ((Component) event.getSource()).removeMouseListener(this);

@@ -22,7 +22,6 @@ public class HealthSpell extends SpellCard {
         Hero player = battlefield.getPlayer();
         Hero ai = battlefield.getAi();
         Hero target;
-        String gif = "HEARTS";
         boolean heal = this.type.equals("INSTANTHEALTH");
         int dealValue = this.getEnumCard().getValue();
         if (!heal) dealValue *= -1;
@@ -33,8 +32,6 @@ public class HealthSpell extends SpellCard {
             if (heal) target = ai;
             else target = player;
         }
-        if(heal) gif = "HEARTS";
-//        frame.playGif(gif);
         target.setHeroHealth(target.getHealth() + dealValue);
         return super.play(battlefield, hero, pos, frame);
     }

@@ -73,34 +73,6 @@ public class Battlefield extends Observable {
         if (hero.getMaxMana() < DefaultStats.MAX_MANA) hero.setMaxMana(hero.getMaxMana() + 1);
     }
 
-//    /**
-//     * Show the creatures on the battlefield for AI and Player
-//     */
-//    public void showBattlefield() {
-//        System.out.println("ENEMY HEALTH: " + this.getAi().getHeroHealth());
-//        System.out.println("ENEMY FIELD:");
-//        for (int i = 0; i < ai.getPlayedCreatures().size(); i++) {
-//            CreatureCard creature = ai.getPlayedCreatures().get(i);
-//            if (creature == null) System.out.println(i + ") null");
-//            else {
-//                System.out.println(i + ") " + creature.getName() + ": Health = " + creature.getHealth() + ": Attack = " +
-//                        creature.getAttack() + " : Tapped = " + creature.isUsed() + " : Pos = " + creature.getBattlePosition());
-//            }
-//        }
-//        System.out.println();
-//        System.out.println("YOUR HEALTH: " + this.getPlayer().getHeroHealth());
-//        System.out.println("YOUR FIELD:");
-//        for (int i = 0; i < player.getPlayedCreatures().size(); i++) {
-//            CreatureCard creature = player.getPlayedCreatures().get(i);
-//            if (creature == null) System.out.println(i + ") null");
-//            else {
-//                System.out.println(i + ") " + creature.getName() + ": Health = " + creature.getHealth() + ": Attack = " +
-//                        creature.getAttack() + " : Tapped = " + creature.isUsed() + " : Pos = " + creature.getBattlePosition());
-//            }
-//        }
-//        System.out.println();
-//    }
-
     /**
      * places a creature on a free spot on the battlefield
      *
@@ -115,8 +87,6 @@ public class Battlefield extends Observable {
             if (hero instanceof AIHero) {
                 ArrayList<Integer> enemySpots = playerHasBattlefieldCreature(this.getPlayer());
                 if (enemySpots.size() > 0) {
-//                    Collections.shuffle(enemySpots);
-//                    placePos = enemySpots.get(0);
                     placePos = enemySpotIHaveEmpty(freePositions, enemySpots);
                 }
                 if(placePos == -1){
@@ -125,7 +95,6 @@ public class Battlefield extends Observable {
                 }
                 hero.getPlayedCreatures().set(placePos, creatureCard);
                 hero.getPlayedCreatures().get(placePos).setBattlePosition(placePos);
-//            System.out.println(freePositions.get(0));
                 return true;
             }
             hero.getPlayedCreatures().set(pos, creatureCard);
