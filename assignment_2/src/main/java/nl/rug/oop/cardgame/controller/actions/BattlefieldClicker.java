@@ -23,6 +23,7 @@ public class BattlefieldClicker extends MouseInputAdapter {
     private MagicStoneFrame frame;
     private ArrayList<Integer> freePos;
     private boolean attackPhase;
+    private MouseEvent event;
 
     public BattlefieldClicker(MagicStoneGame magicStoneGame, MagicStonePanel magicStonePanel, Card card,
                               MagicStoneFrame frame, boolean attackPhase) {
@@ -54,10 +55,7 @@ public class BattlefieldClicker extends MouseInputAdapter {
 
     @Override
     public void mouseClicked(MouseEvent event) {
-        if(!magicStoneGame.getBattlefield().isPlayerTurn()) {
-            ((Component) event.getSource()).removeMouseListener(this);
-            return;
-        }
+        this.event = event;
         x = event.getX();
         y = event.getY();
         if(!attackPhase) {
@@ -99,6 +97,12 @@ public class BattlefieldClicker extends MouseInputAdapter {
     }
 
     private void attack(int pos) {
+        if(!magicStoneGame.getBattlefield().isPlayerTurn() || !magicStoneGame.getBattlefield().isAttackPhase()) {
+            ((Component) event.getSource()).removeMouseListener(this);
+            magicStoneGame.getBattlefield().setAttackPhase(false);
+            magicStoneGame.getBattlefield().setPlayerTurn(false);
+            return;
+        }
         Hero player = magicStoneGame.getBattlefield().getPlayer();
         CreatureCard card = getCard(magicStoneGame, pos);
         if(card != null) {
