@@ -45,7 +45,8 @@ public class AIHero extends Hero {
             System.out.println("Drawing card: " + card.getName() + " : Mana Cost -> " + card.getCost());
             this.getDeckHand().addCard(this.getDiscardDeck(), card);
         }
-        frame.update(frame.getGraphics());
+        notifyUpdate();
+//        frame.update(frame.getGraphics());
         if (this.deckHand.getDeckHand().size() > 0) {
             System.out.println("AI has cards in hand");
             ArrayList<Card> playableCards;
@@ -65,7 +66,8 @@ public class AIHero extends Hero {
                         this.setMana(this.getMana() - played.getCost());
                         System.out.println("Current Mana: " + this.getMana() + "/" + this.getMaxMana());
                     }
-                    frame.update(frame.getGraphics());
+                    notifyUpdate();
+//                    frame.update(frame.getGraphics());
                 }
             }
         } else System.out.println("AI has no cards in hand");
@@ -95,7 +97,8 @@ public class AIHero extends Hero {
                 battlefield.removeDead(this);
                 battlefield.removeDead(battlefield.getPlayer());
                 game.endGameCheck(battlefield);
-                frame.update(frame.getGraphics());
+                notifyUpdate();
+//                frame.update(frame.getGraphics());
             }
         }
     }

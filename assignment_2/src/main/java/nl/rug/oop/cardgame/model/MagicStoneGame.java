@@ -38,17 +38,21 @@ public class MagicStoneGame extends Observable {
         Hero ai = battlefield.getAi();
         boolean start = true;
         for (int i = 1; start; i++) {
-            frame.update(frame.getGraphics());
+            notifyUpdate();
+//            frame.update(frame.getGraphics());
             System.out.println();
             System.out.println("It's turn number " + ((i + (i % 2)) / 2));
             if (i % 2 == 1) {
                 resetUsedCreatures(player);
-                frame.update(frame.getGraphics());
+                notifyUpdate();
+//                frame.update(frame.getGraphics());
                 battlefield.incMana(player);
                 player.setMana(player.getMaxMana());
-                frame.update(frame.getGraphics());
+                notifyUpdate();
+//                frame.update(frame.getGraphics());
                 player.takeTurn(battlefield, frame, frame.getPanel(), this);
-                frame.update(frame.getGraphics());
+//                frame.update(frame.getGraphics());
+                notifyUpdate();
             } else {
                 resetUsedCreatures(ai);
                 battlefield.incMana(ai);
@@ -58,6 +62,11 @@ public class MagicStoneGame extends Observable {
             }
             endGameCheck(battlefield);
         }
+    }
+
+    private void notifyUpdate() {
+        setChanged();
+        notifyObservers();
     }
 
     public void endPlayerTurn() {

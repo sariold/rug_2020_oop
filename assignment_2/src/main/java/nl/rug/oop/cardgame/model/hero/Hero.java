@@ -26,7 +26,7 @@ import java.util.concurrent.TimeUnit;
  * Hero class to store health, mana, deck, and deck hand
  */
 @Data
-public class Hero implements Attackable {
+public class Hero extends Observable implements Attackable {
 
     protected String name;
     protected int heroHealth;
@@ -97,7 +97,8 @@ public class Hero implements Attackable {
 //                    System.out.println("NOT VALID INPUT!");
 //                }
 //            }
-            frame.update(frame.getGraphics());
+            notifyUpdate();
+//            frame.update(frame.getGraphics());
         } else System.out.println("Empty Hand!");
     }
 
@@ -117,7 +118,8 @@ public class Hero implements Attackable {
 //            panel.add(endTurnButton);
             panel.add(attackPhaseButton);
         }
-        frame.update(frame.getGraphics());
+        notifyUpdate();
+//        frame.update(frame.getGraphics());
         while(battlefield.isPlayerTurn()) {
             try {
                 TimeUnit.SECONDS.sleep(1);
@@ -149,7 +151,8 @@ public class Hero implements Attackable {
                         movingCreature.setUsed(true);
                         this.getPlayedCreatures().set(currentMove, null);
                     }
-                    frame.update(frame.getGraphics());
+                    notifyUpdate();
+//                    frame.update(frame.getGraphics());
                 } catch (Exception e) {
                     System.out.println("NOT VALID INPUT!");
                 }
@@ -173,7 +176,8 @@ public class Hero implements Attackable {
         battlefield.removeDead(this);
         battlefield.removeDead(battlefield.getAi());
         game.endGameCheck(battlefield);
-        frame.update(frame.getGraphics());
+        notifyUpdate();
+//        frame.update(frame.getGraphics());
     }
 
     /**
@@ -246,4 +250,8 @@ public class Hero implements Attackable {
         this.setHeroAttack(attack);
     }
 
+    protected void notifyUpdate() {
+        setChanged();
+        notifyObservers();
+    }
 }

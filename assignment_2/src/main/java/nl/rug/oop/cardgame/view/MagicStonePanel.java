@@ -26,6 +26,8 @@ public class MagicStonePanel extends JPanel implements Observer {
         this.magicStoneGame = magicStoneGame;
         magicStoneGame.addObserver(this);
         magicStoneGame.getBattlefield().addObserver(this);
+        magicStoneGame.getBattlefield().getPlayer().addObserver(this);
+        magicStoneGame.getBattlefield().getAi().addObserver(this);
         setBackground(BACKGROUND_COLOR);
         setVisible(true);
         setOpaque(true);
