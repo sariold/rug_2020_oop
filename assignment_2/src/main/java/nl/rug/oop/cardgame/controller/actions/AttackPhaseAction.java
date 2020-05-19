@@ -29,8 +29,8 @@ public class AttackPhaseAction extends AbstractAction {
         clicker.startAttackPhase();
 //        if(!magicStoneGame.getBattlefield().getPlayer().untappedCreatures()) magicStoneGame.getBattlefield().setPlayerTurn(false);
 //        panel.paintHand(frame.getGraphics(), true);
-        frame.update(frame.getGraphics());
-        panel.paintPositions(frame.getGraphics(), Color.RED, true);
+//        frame.update(frame.getGraphics());
+//        panel.paintPositions(frame.getGraphics(), Color.RED, true);
     }
 
 }

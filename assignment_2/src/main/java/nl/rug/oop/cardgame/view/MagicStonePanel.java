@@ -24,6 +24,7 @@ public class MagicStonePanel extends JPanel implements Observer {
     public MagicStonePanel(MagicStoneGame magicStoneGame) {
         this.magicStoneGame = magicStoneGame;
         magicStoneGame.addObserver(this);
+        magicStoneGame.getBattlefield().addObserver(this);
         setBackground(BACKGROUND_COLOR);
         setVisible(true);
         setOpaque(true);
@@ -85,6 +86,12 @@ public class MagicStonePanel extends JPanel implements Observer {
         paintDeck(g);
         paintHand(g);
         paintBattlefield(g);
+        if(magicStoneGame.getBattlefield().isPlayerTurn()) {
+            paintPositions(g);
+        }
+        if(magicStoneGame.getBattlefield().getSelectedCard() != null) {
+            paintSelected(g, magicStoneGame.getBattlefield().getSelectedCard().getHandPos(), Color.BLUE);
+        }
     }
 
     /**
@@ -182,14 +189,16 @@ public class MagicStonePanel extends JPanel implements Observer {
         }
     }
 
-    public void paintPositions(Graphics g, Color color, boolean attack) {
+    public void paintPositions(Graphics g) {
+        boolean attack = magicStoneGame.getBattlefield().isAttackPhase();
         Hero player = magicStoneGame.getBattlefield().getPlayer();
-        g.setColor(color);
+        g.setColor(Color.GREEN);
         int xOffset = 200;
         for(int i = 0; i < 5; i++) {
             if(!attack) {
                 if(player.getPlayedCreatures().get(i) == null) g.drawRect(140 + i * xOffset, 396, 90, 135);
             } else {
+                g.setColor(Color.RED);
                 if (player.getPlayedCreatures().get(i) != null) {
                     if(!player.getPlayedCreatures().get(i).isUsed()) {
                         System.out.println(player.getPlayedCreatures().get(i).toString());

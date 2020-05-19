@@ -2,25 +2,25 @@ package nl.rug.oop.cardgame.model;
 
 import lombok.Data;
 import nl.rug.oop.cardgame.DefaultStats;
+import nl.rug.oop.cardgame.model.card.Card;
 import nl.rug.oop.cardgame.model.card.CreatureCard;
 import nl.rug.oop.cardgame.model.hero.AIHero;
 import nl.rug.oop.cardgame.model.hero.Hero;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.InputMismatchException;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * Battlefield Game board
  */
 @Data
-public class Battlefield {
+public class Battlefield extends Observable {
 
     private Hero player;
     private Hero ai;
     private boolean playerTurn = true;
     private boolean attackPhase;
+    private boolean playPhase;
+    private Card selectedCard;
 
     /**
      * Create a new battlefield
@@ -29,6 +29,28 @@ public class Battlefield {
         this.player = new Hero("Diego", 100, 0, 0, 1);
         this.ai = new AIHero("AI", 10, 0, 0, 1);
     }
+
+    public void setAttackPhase(boolean attackPhase) {
+        this.attackPhase = attackPhase;
+        this.playPhase = false;
+        setChanged();
+        notifyObservers();
+    }
+
+    public void setPlayPhase(boolean playPhase) {
+        this.playPhase = playPhase;
+        this.attackPhase = false;
+        setChanged();
+        notifyObservers();
+    }
+
+    public void setSelectedCard(Card selected) {
+        this.selectedCard = selected;
+        setChanged();
+        notifyObservers();
+    }
+
+
 
     /**
      * Increase mana each turn

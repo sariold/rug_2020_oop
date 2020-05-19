@@ -18,6 +18,7 @@ import javax.swing.*;
 import java.io.File;
 import java.sql.Time;
 import java.util.ArrayList;
+import java.util.Observable;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
@@ -163,7 +164,7 @@ public class Hero implements Attackable {
     public void attackPhase(Battlefield battlefield, MagicStoneFrame frame, int pos, MagicStoneGame game, MagicStonePanel panel) {
         CreatureCard attackingCreature = this.getPlayedCreatures().get(pos);
         CreatureCard attackedCreature = battlefield.getAi().getPlayedCreatures().get(pos);
-        frame.playGif("SWORD", attackingCreature.getCardImage().getCoordinates());
+//        frame.playGif("SWORD", attackingCreature.getCardImage().getCoordinates());
         if (attackedCreature == null) attackingCreature.attack(battlefield.getAi());
         else attackingCreature.attack(attackedCreature);
         attackingCreature.checkDeath(this, attackingCreature.getBattlePosition());

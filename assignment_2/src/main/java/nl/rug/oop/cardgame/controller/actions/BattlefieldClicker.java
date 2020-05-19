@@ -33,8 +33,8 @@ public class BattlefieldClicker extends MouseInputAdapter {
         magicStonePanel.addMouseListener(this);
         this.freePos = magicStoneGame.getBattlefield().getFreePositions(magicStoneGame.getBattlefield().getPlayer());
         this.attackPhase = attackPhase;
-        if(card instanceof CreatureCard && !attackPhase) magicStonePanel.paintPositions(frame.getGraphics(), Color.GREEN, false);
-        else if(attackPhase) magicStonePanel.paintPositions(frame.getGraphics(), Color.RED, true);
+        if(card instanceof CreatureCard && !attackPhase) magicStoneGame.getBattlefield().setPlayPhase(true);
+        else if(attackPhase) magicStoneGame.getBattlefield().setAttackPhase(true);
     }
 
     private void placeCreature(int pos) {
@@ -79,7 +79,7 @@ public class BattlefieldClicker extends MouseInputAdapter {
                 attackOrPlace(true);
         }
         if(!attackPhase) ((Component) event.getSource()).removeMouseListener(this);
-        if(attackPhase) magicStonePanel.paintPositions(frame.getGraphics(), Color.RED, true);
+        if(attackPhase) magicStoneGame.getBattlefield().setAttackPhase(true);
     }
 
     private void attackOrPlace(boolean attack) {
