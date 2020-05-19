@@ -89,9 +89,7 @@ public class MagicStonePanel extends JPanel implements Observer {
         if(magicStoneGame.getBattlefield().isPlayerTurn()) {
             paintPositions(g);
         }
-        if(magicStoneGame.getBattlefield().getSelectedCard() != null) {
-            paintSelected(g, magicStoneGame.getBattlefield().getSelectedCard().getHandPos(), Color.BLUE);
-        }
+        paintSelected(g);
     }
 
     /**
@@ -195,35 +193,28 @@ public class MagicStonePanel extends JPanel implements Observer {
         g.setColor(Color.GREEN);
         int xOffset = 200;
         for(int i = 0; i < 5; i++) {
+            int[] coords = DefaultCoordinates.PLAYER_BATTLEFIELD[i];
             if(!attack) {
-                if(player.getPlayedCreatures().get(i) == null) g.drawRect(140 + i * xOffset, 396, 90, 135);
+                if(player.getPlayedCreatures().get(i) == null) g.drawRect(coords[0], coords[1], coords[2], coords[3]);
             } else {
                 g.setColor(Color.RED);
                 if (player.getPlayedCreatures().get(i) != null) {
                     if(!player.getPlayedCreatures().get(i).isUsed()) {
                         System.out.println(player.getPlayedCreatures().get(i).toString());
-                        g.drawRect(140 + i * xOffset, 396, 90, 135);
+                        g.drawRect(coords[0], coords[1], coords[2], coords[3]);
                     }
                 }
             }
         }
     }
 
-    public void paintSelected(Graphics g, int i, Color color) {
-        int xOffset = 150;
-        int x = 0;
-        g.setColor(color);
-            if (i < 3) {
-                x = 100 + i * xOffset;
-                g.drawRect(x, 530, 100, 150);
-            } else if (i < 6){
-                x = 780 + (i - 3) * xOffset;
-                g.drawRect(x, 530, 100, 150);
-            } else {
-                g.drawRect(10, 360, 100, 150); // Discard
-            }
-            g.setColor(Color.BLACK);
-            i++;
+    public void paintSelected(Graphics g) {
+        Card c = magicStoneGame.getBattlefield().getSelectedCard();
+        if (c != null) {
+            int[] coords = c.getCardImage().getCoordinates();
+            g.setColor(Color.BLUE);
+            g.drawRect(coords[0], coords[1], coords[2], coords[3]);
+        }
     }
 
     /**
