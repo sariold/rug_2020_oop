@@ -7,6 +7,7 @@ import nl.rug.oop.cardgame.view.frame.MagicStoneFrame;
 import nl.rug.oop.cardgame.view.panel.MagicStonePanel;
 
 import javax.swing.event.MouseInputAdapter;
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
