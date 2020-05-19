@@ -114,7 +114,7 @@ public class CreatureCard extends Card implements Attackable {
             System.out.println(this.getName() + " has died in combat");
             System.out.println(index);
             hero.getPlayedCreatures().set(index, null);
-            this.setBattlePosition(-1);
+            this.setBattlePosition(-2);
             hero.getDiscardDeck().discard(this);
         }
     }
@@ -128,7 +128,7 @@ public class CreatureCard extends Card implements Attackable {
             String attackAndHealth = (this.getAttack() + "/" + (this.getHealth()));
             g.drawString(attackAndHealth, coords[0] + 130 -
                     g.getFontMetrics().stringWidth(attackAndHealth), 670);
-        } else {
+        } else if (this.battlePosition > -1){
             g.setColor(Color.WHITE);
             g.setFont(new Font("TimesRoman", Font.PLAIN, 20));
             g.drawImage(StatTextures.getTexture(StatEnum.ATTACK), coords[0] + 103, coords[1] + 10, 50, 65, panel);
