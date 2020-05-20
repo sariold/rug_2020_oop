@@ -102,7 +102,8 @@ public class BattlefieldClicker extends MouseInputAdapter {
         if(!magicStoneGame.getBattlefield().isPlayerTurn() || !magicStoneGame.getBattlefield().isAttackPhase()) {
             ((Component) event.getSource()).removeMouseListener(this);
             magicStoneGame.getBattlefield().setAttackPhase(false);
-            magicStoneGame.getBattlefield().setPlayerTurn(false);
+//            magicStoneGame.getBattlefield().setPlayPhase(true);
+//            magicStoneGame.getBattlefield().setPlayerTurn(false);
             return;
         }
         Hero player = magicStoneGame.getBattlefield().getPlayer();
@@ -111,8 +112,9 @@ public class BattlefieldClicker extends MouseInputAdapter {
             if (!card.isUsed()) player.attackPhase(magicStoneGame.getBattlefield(), frame, pos, magicStoneGame, magicStonePanel);
         }
         if(!player.untappedCreatures()) {
-            magicStoneGame.getBattlefield().setAttackPhase(false);
-            magicStoneGame.getBattlefield().setPlayerTurn(false);
+//            magicStoneGame.getBattlefield().setAttackPhase(false);
+//            magicStoneGame.getBattlefield().setPlayerTurn(false);
+            magicStoneGame.getBattlefield().setPlayPhase(false);
         }
     }
 

@@ -27,7 +27,9 @@ public class AttackPhaseAction extends AbstractAction {
         if(magicStoneGame.getBattlefield().getPlayer().untappedCreatures()) {
             magicStoneGame.getBattlefield().setAttackPhase(true);
             clicker.startAttackPhase();
-        } else magicStoneGame.getBattlefield().setPlayerTurn(false);
+        }
+//        else magicStoneGame.getBattlefield().setPlayPhase(false);
+        else magicStoneGame.getBattlefield().setPlayerTurn(false);
     }
 
 }
