@@ -1,4 +1,4 @@
-package nl.rug.oop.cardgame;
+package nl.rug.oop.cardgame.view.textures;
 
 import lombok.Data;
 

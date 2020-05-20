@@ -85,7 +85,7 @@ public class CardCollectionPanel extends JPanel implements Observer {
                     textField4.setText(CardDescriptions.CARDS[i]);
                     break;
             }
-            g.drawImage(CollectionTextures.getTexture(card), 10+i*305, 10, 300, 418, this);
+            g.drawImage(CollectionTextures.getTexture(card), 10+count*305, 10, 300, 418, this);
             count++;
         }
     }
