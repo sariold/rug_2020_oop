@@ -101,8 +101,8 @@ public class BattlefieldClicker extends MouseInputAdapter {
     private void attack(int pos) {
         if(!magicStoneGame.getBattlefield().isPlayerTurn() || !magicStoneGame.getBattlefield().isAttackPhase()) {
             ((Component) event.getSource()).removeMouseListener(this);
-//            magicStoneGame.getBattlefield().setAttackPhase(false);
-            magicStoneGame.getBattlefield().setPlayPhase(true);
+            magicStoneGame.getBattlefield().setAttackPhase(false);
+//            magicStoneGame.getBattlefield().setPlayPhase(true);
 //            magicStoneGame.getBattlefield().setPlayerTurn(false);
             return;
         }
