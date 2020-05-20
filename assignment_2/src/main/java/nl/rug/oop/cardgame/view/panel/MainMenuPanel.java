@@ -29,7 +29,7 @@ public class MainMenuPanel extends JPanel implements Observer {
         TutorialButton tutorialButton = new TutorialButton();
         tutorialButton.setBounds(540, 480, 200, 80);
 
-        CardCollectionButton cardCollectionButton = new CardCollectionButton();
+        CardCollectionButton cardCollectionButton = new CardCollectionButton(frame);
         cardCollectionButton.setBounds(540, 560, 200, 80);
 
         this.add(startGameButton);

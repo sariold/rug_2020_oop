@@ -6,6 +6,7 @@ import nl.rug.oop.cardgame.controller.actions.CardClicker;
 import nl.rug.oop.cardgame.controller.button.AttackPhaseButton;
 import nl.rug.oop.cardgame.controller.button.EndTurnButton;
 import nl.rug.oop.cardgame.model.MagicStoneGame;
+import nl.rug.oop.cardgame.view.panel.CardCollectionPanel;
 import nl.rug.oop.cardgame.view.panel.GameOverPanel;
 import nl.rug.oop.cardgame.view.panel.MagicStonePanel;
 import nl.rug.oop.cardgame.view.panel.MainMenuPanel;
@@ -25,6 +26,7 @@ public class MagicStoneFrame extends JFrame {
     private MagicStonePanel gamePanel;
     private MainMenuPanel mainMenuPanel;
     private GameOverPanel gameOverPanel;
+    private CardCollectionPanel cardCollectionPanel;
     private CardClicker clicker;
     private JLabel gifLabel;
     private Image loadedLogo;
@@ -45,6 +47,9 @@ public class MagicStoneFrame extends JFrame {
 
         mainMenuPanel = new MainMenuPanel(magicStoneGame, this);
         mainMenuPanel.setLayout(null);
+
+        cardCollectionPanel = new CardCollectionPanel(this);
+        cardCollectionPanel.setLayout(null);
 
         add(mainMenuPanel);
         setPreferredSize(new Dimension(1280, 720));
@@ -99,8 +104,19 @@ public class MagicStoneFrame extends JFrame {
     }
 
     public void changeToMainMenuPanel() {
-        remove(gameOverPanel);
+        remove(cardCollectionPanel);
         add(mainMenuPanel);
+        setPreferredSize(new Dimension(1280, 720));
+        pack();
+        setLocationRelativeTo(null);
+        setVisible(true);
+        setResizable(false);
+        repaint();
+    }
+
+    public void changeToCardCollectionPanel() {
+        remove(mainMenuPanel);
+        add(cardCollectionPanel);
         setPreferredSize(new Dimension(1280, 720));
         pack();
         setLocationRelativeTo(null);

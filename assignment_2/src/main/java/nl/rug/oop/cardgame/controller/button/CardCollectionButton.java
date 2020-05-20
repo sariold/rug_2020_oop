@@ -2,6 +2,7 @@ package nl.rug.oop.cardgame.controller.button;
 
 import nl.rug.oop.cardgame.controller.actions.CardCollectionAction;
 import nl.rug.oop.cardgame.controller.actions.TutorialAction;
+import nl.rug.oop.cardgame.view.frame.MagicStoneFrame;
 
 import javax.swing.*;
 import java.awt.event.KeyEvent;
@@ -17,8 +18,8 @@ public class CardCollectionButton extends JButton {
         setMnemonic(KeyEvent.VK_S);
     }
 
-    public CardCollectionButton() {
-        super(new CardCollectionAction());
+    public CardCollectionButton(MagicStoneFrame frame) {
+        super(new CardCollectionAction(frame));
         setButtonProperties();
     }
 }

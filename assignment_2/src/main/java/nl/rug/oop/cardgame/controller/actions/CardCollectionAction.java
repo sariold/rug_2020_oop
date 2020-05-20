@@ -1,17 +1,22 @@
 package nl.rug.oop.cardgame.controller.actions;
 
+import nl.rug.oop.cardgame.view.frame.MagicStoneFrame;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 
 public class CardCollectionAction extends AbstractAction {
 
-    public CardCollectionAction() {
+    MagicStoneFrame frame;
+
+    public CardCollectionAction(MagicStoneFrame frame) {
         super("Card Collection");
+        this.frame = frame;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.println("Card Collection");
+        frame.changeToCardCollectionPanel();
     }
 
 }
