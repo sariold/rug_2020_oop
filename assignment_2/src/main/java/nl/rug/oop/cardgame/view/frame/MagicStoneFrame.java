@@ -39,7 +39,7 @@ public class MagicStoneFrame extends JFrame {
         this.setIconImage(loadedLogo);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        gamePanel = new MagicStonePanel(magicStoneGame);
+        gamePanel = new MagicStonePanel(magicStoneGame, this);
         gamePanel.setLayout(null);
 
         mainMenuPanel = new MainMenuPanel(magicStoneGame, this);
@@ -83,6 +83,7 @@ public class MagicStoneFrame extends JFrame {
         setLocationRelativeTo(null);
         setVisible(true);
         setResizable(false);
+//        this.magicStoneGame.startGame();
     }
 
     public void gameOver(boolean win) {

@@ -17,8 +17,11 @@ import java.util.Observer;
 
 public class MainMenuPanel extends JPanel implements Observer {
 
+    MagicStoneFrame frame;
+
     public MainMenuPanel(MagicStoneGame game, MagicStoneFrame frame) {
         setBackground(Color.GRAY);
+        this.frame = frame;
 
         StartGameButton startGameButton = new StartGameButton(game, frame);
         startGameButton.setBounds(540, 400, 200, 80);

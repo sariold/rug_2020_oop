@@ -12,6 +12,7 @@ import nl.rug.oop.cardgame.model.card.EnumCard;
 import nl.rug.oop.cardgame.model.card.SpellCard;
 import nl.rug.oop.cardgame.model.deck.DeckHand;
 import nl.rug.oop.cardgame.model.hero.Hero;
+import nl.rug.oop.cardgame.view.frame.MagicStoneFrame;
 import nl.rug.oop.cardgame.view.textures.*;
 
 import javax.swing.*;
@@ -23,9 +24,11 @@ import java.util.Observer;
 public class MagicStonePanel extends JPanel implements Observer {
 
     private final MagicStoneGame magicStoneGame;
+    private MagicStoneFrame frame;
     private static final Color BACKGROUND_COLOR = new Color(0xa3, 0xa3, 0xa3);
 
-    public MagicStonePanel(MagicStoneGame magicStoneGame) {
+    public MagicStonePanel(MagicStoneGame magicStoneGame, MagicStoneFrame frame) {
+        this.frame = frame;
         this.magicStoneGame = magicStoneGame;
         magicStoneGame.addObserver(this);
         magicStoneGame.getBattlefield().addObserver(this);
@@ -95,6 +98,8 @@ public class MagicStonePanel extends JPanel implements Observer {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
+        if (magicStoneGame.isLost()) frame.gameOver(false);
+        if (magicStoneGame.isWon()) frame.gameOver(true);
         paintAreas(g);
         paintHeros(g);
         paintDiscardPile(g);

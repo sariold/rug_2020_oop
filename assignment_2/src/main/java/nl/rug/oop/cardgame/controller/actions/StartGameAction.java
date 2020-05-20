@@ -6,6 +6,7 @@ import nl.rug.oop.cardgame.view.frame.MagicStoneFrame;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
+import java.util.concurrent.TimeUnit;
 
 public class StartGameAction extends AbstractAction {
 
@@ -22,6 +23,6 @@ public class StartGameAction extends AbstractAction {
     public void actionPerformed(ActionEvent e) {
         System.out.println("Start game");
         frame.changeToGamePanel();
-        magicStoneGame.startGame();
+//        magicStoneGame.startGame();
     }
 }

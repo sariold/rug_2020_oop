@@ -14,8 +14,11 @@ public class MagicStoneGame extends Observable {
 
     private Battlefield battlefield;
     private MagicStoneFrame frame;
+    private boolean lost;
+    private boolean won;
 
     public MagicStoneGame() {
+        won = lost = false;
         this.battlefield = new Battlefield();
     }
 
@@ -24,7 +27,6 @@ public class MagicStoneGame extends Observable {
      *
      */
     public void startGame() {
-        notifyUpdate();
         turnRotation();
     }
 
@@ -74,8 +76,8 @@ public class MagicStoneGame extends Observable {
      * Checks whether either hero has died if so ends the game
      */
     public void endGameCheck(Battlefield battlefield) {
-        if (battlefield.getPlayer().getHealth() <= 0) frame.gameOver(false);
-        else if (battlefield.getAi().getHealth() <= 0) frame.gameOver(true);
+        if (battlefield.getPlayer().getHealth() <= 0) lost = true;
+        else if (battlefield.getAi().getHealth() <= 0) won = true;
     }
 
     /**
