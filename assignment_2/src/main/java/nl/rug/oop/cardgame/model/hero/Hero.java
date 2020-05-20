@@ -62,14 +62,14 @@ public class Hero extends Observable implements Attackable {
      *
      * @param battlefield Battlefield
      */
-    public void playCard(Battlefield battlefield, MagicStoneFrame frame, int pos, Card card) {
+    public void playCard(Battlefield battlefield, int pos, Card card) {
         if (this.deckHand.getDeckHand().size() > 0) {
             this.deckHand.viewHand();
             System.out.println("Which card would you like to play?");
             Card played = this.deckHand.getDeckHand().get(card.getCardNumber());
             if (played != null && played.getCost() <= this.mana) {
                 this.deckHand.getDeckHand().remove(card.getCardNumber());
-                if (played.play(battlefield, 0, pos, frame)) {
+                if (played.play(battlefield, 0, pos)) {
                     this.setMana(this.getMana() - played.getCost());
                 } else {
                     this.deckHand.getDeckHand().put(card.getCardNumber(), played);
@@ -84,7 +84,7 @@ public class Hero extends Observable implements Attackable {
      *
      * @param battlefield Playing board
      */
-    public void takeTurn(Battlefield battlefield, MagicStoneFrame frame, MagicStonePanel panel, MagicStoneGame game) {
+    public void takeTurn(Battlefield battlefield, MagicStonePanel panel, MagicStoneGame game) {
         Card card = this.getDeck().drawCard();
         if (card != null) {
             this.getDeckHand().addCard(this.getDiscardDeck(), card);
@@ -128,7 +128,7 @@ public class Hero extends Observable implements Attackable {
      * Attack enemy Hero
      * @param battlefield Battlefield
      */
-    public void attackPhase(Battlefield battlefield, MagicStoneFrame frame, int pos, MagicStoneGame game, MagicStonePanel panel) {
+    public void attackPhase(Battlefield battlefield, int pos, MagicStoneGame game, MagicStonePanel panel) {
         CreatureCard attackingCreature = this.getPlayedCreatures().get(pos);
         CreatureCard attackedCreature = battlefield.getAi().getPlayedCreatures().get(pos);
         if (attackedCreature == null) attackingCreature.attack(battlefield.getAi());

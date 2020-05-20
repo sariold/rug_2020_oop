@@ -13,5 +13,5 @@ public interface Playable {
      *
      * @return
      */
-    boolean play(Battlefield battlefield, int hero, int pos, MagicStoneFrame frame);
+    boolean play(Battlefield battlefield, int hero, int pos);
 }

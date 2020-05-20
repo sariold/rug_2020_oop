@@ -1,5 +1,8 @@
 package nl.rug.oop.cardgame.view.panel;
 
+import nl.rug.oop.cardgame.controller.button.CardCollectionButton;
+import nl.rug.oop.cardgame.controller.button.StartGameButton;
+import nl.rug.oop.cardgame.controller.button.TutorialButton;
 import nl.rug.oop.cardgame.model.MagicStoneGame;
 
 import javax.imageio.ImageIO;
@@ -15,6 +18,20 @@ public class MainMenuPanel extends JPanel implements Observer {
 
     public MainMenuPanel() {
         setBackground(Color.GRAY);
+
+        StartGameButton startGameButton = new StartGameButton();
+        startGameButton.setBounds(540, 400, 200, 80);
+
+        TutorialButton tutorialButton = new TutorialButton();
+        tutorialButton.setBounds(540, 480, 200, 80);
+
+        CardCollectionButton cardCollectionButton = new CardCollectionButton();
+        cardCollectionButton.setBounds(540, 560, 200, 80);
+
+        this.add(startGameButton);
+        this.add(tutorialButton);
+        this.add(cardCollectionButton);
+
         setVisible(true);
         setOpaque(true);
         this.setLayout(null);
@@ -26,6 +43,7 @@ public class MainMenuPanel extends JPanel implements Observer {
     }
 
     private void paintLogo(Graphics g) {
+        Font logoFont;
         Image logo = null;
         try {
             logo = ImageIO.read(this.getClass().getResource(File.separator + "textures" + File.separator +
@@ -34,16 +52,16 @@ public class MainMenuPanel extends JPanel implements Observer {
             System.out.println("Could not read File");
         }
         try {
-            Font magicStoneFont = Font.createFont(Font.TRUETYPE_FONT, new File(File.separator + "Dragonlands-KeZ7.ttf"));
-//            magicStoneFont = magicStoneFont.deriveFont(Font.BOLD, 40);
-//            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-//            ge.registerFont(magicStoneFont);
-//            g.setFont(magicStoneFont);
+            logoFont = Font.createFont(Font.TRUETYPE_FONT, new File("src/main/resources/fonts/Dragonlands.ttf"));
+            logoFont = logoFont.deriveFont(Font.BOLD, 80);
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            ge.registerFont(logoFont);
+            g.setFont(logoFont);
         } catch (IOException|FontFormatException e) {
             System.out.println("FONT NOT FOUND");
         }
         g.drawImage(logo,(getWidth()/2)-150, 100, 300, 300, this);
-        g.drawString("MAGIC STONE", 300, 40);
+        g.drawString("MAGIC STONE", 300, 80);
     }
 
     @Override

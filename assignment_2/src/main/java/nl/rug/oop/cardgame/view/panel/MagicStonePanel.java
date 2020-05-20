@@ -1,5 +1,8 @@
 package nl.rug.oop.cardgame.view.panel;
 
+import nl.rug.oop.cardgame.controller.actions.CardClicker;
+import nl.rug.oop.cardgame.controller.button.AttackPhaseButton;
+import nl.rug.oop.cardgame.controller.button.EndTurnButton;
 import nl.rug.oop.cardgame.util.DefaultCoordinates;
 import nl.rug.oop.cardgame.model.Battlefield;
 import nl.rug.oop.cardgame.model.MagicStoneGame;
@@ -28,6 +31,15 @@ public class MagicStonePanel extends JPanel implements Observer {
         magicStoneGame.getBattlefield().addObserver(this);
         magicStoneGame.getBattlefield().getPlayer().addObserver(this);
         magicStoneGame.getBattlefield().getAi().addObserver(this);
+
+        CardClicker clicker = new CardClicker(magicStoneGame, this);
+        EndTurnButton endTurnButton = new EndTurnButton(magicStoneGame);
+        endTurnButton.setBounds(590, 510, 100, 30);
+        AttackPhaseButton attackPhaseButton = new AttackPhaseButton(magicStoneGame, clicker);
+        attackPhaseButton.setBounds(590, 108, 100, 30);
+        this.add(attackPhaseButton);
+        this.add(endTurnButton);
+
         setBackground(BACKGROUND_COLOR);
         setVisible(true);
         setOpaque(true);

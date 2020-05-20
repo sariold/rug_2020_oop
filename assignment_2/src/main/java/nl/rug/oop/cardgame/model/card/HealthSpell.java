@@ -15,7 +15,7 @@ public class HealthSpell extends SpellCard {
     }
 
     @Override
-    public boolean play(Battlefield battlefield, int hero, int pos, MagicStoneFrame frame) {
+    public boolean play(Battlefield battlefield, int hero, int pos) {
         Hero player = battlefield.getPlayer();
         Hero ai = battlefield.getAi();
         Hero target;
@@ -33,7 +33,7 @@ public class HealthSpell extends SpellCard {
         target.setHealth(target.getHealth() + dealValue);
         System.out.println(target.getName());
         System.out.println("UPDATED HEALTH : " +  target.getHealth());
-        return super.play(battlefield, hero, pos, frame);
+        return super.play(battlefield, hero, pos);
     }
 
 }

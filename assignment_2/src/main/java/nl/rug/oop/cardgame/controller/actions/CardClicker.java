@@ -15,17 +15,15 @@ public class CardClicker extends MouseInputAdapter {
 
     private MagicStoneGame magicStoneGame;
     private MagicStonePanel magicStonePanel;
-    private MagicStoneFrame magicStoneFrame;
     private Card card = null;
 
     private boolean selected;
     private int x;
     private int y;
 
-    public CardClicker(MagicStoneGame magicStoneGame, MagicStonePanel magicStonePanel, MagicStoneFrame magicStoneFrame) {
+    public CardClicker(MagicStoneGame magicStoneGame, MagicStonePanel magicStonePanel) {
         this.magicStoneGame = magicStoneGame;
         this.magicStonePanel = magicStonePanel;
-        this.magicStoneFrame = magicStoneFrame;
         magicStonePanel.addMouseListener(this);
         selected = false;
     }
@@ -62,9 +60,9 @@ public class CardClicker extends MouseInputAdapter {
                 System.out.println("pos:" + pos);
                 magicStoneGame.getBattlefield().setSelectedCard(getCard(magicStoneGame, pos));
                 System.out.println("Card number " + card.getCardNumber());
-                new DiscardClicker(magicStoneGame, magicStonePanel, card.getCardNumber(), magicStoneFrame);
+                new DiscardClicker(magicStoneGame, magicStonePanel, card.getCardNumber());
                 if (card.getCost() <= magicStoneGame.getBattlefield().getPlayer().getMana()) {
-                    new BattlefieldClicker(magicStoneGame, magicStonePanel, card, magicStoneFrame, false);
+                    new BattlefieldClicker(magicStoneGame, magicStonePanel, card, false);
                 }
                 card = null;
             }
@@ -72,7 +70,7 @@ public class CardClicker extends MouseInputAdapter {
     }
 
     public void startAttackPhase() {
-        new BattlefieldClicker(magicStoneGame, magicStonePanel, null, magicStoneFrame, true);
+        new BattlefieldClicker(magicStoneGame, magicStonePanel, null, true);
     }
 
     private Card getCard(MagicStoneGame magicStoneGame, int pos) {

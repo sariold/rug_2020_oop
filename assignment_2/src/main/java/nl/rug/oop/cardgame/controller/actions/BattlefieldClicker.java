@@ -20,17 +20,15 @@ public class BattlefieldClicker extends MouseInputAdapter {
     private int x;
     private int y;
     private Card card;
-    private MagicStoneFrame frame;
     private ArrayList<Integer> freePos;
     private boolean attackPhase;
     private MouseEvent event;
 
     public BattlefieldClicker(MagicStoneGame magicStoneGame, MagicStonePanel magicStonePanel, Card card,
-                              MagicStoneFrame frame, boolean attackPhase) {
+                              boolean attackPhase) {
         this.magicStoneGame = magicStoneGame;
         this.magicStonePanel = magicStonePanel;
         this.card = card;
-        this.frame = frame;
         magicStonePanel.addMouseListener(this);
         this.freePos = magicStoneGame.getBattlefield().getFreePositions(magicStoneGame.getBattlefield().getPlayer());
         this.attackPhase = attackPhase;
@@ -41,7 +39,7 @@ public class BattlefieldClicker extends MouseInputAdapter {
     private void placeCreature(int pos) {
         for(int i = 0; i < freePos.size(); i++) {
             if(freePos.get(i) == pos) {
-                magicStoneGame.getBattlefield().getPlayer().playCard(magicStoneGame.getBattlefield(), frame, pos, card);
+                magicStoneGame.getBattlefield().getPlayer().playCard(magicStoneGame.getBattlefield(), pos, card);
                 freePos = magicStoneGame.getBattlefield().getFreePositions(magicStoneGame.getBattlefield().getPlayer());
                 return;
             }
@@ -49,7 +47,7 @@ public class BattlefieldClicker extends MouseInputAdapter {
     }
 
     private void playSpell() {
-        magicStoneGame.getBattlefield().getPlayer().playCard(magicStoneGame.getBattlefield(), frame, 0, card);
+        magicStoneGame.getBattlefield().getPlayer().playCard(magicStoneGame.getBattlefield(), 0, card);
         magicStoneGame.endGameCheck(magicStoneGame.getBattlefield());
     }
 
@@ -72,7 +70,7 @@ public class BattlefieldClicker extends MouseInputAdapter {
                 case SPELL_COPYPASTE:
                     if(card.getEnumCard().getCost() <= magicStoneGame.getBattlefield().getPlayer().getMana() && freePos.size() > 0
                     && magicStoneGame.getBattlefield().playerHasBattlefieldCreature(magicStoneGame.getBattlefield().getPlayer()).size() > 0) {
-                        new CopyClicker(magicStoneGame, magicStonePanel, card, frame);
+                        new CopyClicker(magicStoneGame, magicStonePanel, card);
                     }
                     break;
                 default:
@@ -109,7 +107,7 @@ public class BattlefieldClicker extends MouseInputAdapter {
         Hero player = magicStoneGame.getBattlefield().getPlayer();
         CreatureCard card = getCard(magicStoneGame, pos);
         if(card != null) {
-            if (!card.isUsed()) player.attackPhase(magicStoneGame.getBattlefield(), frame, pos, magicStoneGame, magicStonePanel);
+            if (!card.isUsed()) player.attackPhase(magicStoneGame.getBattlefield(), pos, magicStoneGame, magicStonePanel);
         }
         if(!player.untappedCreatures()) {
 //            magicStoneGame.getBattlefield().setAttackPhase(false);

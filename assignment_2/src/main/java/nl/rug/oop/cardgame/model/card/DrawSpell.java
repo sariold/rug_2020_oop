@@ -14,7 +14,7 @@ public class DrawSpell extends SpellCard {
     }
 
     @Override
-    public boolean play(Battlefield battlefield, int hero, int pos, MagicStoneFrame frame) {
+    public boolean play(Battlefield battlefield, int hero, int pos) {
         System.out.println("Played a spell you draw 2 cards");
         if (hero == 0) {
             for (int i = 0; i < 2; i++) {
@@ -24,7 +24,7 @@ public class DrawSpell extends SpellCard {
                     battlefield.getPlayer().getDeckHand().addCard(battlefield.getPlayer().getDiscardDeck(), card);
                 }
             }
-            return super.play(battlefield, hero, pos, frame);
+            return super.play(battlefield, hero, pos);
         }
         for (int i = 0; i < 2; i++) {
             Card card = battlefield.getAi().getDeck().drawCard();
@@ -33,7 +33,7 @@ public class DrawSpell extends SpellCard {
                 battlefield.getAi().getDeckHand().addCard(battlefield.getAi().getDiscardDeck(), card);
             }
         }
-        return super.play(battlefield, hero, pos, frame);
+        return super.play(battlefield, hero, pos);
     }
 
 

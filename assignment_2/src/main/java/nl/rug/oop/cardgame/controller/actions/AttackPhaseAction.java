@@ -10,15 +10,11 @@ import java.awt.event.ActionEvent;
 public class AttackPhaseAction extends AbstractAction {
 
     private MagicStoneGame magicStoneGame;
-    private MagicStoneFrame frame;
-    private MagicStonePanel panel;
     private CardClicker clicker;
 
-    public AttackPhaseAction(MagicStoneGame magicStoneGame, MagicStoneFrame frame, MagicStonePanel panel, CardClicker clicker) {
+    public AttackPhaseAction(MagicStoneGame magicStoneGame, CardClicker clicker) {
         super("Attack");
         this.magicStoneGame = magicStoneGame;
-        this.frame = frame;
-        this.panel = panel;
         this.clicker = clicker;
     }
 

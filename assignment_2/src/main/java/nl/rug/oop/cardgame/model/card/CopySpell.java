@@ -22,11 +22,11 @@ public class CopySpell extends SpellCard implements Targetting {
     }
 
     @Override
-    public boolean play(Battlefield battlefield, int hero, int pos, MagicStoneFrame frame) {
+    public boolean play(Battlefield battlefield, int hero, int pos) {
         this.pos = pos;
         Hero targetHero = (hero == 0 ? battlefield.getPlayer() : battlefield.getAi());
         boolean played = target(battlefield, targetHero);
-        if(played) return super.play(battlefield, hero, pos, frame);
+        if(played) return super.play(battlefield, hero, pos);
         return false;
     }
 

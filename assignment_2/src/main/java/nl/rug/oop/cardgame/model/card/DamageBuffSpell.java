@@ -11,9 +11,9 @@ public class DamageBuffSpell extends SpellCard {
     }
 
     @Override
-    public boolean play(Battlefield battlefield, int heroIndex, int pos, MagicStoneFrame frame) {
+    public boolean play(Battlefield battlefield, int heroIndex, int pos) {
         Hero targetHero = (heroIndex == 0 ? battlefield.getPlayer() : battlefield.getAi());
         battlefield.setDamageBuff(targetHero, true, this.getEnumCard().getValue());
-        return super.play(battlefield, heroIndex, pos, frame);
+        return super.play(battlefield, heroIndex, pos);
     }
 }

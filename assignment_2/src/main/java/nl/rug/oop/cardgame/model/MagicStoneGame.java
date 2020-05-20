@@ -48,14 +48,14 @@ public class MagicStoneGame extends Observable {
                 battlefield.incMana(player);
                 player.setMana(player.getMaxMana());
                 notifyUpdate();
-                player.takeTurn(battlefield, frame, frame.getPanel(), this);
+                player.takeTurn(battlefield, frame.getGamePanel(), this);
                 notifyUpdate();
             } else {
                 battlefield.setDamageBuff(ai, false, 0);
                 resetUsedCreatures(ai);
                 battlefield.incMana(ai);
                 ai.setMana(ai.getMaxMana());
-                ai.takeTurn(battlefield, frame, frame.getPanel(), this);
+                ai.takeTurn(battlefield, frame.getGamePanel(), this);
                 battlefield.setPlayerTurn(true);
             }
             endGameCheck(battlefield);

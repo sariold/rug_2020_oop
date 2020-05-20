@@ -87,7 +87,7 @@ public class CreatureCard extends Card implements Attackable {
      * @return
      */
     @Override
-    public boolean play(Battlefield battlefield, int heroIndex, int pos, MagicStoneFrame frame) {
+    public boolean play(Battlefield battlefield, int heroIndex, int pos) {
         this.setUsed(true);
         Hero hero = (heroIndex == 0 ? battlefield.getPlayer() : battlefield.getAi());
         return battlefield.placeCreature(this, hero, pos);

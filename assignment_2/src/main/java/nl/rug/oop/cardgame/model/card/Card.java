@@ -46,7 +46,7 @@ public abstract class Card implements Playable {
      * @return
      */
     @Override
-    public boolean play(Battlefield battlefield, int hero, int pos, MagicStoneFrame frame) {
+    public boolean play(Battlefield battlefield, int hero, int pos) {
         System.out.println("You played " + this.name);
         return true;
     }

@@ -22,7 +22,7 @@ import java.util.concurrent.TimeUnit;
 @Data
 public class MagicStoneFrame extends JFrame {
 
-    private MagicStonePanel panel;
+    private MagicStonePanel gamePanel;
     private MainMenuPanel mainMenuPanel;
     private CardClicker clicker;
     private JLabel gifLabel;
@@ -38,20 +38,15 @@ public class MagicStoneFrame extends JFrame {
         }
         this.setIconImage(loadedLogo);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        panel = new MagicStonePanel(magicStoneGame);
-        panel.setLayout(null);
+
+
+        gamePanel = new MagicStonePanel(magicStoneGame);
+        gamePanel.setLayout(null);
 
         mainMenuPanel = new MainMenuPanel();
         mainMenuPanel.setLayout(null);
 
-        EndTurnButton endTurnButton = new EndTurnButton(magicStoneGame);
-        endTurnButton.setBounds(590, 510, 100, 30);
-        panel.add(endTurnButton);
-        add(mainMenuPanel);
-        clicker = new CardClicker(magicStoneGame, panel, this);
-        AttackPhaseButton attackPhaseButton = new AttackPhaseButton(magicStoneGame, this, panel, clicker);
-        attackPhaseButton.setBounds(590, 108, 100, 30);
-        panel.add(attackPhaseButton);
+        add(gamePanel);
         setPreferredSize(new Dimension(1280, 720));
         gifLabel = new JLabel();
         pack();
@@ -66,7 +61,7 @@ public class MagicStoneFrame extends JFrame {
         gif.setImage(gif.getImage().getScaledInstance(coords[2],coords[2], Image.SCALE_DEFAULT));
         gifLabel.setIcon(gif);
         gifLabel.setBounds(coords[0], coords[1], coords[2], coords[2]);
-        panel.add(gifLabel);
+        gamePanel.add(gifLabel);
         pack();
         try {
             TimeUnit.SECONDS.sleep(2);
@@ -78,7 +73,7 @@ public class MagicStoneFrame extends JFrame {
     }
 
     public void gameOver(boolean win) {
-        remove(panel);
+        remove(gamePanel);
         GameOverPanel overPanel = new GameOverPanel(win);
         add(overPanel);
         setPreferredSize(new Dimension(300, 200));

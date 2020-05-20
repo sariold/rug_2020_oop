@@ -18,13 +18,11 @@ public class DiscardClicker extends MouseInputAdapter {
     private int x;
     private int y;
     private int key;
-    private MagicStoneFrame frame;
 
-    public DiscardClicker(MagicStoneGame magicStoneGame, MagicStonePanel magicStonePanel, int key, MagicStoneFrame frame) {
+    public DiscardClicker(MagicStoneGame magicStoneGame, MagicStonePanel magicStonePanel, int key) {
         this.magicStoneGame = magicStoneGame;
         this.magicStonePanel = magicStonePanel;
         this.key = key;
-        this.frame = frame;
         magicStonePanel.addMouseListener(this);
     }
 
