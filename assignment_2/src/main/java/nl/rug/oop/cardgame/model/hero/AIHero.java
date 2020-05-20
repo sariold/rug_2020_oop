@@ -108,7 +108,7 @@ public class AIHero extends Hero {
             if (c.getCost() <= this.getMana()) {
                 addable = true;
                 if(c.getEnumCard().getFace() == EnumCard.Face.COPYPASTE ) {
-                    if(battlefield.playerHasBattlefieldCreature(battlefield.getAi()).size() == 0) addable = false;
+                    if(battlefield.playerHasBattlefieldCreature(battlefield.getAi()).size() == 0 || battlefield.getFreePositions(battlefield.getAi()).size() == 0) addable = false;
                 }
                 if(c.getEnumCard().getFace() == EnumCard.Face.HELLFIRE ) {
                     if(battlefield.playerHasBattlefieldCreature(battlefield.getPlayer()).size() == 0) addable = false;
