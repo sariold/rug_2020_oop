@@ -23,6 +23,5 @@ public class StartGameAction extends AbstractAction {
     public void actionPerformed(ActionEvent e) {
         System.out.println("Start game");
         frame.changeToGamePanel();
-//        magicStoneGame.startGame();
     }
 }

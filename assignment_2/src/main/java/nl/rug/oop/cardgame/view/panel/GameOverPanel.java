@@ -1,5 +1,8 @@
 package nl.rug.oop.cardgame.view.panel;
 
+import nl.rug.oop.cardgame.controller.button.MainMenuButton;
+import nl.rug.oop.cardgame.view.frame.MagicStoneFrame;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.Observable;
@@ -10,7 +13,7 @@ public class GameOverPanel  extends JPanel implements Observer {
     private static final Color BACKGROUND_COLOR = Color.WHITE;
     private boolean win;
 
-    public GameOverPanel(boolean win) {
+    public GameOverPanel(boolean win, MagicStoneFrame frame) {
         setBackground(BACKGROUND_COLOR);
         setVisible(true);
         setOpaque(true);
