@@ -35,7 +35,7 @@ public class AIHero extends Hero {
      * @param battlefield Playing board
      */
     @Override
-    public void takeTurn(Battlefield battlefield, MagicStonePanel panel, MagicStoneGame game) {
+    public void takeTurn(Battlefield battlefield, MagicStoneGame game) {
         System.out.println(this.name + "'s TURN!");
         Card card = this.getDeck().drawCard();
         if (card != null) {
@@ -66,7 +66,7 @@ public class AIHero extends Hero {
                 }
             }
         } else System.out.println("AI has no cards in hand");
-        attackPhase(battlefield, -1, game, panel);
+        attackPhase(battlefield, -1, game);
         battlefield.setPlayerTurn(true);
     }
 
@@ -76,7 +76,7 @@ public class AIHero extends Hero {
      * @param battlefield Battlefield
      */
     @Override
-    public void attackPhase(Battlefield battlefield, int pos, MagicStoneGame game, MagicStonePanel panel) {
+    public void attackPhase(Battlefield battlefield, int pos, MagicStoneGame game) {
         ArrayList<CreatureCard> creatures = getPlayedCreatures();
         if (creatures.size() == 0) System.out.println("AI has no creatures to attack with");
         for (CreatureCard c : creatures) {

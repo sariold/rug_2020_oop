@@ -17,6 +17,6 @@ public class Main {
         MagicStoneGame magicStoneGame = new MagicStoneGame();
         MagicStoneFrame frame = new MagicStoneFrame(magicStoneGame);
         magicStoneGame.setFrame(frame);
-        magicStoneGame.startGame(magicStoneGame.getBattlefield(), frame);
+//        magicStoneGame.startGame(magicStoneGame.getBattlefield(), frame);
     }
 }

@@ -3,6 +3,7 @@ package nl.rug.oop.cardgame.controller.button;
 import nl.rug.oop.cardgame.controller.actions.EndTurnAction;
 import nl.rug.oop.cardgame.controller.actions.StartGameAction;
 import nl.rug.oop.cardgame.model.MagicStoneGame;
+import nl.rug.oop.cardgame.view.frame.MagicStoneFrame;
 
 import javax.swing.*;
 import java.awt.event.KeyEvent;
@@ -17,8 +18,8 @@ public class StartGameButton extends JButton{
         setMnemonic(KeyEvent.VK_S);
     }
 
-    public StartGameButton() {
-        super(new StartGameAction());
+    public StartGameButton(MagicStoneGame game, MagicStoneFrame frame) {
+        super(new StartGameAction(game, frame));
         setButtonProperties();
     }
 }

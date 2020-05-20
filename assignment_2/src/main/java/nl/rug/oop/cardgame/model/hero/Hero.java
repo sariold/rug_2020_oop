@@ -84,7 +84,7 @@ public class Hero extends Observable implements Attackable {
      *
      * @param battlefield Playing board
      */
-    public void takeTurn(Battlefield battlefield, MagicStonePanel panel, MagicStoneGame game) {
+    public void takeTurn(Battlefield battlefield, MagicStoneGame game) {
         Card card = this.getDeck().drawCard();
         if (card != null) {
             this.getDeckHand().addCard(this.getDiscardDeck(), card);
@@ -128,7 +128,7 @@ public class Hero extends Observable implements Attackable {
      * Attack enemy Hero
      * @param battlefield Battlefield
      */
-    public void attackPhase(Battlefield battlefield, int pos, MagicStoneGame game, MagicStonePanel panel) {
+    public void attackPhase(Battlefield battlefield, int pos, MagicStoneGame game) {
         CreatureCard attackingCreature = this.getPlayedCreatures().get(pos);
         CreatureCard attackedCreature = battlefield.getAi().getPlayedCreatures().get(pos);
         if (attackedCreature == null) attackingCreature.attack(battlefield.getAi());

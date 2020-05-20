@@ -107,7 +107,7 @@ public class BattlefieldClicker extends MouseInputAdapter {
         Hero player = magicStoneGame.getBattlefield().getPlayer();
         CreatureCard card = getCard(magicStoneGame, pos);
         if(card != null) {
-            if (!card.isUsed()) player.attackPhase(magicStoneGame.getBattlefield(), pos, magicStoneGame, magicStonePanel);
+            if (!card.isUsed()) player.attackPhase(magicStoneGame.getBattlefield(), pos, magicStoneGame);
         }
         if(!player.untappedCreatures()) {
 //            magicStoneGame.getBattlefield().setAttackPhase(false);

@@ -4,6 +4,7 @@ import nl.rug.oop.cardgame.controller.button.CardCollectionButton;
 import nl.rug.oop.cardgame.controller.button.StartGameButton;
 import nl.rug.oop.cardgame.controller.button.TutorialButton;
 import nl.rug.oop.cardgame.model.MagicStoneGame;
+import nl.rug.oop.cardgame.view.frame.MagicStoneFrame;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -16,10 +17,10 @@ import java.util.Observer;
 
 public class MainMenuPanel extends JPanel implements Observer {
 
-    public MainMenuPanel() {
+    public MainMenuPanel(MagicStoneGame game, MagicStoneFrame frame) {
         setBackground(Color.GRAY);
 
-        StartGameButton startGameButton = new StartGameButton();
+        StartGameButton startGameButton = new StartGameButton(game, frame);
         startGameButton.setBounds(540, 400, 200, 80);
 
         TutorialButton tutorialButton = new TutorialButton();
@@ -39,6 +40,7 @@ public class MainMenuPanel extends JPanel implements Observer {
 
     @Override
     public void paintComponent(Graphics g){
+        super.paintComponent(g);
         paintLogo(g);
     }
 

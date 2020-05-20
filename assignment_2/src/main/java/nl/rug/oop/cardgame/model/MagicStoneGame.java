@@ -22,18 +22,17 @@ public class MagicStoneGame extends Observable {
     /**
      * Starts the actual turn based game
      *
-     * @param battlefield Playing board
      */
-    public void startGame(Battlefield battlefield, MagicStoneFrame frame) {
-        turnRotation(battlefield, frame);
+    public void startGame() {
+        notifyUpdate();
+        turnRotation();
     }
 
     /**
      * Rotates the turns
      *
-     * @param battlefield Playing board
      */
-    public void turnRotation(Battlefield battlefield, MagicStoneFrame frame) {
+    public void turnRotation() {
         Hero player = battlefield.getPlayer();
         Hero ai = battlefield.getAi();
         boolean start = true;
@@ -48,14 +47,14 @@ public class MagicStoneGame extends Observable {
                 battlefield.incMana(player);
                 player.setMana(player.getMaxMana());
                 notifyUpdate();
-                player.takeTurn(battlefield, frame.getGamePanel(), this);
+                player.takeTurn(battlefield, this);
                 notifyUpdate();
             } else {
                 battlefield.setDamageBuff(ai, false, 0);
                 resetUsedCreatures(ai);
                 battlefield.incMana(ai);
                 ai.setMana(ai.getMaxMana());
-                ai.takeTurn(battlefield, frame.getGamePanel(), this);
+                ai.takeTurn(battlefield, this);
                 battlefield.setPlayerTurn(true);
             }
             endGameCheck(battlefield);

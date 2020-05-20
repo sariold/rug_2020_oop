@@ -39,14 +39,13 @@ public class MagicStoneFrame extends JFrame {
         this.setIconImage(loadedLogo);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-
         gamePanel = new MagicStonePanel(magicStoneGame);
         gamePanel.setLayout(null);
 
-        mainMenuPanel = new MainMenuPanel();
+        mainMenuPanel = new MainMenuPanel(magicStoneGame, this);
         mainMenuPanel.setLayout(null);
 
-        add(gamePanel);
+        add(mainMenuPanel);
         setPreferredSize(new Dimension(1280, 720));
         gifLabel = new JLabel();
         pack();
@@ -70,6 +69,20 @@ public class MagicStoneFrame extends JFrame {
         }
         gifLabel.setIcon(null);
         return;
+    }
+
+    /**
+     * changes the current panel to the game
+     */
+    public void changeToGamePanel() {
+        System.out.println("CHANGING");
+        remove(mainMenuPanel);
+        add(gamePanel);
+        setPreferredSize(new Dimension(1280, 720));
+        pack();
+        setLocationRelativeTo(null);
+        setVisible(true);
+        setResizable(false);
     }
 
     public void gameOver(boolean win) {
