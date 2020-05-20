@@ -4,6 +4,7 @@ import nl.rug.oop.cardgame.controller.button.CardCollectionButton;
 import nl.rug.oop.cardgame.controller.button.StartGameButton;
 import nl.rug.oop.cardgame.controller.button.TutorialButton;
 import nl.rug.oop.cardgame.model.MagicStoneGame;
+import nl.rug.oop.cardgame.model.menu.MainMenu;
 import nl.rug.oop.cardgame.view.frame.MagicStoneFrame;
 
 import javax.imageio.ImageIO;
@@ -18,18 +19,20 @@ import java.util.Observer;
 public class MainMenuPanel extends JPanel implements Observer {
 
     MagicStoneFrame frame;
+    MainMenu mainMenu;
 
-    public MainMenuPanel(MagicStoneGame game, MagicStoneFrame frame) {
+    public MainMenuPanel(MainMenu mainMenu, MagicStoneFrame frame) {
         setBackground(Color.GRAY);
         this.frame = frame;
+        this.mainMenu = mainMenu;
 
-        StartGameButton startGameButton = new StartGameButton(game, frame);
+        StartGameButton startGameButton = new StartGameButton(mainMenu);
         startGameButton.setBounds(540, 400, 200, 80);
 
         TutorialButton tutorialButton = new TutorialButton();
         tutorialButton.setBounds(540, 480, 200, 80);
 
-        CardCollectionButton cardCollectionButton = new CardCollectionButton(frame);
+        CardCollectionButton cardCollectionButton = new CardCollectionButton(mainMenu);
         cardCollectionButton.setBounds(540, 560, 200, 80);
 
         this.add(startGameButton);
@@ -44,6 +47,12 @@ public class MainMenuPanel extends JPanel implements Observer {
     @Override
     public void paintComponent(Graphics g){
         super.paintComponent(g);
+        if (mainMenu.isInGame()) {
+            frame.changeToGamePanel();
+        }
+        if (mainMenu.isInCollection()) {
+            frame.changeToCardCollectionPanel();
+        }
         paintLogo(g);
     }
 

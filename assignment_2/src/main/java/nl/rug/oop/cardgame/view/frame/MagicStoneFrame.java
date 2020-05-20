@@ -6,6 +6,7 @@ import nl.rug.oop.cardgame.controller.actions.CardClicker;
 import nl.rug.oop.cardgame.controller.button.AttackPhaseButton;
 import nl.rug.oop.cardgame.controller.button.EndTurnButton;
 import nl.rug.oop.cardgame.model.MagicStoneGame;
+import nl.rug.oop.cardgame.model.menu.MainMenu;
 import nl.rug.oop.cardgame.view.panel.CardCollectionPanel;
 import nl.rug.oop.cardgame.view.panel.GameOverPanel;
 import nl.rug.oop.cardgame.view.panel.MagicStonePanel;
@@ -31,7 +32,7 @@ public class MagicStoneFrame extends JFrame {
     private JLabel gifLabel;
     private Image loadedLogo;
 
-    public MagicStoneFrame(MagicStoneGame magicStoneGame) {
+    public MagicStoneFrame(MainMenu mainMenu) {
         super("Magic Stone");
         try {
             this.loadedLogo = ImageIO.read(CardTextures.class.getResource(File.separator + "textures"
@@ -42,13 +43,13 @@ public class MagicStoneFrame extends JFrame {
         this.setIconImage(loadedLogo);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        gamePanel = new MagicStonePanel(magicStoneGame, this);
+        gamePanel = new MagicStonePanel(mainMenu.getGame(), this);
         gamePanel.setLayout(null);
 
-        mainMenuPanel = new MainMenuPanel(magicStoneGame, this);
+        mainMenuPanel = new MainMenuPanel(mainMenu, this);
         mainMenuPanel.setLayout(null);
 
-        cardCollectionPanel = new CardCollectionPanel(this);
+        cardCollectionPanel = new CardCollectionPanel(mainMenu,this);
         cardCollectionPanel.setLayout(null);
 
         add(mainMenuPanel);

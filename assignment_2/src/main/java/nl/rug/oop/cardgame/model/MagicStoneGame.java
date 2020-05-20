@@ -38,6 +38,12 @@ public class MagicStoneGame extends Observable {
         Hero player = battlefield.getPlayer();
         Hero ai = battlefield.getAi();
         boolean start = true;
+        for (int i = 0; i < 2; i++) {
+            Card c = player.getDeck().drawCard();
+            player.getDeckHand().addCard(player.getDiscardDeck(), c);
+            c = ai.getDeck().drawCard();
+            ai.getDeckHand().addCard(ai.getDiscardDeck(), c);
+        }
         for (int i = 1; start; i++) {
             notifyUpdate();
             System.out.println();

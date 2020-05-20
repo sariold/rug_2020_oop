@@ -1,14 +1,13 @@
 package nl.rug.oop.cardgame.controller.button;
 
-import nl.rug.oop.cardgame.controller.actions.CardCollectionAction;
-import nl.rug.oop.cardgame.controller.actions.TutorialAction;
+import nl.rug.oop.cardgame.controller.actions.MainMenuAction;
+import nl.rug.oop.cardgame.controller.actions.PageAction;
 import nl.rug.oop.cardgame.model.menu.MainMenu;
-import nl.rug.oop.cardgame.view.frame.MagicStoneFrame;
 
 import javax.swing.*;
 import java.awt.event.KeyEvent;
 
-public class CardCollectionButton extends JButton {
+public class PageButton extends JButton {
 
     /**
      * Initialise the properties of this button
@@ -19,8 +18,8 @@ public class CardCollectionButton extends JButton {
         setMnemonic(KeyEvent.VK_S);
     }
 
-    public CardCollectionButton(MainMenu mainMenu) {
-        super(new CardCollectionAction(mainMenu));
+    public PageButton(MainMenu mainMenu, String dir) {
+        super(new PageAction(mainMenu, dir));
         setButtonProperties();
     }
 }

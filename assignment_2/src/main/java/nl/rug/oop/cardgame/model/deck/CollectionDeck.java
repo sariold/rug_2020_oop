@@ -9,11 +9,13 @@ import java.util.Collections;
 @Data
 public class CollectionDeck {
     private ArrayList<Card> deckList;
+    private int startingCard;
 
     /**
      * Creates a new Deck and fills it with cards and shuffles it
      */
     public CollectionDeck() {
+        this.startingCard = 0;
         this.deckList = new ArrayList<>();
         deckList.add(new CreatureCard(EnumCard.CREATURE_ZOMBIE));
 
@@ -44,6 +46,13 @@ public class CollectionDeck {
         deckList.add(new HellFireSpell(EnumCard.SPELL_HELLFIRE));
 
         deckList.add(new DamageBuffSpell(EnumCard.SPELL_DAMAGEBUFF));
+    }
 
+    public void increaseStartingCard() {
+        if (startingCard < getDeckList().size()-1) startingCard++;
+    }
+
+    public void decreaseStartingCard() {
+        if (startingCard > 0) startingCard--;
     }
 }
