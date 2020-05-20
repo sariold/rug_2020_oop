@@ -8,6 +8,7 @@ import nl.rug.oop.cardgame.controller.button.EndTurnButton;
 import nl.rug.oop.cardgame.model.MagicStoneGame;
 import nl.rug.oop.cardgame.view.panel.GameOverPanel;
 import nl.rug.oop.cardgame.view.panel.MagicStonePanel;
+import nl.rug.oop.cardgame.view.panel.MainMenuPanel;
 import nl.rug.oop.cardgame.view.textures.CardTextures;
 
 import javax.imageio.ImageIO;
@@ -22,6 +23,7 @@ import java.util.concurrent.TimeUnit;
 public class MagicStoneFrame extends JFrame {
 
     private MagicStonePanel panel;
+    private MainMenuPanel mainMenuPanel;
     private CardClicker clicker;
     private JLabel gifLabel;
     private Image loadedLogo;
@@ -38,10 +40,14 @@ public class MagicStoneFrame extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         panel = new MagicStonePanel(magicStoneGame);
         panel.setLayout(null);
+
+        mainMenuPanel = new MainMenuPanel();
+        mainMenuPanel.setLayout(null);
+
         EndTurnButton endTurnButton = new EndTurnButton(magicStoneGame);
         endTurnButton.setBounds(590, 510, 100, 30);
         panel.add(endTurnButton);
-        add(panel);
+        add(mainMenuPanel);
         clicker = new CardClicker(magicStoneGame, panel, this);
         AttackPhaseButton attackPhaseButton = new AttackPhaseButton(magicStoneGame, this, panel, clicker);
         attackPhaseButton.setBounds(590, 108, 100, 30);
