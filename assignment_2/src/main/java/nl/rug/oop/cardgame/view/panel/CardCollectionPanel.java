@@ -46,6 +46,10 @@ public class CardCollectionPanel extends JPanel implements Observer {
         textField2 = new JTextArea();
         textField3 = new JTextArea();
         textField4 = new JTextArea();
+        textField1.setEditable(false);
+        textField2.setEditable(false);
+        textField3.setEditable(false);
+        textField4.setEditable(false);
         label1 = new JLabel();
         label2 = new JLabel();
         label3 = new JLabel();
