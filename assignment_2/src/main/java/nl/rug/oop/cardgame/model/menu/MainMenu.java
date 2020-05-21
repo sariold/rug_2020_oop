@@ -34,6 +34,12 @@ public class MainMenu extends Observable {
         notifyUpdate();
     }
 
+    public void startTutorial() {
+        this.inTutorial = true;
+        this.inGame = this.inCollection = false;
+        notifyUpdate();
+    }
+
     public void changeCollection(int dir) {
         if (dir == 0) this.getCollectionDeck().increaseStartingCard();
         else this.getCollectionDeck().decreaseStartingCard();

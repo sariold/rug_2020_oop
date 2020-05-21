@@ -1,16 +1,22 @@
 package nl.rug.oop.cardgame.controller.actions;
 
+import nl.rug.oop.cardgame.Main;
+import nl.rug.oop.cardgame.model.menu.MainMenu;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 
 public class TutorialAction extends AbstractAction {
 
-    public TutorialAction() {
+    MainMenu mainMenu;
+
+    public TutorialAction(MainMenu mainMenu) {
         super("Tutorial");
+        this.mainMenu = mainMenu;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.println("Tutorial");
+        mainMenu.startTutorial();
     }
 }

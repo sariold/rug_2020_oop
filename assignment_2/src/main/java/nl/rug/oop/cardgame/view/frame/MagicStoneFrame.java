@@ -117,6 +117,17 @@ public class MagicStoneFrame extends JFrame {
         repaint();
     }
 
+    public void changeToTutorialPanel() {
+        remove(mainMenuPanel);
+        add(tutorialPanel);
+        setPreferredSize(new Dimension(1280, 720));
+        pack();
+        setLocationRelativeTo(null);
+        setVisible(true);
+        setResizable(false);
+        repaint();
+    }
+
     public void changeToCardCollectionPanel() {
         remove(mainMenuPanel);
         add(cardCollectionPanel);
