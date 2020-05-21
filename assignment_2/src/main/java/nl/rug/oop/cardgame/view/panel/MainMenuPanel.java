@@ -12,6 +12,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.Observable;
 import java.util.Observer;
@@ -50,6 +51,7 @@ public class MainMenuPanel extends JPanel implements Observer {
         super.paintComponent(g);
         if (mainMenu.isInGame()) {
             frame.changeToGamePanel();
+//            mainMenu.deleteObserver(this);
         }
         if (mainMenu.isInCollection()) {
             frame.changeToCardCollectionPanel();
@@ -70,7 +72,8 @@ public class MainMenuPanel extends JPanel implements Observer {
             System.out.println("Could not read File");
         }
         try {
-            logoFont = Font.createFont(Font.TRUETYPE_FONT, new File("src/main/resources/fonts/Dragonlands.ttf"));
+            InputStream fontStream = this.getClass().getResourceAsStream(File.separator + "fonts" + File.separator + "Dragonlands.ttf");
+            logoFont = Font.createFont(Font.TRUETYPE_FONT, fontStream);
             logoFont = logoFont.deriveFont(Font.BOLD, 80);
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
             ge.registerFont(logoFont);
