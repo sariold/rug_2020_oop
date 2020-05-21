@@ -23,10 +23,10 @@ public class CardCollectionPanel extends JPanel implements Observer {
 
     private MainMenu mainMenu;
     private MagicStoneFrame frame;
-    private JTextField textField1;
-    private JTextField textField2;
-    private JTextField textField3;
-    private JTextField textField4;
+    private JTextArea textField1;
+    private JTextArea textField2;
+    private JTextArea textField3;
+    private JTextArea textField4;
 
     public CardCollectionPanel(MainMenu mainMenu, MagicStoneFrame frame) {
         this.frame = frame;
@@ -37,14 +37,15 @@ public class CardCollectionPanel extends JPanel implements Observer {
         PageButton prevPageButton = new PageButton(mainMenu, "Previous Page");
         nextPageButton.setBounds(1050, 630, 200, 50);
         prevPageButton.setBounds(850, 630, 200, 50);
-        textField1 = new JTextField();
-        textField2 = new JTextField();
-        textField3 = new JTextField();
-        textField4 = new JTextField();
+        textField1 = new JTextArea();
+        textField2 = new JTextArea();
+        textField3 = new JTextArea();
+        textField4 = new JTextArea();
         textField1.setBounds(10, 430, 300, 200);
         textField2.setBounds(315, 430, 300, 200);
         textField3.setBounds(620, 430, 300, 200);
         textField4.setBounds(925, 430, 300, 200);
+
         this.add(textField1);
         this.add(textField2);
         this.add(textField3);

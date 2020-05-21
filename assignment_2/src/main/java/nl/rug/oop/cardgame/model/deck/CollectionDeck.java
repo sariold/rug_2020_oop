@@ -49,7 +49,7 @@ public class CollectionDeck {
     }
 
     public void increaseStartingCard() {
-        if (startingCard < getDeckList().size()-1) startingCard++;
+        if (startingCard < getDeckList().size()-4) startingCard++;
     }
 
     public void decreaseStartingCard() {
