@@ -27,6 +27,10 @@ public class CardCollectionPanel extends JPanel implements Observer {
     private JTextArea textField2;
     private JTextArea textField3;
     private JTextArea textField4;
+    private JLabel label1;
+    private JLabel label2;
+    private JLabel label3;
+    private JLabel label4;
 
     public CardCollectionPanel(MainMenu mainMenu, MagicStoneFrame frame) {
         this.frame = frame;
@@ -41,14 +45,26 @@ public class CardCollectionPanel extends JPanel implements Observer {
         textField2 = new JTextArea();
         textField3 = new JTextArea();
         textField4 = new JTextArea();
+        label1 = new JLabel();
+        label2 = new JLabel();
+        label3 = new JLabel();
+        label4 = new JLabel();
         textField1.setBounds(10, 430, 300, 200);
         textField2.setBounds(315, 430, 300, 200);
         textField3.setBounds(620, 430, 300, 200);
         textField4.setBounds(925, 430, 300, 200);
+        label1.setBounds(10, 10, 300, 418);
+        label2.setBounds(315, 10, 300, 418);
+        label3.setBounds(620, 10, 300, 418);
+        label4.setBounds(925, 10, 300, 418);
         this.add(textField1);
         this.add(textField2);
         this.add(textField3);
         this.add(textField4);
+        this.add(label1);
+        this.add(label2);
+        this.add(label3);
+        this.add(label4);
         this.add(backButton);
         this.add(nextPageButton);
         this.add(prevPageButton);
@@ -74,18 +90,21 @@ public class CardCollectionPanel extends JPanel implements Observer {
             switch (count) {
                 case 0:
                     textField1.setText(CardDescriptions.CARDS[i]);
+                    label1.setIcon((new ImageIcon(CollectionTextures.getTexture(card))));
                     break;
                 case 1:
                     textField2.setText(CardDescriptions.CARDS[i]);
+                    label2.setIcon((new ImageIcon(CollectionTextures.getTexture(card))));
                     break;
                 case 2:
                     textField3.setText(CardDescriptions.CARDS[i]);
+                    label3.setIcon((new ImageIcon(CollectionTextures.getTexture(card))));
                     break;
                 case 3:
                     textField4.setText(CardDescriptions.CARDS[i]);
+                    label4.setIcon((new ImageIcon(CollectionTextures.getTexture(card))));
                     break;
             }
-            g.drawImage(CollectionTextures.getTexture(card), 10+count*305, 10, 300, 418, this);
             count++;
         }
     }
