@@ -35,6 +35,7 @@ public class CardCollectionPanel extends JPanel implements Observer {
     public CardCollectionPanel(MainMenu mainMenu, MagicStoneFrame frame) {
         this.frame = frame;
         this.mainMenu = mainMenu;
+        this.mainMenu.addObserver(this);
         MainMenuButton backButton = new MainMenuButton(mainMenu);
         backButton.setBounds(20, 630, 200, 50);
         PageButton nextPageButton = new PageButton(mainMenu, "Next Page");
@@ -86,7 +87,7 @@ public class CardCollectionPanel extends JPanel implements Observer {
         int count = 0;
         for (int i = deck.getStartingCard(); i < deck.getDeckList().size() && i < deck.getStartingCard()+4; i++) {
             EnumCard card = deck.getDeckList().get(i).getEnumCard();
-            System.out.println(card + "  " + i);
+//            System.out.println(card + "  " + i);
             switch (count) {
                 case 0:
                     textField1.setText(CardDescriptions.CARDS[i]);

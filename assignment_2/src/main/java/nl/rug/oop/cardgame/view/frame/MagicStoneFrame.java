@@ -29,9 +29,11 @@ public class MagicStoneFrame extends JFrame {
     private CardClicker clicker;
     private JLabel gifLabel;
     private Image loadedLogo;
+    private MainMenu mainMenu;
 
     public MagicStoneFrame(MainMenu mainMenu) {
         super("Magic Stone");
+        this.mainMenu = mainMenu;
         try {
             this.loadedLogo = ImageIO.read(CardTextures.class.getResource(File.separator + "textures"
                     + File.separator + "MAGICSTONE_LOGO.png"));
@@ -83,6 +85,7 @@ public class MagicStoneFrame extends JFrame {
      * changes the current panel to the game
      */
     public void changeToGamePanel() {
+        System.out.println("CHANGED TO GAME PANEL!");
         remove(mainMenuPanel);
         add(gamePanel);
         setPreferredSize(new Dimension(1280, 720));

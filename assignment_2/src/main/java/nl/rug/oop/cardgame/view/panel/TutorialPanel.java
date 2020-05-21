@@ -19,6 +19,7 @@ public class TutorialPanel extends JPanel implements Observer {
 
     public TutorialPanel(MainMenu mainMenu, MagicStoneFrame frame) {
         this.mainMenu = mainMenu;
+        this.mainMenu.addObserver(this);
         this.frame = frame;
         Font logoFont;
         textArea = new JTextArea();

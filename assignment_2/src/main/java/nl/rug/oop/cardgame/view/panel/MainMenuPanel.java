@@ -38,6 +38,7 @@ public class MainMenuPanel extends JPanel implements Observer {
         this.add(startGameButton);
         this.add(tutorialButton);
         this.add(cardCollectionButton);
+        mainMenu.addObserver(this);
 
         setVisible(true);
         setOpaque(true);
@@ -47,7 +48,9 @@ public class MainMenuPanel extends JPanel implements Observer {
     @Override
     public void paintComponent(Graphics g){
         super.paintComponent(g);
+        System.out.println("repaining");
         if (mainMenu.isInGame()) {
+            System.out.println("PANEL CHANGED");
             frame.changeToGamePanel();
         }
         if (mainMenu.isInCollection()) {

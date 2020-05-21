@@ -1,6 +1,5 @@
 package nl.rug.oop.cardgame;
 
-import nl.rug.oop.cardgame.model.MagicStoneGame;
 import nl.rug.oop.cardgame.model.menu.MainMenu;
 import nl.rug.oop.cardgame.view.frame.MagicStoneFrame;
 

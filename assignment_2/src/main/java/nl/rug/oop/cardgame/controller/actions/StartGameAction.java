@@ -20,6 +20,7 @@ public class StartGameAction extends AbstractAction {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        System.out.println("button works");
         mainMenu.startGame();
     }
 }
