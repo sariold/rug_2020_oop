@@ -25,6 +25,7 @@ public class TutorialPanel extends JPanel implements Observer {
         textArea = new JTextArea();
         MainMenuButton backButton = new MainMenuButton(mainMenu);
         backButton.setBounds(20, 630, 200, 50);
+        textArea.setEditable(false);
         textArea.setText("GENERAL:\n\n" +
                 "Your goal is to reduced the enemies health to 0.\n\n" +
                 "Your deck consists of creatures and spells.\n" +
