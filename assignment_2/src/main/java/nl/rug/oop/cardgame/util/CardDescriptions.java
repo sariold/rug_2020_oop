@@ -1,18 +1,18 @@
 package nl.rug.oop.cardgame.util;
 
-import java.text.AttributedString;
 
 public class CardDescriptions {
 
 
-    public static String[] CARDS ={"Creature: Chomps\n\n" +
+    public static String[] CARDS ={
+            "Creature: Chomps\n\n" +
             "Attack:1 Health:1\n\n" +
             "This creature is scary but dies pretty easily!\n\n" +
             "To play: Click this creature in your hand and\n    then click a free spot on your battlefield.\n\n" +
             "To attack: Click on the attack button\n    then click on this creature."
             ,"Creature: Howler\n\n" +
             "Attack:3 Health:3\n\n" +
-            "By day you he seems nice but by night he would devour your child with one bite!\n\n" +
+            "By day you he seems nice but by night he\n    would devour your child with one bite!\n\n" +
             "To play: Click this creature in your hand and\n    then click a free spot on your battlefield.\n\n" +
             "To attack: Click on the attack button\n    then click on this creature."
             ,"Creature: Wolf Gang\n\n" +
@@ -73,5 +73,6 @@ public class CardDescriptions {
             ,"Spell: Thirst for Blood\n\n" +
             "Effect: Give your hero +2 attack until the start\n    of your next turn.\n\n" +
             "To play: Click this spell in your hand and then\n    click on your own hero.\n\n" +
-            "Restrictions: none."};
+            "Restrictions: none."
+    };
 }

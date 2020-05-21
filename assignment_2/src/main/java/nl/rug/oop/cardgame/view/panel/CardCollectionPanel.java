@@ -45,7 +45,6 @@ public class CardCollectionPanel extends JPanel implements Observer {
         textField2.setBounds(315, 430, 300, 200);
         textField3.setBounds(620, 430, 300, 200);
         textField4.setBounds(925, 430, 300, 200);
-
         this.add(textField1);
         this.add(textField2);
         this.add(textField3);
