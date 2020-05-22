@@ -1,26 +1,32 @@
 package nl.rug.oop.cardgame.controller.actions;
 
-import nl.rug.oop.cardgame.controller.button.StartGameButton;
-import nl.rug.oop.cardgame.model.MagicStoneGame;
 import nl.rug.oop.cardgame.model.menu.MainMenu;
-import nl.rug.oop.cardgame.view.frame.MagicStoneFrame;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
-import java.util.concurrent.TimeUnit;
 
+/**
+ * Action performed by Start Game Button
+ */
 public class StartGameAction extends AbstractAction {
 
     MainMenu mainMenu;
 
+    /**
+     * Create new Start Game Action
+     * @param mainMenu Main Menu
+     */
     public StartGameAction(MainMenu mainMenu) {
         super("Start Game");
         this.mainMenu = mainMenu;
     }
 
+    /**
+     * Switch from Main Menu Panel to Game Panel
+     * @param e
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.println("button works");
         mainMenu.startGame();
     }
 }

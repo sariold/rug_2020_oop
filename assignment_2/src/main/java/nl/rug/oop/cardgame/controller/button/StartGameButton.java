@@ -1,15 +1,16 @@
 package nl.rug.oop.cardgame.controller.button;
 
-import nl.rug.oop.cardgame.controller.actions.EndTurnAction;
 import nl.rug.oop.cardgame.controller.actions.StartGameAction;
-import nl.rug.oop.cardgame.model.MagicStoneGame;
 import nl.rug.oop.cardgame.model.menu.MainMenu;
-import nl.rug.oop.cardgame.view.frame.MagicStoneFrame;
 
 import javax.swing.*;
 import java.awt.event.KeyEvent;
 
+/**
+ * Button to start the game
+ */
 public class StartGameButton extends JButton{
+
     /**
      * Initialise the properties of this button
      */
@@ -19,6 +20,10 @@ public class StartGameButton extends JButton{
         setMnemonic(KeyEvent.VK_S);
     }
 
+    /**
+     * Create a new Start Game Button
+     * @param mainMenu Main Menu
+     */
     public StartGameButton(MainMenu mainMenu) {
         super(new StartGameAction(mainMenu));
         setButtonProperties();

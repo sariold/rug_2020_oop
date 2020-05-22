@@ -1,6 +1,6 @@
 package nl.rug.oop.cardgame.view.panel;
 
-import nl.rug.oop.cardgame.controller.actions.CardClicker;
+import nl.rug.oop.cardgame.controller.clicker.CardClicker;
 import nl.rug.oop.cardgame.controller.button.AttackPhaseButton;
 import nl.rug.oop.cardgame.controller.button.EndTurnButton;
 import nl.rug.oop.cardgame.util.DefaultCoordinates;

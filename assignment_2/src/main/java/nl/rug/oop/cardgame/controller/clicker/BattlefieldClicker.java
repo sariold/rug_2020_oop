@@ -1,10 +1,9 @@
-package nl.rug.oop.cardgame.controller.actions;
+package nl.rug.oop.cardgame.controller.clicker;
 
 import nl.rug.oop.cardgame.model.MagicStoneGame;
 import nl.rug.oop.cardgame.model.card.Card;
 import nl.rug.oop.cardgame.model.card.CreatureCard;
 import nl.rug.oop.cardgame.model.hero.Hero;
-import nl.rug.oop.cardgame.view.frame.MagicStoneFrame;
 import nl.rug.oop.cardgame.view.panel.MagicStonePanel;
 
 import javax.swing.event.MouseInputAdapter;
@@ -12,7 +11,9 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
-
+/**
+ * A card clicker that lets the player interact with the battlefield
+ */
 public class BattlefieldClicker extends MouseInputAdapter {
 
     private MagicStoneGame magicStoneGame;
@@ -24,6 +25,13 @@ public class BattlefieldClicker extends MouseInputAdapter {
     private boolean attackPhase;
     private MouseEvent event;
 
+    /**
+     * Creates a new mouse input to interact with the battlefield
+     * @param magicStoneGame Game
+     * @param magicStonePanel Panel
+     * @param card Card
+     * @param attackPhase Player is in attack phase
+     */
     public BattlefieldClicker(MagicStoneGame magicStoneGame, MagicStonePanel magicStonePanel, Card card,
                               boolean attackPhase) {
         this.magicStoneGame = magicStoneGame;
@@ -36,6 +44,11 @@ public class BattlefieldClicker extends MouseInputAdapter {
         else if(attackPhase) magicStoneGame.getBattlefield().setAttackPhase(true);
     }
 
+    /**
+     * Lets the player place a creature on a free position on the battlefield
+     * Adjusts the free positions on the battlefield
+     * @param pos Position where the creature is placed
+     */
     private void placeCreature(int pos) {
         for(int i = 0; i < freePos.size(); i++) {
             if(freePos.get(i) == pos) {
@@ -46,11 +59,18 @@ public class BattlefieldClicker extends MouseInputAdapter {
         }
     }
 
+    /**
+     * Lets the player play a spell
+     */
     private void playSpell() {
         magicStoneGame.getBattlefield().getPlayer().playCard(magicStoneGame.getBattlefield(), 0, card);
         magicStoneGame.endGameCheck(magicStoneGame.getBattlefield());
     }
 
+    /**
+     * Defines what happens when the maóuse is clicked
+     * @param event Mouse Click
+     */
     @Override
     public void mouseClicked(MouseEvent event) {
         this.event = event;
@@ -83,6 +103,10 @@ public class BattlefieldClicker extends MouseInputAdapter {
         if(!attackPhase) ((Component) event.getSource()).removeMouseListener(this);
     }
 
+    /**
+     * Place or attack with the creature that was at the position clicked on
+     * @param attack
+     */
     private void attackOrPlace(boolean attack) {
         int pos = -1;
         if (x >= 140 && x <= 230 && y >= 360 && y <= 495) pos = 0;
@@ -96,12 +120,15 @@ public class BattlefieldClicker extends MouseInputAdapter {
         }
     }
 
+    /**
+     * Ends the players turn if the attack phase is over
+     * Attacks with an untapped creature if it has been clicked
+     * @param pos Position of the clicked creature
+     */
     private void attack(int pos) {
         if(!magicStoneGame.getBattlefield().isPlayerTurn() || !magicStoneGame.getBattlefield().isAttackPhase()) {
             ((Component) event.getSource()).removeMouseListener(this);
             magicStoneGame.getBattlefield().setAttackPhase(false);
-//            magicStoneGame.getBattlefield().setPlayPhase(true);
-//            magicStoneGame.getBattlefield().setPlayerTurn(false);
             return;
         }
         Hero player = magicStoneGame.getBattlefield().getPlayer();
@@ -110,12 +137,16 @@ public class BattlefieldClicker extends MouseInputAdapter {
             if (!card.isUsed()) player.attackPhase(magicStoneGame.getBattlefield(), pos, magicStoneGame);
         }
         if(!player.untappedCreatures()) {
-//            magicStoneGame.getBattlefield().setAttackPhase(false);
-//            magicStoneGame.getBattlefield().setPlayerTurn(false);
             magicStoneGame.getBattlefield().setPlayPhase(false);
         }
     }
 
+    /**
+     * Returns the players creature at the specified position
+     * @param magicStoneGame Game
+     * @param pos Position
+     * @return
+     */
     private CreatureCard getCard(MagicStoneGame magicStoneGame, int pos) {
         ArrayList<CreatureCard> played = magicStoneGame.getBattlefield().getPlayer().getPlayedCreatures();
         CreatureCard card = null;

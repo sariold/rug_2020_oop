@@ -1,8 +1,7 @@
-package nl.rug.oop.cardgame.controller.actions;
+package nl.rug.oop.cardgame.controller.clicker;
 
 import nl.rug.oop.cardgame.model.MagicStoneGame;
 import nl.rug.oop.cardgame.model.card.Card;
-import nl.rug.oop.cardgame.view.frame.MagicStoneFrame;
 import nl.rug.oop.cardgame.view.panel.MagicStonePanel;
 
 import javax.swing.event.MouseInputAdapter;
@@ -10,7 +9,9 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
-
+/**
+ * Clicker that lets the player copy a creature
+ */
 public class CopyClicker extends MouseInputAdapter {
 
     private MagicStoneGame magicStoneGame;
@@ -20,6 +21,12 @@ public class CopyClicker extends MouseInputAdapter {
     private Card card;
     private ArrayList<Integer> freePos;
 
+    /**
+     * Create a new Copy Clicker
+     * @param magicStoneGame Game
+     * @param magicStonePanel Panel
+     * @param card Card
+     */
     public CopyClicker(MagicStoneGame magicStoneGame, MagicStonePanel magicStonePanel, Card card) {
         this.magicStoneGame = magicStoneGame;
         this.magicStonePanel = magicStonePanel;
@@ -28,6 +35,10 @@ public class CopyClicker extends MouseInputAdapter {
         this.freePos = magicStoneGame.getBattlefield().getFreePositions(magicStoneGame.getBattlefield().getPlayer());
     }
 
+    /**
+     * Place the creature at the specified position
+     * @param event Mouse Click
+     */
     @Override
     public void mouseClicked(MouseEvent event) {
         x = event.getX();

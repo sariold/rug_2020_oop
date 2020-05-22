@@ -1,14 +1,14 @@
 package nl.rug.oop.cardgame.controller.button;
 
-import nl.rug.oop.cardgame.controller.actions.EndTurnAction;
 import nl.rug.oop.cardgame.controller.actions.MainMenuAction;
-import nl.rug.oop.cardgame.model.MagicStoneGame;
 import nl.rug.oop.cardgame.model.menu.MainMenu;
-import nl.rug.oop.cardgame.view.frame.MagicStoneFrame;
 
 import javax.swing.*;
 import java.awt.event.KeyEvent;
 
+/**
+ * Button to go to the main menu
+ */
 public class MainMenuButton extends JButton{
 
     /**
@@ -20,6 +20,10 @@ public class MainMenuButton extends JButton{
         setMnemonic(KeyEvent.VK_S);
     }
 
+    /**
+     * Create new Main Menu Button
+     * @param mainMenu Main Menu
+     */
     public MainMenuButton(MainMenu mainMenu) {
         super(new MainMenuAction(mainMenu));
         setButtonProperties();

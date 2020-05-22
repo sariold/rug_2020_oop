@@ -1,13 +1,14 @@
 package nl.rug.oop.cardgame.controller.button;
 
 import nl.rug.oop.cardgame.controller.actions.CardCollectionAction;
-import nl.rug.oop.cardgame.controller.actions.TutorialAction;
 import nl.rug.oop.cardgame.model.menu.MainMenu;
-import nl.rug.oop.cardgame.view.frame.MagicStoneFrame;
 
 import javax.swing.*;
 import java.awt.event.KeyEvent;
 
+/**
+ * Button to go to the Card Collection
+ */
 public class CardCollectionButton extends JButton {
 
     /**
@@ -19,6 +20,10 @@ public class CardCollectionButton extends JButton {
         setMnemonic(KeyEvent.VK_S);
     }
 
+    /**
+     * Create new Card Collection Button
+     * @param mainMenu Main Menu
+     */
     public CardCollectionButton(MainMenu mainMenu) {
         super(new CardCollectionAction(mainMenu));
         setButtonProperties();

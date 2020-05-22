@@ -2,10 +2,7 @@ package nl.rug.oop.cardgame.view.frame;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import nl.rug.oop.cardgame.controller.actions.CardClicker;
-import nl.rug.oop.cardgame.controller.button.AttackPhaseButton;
-import nl.rug.oop.cardgame.controller.button.EndTurnButton;
-import nl.rug.oop.cardgame.model.MagicStoneGame;
+import nl.rug.oop.cardgame.controller.clicker.CardClicker;
 import nl.rug.oop.cardgame.model.menu.MainMenu;
 import nl.rug.oop.cardgame.view.panel.*;
 import nl.rug.oop.cardgame.view.textures.CardTextures;
