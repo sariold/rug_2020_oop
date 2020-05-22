@@ -17,13 +17,19 @@ public abstract class SpellCard extends Card {
 
     /**
      * Creates a new spell card
-     *
      * @param enumCard Enum Card
      */
     public SpellCard(EnumCard enumCard) {
         super(enumCard);
     }
 
+    /**
+     * Play a spell
+     * @param battlefield Battlefield
+     * @param heroIndex Hero
+     * @param pos Position
+     * @return Success of spell
+     */
     @Override
     public boolean play(Battlefield battlefield, int heroIndex, int pos) {
         Hero hero = (heroIndex == 0 ? battlefield.getPlayer() : battlefield.getAi());
@@ -31,6 +37,11 @@ public abstract class SpellCard extends Card {
         return true;
     }
 
+    /**
+     * Checks if the hero has creatures on the battlefield
+     * @param hero Hero
+     * @return True if at least one creature is on the battlefield
+     */
     public boolean notEmptyBattlefield(Hero hero) {
         ArrayList<CreatureCard> creatures = hero.getPlayedCreatures();
         for (CreatureCard c : creatures) {

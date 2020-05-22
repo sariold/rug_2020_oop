@@ -11,16 +11,30 @@ import nl.rug.oop.cardgame.view.frame.MagicStoneFrame;
 import java.util.ArrayList;
 import java.util.Collections;
 
+/**
+ * Spell that copies a creature and places it on the battlefield
+ */
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class CopySpell extends SpellCard implements Targetting {
 
     private int pos;
 
+    /**
+     * Create a copy spell
+     * @param enumCard EnumCard
+     */
     public CopySpell(EnumCard enumCard) {
         super(enumCard);
     }
 
+    /**
+     * Play the spell
+     * @param battlefield Battlefield
+     * @param hero Hero who played the card
+     * @param pos Position of copied creature
+     * @return Sucess of playing
+     */
     @Override
     public boolean play(Battlefield battlefield, int hero, int pos) {
         this.pos = pos;
@@ -30,6 +44,12 @@ public class CopySpell extends SpellCard implements Targetting {
         return false;
     }
 
+    /**
+     * Target the creature that should be copied
+     * @param battlefield Battlefield
+     * @param hero Hero
+     * @return If creature has been targeted
+     */
     @Override
     public boolean target(Battlefield battlefield, Hero hero) {
         ArrayList<Integer> freePositions = battlefield.getFreePositions(hero);
@@ -41,13 +61,6 @@ public class CopySpell extends SpellCard implements Targetting {
             } else {
                 if (freePositions.size() > 0) {
                     ArrayList<CreatureCard> creatures = hero.getPlayedCreatures();
-//                    Collections.shuffle(creatures);
-//                    if (creatures.get(0) != null) {
-//                        CreatureCard creatureCard = new CreatureCard(creatures.get(0).getEnumCard());
-//                        creatureCard.setUsed(true);
-//                        battlefield.placeCreature(creatureCard, hero, freePositions.get(0));
-//                        System.out.println("AI COPIES " + creatureCard.getName() + " AI PLACES IN " + freePositions.get(0));
-//                    }
                     CreatureCard creatureCard = new CreatureCard(creatures.get(getStrongestCreature(battlefield.getAi())).getEnumCard());
                     creatureCard.setUsed(true);
                     battlefield.placeCreature(creatureCard, hero, freePositions.get(0));
@@ -59,6 +72,11 @@ public class CopySpell extends SpellCard implements Targetting {
         return false;
     }
 
+    /**
+     * Return the strongest creature of a hero
+     * @param hero Hero
+     * @return Strongest Creature
+     */
     private int getStrongestCreature(Hero hero) {
         int pos = -1;
         ArrayList<CreatureCard> creatures = hero.getPlayedCreatures();
@@ -69,26 +87,5 @@ public class CopySpell extends SpellCard implements Targetting {
             }
         }
         return pos;
-    }
-
-//    public boolean notEmptyBattlefield(Hero hero) {
-//        ArrayList<CreatureCard> creatures = hero.getPlayedCreatures();
-//        for (CreatureCard c : creatures) {
-//            if (c != null) return true;
-//        }
-//        return false;
-//    }
-
-
-    public void showBattlefield(Hero hero) {
-        ArrayList<CreatureCard> creatures = hero.getPlayedCreatures();
-        int i = 0;
-        for (CreatureCard c : creatures) {
-            if (c != null) {
-                System.out.print(i + ") " + c.getName() + " : Health = " + c.getCreatureHealth() + " : Attack = " +
-                        c.getCreatureAttack());
-            }
-            i++;
-        }
     }
 }

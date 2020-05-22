@@ -23,7 +23,6 @@ public class DeckHand {
 
     /**
      * Adds a card to player's deck hand
-     *
      * @param card Takes a card
      */
     public void addCard(DiscardDeck discardDeck, Card card) {
@@ -51,7 +50,6 @@ public class DeckHand {
 
     /**
      * Removes a card from player's deck hand
-     *
      * @param discardDeck
      */
     public void discardCard(DiscardDeck discardDeck, int key) {

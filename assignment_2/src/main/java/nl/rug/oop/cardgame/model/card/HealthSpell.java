@@ -4,16 +4,29 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import nl.rug.oop.cardgame.model.Battlefield;
 import nl.rug.oop.cardgame.model.hero.Hero;
-import nl.rug.oop.cardgame.view.frame.MagicStoneFrame;
 
+/**
+ * Spell to change health
+ */
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class HealthSpell extends SpellCard {
 
+    /**
+     * Create new health spell
+     * @param enumCard Enum Card
+     */
     public HealthSpell(EnumCard enumCard) {
         super(enumCard);
     }
 
+    /**
+     * Heal or damage a hero
+     * @param battlefield Battlefield
+     * @param hero Hero
+     * @param pos Position
+     * @return Success of spell
+     */
     @Override
     public boolean play(Battlefield battlefield, int hero, int pos) {
         Hero player = battlefield.getPlayer();
@@ -32,7 +45,6 @@ public class HealthSpell extends SpellCard {
         }
         target.setHealth(target.getHealth() + dealValue);
         System.out.println(target.getName());
-        System.out.println("UPDATED HEALTH : " +  target.getHealth());
         return super.play(battlefield, hero, pos);
     }
 

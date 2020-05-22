@@ -18,7 +18,6 @@ public class AIHero extends Hero {
 
     /**
      * Creates a hero that plays on its own
-     *
      * @param playerName Name
      * @param heroHealth Health
      * @param mana       Mana
@@ -31,7 +30,6 @@ public class AIHero extends Hero {
 
     /**
      * Rotate turns between Player and AI
-     *
      * @param battlefield Playing board
      */
     @Override
@@ -72,7 +70,6 @@ public class AIHero extends Hero {
 
     /**
      * Attack enemy hero with your untapped creatures
-     *
      * @param battlefield Battlefield
      */
     @Override
@@ -98,7 +95,6 @@ public class AIHero extends Hero {
 
     /**
      * Return which cards can be played with your current mana amount
-     *
      * @return An arraylist of playable cards
      */
     private ArrayList<Card> getPlayableCards(Battlefield battlefield) {

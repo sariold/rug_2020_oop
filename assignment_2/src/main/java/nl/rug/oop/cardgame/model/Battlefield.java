@@ -33,11 +33,20 @@ public class Battlefield extends Observable {
         this.playPhase = true;
     }
 
+    /**
+     * notifies observers of change
+     */
     public void notifyUpdate() {
         setChanged();
         notifyObservers();
     }
 
+    /**
+     * Adds attack to the hero that played the damage buff if it has been played and notifies observers
+     * @param hero Hero
+     * @param damageBuff True if damage buff was played
+     * @param value Amount of damage to buff
+     */
     public void setDamageBuff(Hero hero, boolean damageBuff, int value) {
         if(damageBuff) {
             hero.setHeroAttack(hero.getHeroAttack() + value);
@@ -45,6 +54,11 @@ public class Battlefield extends Observable {
         notifyUpdate();
     }
 
+    /**
+     * Set Hell fire to true if hell fire is played and notifies observers
+     * @param hellFire True if hell fire is played
+     * @param hero Hero
+     */
     public void setHellFire(boolean hellFire, Hero hero) {
         this.hellFire = hellFire;
         removeDead(hero);
@@ -52,17 +66,29 @@ public class Battlefield extends Observable {
         this.hellFire = false;
     }
 
+    /**
+     * Set attack phase and set play phase to false and notifies observers
+     * @param attackPhase True if it is the players attack phase
+     */
     public void setAttackPhase(boolean attackPhase) {
         this.attackPhase = attackPhase;
         this.playPhase = false;
         notifyUpdate();
     }
 
+    /**
+     * Set whether it is the players turn
+     * @param playerTurn True if it is the players turn
+     */
     public void setPlayerTurn(boolean playerTurn) {
         if(playerTurn) setPlayPhase(true);
         else setPlayPhase(false);
     }
 
+    /**
+     * Set Play Phase and set attack phase to false and notifies observers
+     * @param playPhase True if player is in play phase
+     */
     public void setPlayPhase(boolean playPhase) {
         this.playPhase = playPhase;
         this.playerTurn = playPhase;
@@ -70,6 +96,10 @@ public class Battlefield extends Observable {
         notifyUpdate();
     }
 
+    /**
+     * Sets the selected card and notifies observers
+     * @param selected
+     */
     public void setSelectedCard(Card selected) {
         this.selectedCard = selected;
         notifyUpdate();
@@ -77,12 +107,6 @@ public class Battlefield extends Observable {
 
     /**
      * Increase mana each turn
-     *
-     * @param hero Hero
-     */
-    /**
-     * Increase mana each turn
-     *
      * @param hero Hero
      */
     public void incMana(Hero hero) {
@@ -92,10 +116,9 @@ public class Battlefield extends Observable {
 
     /**
      * places a creature on a free spot on the battlefield
-     *
      * @param creatureCard Creature
      * @param hero         Hero who played the creature
-     * @return
+     * @return Success of placing
      */
     public boolean placeCreature(CreatureCard creatureCard, Hero hero, int pos) {
         ArrayList<Integer> freePositions = getFreePositions(hero);
@@ -121,6 +144,12 @@ public class Battlefield extends Observable {
         return false;
     }
 
+    /**
+     * Return spots where both players have creatures on the battlefield
+     * @param mySpots My Spots
+     * @param enemySpots Enemy spots
+     * @return Spots occupied by both
+     */
     private int enemySpotIHaveEmpty(ArrayList<Integer> mySpots, ArrayList<Integer> enemySpots) {
         for(int i = 0; i < mySpots.size(); i++) {
             for(int j = 0; j < enemySpots.size(); j++) {
@@ -130,6 +159,11 @@ public class Battlefield extends Observable {
         return -1;
     }
 
+    /**
+     * Returns the positions where a hero has creatures on the battlefield
+     * @param hero Hero
+     * @return Positions
+     */
     public ArrayList playerHasBattlefieldCreature(Hero hero) {
         ArrayList<Integer> battleSpots = new ArrayList<>();
         ArrayList<CreatureCard> playerCreatures = hero.getPlayedCreatures();
@@ -141,7 +175,6 @@ public class Battlefield extends Observable {
 
     /**
      * Returns an array list of free positions on the battlefield for the hero
-     *
      * @param hero Hero
      * @return Free Positions
      */
@@ -154,41 +187,9 @@ public class Battlefield extends Observable {
     }
 
     /**
-     * Moves a creature to another spot on the battlefield
-     *
-     * @param hero
-     * @param movingCreature Creature
-     * @return If the creature has been moved
+     * Remove dead creatures of the hero from the battlefield
+     * @param hero Hero
      */
-    public boolean moveCreature(Hero hero, CreatureCard movingCreature) {
-        Scanner scanner = new Scanner(System.in);
-        ArrayList<Integer> freePositions = getFreePositions(hero);
-        if (freePositions.size() == 0) {
-            System.out.println("No space to move a creature!");
-            return false;
-        }
-        int position = 0;
-        System.out.println("Where will you move the creature to? (-1 : nowhere)");
-        for (int i = 0; i < freePositions.size(); i++) {
-            System.out.println(freePositions.get(i) + ")");
-        }
-        while (true) {
-            try {
-                position = scanner.nextInt();
-                if (position == -1) return false;
-                if (freePositions.contains(position)) break;
-                System.out.println("Invalid input. Where to move?");
-                continue;
-            } catch (InputMismatchException e) {
-                System.out.println("Invalid input. Where to move?");
-                continue;
-            }
-        }
-        hero.getPlayedCreatures().set(position, movingCreature);
-        movingCreature.setBattlePosition(position);
-        return true;
-    }
-
     public void removeDead(Hero hero) {
         for (int i = 0; i < hero.getPlayedCreatures().size(); i++) {
             if (hero.getPlayedCreatures().get(i) != null) {

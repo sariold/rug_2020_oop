@@ -4,19 +4,23 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import nl.rug.oop.cardgame.model.card.Card;
 import nl.rug.oop.cardgame.model.hero.Hero;
-import nl.rug.oop.cardgame.view.frame.MagicStoneFrame;
 
 import java.util.Observable;
 
+/**
+ * A game environment
+ */
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class MagicStoneGame extends Observable {
 
     private Battlefield battlefield;
-    private MagicStoneFrame frame;
     private boolean lost;
     private boolean won;
 
+    /**
+     * Create a new game
+     */
     public MagicStoneGame() {
         won = lost = false;
         this.battlefield = new Battlefield();
@@ -24,7 +28,6 @@ public class MagicStoneGame extends Observable {
 
     /**
      * Starts the actual turn based game
-     *
      */
     public void startGame() {
         turnRotation();
@@ -32,7 +35,6 @@ public class MagicStoneGame extends Observable {
 
     /**
      * Rotates the turns
-     *
      */
     public void turnRotation() {
         Hero player = battlefield.getPlayer();
@@ -46,8 +48,6 @@ public class MagicStoneGame extends Observable {
         }
         for (int i = 1; start; i++) {
             notifyUpdate();
-            System.out.println();
-            System.out.println("It's turn number " + ((i + (i % 2)) / 2));
             if (i % 2 == 1) {
                 battlefield.setDamageBuff(player, false, 0);
                 resetUsedCreatures(player);
@@ -69,11 +69,17 @@ public class MagicStoneGame extends Observable {
         }
     }
 
+    /**
+     * notifies observers of change
+     */
     private void notifyUpdate() {
         setChanged();
         notifyObservers();
     }
 
+    /**
+     * End the players turn
+     */
     public void endPlayerTurn() {
        this.battlefield.setPlayerTurn(false);
     }
@@ -88,7 +94,6 @@ public class MagicStoneGame extends Observable {
 
     /**
      * Resets the param used for each played creature
-     *
      * @param hero Hero
      */
     public void resetUsedCreatures(Hero hero) {

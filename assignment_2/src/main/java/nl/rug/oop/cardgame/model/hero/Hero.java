@@ -35,7 +35,6 @@ public class Hero extends Observable implements Attackable {
 
     /**
      * Creates a new Hero
-     *
      * @param playerName Player name
      * @param heroHealth Player health
      * @param mana       Player mana
@@ -59,7 +58,6 @@ public class Hero extends Observable implements Attackable {
 
     /**
      * Play a card
-     *
      * @param battlefield Battlefield
      */
     public void playCard(Battlefield battlefield, int pos, Card card) {
@@ -81,7 +79,6 @@ public class Hero extends Observable implements Attackable {
 
     /**
      * Present the player with game options
-     *
      * @param battlefield Playing board
      */
     public void takeTurn(Battlefield battlefield, MagicStoneGame game) {
@@ -98,30 +95,6 @@ public class Hero extends Observable implements Attackable {
             }
         }
         return;
-    }
-
-    private void swapCreaturePositions(Battlefield battlefield, MagicStoneFrame frame) {
-        if (this.untappedCreatures()) {
-            Scanner scanner = new Scanner(System.in);
-            boolean start = true;
-            int currentMove;
-            while (start && this.untappedCreatures()) {
-                System.out.println("Which creature would oyu like to swap to another position? (-1 : none)");
-                showPlayedCreatures();
-                try {
-                    currentMove = scanner.nextInt();
-                    if (currentMove == -1) return;
-                    CreatureCard movingCreature = this.getPlayedCreatures().get(currentMove);
-                    if (battlefield.moveCreature(this, movingCreature)) {
-                        movingCreature.setUsed(true);
-                        this.getPlayedCreatures().set(currentMove, null);
-                    }
-                    notifyUpdate();
-                } catch (Exception e) {
-                    System.out.println("NOT VALID INPUT!");
-                }
-            }
-        } else System.out.println("Either you have no creatures or you just placed them down!");
     }
 
     /**
@@ -213,6 +186,9 @@ public class Hero extends Observable implements Attackable {
         this.setHeroAttack(attack);
     }
 
+    /**
+     * notifies observers of change
+     */
     protected void notifyUpdate() {
         setChanged();
         notifyObservers();

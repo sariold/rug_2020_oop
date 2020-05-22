@@ -93,6 +93,10 @@ public class CreatureCard extends Card implements Attackable {
         return battlefield.placeCreature(this, hero, pos);
     }
 
+    /**
+     * Return the type
+     * @return Type
+     */
     @Override
     public String getType() {
         return this.name;
@@ -100,7 +104,6 @@ public class CreatureCard extends Card implements Attackable {
 
     /**
      * Checks if a creature has died if so removes it from the battlefield
-     *
      * @param hero  Hero
      * @param index Index in played creatures array list
      */

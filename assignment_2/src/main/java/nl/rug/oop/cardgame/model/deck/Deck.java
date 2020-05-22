@@ -69,7 +69,6 @@ public class Deck {
 
     /**
      * Removes a card from the top of the deck and returns it
-     *
      * @return Card drawn
      */
     public Card drawCard() {

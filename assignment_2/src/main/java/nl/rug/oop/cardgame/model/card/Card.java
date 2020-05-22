@@ -26,7 +26,6 @@ public abstract class Card implements Playable {
 
     /**
      * Creates a new Card
-     *
      * @param enumCard EnumCard
      */
     public Card(EnumCard enumCard) {
@@ -41,8 +40,7 @@ public abstract class Card implements Playable {
 
     /**
      * Play method
-     *
-     * @return
+     * @return If the card was played
      */
     @Override
     public boolean play(Battlefield battlefield, int hero, int pos) {
