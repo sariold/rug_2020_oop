@@ -1,6 +1,5 @@
 package nl.rug.oop.cardgame.controller.button;
 
-import nl.rug.oop.cardgame.controller.actions.MainMenuAction;
 import nl.rug.oop.cardgame.controller.actions.PageAction;
 import nl.rug.oop.cardgame.model.menu.MainMenu;
 

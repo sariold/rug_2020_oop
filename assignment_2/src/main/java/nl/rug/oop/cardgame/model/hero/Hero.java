@@ -1,6 +1,7 @@
 package nl.rug.oop.cardgame.model.hero;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import nl.rug.oop.cardgame.util.Attackable;
 import nl.rug.oop.cardgame.model.Battlefield;
 import nl.rug.oop.cardgame.model.MagicStoneGame;
@@ -9,17 +10,15 @@ import nl.rug.oop.cardgame.model.card.CreatureCard;
 import nl.rug.oop.cardgame.model.deck.Deck;
 import nl.rug.oop.cardgame.model.deck.DeckHand;
 import nl.rug.oop.cardgame.model.deck.DiscardDeck;
-import nl.rug.oop.cardgame.view.frame.MagicStoneFrame;
-import nl.rug.oop.cardgame.view.panel.MagicStonePanel;
 
 import java.util.ArrayList;
 import java.util.Observable;
-import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 /**
  * Hero class to store health, mana, deck, and deck hand
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
 public class Hero extends Observable implements Attackable {
 
@@ -94,7 +93,6 @@ public class Hero extends Observable implements Attackable {
                 e.printStackTrace();
             }
         }
-        return;
     }
 
     /**
@@ -113,20 +111,6 @@ public class Hero extends Observable implements Attackable {
         battlefield.removeDead(battlefield.getAi());
         game.endGameCheck(battlefield);
         notifyUpdate();
-    }
-
-    /**
-     * Print out all creatures are not tapped
-     */
-    public void showPlayedCreatures() {
-        for (int i = 0; i < this.getPlayedCreatures().size(); i++) {
-            if (this.playedCreatures.get(i) != null && !this.getPlayedCreatures().get(i).isUsed()) {
-                System.out.println(i + ") " + this.getPlayedCreatures().get(i).getName() + ": Health = " +
-                        this.getPlayedCreatures().get(i).getHealth() + ": Attack = " +
-                        this.getPlayedCreatures().get(i).getAttack());
-
-            }
-        }
     }
 
     /**

@@ -4,7 +4,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import nl.rug.oop.cardgame.model.Battlefield;
 import nl.rug.oop.cardgame.model.hero.Hero;
-import nl.rug.oop.cardgame.view.frame.MagicStoneFrame;
 
 import java.util.ArrayList;
 

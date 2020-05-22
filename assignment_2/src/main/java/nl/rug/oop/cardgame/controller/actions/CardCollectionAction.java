@@ -10,7 +10,7 @@ import java.awt.event.ActionEvent;
  */
 public class CardCollectionAction extends AbstractAction {
 
-    MainMenu mainMenu;
+    final MainMenu mainMenu;
 
     /**
      * Create new Card Collection Action

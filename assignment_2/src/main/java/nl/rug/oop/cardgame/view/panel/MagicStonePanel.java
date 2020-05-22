@@ -24,7 +24,7 @@ import java.util.Observer;
 public class MagicStonePanel extends JPanel implements Observer {
 
     private final MagicStoneGame magicStoneGame;
-    private MagicStoneFrame frame;
+    private final MagicStoneFrame frame;
     private static final Color BACKGROUND_COLOR = new Color(0xa3, 0xa3, 0xa3);
 
     public MagicStonePanel(MagicStoneGame magicStoneGame, MagicStoneFrame frame) {
@@ -212,7 +212,6 @@ public class MagicStonePanel extends JPanel implements Observer {
         boolean attack = magicStoneGame.getBattlefield().isAttackPhase();
         Hero player = magicStoneGame.getBattlefield().getPlayer();
         g.setColor(Color.GREEN);
-        int xOffset = 200;
         for(int i = 0; i < 5; i++) {
             int[] coords = DefaultCoordinates.PLAYER_BATTLEFIELD[i];
             if(!attack) {

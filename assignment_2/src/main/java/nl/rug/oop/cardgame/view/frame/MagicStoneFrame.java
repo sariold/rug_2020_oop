@@ -14,6 +14,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * Frame window of the application
+ */
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class MagicStoneFrame extends JFrame {
@@ -28,6 +31,10 @@ public class MagicStoneFrame extends JFrame {
     private Image loadedLogo;
     private MainMenu mainMenu;
 
+    /**
+     * Creating game frame
+     * @param mainMenu main menu panel
+     */
     public MagicStoneFrame(MainMenu mainMenu) {
         super("Magic Stone");
         this.mainMenu = mainMenu;
@@ -52,7 +59,7 @@ public class MagicStoneFrame extends JFrame {
         tutorialPanel = new TutorialPanel(mainMenu, this);
         tutorialPanel.setLayout(null);
 
-        add(mainMenuPanel);
+        setContentPane(mainMenuPanel);
         setPreferredSize(new Dimension(1280, 720));
         gifLabel = new JLabel();
         pack();
@@ -61,6 +68,11 @@ public class MagicStoneFrame extends JFrame {
         setResizable(false);
     }
 
+    /**
+     * Play gif, keeping method in case we decide to use it again
+     * @param gifName gif name
+     * @param coords coordinates of card
+     */
     public void playGif(String gifName, int[] coords) {
         ImageIcon gif = new ImageIcon(this.getClass().getResource(File.separator + "textures"
                 + File.separator + gifName + ".gif"));
@@ -75,7 +87,6 @@ public class MagicStoneFrame extends JFrame {
             e.printStackTrace();
         }
         gifLabel.setIcon(null);
-        return;
     }
 
     /**
@@ -83,8 +94,7 @@ public class MagicStoneFrame extends JFrame {
      */
     public void changeToGamePanel() {
         System.out.println("CHANGED TO GAME PANEL!");
-        remove(mainMenuPanel);
-        add(gamePanel);
+        setContentPane(gamePanel);
         setPreferredSize(new Dimension(1280, 720));
         pack();
         setLocationRelativeTo(null);
@@ -93,10 +103,13 @@ public class MagicStoneFrame extends JFrame {
         repaint();
     }
 
+    /**
+     * Game is over
+     * @param win who won
+     */
     public void gameOver(boolean win) {
-        remove(gamePanel);
         this.gameOverPanel = new GameOverPanel(win, this);
-        add(this.gameOverPanel);
+        setContentPane(this.gameOverPanel);
         setPreferredSize(new Dimension(300, 200));
         pack();
         setLocationRelativeTo(null);
@@ -105,10 +118,11 @@ public class MagicStoneFrame extends JFrame {
         repaint();
     }
 
+    /**
+     * Change to main menu panel
+     */
     public void changeToMainMenuPanel() {
-        remove(cardCollectionPanel);
-        remove(tutorialPanel);
-        add(mainMenuPanel);
+        setContentPane(mainMenuPanel);
         setPreferredSize(new Dimension(1280, 720));
         pack();
         setLocationRelativeTo(null);
@@ -118,8 +132,7 @@ public class MagicStoneFrame extends JFrame {
     }
 
     public void changeToTutorialPanel() {
-        remove(mainMenuPanel);
-        add(tutorialPanel);
+        setContentPane(tutorialPanel);
         setPreferredSize(new Dimension(1280, 720));
         pack();
         setLocationRelativeTo(null);
@@ -128,9 +141,11 @@ public class MagicStoneFrame extends JFrame {
         repaint();
     }
 
+    /**
+     * Change to card collection panel
+     */
     public void changeToCardCollectionPanel() {
-        remove(mainMenuPanel);
-        add(cardCollectionPanel);
+        setContentPane(cardCollectionPanel);
         setPreferredSize(new Dimension(1280, 720));
         pack();
         setLocationRelativeTo(null);

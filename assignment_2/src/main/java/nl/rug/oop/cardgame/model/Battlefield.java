@@ -1,6 +1,7 @@
 package nl.rug.oop.cardgame.model;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import nl.rug.oop.cardgame.util.DefaultStats;
 import nl.rug.oop.cardgame.model.card.Card;
 import nl.rug.oop.cardgame.model.card.CreatureCard;
@@ -12,6 +13,7 @@ import java.util.*;
 /**
  * Battlefield Game board
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
 public class Battlefield extends Observable {
 
@@ -81,8 +83,7 @@ public class Battlefield extends Observable {
      * @param playerTurn True if it is the players turn
      */
     public void setPlayerTurn(boolean playerTurn) {
-        if(playerTurn) setPlayPhase(true);
-        else setPlayPhase(false);
+        setPlayPhase(playerTurn);
     }
 
     /**
@@ -98,7 +99,7 @@ public class Battlefield extends Observable {
 
     /**
      * Sets the selected card and notifies observers
-     * @param selected
+     * @param selected selected card
      */
     public void setSelectedCard(Card selected) {
         this.selectedCard = selected;
@@ -151,9 +152,9 @@ public class Battlefield extends Observable {
      * @return Spots occupied by both
      */
     private int enemySpotIHaveEmpty(ArrayList<Integer> mySpots, ArrayList<Integer> enemySpots) {
-        for(int i = 0; i < mySpots.size(); i++) {
-            for(int j = 0; j < enemySpots.size(); j++) {
-                if(mySpots.get(i) == enemySpots.get(j)) return mySpots.get(i);
+        for (Integer mySpot : mySpots) {
+            for (Integer enemySpot : enemySpots) {
+                if (mySpot.equals(enemySpot)) return mySpot;
             }
         }
         return -1;
@@ -179,7 +180,7 @@ public class Battlefield extends Observable {
      * @return Free Positions
      */
     public ArrayList<Integer> getFreePositions(Hero hero) {
-        ArrayList<Integer> freePositions = new ArrayList<Integer>();
+        ArrayList<Integer> freePositions = new ArrayList<>();
         for (int i = 0; i < DefaultStats.MAX_CREATURES_ON_BATTLEFIELD; i++) {
             if (hero.getPlayedCreatures().get(i) == null) freePositions.add(i);
         }

@@ -16,13 +16,13 @@ import java.util.ArrayList;
  */
 public class BattlefieldClicker extends MouseInputAdapter {
 
-    private MagicStoneGame magicStoneGame;
-    private MagicStonePanel magicStonePanel;
+    private final MagicStoneGame magicStoneGame;
+    private final MagicStonePanel magicStonePanel;
     private int x;
     private int y;
-    private Card card;
+    private final Card card;
     private ArrayList<Integer> freePos;
-    private boolean attackPhase;
+    private final boolean attackPhase;
     private MouseEvent event;
 
     /**
@@ -105,7 +105,7 @@ public class BattlefieldClicker extends MouseInputAdapter {
 
     /**
      * Place or attack with the creature that was at the position clicked on
-     * @param attack
+     * @param attack attack
      */
     private void attackOrPlace(boolean attack) {
         int pos = -1;
@@ -145,7 +145,7 @@ public class BattlefieldClicker extends MouseInputAdapter {
      * Returns the players creature at the specified position
      * @param magicStoneGame Game
      * @param pos Position
-     * @return
+     * @return CreatureCard
      */
     private CreatureCard getCard(MagicStoneGame magicStoneGame, int pos) {
         ArrayList<CreatureCard> played = magicStoneGame.getBattlefield().getPlayer().getPlayedCreatures();

@@ -6,10 +6,8 @@ import nl.rug.oop.cardgame.util.Targetting;
 import nl.rug.oop.cardgame.model.Battlefield;
 import nl.rug.oop.cardgame.model.hero.AIHero;
 import nl.rug.oop.cardgame.model.hero.Hero;
-import nl.rug.oop.cardgame.view.frame.MagicStoneFrame;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 /**
  * Spell that copies a creature and places it on the battlefield
@@ -33,7 +31,7 @@ public class CopySpell extends SpellCard implements Targetting {
      * @param battlefield Battlefield
      * @param hero Hero who played the card
      * @param pos Position of copied creature
-     * @return Sucess of playing
+     * @return Success of playing
      */
     @Override
     public boolean play(Battlefield battlefield, int hero, int pos) {

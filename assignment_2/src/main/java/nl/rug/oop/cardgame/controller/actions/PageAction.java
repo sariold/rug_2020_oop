@@ -10,8 +10,8 @@ import java.awt.event.ActionEvent;
  */
 public class PageAction extends AbstractAction {
 
-    MainMenu mainMenu;
-    int direction;
+    final MainMenu mainMenu;
+    final int direction;
 
     /**
      * Create new Page Action
@@ -27,7 +27,7 @@ public class PageAction extends AbstractAction {
 
     /**
      * Change the displayed Cards in the Card collection in the given direction
-     * @param e
+     * @param e event
      */
     @Override
     public void actionPerformed(ActionEvent e) {

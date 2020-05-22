@@ -10,7 +10,7 @@ import java.awt.event.ActionEvent;
  */
 public class StartGameAction extends AbstractAction {
 
-    MainMenu mainMenu;
+    final MainMenu mainMenu;
 
     /**
      * Create new Start Game Action
@@ -23,7 +23,7 @@ public class StartGameAction extends AbstractAction {
 
     /**
      * Switch from Main Menu Panel to Game Panel
-     * @param e
+     * @param e e
      */
     @Override
     public void actionPerformed(ActionEvent e) {

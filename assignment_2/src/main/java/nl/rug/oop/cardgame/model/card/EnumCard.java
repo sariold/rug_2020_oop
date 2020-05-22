@@ -8,25 +8,25 @@ public enum EnumCard {
     /**
      * All creatures
      */
-    CREATURE_ZOMBIE(Type.CREATURE, Face.ZOMBIE, 1, 1, 1),
-    CREATURE_WOLF(Type.CREATURE, Face.WOLF, 2, 2, 2),
-    CREATURE_WEREWOLF(Type.CREATURE, Face.WEREWOLF, 3, 3, 3),
-    CREATURE_DRAGON(Type.CREATURE, Face.DRAGON, 4, 4, 4),
-    CREATURE_DEMON(Type.CREATURE, Face.DEMON, 5, 5, 5),
-    CREATURE_GUARD(Type.CREATURE, Face.GUARD, 4, 2, 3),
-    CREATURE_ARCHER(Type.CREATURE, Face.ARCHER, 1, 3, 2),
-    CREATURE_GARGOYLE(Type.CREATURE, Face.GARGOYLE, 3, 1, 2),
-    CREATURE_TORTOISE(Type.CREATURE, Face.TORTOISE, 5, 3, 4),
+    CREATURE_ZOMBIE(Face.ZOMBIE, 1, 1, 1),
+    CREATURE_WOLF(Face.WOLF, 2, 2, 2),
+    CREATURE_WEREWOLF(Face.WEREWOLF, 3, 3, 3),
+    CREATURE_DRAGON(Face.DRAGON, 4, 4, 4),
+    CREATURE_DEMON(Face.DEMON, 5, 5, 5),
+    CREATURE_GUARD(Face.GUARD, 4, 2, 3),
+    CREATURE_ARCHER(Face.ARCHER, 1, 3, 2),
+    CREATURE_GARGOYLE(Face.GARGOYLE, 3, 1, 2),
+    CREATURE_TORTOISE(Face.TORTOISE, 5, 3, 4),
 
     /**
      * All spells
      */
-    SPELL_INSTANTDRAW(Type.SPELL, Face.INSTANTDRAW, 4, 2),
-    SPELL_INSTANTHEALTH(Type.SPELL, Face.INSTANTHEALTH, 3, 3),
-    SPELL_INSTANTDAMAGE(Type.SPELL, Face.INSTANTDAMAGE, 5, 3),
-    SPELL_COPYPASTE(Type.SPELL, Face.COPYPASTE, 4, 1),
-    SPELL_HELLFIRE(Type.SPELL, Face.HELLFIRE, 4, 2),
-    SPELL_DAMAGEBUFF(Type.SPELL, Face.DAMAGEBUFF, 3, 2);
+    SPELL_INSTANTDRAW(Face.INSTANTDRAW, 4, 2),
+    SPELL_INSTANTHEALTH(Face.INSTANTHEALTH, 3, 3),
+    SPELL_INSTANTDAMAGE(Face.INSTANTDAMAGE, 5, 3),
+    SPELL_COPYPASTE(Face.COPYPASTE, 4, 1),
+    SPELL_HELLFIRE(Face.HELLFIRE, 4, 2),
+    SPELL_DAMAGEBUFF(Face.DAMAGEBUFF, 3, 2);
 
     private final Type type;
     private final Face face;
@@ -38,14 +38,13 @@ public enum EnumCard {
 
     /**
      * Create new Enum Card for Creatures
-     * @param type Type
      * @param face Face
      * @param health Health
      * @param attack Attack
      * @param cost Cost
      */
-    EnumCard(Type type, Face face, int health, int attack, int cost) {
-        this.type = type;
+    EnumCard(Face face, int health, int attack, int cost) {
+        this.type = Type.CREATURE;
         this.face = face;
         this.health = health;
         this.attack = attack;
@@ -55,13 +54,12 @@ public enum EnumCard {
 
     /**
      * Create new Enum Card for Spells
-     * @param type Type
      * @param face Face
      * @param cost Cost
      * @param value Value
      */
-    EnumCard(Type type, Face face, int cost, int value) {
-        this.type = type;
+    EnumCard(Face face, int cost, int value) {
+        this.type = Type.SPELL;
         this.face = face;
         this.cost = cost;
         this.value = value;

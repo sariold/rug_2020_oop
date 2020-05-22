@@ -20,7 +20,7 @@ public class DamageBuffSpell extends SpellCard {
      * Increase the Heros attack until the next turn
      * @param battlefield Battlefield
      * @param heroIndex Hero
-     * @param pos Postion
+     * @param pos Position
      * @return Success of spell
      */
     @Override

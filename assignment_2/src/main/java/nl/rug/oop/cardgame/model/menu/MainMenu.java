@@ -1,6 +1,7 @@
 package nl.rug.oop.cardgame.model.menu;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import nl.rug.oop.cardgame.model.MagicStoneGame;
 import nl.rug.oop.cardgame.model.deck.CollectionDeck;
 
@@ -9,6 +10,7 @@ import java.util.Observable;
 /**
  * Main Menu from into which the game launches
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
 public class MainMenu extends Observable {
 

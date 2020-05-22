@@ -14,11 +14,11 @@ import java.awt.event.MouseEvent;
  */
 public class DiscardClicker extends MouseInputAdapter {
 
-    private MagicStoneGame magicStoneGame;
-    private MagicStonePanel magicStonePanel;
+    private final MagicStoneGame magicStoneGame;
+    private final MagicStonePanel magicStonePanel;
     private int x;
     private int y;
-    private int key;
+    private final int key;
 
     /**
      * Create a new Discard Clicker

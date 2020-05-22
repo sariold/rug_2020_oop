@@ -14,12 +14,12 @@ import java.util.ArrayList;
  */
 public class CopyClicker extends MouseInputAdapter {
 
-    private MagicStoneGame magicStoneGame;
-    private MagicStonePanel magicStonePanel;
+    private final MagicStoneGame magicStoneGame;
+    private final MagicStonePanel magicStonePanel;
     private int x;
     private int y;
-    private Card card;
-    private ArrayList<Integer> freePos;
+    private final Card card;
+    private final ArrayList<Integer> freePos;
 
     /**
      * Create a new Copy Clicker

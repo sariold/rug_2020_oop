@@ -2,36 +2,39 @@ package nl.rug.oop.cardgame.view.panel;
 
 import nl.rug.oop.cardgame.controller.button.MainMenuButton;
 import nl.rug.oop.cardgame.controller.button.PageButton;
-import nl.rug.oop.cardgame.model.card.Card;
 import nl.rug.oop.cardgame.model.card.EnumCard;
 import nl.rug.oop.cardgame.model.deck.CollectionDeck;
 import nl.rug.oop.cardgame.model.menu.MainMenu;
 import nl.rug.oop.cardgame.util.CardDescriptions;
 import nl.rug.oop.cardgame.view.frame.MagicStoneFrame;
-import nl.rug.oop.cardgame.view.textures.CardTextures;
 import nl.rug.oop.cardgame.view.textures.CollectionTextures;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.io.File;
-import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
 
+/**
+ * Card collection panel
+ */
 public class CardCollectionPanel extends JPanel implements Observer {
 
-    private MainMenu mainMenu;
-    private MagicStoneFrame frame;
-    private JTextArea textField1;
-    private JTextArea textField2;
-    private JTextArea textField3;
-    private JTextArea textField4;
-    private JLabel label1;
-    private JLabel label2;
-    private JLabel label3;
-    private JLabel label4;
+    private final MainMenu mainMenu;
+    private final MagicStoneFrame frame;
+    private final JTextArea textField1;
+    private final JTextArea textField2;
+    private final JTextArea textField3;
+    private final JTextArea textField4;
+    private final JLabel label1;
+    private final JLabel label2;
+    private final JLabel label3;
+    private final JLabel label4;
 
+    /**
+     * Card collection panel constructor
+     * @param mainMenu main menu
+     * @param frame frame
+     */
     public CardCollectionPanel(MainMenu mainMenu, MagicStoneFrame frame) {
         this.frame = frame;
         this.mainMenu = mainMenu;
@@ -79,6 +82,10 @@ public class CardCollectionPanel extends JPanel implements Observer {
         this.setLayout(null);
     }
 
+    /**
+     * Painting components
+     * @param g graphics
+     */
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -86,12 +93,15 @@ public class CardCollectionPanel extends JPanel implements Observer {
         paintCurrentCard(g);
     }
 
+    /**
+     * Paint current card on collection panel
+     * @param g graphics
+     */
     private void paintCurrentCard(Graphics g) {
         CollectionDeck deck = mainMenu.getCollectionDeck();
         int count = 0;
         for (int i = deck.getStartingCard(); i < deck.getDeckList().size() && i < deck.getStartingCard()+4; i++) {
             EnumCard card = deck.getDeckList().get(i).getEnumCard();
-//            System.out.println(card + "  " + i);
             switch (count) {
                 case 0:
                     textField1.setText(CardDescriptions.CARDS[i]);
@@ -115,6 +125,11 @@ public class CardCollectionPanel extends JPanel implements Observer {
     }
 
 
+    /**
+     * Observer update function
+     * @param o observerable
+     * @param arg arguments
+     */
     @Override
     public void update(Observable o, Object arg) {
         repaint();

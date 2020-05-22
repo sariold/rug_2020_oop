@@ -50,7 +50,7 @@ public class DeckHand {
 
     /**
      * Removes a card from player's deck hand
-     * @param discardDeck
+     * @param discardDeck discard deck
      */
     public void discardCard(DiscardDeck discardDeck, int key) {
         if (this.deckHand.size() > 0) {

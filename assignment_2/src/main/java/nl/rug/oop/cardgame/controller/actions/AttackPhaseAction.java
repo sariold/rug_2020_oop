@@ -11,8 +11,8 @@ import java.awt.event.ActionEvent;
  */
 public class AttackPhaseAction extends AbstractAction {
 
-    private MagicStoneGame magicStoneGame;
-    private CardClicker clicker;
+    private final MagicStoneGame magicStoneGame;
+    private final CardClicker clicker;
 
     /**
      * Creates a new Attack phase action

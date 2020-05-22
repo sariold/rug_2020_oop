@@ -14,8 +14,8 @@ import java.util.ArrayList;
  */
 public class CardClicker extends MouseInputAdapter {
 
-    private MagicStoneGame magicStoneGame;
-    private MagicStonePanel magicStonePanel;
+    private final MagicStoneGame magicStoneGame;
+    private final MagicStonePanel magicStonePanel;
     private Card card = null;
 
     private boolean selected;
@@ -37,7 +37,7 @@ public class CardClicker extends MouseInputAdapter {
     /**
      * Checks if the selected position contains a card
      * @param i Position to check for a creature
-     * @return
+     * @return selected card
      */
     private int selectCheck(int i) {
         int pos = -1;

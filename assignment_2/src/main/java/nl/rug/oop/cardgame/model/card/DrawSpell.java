@@ -24,7 +24,7 @@ public class DrawSpell extends SpellCard {
      * Draw two cards
      * @param battlefield Battlefield
      * @param hero Hero
-     * @param pos Postion
+     * @param pos Position
      * @return Success of spell
      */
     @Override

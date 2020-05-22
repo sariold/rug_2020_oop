@@ -10,7 +10,7 @@ import java.awt.event.ActionEvent;
  */
 public class EndTurnAction extends AbstractAction {
 
-    private MagicStoneGame magicStoneGame;
+    private final MagicStoneGame magicStoneGame;
 
     /**
      * Create new End Turn Action

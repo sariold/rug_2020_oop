@@ -3,7 +3,6 @@ package nl.rug.oop.cardgame.view.panel;
 import nl.rug.oop.cardgame.controller.button.CardCollectionButton;
 import nl.rug.oop.cardgame.controller.button.StartGameButton;
 import nl.rug.oop.cardgame.controller.button.TutorialButton;
-import nl.rug.oop.cardgame.model.MagicStoneGame;
 import nl.rug.oop.cardgame.model.menu.MainMenu;
 import nl.rug.oop.cardgame.view.frame.MagicStoneFrame;
 
@@ -13,15 +12,22 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
 import java.util.Observable;
 import java.util.Observer;
 
+/**
+ * Main menu panel
+ */
 public class MainMenuPanel extends JPanel implements Observer {
 
-    MagicStoneFrame frame;
-    MainMenu mainMenu;
+    final MagicStoneFrame frame;
+    final MainMenu mainMenu;
 
+    /**
+     * Main menu constructor
+     * @param mainMenu main menu class
+     * @param frame frame
+     */
     public MainMenuPanel(MainMenu mainMenu, MagicStoneFrame frame) {
         setBackground(Color.GRAY);
         this.frame = frame;
@@ -46,12 +52,15 @@ public class MainMenuPanel extends JPanel implements Observer {
         this.setLayout(null);
     }
 
+    /**
+     * Paint components
+     * @param g graphics
+     */
     @Override
     public void paintComponent(Graphics g){
         super.paintComponent(g);
         if (mainMenu.isInGame()) {
             frame.changeToGamePanel();
-//            mainMenu.deleteObserver(this);
         }
         if (mainMenu.isInCollection()) {
             frame.changeToCardCollectionPanel();
@@ -62,6 +71,10 @@ public class MainMenuPanel extends JPanel implements Observer {
         paintLogo(g);
     }
 
+    /**
+     * Paint logo for windows users
+     * @param g graphics
+     */
     private void paintLogo(Graphics g) {
         Font logoFont;
         Image logo = null;
@@ -85,6 +98,11 @@ public class MainMenuPanel extends JPanel implements Observer {
         g.drawString("MAGIC STONE", 300, 80);
     }
 
+    /**
+     * Update function
+     * @param o observable
+     * @param arg arguments
+     */
     @Override
     public void update(Observable o, Object arg) {
         repaint();

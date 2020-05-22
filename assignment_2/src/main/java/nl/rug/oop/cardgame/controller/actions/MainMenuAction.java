@@ -10,7 +10,7 @@ import java.awt.event.ActionEvent;
  */
 public class MainMenuAction extends AbstractAction {
 
-    MainMenu mainMenu;
+    final MainMenu mainMenu;
 
     /**
      * Create new Main Menu Action

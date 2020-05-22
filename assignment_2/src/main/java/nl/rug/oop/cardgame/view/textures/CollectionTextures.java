@@ -8,6 +8,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.EnumMap;
 
+/**
+ * Collection of textures
+ */
 public class CollectionTextures {
 
     private static final EnumMap<EnumCard, Image> textures;
@@ -20,12 +23,11 @@ public class CollectionTextures {
     static {
         textures = new EnumMap<>(EnumCard.class);
         for (EnumCard card : EnumCard.values()) {
-            Image texture = null;
+            Image texture;
             try {
                 Image loaded = ImageIO.read(CardTextures.class.getResource(File.separator + "textures" + File.separator
                         + card + ".png"));
-                Image renderedImage = loaded.getScaledInstance(300, 418, Image.SCALE_SMOOTH);
-                texture = renderedImage;
+                texture = loaded.getScaledInstance(300, 418, Image.SCALE_SMOOTH);
                 textures.put(card, texture);
             } catch (IOException ioe) {
                 System.err.println("Could not load!");
@@ -37,6 +39,7 @@ public class CollectionTextures {
      * Find a texture for a card.
      *
      * @param card The cart in question.
+     * return image
      */
     public static Image getTexture(EnumCard card) {
         return textures.get(card);

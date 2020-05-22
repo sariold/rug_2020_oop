@@ -5,8 +5,6 @@ import nl.rug.oop.cardgame.model.MagicStoneGame;
 import nl.rug.oop.cardgame.model.card.Card;
 import nl.rug.oop.cardgame.model.card.CreatureCard;
 import nl.rug.oop.cardgame.model.card.EnumCard;
-import nl.rug.oop.cardgame.view.frame.MagicStoneFrame;
-import nl.rug.oop.cardgame.view.panel.MagicStonePanel;
 
 import java.util.ArrayList;
 import java.util.Collections;

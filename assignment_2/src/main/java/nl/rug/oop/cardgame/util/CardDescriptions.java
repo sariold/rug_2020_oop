@@ -1,10 +1,14 @@
 package nl.rug.oop.cardgame.util;
 
-
+/**
+ * Card descriptions
+ */
 public class CardDescriptions {
 
-
-    public static String[] CARDS ={
+    /**
+     * String arraylist of card descriptions and their other data for printing in card collection screen
+     */
+    public static final String[] CARDS ={
             "Creature: Chomps\n\n" +
             "Attack:1 Health:1\n\n" +
             "This creature is scary but dies pretty easily!\n\n" +
@@ -20,7 +24,7 @@ public class CardDescriptions {
             "A wolf is never alone, look for red lights in\n    the shadows!\n\n" +
             "To play: Click this creature in your hand and\n    then click a free spot on your battlefield.\n\n" +
             "To attack: Click on the attack button\n    then click on this creature."
-            ,"Creature: Drogon\n\n" +
+            ,"Creature: Dorgon\n\n" +
             "Attack:4 Health:4\n\n" +
             "This mighty creature has been around since\n    the beginning of time!\n\n" +
             "To play: Click this creature in your hand and\n    then click a free spot on your battlefield.\n\n" +
@@ -56,23 +60,23 @@ public class CardDescriptions {
             "Restrictions: Can only be played if you control\n    a creature."
             ,"Spell: Hand of Zeus\n\n" +
             "Effect: Deal 3 damage to the enemy hero.\n\n" +
-            "To play: Click this spell in your hand and then\n    click on the enemy hero.\n\n" +
+            "To play: Click this spell in your hand and then\n    click on the enemy hero arc.\n\n" +
             "Restrictions: none."
             ,"Spell: Draw two\n\n" +
             "Effect: Draw 2 cards from your deck.\n\n" +
-            "To play: Click this spell in your hand and then\n    click on your own hero.\n\n" +
+            "To play: Click this spell in your hand and then\n    click on your own hero arc.\n\n" +
             "Restrictions: Any cards over drawn will\n    be discarded."
             ,"Spell: Pain Killers\n\n" +
             "Effect: Heal your hero for 3 health.\n\n" +
-            "To play: Click this spell in your hand and then\n    click on your own hero.\n\n" +
+            "To play: Click this spell in your hand and then\n    click on your own hero arc.\n\n" +
             "Restrictions: none."
             ,"Spell: Hellfire\n\n" +
             "Effect: Deal 2 damage to all enemy creatures.\n\n" +
-            "To play: Click this spell in your hand and then\n    click on the enemy hero.\n\n" +
+            "To play: Click this spell in your hand and then\n    click on the enemy hero arc.\n\n" +
             "Restrictions: none."
             ,"Spell: Thirst for Blood\n\n" +
             "Effect: Give your hero +2 attack until the start\n    of your next turn.\n\n" +
-            "To play: Click this spell in your hand and then\n    click on your own hero.\n\n" +
+            "To play: Click this spell in your hand and then\n    click on your own hero arc.\n\n" +
             "Restrictions: none."
     };
 }

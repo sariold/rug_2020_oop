@@ -5,7 +5,6 @@ import lombok.EqualsAndHashCode;
 import nl.rug.oop.cardgame.util.Attackable;
 import nl.rug.oop.cardgame.model.Battlefield;
 import nl.rug.oop.cardgame.model.hero.Hero;
-import nl.rug.oop.cardgame.view.frame.MagicStoneFrame;
 
 /**
  * A type of card that summons a creature when played
@@ -84,7 +83,7 @@ public class CreatureCard extends Card implements Attackable {
      * Play a card
      * @param battlefield Battlefield
      * @param heroIndex   Hero that played the card 0 for player, 1 for AI
-     * @return
+     * @return boolean if card was played
      */
     @Override
     public boolean play(Battlefield battlefield, int heroIndex, int pos) {
