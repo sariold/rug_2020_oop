@@ -39,6 +39,7 @@ public class GraphModel extends Observable {
      */
     public void addEdge(Edge edge) {
         this.edges.add(edge);
+        notifyUpdate();
     }
 
     /**
@@ -47,6 +48,16 @@ public class GraphModel extends Observable {
      */
     public void removeEdgeAtIndex(int edge) {
         this.edges.remove(edge);
+        notifyUpdate();
+    }
+
+    /**
+     * Remove an edge from the graph
+     * @param edge Edge
+     */
+    public void removeEdge(Edge edge) {
+        this.edges.remove(edge);
+        notifyUpdate();
     }
 
     /**
@@ -55,6 +66,7 @@ public class GraphModel extends Observable {
      */
     public void addNode(Node node) {
         this.nodes.add(node);
+        notifyUpdate();
     }
 
     /**
@@ -70,6 +82,30 @@ public class GraphModel extends Observable {
             }
         }
         this.nodes.remove(node);
+        notifyUpdate();
+    }
+
+    /**
+     * Remove a Node and all edges connecting the node from the graph
+     * @param node Node
+     */
+    public void removeNode(Node node) {
+        for (int i = this.edges.size() - 1; i >= 0; i--) {
+            Edge e = this.edges.get(i);
+            if (e.connects(node)) {
+                removeEdgeAtIndex(i);
+            }
+        }
+        this.nodes.remove(node);
+        notifyUpdate();
+    }
+
+    /**
+     * Notify observers of a change in this object
+     */
+    public void notifyUpdate() {
+        setChanged();
+        notifyObservers();
     }
 
 }

@@ -27,10 +27,18 @@ public class Node {
     }
 
     /**
+     * Create a node with given name and standard size and location
+     * @param name Name
+     */
+    public Node(String name) {
+        this(name,  new int[]{10,10}, new int[]{0,0});
+    }
+
+    /**
      * Create a new node with standard name, size and location.
      */
     public Node() {
-        this("Name",  new int[]{10,10}, new int[]{0,0});
+        this("Name");
     }
 
     /**
@@ -58,5 +66,15 @@ public class Node {
     @Override
     public int hashCode() {
         return Objects.hash(name, size, location);
+    }
+
+    /**
+     * Return this Node as a String.
+     * @return string representing this node.
+     */
+    @Override
+    public String toString() {
+        return ("Name:" + this.name + "; Size:" + this.size[0] + ", " + this.size[1] +
+                "; Location:" + this.location[0] + ", " + this.location[1]);
     }
 }

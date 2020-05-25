@@ -56,4 +56,13 @@ public class Edge {
     public int hashCode() {
         return Objects.hash(start, end);
     }
+
+    /**
+     * Return this Edge as a String.
+     * @return string representing this edge.
+     */
+    @Override
+    public String toString() {
+        return ("Starting:" + this.start.getName() + "; End:" + this.end.getName());
+    }
 }
