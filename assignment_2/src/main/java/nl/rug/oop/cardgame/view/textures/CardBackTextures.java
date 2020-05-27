@@ -4,7 +4,6 @@ import lombok.Data;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.EnumMap;
@@ -27,8 +26,7 @@ public class CardBackTextures {
             try {
                 Image loaded = ImageIO.read(CardTextures.class.getResource(File.separator + "textures" + File.separator
                         + back + ".png"));
-                Image renderedImage = loaded.getScaledInstance(100, 150, Image.SCALE_SMOOTH);
-                texture = renderedImage;
+                texture = loaded.getScaledInstance(100, 150, Image.SCALE_SMOOTH);
             } catch (IOException ioe) {
                 System.err.println("Could not load!");
             }

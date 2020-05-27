@@ -4,10 +4,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import nl.rug.oop.cardgame.model.Battlefield;
 import nl.rug.oop.cardgame.model.hero.Hero;
-import nl.rug.oop.cardgame.view.MagicStoneFrame;
-import nl.rug.oop.cardgame.view.MagicStonePanel;
 
-import java.awt.*;
+import java.util.ArrayList;
 
 /**
  * Spell card
@@ -18,27 +16,37 @@ public abstract class SpellCard extends Card {
 
     /**
      * Creates a new spell card
-     *
      * @param enumCard Enum Card
      */
     public SpellCard(EnumCard enumCard) {
         super(enumCard);
     }
 
+    /**
+     * Play a spell
+     * @param battlefield Battlefield
+     * @param heroIndex Hero
+     * @param pos Position
+     * @return Success of spell
+     */
     @Override
-    public boolean play(Battlefield battlefield, int heroIndex, int pos, MagicStoneFrame frame) {
+    public boolean play(Battlefield battlefield, int heroIndex, int pos) {
         Hero hero = (heroIndex == 0 ? battlefield.getPlayer() : battlefield.getAi());
         hero.getDiscardDeck().discard(this);
         return true;
     }
 
-    @Override
-    public void display(Graphics g, MagicStonePanel panel) {
-        super.display(g, panel);
-        g.setColor(Color.BLACK);
-        String value = String.valueOf(this.getEnumCard().getValue());
-        g.drawString(value, this.cardImage.getCoordinates()[0] + 130 - g.getFontMetrics().stringWidth(value),
-                670);
+    /**
+     * Checks if the hero has creatures on the battlefield
+     * @param hero Hero
+     * @return True if at least one creature is on the battlefield
+     */
+    public boolean notEmptyBattlefield(Hero hero) {
+        ArrayList<CreatureCard> creatures = hero.getPlayedCreatures();
+        for (CreatureCard c : creatures) {
+            if (c != null) return true;
+        }
+        return false;
     }
 
 }

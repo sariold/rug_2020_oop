@@ -1,14 +1,15 @@
 package nl.rug.oop.cardgame.controller.button;
 
 import nl.rug.oop.cardgame.controller.actions.AttackPhaseAction;
-import nl.rug.oop.cardgame.controller.actions.CardClicker;
+import nl.rug.oop.cardgame.controller.clicker.CardClicker;
 import nl.rug.oop.cardgame.model.MagicStoneGame;
-import nl.rug.oop.cardgame.view.MagicStoneFrame;
-import nl.rug.oop.cardgame.view.MagicStonePanel;
 
 import javax.swing.*;
 import java.awt.event.KeyEvent;
 
+/**
+ * Button to engage attack phase
+ */
 public class AttackPhaseButton extends JButton {
 
     /**
@@ -20,8 +21,13 @@ public class AttackPhaseButton extends JButton {
         setMnemonic(KeyEvent.VK_S);
     }
 
-    public AttackPhaseButton(MagicStoneGame magicStoneGame, MagicStoneFrame frame, MagicStonePanel panel, CardClicker clicker) {
-        super(new AttackPhaseAction(magicStoneGame, frame, panel, clicker));
+    /**
+     * Create new attack phase button
+     * @param magicStoneGame Game
+     * @param clicker Card Clicker
+     */
+    public AttackPhaseButton(MagicStoneGame magicStoneGame, CardClicker clicker) {
+        super(new AttackPhaseAction(magicStoneGame, clicker));
         setButtonProperties();
     }
 

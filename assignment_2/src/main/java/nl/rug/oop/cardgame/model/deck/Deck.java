@@ -21,19 +21,30 @@ public class Deck {
         this.deckList = new ArrayList<>();
         deckList.add(new CreatureCard(EnumCard.CREATURE_ZOMBIE));
         deckList.add(new CreatureCard(EnumCard.CREATURE_ZOMBIE));
-        deckList.add(new CreatureCard(EnumCard.CREATURE_ZOMBIE));
 
-        deckList.add(new CreatureCard(EnumCard.CREATURE_WEREWOLF));
         deckList.add(new CreatureCard(EnumCard.CREATURE_WEREWOLF));
         deckList.add(new CreatureCard(EnumCard.CREATURE_WEREWOLF));
 
         deckList.add(new CreatureCard(EnumCard.CREATURE_WOLF));
         deckList.add(new CreatureCard(EnumCard.CREATURE_WOLF));
-        deckList.add(new CreatureCard(EnumCard.CREATURE_WOLF));
 
         deckList.add(new CreatureCard(EnumCard.CREATURE_DRAGON));
         deckList.add(new CreatureCard(EnumCard.CREATURE_DRAGON));
-        deckList.add(new CreatureCard(EnumCard.CREATURE_DRAGON));
+
+        deckList.add(new CreatureCard(EnumCard.CREATURE_ARCHER));
+        deckList.add(new CreatureCard(EnumCard.CREATURE_ARCHER));
+
+        deckList.add(new CreatureCard(EnumCard.CREATURE_GUARD));
+        deckList.add(new CreatureCard(EnumCard.CREATURE_GUARD));
+
+        deckList.add(new CreatureCard(EnumCard.CREATURE_DEMON));
+        deckList.add(new CreatureCard(EnumCard.CREATURE_DEMON));
+
+        deckList.add(new CreatureCard(EnumCard.CREATURE_TORTOISE));
+        deckList.add(new CreatureCard(EnumCard.CREATURE_TORTOISE));
+
+        deckList.add(new CreatureCard(EnumCard.CREATURE_GARGOYLE));
+        deckList.add(new CreatureCard(EnumCard.CREATURE_GARGOYLE));
 
         deckList.add(new CopySpell(EnumCard.SPELL_COPYPASTE));
         deckList.add(new CopySpell(EnumCard.SPELL_COPYPASTE));
@@ -46,13 +57,18 @@ public class Deck {
 
         deckList.add(new HealthSpell(EnumCard.SPELL_INSTANTHEALTH));
         deckList.add(new HealthSpell(EnumCard.SPELL_INSTANTHEALTH));
+
+        deckList.add(new HellFireSpell(EnumCard.SPELL_HELLFIRE));
+        deckList.add(new HellFireSpell(EnumCard.SPELL_HELLFIRE));
+
+        deckList.add(new DamageBuffSpell(EnumCard.SPELL_DAMAGEBUFF));
+        deckList.add(new DamageBuffSpell(EnumCard.SPELL_DAMAGEBUFF));
 
         Collections.shuffle(deckList);
     }
 
     /**
      * Removes a card from the top of the deck and returns it
-     *
      * @return Card drawn
      */
     public Card drawCard() {

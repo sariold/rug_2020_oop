@@ -1,13 +1,18 @@
-package nl.rug.oop.cardgame.view;
+package nl.rug.oop.cardgame.view.panel;
 
-import nl.rug.oop.cardgame.DefaultCoordinates;
+import nl.rug.oop.cardgame.controller.clicker.CardClicker;
+import nl.rug.oop.cardgame.controller.button.AttackPhaseButton;
+import nl.rug.oop.cardgame.controller.button.EndTurnButton;
+import nl.rug.oop.cardgame.util.DefaultCoordinates;
 import nl.rug.oop.cardgame.model.Battlefield;
 import nl.rug.oop.cardgame.model.MagicStoneGame;
 import nl.rug.oop.cardgame.model.card.Card;
 import nl.rug.oop.cardgame.model.card.CreatureCard;
 import nl.rug.oop.cardgame.model.card.EnumCard;
+import nl.rug.oop.cardgame.model.card.SpellCard;
 import nl.rug.oop.cardgame.model.deck.DeckHand;
 import nl.rug.oop.cardgame.model.hero.Hero;
+import nl.rug.oop.cardgame.view.frame.MagicStoneFrame;
 import nl.rug.oop.cardgame.view.textures.*;
 
 import javax.swing.*;
@@ -19,11 +24,25 @@ import java.util.Observer;
 public class MagicStonePanel extends JPanel implements Observer {
 
     private final MagicStoneGame magicStoneGame;
+    private final MagicStoneFrame frame;
     private static final Color BACKGROUND_COLOR = new Color(0xa3, 0xa3, 0xa3);
 
-    public MagicStonePanel(MagicStoneGame magicStoneGame) {
+    public MagicStonePanel(MagicStoneGame magicStoneGame, MagicStoneFrame frame) {
+        this.frame = frame;
         this.magicStoneGame = magicStoneGame;
         magicStoneGame.addObserver(this);
+        magicStoneGame.getBattlefield().addObserver(this);
+        magicStoneGame.getBattlefield().getPlayer().addObserver(this);
+        magicStoneGame.getBattlefield().getAi().addObserver(this);
+
+        CardClicker clicker = new CardClicker(magicStoneGame, this);
+        EndTurnButton endTurnButton = new EndTurnButton(magicStoneGame);
+        endTurnButton.setBounds(590, 510, 100, 30);
+        AttackPhaseButton attackPhaseButton = new AttackPhaseButton(magicStoneGame, clicker);
+        attackPhaseButton.setBounds(590, 108, 100, 30);
+        this.add(attackPhaseButton);
+        this.add(endTurnButton);
+
         setBackground(BACKGROUND_COLOR);
         setVisible(true);
         setOpaque(true);
@@ -79,12 +98,19 @@ public class MagicStonePanel extends JPanel implements Observer {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
+        if (magicStoneGame.isLost()) frame.gameOver(false);
+        if (magicStoneGame.isWon()) frame.gameOver(true);
         paintAreas(g);
         paintHeros(g);
         paintDiscardPile(g);
         paintDeck(g);
         paintHand(g);
         paintBattlefield(g);
+        if(magicStoneGame.getBattlefield().isPlayerTurn() && ((magicStoneGame.getBattlefield().getSelectedCard() != null
+        && magicStoneGame.getBattlefield().getSelectedCard() instanceof CreatureCard) || magicStoneGame.getBattlefield().isAttackPhase())) {
+            paintPositions(g);
+        }
+        paintSelected(g);
     }
 
     /**
@@ -99,12 +125,12 @@ public class MagicStonePanel extends JPanel implements Observer {
         if (playerDiscardPile.size() > 0) {
             card = playerDiscardPile.get(playerDiscardPile.size()-1);
             card.getCardImage().setCoordinates(DefaultCoordinates.PLAYER_DISCARD_PILE);
-            card.display(g, this);
+            renderCard(card, g);
         }
         if (aiDiscardPile.size() > 0) {
             card = aiDiscardPile.get(aiDiscardPile.size()-1);
             card.getCardImage().setCoordinates(DefaultCoordinates.AI_DISCARD_PILE);
-            card.display(g, this);
+            renderCard(card, g);
         }
     }
 
@@ -167,7 +193,7 @@ public class MagicStonePanel extends JPanel implements Observer {
                 continue;
             }
             c.getCardImage().setCoordinates(DefaultCoordinates.PLAYER_BATTLEFIELD[i]);
-            c.display(g, this);
+            renderCard(c, g);
             i++;
         }
         i = 0;
@@ -177,44 +203,42 @@ public class MagicStonePanel extends JPanel implements Observer {
                 continue;
             }
             c.getCardImage().setCoordinates(DefaultCoordinates.AI_BATTLEFIELD[i]);
-            c.display(g, this);
+            renderCard(c, g);
             i++;
         }
     }
 
-    public void paintPositions(Graphics g, Color color, boolean attack) {
+    public void paintPositions(Graphics g) {
+        boolean attack = magicStoneGame.getBattlefield().isAttackPhase();
         Hero player = magicStoneGame.getBattlefield().getPlayer();
-        g.setColor(color);
-        int xOffset = 200;
+        g.setColor(Color.GREEN);
         for(int i = 0; i < 5; i++) {
+            int[] coords = DefaultCoordinates.PLAYER_BATTLEFIELD[i];
             if(!attack) {
-                if(player.getPlayedCreatures().get(i) == null) g.drawRect(140 + i * xOffset, 396, 90, 135);
+                if(player.getPlayedCreatures().get(i) == null) g.drawRect(coords[0], coords[1], coords[2], coords[3]);
             } else {
+                System.out.println("ATTACK RED");
+                g.setColor(Color.RED);
                 if (player.getPlayedCreatures().get(i) != null) {
                     if(!player.getPlayedCreatures().get(i).isUsed()) {
                         System.out.println(player.getPlayedCreatures().get(i).toString());
-                        g.drawRect(140 + i * xOffset, 396, 90, 135);
+                        g.drawRect(coords[0], coords[1], coords[2], coords[3]);
                     }
                 }
             }
         }
     }
 
-    public void paintSelected(Graphics g, int i, Color color) {
-        int xOffset = 150;
-        int x = 0;
-        g.setColor(color);
-            if (i < 3) {
-                x = 100 + i * xOffset;
-                g.drawRect(x, 530, 100, 150);
-            } else if (i < 6){
-                x = 780 + (i - 3) * xOffset;
-                g.drawRect(x, 530, 100, 150);
-            } else {
-                g.drawRect(10, 360, 100, 150); // Discard
-            }
-            g.setColor(Color.BLACK);
-            i++;
+    public void paintSelected(Graphics g) {
+        Card c = magicStoneGame.getBattlefield().getSelectedCard();
+        if (c != null) {
+            int[] coords = c.getCardImage().getCoordinates();
+            g.setColor(Color.BLUE);
+            g.drawRect(coords[0], coords[1], coords[2], coords[3]);
+            coords = DefaultCoordinates.PLAYER_DISCARD_PILE;
+            g.setColor(Color.RED);
+            g.drawRect(coords[0], coords[1], coords[2], coords[3]);
+        }
     }
 
     /**
@@ -232,7 +256,7 @@ public class MagicStonePanel extends JPanel implements Observer {
             c.getCardImage().setCoordinates(DefaultCoordinates.PLAYER_HAND[i]);
             Color color = (c.getCost() <= magicStoneGame.getBattlefield().getPlayer().getMana()?Color.GREEN:Color.RED);
             playerHand.getDeckHand().get(c.getCardNumber()).setHandPos(i);
-            c.display(g, this);
+            renderCard(c, g);
             if(magicStoneGame.getBattlefield().isAttackPhase()) color = Color.WHITE;
             g.setColor(color);
             g.drawRect(c.getCardImage().getCoordinates()[0], c.getCardImage().getCoordinates()[1],
@@ -274,6 +298,34 @@ public class MagicStonePanel extends JPanel implements Observer {
     @Override
     public void update(Observable observed, Object message) {
         repaint();
+    }
+
+    private void renderCard(Card c, Graphics g) {
+        int[] coords = c.getCardImage().getCoordinates();
+        g.drawImage(c.getCardImage().getImage(), coords[0],coords[1],coords[2],coords[3], this);
+        if (c.isDiscarded()) return;
+        if (c.getEnumCard().getType() == EnumCard.Type.CREATURE) {
+            CreatureCard creature = (CreatureCard)c;
+            if (creature.getBattlePosition() == -1) {
+                g.setColor(Color.BLACK);
+                String attackAndHealth = (creature.getAttack() + "/" + (creature.getHealth()));
+                g.drawString(attackAndHealth, coords[0] + 130 -
+                        g.getFontMetrics().stringWidth(attackAndHealth), 670);
+            } else if (creature.getBattlePosition() > -1){
+                g.setColor(Color.WHITE);
+                g.setFont(new Font("TimesRoman", Font.PLAIN, 20));
+                g.drawImage(StatTextures.getTexture(StatEnum.ATTACK), coords[0] + 103, coords[1] + 10, 50, 65, this);
+                g.drawString(Integer.toString(creature.getAttack()), coords[0] + 120, coords[1] + 55);
+                g.drawImage(StatTextures.getTexture(StatEnum.HEART), coords[0] + 104, coords[1] + 90, 45, 45, this);
+                g.drawString(Integer.toString(creature.getHealth()), coords[0] + 122, coords[1] + 115);
+            }
+        } else {
+            SpellCard spell = (SpellCard)c;
+            g.setColor(Color.BLACK);
+            String value = String.valueOf(spell.getEnumCard().getValue());
+            g.drawString(value, spell.getCardImage().getCoordinates()[0] + 130 - g.getFontMetrics().stringWidth(value),
+                    670);
+        }
     }
 
 }

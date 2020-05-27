@@ -4,26 +4,36 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import nl.rug.oop.cardgame.model.Battlefield;
 import nl.rug.oop.cardgame.model.hero.Hero;
-import nl.rug.oop.cardgame.view.MagicStoneFrame;
 
+/**
+ * Spell to change health
+ */
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class HealthSpell extends SpellCard {
 
-    private final String type;
-
+    /**
+     * Create new health spell
+     * @param enumCard Enum Card
+     */
     public HealthSpell(EnumCard enumCard) {
         super(enumCard);
-        this.type = enumCard.getFace().toString();
     }
 
+    /**
+     * Heal or damage a hero
+     * @param battlefield Battlefield
+     * @param hero Hero
+     * @param pos Position
+     * @return Success of spell
+     */
     @Override
-    public boolean play(Battlefield battlefield, int hero, int pos, MagicStoneFrame frame) {
+    public boolean play(Battlefield battlefield, int hero, int pos) {
         Hero player = battlefield.getPlayer();
         Hero ai = battlefield.getAi();
         Hero target;
-        String gif = "HEARTS";
-        boolean heal = this.type.equals("INSTANTHEALTH");
+        boolean heal = this.getEnumCard().getFace() == EnumCard.Face.INSTANTHEALTH;
+        System.out.println(heal);
         int dealValue = this.getEnumCard().getValue();
         if (!heal) dealValue *= -1;
         if (hero == 0) {
@@ -33,11 +43,9 @@ public class HealthSpell extends SpellCard {
             if (heal) target = ai;
             else target = player;
         }
-        if(heal) gif = "HEARTS";
-//        frame.playGif(gif);
-        target.setHeroHealth(target.getHealth() + dealValue);
-        return super.play(battlefield, hero, pos, frame);
+        target.setHealth(target.getHealth() + dealValue);
+        System.out.println(target.getName());
+        return super.play(battlefield, hero, pos);
     }
-
 
 }

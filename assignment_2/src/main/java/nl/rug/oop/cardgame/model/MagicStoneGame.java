@@ -2,65 +2,84 @@ package nl.rug.oop.cardgame.model;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import nl.rug.oop.cardgame.controller.button.EndTurnButton;
+import nl.rug.oop.cardgame.model.card.Card;
 import nl.rug.oop.cardgame.model.hero.Hero;
-import nl.rug.oop.cardgame.view.MagicStoneFrame;
 
 import java.util.Observable;
-import java.util.Observer;
 
+/**
+ * A game environment
+ */
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class MagicStoneGame extends Observable implements Observer {
+public class MagicStoneGame extends Observable {
 
     private Battlefield battlefield;
-    private MagicStoneFrame frame;
+    private boolean lost;
+    private boolean won;
 
+    /**
+     * Create a new game
+     */
     public MagicStoneGame() {
+        won = lost = false;
         this.battlefield = new Battlefield();
     }
 
     /**
      * Starts the actual turn based game
-     *
-     * @param battlefield Playing board
      */
-    public void startGame(Battlefield battlefield, MagicStoneFrame frame, EndTurnButton endTurnButton) {
-        turnRotation(battlefield, frame, endTurnButton);
+    public void startGame() {
+        turnRotation();
     }
 
     /**
      * Rotates the turns
-     *
-     * @param battlefield Playing board
      */
-    public void turnRotation(Battlefield battlefield, MagicStoneFrame frame, EndTurnButton endTurnButton) {
+    public void turnRotation() {
         Hero player = battlefield.getPlayer();
         Hero ai = battlefield.getAi();
         boolean start = true;
+        for (int i = 0; i < 2; i++) {
+            Card c = player.getDeck().drawCard();
+            player.getDeckHand().addCard(player.getDiscardDeck(), c);
+            c = ai.getDeck().drawCard();
+            ai.getDeckHand().addCard(ai.getDiscardDeck(), c);
+        }
         for (int i = 1; start; i++) {
-            frame.update(frame.getGraphics());
-            System.out.println();
-            System.out.println("It's turn number " + ((i + (i % 2)) / 2));
+            notifyUpdate();
             if (i % 2 == 1) {
+                battlefield.setDamageBuff(player, false, 0);
                 resetUsedCreatures(player);
-                frame.update(frame.getGraphics());
+                notifyUpdate();
                 battlefield.incMana(player);
                 player.setMana(player.getMaxMana());
-                frame.update(frame.getGraphics());
-                player.takeTurn(battlefield, frame, frame.getPanel(), this, endTurnButton);
-                frame.update(frame.getGraphics());
+                notifyUpdate();
+                player.takeTurn(battlefield, this);
+                notifyUpdate();
             } else {
+                battlefield.setDamageBuff(ai, false, 0);
                 resetUsedCreatures(ai);
                 battlefield.incMana(ai);
                 ai.setMana(ai.getMaxMana());
-                ai.takeTurn(battlefield, frame, frame.getPanel(), this, endTurnButton);
+                ai.takeTurn(battlefield, this);
                 battlefield.setPlayerTurn(true);
             }
             endGameCheck(battlefield);
         }
     }
 
+    /**
+     * notifies observers of change
+     */
+    private void notifyUpdate() {
+        setChanged();
+        notifyObservers();
+    }
+
+    /**
+     * End the players turn
+     */
     public void endPlayerTurn() {
        this.battlefield.setPlayerTurn(false);
     }
@@ -69,13 +88,12 @@ public class MagicStoneGame extends Observable implements Observer {
      * Checks whether either hero has died if so ends the game
      */
     public void endGameCheck(Battlefield battlefield) {
-        if (battlefield.getPlayer().getHealth() <= 0) frame.gameOver(false);
-        else if (battlefield.getAi().getHealth() <= 0) frame.gameOver(true);
+        if (battlefield.getPlayer().getHealth() <= 0) lost = true;
+        else if (battlefield.getAi().getHealth() <= 0) won = true;
     }
 
     /**
      * Resets the param used for each played creature
-     *
      * @param hero Hero
      */
     public void resetUsedCreatures(Hero hero) {
@@ -83,12 +101,6 @@ public class MagicStoneGame extends Observable implements Observer {
         for (int i = hero.getPlayedCreatures().size() - 1; i >= 0; i--) {
             if (hero.getPlayedCreatures().get(i) != null) hero.getPlayedCreatures().get(i).setUsed(false);
         }
-    }
-
-    @Override
-    public void update(Observable observable, Object message) {
-        setChanged();
-        notifyObservers();
     }
 
 }
