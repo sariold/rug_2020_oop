@@ -50,7 +50,8 @@ public class ConsoleController {
         System.out.println("3) Remove Node");
         System.out.println("4) Save to File");
         System.out.println("5) Load File");
-        System.out.println("6) End Program");
+        System.out.println("6) Print");
+        System.out.println("7) End Program");
     }
 
     /**
@@ -90,10 +91,13 @@ public class ConsoleController {
             case 5:
                 int load = jFileChooser.showOpenDialog(null);
                 if(load == JFileChooser.APPROVE_OPTION) {
-                    loadGraph.loadFile(jFileChooser.getSelectedFile().getAbsolutePath());
+                    graphModel = loadGraph.loadFile(jFileChooser.getSelectedFile().getAbsolutePath());
                 }
                 break;
             case 6:
+//                graphModel.notifyUpdate();
+                break;
+            case 7:
                 System.exit(0);
                 break;
         }
