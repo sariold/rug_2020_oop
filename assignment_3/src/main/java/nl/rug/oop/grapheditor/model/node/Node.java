@@ -11,19 +11,19 @@ import java.util.Objects;
 public class Node {
 
     private String name;
-    private int[] size;
-    private int[] location;
+    private NodeSize nodeSize;
+    private NodeCoords nodeCoords;
 
     /**
      * Create a new node with a name, size and location.
      * @param name Name
-     * @param size Size
-     * @param location Location
+     * @param nodeSize NodeSize
+     * @param nodeCoords NodeeCoords
      */
-    public Node(String name, int[] size, int[] location) {
+    public Node(String name, NodeSize nodeSize, NodeCoords nodeCoords) {
         this.name = name;
-        this.size = size;
-        this.location = location;
+        this.nodeSize = nodeSize;
+        this.nodeCoords = nodeCoords;
     }
 
     /**
@@ -31,7 +31,7 @@ public class Node {
      * @param name Name
      */
     public Node(String name) {
-        this(name,  new int[]{10,10}, new int[]{0,0});
+        this(name,  new NodeSize(10, 10), new NodeCoords(0, 0));
     }
 
     /**
@@ -52,10 +52,10 @@ public class Node {
         if (!(o instanceof Node)) return false;
         Node node = (Node) o;
         return (this.name.equals(node.getName()) &&
-                this.size[0] == node.getSize()[0] &&
-                this.size[1] == node.getSize()[1] &&
-                this.location[0] == node.getLocation()[0] &&
-                this.location[1] == node.getLocation()[1] );
+                this.nodeSize.getSizeX() == node.getNodeSize().getSizeX() &&
+                this.nodeSize.getSizeY() == node.getNodeSize().getSizeY() &&
+                this.nodeCoords.getCoordX() == node.getNodeCoords().getCoordX() &&
+                this.nodeCoords.getCoordY() == node.getNodeCoords().getCoordY() );
 
     }
 
@@ -65,7 +65,7 @@ public class Node {
      */
     @Override
     public int hashCode() {
-        return Objects.hash(name, size, location);
+        return Objects.hash(name, nodeSize, nodeCoords);
     }
 
     /**
@@ -74,7 +74,7 @@ public class Node {
      */
     @Override
     public String toString() {
-        return ("Name:" + this.name + "; Size:" + this.size[0] + ", " + this.size[1] +
-                "; Location:" + this.location[0] + ", " + this.location[1]);
+        return ("Name:" + this.name + "; Size:" + this.nodeSize.getSizeX() + ", " + this.nodeSize.getSizeY() +
+                "; Location:" + this.nodeCoords.getCoordX() + ", " + this.nodeCoords.getCoordY());
     }
 }

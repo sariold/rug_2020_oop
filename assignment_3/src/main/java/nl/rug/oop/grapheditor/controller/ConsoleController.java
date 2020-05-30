@@ -3,6 +3,8 @@ package nl.rug.oop.grapheditor.controller;
 import nl.rug.oop.grapheditor.model.GraphModel;
 import nl.rug.oop.grapheditor.model.edge.Edge;
 import nl.rug.oop.grapheditor.model.node.Node;
+import nl.rug.oop.grapheditor.model.node.NodeCoords;
+import nl.rug.oop.grapheditor.model.node.NodeSize;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -188,7 +190,7 @@ public class ConsoleController {
                 scanner.nextLine();
             }
         }
-        graphModel.addNode(new Node(name, new int[]{length, height}, new int[]{x,y}));
+        graphModel.addNode(new Node(name, new NodeSize(length, height), new NodeCoords(x, y)));
     }
 
     /**
