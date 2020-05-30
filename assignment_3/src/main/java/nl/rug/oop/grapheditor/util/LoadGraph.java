@@ -22,8 +22,8 @@ public class LoadGraph {
     /**
      * Load a graph from a file
      */
-    public LoadGraph() {
-        this.graphModel = new GraphModel();
+    public LoadGraph(GraphModel graphModel) {
+        this.graphModel = graphModel;
     }
 
     /**

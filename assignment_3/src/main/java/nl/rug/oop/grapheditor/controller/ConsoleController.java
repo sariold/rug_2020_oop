@@ -32,7 +32,7 @@ public class ConsoleController {
         this.graphModel = graphModel;
         this.scanner = new Scanner(System.in);
         this.saveGraph = new SaveGraph(this.graphModel);
-        this.loadGraph = new LoadGraph();
+        this.loadGraph = new LoadGraph(graphModel);
         this.jFileChooser = new JFileChooser();
         jFileChooser.setAcceptAllFileFilterUsed(false);
         FileNameExtensionFilter restrict = new FileNameExtensionFilter("Only .sff files", "sff");
@@ -95,7 +95,7 @@ public class ConsoleController {
                 }
                 break;
             case 6:
-//                graphModel.notifyUpdate();
+                graphModel.notifyUpdate();
                 break;
             case 7:
                 System.exit(0);
