@@ -13,6 +13,7 @@ public class Node {
     private String name;
     private NodeSize nodeSize;
     private NodeCoords nodeCoords;
+    private int nodeIndex;
 
     /**
      * Create a new node with a name, size and location.

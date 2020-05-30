@@ -66,6 +66,7 @@ public class GraphModel extends Observable {
      */
     public void addNode(Node node) {
         this.nodes.add(node);
+        node.setNodeIndex(nodes.size() -1);
         notifyUpdate();
     }
 

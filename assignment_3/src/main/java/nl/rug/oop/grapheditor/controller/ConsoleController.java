@@ -5,7 +5,10 @@ import nl.rug.oop.grapheditor.model.edge.Edge;
 import nl.rug.oop.grapheditor.model.node.Node;
 import nl.rug.oop.grapheditor.model.node.NodeCoords;
 import nl.rug.oop.grapheditor.model.node.NodeSize;
+import nl.rug.oop.grapheditor.util.SaveGraph;
 
+import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -16,6 +19,8 @@ public class ConsoleController {
 
     GraphModel graphModel;
     Scanner scanner;
+    SaveGraph saveGraph;
+    JFileChooser jFileChooser;
 
     /**
      * Create a new controller using the console as input
@@ -24,6 +29,11 @@ public class ConsoleController {
     public ConsoleController(GraphModel graphModel) {
         this.graphModel = graphModel;
         this.scanner = new Scanner(System.in);
+        this.saveGraph = new SaveGraph(this.graphModel);
+        this.jFileChooser = new JFileChooser();
+        jFileChooser.setAcceptAllFileFilterUsed(false);
+        FileNameExtensionFilter restrict = new FileNameExtensionFilter("Only .sff files", "sff");
+        jFileChooser.addChoosableFileFilter(restrict);
     }
 
     /**
@@ -35,7 +45,8 @@ public class ConsoleController {
         System.out.println("1) Remove Edge");
         System.out.println("2) Add Node");
         System.out.println("3) Remove Node");
-        System.out.println("4) End Program");
+        System.out.println("4) Save to File");
+        System.out.println("5) End Program");
     }
 
     /**
@@ -67,6 +78,13 @@ public class ConsoleController {
                 removeNode();
                 break;
             case 4:
+                int save = jFileChooser.showSaveDialog(null);
+                if(save == JFileChooser.APPROVE_OPTION) {
+                    saveGraph.saveFile(jFileChooser.getSelectedFile().getAbsolutePath());
+                }
+//                saveGraph.saveFile("test.graph");
+                break;
+            case 5:
                 System.exit(0);
                 break;
         }
