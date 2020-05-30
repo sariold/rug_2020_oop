@@ -5,6 +5,7 @@ import nl.rug.oop.grapheditor.model.edge.Edge;
 import nl.rug.oop.grapheditor.model.node.Node;
 import nl.rug.oop.grapheditor.model.node.NodeCoords;
 import nl.rug.oop.grapheditor.model.node.NodeSize;
+import nl.rug.oop.grapheditor.util.LoadGraph;
 import nl.rug.oop.grapheditor.util.SaveGraph;
 
 import javax.swing.*;
@@ -20,6 +21,7 @@ public class ConsoleController {
     GraphModel graphModel;
     Scanner scanner;
     SaveGraph saveGraph;
+    LoadGraph loadGraph;
     JFileChooser jFileChooser;
 
     /**
@@ -30,6 +32,7 @@ public class ConsoleController {
         this.graphModel = graphModel;
         this.scanner = new Scanner(System.in);
         this.saveGraph = new SaveGraph(this.graphModel);
+        this.loadGraph = new LoadGraph();
         this.jFileChooser = new JFileChooser();
         jFileChooser.setAcceptAllFileFilterUsed(false);
         FileNameExtensionFilter restrict = new FileNameExtensionFilter("Only .sff files", "sff");
@@ -46,7 +49,8 @@ public class ConsoleController {
         System.out.println("2) Add Node");
         System.out.println("3) Remove Node");
         System.out.println("4) Save to File");
-        System.out.println("5) End Program");
+        System.out.println("5) Load File");
+        System.out.println("6) End Program");
     }
 
     /**
@@ -82,9 +86,14 @@ public class ConsoleController {
                 if(save == JFileChooser.APPROVE_OPTION) {
                     saveGraph.saveFile(jFileChooser.getSelectedFile().getAbsolutePath());
                 }
-//                saveGraph.saveFile("test.graph");
                 break;
             case 5:
+                int load = jFileChooser.showOpenDialog(null);
+                if(load == JFileChooser.APPROVE_OPTION) {
+                    loadGraph.loadFile(jFileChooser.getSelectedFile().getAbsolutePath());
+                }
+                break;
+            case 6:
                 System.exit(0);
                 break;
         }
