@@ -31,6 +31,8 @@ public class LoadGraph {
      * @param fileName File Name
      */
     public GraphModel loadFile(String fileName) {
+        graphModel.getNodes().clear();
+        graphModel.getEdges().clear();
         try {
             fileReader(fileName);
         } catch (IOException e) {

@@ -4,6 +4,7 @@ import lombok.Data;
 import nl.rug.oop.grapheditor.model.edge.Edge;
 import nl.rug.oop.grapheditor.model.node.Node;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Observable;
 
@@ -24,6 +25,14 @@ public class GraphModel extends Observable {
     public GraphModel(ArrayList<Node> nodes, ArrayList<Edge> edges) {
         this.nodes = nodes;
         this.edges = edges;
+    }
+
+    /**
+     * Create new graph model from a file
+     * @param file File
+     */
+    public GraphModel(File file) {
+
     }
 
     /**
