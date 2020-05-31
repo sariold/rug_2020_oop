@@ -3,6 +3,7 @@ package nl.rug.oop.grapheditor.model;
 import lombok.Data;
 import nl.rug.oop.grapheditor.model.edge.Edge;
 import nl.rug.oop.grapheditor.model.node.Node;
+import nl.rug.oop.grapheditor.util.LoadGraph;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -29,10 +30,12 @@ public class GraphModel extends Observable {
 
     /**
      * Create new graph model from a file
-     * @param file File
+     * @param filePath File Path
      */
-    public GraphModel(File file) {
-
+    public GraphModel(String filePath) {
+        this(new ArrayList<Node>(), new ArrayList<Edge>());
+        LoadGraph loadGraph = new LoadGraph(this);
+        loadGraph.loadFile(filePath);
     }
 
     /**
