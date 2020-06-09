@@ -1,6 +1,6 @@
 package nl.rug.oop.grapheditor.view.panel;
 
-import com.sun.corba.se.impl.orbutil.graph.Graph;
+import nl.rug.oop.grapheditor.controller.buttons.ButtonBar;
 import nl.rug.oop.grapheditor.model.GraphModel;
 import nl.rug.oop.grapheditor.model.edge.Edge;
 import nl.rug.oop.grapheditor.model.node.Node;
@@ -15,9 +15,14 @@ import java.util.Observer;
 public class GraphPanel extends JPanel implements Observer {
 
     private GraphModel graphModel;
+    private ButtonBar buttonBar;
 
     public GraphPanel(GraphModel graphModel) {
+        super(new BorderLayout());
+        setBackground(Color.GRAY);
         this.graphModel = graphModel;
+        this.buttonBar = new ButtonBar();
+        this.add(buttonBar, BorderLayout.PAGE_START);
     }
 
     /**
