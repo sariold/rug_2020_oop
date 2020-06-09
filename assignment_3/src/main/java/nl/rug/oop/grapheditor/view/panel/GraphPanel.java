@@ -41,8 +41,10 @@ public class GraphPanel extends JPanel implements Observer {
         for (Node n : graphModel.getNodes()) {
             coords = n.getNodeCoords();
             size = n.getNodeSize();
+            g.setColor(Color.BLACK);
             g.fillRect(coords.getCoordX(), coords.getCoordY(), size.getSizeX(), size.getSizeY());
-            g.drawString(n.getName(), coords.getCoordX(), coords.getCoordY());
+            g.setColor(Color.WHITE);
+            g.drawString(n.getName(), coords.getCoordX(), coords.getCoordY() + g.getFontMetrics().getHeight());
         }
     }
 
@@ -52,11 +54,19 @@ public class GraphPanel extends JPanel implements Observer {
      */
     private void paintEdges(Graphics g) {
         NodeCoords startCoords;
+        NodeSize startOffset;
         NodeCoords endCoords;
+        NodeSize endOffset;
+        g.setColor(Color.BLACK);
         for (Edge e : graphModel.getEdges()) {
             startCoords = e.getStart().getNodeCoords();
             endCoords = e.getEnd().getNodeCoords();
-            g.drawLine(startCoords.getCoordX(), startCoords.getCoordY(), endCoords.getCoordX(), endCoords.getCoordY());
+            startOffset = e.getStart().getNodeSize();
+            endOffset = e.getEnd().getNodeSize();
+            g.drawLine(startCoords.getCoordX() + startOffset.getSizeX()/2,
+                    startCoords.getCoordY() + startOffset.getSizeY()/2,
+                    endCoords.getCoordX() + endOffset.getSizeX()/2,
+                    endCoords.getCoordY() + endOffset.getSizeY()/2);
         }
     }
 
