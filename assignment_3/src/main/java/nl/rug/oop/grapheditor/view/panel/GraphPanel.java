@@ -21,8 +21,8 @@ public class GraphPanel extends JPanel implements Observer {
         super(new BorderLayout());
         setBackground(Color.GRAY);
         this.graphModel = graphModel;
-        this.buttonBar = new ButtonBar();
-        this.add(buttonBar, BorderLayout.PAGE_START);
+//        this.buttonBar = new ButtonBar();
+//        this.add(buttonBar, BorderLayout.PAGE_START);
     }
 
     /**
