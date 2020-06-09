@@ -10,7 +10,6 @@ import java.util.Observer;
 
 public class MainFrame extends JFrame implements Observer {
 
-    GraphModel graphModel;
     GraphPanel graphPanel;
     JMenuBar jMenuBar;
     JMenu fileMenu, edgeMenu, nodeMenu;

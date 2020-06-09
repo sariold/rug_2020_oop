@@ -1,6 +1,5 @@
 package nl.rug.oop.grapheditor.view.panel;
 
-import nl.rug.oop.grapheditor.controller.buttons.ButtonBar;
 import nl.rug.oop.grapheditor.model.GraphModel;
 import nl.rug.oop.grapheditor.model.edge.Edge;
 import nl.rug.oop.grapheditor.model.node.Node;
@@ -15,14 +14,12 @@ import java.util.Observer;
 public class GraphPanel extends JPanel implements Observer {
 
     private GraphModel graphModel;
-    private ButtonBar buttonBar;
 
     public GraphPanel(GraphModel graphModel) {
         super(new BorderLayout());
         setBackground(Color.GRAY);
         this.graphModel = graphModel;
-//        this.buttonBar = new ButtonBar();
-//        this.add(buttonBar, BorderLayout.PAGE_START);
+        this.graphModel.addObserver(this);
     }
 
     /**
@@ -41,8 +38,10 @@ public class GraphPanel extends JPanel implements Observer {
      * @param g Graphics
      */
     private void paintNodes(Graphics g) {
+        System.out.println("graphing stuffs");
         NodeCoords coords;
         NodeSize size;
+        g.translate(getWidth()/2, getHeight()/2);
         for (Node n : graphModel.getNodes()) {
             coords = n.getNodeCoords();
             size = n.getNodeSize();
@@ -51,6 +50,7 @@ public class GraphPanel extends JPanel implements Observer {
             g.setColor(Color.WHITE);
             g.drawString(n.getName(), coords.getCoordX(), coords.getCoordY() + g.getFontMetrics().getHeight());
         }
+        g.translate(-getWidth()/2, -getHeight()/2);
     }
 
     /**
@@ -58,6 +58,7 @@ public class GraphPanel extends JPanel implements Observer {
      * @param g
      */
     private void paintEdges(Graphics g) {
+        g.translate(getWidth()/2, getHeight()/2);
         NodeCoords startCoords;
         NodeSize startOffset;
         NodeCoords endCoords;
@@ -73,6 +74,7 @@ public class GraphPanel extends JPanel implements Observer {
                     endCoords.getCoordX() + endOffset.getSizeX()/2,
                     endCoords.getCoordY() + endOffset.getSizeY()/2);
         }
+        g.translate(-getWidth()/2, -getHeight()/2);
     }
 
     /**
