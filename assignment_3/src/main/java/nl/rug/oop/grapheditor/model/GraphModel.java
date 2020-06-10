@@ -5,7 +5,6 @@ import nl.rug.oop.grapheditor.model.edge.Edge;
 import nl.rug.oop.grapheditor.model.node.Node;
 import nl.rug.oop.grapheditor.util.LoadGraph;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Observable;
 
@@ -97,6 +96,7 @@ public class GraphModel extends Observable {
             }
         }
         this.nodes.remove(node);
+        this.selected = null;
         notifyUpdate();
     }
 
@@ -112,6 +112,7 @@ public class GraphModel extends Observable {
             }
         }
         this.nodes.remove(node);
+        this.selected = null;
         notifyUpdate();
     }
 

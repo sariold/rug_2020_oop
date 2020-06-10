@@ -1,5 +1,6 @@
 package nl.rug.oop.grapheditor.view.panel;
 
+import nl.rug.oop.grapheditor.controller.clicker.SelectionController;
 import nl.rug.oop.grapheditor.model.GraphModel;
 import nl.rug.oop.grapheditor.model.edge.Edge;
 import nl.rug.oop.grapheditor.model.node.Node;
@@ -20,6 +21,7 @@ public class GraphPanel extends JPanel implements Observer {
         setBackground(Color.GRAY);
         this.graphModel = graphModel;
         this.graphModel.addObserver(this);
+        SelectionController selectNodeClicker = new SelectionController(graphModel, this);
     }
 
     /**
@@ -29,8 +31,18 @@ public class GraphPanel extends JPanel implements Observer {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
+        paintNodeConnector(g);
         paintEdges(g);
         paintNodes(g);
+
+    }
+
+    /**
+     * Draw a theoretical edge between the cursor and the selected node
+     * @param g
+     */
+    private void paintNodeConnector(Graphics g) {
+
     }
 
     /**
@@ -41,7 +53,7 @@ public class GraphPanel extends JPanel implements Observer {
         System.out.println("graphing stuffs");
         NodeCoords coords;
         NodeSize size;
-        g.translate(getWidth()/2, getHeight()/2);
+//        g.translate(getWidth()/2, getHeight()/2);
         for (Node n : graphModel.getNodes()) {
             coords = n.getNodeCoords();
             size = n.getNodeSize();
@@ -54,7 +66,7 @@ public class GraphPanel extends JPanel implements Observer {
             g.setColor(Color.WHITE);
             g.drawString(n.getName(), coords.getCoordX(), coords.getCoordY() + g.getFontMetrics().getHeight());
         }
-        g.translate(-getWidth()/2, -getHeight()/2);
+//        g.translate(-getWidth()/2, -getHeight()/2);
     }
 
     /**
@@ -62,7 +74,7 @@ public class GraphPanel extends JPanel implements Observer {
      * @param g
      */
     private void paintEdges(Graphics g) {
-        g.translate(getWidth()/2, getHeight()/2);
+//        g.translate(getWidth()/2, getHeight()/2);
         NodeCoords startCoords;
         NodeSize startOffset;
         NodeCoords endCoords;
@@ -83,7 +95,7 @@ public class GraphPanel extends JPanel implements Observer {
                     endCoords.getCoordX() + endOffset.getSizeX()/2,
                     endCoords.getCoordY() + endOffset.getSizeY()/2);
         }
-        g.translate(-getWidth()/2, -getHeight()/2);
+//        g.translate(-getWidth()/2, -getHeight()/2);
     }
 
     /**

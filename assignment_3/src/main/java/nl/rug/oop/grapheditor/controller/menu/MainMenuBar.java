@@ -79,7 +79,7 @@ public class MainMenuBar extends JMenuBar {
         addNode.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new CreateNodeMenu(graphModel, frame);
+                new CreateNodeMenu(graphModel);
             }
         });
         removeNode.addActionListener(new ActionListener() {

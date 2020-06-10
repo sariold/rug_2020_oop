@@ -15,17 +15,15 @@ import java.text.NumberFormat;
 public class CreateNodeMenu extends JOptionPane {
 
     private GraphModel graphModel;
-    private JFrame frame;
     private NumberFormatter formatter;
 
     /**
      * Create a new menu to create a node in a graph model
      * @param graphModel Graph Model
      */
-    public CreateNodeMenu(GraphModel graphModel, JFrame frame) {
+    public CreateNodeMenu(GraphModel graphModel) {
         super("Create Node Menu");
         this.graphModel = graphModel;
-        this.frame = frame;
         NumberFormat format = NumberFormat.getInstance();
         formatter = new NumberFormatter(format);
         formatter.setValueClass(Integer.class);
