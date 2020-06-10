@@ -1,6 +1,7 @@
 package nl.rug.oop.grapheditor.model.edge;
 
 import lombok.Data;
+import nl.rug.oop.grapheditor.model.GraphComponent;
 import nl.rug.oop.grapheditor.model.node.Node;
 
 import java.util.Objects;
@@ -9,7 +10,7 @@ import java.util.Objects;
  * An edge connecting two nodes
  */
 @Data
-public class Edge {
+public class Edge extends GraphComponent {
 
     private Node start;
     private Node end;

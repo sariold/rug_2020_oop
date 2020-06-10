@@ -50,12 +50,14 @@ public class CreateNodeMenu extends JOptionPane {
                             "Height:", heightField,
                             "X-Position:", xField,
                             "Y-Position:", yField};
-        showConfirmDialog(null, objects, "Node", OK_CANCEL_OPTION);
+        int option = showConfirmDialog(null, objects, "Node", OK_CANCEL_OPTION);
         String name = (nameField.getText().isEmpty()?"Generic Node":nameField.getText());
         int width = (widthField.getText().isEmpty()?30:Integer.parseInt(widthField.getText()));
         int height = (heightField.getText().isEmpty()?30:Integer.parseInt(heightField.getText()));
         int x = (xField.getText().isEmpty()?0:Integer.parseInt(xField.getText()));
         int y = (yField.getText().isEmpty()?0:Integer.parseInt(yField.getText()));
-        graphModel.addNode(new Node(name, new NodeSize(width, height), new NodeCoords(x,y)));
+        if (option == YES_OPTION) {
+            graphModel.addNode(new Node(name, new NodeSize(width, height), new NodeCoords(x,y)));
+        }
     }
 }

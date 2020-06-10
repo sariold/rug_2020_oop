@@ -17,6 +17,7 @@ public class GraphModel extends Observable {
 
     private ArrayList<Node> nodes;
     private ArrayList<Edge> edges;
+    private GraphComponent selected;
 
     /**
      * Create new graph model with given nodes and edges
@@ -26,6 +27,7 @@ public class GraphModel extends Observable {
     public GraphModel(ArrayList<Node> nodes, ArrayList<Edge> edges) {
         this.nodes = nodes;
         this.edges = edges;
+        selected = null;
     }
 
     /**

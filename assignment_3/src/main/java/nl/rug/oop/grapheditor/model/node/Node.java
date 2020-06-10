@@ -1,6 +1,7 @@
 package nl.rug.oop.grapheditor.model.node;
 
 import lombok.Data;
+import nl.rug.oop.grapheditor.model.GraphComponent;
 
 import java.util.Objects;
 
@@ -8,7 +9,7 @@ import java.util.Objects;
  * A node connected to other nodes by edges.
  */
 @Data
-public class Node {
+public class Node extends GraphComponent {
 
     private String name;
     private NodeSize nodeSize;

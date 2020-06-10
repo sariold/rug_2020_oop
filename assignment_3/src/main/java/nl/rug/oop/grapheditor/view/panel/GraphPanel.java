@@ -45,7 +45,11 @@ public class GraphPanel extends JPanel implements Observer {
         for (Node n : graphModel.getNodes()) {
             coords = n.getNodeCoords();
             size = n.getNodeSize();
-            g.setColor(Color.BLACK);
+            if (n.equals(graphModel.getSelected())) {
+                g.setColor(Color.GREEN);
+            } else {
+                g.setColor(Color.BLACK);
+            }
             g.fillRect(coords.getCoordX(), coords.getCoordY(), size.getSizeX(), size.getSizeY());
             g.setColor(Color.WHITE);
             g.drawString(n.getName(), coords.getCoordX(), coords.getCoordY() + g.getFontMetrics().getHeight());
@@ -69,6 +73,11 @@ public class GraphPanel extends JPanel implements Observer {
             endCoords = e.getEnd().getNodeCoords();
             startOffset = e.getStart().getNodeSize();
             endOffset = e.getEnd().getNodeSize();
+            if (e.equals(graphModel.getSelected())) {
+                g.setColor(Color.GREEN);
+            } else {
+                g.setColor(Color.BLACK);
+            }
             g.drawLine(startCoords.getCoordX() + startOffset.getSizeX()/2,
                     startCoords.getCoordY() + startOffset.getSizeY()/2,
                     endCoords.getCoordX() + endOffset.getSizeX()/2,

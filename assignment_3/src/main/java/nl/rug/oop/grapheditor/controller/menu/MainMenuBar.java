@@ -2,6 +2,7 @@ package nl.rug.oop.grapheditor.controller.menu;
 
 import nl.rug.oop.grapheditor.controller.actions.SaveAction;
 import nl.rug.oop.grapheditor.model.GraphModel;
+import nl.rug.oop.grapheditor.model.node.Node;
 import nl.rug.oop.grapheditor.util.LoadGraph;
 import nl.rug.oop.grapheditor.util.SaveGraph;
 import nl.rug.oop.grapheditor.view.panel.GraphPanel;
@@ -79,6 +80,16 @@ public class MainMenuBar extends JMenuBar {
             @Override
             public void actionPerformed(ActionEvent e) {
                 new CreateNodeMenu(graphModel, frame);
+            }
+        });
+        removeNode.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (graphModel.getSelected() instanceof Node) {
+                    graphModel.removeNode((Node)graphModel.getSelected());
+                } else {
+                    JOptionPane.showMessageDialog(frame, "No Node is selected!");
+                }
             }
         });
     }
