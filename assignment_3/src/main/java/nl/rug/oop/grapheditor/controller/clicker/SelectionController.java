@@ -77,12 +77,13 @@ public class SelectionController extends MouseInputAdapter {
             for (Node n:graphModel.getNodes()) {
                 NodeCoords coords = n.getNodeCoords();
                 NodeSize size = n.getNodeSize();
-                if (x >= coords.getCoordX()-x && x <= coords.getCoordX()+size.getSizeX() &&
-                        y >= coords.getCoordY()-y && y <= coords.getCoordY()+size.getSizeY()) {
+                if (x >= coords.getCoordX() && x <= coords.getCoordX()+size.getSizeX() &&
+                        y >= coords.getCoordY() && y <= coords.getCoordY()+size.getSizeY()) {
                         this.moveNode = n;
                         break;
                 }
             }
+            return;
         }
         this.moveNode.setNodeCoords(new NodeCoords(x,y));
         graphModel.notifyUpdate();
