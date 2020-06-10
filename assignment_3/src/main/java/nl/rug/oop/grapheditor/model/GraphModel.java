@@ -17,6 +17,9 @@ public class GraphModel extends Observable {
     private ArrayList<Node> nodes;
     private ArrayList<Edge> edges;
     private GraphComponent selected;
+    private CursorCoords connectorCursor;
+    private boolean dragging;
+
 
     /**
      * Create new graph model with given nodes and edges
@@ -27,6 +30,7 @@ public class GraphModel extends Observable {
         this.nodes = nodes;
         this.edges = edges;
         selected = null;
+        this.connectorCursor = new CursorCoords();
     }
 
     /**

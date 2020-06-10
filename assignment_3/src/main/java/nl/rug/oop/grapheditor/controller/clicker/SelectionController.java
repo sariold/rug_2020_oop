@@ -43,26 +43,42 @@ public class SelectionController extends MouseInputAdapter {
     public void mouseClicked(MouseEvent e) {
         int x = e.getX();
         int y = e.getY();
-        for (Node n: graphModel.getNodes()) {
-            NodeCoords coords = n.getNodeCoords();
-            NodeSize size = n.getNodeSize();
-            if (x >= coords.getCoordX() && x <= coords.getCoordX()+size.getSizeX() &&
-                    y >= coords.getCoordY() && y <= coords.getCoordY()+size.getSizeY()) {
-                if (graphModel.getSelected() == null) {
-                    graphModel.setSelected(n);
+        graphModel.getConnectorCursor().setX(x);
+        graphModel.getConnectorCursor().setY(y);
+        if(e.getButton() == MouseEvent.BUTTON1) {
+            for (Node n: graphModel.getNodes()) {
+                NodeCoords coords = n.getNodeCoords();
+                NodeSize size = n.getNodeSize();
+                if (x >= coords.getCoordX() && x <= coords.getCoordX()+size.getSizeX() &&
+                        y >= coords.getCoordY() && y <= coords.getCoordY()+size.getSizeY()) {
+                    if (graphModel.getSelected() == null) {
+                        graphModel.setSelected(n);
+                    }
+                    else if (!n.equals(graphModel.getSelected())) {
+                        System.out.println("new node selected");
+                        graphModel.addEdge(new Edge((Node) graphModel.getSelected(), n));
+                        graphModel.setSelected(null);
+                    }
+                    graphModel.notifyUpdate();
+                    System.out.println("NODE Interaction");
+                    return;
                 }
-                else if (!n.equals(graphModel.getSelected())) {
-                    graphModel.addEdge(new Edge((Node) graphModel.getSelected(), n));
-                    graphModel.setSelected(null);
-                }
-                graphModel.notifyUpdate();
-                System.out.println("NODE Interaction");
-                return;
             }
         }
         graphModel.setSelected(null);
         graphModel.notifyUpdate();
         System.out.println("Not selected");
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent e) {
+        int x = e.getX();
+        int y = e.getY();
+        if(graphModel.getSelected() != null) {
+            graphModel.getConnectorCursor().setX(x);
+            graphModel.getConnectorCursor().setY(y);
+            graphModel.notifyUpdate();
+        }
     }
 
     /**
@@ -80,11 +96,18 @@ public class SelectionController extends MouseInputAdapter {
                 if (x >= coords.getCoordX() && x <= coords.getCoordX()+size.getSizeX() &&
                         y >= coords.getCoordY() && y <= coords.getCoordY()+size.getSizeY()) {
                         this.moveNode = n;
-                        break;
+                        graphModel.setDragging(true);
+                        graphModel.setSelected(n);
+                        graphModel.getConnectorCursor().setX(x);
+                        graphModel.getConnectorCursor().setY(y);
+                        graphModel.notifyUpdate();
+                    break;
                 }
             }
             return;
         }
+        graphModel.getConnectorCursor().setX(x);
+        graphModel.getConnectorCursor().setY(y);
         this.moveNode.setNodeCoords(new NodeCoords(x,y));
         graphModel.notifyUpdate();
     }
@@ -96,5 +119,8 @@ public class SelectionController extends MouseInputAdapter {
     @Override
     public void mouseReleased(MouseEvent e) {
         this.moveNode = null;
+        graphModel.setDragging(false);
+//        graphModel.setSelected(null);
+        graphModel.notifyUpdate();
     }
 }

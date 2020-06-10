@@ -42,7 +42,13 @@ public class GraphPanel extends JPanel implements Observer {
      * @param g
      */
     private void paintNodeConnector(Graphics g) {
-
+        if(graphModel.getSelected() != null && !graphModel.isDragging()) {
+            Node selected = (Node) graphModel.getSelected();
+            g.drawLine(selected.getNodeCoords().getCoordX() + selected.getNodeSize().getSizeX()/2,
+                    selected.getNodeCoords().getCoordY() + selected.getNodeSize().getSizeY()/2,
+                    graphModel.getConnectorCursor().getX(),
+                    graphModel.getConnectorCursor().getY());
+        }
     }
 
     /**
@@ -64,7 +70,8 @@ public class GraphPanel extends JPanel implements Observer {
             }
             g.fillRect(coords.getCoordX(), coords.getCoordY(), size.getSizeX(), size.getSizeY());
             g.setColor(Color.WHITE);
-            g.drawString(n.getName(), coords.getCoordX(), coords.getCoordY() + g.getFontMetrics().getHeight());
+            g.drawString(n.getName(), coords.getCoordX() + (n.getNodeSize().getSizeX() / 3), coords.getCoordY() + (n.getNodeSize().getSizeY() / 2));
+//            - g.getFontMetrics().getHeight());
         }
 //        g.translate(-getWidth()/2, -getHeight()/2);
     }

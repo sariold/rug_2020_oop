@@ -17,7 +17,7 @@ public class MainMenuBar extends JMenuBar {
 
     private JFrame frame;
     private JMenu fileMenu, edgeMenu, nodeMenu;
-    private JMenuItem save, load, addNode, removeNode, addEdge, removeEdge;
+    private JMenuItem save, load, newGraph, addNode, removeNode, addEdge, removeEdge;
     private GraphModel graphModel;
     private SaveGraph saveGraph;
     private LoadGraph loadGraph;
@@ -41,11 +41,13 @@ public class MainMenuBar extends JMenuBar {
         this.nodeMenu = new JMenu("Nodes");
         this.save = new JMenuItem("Save");
         this.load = new JMenuItem("Load");
+        this.newGraph = new JMenuItem("New");
         this.addNode = new JMenuItem("Add Node");
         this.removeNode = new JMenuItem("Remove Node");
         this.addEdge = new JMenuItem("Add Edge");
         this.removeEdge = new JMenuItem("Remove Edge");
         addFunctionality();
+        this.fileMenu.add(newGraph);
         this.fileMenu.add(save);
         this.fileMenu.add(load);
         this.nodeMenu.add(addNode);
@@ -61,7 +63,7 @@ public class MainMenuBar extends JMenuBar {
      * Sets actions to all Menu Items in this menu
      */
     private void addFunctionality() {
-        addSaveAndLoad();
+        addSaveAndLoadandNew();
         addNodeFunctionality();
         addEdgeFunctionality();
     }
@@ -97,7 +99,7 @@ public class MainMenuBar extends JMenuBar {
     /**
      * Adds save and load functionality to the menu bar
      */
-    private void addSaveAndLoad() {
+    private void addSaveAndLoadandNew() {
         save.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -114,6 +116,14 @@ public class MainMenuBar extends JMenuBar {
                 if(load == JFileChooser.APPROVE_OPTION) {
                     graphModel = loadGraph.loadFile(jFileChooser.getSelectedFile().getAbsolutePath());
                 }
+            }
+        });
+        newGraph.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                graphModel.getNodes().clear();
+                graphModel.getEdges().clear();
+                graphModel.notifyUpdate();
             }
         });
     }
