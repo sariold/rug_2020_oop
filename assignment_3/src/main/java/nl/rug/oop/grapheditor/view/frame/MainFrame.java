@@ -1,5 +1,6 @@
 package nl.rug.oop.grapheditor.view.frame;
 
+import nl.rug.oop.grapheditor.controller.menu.MainMenuBar;
 import nl.rug.oop.grapheditor.model.GraphModel;
 import nl.rug.oop.grapheditor.view.panel.GraphPanel;
 
@@ -11,13 +12,13 @@ import java.util.Observer;
 public class MainFrame extends JFrame implements Observer {
 
     GraphPanel graphPanel;
-    JMenuBar jMenuBar;
-    JMenu fileMenu, edgeMenu, nodeMenu;
-    JMenuItem save, load, addNode, removeNode, addEdge, removeEdge;
+    GraphModel graphModel;
+    MainMenuBar menuBar;
 
     public MainFrame(GraphModel graphModel){
         super("Graph Editor");
         graphModel.addObserver(this);
+        this.graphModel = graphModel;
         this.graphPanel = new GraphPanel(graphModel);
         createMenuBar();
         setContentPane(graphPanel);
@@ -30,26 +31,8 @@ public class MainFrame extends JFrame implements Observer {
     }
 
     private void createMenuBar() {
-        this.jMenuBar = new JMenuBar();
-        this.fileMenu = new JMenu("File");
-        this.edgeMenu = new JMenu("Edges");
-        this.nodeMenu = new JMenu("Nodes");
-        this.save = new JMenuItem("Save");
-        this.load = new JMenuItem("Load");
-        this.addNode = new JMenuItem("Add Node");
-        this.removeNode = new JMenuItem("Remove Node");
-        this.addEdge = new JMenuItem("Add Edge");
-        this.removeEdge = new JMenuItem("Remove Edge");
-        this.fileMenu.add(save);
-        this.fileMenu.add(load);
-        this.nodeMenu.add(addNode);
-        this.nodeMenu.add(removeNode);
-        this.edgeMenu.add(addEdge);
-        this.edgeMenu.add(removeEdge);
-        this.jMenuBar.add(fileMenu);
-        this.jMenuBar.add(nodeMenu);
-        this.jMenuBar.add(edgeMenu);
-        this.setJMenuBar(jMenuBar);
+        this.menuBar = new MainMenuBar(graphModel, this);
+        this.setJMenuBar(menuBar);
     }
 
     /**
