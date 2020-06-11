@@ -81,6 +81,8 @@ public class MainMenuBar extends JMenuBar implements Observer {
      * Sets actions to all Menu Items in this menu
      */
     private void addFunctionality() {
+        KeyStroke keyStrokeToEdit = KeyStroke.getKeyStroke(KeyEvent.VK_E, KeyEvent.CTRL_DOWN_MASK);
+        editNode.setAccelerator(keyStrokeToEdit);
         addSaveAndLoadAndNew();
         addNodeFunctionality();
         addEdgeFunctionality();
