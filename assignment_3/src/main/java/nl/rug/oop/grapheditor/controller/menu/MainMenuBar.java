@@ -2,6 +2,7 @@ package nl.rug.oop.grapheditor.controller.menu;
 
 import nl.rug.oop.grapheditor.controller.actions.SaveAction;
 import nl.rug.oop.grapheditor.model.GraphModel;
+import nl.rug.oop.grapheditor.model.edge.Edge;
 import nl.rug.oop.grapheditor.model.node.Node;
 import nl.rug.oop.grapheditor.util.LoadGraph;
 import nl.rug.oop.grapheditor.util.SaveGraph;
@@ -12,8 +13,10 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Observable;
+import java.util.Observer;
 
-public class MainMenuBar extends JMenuBar {
+public class MainMenuBar extends JMenuBar implements Observer {
 
     private JFrame frame;
     private JMenu fileMenu, edgeMenu, nodeMenu;
@@ -36,6 +39,7 @@ public class MainMenuBar extends JMenuBar {
         jFileChooser.setAcceptAllFileFilterUsed(false);
         FileNameExtensionFilter restrict = new FileNameExtensionFilter("Only .sff files", "sff");
         jFileChooser.addChoosableFileFilter(restrict);
+        graphModel.addObserver(this);
         this.fileMenu = new JMenu("File");
         this.edgeMenu = new JMenu("Edges");
         this.nodeMenu = new JMenu("Nodes");
@@ -48,6 +52,9 @@ public class MainMenuBar extends JMenuBar {
         this.addEdge = new JMenuItem("Add Edge");
         this.removeEdge = new JMenuItem("Remove Edge");
         addFunctionality();
+        removeNode.setEnabled(graphModel.getSelected() instanceof Node);
+        editNode.setEnabled(graphModel.getSelected() instanceof Node);
+        removeEdge.setEnabled(graphModel.getSelected() instanceof Edge);
         this.fileMenu.add(newGraph);
         this.fileMenu.add(save);
         this.fileMenu.add(load);
@@ -65,7 +72,7 @@ public class MainMenuBar extends JMenuBar {
      * Sets actions to all Menu Items in this menu
      */
     private void addFunctionality() {
-        addSaveAndLoadandNew();
+        addSaveAndLoadAndNew();
         addNodeFunctionality();
         addEdgeFunctionality();
     }
@@ -74,6 +81,16 @@ public class MainMenuBar extends JMenuBar {
      * Adds the funcitonality to add and remove edges
      */
     private void addEdgeFunctionality() {
+        removeEdge.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (graphModel.getSelected() instanceof Edge) {
+                    graphModel.removeEdge((Edge)graphModel.getSelected());
+                } else {
+                    JOptionPane.showMessageDialog(frame, "No Edge is selected!");
+                }
+            }
+        });
     }
 
     /**
@@ -110,7 +127,7 @@ public class MainMenuBar extends JMenuBar {
     /**
      * Adds save and load functionality to the menu bar
      */
-    private void addSaveAndLoadandNew() {
+    private void addSaveAndLoadAndNew() {
         save.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -137,5 +154,17 @@ public class MainMenuBar extends JMenuBar {
                 graphModel.notifyUpdate();
             }
         });
+    }
+
+    /**
+     * Enables or disables Buttons when a change in the Graph model occured
+     * @param o Graph Model
+     * @param arg Object
+     */
+    @Override
+    public void update(Observable o, Object arg) {
+        removeNode.setEnabled(graphModel.getSelected() instanceof Node);
+        editNode.setEnabled(graphModel.getSelected() instanceof Node);
+        removeEdge.setEnabled(graphModel.getSelected() instanceof Edge);
     }
 }
