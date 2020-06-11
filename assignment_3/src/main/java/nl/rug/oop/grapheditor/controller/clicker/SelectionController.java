@@ -1,5 +1,6 @@
 package nl.rug.oop.grapheditor.controller.clicker;
 
+import nl.rug.oop.grapheditor.controller.actions.CreateEdgeAction;
 import nl.rug.oop.grapheditor.controller.actions.EditNodeAction;
 import nl.rug.oop.grapheditor.model.GraphModel;
 import nl.rug.oop.grapheditor.model.edge.Edge;
@@ -115,7 +116,10 @@ public class SelectionController extends MouseInputAdapter {
                 }
                 else if (!n.equals(graphModel.getSelected()) && graphModel.getSelected() instanceof Node) {
                     System.out.println("new node selected");
-                    graphModel.addEdge(new Edge((Node) graphModel.getSelected(), n));
+                    CreateEdgeAction createEdgeAction = new CreateEdgeAction(graphModel,
+                            new Edge((Node) graphModel.getSelected(), n));
+                    createEdgeAction.redo();
+                    graphModel.getUndoManager().addEdit(createEdgeAction);
                     graphModel.setSelected(null);
                 }
                 graphModel.notifyUpdate();

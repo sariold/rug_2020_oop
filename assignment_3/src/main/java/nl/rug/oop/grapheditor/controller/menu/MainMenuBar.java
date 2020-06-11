@@ -1,6 +1,7 @@
 package nl.rug.oop.grapheditor.controller.menu;
 
 import nl.rug.oop.grapheditor.controller.actions.CreateNodeAction;
+import nl.rug.oop.grapheditor.controller.actions.RemoveEdgeAction;
 import nl.rug.oop.grapheditor.controller.actions.RemoveNodeAction;
 import nl.rug.oop.grapheditor.model.GraphModel;
 import nl.rug.oop.grapheditor.model.edge.Edge;
@@ -121,7 +122,9 @@ public class MainMenuBar extends JMenuBar implements Observer {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (graphModel.getSelected() instanceof Edge) {
-                    graphModel.removeEdge((Edge) graphModel.getSelected());
+                    RemoveEdgeAction removeEdgeAction = new RemoveEdgeAction(graphModel, (Edge)graphModel.getSelected());
+                    removeEdgeAction.redo();
+                    graphModel.getUndoManager().addEdit(removeEdgeAction);
                 }
             }
         });
