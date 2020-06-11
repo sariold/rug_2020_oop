@@ -59,14 +59,9 @@ public class EditNodeMenu extends JOptionPane {
             int x = xField.getText().isEmpty()?node.getNodeCoords().getCoordX():Integer.parseInt(xField.getText());
             int y = yField.getText().isEmpty()?node.getNodeCoords().getCoordY():Integer.parseInt(yField.getText());
             EditNodeAction editNodeAction = new EditNodeAction(node, name, new NodeCoords(x,y),
-                    new NodeSize(height, width), node.getName(), node.getNodeCoords(), node.getNodeSize());
+                    new NodeSize(height, width));
             editNodeAction.redo();
             graphModel.getUndoManager().addEdit(editNodeAction);
-//            if (!nameField.getText().isEmpty()) node.setName(nameField.getText());
-//            if (!widthField.getText().isEmpty()) node.getNodeSize().setSizeX(Integer.parseInt(widthField.getText()));
-//            if (!heightField.getText().isEmpty()) node.getNodeSize().setSizeY(Integer.parseInt(heightField.getText()));
-//            if (!xField.getText().isEmpty()) node.getNodeCoords().setCoordX(Integer.parseInt(xField.getText()));
-//            if (!yField.getText().isEmpty()) node.getNodeCoords().setCoordY(Integer.parseInt(yField.getText()));
         }
     }
 }

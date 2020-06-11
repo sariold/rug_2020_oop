@@ -19,14 +19,19 @@ public class EditNodeAction extends AbstractUndoableEdit {
     private NodeCoords oldCoords;
     private NodeSize oldSize;
 
-    public EditNodeAction(Node node, String newName, NodeCoords newCoords, NodeSize newSize, String oldName, NodeCoords oldCoords, NodeSize oldSize) {
+    public EditNodeAction(Node node, String newName, NodeCoords newCoords, NodeSize newSize) {
         this.node = node;
         this.newName = newName;
         this.newCoords = newCoords;
         this.newSize = newSize;
-        this.oldName = oldName;
+        this.oldName = node.getName();
+        this.oldCoords = node.getNodeCoords();
+        this.oldSize = node.getNodeSize();
+    }
+
+    public EditNodeAction(Node node, NodeCoords newCoords, NodeCoords oldCoords) {
+        this(node, node.getName(), newCoords, node.getNodeSize());
         this.oldCoords = oldCoords;
-        this.oldSize = oldSize;
     }
 
     @Override

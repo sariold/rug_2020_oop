@@ -1,5 +1,6 @@
 package nl.rug.oop.grapheditor.controller.clicker;
 
+import nl.rug.oop.grapheditor.controller.actions.EditNodeAction;
 import nl.rug.oop.grapheditor.model.GraphModel;
 import nl.rug.oop.grapheditor.model.edge.Edge;
 import nl.rug.oop.grapheditor.model.node.Node;
@@ -19,6 +20,7 @@ public class SelectionController extends MouseInputAdapter {
     private GraphModel graphModel;
     private GraphPanel graphPanel;
     private Node moveNode;
+    private NodeCoords startDragging;
 
     /**
      * Create clicker to select a node
@@ -155,6 +157,7 @@ public class SelectionController extends MouseInputAdapter {
                         graphModel.getConnectorCursor().setX(x);
                         graphModel.getConnectorCursor().setY(y);
                         graphModel.notifyUpdate();
+                        this.startDragging = n.getNodeCoords();
                         break;
                 }
             }
@@ -173,6 +176,8 @@ public class SelectionController extends MouseInputAdapter {
      */
     @Override
     public void mouseReleased(MouseEvent e) {
+        EditNodeAction editNodeAction = new EditNodeAction(moveNode, moveNode.getNodeCoords(), this.startDragging);
+        graphModel.getUndoManager().addEdit(editNodeAction);
         this.moveNode = null;
         graphModel.setDragging(false);
 //        graphModel.setSelected(null);
