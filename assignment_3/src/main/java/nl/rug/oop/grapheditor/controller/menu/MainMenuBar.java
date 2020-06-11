@@ -17,7 +17,7 @@ public class MainMenuBar extends JMenuBar {
 
     private JFrame frame;
     private JMenu fileMenu, edgeMenu, nodeMenu;
-    private JMenuItem save, load, newGraph, addNode, removeNode, addEdge, removeEdge;
+    private JMenuItem save, load, newGraph, addNode, removeNode, editNode, addEdge, removeEdge;
     private GraphModel graphModel;
     private SaveGraph saveGraph;
     private LoadGraph loadGraph;
@@ -44,6 +44,7 @@ public class MainMenuBar extends JMenuBar {
         this.newGraph = new JMenuItem("New");
         this.addNode = new JMenuItem("Add Node");
         this.removeNode = new JMenuItem("Remove Node");
+        this.editNode = new JMenuItem("Edit Node");
         this.addEdge = new JMenuItem("Add Edge");
         this.removeEdge = new JMenuItem("Remove Edge");
         addFunctionality();
@@ -52,6 +53,7 @@ public class MainMenuBar extends JMenuBar {
         this.fileMenu.add(load);
         this.nodeMenu.add(addNode);
         this.nodeMenu.add(removeNode);
+        this.nodeMenu.add(editNode);
         this.edgeMenu.add(addEdge);
         this.edgeMenu.add(removeEdge);
         this.add(fileMenu);
@@ -91,6 +93,15 @@ public class MainMenuBar extends JMenuBar {
                     graphModel.removeNode((Node)graphModel.getSelected());
                 } else {
                     JOptionPane.showMessageDialog(frame, "No Node is selected!");
+                }
+            }
+        });
+        editNode.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (graphModel.getSelected() instanceof Node) {
+                    new EditNodeMenu((Node)graphModel.getSelected());
+                    graphModel.notifyUpdate();
                 }
             }
         });

@@ -48,7 +48,7 @@ public class CreateNodeMenu extends JOptionPane {
                             "Height:", heightField,
                             "X-Position:", xField,
                             "Y-Position:", yField};
-        int option = showConfirmDialog(null, objects, "Node", OK_CANCEL_OPTION);
+        int option = showConfirmDialog(null, objects, "Creating a Node", OK_CANCEL_OPTION);
         String name = (nameField.getText().isEmpty()?"Generic Node":nameField.getText());
         int width = (widthField.getText().isEmpty()?30:Integer.parseInt(widthField.getText()));
         int height = (heightField.getText().isEmpty()?30:Integer.parseInt(heightField.getText()));

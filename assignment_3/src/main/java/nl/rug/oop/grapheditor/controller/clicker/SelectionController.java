@@ -101,14 +101,15 @@ public class SelectionController extends MouseInputAdapter {
                         graphModel.getConnectorCursor().setX(x);
                         graphModel.getConnectorCursor().setY(y);
                         graphModel.notifyUpdate();
-                    break;
+                        break;
                 }
             }
             return;
         }
         graphModel.getConnectorCursor().setX(x);
         graphModel.getConnectorCursor().setY(y);
-        this.moveNode.setNodeCoords(new NodeCoords(x,y));
+        this.moveNode.setNodeCoords(new NodeCoords(x-moveNode.getNodeSize().getSizeX()/2,
+                                                    y-moveNode.getNodeSize().getSizeY()/2));
         graphModel.notifyUpdate();
     }
 
