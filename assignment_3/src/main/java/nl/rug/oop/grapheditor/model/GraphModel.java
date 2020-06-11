@@ -5,6 +5,7 @@ import nl.rug.oop.grapheditor.model.edge.Edge;
 import nl.rug.oop.grapheditor.model.node.Node;
 import nl.rug.oop.grapheditor.util.LoadGraph;
 
+import javax.swing.undo.UndoManager;
 import java.util.ArrayList;
 import java.util.Observable;
 
@@ -19,6 +20,7 @@ public class GraphModel extends Observable {
     private GraphComponent selected;
     private CursorCoords connectorCursor;
     private boolean dragging;
+    private UndoManager undoManager;
 
 
     /**
@@ -31,6 +33,7 @@ public class GraphModel extends Observable {
         this.edges = edges;
         selected = null;
         this.connectorCursor = new CursorCoords();
+        this.undoManager = new UndoManager();
     }
 
     /**

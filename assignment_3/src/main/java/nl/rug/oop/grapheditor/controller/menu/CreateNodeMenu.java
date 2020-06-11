@@ -1,5 +1,6 @@
 package nl.rug.oop.grapheditor.controller.menu;
 
+import nl.rug.oop.grapheditor.controller.actions.CreateNodeAction;
 import nl.rug.oop.grapheditor.model.GraphModel;
 import nl.rug.oop.grapheditor.model.node.Node;
 import nl.rug.oop.grapheditor.model.node.NodeCoords;
@@ -55,7 +56,10 @@ public class CreateNodeMenu extends JOptionPane {
         int x = (xField.getText().isEmpty()?0:Integer.parseInt(xField.getText()));
         int y = (yField.getText().isEmpty()?0:Integer.parseInt(yField.getText()));
         if (option == YES_OPTION) {
-            graphModel.addNode(new Node(name, new NodeSize(width, height), new NodeCoords(x,y)));
+            Node newNode = new Node(name, new NodeSize(width, height), new NodeCoords(x,y));
+            CreateNodeAction createNodeAction = new CreateNodeAction(graphModel, newNode);
+            createNodeAction.redo();
+            graphModel.getUndoManager().addEdit(createNodeAction);
         }
     }
 }

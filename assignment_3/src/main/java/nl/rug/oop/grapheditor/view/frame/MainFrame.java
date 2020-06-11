@@ -31,7 +31,7 @@ public class MainFrame extends JFrame implements Observer {
     }
 
     private void createMenuBar() {
-        this.menuBar = new MainMenuBar(graphModel, this);
+        this.menuBar = new MainMenuBar(graphModel);
         this.setJMenuBar(menuBar);
     }
 

@@ -48,9 +48,15 @@ public class SelectionController extends MouseInputAdapter {
         graphModel.getConnectorCursor().setY(y);
         if(e.getButton() == MouseEvent.BUTTON1) {
             // check if a node was selected
-            if (nodeSelection(x,y)) return;
+            if (nodeSelection(x,y)) {
+                graphModel.notifyUpdate();
+                return;
+            }
             // check if an edge was selected
-            if (edgeSelection(x,y)) return;
+            if (edgeSelection(x,y)) {
+                graphModel.notifyUpdate();
+                return;
+            }
         }
         graphModel.setSelected(null);
         graphModel.notifyUpdate();

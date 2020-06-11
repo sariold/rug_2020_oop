@@ -1,16 +1,19 @@
 package nl.rug.oop.grapheditor.controller.menu;
 
-import nl.rug.oop.grapheditor.controller.actions.SaveAction;
+import nl.rug.oop.grapheditor.controller.actions.CreateNodeAction;
+import nl.rug.oop.grapheditor.controller.actions.RemoveNodeAction;
 import nl.rug.oop.grapheditor.model.GraphModel;
 import nl.rug.oop.grapheditor.model.edge.Edge;
 import nl.rug.oop.grapheditor.model.node.Node;
+import nl.rug.oop.grapheditor.model.node.NodeCoords;
+import nl.rug.oop.grapheditor.model.node.NodeSize;
 import nl.rug.oop.grapheditor.util.LoadGraph;
 import nl.rug.oop.grapheditor.util.SaveGraph;
-import nl.rug.oop.grapheditor.view.panel.GraphPanel;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import java.awt.*;
+import javax.swing.undo.CannotRedoException;
+import javax.swing.undo.CannotUndoException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Observable;
@@ -18,9 +21,8 @@ import java.util.Observer;
 
 public class MainMenuBar extends JMenuBar implements Observer {
 
-    private JFrame frame;
-    private JMenu fileMenu, edgeMenu, nodeMenu;
-    private JMenuItem save, load, newGraph, addNode, removeNode, editNode, addEdge, removeEdge;
+    private JMenu fileMenu, edgeMenu, nodeMenu, editMenu;
+    private JMenuItem save, load, newGraph, addNode, removeNode, editNode, addEdge, removeEdge, undo, redo;
     private GraphModel graphModel;
     private SaveGraph saveGraph;
     private LoadGraph loadGraph;
@@ -29,9 +31,8 @@ public class MainMenuBar extends JMenuBar implements Observer {
     /**
      * Create a new Menu Bar for the graph editor
      */
-    public MainMenuBar(GraphModel graphModel, JFrame frame){
+    public MainMenuBar(GraphModel graphModel){
         super();
-        this.frame = frame;
         this.graphModel = graphModel;
         this.saveGraph = new SaveGraph(this.graphModel);
         this.loadGraph = new LoadGraph(graphModel);
@@ -43,6 +44,7 @@ public class MainMenuBar extends JMenuBar implements Observer {
         this.fileMenu = new JMenu("File");
         this.edgeMenu = new JMenu("Edges");
         this.nodeMenu = new JMenu("Nodes");
+        this.editMenu = new JMenu("Edit");
         this.save = new JMenuItem("Save");
         this.load = new JMenuItem("Load");
         this.newGraph = new JMenuItem("New");
@@ -51,6 +53,8 @@ public class MainMenuBar extends JMenuBar implements Observer {
         this.editNode = new JMenuItem("Edit Node");
         this.addEdge = new JMenuItem("Add Edge");
         this.removeEdge = new JMenuItem("Remove Edge");
+        this.undo = new JMenuItem("Undo");
+        this.redo = new JMenuItem("Redo");
         addFunctionality();
         removeNode.setEnabled(graphModel.getSelected() instanceof Node);
         editNode.setEnabled(graphModel.getSelected() instanceof Node);
@@ -63,9 +67,12 @@ public class MainMenuBar extends JMenuBar implements Observer {
         this.nodeMenu.add(editNode);
         this.edgeMenu.add(addEdge);
         this.edgeMenu.add(removeEdge);
+        this.editMenu.add(undo);
+        this.editMenu.add(redo);
         this.add(fileMenu);
         this.add(nodeMenu);
         this.add(edgeMenu);
+        this.add(editMenu);
     }
 
     /**
@@ -75,6 +82,35 @@ public class MainMenuBar extends JMenuBar implements Observer {
         addSaveAndLoadAndNew();
         addNodeFunctionality();
         addEdgeFunctionality();
+        addEditFunctionality();
+    }
+
+    /**
+     * Adds the possibility to undo and redo actions
+     */
+    private void addEditFunctionality() {
+        redo.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    graphModel.getUndoManager().redo();
+                    graphModel.notifyUpdate();
+                } catch (CannotRedoException ex) {
+                    System.out.println("CANT REDO");
+                }
+            }
+        });
+        undo.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    graphModel.getUndoManager().undo();
+                    graphModel.notifyUpdate();
+                } catch (CannotUndoException ex) {
+                    System.out.println("CANT UNDO");
+                }
+            }
+        });
     }
 
     /**
@@ -85,9 +121,7 @@ public class MainMenuBar extends JMenuBar implements Observer {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (graphModel.getSelected() instanceof Edge) {
-                    graphModel.removeEdge((Edge)graphModel.getSelected());
-                } else {
-                    JOptionPane.showMessageDialog(frame, "No Edge is selected!");
+                    graphModel.removeEdge((Edge) graphModel.getSelected());
                 }
             }
         });
@@ -107,9 +141,9 @@ public class MainMenuBar extends JMenuBar implements Observer {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (graphModel.getSelected() instanceof Node) {
-                    graphModel.removeNode((Node)graphModel.getSelected());
-                } else {
-                    JOptionPane.showMessageDialog(frame, "No Node is selected!");
+                    RemoveNodeAction removeNodeAction = new RemoveNodeAction(graphModel, (Node)graphModel.getSelected());
+                    removeNodeAction.redo();
+                    graphModel.getUndoManager().addEdit(removeNodeAction);
                 }
             }
         });
@@ -117,7 +151,7 @@ public class MainMenuBar extends JMenuBar implements Observer {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (graphModel.getSelected() instanceof Node) {
-                    new EditNodeMenu((Node)graphModel.getSelected());
+                    new EditNodeMenu((Node)graphModel.getSelected(), graphModel);
                     graphModel.notifyUpdate();
                 }
             }
