@@ -17,6 +17,7 @@ import javax.swing.undo.CannotRedoException;
 import javax.swing.undo.CannotUndoException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -90,6 +91,8 @@ public class MainMenuBar extends JMenuBar implements Observer {
      * Adds the possibility to undo and redo actions
      */
     private void addEditFunctionality() {
+        KeyStroke keyStrokeToRedo = KeyStroke.getKeyStroke("shift control Z");
+        redo.setAccelerator(keyStrokeToRedo);
         redo.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -101,6 +104,8 @@ public class MainMenuBar extends JMenuBar implements Observer {
                 }
             }
         });
+        KeyStroke keyStrokeToUndo = KeyStroke.getKeyStroke(KeyEvent.VK_Z, KeyEvent.CTRL_DOWN_MASK);
+        undo.setAccelerator(keyStrokeToUndo);
         undo.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -118,6 +123,8 @@ public class MainMenuBar extends JMenuBar implements Observer {
      * Adds the funcitonality to add and remove edges
      */
     private void addEdgeFunctionality() {
+        KeyStroke keyStrokeToDeleteEdge = KeyStroke.getKeyStroke(KeyEvent.VK_DELETE, 0);
+        removeEdge.setAccelerator(keyStrokeToDeleteEdge);
         removeEdge.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -134,12 +141,16 @@ public class MainMenuBar extends JMenuBar implements Observer {
      * Adds the functionality to add and remove nodes
      */
     private void addNodeFunctionality() {
+        KeyStroke keyStrokeToAddNode = KeyStroke.getKeyStroke(KeyEvent.VK_D, KeyEvent.CTRL_DOWN_MASK);
+        addNode.setAccelerator(keyStrokeToAddNode);
         addNode.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 new CreateNodeMenu(graphModel);
             }
         });
+        KeyStroke keyStrokeToDeleteNode = KeyStroke.getKeyStroke(KeyEvent.VK_DELETE, 0);
+        removeNode.setAccelerator(keyStrokeToDeleteNode);
         removeNode.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -165,6 +176,8 @@ public class MainMenuBar extends JMenuBar implements Observer {
      * Adds save and load functionality to the menu bar
      */
     private void addSaveAndLoadAndNew() {
+        KeyStroke keyStrokeToSave = KeyStroke.getKeyStroke(KeyEvent.VK_S, KeyEvent.CTRL_DOWN_MASK);
+        save.setAccelerator(keyStrokeToSave);
         save.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -174,6 +187,8 @@ public class MainMenuBar extends JMenuBar implements Observer {
                 }
             }
         });
+        KeyStroke keyStrokeToOpen = KeyStroke.getKeyStroke(KeyEvent.VK_O, KeyEvent.CTRL_DOWN_MASK);
+        load.setAccelerator(keyStrokeToOpen);
         load.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -183,6 +198,8 @@ public class MainMenuBar extends JMenuBar implements Observer {
                 }
             }
         });
+        KeyStroke keyStrokeToNew = KeyStroke.getKeyStroke(KeyEvent.VK_N, KeyEvent.CTRL_DOWN_MASK);
+        newGraph.setAccelerator(keyStrokeToNew);
         newGraph.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

@@ -180,8 +180,10 @@ public class SelectionController extends MouseInputAdapter {
      */
     @Override
     public void mouseReleased(MouseEvent e) {
-        EditNodeAction editNodeAction = new EditNodeAction(moveNode, moveNode.getNodeCoords(), this.startDragging);
-        graphModel.getUndoManager().addEdit(editNodeAction);
+        if(moveNode != null) {
+            EditNodeAction editNodeAction = new EditNodeAction(moveNode, moveNode.getNodeCoords(), this.startDragging);
+            graphModel.getUndoManager().addEdit(editNodeAction);
+        }
         this.moveNode = null;
         graphModel.setDragging(false);
 //        graphModel.setSelected(null);
