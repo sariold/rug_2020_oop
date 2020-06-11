@@ -9,6 +9,7 @@ import nl.rug.oop.grapheditor.view.panel.GraphPanel;
 
 import javax.swing.event.MouseInputAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.geom.Line2D;
 
 /**
  * Clicker that allows to select a node by clicking on it.
@@ -46,35 +47,82 @@ public class SelectionController extends MouseInputAdapter {
         graphModel.getConnectorCursor().setX(x);
         graphModel.getConnectorCursor().setY(y);
         if(e.getButton() == MouseEvent.BUTTON1) {
-            for (Node n: graphModel.getNodes()) {
-                NodeCoords coords = n.getNodeCoords();
-                NodeSize size = n.getNodeSize();
-                if (x >= coords.getCoordX() && x <= coords.getCoordX()+size.getSizeX() &&
-                        y >= coords.getCoordY() && y <= coords.getCoordY()+size.getSizeY()) {
-                    if (graphModel.getSelected() == null) {
-                        graphModel.setSelected(n);
-                    }
-                    else if (!n.equals(graphModel.getSelected())) {
-                        System.out.println("new node selected");
-                        graphModel.addEdge(new Edge((Node) graphModel.getSelected(), n));
-                        graphModel.setSelected(null);
-                    }
-                    graphModel.notifyUpdate();
-                    System.out.println("NODE Interaction");
-                    return;
-                }
-            }
+            // check if a node was selected
+            if (nodeSelection(x,y)) return;
+            // check if an edge was selected
+            if (edgeSelection(x,y)) return;
         }
         graphModel.setSelected(null);
         graphModel.notifyUpdate();
         System.out.println("Not selected");
     }
 
+    /**
+     * Handle selection of edges
+     * @param x X position of the mouse
+     * @param y Y Position of the mouse
+     * @return True if an edge was selected
+     */
+    private boolean edgeSelection(int x, int y) {
+        NodeCoords startCoords, endCoords;
+        NodeSize startSize, endSize;
+        int startX, startY, endX, endY;
+        double distance;
+        for (Edge e: graphModel.getEdges()) {
+            startCoords = e.getStart().getNodeCoords();
+            endCoords = e.getEnd().getNodeCoords();
+            startSize = e.getStart().getNodeSize();
+            endSize = e.getEnd().getNodeSize();
+            startX = startCoords.getCoordX()+startSize.getSizeX()/2;
+            startY = startCoords.getCoordY()+startSize.getSizeY()/2;
+            endX = endCoords.getCoordX()+endSize.getSizeX()/2;
+            endY = endCoords.getCoordY()+endSize.getSizeY()/2;
+            distance = Line2D.ptSegDist(startX, startY, endX, endY, x, y);
+            // check if the cursor is on the current edge
+            if (distance < 8 && !(x >= startCoords.getCoordX() && x <= startCoords.getCoordX()+startSize.getSizeX() &&
+                    y >= startCoords.getCoordY() && y <= startCoords.getCoordY()+startSize.getSizeY())&&
+            !(x >= endCoords.getCoordX() && x <= endCoords.getCoordX()+endSize.getSizeX() &&
+                    y >= endCoords.getCoordY() && y <= endCoords.getCoordY()+endSize.getSizeY())) {
+                graphModel.setSelected(e);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Handle selection of nodes
+     * @param x X position of the mouse
+     * @param y Y Position of the mouse
+     * @return True if a node was selected
+     */
+    private boolean nodeSelection(int x, int y) {
+        for (Node n: graphModel.getNodes()) {
+            NodeCoords coords = n.getNodeCoords();
+            NodeSize size = n.getNodeSize();
+            if (x >= coords.getCoordX() && x <= coords.getCoordX()+size.getSizeX() &&
+                    y >= coords.getCoordY() && y <= coords.getCoordY()+size.getSizeY()) {
+                if (graphModel.getSelected() == null) {
+                    graphModel.setSelected(n);
+                }
+                else if (!n.equals(graphModel.getSelected()) && graphModel.getSelected() instanceof Node) {
+                    System.out.println("new node selected");
+                    graphModel.addEdge(new Edge((Node) graphModel.getSelected(), n));
+                    graphModel.setSelected(null);
+                }
+                graphModel.notifyUpdate();
+                System.out.println("NODE Interaction");
+                return true;
+            }
+        }
+        return false;
+    }
+
     @Override
     public void mouseMoved(MouseEvent e) {
         int x = e.getX();
         int y = e.getY();
-        if(graphModel.getSelected() != null) {
+        if(graphModel.getSelected() instanceof Node) {
             graphModel.getConnectorCursor().setX(x);
             graphModel.getConnectorCursor().setY(y);
             graphModel.notifyUpdate();

@@ -42,7 +42,7 @@ public class GraphPanel extends JPanel implements Observer {
      * @param g
      */
     private void paintNodeConnector(Graphics g) {
-        if(graphModel.getSelected() != null && !graphModel.isDragging()) {
+        if(graphModel.getSelected() != null && graphModel.getSelected() instanceof Node && !graphModel.isDragging()) {
             Node selected = (Node) graphModel.getSelected();
             g.drawLine(selected.getNodeCoords().getCoordX() + selected.getNodeSize().getSizeX()/2,
                     selected.getNodeCoords().getCoordY() + selected.getNodeSize().getSizeY()/2,
