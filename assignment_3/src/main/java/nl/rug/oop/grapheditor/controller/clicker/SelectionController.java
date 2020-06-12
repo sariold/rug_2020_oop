@@ -50,17 +50,14 @@ public class SelectionController extends MouseInputAdapter {
         if(e.getButton() == MouseEvent.BUTTON1) {
             // check if a node was selected
             if (nodeSelection(x,y)) {
-                graphModel.notifyUpdate();
                 return;
             }
             // check if an edge was selected
             if (edgeSelection(x,y)) {
-                graphModel.notifyUpdate();
                 return;
             }
         }
         graphModel.setSelected(null);
-        graphModel.notifyUpdate();
         System.out.println("Not selected");
     }
 
@@ -120,7 +117,6 @@ public class SelectionController extends MouseInputAdapter {
                     graphModel.getUndoManager().addEdit(createEdgeAction);
                     graphModel.setSelected(null);
                 }
-                graphModel.notifyUpdate();
                 System.out.println("NODE Interaction");
                 return true;
             }
@@ -135,7 +131,6 @@ public class SelectionController extends MouseInputAdapter {
         if(graphModel.getSelected() instanceof Node) {
             graphModel.getConnectorCursor().setX(x);
             graphModel.getConnectorCursor().setY(y);
-            graphModel.notifyUpdate();
         }
     }
 
@@ -158,7 +153,6 @@ public class SelectionController extends MouseInputAdapter {
                         graphModel.setSelected(n);
                         graphModel.getConnectorCursor().setX(x);
                         graphModel.getConnectorCursor().setY(y);
-                        graphModel.notifyUpdate();
                         this.startDragging = n.getNodeCoords();
                         break;
                 }
@@ -169,7 +163,6 @@ public class SelectionController extends MouseInputAdapter {
         graphModel.getConnectorCursor().setY(y);
         this.moveNode.setNodeCoords(new NodeCoords(x-moveNode.getNodeSize().getSizeX()/2,
                                                     y-moveNode.getNodeSize().getSizeY()/2));
-        graphModel.notifyUpdate();
     }
 
     /**
@@ -184,6 +177,5 @@ public class SelectionController extends MouseInputAdapter {
         }
         this.moveNode = null;
         graphModel.setDragging(false);
-        graphModel.notifyUpdate();
     }
 }
