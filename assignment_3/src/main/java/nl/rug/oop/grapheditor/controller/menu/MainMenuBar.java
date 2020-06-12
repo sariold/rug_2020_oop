@@ -1,5 +1,6 @@
 package nl.rug.oop.grapheditor.controller.menu;
 
+import nl.rug.oop.grapheditor.controller.actions.CreateEdgeAction;
 import nl.rug.oop.grapheditor.controller.actions.CreateNodeAction;
 import nl.rug.oop.grapheditor.controller.actions.RemoveEdgeAction;
 import nl.rug.oop.grapheditor.controller.actions.RemoveNodeAction;
@@ -24,7 +25,7 @@ import java.util.Observer;
 public class MainMenuBar extends JMenuBar implements Observer {
 
     private JMenu fileMenu, edgeMenu, nodeMenu, editMenu;
-    private JMenuItem save, load, newGraph, addNode, removeNode, editNode, addEdge, removeEdge, undo, redo;
+    private JMenuItem save, load, newGraph, addNode, removeNode, editNode, addEdge, removeEdge, undo, redo, copy, paste;
     private GraphModel graphModel;
     private SaveGraph saveGraph;
     private LoadGraph loadGraph;
@@ -57,16 +58,22 @@ public class MainMenuBar extends JMenuBar implements Observer {
         this.removeEdge = new JMenuItem("Remove Edge");
         this.undo = new JMenuItem("Undo");
         this.redo = new JMenuItem("Redo");
+        this.copy = new JMenuItem("Copy Node");
+        this.paste = new JMenuItem("Paste Node");
         addFunctionality();
         removeNode.setEnabled(graphModel.getSelected() instanceof Node);
         editNode.setEnabled(graphModel.getSelected() instanceof Node);
         removeEdge.setEnabled(graphModel.getSelected() instanceof Edge);
+        copy.setEnabled(graphModel.getSelected() instanceof Node);
+        paste.setEnabled(graphModel.getCopy() != null);
         this.fileMenu.add(newGraph);
         this.fileMenu.add(save);
         this.fileMenu.add(load);
         this.nodeMenu.add(addNode);
         this.nodeMenu.add(removeNode);
         this.nodeMenu.add(editNode);
+        this.nodeMenu.add(copy);
+        this.nodeMenu.add(paste);
         this.edgeMenu.add(addEdge);
         this.edgeMenu.add(removeEdge);
         this.editMenu.add(undo);
@@ -172,6 +179,24 @@ public class MainMenuBar extends JMenuBar implements Observer {
                 }
             }
         });
+        copy.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (graphModel.getSelected() instanceof Node) {
+                    graphModel.setCopy((Node)graphModel.getSelected());
+                }
+            }
+        });
+        paste.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Node newNode = graphModel.getCopy().copy();
+                newNode.move(5,5);
+                CreateNodeAction createNodeAction = new CreateNodeAction(graphModel, newNode);
+                createNodeAction.redo();
+                graphModel.getUndoManager().addEdit(createNodeAction);
+            }
+        });
     }
 
     /**
@@ -222,5 +247,7 @@ public class MainMenuBar extends JMenuBar implements Observer {
         removeNode.setEnabled(graphModel.getSelected() instanceof Node);
         editNode.setEnabled(graphModel.getSelected() instanceof Node);
         removeEdge.setEnabled(graphModel.getSelected() instanceof Edge);
+        copy.setEnabled(graphModel.getSelected() instanceof Node);
+        paste.setEnabled(graphModel.getCopy() != null);
     }
 }

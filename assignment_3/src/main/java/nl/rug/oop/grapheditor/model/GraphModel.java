@@ -18,6 +18,7 @@ public class GraphModel extends Observable {
     private ArrayList<Node> nodes;
     private ArrayList<Edge> edges;
     private GraphComponent selected;
+    private Node copy;
     private CursorCoords connectorCursor;
     private boolean dragging;
     private UndoManager undoManager;
@@ -32,6 +33,7 @@ public class GraphModel extends Observable {
         this.nodes = nodes;
         this.edges = edges;
         selected = null;
+        copy = null;
         this.connectorCursor = new CursorCoords();
         this.undoManager = new UndoManager();
     }

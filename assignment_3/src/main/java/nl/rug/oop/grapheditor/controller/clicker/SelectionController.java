@@ -19,7 +19,6 @@ import java.awt.geom.Line2D;
 public class SelectionController extends MouseInputAdapter {
 
     private GraphModel graphModel;
-    private GraphPanel graphPanel;
     private Node moveNode;
     private NodeCoords startDragging;
 
@@ -30,7 +29,6 @@ public class SelectionController extends MouseInputAdapter {
      */
     public SelectionController(GraphModel graphModel, GraphPanel graphPanel) {
         this.graphModel = graphModel;
-        this.graphPanel = graphPanel;
         this.moveNode = null;
         graphPanel.addMouseListener(this);
         graphPanel.addMouseMotionListener(this);
@@ -186,7 +184,6 @@ public class SelectionController extends MouseInputAdapter {
         }
         this.moveNode = null;
         graphModel.setDragging(false);
-//        graphModel.setSelected(null);
         graphModel.notifyUpdate();
     }
 }

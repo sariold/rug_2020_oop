@@ -44,6 +44,15 @@ public class Node extends GraphComponent {
     }
 
     /**
+     * Creates a copy of this node
+     * @return A node with the same properties
+     */
+    public Node copy() {
+        return new Node(this.getName(), new NodeSize(this.nodeSize.getSizeX(), this.nodeSize.getSizeY()),
+                new NodeCoords(this.nodeCoords.getCoordX(), this.nodeCoords.getCoordY()));
+    }
+
+    /**
      * Check if a node is equal to given object.
      * @param o Object to compare
      * @return true if object is the same node, false otherwise.
@@ -78,5 +87,15 @@ public class Node extends GraphComponent {
     public String toString() {
         return ("Name:" + this.name + "; Size:" + this.nodeSize.getSizeX() + ", " + this.nodeSize.getSizeY() +
                 "; Location:" + this.nodeCoords.getCoordX() + ", " + this.nodeCoords.getCoordY());
+    }
+
+    /**
+     * Moves the node in the specified direction
+     * @param x Change in X coordinate
+     * @param y Change in Y coordinate
+     */
+    public void move(int x, int y) {
+        this.setNodeCoords(new NodeCoords(this.nodeCoords.getCoordX() + x,
+                this.nodeCoords.getCoordY() + y));
     }
 }
