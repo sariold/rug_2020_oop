@@ -1,11 +1,13 @@
 package nl.rug.oop.grapheditor.controller.actions;
 
 import nl.rug.oop.grapheditor.model.GraphModel;
+import nl.rug.oop.grapheditor.model.edge.Edge;
 import nl.rug.oop.grapheditor.model.node.Node;
 
 import javax.swing.undo.AbstractUndoableEdit;
 import javax.swing.undo.CannotRedoException;
 import javax.swing.undo.CannotUndoException;
+import java.util.ArrayList;
 
 /**
  * Undoable Edit to remove a Node
@@ -14,6 +16,7 @@ public class RemoveNodeAction extends AbstractUndoableEdit {
 
     private GraphModel graphModel;
     private Node node;
+    private ArrayList<Edge> edges;
 
     /**
      * Create a new Action to create a node
@@ -23,6 +26,10 @@ public class RemoveNodeAction extends AbstractUndoableEdit {
     public RemoveNodeAction(GraphModel graphModel, Node node) {
         this.graphModel = graphModel;
         this.node = node;
+        this.edges = new ArrayList<Edge>();
+        for (Edge e: graphModel.getEdges()) {
+            if (e.getStart().equals(node)||e.getEnd().equals(node)) edges.add(e);
+        }
     }
 
     /**
@@ -32,6 +39,9 @@ public class RemoveNodeAction extends AbstractUndoableEdit {
     @Override
     public void undo() throws CannotUndoException {
         graphModel.addNode(node);
+        for (Edge e: this.edges) {
+            graphModel.addEdge(e);
+        }
     }
 
     /**
