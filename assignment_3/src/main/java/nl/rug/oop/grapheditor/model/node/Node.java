@@ -97,4 +97,14 @@ public class Node extends GraphComponent {
         return ("Name:" + this.name + "; Size:" + this.nodeSize.getSizeX() + ", " + this.nodeSize.getSizeY() +
                 "; Location:" + this.nodeCoords.getCoordX() + ", " + this.nodeCoords.getCoordY());
     }
+
+    /**
+     * Moves the node in the specified direction
+     * @param x Change in X coordinate
+     * @param y Change in Y coordinate
+     */
+    public void move(int x, int y) {
+        this.setNodeCoords(new NodeCoords(this.nodeCoords.getCoordX() + x,
+                this.nodeCoords.getCoordY() + y));
+    }
 }

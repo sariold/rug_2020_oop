@@ -135,7 +135,10 @@ public class SelectionController extends MouseInputAdapter {
         if(graphModel.getSelected() instanceof Node) {
             graphModel.getConnectorCursor().setX(x);
             graphModel.getConnectorCursor().setY(y);
+<<<<<<< HEAD
             graphModel.isSelected();
+=======
+>>>>>>> 9fb674e11454a90dec45a8f75a9d5cae919838bd
         }
     }
 
@@ -168,7 +171,10 @@ public class SelectionController extends MouseInputAdapter {
         graphModel.getConnectorCursor().setY(y);
         this.moveNode.setNodeCoords(new NodeCoords(x-moveNode.getNodeSize().getSizeX()/2,
                                                     y-moveNode.getNodeSize().getSizeY()/2));
+<<<<<<< HEAD
         graphModel.setDragging(true);
+=======
+>>>>>>> 9fb674e11454a90dec45a8f75a9d5cae919838bd
     }
 
     /**

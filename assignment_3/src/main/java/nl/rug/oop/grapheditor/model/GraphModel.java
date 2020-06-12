@@ -12,7 +12,6 @@ import java.util.Observable;
 /**
  * A graph model keeps track of the nodes and edges in the graph
  */
-@Data
 public class GraphModel extends Observable {
 
     private ArrayList<Node> nodes;
@@ -53,6 +52,69 @@ public class GraphModel extends Observable {
      */
     public GraphModel() {
         this(new ArrayList<Node>(), new ArrayList<Edge>());
+    }
+
+    public ArrayList<Node> getNodes() {
+        return nodes;
+    }
+
+    public void setNodes(ArrayList<Node> nodes) {
+        this.nodes = nodes;
+        notifyUpdate();
+    }
+
+    public ArrayList<Edge> getEdges() {
+        return edges;
+    }
+
+    public void setEdges(ArrayList<Edge> edges) {
+        this.edges = edges;
+        notifyUpdate();
+    }
+
+    public GraphComponent getSelected() {
+        return selected;
+    }
+
+    public void setSelected(GraphComponent selected) {
+        this.selected = selected;
+        notifyUpdate();
+    }
+
+    public Node getCopy() {
+        return copy;
+    }
+
+    public void setCopy(Node copy) {
+        this.copy = copy;
+        notifyUpdate();
+    }
+
+    public CursorCoords getConnectorCursor() {
+        notifyUpdate();
+        return connectorCursor;
+    }
+
+    public void setConnectorCursor(CursorCoords connectorCursor) {
+        this.connectorCursor = connectorCursor;
+        notifyUpdate();
+    }
+
+    public boolean isDragging() {
+        return dragging;
+    }
+
+    public void setDragging(boolean dragging) {
+        this.dragging = dragging;
+        notifyUpdate();
+    }
+
+    public UndoManager getUndoManager() {
+        return undoManager;
+    }
+
+    public void setUndoManager(UndoManager undoManager) {
+        this.undoManager = undoManager;
     }
 
     /**

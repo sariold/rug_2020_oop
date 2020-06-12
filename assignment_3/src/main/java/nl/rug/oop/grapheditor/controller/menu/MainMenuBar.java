@@ -1,5 +1,6 @@
 package nl.rug.oop.grapheditor.controller.menu;
 
+import nl.rug.oop.grapheditor.controller.actions.CreateEdgeAction;
 import nl.rug.oop.grapheditor.controller.actions.CreateNodeAction;
 import nl.rug.oop.grapheditor.controller.actions.RemoveEdgeAction;
 import nl.rug.oop.grapheditor.controller.actions.RemoveNodeAction;
@@ -27,7 +28,11 @@ import java.util.Observer;
 public class MainMenuBar extends JMenuBar implements Observer {
 
     private JMenu fileMenu, edgeMenu, nodeMenu, editMenu;
+<<<<<<< HEAD
     private JMenuItem save, load, newGraph, addNode, removeNode, editNode, removeEdge, undo, redo, copy, paste;
+=======
+    private JMenuItem save, load, newGraph, addNode, removeNode, editNode, addEdge, removeEdge, undo, redo, copy, paste;
+>>>>>>> 9fb674e11454a90dec45a8f75a9d5cae919838bd
     private GraphModel graphModel;
     private SaveGraph saveGraph;
     private LoadGraph loadGraph;
@@ -76,6 +81,10 @@ public class MainMenuBar extends JMenuBar implements Observer {
         this.nodeMenu.add(editNode);
         this.nodeMenu.add(copy);
         this.nodeMenu.add(paste);
+<<<<<<< HEAD
+=======
+        this.edgeMenu.add(addEdge);
+>>>>>>> 9fb674e11454a90dec45a8f75a9d5cae919838bd
         this.edgeMenu.add(removeEdge);
         this.editMenu.add(undo);
         this.editMenu.add(redo);
@@ -180,8 +189,11 @@ public class MainMenuBar extends JMenuBar implements Observer {
                 }
             }
         });
+<<<<<<< HEAD
         KeyStroke keyStrokeToCopyNode = KeyStroke.getKeyStroke(KeyEvent.VK_C, KeyEvent.CTRL_DOWN_MASK);
         copy.setAccelerator(keyStrokeToCopyNode);
+=======
+>>>>>>> 9fb674e11454a90dec45a8f75a9d5cae919838bd
         copy.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -190,15 +202,22 @@ public class MainMenuBar extends JMenuBar implements Observer {
                 }
             }
         });
+<<<<<<< HEAD
         KeyStroke keyStrokeToPasteNode = KeyStroke.getKeyStroke(KeyEvent.VK_V, KeyEvent.CTRL_DOWN_MASK);
         paste.setAccelerator(keyStrokeToPasteNode);
+=======
+>>>>>>> 9fb674e11454a90dec45a8f75a9d5cae919838bd
         paste.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Node newNode = graphModel.getCopy().copy();
+<<<<<<< HEAD
 //                newNode.move(5,5);
 
                 newNode.setNodeCoords(new NodeCoords(graphModel.getConnectorCursor().getX(), graphModel.getConnectorCursor().getY()));
+=======
+                newNode.move(5,5);
+>>>>>>> 9fb674e11454a90dec45a8f75a9d5cae919838bd
                 CreateNodeAction createNodeAction = new CreateNodeAction(graphModel, newNode);
                 createNodeAction.redo();
                 graphModel.getUndoManager().addEdit(createNodeAction);
