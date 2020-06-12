@@ -70,10 +70,22 @@ public class LoadGraph {
      * @param nodeInfo Node Info String
      */
     private void createNodes(String nodeInfo) {
+        String name;
         String [] node = nodeInfo.split(" ");
         NodeSize nodeSize = new NodeSize(Integer.parseInt(node[2]), Integer.parseInt(node[3]));
         NodeCoords nodeCoords = new NodeCoords(Integer.parseInt(node[0]), Integer.parseInt(node[1]));
-        Node newNode = new Node(node[4], nodeSize, nodeCoords);
+        name = node[4];
+        System.out.println(node.length);
+        if(node.length > 5) {
+            int i = 5;
+            while(true) {
+                name = name + " " + node[i];
+                System.out.println(name);
+                if(node.length == i + 1) break;
+                i++;
+            }
+        }
+        Node newNode = new Node(name, nodeSize, nodeCoords);
         graphModel.addNode(newNode);
     }
 

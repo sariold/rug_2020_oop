@@ -16,7 +16,6 @@ import javax.swing.undo.CannotRedoException;
 import javax.swing.undo.CannotUndoException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.util.Observable;
 import java.util.Observer;
@@ -130,7 +129,7 @@ public class MainMenuBar extends JMenuBar implements Observer {
     }
 
     /**
-     * Adds the funcitonality to add and remove edges
+     * Adds the functionality to add and remove edges
      */
     private void addEdgeFunctionality() {
         KeyStroke keyStrokeToDeleteEdge = KeyStroke.getKeyStroke(KeyEvent.VK_BACK_SPACE, 0);
@@ -251,6 +250,8 @@ public class MainMenuBar extends JMenuBar implements Observer {
      */
     @Override
     public void update(Observable o, Object arg) {
+//        undo.setEnabled(graphModel.getUndoManager().canUndo());
+//        redo.setEnabled(graphModel.getUndoManager().canRedo());
         removeNode.setEnabled(graphModel.getSelected() instanceof Node);
         editNode.setEnabled(graphModel.getSelected() instanceof Node);
         removeEdge.setEnabled(graphModel.getSelected() instanceof Edge);
