@@ -12,10 +12,17 @@ import java.awt.*;
 import java.util.Observable;
 import java.util.Observer;
 
+/**
+ * Graph Panel
+ */
 public class GraphPanel extends JPanel implements Observer {
 
     private GraphModel graphModel;
 
+    /**
+     * Graph panel
+     * @param graphModel graph model
+     */
     public GraphPanel(GraphModel graphModel) {
         super(new BorderLayout());
         setBackground(Color.GRAY);
@@ -25,7 +32,7 @@ public class GraphPanel extends JPanel implements Observer {
     }
 
     /**
-     * Paint the Graphmodel
+     * Paint the Graph model
      * @param g Graphics
      */
     @Override
@@ -78,7 +85,7 @@ public class GraphPanel extends JPanel implements Observer {
 
     /**
      * Paint the Nodes of the Graph model
-     * @param g
+     * @param g graphics
      */
     private void paintEdges(Graphics g) {
 //        g.translate(getWidth()/2, getHeight()/2);

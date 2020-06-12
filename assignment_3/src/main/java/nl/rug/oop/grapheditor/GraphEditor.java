@@ -17,7 +17,7 @@ public class GraphEditor {
             graphModel = new GraphModel();
         }
         MainFrame mainFrame = new MainFrame(graphModel);
-        ConsoleView consoleView  = new ConsoleView(graphModel);
+//        ConsoleView consoleView  = new ConsoleView(graphModel);
         ConsoleController consoleController = new ConsoleController(graphModel);
         while (true) {
             consoleController.showOptions();

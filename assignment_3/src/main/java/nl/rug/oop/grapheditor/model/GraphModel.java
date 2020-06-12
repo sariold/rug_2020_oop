@@ -18,6 +18,7 @@ public class GraphModel extends Observable {
     private ArrayList<Node> nodes;
     private ArrayList<Edge> edges;
     private GraphComponent selected;
+    private Node copy;
     private CursorCoords connectorCursor;
     private boolean dragging;
     private UndoManager undoManager;
@@ -32,6 +33,7 @@ public class GraphModel extends Observable {
         this.nodes = nodes;
         this.edges = edges;
         selected = null;
+        copy = null;
         this.connectorCursor = new CursorCoords();
         this.undoManager = new UndoManager();
     }
@@ -51,6 +53,33 @@ public class GraphModel extends Observable {
      */
     public GraphModel() {
         this(new ArrayList<Node>(), new ArrayList<Edge>());
+    }
+
+    /**
+     * Set dragging boolean
+     * @param dragging boolean
+     */
+    public void setDragging(boolean dragging) {
+        this.dragging = dragging;
+        notifyUpdate();
+    }
+
+    /**
+     * Check if a graph component is selected
+     * @return boolean selected
+     */
+    public boolean isSelected() {
+        notifyUpdate();
+        return this.getSelected() != null;
+    }
+
+    /**
+     * Set selected
+     * @param selected graph component
+     */
+    public void setSelected(GraphComponent selected) {
+        this.selected = selected;
+        notifyUpdate();
     }
 
     /**

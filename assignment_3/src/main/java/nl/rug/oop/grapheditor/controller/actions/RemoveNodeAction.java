@@ -34,7 +34,7 @@ public class RemoveNodeAction extends AbstractUndoableEdit {
 
     /**
      * Remove the Node from the graph Model
-     * @throws CannotUndoException
+     * @throws CannotUndoException cannot undo
      */
     @Override
     public void undo() throws CannotUndoException {
@@ -46,7 +46,7 @@ public class RemoveNodeAction extends AbstractUndoableEdit {
 
     /**
      * Add the node to the graph model
-     * @throws CannotRedoException
+     * @throws CannotRedoException cannot redo
      */
     @Override
     public void redo() throws CannotRedoException {

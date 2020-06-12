@@ -1,6 +1,5 @@
 package nl.rug.oop.grapheditor.controller.actions;
 
-import nl.rug.oop.grapheditor.controller.menu.EditNodeMenu;
 import nl.rug.oop.grapheditor.model.node.Node;
 import nl.rug.oop.grapheditor.model.node.NodeCoords;
 import nl.rug.oop.grapheditor.model.node.NodeSize;
@@ -10,7 +9,7 @@ import javax.swing.undo.CannotRedoException;
 import javax.swing.undo.CannotUndoException;
 
 /**
- * Ection that handles the edit of a Node
+ * Action that handles the edit of a Node
  */
 public class EditNodeAction extends AbstractUndoableEdit {
 
@@ -52,7 +51,7 @@ public class EditNodeAction extends AbstractUndoableEdit {
 
     /**
      * Change the Node back to before the edit
-     * @throws CannotUndoException
+     * @throws CannotUndoException cannot undo
      */
     @Override
     public void undo() throws CannotUndoException {
@@ -63,7 +62,7 @@ public class EditNodeAction extends AbstractUndoableEdit {
 
     /**
      * Edit the node
-     * @throws CannotRedoException
+     * @throws CannotRedoException cannot redo
      */
     @Override
     public void redo() throws CannotRedoException {

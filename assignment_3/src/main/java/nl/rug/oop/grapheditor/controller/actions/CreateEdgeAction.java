@@ -27,7 +27,7 @@ public class CreateEdgeAction extends AbstractUndoableEdit {
 
     /**
      * Remove the edge again
-     * @throws CannotUndoException
+     * @throws CannotUndoException cannot undo
      */
     @Override
     public void undo() throws CannotUndoException {
@@ -36,7 +36,7 @@ public class CreateEdgeAction extends AbstractUndoableEdit {
 
     /**
      * Add the edge
-     * @throws CannotRedoException
+     * @throws CannotRedoException cannot redo
      */
     @Override
     public void redo() throws CannotRedoException {

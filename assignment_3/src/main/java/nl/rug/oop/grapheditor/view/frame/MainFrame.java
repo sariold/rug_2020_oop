@@ -9,12 +9,19 @@ import java.awt.*;
 import java.util.Observable;
 import java.util.Observer;
 
+/**
+ * Main Frame
+ */
 public class MainFrame extends JFrame implements Observer {
 
     GraphPanel graphPanel;
     GraphModel graphModel;
     MainMenuBar menuBar;
 
+    /**
+     * Main frame
+     * @param graphModel graph model
+     */
     public MainFrame(GraphModel graphModel){
         super("Graph Editor");
         graphModel.addObserver(this);

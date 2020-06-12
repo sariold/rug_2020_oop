@@ -7,7 +7,6 @@ import nl.rug.oop.grapheditor.model.GraphModel;
 import nl.rug.oop.grapheditor.model.edge.Edge;
 import nl.rug.oop.grapheditor.model.node.Node;
 import nl.rug.oop.grapheditor.model.node.NodeCoords;
-import nl.rug.oop.grapheditor.model.node.NodeSize;
 import nl.rug.oop.grapheditor.util.LoadGraph;
 import nl.rug.oop.grapheditor.util.SaveGraph;
 
@@ -17,14 +16,18 @@ import javax.swing.undo.CannotRedoException;
 import javax.swing.undo.CannotUndoException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.util.Observable;
 import java.util.Observer;
 
+/**
+ * Main menu bar for graph editor options
+ */
 public class MainMenuBar extends JMenuBar implements Observer {
 
     private JMenu fileMenu, edgeMenu, nodeMenu, editMenu;
-    private JMenuItem save, load, newGraph, addNode, removeNode, editNode, addEdge, removeEdge, undo, redo;
+    private JMenuItem save, load, newGraph, addNode, removeNode, editNode, removeEdge, undo, redo, copy, paste;
     private GraphModel graphModel;
     private SaveGraph saveGraph;
     private LoadGraph loadGraph;
@@ -32,8 +35,9 @@ public class MainMenuBar extends JMenuBar implements Observer {
 
     /**
      * Create a new Menu Bar for the graph editor
+     * @param graphModel graph model
      */
-    public MainMenuBar(GraphModel graphModel){
+    public MainMenuBar(GraphModel graphModel) {
         super();
         this.graphModel = graphModel;
         this.saveGraph = new SaveGraph(this.graphModel);
@@ -53,21 +57,25 @@ public class MainMenuBar extends JMenuBar implements Observer {
         this.addNode = new JMenuItem("Add Node");
         this.removeNode = new JMenuItem("Remove Node");
         this.editNode = new JMenuItem("Edit Node");
-        this.addEdge = new JMenuItem("Add Edge");
         this.removeEdge = new JMenuItem("Remove Edge");
         this.undo = new JMenuItem("Undo");
         this.redo = new JMenuItem("Redo");
+        this.copy = new JMenuItem("Copy Node");
+        this.paste = new JMenuItem("Paste Node");
         addFunctionality();
         removeNode.setEnabled(graphModel.getSelected() instanceof Node);
         editNode.setEnabled(graphModel.getSelected() instanceof Node);
         removeEdge.setEnabled(graphModel.getSelected() instanceof Edge);
+        copy.setEnabled(graphModel.getSelected() instanceof Node);
+        paste.setEnabled(graphModel.getCopy() != null);
         this.fileMenu.add(newGraph);
         this.fileMenu.add(save);
         this.fileMenu.add(load);
         this.nodeMenu.add(addNode);
         this.nodeMenu.add(removeNode);
         this.nodeMenu.add(editNode);
-        this.edgeMenu.add(addEdge);
+        this.nodeMenu.add(copy);
+        this.nodeMenu.add(paste);
         this.edgeMenu.add(removeEdge);
         this.editMenu.add(undo);
         this.editMenu.add(redo);
@@ -125,7 +133,7 @@ public class MainMenuBar extends JMenuBar implements Observer {
      * Adds the funcitonality to add and remove edges
      */
     private void addEdgeFunctionality() {
-        KeyStroke keyStrokeToDeleteEdge = KeyStroke.getKeyStroke(KeyEvent.VK_DELETE, 0);
+        KeyStroke keyStrokeToDeleteEdge = KeyStroke.getKeyStroke(KeyEvent.VK_BACK_SPACE, 0);
         removeEdge.setAccelerator(keyStrokeToDeleteEdge);
         removeEdge.addActionListener(new ActionListener() {
             @Override
@@ -151,7 +159,7 @@ public class MainMenuBar extends JMenuBar implements Observer {
                 new CreateNodeMenu(graphModel);
             }
         });
-        KeyStroke keyStrokeToDeleteNode = KeyStroke.getKeyStroke(KeyEvent.VK_DELETE, 0);
+        KeyStroke keyStrokeToDeleteNode = KeyStroke.getKeyStroke(KeyEvent.VK_BACK_SPACE, 0);
         removeNode.setAccelerator(keyStrokeToDeleteNode);
         removeNode.addActionListener(new ActionListener() {
             @Override
@@ -170,6 +178,30 @@ public class MainMenuBar extends JMenuBar implements Observer {
                     new EditNodeMenu((Node)graphModel.getSelected(), graphModel);
                     graphModel.notifyUpdate();
                 }
+            }
+        });
+        KeyStroke keyStrokeToCopyNode = KeyStroke.getKeyStroke(KeyEvent.VK_C, KeyEvent.CTRL_DOWN_MASK);
+        copy.setAccelerator(keyStrokeToCopyNode);
+        copy.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (graphModel.getSelected() instanceof Node) {
+                    graphModel.setCopy((Node)graphModel.getSelected());
+                }
+            }
+        });
+        KeyStroke keyStrokeToPasteNode = KeyStroke.getKeyStroke(KeyEvent.VK_V, KeyEvent.CTRL_DOWN_MASK);
+        paste.setAccelerator(keyStrokeToPasteNode);
+        paste.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Node newNode = graphModel.getCopy().copy();
+//                newNode.move(5,5);
+
+                newNode.setNodeCoords(new NodeCoords(graphModel.getConnectorCursor().getX(), graphModel.getConnectorCursor().getY()));
+                CreateNodeAction createNodeAction = new CreateNodeAction(graphModel, newNode);
+                createNodeAction.redo();
+                graphModel.getUndoManager().addEdit(createNodeAction);
             }
         });
     }
@@ -213,7 +245,7 @@ public class MainMenuBar extends JMenuBar implements Observer {
     }
 
     /**
-     * Enables or disables Buttons when a change in the Graph model occured
+     * Enables or disables Buttons when a change in the Graph model occurred
      * @param o Graph Model
      * @param arg Object
      */
@@ -222,5 +254,7 @@ public class MainMenuBar extends JMenuBar implements Observer {
         removeNode.setEnabled(graphModel.getSelected() instanceof Node);
         editNode.setEnabled(graphModel.getSelected() instanceof Node);
         removeEdge.setEnabled(graphModel.getSelected() instanceof Edge);
+        copy.setEnabled(graphModel.getSelected() instanceof Node);
+        paste.setEnabled(graphModel.getCopy() != null);
     }
 }

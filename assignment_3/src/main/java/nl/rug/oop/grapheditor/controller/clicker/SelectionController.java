@@ -19,18 +19,16 @@ import java.awt.geom.Line2D;
 public class SelectionController extends MouseInputAdapter {
 
     private GraphModel graphModel;
-    private GraphPanel graphPanel;
     private Node moveNode;
     private NodeCoords startDragging;
 
     /**
      * Create clicker to select a node
-     * @param graphModel
-     * @param graphPanel
+     * @param graphModel graph model
+     * @param graphPanel graph panel
      */
     public SelectionController(GraphModel graphModel, GraphPanel graphPanel) {
         this.graphModel = graphModel;
-        this.graphPanel = graphPanel;
         this.moveNode = null;
         graphPanel.addMouseListener(this);
         graphPanel.addMouseMotionListener(this);
@@ -52,17 +50,14 @@ public class SelectionController extends MouseInputAdapter {
         if(e.getButton() == MouseEvent.BUTTON1) {
             // check if a node was selected
             if (nodeSelection(x,y)) {
-                graphModel.notifyUpdate();
                 return;
             }
             // check if an edge was selected
             if (edgeSelection(x,y)) {
-                graphModel.notifyUpdate();
                 return;
             }
         }
         graphModel.setSelected(null);
-        graphModel.notifyUpdate();
         System.out.println("Not selected");
     }
 
@@ -122,7 +117,6 @@ public class SelectionController extends MouseInputAdapter {
                     graphModel.getUndoManager().addEdit(createEdgeAction);
                     graphModel.setSelected(null);
                 }
-                graphModel.notifyUpdate();
                 System.out.println("NODE Interaction");
                 return true;
             }
@@ -130,6 +124,10 @@ public class SelectionController extends MouseInputAdapter {
         return false;
     }
 
+    /**
+     * Mouse movement so edge should follow mouse cursor
+     * @param e Mouse even
+     */
     @Override
     public void mouseMoved(MouseEvent e) {
         int x = e.getX();
@@ -137,7 +135,7 @@ public class SelectionController extends MouseInputAdapter {
         if(graphModel.getSelected() instanceof Node) {
             graphModel.getConnectorCursor().setX(x);
             graphModel.getConnectorCursor().setY(y);
-            graphModel.notifyUpdate();
+            graphModel.isSelected();
         }
     }
 
@@ -156,13 +154,12 @@ public class SelectionController extends MouseInputAdapter {
                 if (x >= coords.getCoordX() && x <= coords.getCoordX()+size.getSizeX() &&
                         y >= coords.getCoordY() && y <= coords.getCoordY()+size.getSizeY()) {
                         this.moveNode = n;
-                        graphModel.setDragging(true);
                         graphModel.setSelected(n);
                         graphModel.getConnectorCursor().setX(x);
                         graphModel.getConnectorCursor().setY(y);
-                        graphModel.notifyUpdate();
                         this.startDragging = n.getNodeCoords();
-                        break;
+                        graphModel.setDragging(true);
+                    break;
                 }
             }
             return;
@@ -171,7 +168,7 @@ public class SelectionController extends MouseInputAdapter {
         graphModel.getConnectorCursor().setY(y);
         this.moveNode.setNodeCoords(new NodeCoords(x-moveNode.getNodeSize().getSizeX()/2,
                                                     y-moveNode.getNodeSize().getSizeY()/2));
-        graphModel.notifyUpdate();
+        graphModel.setDragging(true);
     }
 
     /**
@@ -186,7 +183,5 @@ public class SelectionController extends MouseInputAdapter {
         }
         this.moveNode = null;
         graphModel.setDragging(false);
-//        graphModel.setSelected(null);
-        graphModel.notifyUpdate();
     }
 }
