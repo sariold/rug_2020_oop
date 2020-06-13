@@ -59,7 +59,7 @@ public class EditNodeMenu extends JOptionPane {
             int x = xField.getText().isEmpty()?node.getNodeCoords().getCoordX():Integer.parseInt(xField.getText());
             int y = yField.getText().isEmpty()?node.getNodeCoords().getCoordY():Integer.parseInt(yField.getText());
             EditNodeAction editNodeAction = new EditNodeAction(node, name, new NodeCoords(x,y),
-                    new NodeSize(height, width));
+                    new NodeSize(width, height));
 //            editNodeAction.redo();
             graphModel.getUndoManager().addEdit(editNodeAction);
         }
