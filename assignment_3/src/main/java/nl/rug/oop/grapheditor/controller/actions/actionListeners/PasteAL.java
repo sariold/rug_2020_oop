@@ -37,7 +37,6 @@ public class PasteAL implements ActionListener {
         Node newNode = graphModel.getCopy().copy();
         newNode.setNodeCoords(new NodeCoords(graphModel.getConnectorCursor().getX(), graphModel.getConnectorCursor().getY()));
         CreateNodeAction createNodeAction = new CreateNodeAction(graphModel, newNode);
-//        createNodeAction.redo();
         graphModel.getUndoManager().addEdit(createNodeAction);
     }
 }

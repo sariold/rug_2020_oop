@@ -34,7 +34,7 @@ public class RedoAL implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         try {
             graphModel.getUndoManager().redo();
-            graphModel.notifyUpdate();
+            graphModel.setSelected(null);
         } catch (CannotRedoException ex) {
             System.out.println("CANT REDO");
         }

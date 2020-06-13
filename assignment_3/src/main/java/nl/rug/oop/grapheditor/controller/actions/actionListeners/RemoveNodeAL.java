@@ -35,7 +35,6 @@ public class RemoveNodeAL implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (graphModel.getSelected() instanceof Node) {
             RemoveNodeAction removeNodeAction = new RemoveNodeAction(graphModel, (Node)graphModel.getSelected());
-//            removeNodeAction.redo();
             graphModel.getUndoManager().addEdit(removeNodeAction);
         }
     }

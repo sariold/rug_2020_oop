@@ -35,6 +35,7 @@ public class EditNodeAL implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (graphModel.getSelected() instanceof Node) {
             new EditNodeMenu((Node)graphModel.getSelected(), graphModel);
-            graphModel.notifyUpdate();
-        }    }
+            graphModel.setSelected(null);
+        }
+    }
 }

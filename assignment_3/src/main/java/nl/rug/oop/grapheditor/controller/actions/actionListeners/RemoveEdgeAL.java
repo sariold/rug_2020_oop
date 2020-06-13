@@ -35,7 +35,6 @@ public class RemoveEdgeAL implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (graphModel.getSelected() instanceof Edge) {
             RemoveEdgeAction removeEdgeAction = new RemoveEdgeAction(graphModel, (Edge)graphModel.getSelected());
-//            removeEdgeAction.redo();
             graphModel.getUndoManager().addEdit(removeEdgeAction);
         }
     }

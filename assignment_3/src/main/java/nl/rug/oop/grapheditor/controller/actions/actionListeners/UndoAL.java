@@ -34,7 +34,7 @@ public class UndoAL implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         try {
             graphModel.getUndoManager().undo();
-            graphModel.notifyUpdate();
+            graphModel.setSelected(null);
         } catch (CannotUndoException ex) {
             System.out.println("CANT UNDO");
         }

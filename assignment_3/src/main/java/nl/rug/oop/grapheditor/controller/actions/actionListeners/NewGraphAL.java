@@ -33,6 +33,6 @@ public class NewGraphAL implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         graphModel.getNodes().clear();
         graphModel.getEdges().clear();
-        graphModel.notifyUpdate();
+        graphModel.setSelected(null);
     }
 }
