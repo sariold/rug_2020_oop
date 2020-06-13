@@ -13,8 +13,7 @@ import java.awt.event.ActionListener;
  */
 public class RemoveEdgeAL implements ActionListener {
 
-    JMenuItem jMenuItem;
-    GraphModel graphModel;
+    final GraphModel graphModel;
 
     /**
      * Create a new paste action
@@ -22,7 +21,6 @@ public class RemoveEdgeAL implements ActionListener {
      * @param graphModel Graph model
      */
     public RemoveEdgeAL(JMenuItem jMenuItem, GraphModel graphModel) {
-        this.jMenuItem = jMenuItem;
         this.graphModel = graphModel;
         jMenuItem.addActionListener(this);
     }

@@ -12,8 +12,8 @@ import javax.swing.undo.CannotUndoException;
  */
 public class CreateNodeAction extends AbstractUndoableEdit {
 
-    private GraphModel graphModel;
-    private Node node;
+    private final GraphModel graphModel;
+    private final Node node;
 
     /**
      * Create a new Action to create a node

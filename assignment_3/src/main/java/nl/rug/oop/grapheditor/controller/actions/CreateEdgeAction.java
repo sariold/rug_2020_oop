@@ -12,8 +12,8 @@ import javax.swing.undo.CannotUndoException;
  */
 public class CreateEdgeAction extends AbstractUndoableEdit {
 
-    private GraphModel graphModel;
-    private Edge edge;
+    private final GraphModel graphModel;
+    private final Edge edge;
 
     /**
      * Create a new add edge action

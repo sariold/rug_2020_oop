@@ -14,8 +14,7 @@ import java.awt.event.ActionListener;
  */
 public class PasteAL implements ActionListener {
 
-    JMenuItem jMenuItem;
-    GraphModel graphModel;
+    final GraphModel graphModel;
 
     /**
      * Create a new paste action
@@ -23,7 +22,6 @@ public class PasteAL implements ActionListener {
      * @param graphModel Graph model
      */
     public PasteAL(JMenuItem jMenuItem, GraphModel graphModel) {
-        this.jMenuItem = jMenuItem;
         this.graphModel = graphModel;
         jMenuItem.addActionListener(this);
     }

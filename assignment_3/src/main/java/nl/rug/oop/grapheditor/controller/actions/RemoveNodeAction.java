@@ -14,9 +14,9 @@ import java.util.ArrayList;
  */
 public class RemoveNodeAction extends AbstractUndoableEdit {
 
-    private GraphModel graphModel;
-    private Node node;
-    private ArrayList<Edge> edges;
+    private final GraphModel graphModel;
+    private final Node node;
+    private final ArrayList<Edge> edges;
 
     /**
      * Create a new Action to create a node
@@ -26,7 +26,7 @@ public class RemoveNodeAction extends AbstractUndoableEdit {
     public RemoveNodeAction(GraphModel graphModel, Node node) {
         this.graphModel = graphModel;
         this.node = node;
-        this.edges = new ArrayList<Edge>();
+        this.edges = new ArrayList<>();
         for (Edge e: graphModel.getEdges()) {
             if (e.getStart().equals(node)|| e.getEnd().equals(node)) edges.add(e);
         }

@@ -18,7 +18,7 @@ import java.awt.geom.Line2D;
  */
 public class SelectionController extends MouseInputAdapter {
 
-    private GraphModel graphModel;
+    private final GraphModel graphModel;
     private Node moveNode;
     private NodeCoords startDragging;
 

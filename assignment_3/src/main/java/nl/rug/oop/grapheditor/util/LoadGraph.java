@@ -15,9 +15,7 @@ import java.io.IOException;
  */
 public class LoadGraph {
 
-    private GraphModel graphModel;
-    private int nodes;
-    private int edges;
+    private final GraphModel graphModel;
 
     /**
      * Load a graph from a file
@@ -51,9 +49,9 @@ public class LoadGraph {
         String currentLine = reader.readLine();
         if(currentLine.length() != 0) {
             String [] graphInfo = currentLine.split(" ");
-            nodes = Integer.parseInt(graphInfo[0]);
-            edges = Integer.parseInt(graphInfo[1]);
-            while(currentLine != null && currentLine.length() != 0) {
+            int nodes = Integer.parseInt(graphInfo[0]);
+            int edges = Integer.parseInt(graphInfo[1]);
+            while(currentLine.length() != 0) {
                 currentLine = reader.readLine();
                 if(currentLine == null) break;
                 if(nodes > 0) {

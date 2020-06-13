@@ -13,13 +13,13 @@ import javax.swing.undo.CannotUndoException;
  */
 public class EditNodeAction extends AbstractUndoableEdit {
 
-    private Node node;
-    private String newName;
-    private NodeCoords newCoords;
-    private NodeSize newSize;
-    private String oldName;
+    private final Node node;
+    private final String newName;
+    private final NodeCoords newCoords;
+    private final NodeSize newSize;
+    private final String oldName;
     private NodeCoords oldCoords;
-    private NodeSize oldSize;
+    private final NodeSize oldSize;
 
     /**
      * Create a Edit node action given a new name new coordinates and a new size

@@ -12,8 +12,7 @@ import java.awt.event.ActionListener;
  */
 public class UndoAL implements ActionListener {
 
-    JMenuItem jMenuItem;
-    GraphModel graphModel;
+    final GraphModel graphModel;
 
     /**
      * Create a new paste action
@@ -21,7 +20,6 @@ public class UndoAL implements ActionListener {
      * @param graphModel Graph model
      */
     public UndoAL(JMenuItem jMenuItem, GraphModel graphModel) {
-        this.jMenuItem = jMenuItem;
         this.graphModel = graphModel;
         jMenuItem.addActionListener(this);
     }

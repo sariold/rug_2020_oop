@@ -14,8 +14,8 @@ import java.util.Observer;
  */
 public class MainFrame extends JFrame implements Observer {
 
-    GraphPanel graphPanel;
-    GraphModel graphModel;
+    final GraphPanel graphPanel;
+    final GraphModel graphModel;
     MainMenuBar menuBar;
 
     /**

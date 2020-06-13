@@ -12,7 +12,7 @@ import java.io.IOException;
  */
 public class SaveGraph {
 
-    private GraphModel graphModel;
+    private final GraphModel graphModel;
 
     /**
      * Create a save graph object

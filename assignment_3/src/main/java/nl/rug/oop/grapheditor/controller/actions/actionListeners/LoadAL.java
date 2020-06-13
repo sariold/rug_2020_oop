@@ -12,9 +12,8 @@ import java.awt.event.ActionListener;
  */
 public class LoadAL implements ActionListener {
 
-    JMenuItem jMenuItem;
-    LoadGraph loadGraph;
-    JFileChooser jFileChooser;
+    final LoadGraph loadGraph;
+    final JFileChooser jFileChooser;
     GraphModel graphModel;
 
     /**
@@ -25,7 +24,6 @@ public class LoadAL implements ActionListener {
      * @param graphModel graph model
      */
     public LoadAL(JMenuItem jMenuItem, LoadGraph loadGraph, JFileChooser jFileChooser, GraphModel graphModel) {
-        this.jMenuItem = jMenuItem;
         this.loadGraph = loadGraph;
         this.jFileChooser = jFileChooser;
         this.graphModel = graphModel;

@@ -15,9 +15,9 @@ import java.text.NumberFormat;
  */
 public class EditNodeMenu extends JOptionPane {
 
-    private Node node;
-    private GraphModel graphModel;
-    private NumberFormatter formatter;
+    private final Node node;
+    private final GraphModel graphModel;
+    private final NumberFormatter formatter;
 
     /**
      * Create a new Menu to edit a node

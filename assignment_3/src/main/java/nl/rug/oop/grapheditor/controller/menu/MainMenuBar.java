@@ -18,12 +18,21 @@ import java.util.Observer;
  */
 public class MainMenuBar extends JMenuBar implements Observer {
 
-    private JMenu fileMenu, edgeMenu, nodeMenu, editMenu;
-    private JMenuItem save, load, newGraph, addNode, removeNode, editNode, removeEdge, undo, redo, copy, paste;
-    private GraphModel graphModel;
-    private SaveGraph saveGraph;
-    private LoadGraph loadGraph;
-    private JFileChooser jFileChooser;
+    private final JMenuItem save;
+    private final JMenuItem load;
+    private final JMenuItem newGraph;
+    private final JMenuItem addNode;
+    private final JMenuItem removeNode;
+    private final JMenuItem editNode;
+    private final JMenuItem removeEdge;
+    private final JMenuItem undo;
+    private final JMenuItem redo;
+    private final JMenuItem copy;
+    private final JMenuItem paste;
+    private final GraphModel graphModel;
+    private final SaveGraph saveGraph;
+    private final LoadGraph loadGraph;
+    private final JFileChooser jFileChooser;
 
     /**
      * Create a new Menu Bar for the graph editor
@@ -39,10 +48,10 @@ public class MainMenuBar extends JMenuBar implements Observer {
         FileNameExtensionFilter restrict = new FileNameExtensionFilter("Only .sff files", "sff");
         jFileChooser.addChoosableFileFilter(restrict);
         graphModel.addObserver(this);
-        this.fileMenu = new JMenu("File");
-        this.edgeMenu = new JMenu("Edges");
-        this.nodeMenu = new JMenu("Nodes");
-        this.editMenu = new JMenu("Edit");
+        JMenu fileMenu = new JMenu("File");
+        JMenu edgeMenu = new JMenu("Edges");
+        JMenu nodeMenu = new JMenu("Nodes");
+        JMenu editMenu = new JMenu("Edit");
         this.save = new JMenuItem("Save");
         this.load = new JMenuItem("Load");
         this.newGraph = new JMenuItem("New");
@@ -62,17 +71,17 @@ public class MainMenuBar extends JMenuBar implements Observer {
         removeEdge.setEnabled(graphModel.getSelected() instanceof Edge);
         copy.setEnabled(graphModel.getSelected() instanceof Node);
         paste.setEnabled(graphModel.getCopy() != null);
-        this.fileMenu.add(newGraph);
-        this.fileMenu.add(save);
-        this.fileMenu.add(load);
-        this.nodeMenu.add(addNode);
-        this.nodeMenu.add(removeNode);
-        this.nodeMenu.add(editNode);
-        this.nodeMenu.add(copy);
-        this.nodeMenu.add(paste);
-        this.edgeMenu.add(removeEdge);
-        this.editMenu.add(undo);
-        this.editMenu.add(redo);
+        fileMenu.add(newGraph);
+        fileMenu.add(save);
+        fileMenu.add(load);
+        nodeMenu.add(addNode);
+        nodeMenu.add(removeNode);
+        nodeMenu.add(editNode);
+        nodeMenu.add(copy);
+        nodeMenu.add(paste);
+        edgeMenu.add(removeEdge);
+        editMenu.add(undo);
+        editMenu.add(redo);
         this.add(fileMenu);
         this.add(nodeMenu);
         this.add(edgeMenu);

@@ -15,8 +15,8 @@ import java.text.NumberFormat;
  */
 public class CreateNodeMenu extends JOptionPane {
 
-    private GraphModel graphModel;
-    private NumberFormatter formatter;
+    private final GraphModel graphModel;
+    private final NumberFormatter formatter;
 
     /**
      * Create a new menu to create a node in a graph model

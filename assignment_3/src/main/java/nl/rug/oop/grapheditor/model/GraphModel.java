@@ -45,7 +45,7 @@ public class GraphModel extends Observable {
      * @param filePath File Path
      */
     public GraphModel(String filePath) {
-        this(new ArrayList<Node>(), new ArrayList<Edge>());
+        this(new ArrayList<>(), new ArrayList<>());
         LoadGraph loadGraph = new LoadGraph(this);
         loadGraph.loadFile(filePath);
     }
@@ -54,7 +54,7 @@ public class GraphModel extends Observable {
      * Create new graph model with empty edges and nodes
      */
     public GraphModel() {
-        this(new ArrayList<Node>(), new ArrayList<Edge>());
+        this(new ArrayList<>(), new ArrayList<>());
     }
 
     /**
@@ -121,22 +121,22 @@ public class GraphModel extends Observable {
         notifyUpdate();
     }
 
-    /**
-     * Remove a Node at a given index and all edges connecting the node from the graph
-     * @param node Index of node
-     */
-    public void removeNodeAtIndex(int node) {
-        Node toRemove = this.nodes.get(node);
-        for (int i = this.edges.size() - 1; i >= 0; i--) {
-            Edge e = this.edges.get(i);
-            if (e.connects(toRemove)) {
-                removeEdgeAtIndex(i);
-            }
-        }
-        this.nodes.remove(node);
-        this.selected = null;
-        notifyUpdate();
-    }
+//    /**
+//     * Remove a Node at a given index and all edges connecting the node from the graph
+//     * @param node Index of node
+//     */
+//    public void removeNodeAtIndex(int node) {
+//        Node toRemove = this.nodes.get(node);
+//        for (int i = this.edges.size() - 1; i >= 0; i--) {
+//            Edge e = this.edges.get(i);
+//            if (e.connects(toRemove)) {
+//                removeEdgeAtIndex(i);
+//            }
+//        }
+//        this.nodes.remove(node);
+//        this.selected = null;
+//        notifyUpdate();
+//    }
 
     /**
      * Remove a Node and all edges connecting the node from the graph

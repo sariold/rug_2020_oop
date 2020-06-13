@@ -17,7 +17,7 @@ import java.util.Observer;
  */
 public class GraphPanel extends JPanel implements Observer {
 
-    private GraphModel graphModel;
+    private final GraphModel graphModel;
 
     /**
      * Graph panel

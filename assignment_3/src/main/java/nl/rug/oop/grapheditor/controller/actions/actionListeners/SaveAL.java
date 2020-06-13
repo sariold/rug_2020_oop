@@ -11,9 +11,8 @@ import java.awt.event.ActionListener;
  */
 public class SaveAL implements ActionListener {
 
-    JMenuItem jMenuItem;
-    SaveGraph saveGraph;
-    JFileChooser jFileChooser;
+    final SaveGraph saveGraph;
+    final JFileChooser jFileChooser;
 
     /**
      * Create a new paste action
@@ -22,7 +21,6 @@ public class SaveAL implements ActionListener {
      * @param jFileChooser jFileChooser
      */
     public SaveAL(JMenuItem jMenuItem, SaveGraph saveGraph, JFileChooser jFileChooser) {
-        this.jMenuItem = jMenuItem;
         this.saveGraph = saveGraph;
         this.jFileChooser = jFileChooser;
         jMenuItem.addActionListener(this);
