@@ -31,6 +31,7 @@ public class CreateEdgeAction extends AbstractUndoableEdit {
      */
     @Override
     public void undo() throws CannotUndoException {
+//        super.undo();
         graphModel.removeEdge(edge);
     }
 
@@ -40,6 +41,7 @@ public class CreateEdgeAction extends AbstractUndoableEdit {
      */
     @Override
     public void redo() throws CannotRedoException {
+//        super.redo();
         graphModel.addEdge(edge);
     }
 }

@@ -2,7 +2,6 @@ package nl.rug.oop.grapheditor;
 
 import nl.rug.oop.grapheditor.controller.ConsoleController;
 import nl.rug.oop.grapheditor.model.GraphModel;
-import nl.rug.oop.grapheditor.view.ConsoleView;
 import nl.rug.oop.grapheditor.view.frame.MainFrame;
 
 public class GraphEditor {

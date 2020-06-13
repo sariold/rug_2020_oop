@@ -1,6 +1,7 @@
 package nl.rug.oop.grapheditor.model;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import nl.rug.oop.grapheditor.model.edge.Edge;
 import nl.rug.oop.grapheditor.model.node.Node;
 import nl.rug.oop.grapheditor.util.LoadGraph;
@@ -12,6 +13,7 @@ import java.util.Observable;
 /**
  * A graph model keeps track of the nodes and edges in the graph
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
 public class GraphModel extends Observable {
 

@@ -46,7 +46,7 @@ public class GraphPanel extends JPanel implements Observer {
 
     /**
      * Draw a theoretical edge between the cursor and the selected node
-     * @param g
+     * @param g graph
      */
     private void paintNodeConnector(Graphics g) {
         if(graphModel.getSelected() != null && graphModel.getSelected() instanceof Node && !graphModel.isDragging()) {
@@ -63,7 +63,7 @@ public class GraphPanel extends JPanel implements Observer {
      * @param g Graphics
      */
     private void paintNodes(Graphics g) {
-        System.out.println("graphing stuffs");
+//        System.out.println("graphing stuffs");
         NodeCoords coords;
         NodeSize size;
 //        g.translate(getWidth()/2, getHeight()/2);

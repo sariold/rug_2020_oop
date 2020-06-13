@@ -44,7 +44,7 @@ public class LoadGraph {
     /**
      * File Reader
      * @param fileName File Name
-     * @throws IOException
+     * @throws IOException input output exception
      */
     private void fileReader(String fileName) throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(fileName));

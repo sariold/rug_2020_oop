@@ -55,6 +55,7 @@ public class EditNodeAction extends AbstractUndoableEdit {
      */
     @Override
     public void undo() throws CannotUndoException {
+//        super.undo();
         node.setName(oldName);
         node.setNodeCoords(oldCoords);
         node.setNodeSize(oldSize);
@@ -66,6 +67,7 @@ public class EditNodeAction extends AbstractUndoableEdit {
      */
     @Override
     public void redo() throws CannotRedoException {
+//        super.redo();
         node.setName(newName);
         node.setNodeCoords(newCoords);
         node.setNodeSize(newSize);

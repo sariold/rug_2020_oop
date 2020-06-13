@@ -1,21 +1,14 @@
 package nl.rug.oop.grapheditor.controller.menu;
 
-import nl.rug.oop.grapheditor.controller.actions.CreateNodeAction;
-import nl.rug.oop.grapheditor.controller.actions.RemoveEdgeAction;
-import nl.rug.oop.grapheditor.controller.actions.RemoveNodeAction;
+import nl.rug.oop.grapheditor.controller.actions.actionListeners.*;
 import nl.rug.oop.grapheditor.model.GraphModel;
 import nl.rug.oop.grapheditor.model.edge.Edge;
 import nl.rug.oop.grapheditor.model.node.Node;
-import nl.rug.oop.grapheditor.model.node.NodeCoords;
 import nl.rug.oop.grapheditor.util.LoadGraph;
 import nl.rug.oop.grapheditor.util.SaveGraph;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.swing.undo.CannotRedoException;
-import javax.swing.undo.CannotUndoException;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.util.Observable;
 import java.util.Observer;
@@ -88,8 +81,6 @@ public class MainMenuBar extends JMenuBar implements Observer {
      * Sets actions to all Menu Items in this menu
      */
     private void addFunctionality() {
-        KeyStroke keyStrokeToEdit = KeyStroke.getKeyStroke(KeyEvent.VK_E, KeyEvent.CTRL_DOWN_MASK);
-        editNode.setAccelerator(keyStrokeToEdit);
         addSaveAndLoadAndNew();
         addNodeFunctionality();
         addEdgeFunctionality();
@@ -102,30 +93,10 @@ public class MainMenuBar extends JMenuBar implements Observer {
     private void addEditFunctionality() {
         KeyStroke keyStrokeToRedo = KeyStroke.getKeyStroke("shift control Z");
         redo.setAccelerator(keyStrokeToRedo);
-        redo.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    graphModel.getUndoManager().redo();
-                    graphModel.notifyUpdate();
-                } catch (CannotRedoException ex) {
-                    System.out.println("CANT REDO");
-                }
-            }
-        });
+        new RedoAL(redo, graphModel);
         KeyStroke keyStrokeToUndo = KeyStroke.getKeyStroke(KeyEvent.VK_Z, KeyEvent.CTRL_DOWN_MASK);
         undo.setAccelerator(keyStrokeToUndo);
-        undo.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    graphModel.getUndoManager().undo();
-                    graphModel.notifyUpdate();
-                } catch (CannotUndoException ex) {
-                    System.out.println("CANT UNDO");
-                }
-            }
-        });
+        new UndoAL(undo, graphModel);
     }
 
     /**
@@ -134,16 +105,7 @@ public class MainMenuBar extends JMenuBar implements Observer {
     private void addEdgeFunctionality() {
         KeyStroke keyStrokeToDeleteEdge = KeyStroke.getKeyStroke(KeyEvent.VK_BACK_SPACE, 0);
         removeEdge.setAccelerator(keyStrokeToDeleteEdge);
-        removeEdge.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (graphModel.getSelected() instanceof Edge) {
-                    RemoveEdgeAction removeEdgeAction = new RemoveEdgeAction(graphModel, (Edge)graphModel.getSelected());
-                    removeEdgeAction.redo();
-                    graphModel.getUndoManager().addEdit(removeEdgeAction);
-                }
-            }
-        });
+        new RemoveEdgeAL(removeEdge, graphModel);
     }
 
     /**
@@ -152,57 +114,19 @@ public class MainMenuBar extends JMenuBar implements Observer {
     private void addNodeFunctionality() {
         KeyStroke keyStrokeToAddNode = KeyStroke.getKeyStroke(KeyEvent.VK_D, KeyEvent.CTRL_DOWN_MASK);
         addNode.setAccelerator(keyStrokeToAddNode);
-        addNode.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new CreateNodeMenu(graphModel);
-            }
-        });
+        new AddNodeAL(addNode, graphModel);
         KeyStroke keyStrokeToDeleteNode = KeyStroke.getKeyStroke(KeyEvent.VK_BACK_SPACE, 0);
         removeNode.setAccelerator(keyStrokeToDeleteNode);
-        removeNode.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (graphModel.getSelected() instanceof Node) {
-                    RemoveNodeAction removeNodeAction = new RemoveNodeAction(graphModel, (Node)graphModel.getSelected());
-                    removeNodeAction.redo();
-                    graphModel.getUndoManager().addEdit(removeNodeAction);
-                }
-            }
-        });
-        editNode.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (graphModel.getSelected() instanceof Node) {
-                    new EditNodeMenu((Node)graphModel.getSelected(), graphModel);
-                    graphModel.notifyUpdate();
-                }
-            }
-        });
+        new RemoveNodeAL(removeNode, graphModel);
+        KeyStroke keyStrokeToEdit = KeyStroke.getKeyStroke(KeyEvent.VK_E, KeyEvent.CTRL_DOWN_MASK);
+        editNode.setAccelerator(keyStrokeToEdit);
+        new EditNodeAL(editNode, graphModel);
         KeyStroke keyStrokeToCopyNode = KeyStroke.getKeyStroke(KeyEvent.VK_C, KeyEvent.CTRL_DOWN_MASK);
         copy.setAccelerator(keyStrokeToCopyNode);
-        copy.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (graphModel.getSelected() instanceof Node) {
-                    graphModel.setCopy((Node)graphModel.getSelected());
-                }
-            }
-        });
+        new CopyAL(copy, graphModel);
         KeyStroke keyStrokeToPasteNode = KeyStroke.getKeyStroke(KeyEvent.VK_V, KeyEvent.CTRL_DOWN_MASK);
         paste.setAccelerator(keyStrokeToPasteNode);
-        paste.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Node newNode = graphModel.getCopy().copy();
-//                newNode.move(5,5);
-
-                newNode.setNodeCoords(new NodeCoords(graphModel.getConnectorCursor().getX(), graphModel.getConnectorCursor().getY()));
-                CreateNodeAction createNodeAction = new CreateNodeAction(graphModel, newNode);
-                createNodeAction.redo();
-                graphModel.getUndoManager().addEdit(createNodeAction);
-            }
-        });
+        new PasteAL(paste, graphModel);
     }
 
     /**
@@ -211,36 +135,13 @@ public class MainMenuBar extends JMenuBar implements Observer {
     private void addSaveAndLoadAndNew() {
         KeyStroke keyStrokeToSave = KeyStroke.getKeyStroke(KeyEvent.VK_S, KeyEvent.CTRL_DOWN_MASK);
         save.setAccelerator(keyStrokeToSave);
-        save.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int save = jFileChooser.showSaveDialog(null);
-                if(save == JFileChooser.APPROVE_OPTION) {
-                    saveGraph.saveFile(jFileChooser.getSelectedFile().getAbsolutePath());
-                }
-            }
-        });
+        new SaveAL(save, saveGraph, jFileChooser);
         KeyStroke keyStrokeToOpen = KeyStroke.getKeyStroke(KeyEvent.VK_O, KeyEvent.CTRL_DOWN_MASK);
         load.setAccelerator(keyStrokeToOpen);
-        load.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int load = jFileChooser.showOpenDialog(null);
-                if(load == JFileChooser.APPROVE_OPTION) {
-                    graphModel = loadGraph.loadFile(jFileChooser.getSelectedFile().getAbsolutePath());
-                }
-            }
-        });
+        new LoadAL(load, loadGraph, jFileChooser, graphModel);
         KeyStroke keyStrokeToNew = KeyStroke.getKeyStroke(KeyEvent.VK_N, KeyEvent.CTRL_DOWN_MASK);
         newGraph.setAccelerator(keyStrokeToNew);
-        newGraph.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                graphModel.getNodes().clear();
-                graphModel.getEdges().clear();
-                graphModel.notifyUpdate();
-            }
-        });
+        new NewGraphAL(newGraph, graphModel);
     }
 
     /**
@@ -250,6 +151,7 @@ public class MainMenuBar extends JMenuBar implements Observer {
      */
     @Override
     public void update(Observable o, Object arg) {
+        System.out.println(graphModel.getUndoManager().canUndo() + " " + graphModel.getUndoManager().canRedo());
 //        undo.setEnabled(graphModel.getUndoManager().canUndo());
 //        redo.setEnabled(graphModel.getUndoManager().canRedo());
         removeNode.setEnabled(graphModel.getSelected() instanceof Node);

@@ -66,7 +66,7 @@ public class SaveGraph {
      * @param text Text string
      * @param fileName File Name
      * @param append Append?
-     * @throws IOException
+     * @throws IOException input output exception
      */
     private void fileWriter(String text, String fileName, boolean append) throws IOException {
         FileOutputStream fileOutputStream = new FileOutputStream(fileName, append);
