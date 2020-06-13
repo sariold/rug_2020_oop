@@ -1,6 +1,6 @@
 package nl.rug.oop.grapheditor;
 
-import nl.rug.oop.grapheditor.controller.ConsoleController;
+//import nl.rug.oop.grapheditor.controller.ConsoleController;
 import nl.rug.oop.grapheditor.model.GraphModel;
 import nl.rug.oop.grapheditor.view.frame.MainFrame;
 
@@ -17,10 +17,10 @@ public class GraphEditor {
         }
         MainFrame mainFrame = new MainFrame(graphModel);
 //        ConsoleView consoleView  = new ConsoleView(graphModel);
-        ConsoleController consoleController = new ConsoleController(graphModel);
-        while (true) {
-            consoleController.showOptions();
-            consoleController.executeOption();
-        }
+//        ConsoleController consoleController = new ConsoleController(graphModel);
+//        while (true) {
+//            consoleController.showOptions();
+//            consoleController.executeOption();
+//        }
     }
 }
