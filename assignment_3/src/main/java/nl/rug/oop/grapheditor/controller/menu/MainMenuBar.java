@@ -55,6 +55,8 @@ public class MainMenuBar extends JMenuBar implements Observer {
         this.copy = new JMenuItem("Copy Node");
         this.paste = new JMenuItem("Paste Node");
         addFunctionality();
+        undo.setEnabled(graphModel.getUndoManager().canUndo());
+        redo.setEnabled(graphModel.getUndoManager().canRedo());
         removeNode.setEnabled(graphModel.getSelected() instanceof Node);
         editNode.setEnabled(graphModel.getSelected() instanceof Node);
         removeEdge.setEnabled(graphModel.getSelected() instanceof Edge);
@@ -151,9 +153,8 @@ public class MainMenuBar extends JMenuBar implements Observer {
      */
     @Override
     public void update(Observable o, Object arg) {
-        System.out.println(graphModel.getUndoManager().canUndo() + " " + graphModel.getUndoManager().canRedo());
-//        undo.setEnabled(graphModel.getUndoManager().canUndo());
-//        redo.setEnabled(graphModel.getUndoManager().canRedo());
+        undo.setEnabled(graphModel.getUndoManager().canUndo());
+        redo.setEnabled(graphModel.getUndoManager().canRedo());
         removeNode.setEnabled(graphModel.getSelected() instanceof Node);
         editNode.setEnabled(graphModel.getSelected() instanceof Node);
         removeEdge.setEnabled(graphModel.getSelected() instanceof Edge);

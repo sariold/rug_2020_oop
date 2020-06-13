@@ -23,6 +23,7 @@ public class RemoveEdgeAction extends AbstractUndoableEdit {
     public RemoveEdgeAction(GraphModel graphModel, Edge edge) {
         this.edge = edge;
         this.graphModel = graphModel;
+        graphModel.removeEdge(edge);
     }
 
     /**
@@ -31,7 +32,7 @@ public class RemoveEdgeAction extends AbstractUndoableEdit {
      */
     @Override
     public void undo() throws CannotUndoException {
-//        super.undo();
+        super.undo();
         graphModel.addEdge(edge);
     }
 
@@ -41,7 +42,7 @@ public class RemoveEdgeAction extends AbstractUndoableEdit {
      */
     @Override
     public void redo() throws CannotRedoException {
-//        super.redo();
+        super.redo();
         graphModel.removeEdge(edge);
     }
 }

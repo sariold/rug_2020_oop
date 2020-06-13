@@ -23,6 +23,7 @@ public class CreateNodeAction extends AbstractUndoableEdit {
     public CreateNodeAction(GraphModel graphModel, Node node) {
         this.graphModel = graphModel;
         this.node = node;
+        graphModel.addNode(node);
     }
 
     /**
@@ -31,7 +32,7 @@ public class CreateNodeAction extends AbstractUndoableEdit {
      */
     @Override
     public void undo() throws CannotUndoException {
-//        super.undo();
+        super.undo();
         graphModel.removeNode(node);
     }
 
@@ -41,7 +42,7 @@ public class CreateNodeAction extends AbstractUndoableEdit {
      */
     @Override
     public void redo() throws CannotRedoException {
-//        super.redo();
+        super.redo();
         graphModel.addNode(node);
     }
 }

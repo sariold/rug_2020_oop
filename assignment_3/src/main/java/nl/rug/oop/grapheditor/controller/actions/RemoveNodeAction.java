@@ -30,6 +30,7 @@ public class RemoveNodeAction extends AbstractUndoableEdit {
         for (Edge e: graphModel.getEdges()) {
             if (e.getStart().equals(node)|| e.getEnd().equals(node)) edges.add(e);
         }
+        graphModel.removeNode(node);
     }
 
     /**
@@ -38,7 +39,7 @@ public class RemoveNodeAction extends AbstractUndoableEdit {
      */
     @Override
     public void undo() throws CannotUndoException {
-//        super.undo();
+        super.undo();
         graphModel.addNode(node);
         for (Edge e: this.edges) {
             graphModel.addEdge(e);
@@ -51,7 +52,7 @@ public class RemoveNodeAction extends AbstractUndoableEdit {
      */
     @Override
     public void redo() throws CannotRedoException {
-//        super.redo();
+        super.redo();
         graphModel.removeNode(node);
     }
 }

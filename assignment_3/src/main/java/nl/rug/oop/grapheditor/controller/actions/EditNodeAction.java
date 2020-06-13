@@ -22,7 +22,7 @@ public class EditNodeAction extends AbstractUndoableEdit {
     private NodeSize oldSize;
 
     /**
-     * Create a Edit node action given a new name new coordiantes and a new size
+     * Create a Edit node action given a new name new coordinates and a new size
      * @param node Node
      * @param newName Name
      * @param newCoords Coordinates
@@ -36,6 +36,9 @@ public class EditNodeAction extends AbstractUndoableEdit {
         this.oldName = node.getName();
         this.oldCoords = node.getNodeCoords();
         this.oldSize = node.getNodeSize();
+        node.setName(newName);
+        node.setNodeCoords(newCoords);
+        node.setNodeSize(newSize);
     }
 
     /**
@@ -47,6 +50,9 @@ public class EditNodeAction extends AbstractUndoableEdit {
     public EditNodeAction(Node node, NodeCoords newCoords, NodeCoords oldCoords) {
         this(node, node.getName(), newCoords, node.getNodeSize());
         this.oldCoords = oldCoords;
+        node.setName(newName);
+        node.setNodeCoords(newCoords);
+        node.setNodeSize(newSize);
     }
 
     /**
@@ -55,7 +61,7 @@ public class EditNodeAction extends AbstractUndoableEdit {
      */
     @Override
     public void undo() throws CannotUndoException {
-//        super.undo();
+        super.undo();
         node.setName(oldName);
         node.setNodeCoords(oldCoords);
         node.setNodeSize(oldSize);
@@ -67,7 +73,7 @@ public class EditNodeAction extends AbstractUndoableEdit {
      */
     @Override
     public void redo() throws CannotRedoException {
-//        super.redo();
+        super.redo();
         node.setName(newName);
         node.setNodeCoords(newCoords);
         node.setNodeSize(newSize);

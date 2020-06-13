@@ -113,7 +113,7 @@ public class SelectionController extends MouseInputAdapter {
                     System.out.println("new node selected");
                     CreateEdgeAction createEdgeAction = new CreateEdgeAction(graphModel,
                             new Edge((Node) graphModel.getSelected(), n));
-                    createEdgeAction.redo();
+//                    createEdgeAction.redo();
                     graphModel.getUndoManager().addEdit(createEdgeAction);
                     graphModel.setSelected(null);
                 }
