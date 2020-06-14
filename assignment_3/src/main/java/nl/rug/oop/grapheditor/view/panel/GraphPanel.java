@@ -1,5 +1,6 @@
 package nl.rug.oop.grapheditor.view.panel;
 
+import nl.rug.oop.grapheditor.controller.clicker.ResizeController;
 import nl.rug.oop.grapheditor.controller.clicker.SelectionController;
 import nl.rug.oop.grapheditor.model.GraphModel;
 import nl.rug.oop.grapheditor.model.edge.Edge;
@@ -28,7 +29,8 @@ public class GraphPanel extends JPanel implements Observer {
         setBackground(Color.GRAY);
         this.graphModel = graphModel;
         this.graphModel.addObserver(this);
-        SelectionController selectNodeClicker = new SelectionController(graphModel, this);
+        SelectionController selectionController = new SelectionController(graphModel, this);
+        ResizeController resizeController = new ResizeController(graphModel, this);
     }
 
     /**
@@ -49,7 +51,7 @@ public class GraphPanel extends JPanel implements Observer {
      * @param g graph
      */
     private void paintNodeConnector(Graphics g) {
-        if(graphModel.getSelected() != null && graphModel.getSelected() instanceof Node && !graphModel.isDragging()) {
+        if(graphModel.getSelected() != null && graphModel.getSelected() instanceof Node && !graphModel.isDragging() && !graphModel.isResizing()) {
             Node selected = (Node) graphModel.getSelected();
             g.drawLine(selected.getNodeCoords().getCoordX() + selected.getNodeSize().getSizeX()/2,
                     selected.getNodeCoords().getCoordY() + selected.getNodeSize().getSizeY()/2,
@@ -70,12 +72,16 @@ public class GraphPanel extends JPanel implements Observer {
         for (Node n : graphModel.getNodes()) {
             coords = n.getNodeCoords();
             size = n.getNodeSize();
-            if (n.equals(graphModel.getSelected())) {
+            if (n.equals(graphModel.getSelected()) && !graphModel.isResizing()) {
                 g.setColor(Color.GREEN);
             } else {
                 g.setColor(Color.BLACK);
             }
             g.fillRect(coords.getCoordX(), coords.getCoordY(), size.getSizeX(), size.getSizeY());
+            if(graphModel.isResizing() && n.equals(graphModel.getSelected())) {
+                g.setColor(Color.RED);
+                g.fillRect(coords.getCoordX() + size.getSizeX(), coords.getCoordY() + size.getSizeY(), 10, 10);
+            }
             g.setColor(Color.WHITE);
             g.drawString(n.getName(), coords.getCoordX() + (n.getNodeSize().getSizeX() / 3), coords.getCoordY() + (n.getNodeSize().getSizeY() / 2));
 //            - g.getFontMetrics().getHeight());

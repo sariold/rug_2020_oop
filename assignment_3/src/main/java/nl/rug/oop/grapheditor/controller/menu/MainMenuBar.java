@@ -24,6 +24,7 @@ public class MainMenuBar extends JMenuBar implements Observer {
     private final JMenuItem addNode;
     private final JMenuItem removeNode;
     private final JMenuItem editNode;
+    private final JMenuItem resizeNode;
     private final JMenuItem removeEdge;
     private final JMenuItem undo;
     private final JMenuItem redo;
@@ -57,6 +58,7 @@ public class MainMenuBar extends JMenuBar implements Observer {
         this.newGraph = new JMenuItem("New");
         this.addNode = new JMenuItem("Add Node");
         this.removeNode = new JMenuItem("Remove Node");
+        this.resizeNode = new JMenuItem("Resize Node");
         this.editNode = new JMenuItem("Edit Node");
         this.removeEdge = new JMenuItem("Remove Edge");
         this.undo = new JMenuItem("Undo");
@@ -68,6 +70,7 @@ public class MainMenuBar extends JMenuBar implements Observer {
         redo.setEnabled(graphModel.getUndoManager().canRedo());
         removeNode.setEnabled(graphModel.getSelected() instanceof Node);
         editNode.setEnabled(graphModel.getSelected() instanceof Node);
+        resizeNode.setEnabled(graphModel.getSelected() instanceof Node);
         removeEdge.setEnabled(graphModel.getSelected() instanceof Edge);
         copy.setEnabled(graphModel.getSelected() instanceof Node);
         paste.setEnabled(graphModel.getCopy() != null);
@@ -77,6 +80,7 @@ public class MainMenuBar extends JMenuBar implements Observer {
         nodeMenu.add(addNode);
         nodeMenu.add(removeNode);
         nodeMenu.add(editNode);
+        nodeMenu.add(resizeNode);
         nodeMenu.add(copy);
         nodeMenu.add(paste);
         edgeMenu.add(removeEdge);
@@ -132,6 +136,9 @@ public class MainMenuBar extends JMenuBar implements Observer {
         KeyStroke keyStrokeToEdit = KeyStroke.getKeyStroke(KeyEvent.VK_E, KeyEvent.CTRL_DOWN_MASK);
         editNode.setAccelerator(keyStrokeToEdit);
         new EditNodeAL(editNode, graphModel);
+        KeyStroke keyStrokeToResize = KeyStroke.getKeyStroke(KeyEvent.VK_R, KeyEvent.CTRL_DOWN_MASK);
+        resizeNode.setAccelerator(keyStrokeToResize);
+        new ResizeAL(resizeNode, graphModel);
         KeyStroke keyStrokeToCopyNode = KeyStroke.getKeyStroke(KeyEvent.VK_C, KeyEvent.CTRL_DOWN_MASK);
         copy.setAccelerator(keyStrokeToCopyNode);
         new CopyAL(copy, graphModel);
@@ -162,6 +169,7 @@ public class MainMenuBar extends JMenuBar implements Observer {
      */
     @Override
     public void update(Observable o, Object arg) {
+        resizeNode.setEnabled(graphModel.getSelected() instanceof Node);
         undo.setEnabled(graphModel.getUndoManager().canUndo());
         redo.setEnabled(graphModel.getUndoManager().canRedo());
         removeNode.setEnabled(graphModel.getSelected() instanceof Node);

@@ -23,6 +23,7 @@ public class GraphModel extends Observable {
     private Node copy;
     private CursorCoords connectorCursor;
     private boolean dragging;
+    private boolean resizing;
     private UndoManager undoManager;
 
 
@@ -63,6 +64,15 @@ public class GraphModel extends Observable {
      */
     public void setDragging(boolean dragging) {
         this.dragging = dragging;
+        notifyUpdate();
+    }
+
+    /**
+     * Set resizing boolean
+     * @param resizing boolean
+     */
+    public void setResizing(boolean resizing) {
+        this.resizing = resizing;
         notifyUpdate();
     }
 

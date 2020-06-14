@@ -14,7 +14,7 @@ import java.awt.event.MouseEvent;
 import java.awt.geom.Line2D;
 
 /**
- * Clicker that allows to select a node by clicking on it.
+ * Clicker that allows to select a node or edge by clicking on it.
  */
 public class SelectionController extends MouseInputAdapter {
 
@@ -23,7 +23,7 @@ public class SelectionController extends MouseInputAdapter {
     private NodeCoords startDragging;
 
     /**
-     * Create clicker to select a node
+     * Create clicker to select a node or edge
      * @param graphModel graph model
      * @param graphPanel graph panel
      */
@@ -132,7 +132,7 @@ public class SelectionController extends MouseInputAdapter {
     public void mouseMoved(MouseEvent e) {
         int x = e.getX();
         int y = e.getY();
-        if(graphModel.getSelected() instanceof Node) {
+        if(graphModel.getSelected() instanceof Node && !graphModel.isResizing()) {
             graphModel.getConnectorCursor().setX(x);
             graphModel.getConnectorCursor().setY(y);
             graphModel.isSelected();
@@ -145,6 +145,7 @@ public class SelectionController extends MouseInputAdapter {
      */
     @Override
     public void mouseDragged(MouseEvent e) {
+        if(graphModel.isResizing()) return;
         int x = e.getX();
         int y = e.getY();
         if (this.moveNode == null) {
