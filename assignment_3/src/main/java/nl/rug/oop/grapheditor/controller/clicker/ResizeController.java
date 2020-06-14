@@ -41,6 +41,8 @@ public class ResizeController extends MouseInputAdapter {
             this.moveNode = (Node) graphModel.getSelected();
             this.moveNode.setNodeSize(new NodeSize(x - moveNode.getNodeCoords().getCoordX(), y - moveNode.getNodeCoords().getCoordY()));
             graphModel.setResizing(true);
+            graphModel.getConnectorCursor().setX(x);
+            graphModel.getConnectorCursor().setY(y);
         }
     }
 
@@ -51,5 +53,6 @@ public class ResizeController extends MouseInputAdapter {
     @Override
     public void mouseReleased(MouseEvent e) {
         graphModel.setResizing(false);
+
     }
 }
