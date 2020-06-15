@@ -7,6 +7,7 @@ import nl.rug.oop.grapheditor.model.edge.Edge;
 import nl.rug.oop.grapheditor.model.node.Node;
 import nl.rug.oop.grapheditor.model.node.NodeCoords;
 import nl.rug.oop.grapheditor.model.node.NodeSize;
+import nl.rug.oop.grapheditor.util.printer.PrintMouseInfo;
 import nl.rug.oop.grapheditor.view.panel.GraphPanel;
 
 import javax.swing.event.MouseInputAdapter;
@@ -43,6 +44,7 @@ public class SelectionController extends MouseInputAdapter {
      */
     @Override
     public void mouseClicked(MouseEvent e) {
+        PrintMouseInfo.MouseClicked(e);
         int x = e.getX();
         int y = e.getY();
         graphModel.getConnectorCursor().setX(x);
@@ -59,6 +61,71 @@ public class SelectionController extends MouseInputAdapter {
         }
         graphModel.setSelected(null);
         System.out.println("Not selected");
+    }
+
+    /**
+     * Mouse movement so edge should follow mouse cursor
+     * @param e Mouse even
+     */
+    @Override
+    public void mouseMoved(MouseEvent e) {
+        PrintMouseInfo.MouseMoved(e);
+        int x = e.getX();
+        int y = e.getY();
+        if(graphModel.getSelected() instanceof Node && !graphModel.isResizing()) {
+            graphModel.getConnectorCursor().setX(x);
+            graphModel.getConnectorCursor().setY(y);
+            graphModel.isSelected();
+        }
+    }
+
+    /**
+     * Move a selected node
+     * @param e Mouse Event
+     */
+    @Override
+    public void mouseDragged(MouseEvent e) {
+        PrintMouseInfo.MouseDragged(e);
+        if(graphModel.isResizing()) return;
+        int x = e.getX();
+        int y = e.getY();
+        if (this.moveNode == null) {
+            for (Node n:graphModel.getNodes()) {
+                NodeCoords coords = n.getNodeCoords();
+                NodeSize size = n.getNodeSize();
+                if (x >= coords.getCoordX() && x <= coords.getCoordX()+size.getSizeX() &&
+                        y >= coords.getCoordY() && y <= coords.getCoordY()+size.getSizeY()) {
+                        this.moveNode = n;
+                        graphModel.setSelected(n);
+                        graphModel.getConnectorCursor().setX(x);
+                        graphModel.getConnectorCursor().setY(y);
+                        this.startDragging = n.getNodeCoords();
+                        graphModel.setDragging(true);
+                    break;
+                }
+            }
+            return;
+        }
+        graphModel.getConnectorCursor().setX(x);
+        graphModel.getConnectorCursor().setY(y);
+        this.moveNode.setNodeCoords(new NodeCoords(x-moveNode.getNodeSize().getSizeX()/2,
+                                                    y-moveNode.getNodeSize().getSizeY()/2));
+        graphModel.setDragging(true);
+    }
+
+    /**
+     * Reset the dragged Node when the mouse is released
+     * @param e Mouse Event
+     */
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        PrintMouseInfo.MouseReleased(e);
+        if(moveNode != null) {
+            EditNodeAction editNodeAction = new EditNodeAction(moveNode, moveNode.getNodeCoords(), this.startDragging);
+            graphModel.getUndoManager().addEdit(editNodeAction);
+        }
+        this.moveNode = null;
+        graphModel.setDragging(false);
     }
 
     /**
@@ -85,8 +152,8 @@ public class SelectionController extends MouseInputAdapter {
             // check if the cursor is on the current edge
             if (distance < 8 && !(x >= startCoords.getCoordX() && x <= startCoords.getCoordX()+startSize.getSizeX() &&
                     y >= startCoords.getCoordY() && y <= startCoords.getCoordY()+startSize.getSizeY())&&
-            !(x >= endCoords.getCoordX() && x <= endCoords.getCoordX()+endSize.getSizeX() &&
-                    y >= endCoords.getCoordY() && y <= endCoords.getCoordY()+endSize.getSizeY())) {
+                    !(x >= endCoords.getCoordX() && x <= endCoords.getCoordX()+endSize.getSizeX() &&
+                            y >= endCoords.getCoordY() && y <= endCoords.getCoordY()+endSize.getSizeY())) {
                 graphModel.setSelected(e);
                 return true;
             }
@@ -122,67 +189,5 @@ public class SelectionController extends MouseInputAdapter {
             }
         }
         return false;
-    }
-
-    /**
-     * Mouse movement so edge should follow mouse cursor
-     * @param e Mouse even
-     */
-    @Override
-    public void mouseMoved(MouseEvent e) {
-        int x = e.getX();
-        int y = e.getY();
-        if(graphModel.getSelected() instanceof Node && !graphModel.isResizing()) {
-            graphModel.getConnectorCursor().setX(x);
-            graphModel.getConnectorCursor().setY(y);
-            graphModel.isSelected();
-        }
-    }
-
-    /**
-     * Move a selected node
-     * @param e Mouse Event
-     */
-    @Override
-    public void mouseDragged(MouseEvent e) {
-        if(graphModel.isResizing()) return;
-        int x = e.getX();
-        int y = e.getY();
-        if (this.moveNode == null) {
-            for (Node n:graphModel.getNodes()) {
-                NodeCoords coords = n.getNodeCoords();
-                NodeSize size = n.getNodeSize();
-                if (x >= coords.getCoordX() && x <= coords.getCoordX()+size.getSizeX() &&
-                        y >= coords.getCoordY() && y <= coords.getCoordY()+size.getSizeY()) {
-                        this.moveNode = n;
-                        graphModel.setSelected(n);
-                        graphModel.getConnectorCursor().setX(x);
-                        graphModel.getConnectorCursor().setY(y);
-                        this.startDragging = n.getNodeCoords();
-                        graphModel.setDragging(true);
-                    break;
-                }
-            }
-            return;
-        }
-        graphModel.getConnectorCursor().setX(x);
-        graphModel.getConnectorCursor().setY(y);
-        this.moveNode.setNodeCoords(new NodeCoords(x-moveNode.getNodeSize().getSizeX()/2,
-                                                    y-moveNode.getNodeSize().getSizeY()/2));
-        graphModel.setDragging(true);
-    }
-
-    /**
-     * Reset the dragged Node when the mouse is released
-     * @param e Mouse Event
-     */
-    @Override
-    public void mouseReleased(MouseEvent e) {
-        if(moveNode != null) {
-            EditNodeAction editNodeAction = new EditNodeAction(moveNode, moveNode.getNodeCoords(), this.startDragging);
-            graphModel.getUndoManager().addEdit(editNodeAction);
-        }
-        this.moveNode = null;
-        graphModel.setDragging(false);
     }
 }

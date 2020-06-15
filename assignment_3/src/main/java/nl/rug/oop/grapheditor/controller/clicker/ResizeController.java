@@ -1,9 +1,11 @@
 package nl.rug.oop.grapheditor.controller.clicker;
 
+import nl.rug.oop.grapheditor.controller.actions.ResizeNodeAction;
 import nl.rug.oop.grapheditor.model.GraphModel;
 import nl.rug.oop.grapheditor.model.node.Node;
 import nl.rug.oop.grapheditor.model.node.NodeCoords;
 import nl.rug.oop.grapheditor.model.node.NodeSize;
+import nl.rug.oop.grapheditor.util.printer.PrintMouseInfo;
 import nl.rug.oop.grapheditor.view.panel.GraphPanel;
 
 import javax.swing.event.MouseInputAdapter;
@@ -18,6 +20,8 @@ public class ResizeController extends MouseInputAdapter {
     private Node moveNode;
     private int startX;
     private int startY;
+    private int endX;
+    private int endY;
 
     /**
      * Create clicker to resize a node
@@ -28,6 +32,7 @@ public class ResizeController extends MouseInputAdapter {
         this.graphModel = graphModel;
         this.moveNode = null;
         this.startX = this.startY = -1;
+        this.endX = this.endY = -1;
         graphPanel.addMouseListener(this);
         graphPanel.addMouseMotionListener(this);
     }
@@ -38,8 +43,10 @@ public class ResizeController extends MouseInputAdapter {
      */
     @Override
     public void mouseDragged(MouseEvent e) {
+        PrintMouseInfo.MouseDragged(e);
         int x = e.getX();
         int y = e.getY();
+//        ResizeNodeAction resizeNodeAction = new ResizeNodeAction(graphModel);
         if (graphModel.isResizing()) {
             this.moveNode = (Node) graphModel.getSelected();
             if (startY < 0 && startX < 0) {
@@ -74,6 +81,7 @@ public class ResizeController extends MouseInputAdapter {
      */
     @Override
     public void mouseReleased(MouseEvent e) {
+        PrintMouseInfo.MouseReleased(e);
         graphModel.setResizing(false);
         startX = startY = -1;
     }
