@@ -10,6 +10,7 @@ import nl.rug.oop.grapheditor.util.SaveGraph;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.event.KeyEvent;
+import java.security.Key;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -30,6 +31,7 @@ public class MainMenuBar extends JMenuBar implements Observer {
     private final JMenuItem redo;
     private final JMenuItem copy;
     private final JMenuItem paste;
+    private final JMenuItem settings;
     private final GraphModel graphModel;
     private final SaveGraph saveGraph;
     private final LoadGraph loadGraph;
@@ -65,6 +67,7 @@ public class MainMenuBar extends JMenuBar implements Observer {
         this.redo = new JMenuItem("Redo");
         this.copy = new JMenuItem("Copy Node");
         this.paste = new JMenuItem("Paste Node");
+        this.settings = new JMenuItem("Settings");
         addFunctionality();
         undo.setEnabled(graphModel.getUndoManager().canUndo());
         redo.setEnabled(graphModel.getUndoManager().canRedo());
@@ -90,6 +93,7 @@ public class MainMenuBar extends JMenuBar implements Observer {
         this.add(nodeMenu);
         this.add(edgeMenu);
         this.add(editMenu);
+        this.add(settings);
     }
 
     /**
@@ -100,6 +104,16 @@ public class MainMenuBar extends JMenuBar implements Observer {
         addNodeFunctionality();
         addEdgeFunctionality();
         addEditFunctionality();
+        addSettings();
+    }
+
+    /**
+     * Adds the possibility to change the settings
+     */
+    private void addSettings() {
+        KeyStroke keyStrokeToSettings = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0);
+        settings.setAccelerator(keyStrokeToSettings);
+        new SettingsAL(settings, graphModel);
     }
 
     /**

@@ -2,6 +2,7 @@ package nl.rug.oop.grapheditor.model;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import nl.rug.oop.grapheditor.controller.settings.Settings;
 import nl.rug.oop.grapheditor.model.edge.Edge;
 import nl.rug.oop.grapheditor.model.node.Node;
 import nl.rug.oop.grapheditor.util.LoadGraph;
@@ -25,6 +26,7 @@ public class GraphModel extends Observable {
     private boolean dragging;
     private boolean resizing;
     private UndoManager undoManager;
+    private Settings settings;
 
 
     /**
@@ -39,6 +41,7 @@ public class GraphModel extends Observable {
         copy = null;
         this.connectorCursor = new CursorCoords();
         this.undoManager = new UndoManager();
+        this.settings = new Settings();
     }
 
     /**

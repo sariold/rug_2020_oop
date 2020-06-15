@@ -26,7 +26,7 @@ public class GraphPanel extends JPanel implements Observer {
      */
     public GraphPanel(GraphModel graphModel) {
         super(new BorderLayout());
-        setBackground(Color.GRAY);
+        setBackground(graphModel.getSettings().getBackgroundColor());
         this.graphModel = graphModel;
         this.graphModel.addObserver(this);
         SelectionController selectionController = new SelectionController(graphModel, this);
@@ -40,6 +40,7 @@ public class GraphPanel extends JPanel implements Observer {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
+        this.setBackground(graphModel.getSettings().getBackgroundColor());
         paintNodeConnector(g);
         paintEdges(g);
         paintNodes(g);
@@ -53,6 +54,7 @@ public class GraphPanel extends JPanel implements Observer {
     private void paintNodeConnector(Graphics g) {
         if(graphModel.getSelected() != null && graphModel.getSelected() instanceof Node && !graphModel.isDragging() && !graphModel.isResizing()) {
             Node selected = (Node) graphModel.getSelected();
+            g.setColor(graphModel.getSettings().getEdgeColor());
             g.drawLine(selected.getNodeCoords().getCoordX() + selected.getNodeSize().getSizeX()/2,
                     selected.getNodeCoords().getCoordY() + selected.getNodeSize().getSizeY()/2,
                     graphModel.getConnectorCursor().getX(),
@@ -65,28 +67,24 @@ public class GraphPanel extends JPanel implements Observer {
      * @param g Graphics
      */
     private void paintNodes(Graphics g) {
-//        System.out.println("graphing stuffs");
         NodeCoords coords;
         NodeSize size;
-//        g.translate(getWidth()/2, getHeight()/2);
         for (Node n : graphModel.getNodes()) {
             coords = n.getNodeCoords();
             size = n.getNodeSize();
             if (n.equals(graphModel.getSelected()) && !graphModel.isResizing()) {
-                g.setColor(Color.GREEN);
+                g.setColor(graphModel.getSettings().getHighlightColor());
             } else {
-                g.setColor(Color.BLACK);
+                g.setColor(graphModel.getSettings().getNodeColor());
             }
             g.fillRect(coords.getCoordX(), coords.getCoordY(), size.getSizeX(), size.getSizeY());
             if(graphModel.isResizing() && n.equals(graphModel.getSelected())) {
                 g.setColor(Color.RED);
                 g.fillRect(coords.getCoordX() + size.getSizeX(), coords.getCoordY() + size.getSizeY(), 10, 10);
             }
-            g.setColor(Color.WHITE);
+            g.setColor(graphModel.getSettings().getTextColor());
             g.drawString(n.getName(), coords.getCoordX() + (n.getNodeSize().getSizeX() / 3), coords.getCoordY() + (n.getNodeSize().getSizeY() / 2));
-//            - g.getFontMetrics().getHeight());
         }
-//        g.translate(-getWidth()/2, -getHeight()/2);
     }
 
     /**
@@ -94,28 +92,25 @@ public class GraphPanel extends JPanel implements Observer {
      * @param g graphics
      */
     private void paintEdges(Graphics g) {
-//        g.translate(getWidth()/2, getHeight()/2);
         NodeCoords startCoords;
         NodeSize startOffset;
         NodeCoords endCoords;
         NodeSize endOffset;
-        g.setColor(Color.BLACK);
         for (Edge e : graphModel.getEdges()) {
             startCoords = e.getStart().getNodeCoords();
             endCoords = e.getEnd().getNodeCoords();
             startOffset = e.getStart().getNodeSize();
             endOffset = e.getEnd().getNodeSize();
             if (e.equals(graphModel.getSelected())) {
-                g.setColor(Color.GREEN);
+                g.setColor(graphModel.getSettings().getHighlightColor());
             } else {
-                g.setColor(Color.BLACK);
+                g.setColor(graphModel.getSettings().getEdgeColor());
             }
             g.drawLine(startCoords.getCoordX() + startOffset.getSizeX()/2,
                     startCoords.getCoordY() + startOffset.getSizeY()/2,
                     endCoords.getCoordX() + endOffset.getSizeX()/2,
                     endCoords.getCoordY() + endOffset.getSizeY()/2);
         }
-//        g.translate(-getWidth()/2, -getHeight()/2);
     }
 
     /**
