@@ -12,7 +12,7 @@ import java.util.Observer;
  */
 public class ConsoleView implements Observer {
 
-    GraphModel graphModel;
+    final GraphModel graphModel;
 
     /**
      * Create a new console view for a graph model

@@ -1,6 +1,7 @@
 package nl.rug.oop.grapheditor.model.node;
 
 import lombok.Data;
+import nl.rug.oop.grapheditor.model.GraphComponent;
 
 import java.util.Objects;
 
@@ -8,22 +9,23 @@ import java.util.Objects;
  * A node connected to other nodes by edges.
  */
 @Data
-public class Node {
+public class Node extends GraphComponent {
 
     private String name;
-    private int[] size;
-    private int[] location;
+    private NodeSize nodeSize;
+    private NodeCoords nodeCoords;
+    private int nodeIndex;
 
     /**
      * Create a new node with a name, size and location.
      * @param name Name
-     * @param size Size
-     * @param location Location
+     * @param nodeSize NodeSize
+     * @param nodeCoords NodeeCoords
      */
-    public Node(String name, int[] size, int[] location) {
+    public Node(String name, NodeSize nodeSize, NodeCoords nodeCoords) {
         this.name = name;
-        this.size = size;
-        this.location = location;
+        this.nodeSize = nodeSize;
+        this.nodeCoords = nodeCoords;
     }
 
     /**
@@ -31,7 +33,7 @@ public class Node {
      * @param name Name
      */
     public Node(String name) {
-        this(name,  new int[]{10,10}, new int[]{0,0});
+        this(name,  new NodeSize(10, 10), new NodeCoords(0, 0));
     }
 
     /**
@@ -39,6 +41,15 @@ public class Node {
      */
     public Node() {
         this("Name");
+    }
+
+    /**
+     * Creates a copy of this node
+     * @return A node with the same properties
+     */
+    public Node copy() {
+        return new Node(this.getName(), new NodeSize(this.nodeSize.getSizeX(), this.nodeSize.getSizeY()),
+                new NodeCoords(this.nodeCoords.getCoordX(), this.nodeCoords.getCoordY()));
     }
 
     /**
@@ -52,11 +63,20 @@ public class Node {
         if (!(o instanceof Node)) return false;
         Node node = (Node) o;
         return (this.name.equals(node.getName()) &&
-                this.size[0] == node.getSize()[0] &&
-                this.size[1] == node.getSize()[1] &&
-                this.location[0] == node.getLocation()[0] &&
-                this.location[1] == node.getLocation()[1] );
+                this.nodeSize.getSizeX() == node.getNodeSize().getSizeX() &&
+                this.nodeSize.getSizeY() == node.getNodeSize().getSizeY() &&
+                this.nodeCoords.getCoordX() == node.getNodeCoords().getCoordX() &&
+                this.nodeCoords.getCoordY() == node.getNodeCoords().getCoordY() );
+    }
 
+    /**
+     * Moves the node in the specified direction
+     * @param x Change in X coordinate
+     * @param y Change in Y coordinate
+     */
+    public void move(int x, int y) {
+        this.setNodeCoords(new NodeCoords(this.nodeCoords.getCoordX() + x,
+                this.nodeCoords.getCoordY() + y));
     }
 
     /**
@@ -65,7 +85,7 @@ public class Node {
      */
     @Override
     public int hashCode() {
-        return Objects.hash(name, size, location);
+        return Objects.hash(name, nodeSize, nodeCoords);
     }
 
     /**
@@ -74,7 +94,23 @@ public class Node {
      */
     @Override
     public String toString() {
-        return ("Name:" + this.name + "; Size:" + this.size[0] + ", " + this.size[1] +
-                "; Location:" + this.location[0] + ", " + this.location[1]);
+        return ("Name:" + this.name + "; Size:" + this.nodeSize.getSizeX() + ", " + this.nodeSize.getSizeY() +
+                "; Location:" + this.nodeCoords.getCoordX() + ", " + this.nodeCoords.getCoordY());
+    }
+
+    /**
+     * Return the lowest point of this node
+     * @return Lowest Y coordinate
+     */
+    public int getLowestPoint() {
+        return this.getNodeCoords().getCoordY() + this.getNodeSize().getSizeY();
+    }
+
+    /**
+     * Return the point that is most right of this node
+     * @return Highest X Coordinate
+     */
+    public int getMostRightPoint() {
+        return this.getNodeCoords().getCoordX() + this.getNodeSize().getSizeX();
     }
 }
