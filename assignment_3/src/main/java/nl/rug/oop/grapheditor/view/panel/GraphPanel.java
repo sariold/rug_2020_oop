@@ -1,6 +1,7 @@
 package nl.rug.oop.grapheditor.view.panel;
 
 import nl.rug.oop.grapheditor.controller.clicker.ResizeController;
+import nl.rug.oop.grapheditor.controller.clicker.ResizeScreenController;
 import nl.rug.oop.grapheditor.controller.clicker.SelectionController;
 import nl.rug.oop.grapheditor.model.GraphModel;
 import nl.rug.oop.grapheditor.model.edge.Edge;
@@ -31,6 +32,7 @@ public class GraphPanel extends JPanel implements Observer {
         this.graphModel.addObserver(this);
         SelectionController selectionController = new SelectionController(graphModel, this);
         ResizeController resizeController = new ResizeController(graphModel, this);
+        ResizeScreenController resizeScreenController = new ResizeScreenController(graphModel, this);
     }
 
     /**
@@ -43,7 +45,6 @@ public class GraphPanel extends JPanel implements Observer {
         paintNodeConnector(g);
         paintEdges(g);
         paintNodes(g);
-
     }
 
     /**

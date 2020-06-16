@@ -69,7 +69,7 @@ public class SelectionController extends MouseInputAdapter {
      */
     @Override
     public void mouseMoved(MouseEvent e) {
-        PrintMouseInfo.MouseMoved(e);
+        //PrintMouseInfo.MouseMoved(e);
         int x = e.getX();
         int y = e.getY();
         if(graphModel.getSelected() instanceof Node && !graphModel.isResizing()) {
