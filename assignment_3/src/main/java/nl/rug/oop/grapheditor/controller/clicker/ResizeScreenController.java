@@ -71,7 +71,7 @@ public class ResizeScreenController implements ComponentListener {
 
     @Override
     public void componentMoved(ComponentEvent e) {
-        
+
     }
 
     @Override

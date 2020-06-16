@@ -6,6 +6,8 @@ import nl.rug.oop.grapheditor.model.edge.Edge;
 import nl.rug.oop.grapheditor.model.node.Node;
 import nl.rug.oop.grapheditor.util.LoadGraph;
 import nl.rug.oop.grapheditor.util.SaveGraph;
+import nl.rug.oop.grapheditor.view.frame.MainFrame;
+import nl.rug.oop.grapheditor.view.panel.GraphPanel;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -39,11 +41,11 @@ public class MainMenuBar extends JMenuBar implements Observer {
      * Create a new Menu Bar for the graph editor
      * @param graphModel graph model
      */
-    public MainMenuBar(GraphModel graphModel) {
+    public MainMenuBar(GraphModel graphModel, MainFrame frame) {
         super();
         this.graphModel = graphModel;
         this.saveGraph = new SaveGraph(this.graphModel);
-        this.loadGraph = new LoadGraph(graphModel);
+        this.loadGraph = new LoadGraph(graphModel, frame);
         this.jFileChooser = new JFileChooser();
         jFileChooser.setAcceptAllFileFilterUsed(false);
         FileNameExtensionFilter restrict = new FileNameExtensionFilter("Only .sff files", "sff");

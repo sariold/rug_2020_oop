@@ -3,6 +3,7 @@ package nl.rug.oop.grapheditor.view.panel;
 import nl.rug.oop.grapheditor.controller.clicker.ResizeController;
 import nl.rug.oop.grapheditor.controller.clicker.ResizeScreenController;
 import nl.rug.oop.grapheditor.controller.clicker.SelectionController;
+import nl.rug.oop.grapheditor.controller.menu.ResizeDialogue;
 import nl.rug.oop.grapheditor.model.GraphModel;
 import nl.rug.oop.grapheditor.model.edge.Edge;
 import nl.rug.oop.grapheditor.model.node.Node;
@@ -46,6 +47,7 @@ public class GraphPanel extends JPanel implements Observer {
         paintEdges(g);
         paintNodes(g);
     }
+
 
     /**
      * Draw a theoretical edge between the cursor and the selected node

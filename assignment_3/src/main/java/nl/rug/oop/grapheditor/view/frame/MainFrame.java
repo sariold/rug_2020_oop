@@ -41,7 +41,7 @@ public class MainFrame extends JFrame {
     }
 
     private void createMenuBar() {
-        this.menuBar = new MainMenuBar(graphModel);
+        this.menuBar = new MainMenuBar(graphModel, this);
         this.setJMenuBar(menuBar);
     }
 }

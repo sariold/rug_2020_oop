@@ -24,6 +24,7 @@ public class GraphModel extends Observable {
     private CursorCoords connectorCursor;
     private boolean dragging;
     private boolean resizing;
+    private boolean loading;
     private UndoManager undoManager;
 
 
@@ -47,7 +48,7 @@ public class GraphModel extends Observable {
      */
     public GraphModel(String filePath) {
         this(new ArrayList<>(), new ArrayList<>());
-        LoadGraph loadGraph = new LoadGraph(this);
+        LoadGraph loadGraph = new LoadGraph(this, null);
         loadGraph.loadFile(filePath);
     }
 
@@ -56,6 +57,16 @@ public class GraphModel extends Observable {
      */
     public GraphModel() {
         this(new ArrayList<>(), new ArrayList<>());
+    }
+
+    public boolean isLoading() {
+        notifyUpdate();
+        return loading;
+    }
+
+    public void setLoading(boolean loading) {
+        this.loading = loading;
+        notifyUpdate();
     }
 
     /**
