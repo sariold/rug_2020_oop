@@ -87,7 +87,7 @@ public class SelectionController extends MouseInputAdapter {
      */
     @Override
     public void mouseDragged(MouseEvent e) {
-        PrintMouseInfo.MouseDragged(e);
+//        PrintMouseInfo.MouseDragged(e);
         if(graphModel.isResizing()) return;
         int x = e.getX();
         int y = e.getY();
@@ -137,8 +137,8 @@ public class SelectionController extends MouseInputAdapter {
      */
     @Override
     public void mouseReleased(MouseEvent e) {
-        PrintMouseInfo.MouseReleased(e);
-        if(moveNode != null) {
+//        PrintMouseInfo.MouseReleased(e);
+        if(moveNode != null && !graphModel.isResizing()) {
             EditNodeAction editNodeAction = new EditNodeAction(moveNode, moveNode.getNodeCoords(), this.startDragging, moveNode.getNodeSize());
             graphModel.getUndoManager().addEdit(editNodeAction);
         }

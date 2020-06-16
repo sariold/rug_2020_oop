@@ -24,6 +24,7 @@ public class ResizeController extends MouseInputAdapter {
     private int oldX;
     private int oldY;
     private NodeSize old;
+    private boolean initialResize;
 
     /**
      * Create clicker to resize a node
@@ -35,6 +36,7 @@ public class ResizeController extends MouseInputAdapter {
         this.moveNode = null;
         this.startX = this.startY = -1;
         this.oldX = this.oldY = -1;
+        this.initialResize = false;
         graphPanel.addMouseListener(this);
         graphPanel.addMouseMotionListener(this);
     }
@@ -45,7 +47,7 @@ public class ResizeController extends MouseInputAdapter {
      */
     @Override
     public void mouseDragged(MouseEvent e) {
-        PrintMouseInfo.MouseDragged(e);
+//        PrintMouseInfo.MouseDragged(e);
         int x = e.getX();
         int y = e.getY();
 //        ResizeNodeAction resizeNodeAction = new ResizeNodeAction(graphModel);
@@ -53,7 +55,10 @@ public class ResizeController extends MouseInputAdapter {
             this.moveNode = (Node) graphModel.getSelected();
             oldX = moveNode.getNodeCoords().getCoordX();
             oldY = moveNode.getNodeCoords().getCoordY();
-            old = moveNode.getNodeSize();
+            if(!initialResize) {
+                old = moveNode.getNodeSize();
+                initialResize = true;
+            }
             // get coords where resizing started
             if (startY < 0 && startX < 0) {
                 startY = moveNode.getNodeCoords().getCoordY();
@@ -95,10 +100,12 @@ public class ResizeController extends MouseInputAdapter {
     @Override
     public void mouseReleased(MouseEvent e) {
         if(moveNode instanceof Node && graphModel.isResizing()) {
+            this.initialResize = false;
+            System.out.println("YES");
             EditNodeAction editNodeAction = new EditNodeAction(moveNode, moveNode.getNodeCoords(), new NodeCoords(oldX, oldY), old);
             graphModel.getUndoManager().addEdit(editNodeAction);
         }
-        PrintMouseInfo.MouseReleased(e);
+//        PrintMouseInfo.MouseReleased(e);
         moveNode = null;
         graphModel.setResizing(false);
         graphModel.setSelected(null);
