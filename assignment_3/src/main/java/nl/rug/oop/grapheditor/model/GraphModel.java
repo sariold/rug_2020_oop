@@ -119,6 +119,9 @@ public class GraphModel extends Observable {
      * @param edge Index of edge
      */
     public void removeEdgeAtIndex(int edge) {
+        Edge edgeFromIndex = this.edges.get(edge);
+        edgeFromIndex.getStart().getEdges().remove(edgeFromIndex);
+        edgeFromIndex.getEnd().getEdges().remove(edgeFromIndex);
         this.edges.remove(edge);
         notifyUpdate();
     }
@@ -128,6 +131,8 @@ public class GraphModel extends Observable {
      * @param edge Edge
      */
     public void removeEdge(Edge edge) {
+        edge.getStart().getEdges().remove(edge);
+        edge.getEnd().getEdges().remove(edge);
         this.edges.remove(edge);
         notifyUpdate();
     }

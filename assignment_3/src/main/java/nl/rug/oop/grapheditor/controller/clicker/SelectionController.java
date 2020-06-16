@@ -139,10 +139,11 @@ public class SelectionController extends MouseInputAdapter {
     public void mouseReleased(MouseEvent e) {
         PrintMouseInfo.MouseReleased(e);
         if(moveNode != null) {
-            EditNodeAction editNodeAction = new EditNodeAction(moveNode, moveNode.getNodeCoords(), this.startDragging);
+            EditNodeAction editNodeAction = new EditNodeAction(moveNode, moveNode.getNodeCoords(), this.startDragging, moveNode.getNodeSize());
             graphModel.getUndoManager().addEdit(editNodeAction);
         }
         this.moveNode = null;
+        graphModel.setSelected(null);
         graphModel.setDragging(false);
     }
 
@@ -196,10 +197,14 @@ public class SelectionController extends MouseInputAdapter {
                 }
                 else if (!n.equals(graphModel.getSelected()) && graphModel.getSelected() instanceof Node) {
                     System.out.println("new node selected");
-                    CreateEdgeAction createEdgeAction = new CreateEdgeAction(graphModel,
-                            new Edge((Node) graphModel.getSelected(), n));
+                    if(!n.shareEdge((Node) graphModel.getSelected())) {
+                        System.out.println("NO SHARED EDGE!");
+                        CreateEdgeAction createEdgeAction = new CreateEdgeAction(graphModel,
+                                new Edge((Node) graphModel.getSelected(), n));
+                        graphModel.getUndoManager().addEdit(createEdgeAction);
+                    }
+                    System.out.println("SHARED EDGE!");
 //                    createEdgeAction.redo();
-                    graphModel.getUndoManager().addEdit(createEdgeAction);
                     graphModel.setSelected(null);
                 }
                 System.out.println("NODE Interaction");

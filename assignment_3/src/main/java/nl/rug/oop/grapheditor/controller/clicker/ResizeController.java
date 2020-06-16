@@ -1,5 +1,6 @@
 package nl.rug.oop.grapheditor.controller.clicker;
 
+import nl.rug.oop.grapheditor.controller.actions.EditNodeAction;
 import nl.rug.oop.grapheditor.controller.actions.ResizeNodeAction;
 import nl.rug.oop.grapheditor.model.GraphModel;
 import nl.rug.oop.grapheditor.model.node.Node;
@@ -20,8 +21,9 @@ public class ResizeController extends MouseInputAdapter {
     private Node moveNode;
     private int startX;
     private int startY;
-    private int endX;
-    private int endY;
+    private int oldX;
+    private int oldY;
+    private NodeSize old;
 
     /**
      * Create clicker to resize a node
@@ -32,7 +34,7 @@ public class ResizeController extends MouseInputAdapter {
         this.graphModel = graphModel;
         this.moveNode = null;
         this.startX = this.startY = -1;
-        this.endX = this.endY = -1;
+        this.oldX = this.oldY = -1;
         graphPanel.addMouseListener(this);
         graphPanel.addMouseMotionListener(this);
     }
@@ -49,6 +51,9 @@ public class ResizeController extends MouseInputAdapter {
 //        ResizeNodeAction resizeNodeAction = new ResizeNodeAction(graphModel);
         if (graphModel.isResizing()) {
             this.moveNode = (Node) graphModel.getSelected();
+            oldX = moveNode.getNodeCoords().getCoordX();
+            oldY = moveNode.getNodeCoords().getCoordY();
+            old = moveNode.getNodeSize();
             // get coords where resizing started
             if (startY < 0 && startX < 0) {
                 startY = moveNode.getNodeCoords().getCoordY();
@@ -89,8 +94,14 @@ public class ResizeController extends MouseInputAdapter {
      */
     @Override
     public void mouseReleased(MouseEvent e) {
+        if(moveNode instanceof Node && graphModel.isResizing()) {
+            EditNodeAction editNodeAction = new EditNodeAction(moveNode, moveNode.getNodeCoords(), new NodeCoords(oldX, oldY), old);
+            graphModel.getUndoManager().addEdit(editNodeAction);
+        }
         PrintMouseInfo.MouseReleased(e);
+        moveNode = null;
         graphModel.setResizing(false);
+        graphModel.setSelected(null);
         startX = startY = -1;
     }
 }

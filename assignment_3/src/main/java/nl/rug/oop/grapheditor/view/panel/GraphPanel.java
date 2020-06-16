@@ -83,7 +83,7 @@ public class GraphPanel extends JPanel implements Observer {
             g.fillRect(coords.getCoordX(), coords.getCoordY(), size.getSizeX(), size.getSizeY());
             if(graphModel.isResizing() && n.equals(graphModel.getSelected())) {
                 g.setColor(Color.RED);
-                g.fillRect(coords.getCoordX() + size.getSizeX(), coords.getCoordY() + size.getSizeY(), 10, 10);
+                g.drawRect(coords.getCoordX(), coords.getCoordY(), n.getNodeSize().getSizeX(), n.getNodeSize().getSizeY());
             }
             g.setColor(Color.WHITE);
             g.drawString(n.getName(), coords.getCoordX() + (n.getNodeSize().getSizeX() / 3), coords.getCoordY() + (n.getNodeSize().getSizeY() / 2));

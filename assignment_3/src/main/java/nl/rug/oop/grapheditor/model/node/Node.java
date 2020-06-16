@@ -2,7 +2,9 @@ package nl.rug.oop.grapheditor.model.node;
 
 import lombok.Data;
 import nl.rug.oop.grapheditor.model.GraphComponent;
+import nl.rug.oop.grapheditor.model.edge.Edge;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 /**
@@ -15,6 +17,7 @@ public class Node extends GraphComponent {
     private NodeSize nodeSize;
     private NodeCoords nodeCoords;
     private int nodeIndex;
+    private ArrayList<Edge> edges;
 
     /**
      * Create a new node with a name, size and location.
@@ -26,6 +29,7 @@ public class Node extends GraphComponent {
         this.name = name;
         this.nodeSize = nodeSize;
         this.nodeCoords = nodeCoords;
+        this.edges = new ArrayList<>();
     }
 
     /**
@@ -67,6 +71,19 @@ public class Node extends GraphComponent {
                 this.nodeSize.getSizeY() == node.getNodeSize().getSizeY() &&
                 this.nodeCoords.getCoordX() == node.getNodeCoords().getCoordX() &&
                 this.nodeCoords.getCoordY() == node.getNodeCoords().getCoordY() );
+    }
+
+    /**
+     * Checking if two nodes share an edge
+     * @param otherNode Other node
+     * @return Boolean if they share a node
+     */
+    public boolean shareEdge(Node otherNode) {
+        for(Edge edge : edges) {
+            if((edge.getStart().equals(this) && edge.getEnd().equals(otherNode))
+                    || edge.getStart().equals(otherNode) && edge.getEnd().equals(this)) return true;
+        }
+        return false;
     }
 
     /**

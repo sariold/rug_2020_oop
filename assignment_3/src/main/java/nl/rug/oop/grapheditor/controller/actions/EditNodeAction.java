@@ -19,7 +19,7 @@ public class EditNodeAction extends AbstractUndoableEdit {
     private final NodeSize newSize;
     private final String oldName;
     private NodeCoords oldCoords;
-    private final NodeSize oldSize;
+    private NodeSize oldSize;
 
     /**
      * Create a Edit node action given a new name new coordinates and a new size
@@ -47,9 +47,11 @@ public class EditNodeAction extends AbstractUndoableEdit {
      * @param newCoords New Coordinates
      * @param oldCoords Old Coordinates
      */
-    public EditNodeAction(Node node, NodeCoords newCoords, NodeCoords oldCoords) {
+    public EditNodeAction(Node node, NodeCoords newCoords, NodeCoords oldCoords, NodeSize old) {
         this(node, node.getName(), newCoords, node.getNodeSize());
         this.oldCoords = oldCoords;
+        this.oldSize = old;
+//        this.newSize = node.getNodeSize();
         node.setName(newName);
         node.setNodeCoords(newCoords);
         node.setNodeSize(newSize);
