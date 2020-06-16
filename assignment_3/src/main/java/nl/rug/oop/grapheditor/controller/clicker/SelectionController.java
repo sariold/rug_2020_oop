@@ -20,6 +20,7 @@ import java.awt.geom.Line2D;
 public class SelectionController extends MouseInputAdapter {
 
     private final GraphModel graphModel;
+    private final GraphPanel graphPanel;
     private Node moveNode;
     private NodeCoords startDragging;
 
@@ -31,6 +32,7 @@ public class SelectionController extends MouseInputAdapter {
     public SelectionController(GraphModel graphModel, GraphPanel graphPanel) {
         this.graphModel = graphModel;
         this.moveNode = null;
+        this.graphPanel = graphPanel;
         graphPanel.addMouseListener(this);
         graphPanel.addMouseMotionListener(this);
     }
@@ -108,8 +110,24 @@ public class SelectionController extends MouseInputAdapter {
         }
         graphModel.getConnectorCursor().setX(x);
         graphModel.getConnectorCursor().setY(y);
-        this.moveNode.setNodeCoords(new NodeCoords(x-moveNode.getNodeSize().getSizeX()/2,
-                                                    y-moveNode.getNodeSize().getSizeY()/2));
+        int xOffset;
+        int yOffset;
+        if (x - moveNode.getNodeSize().getSizeX() / 2 < 0) {
+            xOffset = 0;
+        } else if (x + moveNode.getNodeSize().getSizeX() / 2 > graphPanel.getWidth()) {
+            xOffset = moveNode.getNodeCoords().getCoordX();
+        } else {
+            xOffset = x - moveNode.getNodeSize().getSizeX() / 2;
+        }
+        if (y-moveNode.getNodeSize().getSizeY()/2 < 0) {
+            yOffset = 0;
+        } else if (y+moveNode.getNodeSize().getSizeY()/2 > graphPanel.getHeight()) {
+            yOffset = moveNode.getNodeCoords().getCoordY();
+        }
+        else {
+            yOffset = y-moveNode.getNodeSize().getSizeY()/2;
+        }
+        this.moveNode.setNodeCoords(new NodeCoords(xOffset, yOffset));
         graphModel.setDragging(true);
     }
 

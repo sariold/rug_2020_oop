@@ -49,22 +49,30 @@ public class ResizeController extends MouseInputAdapter {
 //        ResizeNodeAction resizeNodeAction = new ResizeNodeAction(graphModel);
         if (graphModel.isResizing()) {
             this.moveNode = (Node) graphModel.getSelected();
+            // get coords where resizing started
             if (startY < 0 && startX < 0) {
                 startY = moveNode.getNodeCoords().getCoordY();
                 startX = moveNode.getNodeCoords().getCoordX();
             }
+            // cursor is to the right/bottom
             if (x > startX && y > startY) {
                 moveNode.setNodeCoords(new NodeCoords(startX, startY));
                 this.moveNode.setNodeSize(new NodeSize(x - moveNode.getNodeCoords().getCoordX(), y - moveNode.getNodeCoords().getCoordY()));
-            } else if (x < startX && y > startY) {
+            }
+            // cursor is to the left/bottom
+            else if (x < startX && y > startY) {
                 this.moveNode.setNodeSize(new NodeSize(startX - x, y - moveNode.getNodeCoords().getCoordY()));
                 this.moveNode.getNodeCoords().setCoordX(x);
                 this.moveNode.getNodeCoords().setCoordY(startY);
-            } else if (x > startX && y < startY) {
+            }
+            // cursor is to the right/top
+            else if (x > startX && y < startY) {
                 this.moveNode.setNodeSize(new NodeSize(x - moveNode.getNodeCoords().getCoordX(), startY - y));
                 this.moveNode.getNodeCoords().setCoordY(y);
                 this.moveNode.getNodeCoords().setCoordX(startX);
-            } else if (x < startX && y < startY) {
+            }
+            // cursor is to the left/top
+            else if (x < startX && y < startY) {
                 this.moveNode.setNodeSize(new NodeSize(startX - x, startY - y));
                 this.moveNode.getNodeCoords().setCoordX(x);
                 this.moveNode.getNodeCoords().setCoordY(y);
