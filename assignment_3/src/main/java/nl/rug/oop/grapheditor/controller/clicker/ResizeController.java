@@ -18,6 +18,7 @@ import java.awt.event.MouseEvent;
 public class ResizeController extends MouseInputAdapter {
 
     private final GraphModel graphModel;
+    private GraphPanel graphPanel;
     private Node moveNode;
     private int startX;
     private int startY;
@@ -33,6 +34,7 @@ public class ResizeController extends MouseInputAdapter {
      */
     public ResizeController(GraphModel graphModel, GraphPanel graphPanel) {
         this.graphModel = graphModel;
+        this.graphPanel = graphPanel;
         this.moveNode = null;
         this.startX = this.startY = -1;
         this.oldX = this.oldY = -1;
@@ -65,24 +67,24 @@ public class ResizeController extends MouseInputAdapter {
                 startX = moveNode.getNodeCoords().getCoordX();
             }
             // cursor is to the right/bottom
-            if (x > startX && y > startY) {
+            if (x > startX && y > startY && x <= graphPanel.getWidth() && y <= graphPanel.getHeight()) {
                 moveNode.setNodeCoords(new NodeCoords(startX, startY));
                 this.moveNode.setNodeSize(new NodeSize(x - moveNode.getNodeCoords().getCoordX(), y - moveNode.getNodeCoords().getCoordY()));
             }
             // cursor is to the left/bottom
-            else if (x < startX && y > startY) {
+            else if (x < startX && y > startY && x > 0 && y <= graphPanel.getHeight()) {
                 this.moveNode.setNodeSize(new NodeSize(startX - x, y - moveNode.getNodeCoords().getCoordY()));
                 this.moveNode.getNodeCoords().setCoordX(x);
                 this.moveNode.getNodeCoords().setCoordY(startY);
             }
             // cursor is to the right/top
-            else if (x > startX && y < startY) {
+            else if (x > startX && y < startY && x <= graphPanel.getWidth() && y > 0) {
                 this.moveNode.setNodeSize(new NodeSize(x - moveNode.getNodeCoords().getCoordX(), startY - y));
                 this.moveNode.getNodeCoords().setCoordY(y);
                 this.moveNode.getNodeCoords().setCoordX(startX);
             }
             // cursor is to the left/top
-            else if (x < startX && y < startY) {
+            else if (x < startX && y < startY && x > 0 && y > 0) {
                 this.moveNode.setNodeSize(new NodeSize(startX - x, startY - y));
                 this.moveNode.getNodeCoords().setCoordX(x);
                 this.moveNode.getNodeCoords().setCoordY(y);
