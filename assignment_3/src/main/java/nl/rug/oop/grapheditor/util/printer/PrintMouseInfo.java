@@ -28,6 +28,16 @@ public class PrintMouseInfo {
     }
 
     /**
+     * Print the location where the mouse is pressed
+     * @param e Mouse Pressed Event
+     */
+    public static void MousePressed(MouseEvent e) {
+        System.out.println("Mouse Pressed:\n" +
+                "\tX:" + e.getX() + "\n" +
+                "\tY" + e.getY() + "\n");
+    }
+
+    /**
      * Print the location where the mouse is dragged
      * @param e Mouse Dragged Event
      */

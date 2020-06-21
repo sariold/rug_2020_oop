@@ -7,7 +7,6 @@ import nl.rug.oop.grapheditor.model.node.Node;
 import nl.rug.oop.grapheditor.util.LoadGraph;
 import nl.rug.oop.grapheditor.util.SaveGraph;
 import nl.rug.oop.grapheditor.view.frame.MainFrame;
-import nl.rug.oop.grapheditor.view.panel.GraphPanel;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;

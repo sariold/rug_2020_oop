@@ -115,19 +115,4 @@ public class Node extends GraphComponent {
                 "; Location:" + this.nodeCoords.getCoordX() + ", " + this.nodeCoords.getCoordY());
     }
 
-    /**
-     * Return the lowest point of this node
-     * @return Lowest Y coordinate
-     */
-    public int getLowestPoint() {
-        return this.getNodeCoords().getCoordY() + this.getNodeSize().getSizeY();
-    }
-
-    /**
-     * Return the point that is most right of this node
-     * @return Highest X Coordinate
-     */
-    public int getMostRightPoint() {
-        return this.getNodeCoords().getCoordX() + this.getNodeSize().getSizeX();
-    }
 }

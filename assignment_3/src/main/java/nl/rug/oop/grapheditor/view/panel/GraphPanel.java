@@ -3,7 +3,6 @@ package nl.rug.oop.grapheditor.view.panel;
 import nl.rug.oop.grapheditor.controller.clicker.ResizeController;
 import nl.rug.oop.grapheditor.controller.clicker.ResizeScreenController;
 import nl.rug.oop.grapheditor.controller.clicker.SelectionController;
-import nl.rug.oop.grapheditor.controller.menu.ResizeDialogue;
 import nl.rug.oop.grapheditor.model.GraphModel;
 import nl.rug.oop.grapheditor.model.edge.Edge;
 import nl.rug.oop.grapheditor.model.node.Node;
@@ -31,9 +30,9 @@ public class GraphPanel extends JPanel implements Observer {
         setBackground(Color.GRAY);
         this.graphModel = graphModel;
         this.graphModel.addObserver(this);
-        SelectionController selectionController = new SelectionController(graphModel, this);
-        ResizeController resizeController = new ResizeController(graphModel, this);
-        ResizeScreenController resizeScreenController = new ResizeScreenController(graphModel, this);
+        new SelectionController(graphModel, this);
+        new ResizeController(graphModel, this);
+        new ResizeScreenController(graphModel, this);
     }
 
     /**

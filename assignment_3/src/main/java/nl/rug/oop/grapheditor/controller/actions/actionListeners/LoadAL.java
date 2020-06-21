@@ -14,7 +14,7 @@ public class LoadAL implements ActionListener {
 
     final LoadGraph loadGraph;
     final JFileChooser jFileChooser;
-    GraphModel graphModel;
+    private GraphModel graphModel;
 
     /**
      * Create a new paste action

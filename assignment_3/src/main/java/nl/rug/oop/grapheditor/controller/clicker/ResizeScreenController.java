@@ -5,11 +5,8 @@ import nl.rug.oop.grapheditor.model.node.Node;
 import nl.rug.oop.grapheditor.model.node.NodeCoords;
 import nl.rug.oop.grapheditor.view.panel.GraphPanel;
 
-import javax.swing.*;
-import javax.swing.event.MouseInputAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
-import java.awt.event.MouseEvent;
 
 /**
  * Controller to adjust coordinates of nodes when the screen size is adjusted
@@ -17,7 +14,7 @@ import java.awt.event.MouseEvent;
 public class ResizeScreenController implements ComponentListener {
 
     private final GraphModel graphModel;
-    private GraphPanel graphPanel;
+    private final GraphPanel graphPanel;
 
     /**
      * Create new Resize Screen Controller
@@ -33,7 +30,7 @@ public class ResizeScreenController implements ComponentListener {
 
     /**
      *
-     * @param e
+     * @param e Component Event
      */
     @Override
     public void componentResized(ComponentEvent e) {

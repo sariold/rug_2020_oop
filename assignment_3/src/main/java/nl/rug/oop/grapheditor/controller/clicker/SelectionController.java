@@ -2,6 +2,8 @@ package nl.rug.oop.grapheditor.controller.clicker;
 
 import nl.rug.oop.grapheditor.controller.actions.CreateEdgeAction;
 import nl.rug.oop.grapheditor.controller.actions.EditNodeAction;
+import nl.rug.oop.grapheditor.controller.actions.actionListeners.EditNodeAL;
+import nl.rug.oop.grapheditor.controller.menu.EditNodeMenu;
 import nl.rug.oop.grapheditor.model.GraphModel;
 import nl.rug.oop.grapheditor.model.edge.Edge;
 import nl.rug.oop.grapheditor.model.node.Node;
@@ -23,6 +25,7 @@ public class SelectionController extends MouseInputAdapter {
     private final GraphPanel graphPanel;
     private Node moveNode;
     private NodeCoords startDragging;
+    private boolean mouseClicked;
 
     /**
      * Create clicker to select a node or edge
@@ -38,6 +41,36 @@ public class SelectionController extends MouseInputAdapter {
     }
 
     /**
+     * Select graph component
+     * @param e Mouse event
+     */
+    private void selectComponent(MouseEvent e) {
+        int x = e.getX();
+        int y = e.getY();
+        graphModel.getConnectorCursor().setX(x);
+        graphModel.getConnectorCursor().setY(y);
+        if(e.getButton() == MouseEvent.BUTTON1) {
+            // check if a node was selected
+            if (nodeSelection(x,y)) {
+                if(e.getClickCount() == 2) {
+                    System.out.println("DOUBLE CLICK!");
+                    new EditNodeMenu((Node)graphModel.getSelected(), graphModel);
+                    graphModel.setSelected(null);
+                }
+                mouseClicked = true;
+                return;
+            }
+            // check if an edge was selected
+            if (edgeSelection(x,y)) {
+                mouseClicked = true;
+                return;
+            }
+        }
+        graphModel.setSelected(null);
+        System.out.println("Not selected");
+    }
+
+    /**
      * Select a node
      * If no node is selected before select the node that is clicked on
      * If there is a selected node already create an edge between the selected and the one clicked on
@@ -46,23 +79,18 @@ public class SelectionController extends MouseInputAdapter {
      */
     @Override
     public void mouseClicked(MouseEvent e) {
-        PrintMouseInfo.MouseClicked(e);
-        int x = e.getX();
-        int y = e.getY();
-        graphModel.getConnectorCursor().setX(x);
-        graphModel.getConnectorCursor().setY(y);
-        if(e.getButton() == MouseEvent.BUTTON1) {
-            // check if a node was selected
-            if (nodeSelection(x,y)) {
-                return;
-            }
-            // check if an edge was selected
-            if (edgeSelection(x,y)) {
-                return;
-            }
-        }
-        graphModel.setSelected(null);
-        System.out.println("Not selected");
+//        PrintMouseInfo.MouseClicked(e);
+        selectComponent(e);
+    }
+
+    /**
+     * Mouse Pressed event for dragging nodes
+     * @param e Mouse Event E
+     */
+    @Override
+    public void mousePressed(MouseEvent e) {
+//        PrintMouseInfo.MousePressed(e);
+        selectComponent(e);
     }
 
     /**
@@ -91,6 +119,7 @@ public class SelectionController extends MouseInputAdapter {
         if(graphModel.isResizing()) return;
         int x = e.getX();
         int y = e.getY();
+        if(mouseClicked) {
         if (this.moveNode == null) {
             for (Node n:graphModel.getNodes()) {
                 NodeCoords coords = n.getNodeCoords();
@@ -129,6 +158,7 @@ public class SelectionController extends MouseInputAdapter {
         }
         this.moveNode.setNodeCoords(new NodeCoords(xOffset, yOffset));
         graphModel.setDragging(true);
+        }
     }
 
     /**
@@ -137,6 +167,7 @@ public class SelectionController extends MouseInputAdapter {
      */
     @Override
     public void mouseReleased(MouseEvent e) {
+        mouseClicked = false;
 //        PrintMouseInfo.MouseReleased(e);
         if(moveNode != null && !graphModel.isResizing()) {
             EditNodeAction editNodeAction = new EditNodeAction(moveNode, moveNode.getNodeCoords(), this.startDragging, moveNode.getNodeSize());
@@ -204,7 +235,6 @@ public class SelectionController extends MouseInputAdapter {
                         graphModel.getUndoManager().addEdit(createEdgeAction);
                     }
                     System.out.println("SHARED EDGE!");
-//                    createEdgeAction.redo();
                     graphModel.setSelected(null);
                 }
                 System.out.println("NODE Interaction");

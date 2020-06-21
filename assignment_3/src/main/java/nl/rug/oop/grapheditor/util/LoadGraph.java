@@ -7,7 +7,6 @@ import nl.rug.oop.grapheditor.model.node.Node;
 import nl.rug.oop.grapheditor.model.node.NodeCoords;
 import nl.rug.oop.grapheditor.model.node.NodeSize;
 import nl.rug.oop.grapheditor.view.frame.MainFrame;
-import nl.rug.oop.grapheditor.view.panel.GraphPanel;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -19,7 +18,7 @@ import java.io.IOException;
 public class LoadGraph {
 
     private final GraphModel graphModel;
-    private MainFrame frame;
+    private final MainFrame frame;
 
     /**
      * Load a graph from a file
@@ -58,7 +57,6 @@ public class LoadGraph {
         if(currentLine.length() != 0) {
             String [] graphInfo = currentLine.split(" ");
             int nodes = Integer.parseInt(graphInfo[0]);
-            int edges = Integer.parseInt(graphInfo[1]);
             while(currentLine.length() != 0) {
                 currentLine = reader.readLine();
                 if(currentLine == null) break;

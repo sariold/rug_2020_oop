@@ -22,7 +22,7 @@ public class EditNodeAL implements ActionListener {
      */
     public EditNodeAL(JMenuItem jMenuItem, GraphModel graphModel) {
         this.graphModel = graphModel;
-        jMenuItem.addActionListener(this);
+        if(jMenuItem != null) jMenuItem.addActionListener(this);
     }
 
     /**

@@ -1,14 +1,11 @@
 package nl.rug.oop.grapheditor.view.frame;
 
-import nl.rug.oop.grapheditor.controller.clicker.ResizeScreenController;
 import nl.rug.oop.grapheditor.controller.menu.MainMenuBar;
 import nl.rug.oop.grapheditor.model.GraphModel;
 import nl.rug.oop.grapheditor.view.panel.GraphPanel;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Observable;
-import java.util.Observer;
 
 /**
  * Main Frame

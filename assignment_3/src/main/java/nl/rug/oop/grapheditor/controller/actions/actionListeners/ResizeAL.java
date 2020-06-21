@@ -1,9 +1,7 @@
 package nl.rug.oop.grapheditor.controller.actions.actionListeners;
 
-import nl.rug.oop.grapheditor.controller.clicker.ResizeController;
 import nl.rug.oop.grapheditor.model.GraphModel;
 import nl.rug.oop.grapheditor.model.node.Node;
-import nl.rug.oop.grapheditor.view.panel.GraphPanel;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

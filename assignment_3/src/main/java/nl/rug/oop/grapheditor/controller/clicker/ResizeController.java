@@ -1,12 +1,10 @@
 package nl.rug.oop.grapheditor.controller.clicker;
 
 import nl.rug.oop.grapheditor.controller.actions.EditNodeAction;
-import nl.rug.oop.grapheditor.controller.actions.ResizeNodeAction;
 import nl.rug.oop.grapheditor.model.GraphModel;
 import nl.rug.oop.grapheditor.model.node.Node;
 import nl.rug.oop.grapheditor.model.node.NodeCoords;
 import nl.rug.oop.grapheditor.model.node.NodeSize;
-import nl.rug.oop.grapheditor.util.printer.PrintMouseInfo;
 import nl.rug.oop.grapheditor.view.panel.GraphPanel;
 
 import javax.swing.event.MouseInputAdapter;
@@ -18,7 +16,7 @@ import java.awt.event.MouseEvent;
 public class ResizeController extends MouseInputAdapter {
 
     private final GraphModel graphModel;
-    private GraphPanel graphPanel;
+    private final GraphPanel graphPanel;
     private Node moveNode;
     private int startX;
     private int startY;
@@ -101,7 +99,7 @@ public class ResizeController extends MouseInputAdapter {
      */
     @Override
     public void mouseReleased(MouseEvent e) {
-        if(moveNode instanceof Node && graphModel.isResizing()) {
+        if(moveNode != null && graphModel.isResizing()) {
             this.initialResize = false;
             System.out.println("YES");
             EditNodeAction editNodeAction = new EditNodeAction(moveNode, moveNode.getNodeCoords(), new NodeCoords(oldX, oldY), old);

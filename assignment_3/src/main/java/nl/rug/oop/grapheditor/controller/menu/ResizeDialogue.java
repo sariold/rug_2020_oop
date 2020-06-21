@@ -3,13 +3,8 @@ package nl.rug.oop.grapheditor.controller.menu;
 import nl.rug.oop.grapheditor.model.GraphModel;
 import nl.rug.oop.grapheditor.model.node.Node;
 import nl.rug.oop.grapheditor.view.frame.MainFrame;
-import nl.rug.oop.grapheditor.view.panel.GraphPanel;
 
 import javax.swing.*;
-import javax.swing.text.NumberFormatter;
-import java.text.NumberFormat;
-
-import javax.swing.JOptionPane;
 
 public class ResizeDialogue {
 
