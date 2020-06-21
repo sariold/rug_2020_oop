@@ -58,7 +58,6 @@ public class CreateNodeMenu extends JOptionPane {
         if (option == YES_OPTION) {
             Node newNode = new Node(name, new NodeSize(width, height), new NodeCoords(x,y));
             CreateNodeAction createNodeAction = new CreateNodeAction(graphModel, newNode);
-//            createNodeAction.redo();
             graphModel.getUndoManager().addEdit(createNodeAction);
         }
     }

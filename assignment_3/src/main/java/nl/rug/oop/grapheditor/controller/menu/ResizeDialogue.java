@@ -6,8 +6,16 @@ import nl.rug.oop.grapheditor.view.frame.MainFrame;
 
 import javax.swing.*;
 
+/**
+ * Let the user know if they need to resize window
+ */
 public class ResizeDialogue {
 
+    /**
+     * Resize window!
+     * @param graphModel graph model
+     * @param frame frame
+     */
     public static void loadingMessage(GraphModel graphModel, MainFrame frame) {
         int maxX = frame.getWidth();
         int maxY = frame.getHeight();

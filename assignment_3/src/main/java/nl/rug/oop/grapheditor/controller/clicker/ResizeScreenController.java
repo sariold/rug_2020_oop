@@ -25,7 +25,6 @@ public class ResizeScreenController implements ComponentListener {
         this.graphModel = graphModel;
         this.graphPanel = graphPanel;
         graphPanel.addComponentListener(this);
-
     }
 
     /**
@@ -66,16 +65,26 @@ public class ResizeScreenController implements ComponentListener {
         graphModel.notifyUpdate();
     }
 
+    /**
+     * Override to remove functionality
+     * @param e event
+     */
     @Override
     public void componentMoved(ComponentEvent e) {
 
     }
-
+    /**
+     * Override to remove functionality
+     * @param e event
+     */
     @Override
     public void componentShown(ComponentEvent e) {
 
     }
-
+    /**
+     * Override to remove functionality
+     * @param e event
+     */
     @Override
     public void componentHidden(ComponentEvent e) {
 

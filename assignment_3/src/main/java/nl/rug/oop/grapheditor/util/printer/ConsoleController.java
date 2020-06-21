@@ -1,4 +1,4 @@
-//package nl.rug.oop.grapheditor.controller;
+//package nl.rug.oop.grapheditor.util.printer;
 //
 //import nl.rug.oop.grapheditor.model.GraphModel;
 //import nl.rug.oop.grapheditor.model.edge.Edge;
@@ -14,7 +14,7 @@
 //import java.util.Scanner;
 //
 ///**
-// * A controller to edit a Graph through the console
+// * A controller to edit a Graph through the console, keeping because this can be useful for debugging
 // */
 //public class ConsoleController {
 //
