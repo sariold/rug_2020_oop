@@ -12,8 +12,8 @@ import java.awt.event.ActionListener;
  */
 public class LoadAL implements ActionListener {
 
-    final LoadGraph loadGraph;
-    final JFileChooser jFileChooser;
+    private final LoadGraph loadGraph;
+    private final JFileChooser jFileChooser;
     private GraphModel graphModel;
 
     /**

@@ -9,6 +9,7 @@ import java.util.Observer;
 
 /**
  * View to show a graph model in the console
+ * Keeping this class as it can be useful for debugging and using graph model via terminal
  */
 public class ConsoleView implements Observer {
 

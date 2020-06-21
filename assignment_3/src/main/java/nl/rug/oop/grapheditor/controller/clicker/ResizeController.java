@@ -5,6 +5,7 @@ import nl.rug.oop.grapheditor.model.GraphModel;
 import nl.rug.oop.grapheditor.model.node.Node;
 import nl.rug.oop.grapheditor.model.node.NodeCoords;
 import nl.rug.oop.grapheditor.model.node.NodeSize;
+import nl.rug.oop.grapheditor.util.printer.PrintMouseInfo;
 import nl.rug.oop.grapheditor.view.panel.GraphPanel;
 
 import javax.swing.event.MouseInputAdapter;
@@ -47,10 +48,9 @@ public class ResizeController extends MouseInputAdapter {
      */
     @Override
     public void mouseDragged(MouseEvent e) {
-//        PrintMouseInfo.MouseDragged(e);
+        PrintMouseInfo.MouseDragged(e);
         int x = e.getX();
         int y = e.getY();
-//        ResizeNodeAction resizeNodeAction = new ResizeNodeAction(graphModel);
         if (graphModel.isResizing()) {
             this.moveNode = (Node) graphModel.getSelected();
             oldX = moveNode.getNodeCoords().getCoordX();
@@ -105,7 +105,7 @@ public class ResizeController extends MouseInputAdapter {
             EditNodeAction editNodeAction = new EditNodeAction(moveNode, moveNode.getNodeCoords(), new NodeCoords(oldX, oldY), old);
             graphModel.getUndoManager().addEdit(editNodeAction);
         }
-//        PrintMouseInfo.MouseReleased(e);
+        PrintMouseInfo.MouseReleased(e);
         moveNode = null;
         graphModel.setResizing(false);
         graphModel.setSelected(null);

@@ -12,7 +12,7 @@ import java.awt.event.ActionListener;
  */
 public class UndoAL implements ActionListener {
 
-    final GraphModel graphModel;
+    private final GraphModel graphModel;
 
     /**
      * Create a new paste action

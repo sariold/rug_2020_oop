@@ -29,7 +29,7 @@ public class ResizeScreenController implements ComponentListener {
     }
 
     /**
-     *
+     * Component resize aka window resize
      * @param e Component Event
      */
     @Override

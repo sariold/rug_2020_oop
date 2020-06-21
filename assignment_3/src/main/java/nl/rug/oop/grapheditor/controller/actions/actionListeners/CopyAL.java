@@ -12,7 +12,7 @@ import java.awt.event.ActionListener;
  */
 public class CopyAL implements ActionListener {
 
-    final GraphModel graphModel;
+    private final GraphModel graphModel;
 
     /**
      * Create a new paste action

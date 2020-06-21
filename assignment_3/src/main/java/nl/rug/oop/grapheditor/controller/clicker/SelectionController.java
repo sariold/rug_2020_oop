@@ -2,7 +2,6 @@ package nl.rug.oop.grapheditor.controller.clicker;
 
 import nl.rug.oop.grapheditor.controller.actions.CreateEdgeAction;
 import nl.rug.oop.grapheditor.controller.actions.EditNodeAction;
-import nl.rug.oop.grapheditor.controller.actions.actionListeners.EditNodeAL;
 import nl.rug.oop.grapheditor.controller.menu.EditNodeMenu;
 import nl.rug.oop.grapheditor.model.GraphModel;
 import nl.rug.oop.grapheditor.model.edge.Edge;
@@ -53,7 +52,6 @@ public class SelectionController extends MouseInputAdapter {
             // check if a node was selected
             if (nodeSelection(x,y)) {
                 if(e.getClickCount() == 2) {
-                    System.out.println("DOUBLE CLICK!");
                     new EditNodeMenu((Node)graphModel.getSelected(), graphModel);
                     graphModel.setSelected(null);
                 }
@@ -79,7 +77,7 @@ public class SelectionController extends MouseInputAdapter {
      */
     @Override
     public void mouseClicked(MouseEvent e) {
-//        PrintMouseInfo.MouseClicked(e);
+        PrintMouseInfo.MouseClicked(e);
         selectComponent(e);
     }
 
@@ -89,7 +87,7 @@ public class SelectionController extends MouseInputAdapter {
      */
     @Override
     public void mousePressed(MouseEvent e) {
-//        PrintMouseInfo.MousePressed(e);
+        PrintMouseInfo.MousePressed(e);
         selectComponent(e);
     }
 
@@ -99,7 +97,7 @@ public class SelectionController extends MouseInputAdapter {
      */
     @Override
     public void mouseMoved(MouseEvent e) {
-        //PrintMouseInfo.MouseMoved(e);
+        PrintMouseInfo.MouseMoved(e);
         int x = e.getX();
         int y = e.getY();
         if(graphModel.getSelected() instanceof Node && !graphModel.isResizing()) {
@@ -115,7 +113,7 @@ public class SelectionController extends MouseInputAdapter {
      */
     @Override
     public void mouseDragged(MouseEvent e) {
-//        PrintMouseInfo.MouseDragged(e);
+        PrintMouseInfo.MouseDragged(e);
         if(graphModel.isResizing()) return;
         int x = e.getX();
         int y = e.getY();
@@ -168,7 +166,7 @@ public class SelectionController extends MouseInputAdapter {
     @Override
     public void mouseReleased(MouseEvent e) {
         mouseClicked = false;
-//        PrintMouseInfo.MouseReleased(e);
+        PrintMouseInfo.MouseReleased(e);
         if(moveNode != null && !graphModel.isResizing()) {
             EditNodeAction editNodeAction = new EditNodeAction(moveNode, moveNode.getNodeCoords(), this.startDragging, moveNode.getNodeSize());
             graphModel.getUndoManager().addEdit(editNodeAction);

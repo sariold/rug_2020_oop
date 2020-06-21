@@ -59,11 +59,10 @@ public class GraphModel extends Observable {
         this(new ArrayList<>(), new ArrayList<>());
     }
 
-    public boolean isLoading() {
-        notifyUpdate();
-        return loading;
-    }
-
+    /**
+     * Set loading boolean
+     * @param loading is it loading?
+     */
     public void setLoading(boolean loading) {
         this.loading = loading;
         notifyUpdate();
@@ -146,23 +145,6 @@ public class GraphModel extends Observable {
         node.setNodeIndex(nodes.size() -1);
         notifyUpdate();
     }
-
-//    /**
-//     * Remove a Node at a given index and all edges connecting the node from the graph
-//     * @param node Index of node
-//     */
-//    public void removeNodeAtIndex(int node) {
-//        Node toRemove = this.nodes.get(node);
-//        for (int i = this.edges.size() - 1; i >= 0; i--) {
-//            Edge e = this.edges.get(i);
-//            if (e.connects(toRemove)) {
-//                removeEdgeAtIndex(i);
-//            }
-//        }
-//        this.nodes.remove(node);
-//        this.selected = null;
-//        notifyUpdate();
-//    }
 
     /**
      * Remove a Node and all edges connecting the node from the graph

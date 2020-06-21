@@ -11,8 +11,8 @@ import java.awt.event.ActionListener;
  */
 public class SaveAL implements ActionListener {
 
-    final SaveGraph saveGraph;
-    final JFileChooser jFileChooser;
+    private final SaveGraph saveGraph;
+    private final JFileChooser jFileChooser;
 
     /**
      * Create a new paste action
