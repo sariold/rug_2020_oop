@@ -3,7 +3,15 @@ package nl.rug.oop.grapheditor;
 import nl.rug.oop.grapheditor.model.GraphModel;
 import nl.rug.oop.grapheditor.view.frame.MainFrame;
 
+/**
+ * Graph editor main class
+ */
 public class GraphEditor {
+
+    /**
+     * Main function
+     * @param args command line args
+     */
     public static void main(String[] args) {
         GraphModel graphModel;
         System.out.println(args.length);

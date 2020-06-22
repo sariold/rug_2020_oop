@@ -86,9 +86,7 @@ public class GraphPanel extends JPanel implements Observer {
             }
             g.setColor(Color.WHITE);
             g.drawString(n.getName(), coords.getCoordX() + (n.getNodeSize().getSizeX() / 3), coords.getCoordY() + (n.getNodeSize().getSizeY() / 2));
-//            - g.getFontMetrics().getHeight());
         }
-//        g.translate(-getWidth()/2, -getHeight()/2);
     }
 
     /**
@@ -96,7 +94,6 @@ public class GraphPanel extends JPanel implements Observer {
      * @param g graphics
      */
     private void paintEdges(Graphics g) {
-//        g.translate(getWidth()/2, getHeight()/2);
         NodeCoords startCoords;
         NodeSize startOffset;
         NodeCoords endCoords;
@@ -117,7 +114,6 @@ public class GraphPanel extends JPanel implements Observer {
                     endCoords.getCoordX() + endOffset.getSizeX()/2,
                     endCoords.getCoordY() + endOffset.getSizeY()/2);
         }
-//        g.translate(-getWidth()/2, -getHeight()/2);
     }
 
     /**

@@ -38,6 +38,9 @@ public class MainFrame extends JFrame {
         setResizable(true);
     }
 
+    /**
+     * Create menu bar for editing nodes and edges
+     */
     private void createMenuBar() {
         this.menuBar = new MainMenuBar(graphModel, this);
         this.setJMenuBar(menuBar);
