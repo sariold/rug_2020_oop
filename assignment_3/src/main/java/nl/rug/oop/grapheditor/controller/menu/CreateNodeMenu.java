@@ -26,6 +26,7 @@ public class CreateNodeMenu extends JOptionPane {
         super("Create Node Menu");
         this.graphModel = graphModel;
         NumberFormat format = NumberFormat.getInstance();
+        format.setGroupingUsed(false);
         formatter = new NumberFormatter(format);
         formatter.setValueClass(Integer.class);
         formatter.setMinimum(0);

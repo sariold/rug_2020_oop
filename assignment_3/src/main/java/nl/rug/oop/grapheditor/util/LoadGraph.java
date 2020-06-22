@@ -9,6 +9,7 @@ import nl.rug.oop.grapheditor.model.node.NodeCoords;
 import nl.rug.oop.grapheditor.model.node.NodeSize;
 import nl.rug.oop.grapheditor.view.frame.MainFrame;
 
+import java.awt.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -22,6 +23,7 @@ public class LoadGraph {
     private final GraphModel graphModel;
     private final MainFrame frame;
     private int[] frameSize;
+    private ResizeDialogue resizeDialogue;
 
     /**
      * Load a graph from a file
@@ -29,6 +31,8 @@ public class LoadGraph {
     public LoadGraph(GraphModel graphModel, MainFrame frame) {
         this.frame = frame;
         this.graphModel = graphModel;
+        this.resizeDialogue = new ResizeDialogue();
+        resizeDialogue.setFrame(frame);
     }
 
     /**
@@ -40,10 +44,11 @@ public class LoadGraph {
         graphModel.getEdges().clear();
         try {
             fileReader(fileName);
-            frameSize = ResizeDialogue.loadingMessage(graphModel, frame);
+            frameSize = resizeDialogue.loadingMessage(graphModel);
         } catch (IOException e) {
             System.out.println("Cannot read from said file!");
         }
+        if(frameSize != null && frame != null) frame.setSize(new Dimension(frameSize[0], frameSize[1]));
         graphModel.setLoading(false);
         graphModel.setSelected(null);
         return this.graphModel;

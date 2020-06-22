@@ -1,3 +1,10 @@
+# EASIER USE OF COMMAND LINE ARGUMENTS FOR LOADING GRAPH FILES?
+```mvn clean package```
+
+## USE GraphEditor-jar-with-dependencies so:
+
+```java -jar GraphEditor-jar-with-dependencies filePath```
+
 # Graph Editor
 
 [example]: https://user-images.githubusercontent.com/47671548/82716370-67947a00-9c97-11ea-964f-d000675609b9.PNG "Graph Editor Example"
