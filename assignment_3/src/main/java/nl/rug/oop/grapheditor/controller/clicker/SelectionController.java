@@ -135,6 +135,16 @@ public class SelectionController extends MouseInputAdapter {
             }
             return;
         }
+        dragNode(x,y);
+        }
+    }
+
+    /**
+     * Move the selected node to the position of the dragged mouse
+     * @param x X-Position of mouse
+     * @param y Y-Position of mouse
+     */
+    private void dragNode(int x, int y) {
         graphModel.getConnectorCursor().setX(x);
         graphModel.getConnectorCursor().setY(y);
         int xOffset;
@@ -156,7 +166,6 @@ public class SelectionController extends MouseInputAdapter {
         }
         this.moveNode.setNodeCoords(new NodeCoords(xOffset, yOffset));
         graphModel.setDragging(true);
-        }
     }
 
     /**
