@@ -17,6 +17,7 @@ import java.util.Observable;
 @Data
 public class GraphModel extends Observable {
 
+    private int[] minimumSize;
     private ArrayList<Node> nodes;
     private ArrayList<Edge> edges;
     private GraphComponent selected;
@@ -50,6 +51,7 @@ public class GraphModel extends Observable {
         this(new ArrayList<>(), new ArrayList<>());
         LoadGraph loadGraph = new LoadGraph(this, null);
         loadGraph.loadFile(filePath);
+        minimumSize = loadGraph.getFrameSize();
     }
 
     /**

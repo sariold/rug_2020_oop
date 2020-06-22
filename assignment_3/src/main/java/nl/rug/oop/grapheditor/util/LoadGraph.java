@@ -1,5 +1,6 @@
 package nl.rug.oop.grapheditor.util;
 
+import lombok.Data;
 import nl.rug.oop.grapheditor.controller.menu.ResizeDialogue;
 import nl.rug.oop.grapheditor.model.GraphModel;
 import nl.rug.oop.grapheditor.model.edge.Edge;
@@ -15,10 +16,12 @@ import java.io.IOException;
 /**
  * Load Graph
  */
+@Data
 public class LoadGraph {
 
     private final GraphModel graphModel;
     private final MainFrame frame;
+    private int[] frameSize;
 
     /**
      * Load a graph from a file
@@ -37,7 +40,7 @@ public class LoadGraph {
         graphModel.getEdges().clear();
         try {
             fileReader(fileName);
-            ResizeDialogue.loadingMessage(graphModel, frame);
+            frameSize = ResizeDialogue.loadingMessage(graphModel, frame);
         } catch (IOException e) {
             System.out.println("Cannot read from said file!");
         }

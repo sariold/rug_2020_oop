@@ -16,7 +16,7 @@ public class ResizeDialogue {
      * @param graphModel graph model
      * @param frame frame
      */
-    public static void loadingMessage(GraphModel graphModel, MainFrame frame) {
+    public static int[] loadingMessage(GraphModel graphModel, MainFrame frame) {
         int maxX = frame.getWidth();
         int maxY = frame.getHeight();
         boolean changed = false;
@@ -35,9 +35,9 @@ public class ResizeDialogue {
             if(JOptionPane.showConfirmDialog(null, "The graph you are loading has nodes outside of" +
                     " your screen size!\nWould you like to adjust the screen size?", "Loading Graph Out Of Bounds!",
                     JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION) {
-                frame.setSize(maxX, maxY);
+                return new int[]{maxX,maxY};
             }
-
         }
+        return null;
     }
 }

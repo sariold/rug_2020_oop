@@ -28,7 +28,12 @@ public class MainFrame extends JFrame {
 
         createMenuBar();
         setContentPane(graphPanel);
-        setPreferredSize(new Dimension(1280, 720));
+        if (graphModel.getMinimumSize() != null) {
+            int[] size = graphModel.getMinimumSize();
+            setPreferredSize(new Dimension(size[0], size[1]));
+        } else {
+            setPreferredSize(new Dimension(1280, 720));
+        }
         setMinimumSize(new Dimension(900,600));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         pack();
