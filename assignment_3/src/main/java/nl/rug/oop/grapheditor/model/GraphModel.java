@@ -165,6 +165,23 @@ public class GraphModel extends Observable {
     }
 
     /**
+     * Remove a Node at a given index and all edges connecting the node from the graph
+     * @param node Index of node
+     */
+    public void removeNodeAtIndex(int node) {
+        Node toRemove = this.nodes.get(node);
+        for (int i = this.edges.size() - 1; i >= 0; i--) {
+            Edge e = this.edges.get(i);
+            if (e.connects(toRemove)) {
+                removeEdgeAtIndex(i);
+            }
+        }
+        this.nodes.remove(node);
+        this.selected = null;
+        notifyUpdate();
+    }
+
+    /**
      * Notify observers of a change in this object
      */
     public void notifyUpdate() {
