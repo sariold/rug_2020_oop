@@ -6,9 +6,9 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="cardgame" />
-        <module name="rpg" />
         <module name="introduction" />
+        <module name="rpg" />
+        <module name="cardgame" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

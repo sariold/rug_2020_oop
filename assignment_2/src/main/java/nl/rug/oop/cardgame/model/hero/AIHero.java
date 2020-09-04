@@ -1,18 +1,13 @@
 package nl.rug.oop.cardgame.model.hero;
 
-import nl.rug.oop.cardgame.controller.button.EndTurnButton;
 import nl.rug.oop.cardgame.model.Battlefield;
 import nl.rug.oop.cardgame.model.MagicStoneGame;
 import nl.rug.oop.cardgame.model.card.Card;
 import nl.rug.oop.cardgame.model.card.CreatureCard;
-import nl.rug.oop.cardgame.view.MagicStoneFrame;
-import nl.rug.oop.cardgame.view.MagicStonePanel;
+import nl.rug.oop.cardgame.model.card.EnumCard;
 
-import javax.swing.*;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.concurrent.TimeUnit;
 
 /**
  * AI Hero
@@ -21,7 +16,6 @@ public class AIHero extends Hero {
 
     /**
      * Creates a hero that plays on its own
-     *
      * @param playerName Name
      * @param heroHealth Health
      * @param mana       Mana
@@ -34,24 +28,22 @@ public class AIHero extends Hero {
 
     /**
      * Rotate turns between Player and AI
-     *
      * @param battlefield Playing board
      */
     @Override
-    public void takeTurn(Battlefield battlefield, MagicStoneFrame frame, MagicStonePanel panel, MagicStoneGame game,
-                         EndTurnButton endTurnButton) {
+    public void takeTurn(Battlefield battlefield, MagicStoneGame game) {
         System.out.println(this.name + "'s TURN!");
         Card card = this.getDeck().drawCard();
         if (card != null) {
             System.out.println("Drawing card: " + card.getName() + " : Mana Cost -> " + card.getCost());
             this.getDeckHand().addCard(this.getDiscardDeck(), card);
         }
-        frame.update(frame.getGraphics());
+        notifyUpdate();
         if (this.deckHand.getDeckHand().size() > 0) {
             System.out.println("AI has cards in hand");
             ArrayList<Card> playableCards;
             while (this.getMana() > 0) {
-                playableCards = getPlayableCards();
+                playableCards = getPlayableCards(battlefield);
                 if (playableCards.size() == 0) {
                     System.out.println("AI does not have enough mana to play a card");
                     break;
@@ -59,33 +51,31 @@ public class AIHero extends Hero {
                 Collections.shuffle(playableCards);
                 Card played = playableCards.get(0);
                 if (played.getCost() <= this.getMana()) {
-                    boolean playedSuccessfully = played.play(battlefield, 1, -1, frame);
+                    boolean playedSuccessfully = played.play(battlefield, 1, -1);
                     if(playedSuccessfully) {
                         System.out.println("AI plays " + played.getName() + " for " + played.getCost() + " mana");
                         this.deckHand.getDeckHand().remove(played.getCardNumber());
                         this.setMana(this.getMana() - played.getCost());
                         System.out.println("Current Mana: " + this.getMana() + "/" + this.getMaxMana());
                     }
-                    frame.update(frame.getGraphics());
+                    notifyUpdate();
                 }
             }
         } else System.out.println("AI has no cards in hand");
-        attackPhase(battlefield, frame, -1, game, panel);
+        attackPhase(battlefield, -1, game);
         battlefield.setPlayerTurn(true);
     }
 
     /**
      * Attack enemy hero with your untapped creatures
-     *
      * @param battlefield Battlefield
      */
     @Override
-    public void attackPhase(Battlefield battlefield, MagicStoneFrame frame, int pos, MagicStoneGame game, MagicStonePanel panel) {
+    public void attackPhase(Battlefield battlefield, int pos, MagicStoneGame game) {
         ArrayList<CreatureCard> creatures = getPlayedCreatures();
         if (creatures.size() == 0) System.out.println("AI has no creatures to attack with");
         for (CreatureCard c : creatures) {
             if (c != null && !c.isUsed() && c.getBattlePosition() != -1) {
-                frame.playGif("SWORD", c.getCardImage().getCoordinates());
                 System.out.println("AI attack you with " + c.getName());
                 CreatureCard attackedCreature = battlefield.getPlayer().getPlayedCreatures().get(c.getBattlePosition());
                 if (attackedCreature == null) c.attack(battlefield.getPlayer());
@@ -96,21 +86,28 @@ public class AIHero extends Hero {
                 battlefield.removeDead(this);
                 battlefield.removeDead(battlefield.getPlayer());
                 game.endGameCheck(battlefield);
-                frame.update(frame.getGraphics());
+                notifyUpdate();
             }
         }
     }
 
     /**
      * Return which cards can be played with your current mana amount
-     *
      * @return An arraylist of playable cards
      */
-    private ArrayList<Card> getPlayableCards() {
+    private ArrayList<Card> getPlayableCards(Battlefield battlefield) {
+        boolean addable;
         ArrayList<Card> playable = new ArrayList<>();
         for (Card c : this.deckHand.getDeckHand().values()) {
             if (c.getCost() <= this.getMana()) {
-                playable.add(c);
+                addable = true;
+                if(c.getEnumCard().getFace() == EnumCard.Face.COPYPASTE ) {
+                    if(battlefield.playerHasBattlefieldCreature(battlefield.getAi()).size() == 0 || battlefield.getFreePositions(battlefield.getAi()).size() == 0) addable = false;
+                }
+                if(c.getEnumCard().getFace() == EnumCard.Face.HELLFIRE ) {
+                    if(battlefield.playerHasBattlefieldCreature(battlefield.getPlayer()).size() == 0) addable = false;
+                }
+                if(addable) playable.add(c);
             }
         }
         return playable;

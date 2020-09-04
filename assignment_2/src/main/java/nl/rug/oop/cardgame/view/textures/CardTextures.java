@@ -26,12 +26,11 @@ public class CardTextures {
     static {
         textures = new EnumMap<>(EnumCard.class);
         for (EnumCard card : EnumCard.values()) {
-            Image texture = null;
+            Image texture;
             try {
                 Image loaded = ImageIO.read(CardTextures.class.getResource(File.separator + "textures" + File.separator
                     + card + ".png"));
-                Image renderedImage = loaded.getScaledInstance(100, 150, Image.SCALE_SMOOTH);
-                texture = renderedImage;
+                texture = loaded.getScaledInstance(100, 150, Image.SCALE_SMOOTH);
                 textures.put(card, texture);
             } catch (IOException ioe) {
                 System.err.println("Could not load!");
@@ -43,6 +42,7 @@ public class CardTextures {
      * Find a texture for a card.
      *
      * @param card The cart in question.
+     * return image
      */
     public static Image getTexture(EnumCard card) {
         return textures.get(card);

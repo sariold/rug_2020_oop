@@ -1,36 +1,41 @@
 package nl.rug.oop.cardgame.controller.actions;
 
+import nl.rug.oop.cardgame.controller.clicker.CardClicker;
 import nl.rug.oop.cardgame.model.MagicStoneGame;
-import nl.rug.oop.cardgame.view.MagicStoneFrame;
-import nl.rug.oop.cardgame.view.MagicStonePanel;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 
+/**
+ * The action executed by the Attack phase button
+ */
 public class AttackPhaseAction extends AbstractAction {
 
-    private MagicStoneGame magicStoneGame;
-    private MagicStoneFrame frame;
-    private MagicStonePanel panel;
-    private CardClicker clicker;
+    private final MagicStoneGame magicStoneGame;
+    private final CardClicker clicker;
 
-    public AttackPhaseAction(MagicStoneGame magicStoneGame, MagicStoneFrame frame, MagicStonePanel panel, CardClicker clicker) {
+    /**
+     * Creates a new Attack phase action
+     * @param magicStoneGame Game
+     * @param clicker Clicker
+     */
+    public AttackPhaseAction(MagicStoneGame magicStoneGame, CardClicker clicker) {
         super("Attack");
         this.magicStoneGame = magicStoneGame;
-        this.frame = frame;
-        this.panel = panel;
         this.clicker = clicker;
     }
 
+    /**
+     * Lets the player attack with creatures if he has any untapped ones
+     * @param e Event
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
-        magicStoneGame.getBattlefield().setAttackPhase(true);
-        clicker.startAttackPhase();
-//        if(!magicStoneGame.getBattlefield().getPlayer().untappedCreatures()) magicStoneGame.getBattlefield().setPlayerTurn(false);
-//        panel.paintHand(frame.getGraphics(), true);
-        frame.update(frame.getGraphics());
-        panel.paintPositions(frame.getGraphics(), Color.RED, true);
+        if(magicStoneGame.getBattlefield().getPlayer().untappedCreatures()) {
+            magicStoneGame.getBattlefield().setAttackPhase(true);
+            clicker.startAttackPhase();
+        }
+        else magicStoneGame.getBattlefield().setPlayerTurn(false);
     }
 
 }

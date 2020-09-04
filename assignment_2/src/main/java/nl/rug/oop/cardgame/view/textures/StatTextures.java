@@ -4,11 +4,13 @@ import lombok.Data;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.EnumMap;
 
+/**
+ * Stats textures
+ */
 @Data
 public class StatTextures {
 
@@ -27,8 +29,7 @@ public class StatTextures {
             try {
                 Image loaded = ImageIO.read(CardTextures.class.getResource(File.separator + "textures" + File.separator
                         + stat + ".png"));
-                Image renderedImage = loaded.getScaledInstance(100, 150, Image.SCALE_SMOOTH);
-                texture = renderedImage;
+                texture = loaded.getScaledInstance(100, 150, Image.SCALE_SMOOTH);
             } catch (IOException ioe) {
                 System.err.println("Could not load!");
             }
@@ -40,6 +41,7 @@ public class StatTextures {
      * Find a texture for a stat.
      *
      * @param stat The stat in question.
+     * return image
      */
     public static Image getTexture(StatEnum stat) {
         return textures.get(stat);
